@@ -62,6 +62,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
         Dept.openAddDept();
     });
 
+
     // 工具条点击事件
     table.on('tool(' + Dept.tableId + ')', function (obj) {
         var data = obj.data;

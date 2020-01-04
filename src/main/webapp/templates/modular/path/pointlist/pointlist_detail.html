@@ -1,0 +1,57 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/path/pointlist/pointlist_detail.js"]}){
+<form id="pointlistForm" lay-filter="pointlistForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">执法船只编号</label>
+        <div class="layui-input-block">
+            <input id="shipId" name="shipId" placeholder="请输入执法船只编号" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"> 本船经度</label>
+        <div class="layui-input-block">
+            <input id="lon" name="lon" placeholder="请输入 本船经度" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">  本船纬度</label>
+        <div class="layui-input-block">
+            <input id="lat" name="lat" placeholder="请输入  本船纬度" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">本船航向</label>
+        <div class="layui-input-block">
+            <input id="course" name="course" placeholder="请输入本船航向" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">本船航速</label>
+        <div class="layui-input-block">
+            <input id="speed" name="speed" placeholder="请输入本船航速" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">记录该地点的时间</label>
+        <div class="layui-input-block">
+            <input id="createTime" name="createTime" placeholder="请输入记录该地点的时间" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">记录该数据的数据源，北斗/gps</label>
+        <div class="layui-input-block">
+            <input id="deviceSource" name="deviceSource" placeholder="请输入记录该数据的数据源，北斗/gps" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+
+</form>
+@}
+

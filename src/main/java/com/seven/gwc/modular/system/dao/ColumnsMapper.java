@@ -3,6 +3,8 @@ package com.seven.gwc.modular.system.dao;
 import com.seven.gwc.modular.system.entity.ColumnsEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * description : 字段结构Mapper 接口
  *
@@ -10,5 +12,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @date : 2019-09-18
  */
 public interface ColumnsMapper extends BaseMapper<ColumnsEntity> {
+    List<ColumnsEntity> aa();
 
 }

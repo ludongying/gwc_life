@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="${ctxPath}/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="${ctxPath}/modular/map/leaflet.css" />
+    <script type="text/javascript" src="${ctxPath}/modular/map/leaflet.js"></script>
+    <script type="text/javascript" src="${ctxPath}/modular/map/map.js"></script>
+    <style type="text/css">
+        /* 全局CSS*/
+        *{margin:0px; padding:0px;}
+        /* 实例CSS */
+        html{ height:100%; _background:url(about:blank);} /*阻止闪动 in IE6 , 把空文件换成about:blank , 减少请求*/
+        body{ height:100%; font-size:12px; font-family:Arial,Tahoma,sans-serif; background:#E2E2E2;}
+
+        #header{
+            position:fixed; top:0; right:0;z-index:100;
+            _position:absolute;
+        }
+        #headerContent {
+            width:630px;  margin-left:60px; background:#E2E2E2; border-bottom:2px solid #409F89;border-left:2px solid #409F89;
+            position:fixed; top:36px; right:0;z-index:100;
+            _position:absolute;
+        }
+        #map { height: 100%;z-index:10}
+        table tr td { height:20px;    }
+    </style>
+    <title>
+
+    </title></head>
+<body>
+<div id="header">
+    <div style="border:2px solid #409F89; padding:4px; position:fixed; right:0;z-index:10; _position:absolute;background: #E2E2E2">
+        <img src="${ctxPath}/modular/map/images/layers.png" style="float:right; " /></div>
+    <div style=" width:100%; float:none;"></div>
+    <div id="headerContent" style="display:none;" >
+        <div style="float:left; width:608px; padding-top:10px; padding-left:10px; height:110px; margin-right:10px; padding-right:10px; border-top:2px solid #409f89; border-right:2px solid #409F89; ">
+            <h3>CSVALUE</h3>
+            <table>
+                <tr>
+                    <td>SymbolSet:</td>
+                    <td><select id="selChart5" onchange="javascript: refreshChart();" style=" width:90px;"><option value="1">Traditional</option><option value="2">Simplified</option></select></td>
+                    <td>Safety Contour:</td>
+                    <td><input id="txtChart1" type="text" value="10" onchange="javascript: refreshChart();" style="width:60px;" /></td>
+                    <td>Shallow Contour:</td>
+                    <td><input id="txtChart2" type="text" value="5" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                </tr>
+                <tr>
+                    <td>DisplayCategory:</td>
+                    <td><select id="selChart6" onchange="javascript: refreshChart();" style=" width:90px;"><option value="1" selected="selected">Base</option><option value="2" >Standard</option><option value="3">All</option></select></td>
+                    <td>Deep Contour:</td>
+                    <td><input id="txtChart3" type="text" value="20" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                    <td>Safety Depth:</td>
+                    <td><input id="txtChart4" type="text" value="10" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                </tr>
+                <tr>
+                    <td>ColorScheme:</td>
+                    <td><select id="selChart7" onchange="javascript: refreshChart();" style=" width:90px;"><option value="1">Day</option><option value="2">Dusk</option><option value="3">Night</option></select></td>
+                    <td>Text Scale:</td>
+                    <td><input id="txtChart8" type="text" value="100000000" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                    <td>Shallow Sounding Scale:</td>
+                    <td><input id="txtChart9" type="text" value="100000000" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                </tr>
+                <tr>
+                    <td>Layer Strategy:</td>
+                    <td><select id="selChart11" onchange="javascript:refreshChart();" style=" width:90px;"><option value="0">Layer by Layer</option><option value="1" selected="selected">Combined</option></select></td>
+                    <td>Deep Sounding Scale:</td>
+                    <td><input id="txtChart10" type="text" value="100000000" onchange="javascript: refreshChart();" style="width:60px;"/></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div style="float:left; width:116px; padding-top:10px; padding-left:10px; height:110px; padding-right:10px;border-top:2px solid #409f89; border-right:2px solid #409F89; ">
+            <h3>Map Type</h3>
+            <table>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="radio" name="rdoChartTransparent" checked="checked" onclick="javascript: refreshChart();" value="0" />Chart</label></td>
+                </tr>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="radio" name="rdoChartTransparent" onclick="javascript: refreshChart();" value="1" />Chart&RS Image</label></td>
+                </tr>
+            </table>
+        </div>
+        <div style="float:left; padding-top:10px; width:470px; padding-left:10px; height:110px; padding-right:10px;border-top:2px solid #409f89; border-right:2px solid #409F89; ">
+            <h3>CSBOOL</h3>
+            <table>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL"  value="1" onclick="javascript: refreshChart();" />Lights</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL"  value="2" onclick="javascript: refreshChart();"/>Text</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="3" onclick="javascript: refreshChart();" />Symbol Fail</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="4" onclick="javascript: refreshChart();"/>Shallow Pattern</label></td>
+                </tr>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="5" onclick="javascript: refreshChart();" />Overscale</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="6" onclick="javascript: refreshChart();"/>InfoPoints</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="7" onclick="javascript: refreshChart();" />Grid</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="8" onclick="javascript: refreshChart();"/>Shallow Soundings</label></td>
+                </tr>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="9" onclick="javascript: refreshChart();" />Deep Soundings</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="10" onclick="javascript: refreshChart();"/>Two Shades</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="11" onclick="javascript: refreshChart();" />Gray Shades</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="12" onclick="javascript: refreshChart();"/>Chart SCAMIN</label></td>
+                </tr>
+                <tr>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="13" onclick="javascript: refreshChart();" />Auto SCAMIN</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="14" onclick="javascript: refreshChart();"/>Chart Boundaries</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="15" onclick="javascript: refreshChart();" />Contour Lables</label></td>
+                    <td><label style="cursor: pointer;"><input type="checkbox" name="cbxChartCSBOOL" value="16" checked="checked" onclick="javascript:refreshChart();"/>National Text</label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="content" style="background:#808080; height:100%">
+    <div id="map"></div>
+</div>
+
+</body>
+</html>

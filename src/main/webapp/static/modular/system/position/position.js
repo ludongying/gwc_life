@@ -186,7 +186,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 Feng.success("启用成功!");
             }, function (data) {
                 Feng.error("启用失败!");
-                table.reload(Position.tableId)
+                table.reload(Position.tableId);
+
             });
             ajax.set("id", id);
             ajax.start();

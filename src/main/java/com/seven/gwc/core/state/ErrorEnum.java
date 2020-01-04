@@ -50,6 +50,8 @@ public enum ErrorEnum {
     EXISTED_THE_DEPT_NAME(4000, "同一公司下的部门名称已存在"),
     THE_DEPART_EXISTED_USER(4001, "该部门下存在人员，不可删除"),
     THE_DEPART_EXISTED_DEPART(4002, "该部门含有下级，不可删除"),
+    NOT_SUBORDINATES_AS_SUPERIORS(4003, "不能选自己或自己的下级为上级");
+
     NOT_SUBORDINATES_AS_SUPERIORS(4003, "不能选自己或自己的下级为上级"),
 
     /********************************✨    部门(5000 * 5999)   ✨*************************************/

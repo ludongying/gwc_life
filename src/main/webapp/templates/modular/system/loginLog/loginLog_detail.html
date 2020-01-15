@@ -1,0 +1,57 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/system/loginLog/loginLog_detail.js"]}){
+<form id="loginLogForm" lay-filter="loginLogForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">主键</label>
+        <div class="layui-input-block">
+            <input id="id" name="id" placeholder="请输入主键" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">日志名称</label>
+        <div class="layui-input-block">
+            <input id="logName" name="logName" placeholder="请输入日志名称" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">管理员id</label>
+        <div class="layui-input-block">
+            <input id="userId" name="userId" placeholder="请输入管理员id" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">创建时间</label>
+        <div class="layui-input-block">
+            <input id="createTime" name="createTime" placeholder="请输入创建时间" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否执行成功</label>
+        <div class="layui-input-block">
+            <input id="succeed" name="succeed" placeholder="请输入是否执行成功" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">具体消息</label>
+        <div class="layui-input-block">
+            <input id="message" name="message" placeholder="请输入具体消息" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">登录ip</label>
+        <div class="layui-input-block">
+            <input id="ipAddress" name="ipAddress" placeholder="请输入登录ip" type="text" class="layui-input" disabled="disabled"/>
+        </div>
+    </div>
+
+
+</form>
+@}
+

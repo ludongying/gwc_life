@@ -1,0 +1,80 @@
+@layout("/common/_container.html",{js:["/modular/system/code/code.js"]}){
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form">
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">作者 <i class="layui-icon layui-icon-tips" lay-tips="代码生成注释的作者"></i></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="author" name="author" lay-verify="required" autocomplete="off" placeholder="代码生成注释的作者" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">父级菜单 <i class="layui-icon layui-icon-tips" lay-tips="通过父级菜单生成对应菜单数据，本字段可为空"></i></label>
+                            <div class="layui-input-block">
+                                <input id="pid" name="pid" type="hidden">
+                                <input id="pcodeName" name="pcodeName" readonly placeholder="请选择父级菜单" type="text" class="layui-input" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">包名称 <i class="layui-icon layui-icon-tips" lay-tips="具体到模块包"></i></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="proPackage" name="proPackage" value="com.seven.gwc" lay-verify="required" autocomplete="off" placeholder="项目包名称，例如：com.seven.gwc" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">模块名称 <i class="layui-icon layui-icon-tips" lay-tips="利用模块名称来为业务分类"></i></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="modularName" name="modularName" lay-verify="required" autocomplete="off" placeholder="模块名称" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">表前缀 <i class="layui-icon layui-icon-tips" lay-tips="移除表的前缀关键字，本字段可为空"></i></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="removePrefix" name="removePrefix" autocomplete="off" placeholder="表前缀移除" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">表描述 <i class="layui-icon layui-icon-tips" lay-tips="代码生成注释得描述"></i></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="tableComment" name="tableComment" lay-verify="required" autocomplete="off" placeholder="表前缀移除" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">选择表 <i class="layui-icon layui-icon-tips" lay-tips="通过所选表进行生成业务代码"></i></label>
+                            <div class="layui-input-block">
+                                <table class="layui-table" id="dbTable" lay-filter="dbTable"></table>
+                            </div>
+                        </div>
+                        <div class="my-form-item layui-col-md6">
+                            <label class="layui-form-label">生成文件 <i class="layui-icon layui-icon-tips" lay-tips="通过所选文件进行生成相对文件"></i></label>
+                            <div class="layui-input-block" id="business" style="margin-top: 10px;">
+                                <input type="checkbox" name="businessModules" value="entity" title="Entity实体类" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="controller" title="Controller控制器" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="service" title="Service服务类" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="serviceImpl" title="ServiceImpl服务实现类" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="mapper" title="Mapper接口" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="xml" title="XML" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="sql" title="SQL" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="index" title="首页" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="add" title="新增页" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="edit" title="编辑页" checked=""></br>
+                                <input type="checkbox" name="businessModules" value="detail" title="详情页" checked="">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="btnSubmit">生成代码</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@}

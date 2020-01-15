@@ -1,0 +1,51 @@
+@layout("/common/_container.html",{plugins:["ztree"],bg:"bg-white",js:["/modular/system/position/position_dataAuthority.js"]}){
+<form id="positionForm" lay-filter="positionForm" class="layui-form form-background">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-body" style="height: 500px;">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">岗位名称<span style="color: red;">*</span></label>
+                    <div class="layui-input-block">
+                        <input name="id" type="hidden"/>
+                        <input id="name" name="name" placeholder="请输入岗位名称" type="text" class="layui-input layui-disabled" lay-verify="required" required/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">岗位编码<span style="color: red;">*</span></label>
+                    <div class="layui-input-block">
+                        <input id="code" name="code" placeholder="请输入岗位编码" type="text" class="layui-input layui-disabled" lay-verify="required" required/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据范围<i class="layui-icon layui-icon-tips" lay-tips="特殊情况下，设置为“自定数据权限”"></i></label>
+                    <div class="layui-input-block">
+                        <select id="dataScope" name="dataScope" onchange="dataScope(this)" class="form-control m-b">
+                            <option value="1">全部数据权限</option>
+                            <option value="2">自定数据权限</option>
+                            <option value="3">本部门数据权限</option>
+                            <option value="4">本部门及以下数据权限</option>
+                            <option value="5">仅本人数据权限</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" id="authDataScope" style="display: none">
+                    <label class="layui-form-label">数据权限</label>
+                    <div class="layui-input-block">
+                        <div class="ztree" id="deptTree"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-bottom text-center">
+        <button id="save" class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+        <button id="cancel" class="layui-btn layui-btn-primary" type="reset"  ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+</form>
+@}

@@ -1,0 +1,47 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/system/dept/dept_edit.js"]}){
+<form id="deptForm" lay-filter="deptForm" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">简称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="simpleName" name="simpleName" placeholder="请输入简称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">全称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="fullName" name="fullName" placeholder="请输入全称" type="text" class="layui-input" lay-verify="required" required/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">上级名称<span style="color: red;">*</span></label>
+        <div class="layui-input-block">
+            <input id="pid" name="pid" type="hidden">
+            <input id="pName" name="pName" placeholder="请输入上级名称" type="text" class="layui-input" lay-verify="required" readonly required autocomplete="off"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input id="description" name="description" placeholder="请输入描述" type="text" class="layui-input" />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序</label>
+        <div class="layui-input-block">
+            <input id="sort" name="sort" placeholder="请输入排序" type="text" class="layui-input" lay-verify="notNumber"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button id="cancel" class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
+        <button id="save" class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+    </div>
+</form>
+@}
+

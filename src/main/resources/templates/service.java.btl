@@ -1,0 +1,18 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+import java.util.List;
+
+/**
+ * description : ${cfg.genQo.bizChName}服务类
+ *
+ * @author : ${author}
+ * @date : ${date}
+ */
+
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+    List<${entity}> select${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Name);
+}

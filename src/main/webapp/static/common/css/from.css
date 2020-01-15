@@ -1,0 +1,19 @@
+/*表单页面*/
+.form-group-bottom {
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #F2F2F2;
+    padding: 10px 20px;
+}
+
+.form-background{
+    background-color:#f2f2f2
+}
+
+.my-form-item{
+    margin-bottom: 25px;
+    margin-right: 0;
+}

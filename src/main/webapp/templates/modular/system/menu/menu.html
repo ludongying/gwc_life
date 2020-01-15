@@ -1,0 +1,48 @@
+@layout("/common/_container.html",{js:["/modular/system/menu/menu.js"]}){
+<div class="layui-body-header">
+    <span class="layui-body-header-title">菜单管理</span>
+</div>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="menuName" class="layui-input" type="text" placeholder="菜单名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="level" class="layui-input" type="text" placeholder="层级"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/menu/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>关联代码</button>
+                                @}
+                                <button id="expandAll" class="layui-btn layui-btn-warm"><i class="layui-icon">&#xe654;</i>展开所有</button>
+                                <button id="foldAll" class="layui-btn icon-btn"><i class="layui-icon">&#xe656;</i>折叠所有</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="menuTable" lay-filter="menuTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="look" style="width: 24px"><i class="layui-icon layui-icon-search"></i></a>
+    @if(shiro.hasPermission("/menu/update")){
+    <a name="edit" class="layui-btn layui-btn-xs" lay-event="edit" style="width: 24px"><i class="layui-icon layui-icon-edit"></i></a>
+    @}
+    @if(shiro.hasPermission("/menu/delete")){
+    <a name="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" style="width: 24px"><i class="layui-icon layui-icon-delete" ></i></a>
+    @}
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input name="status" type="checkbox" lay-filter="status" value="{{d.id}}" lay-skin="switch" lay-text="正常|冻结" {{d.status=='ENABLE'?'checked':''}} />
+</script>
+@}

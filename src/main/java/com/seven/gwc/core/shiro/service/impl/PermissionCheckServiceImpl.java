@@ -5,7 +5,7 @@ import com.seven.gwc.core.listener.ConfigListener;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.shiro.service.PermissionCheckService;
-import com.seven.gwc.core.util.HttpContext;
+import com.seven.gwc.core.util.HttpContextUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +37,7 @@ public class PermissionCheckServiceImpl implements PermissionCheckService {
 
     @Override
     public boolean checkAll() {
-        HttpServletRequest request = HttpContext.getRequest();
+        HttpServletRequest request = HttpContextUtil.getRequest();
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
             return false;

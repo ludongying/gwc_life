@@ -1,0 +1,44 @@
+@layout("/common/_container.html",{js:["/modular/system/operationLog/operationLog.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">操作日志管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="operationLogName" class="layui-input" type="text" placeholder="操作日志名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                @if(shiro.hasPermission("/operationLog/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                @}
+                                <!--<button id="btnExp" class="layui-btn layui-btn-warm icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="operationLogTable" lay-filter="operationLogTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/operationLog/detail")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" style="width: 24px" title="查看"><i class="layui-icon layui-icon-more"></i></a>
+    @}
+    @if(shiro.hasPermission("/operationLog/update")){
+    <a class="layui-btn layui-btn-xs" lay-event="edit" style="width: 24px" title="修改"><i class="layui-icon layui-icon-edit"></i></a>
+    @}
+    @if(shiro.hasPermission("/operationLog/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" style="width: 24px" title="删除"><i class="layui-icon layui-icon-delete"></i></a>
+    @}
+</script>
+@}

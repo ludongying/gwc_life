@@ -1,8 +1,8 @@
 package com.seven.gwc.config.web;
 
 import com.seven.gwc.config.constant.ConfigConsts;
-import com.seven.gwc.config.properties.TonFunProperties;
 import com.seven.gwc.core.shiro.ShiroDbRealm;
+import com.seven.gwc.config.properties.GwcProperties;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -49,7 +49,7 @@ public class ShiroConfig {
      * session管理器
      */
     @Bean
-    public DefaultWebSessionManager defaultWebSessionManager(CacheManager cacheShiroManager, TonFunProperties tonFunProperties) {
+    public DefaultWebSessionManager defaultWebSessionManager(CacheManager cacheShiroManager, GwcProperties tonFunProperties) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setCacheManager(cacheShiroManager);
         sessionManager.setSessionValidationInterval(tonFunProperties.getSessionValidationInterval() * 1000);

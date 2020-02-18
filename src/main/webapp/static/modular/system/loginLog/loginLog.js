@@ -1,14 +1,39 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
+layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element'], function () {
     var $ = layui.$;
     var table = layui.table;
-    /*var layer = layui.layer;
-    var form = layui.form;
-
-    var $ZTree = layui.ztree;
     var $ax = layui.ax;
     var laydate = layui.laydate;
+    var element = layui.element;
+    /*var layer = layui.layer;
+    var form = layui.form;
+    var $ZTree = layui.ztree;
     var admin = layui.admin;
     var func = layui.func;*/
+
+
+    //渲染时间选择框
+    laydate.render({
+        elem: '#beginTime',
+        type: 'datetime'
+    });
+
+    //渲染时间选择框
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime'
+    });
+
+    //渲染时间选择框
+    laydate.render({
+        elem: '#beginTimeO',
+        type: 'datetime'
+    });
+
+    //渲染时间选择框
+    laydate.render({
+        elem: '#endTimeO',
+        type: 'datetime'
+    });
 
     /**
      * 系统管理--登录历史管理
@@ -16,9 +41,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var LoginLog = {
         tableId: "loginLogTable",
         condition: {
-            loginLogName: ""
+            loginLogName: "",
+            message: "",
+            beginTime: "",
+            endTime: ""
         }
     };
+
+    element.on('tab(logTab)', function(elem){
+
+
+    });
 
     /**
      * 初始化表格的列
@@ -26,11 +59,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     LoginLog.initColumn = function () {
         return [[
             {title: '主键', field: 'id', hide: true},
-            {title: '日志名称', field: 'logName', sort: true, align: "center"},
-            {title: '登录用户名称', field: 'userName', sort: true, align: "center"},
-            {title: '创建时间', field: 'createTime', sort: true, align: "center"},
-            {title: '具体消息', field: 'message', sort: true, align: "center"},
-            {title: '登录ip', field: 'ipAddress', sort: true, align: "center"},
+            {title: '日志', field: 'logName'},
+            {title: '姓名', field: 'userName'},
+            {title: '登录ip', field: 'ipAddress'},
+            {title: 'MAC地址', field: 'macAddress'},
+            {title: '记录时间', field: 'createTime', align: "right", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+            {title: '具体消息', field: 'message'},
         ]];
     };
 
@@ -39,111 +73,138 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + LoginLog.tableId,
         url: Feng.ctxPath + '/loginLog/list',
         page: true,
-        height: "full-158",
         cellMinWidth: 100,
-        cols: LoginLog.initColumn()
+        cols: LoginLog.initColumn(),
+        even: true,
+        height: 'full-158'
     });
+
+
+
 
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         LoginLog.search();
     });
-
-    /*// 添加按钮点击事件
-    $('#btnAdd').click(function () {
-        LoginLog.openAddLoginLog();
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        LoginLog.btnReset();
     });
 
-    // 导出excel
-    $('#btnExp').click(function () {
-        LoginLog.exportExcel();
+    // 清空所有点击事件
+    $('#delete').click(function () {
+        LoginLog.onDeleteLoginLog();
     });
-
-    // 工具条点击事件
-    table.on('tool(' + LoginLog.tableId + ')', function (obj) {
-        var data = obj.data;
-        var layEvent = obj.event;
-
-        if (layEvent === 'edit') {
-            LoginLog.onEditLoginLog(data);
-        } else if (layEvent === 'delete') {
-            LoginLog.onDeleteLoginLog(data);
-        } else if (layEvent === 'detail') {
-            LoginLog.onDetailLoginLog(data);
-        }
-    });*/
-
 
     /**
      * 点击查询按钮
      */
     LoginLog.search = function () {
         var queryData = {};
-        queryData['loginLogName'] = $("#loginLogName").val().time();
+        queryData['loginLogName'] = $("#loginLogName").val().trim();
+        queryData['message'] = $("#message").val().trim();
+        queryData['beginTime'] = $("#beginTime").val();
+        queryData['endTime'] = $("#endTime").val();
         table.reload(LoginLog.tableId, {where: queryData});
     };
 
-    /*/!**
-     * 弹出添加登录历史
-     *!/
-    LoginLog.openAddLoginLog = function () {
-        func.open({
-            title: '添加登录历史',
-            content: Feng.ctxPath + '/loginLog/loginLog_add',
-            tableId: LoginLog.tableId
-        });
+    /**
+     * 重置查询条件
+     */
+    LoginLog.btnReset = function () {
+        $("#loginLogName").val("");
+        $("#message").val("");
+        $("#beginTime").val("");
+        $("#endTime").val("");
     };
 
-    /!**
-     * 点击编辑登录历史
-     *!/
-    LoginLog.onEditLoginLog = function (data) {
-        func.open({
-            title: '编辑登录历史',
-            content: Feng.ctxPath + '/loginLog/loginLog_edit?loginLogId=' + data.id,
-            tableId: LoginLog.tableId
-        });
-    };
-
-    /!**
-     * 点击查看登录历史
-     *!/
-    LoginLog.onDetailLoginLog = function (data) {
-        func.open({
-            title: '查看登录历史',
-            content: Feng.ctxPath + '/loginLog/loginLog_detail?loginLogId=' + data.id,
-            tableId: LoginLog.tableId
-        });
-    };
-
-
-    /!**
+    /**
      * 点击删除登录历史
-     *
      * @param data 点击按钮时候的行数据
-     *!/
+     */
     LoginLog.onDeleteLoginLog = function (data) {
-        Feng.confirm("是否删除登录历史 " + data.name + "?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/loginLog/delete", function () {
-                Feng.success("删除成功!");
-                table.reload(LoginLog.tableId);
+        Feng.confirm("是否清空所有登录历史吗?", function () {
+            var ajax = new $ax(Feng.ctxPath + "/loginLog/deleteAll", function (data) {
+                if (data.success) {
+                    Feng.success("清空所有成功!");
+                    table.reload(LoginLog.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("清空所有失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("loginLogId", data.id);
             ajax.start();
         });
     };
 
-    /!**
-     * 导出excel按钮
-     *!/
-    LoginLog.exportExcel = function () {
-        var checkRows = table.checkStatus(LoginLog.tableId);
-        if (checkRows.data.length === 0) {
-            Feng.error("请选择要导出的数据");
-        } else {
-            table.exportFile(tableResult.config.id, checkRows.data, 'xls');
+    /**
+     * 系统管理--操作日志管理
+     */
+    var OperationLog = {
+        tableId: "operationLogTable",
+        condition: {
+            operationLogName: "",
+            beginTimeO: "",
+            endTimeO: ""
         }
-    };*/
+    };
+
+    /**
+     * 初始化表格的列
+     */
+    OperationLog.initColumn = function () {
+        return [[
+            {title: '日志名称', field: 'logName', align: "center"},
+            {title: '用户名称', field: 'userName', align: "center"},
+            {title: '类名称', field: 'className', align: "center"},
+            {title: '方法名称', field: 'method', align: "center"},
+            {title: '创建时间', field: 'createTime', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+            {title: '是否成功', field: 'succeed', align: "center"},
+            {title: '具体消息', field: 'message', align: "center"}
+        ]];
+    };
+
+    // 渲染表格
+    var tableResult = table.render({
+        elem: '#' + OperationLog.tableId,
+        url: Feng.ctxPath + '/operationLog/list',
+        page: true,
+        height: "full-158",
+        cellMinWidth: 100,
+        cols: OperationLog.initColumn()
+    });
+
+    // 搜索按钮点击事件
+    $('#btnSearchO').click(function () {
+        OperationLog.search();
+    });
+    // 重置按钮点击事件
+    $('#btnResetO').click(function () {
+        OperationLog.btnReset();
+    });
+
+    /**
+     * 点击查询按钮
+     */
+    OperationLog.search = function () {
+        var queryData = {};
+        queryData['operationLogName'] = $("#operationLogName").val().trim();
+        queryData['message'] = $("#messageO").val().trim();
+        queryData['beginTime'] = $("#beginTimeO").val();
+        queryData['endTime'] = $("#endTimeO").val();
+        table.reload(OperationLog.tableId, {where: queryData});
+    };
+
+
+    /**
+     * 重置查询条件
+     */
+    OperationLog.btnReset = function () {
+        $("#operationLogName").val("");
+        $("#messageO").val("");
+        $("#beginTimeO").val("");
+        $("#endTimeO").val("");
+    };
+
 });

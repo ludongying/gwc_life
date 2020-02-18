@@ -44,8 +44,8 @@ import java.util.UUID;
 public class SystemController extends BaseController {
     @Autowired
     private UserService userService;
-    @Value("${FILE_UPLOAD_PATH}")
-    private String uploadPath;
+    @Value("${FILE_UPLOAD_PATH_FILE}")
+    private String uploadPathFile;
     @Value("${FILE_UPLOAD_PATH_IMAGE}")
     private String uploadPathImage;
 
@@ -167,12 +167,12 @@ public class SystemController extends BaseController {
     @ResponseBody
     public BaseResult layuiUpload(@RequestPart("file") MultipartFile picture) {
         String pictureName = UUID.randomUUID().toString() + "." + ToolUtil.getFileSuffix(picture.getOriginalFilename());
+        FileUtil.fileIsExist(uploadPathImage);
         try {
-            picture.transferTo(new File(System.getProperty("user.dir") + uploadPathImage + pictureName));
+            picture.transferTo(new File(uploadPathImage + File.separator + pictureName));
         } catch (Exception e) {
             throw new BusinessException(ErrorEnum.UPLOAD_ERROR);
         }
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("pictureName", pictureName);
         return new BaseResult().content("上传生成", map);
@@ -184,7 +184,7 @@ public class SystemController extends BaseController {
 
     @RequestMapping(value = "downloadFile")
     public void downloadFile(HttpServletResponse response, @RequestParam String file) {
-        FileUtil.download(uploadPath, file, response);
+        FileUtil.download(uploadPathFile, file, response);
     }
 
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/gwc.iml" filepath="$PROJECT_DIR$/gwc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GWC-WEB.iml" filepath="$PROJECT_DIR$/GWC-WEB.iml" />
     </modules>
   </component>
 </project>

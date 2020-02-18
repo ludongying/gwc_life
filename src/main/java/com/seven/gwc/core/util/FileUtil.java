@@ -108,5 +108,16 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 判断文件是否存在，不存在则创建
+     * @param dirPath
+     */
+    public static void fileIsExist(String dirPath){
+        File file = new File(dirPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+    }
+
 
 }

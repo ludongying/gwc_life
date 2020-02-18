@@ -1,15 +1,13 @@
 package com.seven.gwc.modular.system.controller;
 
-import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.base.BaseController;
-import com.seven.gwc.core.node.FirstMenuNode;
 import com.seven.gwc.core.node.MenuNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.LogTypeEnum;
+import com.seven.gwc.core.util.SysUtil;
 import com.seven.gwc.modular.system.service.LoginLogService;
 import com.seven.gwc.modular.system.service.UserService;
-import com.seven.gwc.core.util.HttpContext;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -24,7 +22,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Objects;
+
+import static com.seven.gwc.core.util.HttpContextUtil.getIp;
 
 /**
  * 登录控制器
@@ -35,8 +34,6 @@ import java.util.Objects;
 @Controller
 public class LoginController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(getClass());
-
-
     @Autowired
     private UserService userService;
     @Autowired
@@ -50,26 +47,18 @@ public class LoginController extends BaseController {
         ShiroUser user = ShiroKit.getUserNotNull();
         List<Long> roleList = user.getRoleList();
 
-        //登录成功，记录登录日志
-        loginLogService.insert(LogTypeEnum.LOGIN, user.getId(), null, HttpContext.getIp());
-
         if (roleList == null || roleList.size() == 0) {
             ShiroKit.getSubject().logout();
             model.addAttribute("tips", "该用户没有角色，无法登陆");
+            //登录失败，记录登录日志
+            loginLogService.insert(LogTypeEnum.LOGIN_FAIL, user.getId(), "帐号：" + user.getAccount() + "->用户没有角色，无法登陆", getIp(), SysUtil.getmacAddress());
             return "/login";
         }
+        //登录成功，记录登录日志
+        loginLogService.insert(LogTypeEnum.LOGIN, user.getId(), "帐号：" + user.getAccount() + "->登录成功", getIp(), SysUtil.getmacAddress());
 
-        //加载一级菜单
-        List<FirstMenuNode> firstMenus = userService.getFirstMenu(roleList);
-        model.addAttribute("firstMenus", firstMenus);
-        //加载二级菜单
-        if (Objects.nonNull(firstMenus)) {
-            if (Objects.isNull(pcode)) {
-                pcode = firstMenus.get(0).getCode();
-            }
-            List<MenuNode> menus = userService.getUserMenuNodes(roleList, pcode);
-            model.addAttribute("menus", menus);
-        }
+        List<MenuNode> menus = userService.getUserMenuNodes(roleList);
+        model.addAttribute("menus", menus);
         model.addAttribute("userInfo", user);
         return "index";
     }
@@ -112,17 +101,17 @@ public class LoginController extends BaseController {
 
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
-        String remember = request.getParameter("remember");
+//        String remember = request.getParameter("remember");
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
 
         //如果开启了记住我功能
-        if (SysConsts.STR_ON.equals(remember)) {
-            token.setRememberMe(true);
-        } else {
-            token.setRememberMe(false);
-        }
+//        if (SysConsts.STR_ON.equals(remember)) {
+//            token.setRememberMe(true);
+//        } else {
+        token.setRememberMe(false);
+//        }
 
         //执行shiro登录操作
         currentUser.login(token);
@@ -137,8 +126,8 @@ public class LoginController extends BaseController {
     public String logOut(HttpServletRequest request, HttpServletResponse response) {
         //登录成功，记录登录日志
         ShiroUser user = ShiroKit.getUserNotNull();
-        loginLogService.insert(LogTypeEnum.EXIT, user.getId(), user.getAccount() + "退出登录", HttpContext.getIp());
 
+        loginLogService.insert(LogTypeEnum.EXIT, user.getId(), "帐号：" + user.getAccount() + "->退出登录", getIp(), SysUtil.getmacAddress());
         ShiroKit.getSubject().logout();
 
         Cookie[] cookies = request.getCookies();

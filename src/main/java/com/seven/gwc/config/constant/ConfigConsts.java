@@ -13,12 +13,12 @@ public interface ConfigConsts {
     /**
      * 默认管理系统的名称
      */
-    String DEFAULT_SYSTEM_NAME = "TonFun管理系统";
+    String DEFAULT_SYSTEM_NAME = "GWC管理系统";
 
     /**
      * 默认欢迎界面的提示
      */
-    String DEFAULT_WELCOME_TIP = "欢迎使用TonFun管理系统!";
+    String DEFAULT_WELCOME_TIP = "欢迎使用GWC管理系统!";
 
     /**
      * 管理员角色的名字

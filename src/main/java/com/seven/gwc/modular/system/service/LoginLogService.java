@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.state.LogTypeEnum;
 import com.seven.gwc.modular.system.entity.LoginLogEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface LoginLogService extends IService<LoginLogEntity> {
     /**
      * 登录历史查询列表
      */
-    List<LoginLogEntity> selectLoginLog(String loginLogName);
+    List<LoginLogEntity> selectLoginLog(String loginLogName, String message, String beginTime, String endTime);
 
     /**
      * 添加登录日志
@@ -28,5 +28,5 @@ public interface LoginLogService extends IService<LoginLogEntity> {
      * @param msg         描述
      * @param ip          IP
      */
-    void insert(LogTypeEnum logTypeEnum, Long userId, String msg, String ip);
+    void insert(LogTypeEnum logTypeEnum, Long userId, String msg, String ip, String macAddress);
 }

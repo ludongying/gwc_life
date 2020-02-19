@@ -99,9 +99,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UndeclaredThrowableException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    public BaseResult credentials(UndeclaredThrowableException e) {
-        logger.error("权限异常", e);
-        return new BaseResult(ErrorEnum.NO_POWER_TO_RESOURCES);
+    public Object credentials(HttpServletRequest request,UndeclaredThrowableException e) {
+        if (ToolUtil.isAjax(request)){
+            logger.error("权限异常", e);
+            return new BaseResult(ErrorEnum.NO_POWER_TO_RESOURCES);
+        }else{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("/403");
+            return modelAndView;
+        }
     }
 
 }

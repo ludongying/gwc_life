@@ -6,7 +6,6 @@ import com.seven.gwc.modular.system.entity.DictEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : dictionaryMapper 接口
@@ -15,9 +14,6 @@ import java.util.Map;
  * @date : 2019-10-10
  */
 public interface DictMapper extends BaseMapper<DictEntity> {
-
-
-    List<Map<String, Object>> selectDictTree(@Param("menuName") String menuName, @Param("typeId") Long typeId);
 
     /**
      * 获取ztree的节点列表

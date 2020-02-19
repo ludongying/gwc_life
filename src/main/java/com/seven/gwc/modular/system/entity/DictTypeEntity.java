@@ -41,9 +41,6 @@ public class DictTypeEntity implements Serializable {
     // 是否是系统字典，Y-是，N-否
     private String systemFlag;
 
-    // 状态(字典)
-    private String status;
-
     // 排序
     private Integer sort;
 

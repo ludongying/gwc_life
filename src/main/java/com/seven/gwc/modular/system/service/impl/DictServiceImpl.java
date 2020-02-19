@@ -1,17 +1,19 @@
 package com.seven.gwc.modular.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.exception.ServiceException;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
-import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.dao.DictTypeMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
+import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.seven.gwc.modular.system.service.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : 字典服务实现类
@@ -31,6 +32,17 @@ import java.util.Map;
 public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> implements DictService {
     @Autowired
     private DictMapper dictMapper;
+    @Autowired
+    private DictTypeMapper dictTypeMapper;
+
+    @Override
+    public List<DictEntity> selectDict(Long dictTypeId) {
+        LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(DictEntity::getDictTypeId, dictTypeId)
+                .orderByAsc(DictEntity::getSort)
+                .orderByDesc(DictEntity::getCreateTime);
+        return dictMapper.selectList(lambdaQuery);
+    }
 
     /**
      * 添加字典
@@ -40,16 +52,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         //判断是否已经存在同编码或同名称字典
         QueryWrapper<DictEntity> dictQueryWrapper = new QueryWrapper<>();
         dictQueryWrapper
-                .and(i -> i.eq("code", dict.getCode()).or().eq("name", dict.getName()))
+                .and(i -> i.eq("name", dict.getName()))
                 .and(i -> i.eq("dict_type_id", dict.getDictTypeId()));
         List<DictEntity> list = this.list(dictQueryWrapper);
         if (list != null && list.size() > 0) {
             throw new ServiceException(ErrorEnum.ERROR_ONLY_STATUS);
         }
-        //设置pids
-        dictSetPids(dict);
-        //设置状态
-        dict.setStatus(TypeStatesEnum.OK.getCode());
+        dict.setCreateTime(new Date());
         this.save(dict);
     }
 
@@ -58,24 +67,24 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
      */
     @Override
     public void update(DictEntity dict) {
-        DictEntity dictEntity = this.getById(dict.getId());
-
-        //判断编码是否重复
-        QueryWrapper<DictEntity> wrapper = new QueryWrapper<DictEntity>()
-                .and(i -> i.eq("code", dictEntity.getCode()).or().eq("name", dictEntity.getName()))
-                .and(i -> i.ne("id", dictEntity.getId()))
-                .and(i -> i.eq("dict_type_id", dict.getDictTypeId()));
-        int dicts = this.count(wrapper);
-        if (dicts > 0) {
-            throw new ServiceException(ErrorEnum.ERROR_ONLY_STATUS);
-        }
         ShiroUser user = ShiroKit.getUser();
-        dictEntity.setUpdateUser(user.getName());
-        dictEntity.setUpdateTime(new Date());
-        //设置pids
-        dictSetPids(dictEntity);
+        DictEntity dictEntity = this.getById(dict.getId());
+        LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(DictEntity::getName, dict.getName())
+                .eq(DictEntity::getDictTypeId, dict.getDictTypeId())
+                .ne(DictEntity::getId, dict.getId());
 
-        this.updateById(dictEntity);
+        DictEntity list = dictMapper.selectOne(lambdaQuery);
+        if (list != null) {
+            throw new ServiceException(ErrorEnum.ERROR_ONLY_CODE);
+        }
+        if (dict.getSort() == null) {
+            dict.setSort(0);
+        }
+        dict.setUpdateUser(user.getName());
+        dict.setUpdateTime(new Date());
+
+        this.updateById(dict);
     }
 
     /**
@@ -83,22 +92,41 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
      */
     @Override
     public DictEntity dictDetail(Long dictId) {
-        //查询字典
-        DictEntity detail = this.getById(dictId);
-        //查询父级字典
-        if (ToolUtil.isNotEmpty(detail.getParentId())) {
-            Long parentId = detail.getParentId();
-            DictEntity dict = this.getById(parentId);
-            if (dict != null) {
-                detail.setParentName(dict.getName());
-            } else {
-                detail.setParentName("顶级");
-            }
-        }
-        return detail;
+        DictEntity entity = dictMapper.selectById(dictId);
+        return entity;
     }
 
     @Override
+    public List<ZTreeNode> dictTreeList(Long dictTypeId, Long dictId) {
+        return null;
+    }
+
+    @Override
+    public List<DictEntity> selectDictListByDictType(String code) {
+        LambdaQueryWrapper<DictTypeEntity> dictTypeLambda = Wrappers.lambdaQuery();
+        dictTypeLambda.eq(DictTypeEntity::getCode, code);
+        DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(dictTypeLambda);
+
+        LambdaQueryWrapper<DictEntity> dictLambda = Wrappers.lambdaQuery();
+        dictLambda.eq(DictEntity::getDictTypeId, dictTypeEntity.getId());
+        List<DictEntity> dictEntityList = dictMapper.selectList(dictLambda);
+
+        return dictEntityList;
+    }
+
+    @Override
+    public DictEntity findByNameAndTypeId(String name, String typeCode) {
+        LambdaQueryWrapper<DictTypeEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(DictTypeEntity::getCode, typeCode);
+        DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(lambdaQuery);
+
+        LambdaQueryWrapper<DictEntity> typeLambdaQuery = Wrappers.lambdaQuery();
+        typeLambdaQuery.eq(ToolUtil.isNotEmpty(name), DictEntity::getName, name)
+                .eq(DictEntity::getDictTypeId, dictTypeEntity.getId());
+        return dictMapper.selectOne(typeLambdaQuery);
+    }
+
+    /*@Override
     public List<Map<String, Object>> selectDictTree(String menuName, Long typeId) {
         List<Map<String, Object>> maps = this.dictMapper.selectDictTree(menuName, typeId);
         if (maps == null){
@@ -108,15 +136,14 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         DictEntity dict = new DictEntity();
         dict.setName("根节点");
         dict.setId(0L);
-        dict.setParentId(-999L);
         maps.add(BeanUtil.beanToMap(dict));
         return maps;
-    }
+    }*/
 
     /**
      * 获取字典的树形列表（ztree结构）
      */
-    @Override
+    /*@Override
     public List<ZTreeNode> dictTreeList(Long dictTypeId, Long dictId) {
         List<ZTreeNode> tree = dictMapper.dictTree(dictTypeId);
         //获取dict的所有子节点
@@ -135,7 +162,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         }
         resultTree.add(ZTreeNode.createParent());
         return resultTree;
-    }
+    }*/
 
     private List<Long> getSubIds(Long dictId) {
 
@@ -152,21 +179,4 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         }
     }
 
-    /**
-     * 设置父级Id
-     */
-    private void dictSetPids(DictEntity param) {
-        if (param.getParentId().equals(0L)) {
-            param.setParentIds("[0]");
-        } else {
-            //获取父级的pids
-            Long parentId = param.getParentId();
-            DictEntity parent = this.getById(parentId);
-            if (parent == null) {
-                param.setParentIds("[0]");
-            } else {
-                param.setParentIds(parent.getParentIds() + "," + "[" + parentId + "]");
-            }
-        }
-    }
 }

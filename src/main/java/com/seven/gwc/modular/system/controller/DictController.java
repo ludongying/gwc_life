@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : 字典控制器
@@ -74,10 +73,17 @@ public class DictController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
+    public BaseResultPage<DictTypeEntity> list(Long dictTypeId) {
+        List<DictEntity> list = dictService.selectDict(dictTypeId);
+        return new BaseResultPage().treeData(list);
+    }
+
+    /*@RequestMapping("/list")
+    @ResponseBody
     public Object list(String menuName, Long dictTypeId) {
         List<Map<String, Object>> menus = this.dictService.selectDictTree(menuName, dictTypeId);
         return new BaseResultPage().treeData(menus);
-    }
+    }*/
 
     @RequestMapping("/add")
     @ResponseBody
@@ -107,9 +113,6 @@ public class DictController extends BaseController {
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DictEntity dict) {
-        if (dict.getSort() == null) {
-            dict.setSort(0);
-        }
         dictService.update(dict);
         return SUCCESS;
     }
@@ -131,6 +134,12 @@ public class DictController extends BaseController {
     @ResponseBody
     public List<ZTreeNode> ztree(@RequestParam("dictTypeId") Long dictTypeId, @RequestParam(value = "dictId", required = false) Long dictId) {
         return this.dictService.dictTreeList(dictTypeId, dictId);
+    }
+
+    @RequestMapping(value = "/selectDictListByDictType")
+    @ResponseBody
+    public List<DictEntity> selectDictListByDictType(String code) {
+        return dictService.selectDictListByDictType(code);
     }
 
 }

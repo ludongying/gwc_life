@@ -32,37 +32,19 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/dict/add", function (data) {
-            Feng.success("添加成功！");
-
-            //传给上个页面，刷新table用
-            admin.putTempData('formOk', true);
-
-            //关掉对话框
-            admin.closeThisDialog();
+            if (data.success) {
+                Feng.success("添加成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                admin.closeThisDialog();//关掉对话框
+            } else {
+                Feng.error(data.message);
+            }
         }, function (data) {
-            Feng.error("添加失败！" + data.responseJSON.message)
+            Feng.error("该字典类型下已存在该名称！")
         });
         ajax.set(data.field);
         ajax.start();
 
         return false;
-    });
-
-    //父级字典时
-    $('#parentName').click(function () {
-        var formName = encodeURIComponent("parent.DictInfoDlg.data.parentName");
-        var formId = encodeURIComponent("parent.DictInfoDlg.data.parentId");
-        var treeUrl = encodeURIComponent("/dict/ztree?dictTypeId=" + $("#dictTypeId").val());
-
-        layer.open({
-            type: 2,
-            title: '父级字典',
-            area: ['300px', '400px'],
-            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
-            end: function () {
-                $("#parentId").val(DictInfoDlg.data.parentId);
-                $("#parentName").val(DictInfoDlg.data.parentName);
-            }
-        });
     });
 });

@@ -1,15 +1,14 @@
 package com.seven.gwc.modular.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.DictTypeMapper;
 import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.seven.gwc.modular.system.service.DictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Service;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.util.List;
 

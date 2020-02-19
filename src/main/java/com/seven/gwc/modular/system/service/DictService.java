@@ -5,7 +5,6 @@ import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.modular.system.entity.DictEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : 字典服务类
@@ -15,6 +14,8 @@ import java.util.Map;
  */
 
 public interface DictService extends IService<DictEntity> {
+
+    List<DictEntity> selectDict(Long dictTypeId);
 
     /**
      * 添加字典
@@ -39,6 +40,18 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 获取某个类型下字典树的列表，选择上级字典时用
      */
-    List<Map<String, Object>> selectDictTree(String menuName, Long typeId);
 
+    /**
+     * 根据字典类型编码获取车场类型字典数据
+     * @author: SHQ
+     * @return
+     */
+    List<DictEntity> selectDictListByDictType(String dictTypeCode);
+
+    /**
+     * 根据字典名称跟地点类型获取字典数据
+     * @author: SHQ
+     * @return
+     */
+    DictEntity findByNameAndTypeId(String name, String typeCode);
 }

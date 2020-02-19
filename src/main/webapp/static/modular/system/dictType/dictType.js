@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
+layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
     var $ = layui.$;
     var layer = layui.layer;
     var form = layui.form;
@@ -24,39 +24,31 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     DictType.initColumn = function () {
         return [[
             {title: '字典类型id', field: 'id', hide: true},
-            {
-                field: 'name', sort: true, title: '类型名称', align: "center", templet: function (d) {
-                    var url = Feng.ctxPath + '/dict?id=' + d.id;
-                    return '<a style="color: #01AAED;" href="' + url + '">' + d.name + '</a>';
+            {field: 'name', title: '类型', align: "center", width: 200, templet: function (d) {
+                var url = Feng.ctxPath + '/dict?id=' + d.id;
+                return '<a style="color: #01AAED;" href="' + url + '">' + d.name + '</a>';
+            }},
+            {field: 'code', title: '类型编码', align: "center", width: 200, templet: function (d) {
+                var url = Feng.ctxPath + '/dict?id=' + d.id;
+                return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
+            }},
+            {field: 'systemFlag', align: "center", title: '是否是系统字典', templet: function (d) {
+                if (d.systemFlag === 'Y') {
+                    return "<span class='layui-badge layui-bg-blue'>是</span></b>";
+                } else {
+                    return "<span class='layui-badge layui-bg-cyan'>否</span></b>";
                 }
-            }, {
-                field: 'code', sort: true, align: "center", title: '类型编码', templet: function (d) {
-                    var url = Feng.ctxPath + '/dict?id=' + d.id;
-                    return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
+            }},
+            {field: 'createTime', title: '添加时间', align: "center", width: 160},
+            {field: 'createUser', title: '创建人', align: "center"},
+            {field: 'sort', align: "right", title: '排序'},
+            /*{field: 'status', align: "center", title: '状态', templet: function (d) {
+                if (d.status === 'ENABLE') {
+                    return "<span class='layui-badge layui-bg-green'>启用</span></b>";
+                } else {
+                    return "<span class='layui-badge layui-bg-red'>禁用</span></b>";
                 }
-            },
-            {
-                field: 'systemFlag', sort: true, align: "center", title: '是否是系统字典', templet: function (d) {
-                    if (d.systemFlag === 'Y') {
-                        return "是";
-                    } else {
-                        return "否";
-                    }
-                }
-            },
-            {field: 'description', sort: true, align: "center", title: '字典描述'},
-            {
-                field: 'status', align: "center", title: '状态', templet: function (d) {
-                    if (d.status === 'ENABLE') {
-                        return "启用";
-                    } else {
-                        return "禁用";
-                    }
-                }
-            },
-            {field: 'createTime', sort: true,align: "center", title: '添加时间'},
-            {field: 'createUser', sort: true,align: "center", title: '创建人'},
-            {field: 'sort', sort: true,align: "center", title: '排序'},
+            }},*/
             {align: 'center', toolbar: '#tableBar', title: '操作'}
         ]]
     };
@@ -66,20 +58,34 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + DictType.tableId,
         url: Feng.ctxPath + '/dictType/list',
         page: true,
-        height: "full-158",
         cellMinWidth: 100,
-        cols: DictType.initColumn()
+        cols: DictType.initColumn(),
+        even: true,
+        height: 'full-97'
     });
 
+
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         DictType.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        DictType.btnReset();
+    });
 
+
+    /**
+     * 左侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         DictType.openAddSysDictType();
     });
+
 
     // 工具条点击事件
     table.on('tool(' + DictType.tableId + ')', function (obj) {
@@ -103,6 +109,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         var queryData = {};
         queryData['sysDictTypeName'] = $("#dictTypeName").val().trim();
         table.reload(DictType.tableId, {where: queryData});
+    };
+
+    /**
+     * 重置查询条件
+     */
+    DictType.btnReset = function () {
+        $("#dictTypeName").val("");
     };
 
     /**
@@ -145,10 +158,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     DictType.onDeleteSysDictType = function (data) {
-        Feng.confirm("是否删除" + data.name + "?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/dictType/delete", function () {
-                Feng.success("删除成功!");
-                table.reload(DictType.tableId);
+        Feng.confirm("是否删除字典类型《" + data.name + "》吗?", function () {
+            var ajax = new $ax(Feng.ctxPath + "/dictType/delete", function (data) {
+                if (data.success) {
+                    Feng.success("删除成功!");
+                    table.reload(DictType.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });

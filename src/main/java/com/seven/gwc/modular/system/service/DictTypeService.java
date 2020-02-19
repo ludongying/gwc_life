@@ -1,7 +1,7 @@
 package com.seven.gwc.modular.system.service;
 
-import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.system.entity.DictTypeEntity;
 
 import java.util.List;
 

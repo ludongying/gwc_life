@@ -23,7 +23,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
      */
     DictType.initColumn = function () {
         return [[
-            {title: '字典类型id', field: 'id', hide: true},
+            {field: 'id', title: '字典类型id', hide: true},
             {field: 'name', title: '类型', align: "center", width: 200, templet: function (d) {
                 var url = Feng.ctxPath + '/dict?id=' + d.id;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.name + '</a>';
@@ -42,13 +42,6 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
             {field: 'createTime', title: '添加时间', align: "center", width: 160},
             {field: 'createUser', title: '创建人', align: "center"},
             {field: 'sort', align: "right", title: '排序'},
-            /*{field: 'status', align: "center", title: '状态', templet: function (d) {
-                if (d.status === 'ENABLE') {
-                    return "<span class='layui-badge layui-bg-green'>启用</span></b>";
-                } else {
-                    return "<span class='layui-badge layui-bg-red'>禁用</span></b>";
-                }
-            }},*/
             {align: 'center', toolbar: '#tableBar', title: '操作'}
         ]]
     };
@@ -61,7 +54,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
         cellMinWidth: 100,
         cols: DictType.initColumn(),
         even: true,
-        height: 'full-97'
+        height: 'full-95'
     });
 
 

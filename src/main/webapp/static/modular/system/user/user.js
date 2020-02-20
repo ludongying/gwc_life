@@ -29,25 +29,25 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     User.initColumn = function () {
         return [[
             {title: '用戶id', field: 'id', hide: true, sort: true},
-            {title: '账号', field: 'account', sort: true, align: "center"},
-            {title: '姓名', field: 'name', sort: true, align: "center"},
-            {title: '性别', field: 'sex', sort: true, align: "center", templet: function (d) {
+            // {title: '账号', field: 'account', align: "center"},
+            {title: '姓名', field: 'name', align: "center"},
+            {title: '性别', field: 'sex', align: "center", templet: function (d) {
                 if (d.sex === 'M')
                     return "<span class='layui-badge layui-bg-blue'>男</span></b>";
                 else
                     return "<span class='layui-badge layui-bg-orange'>女</span></b>";
             }},
-            {title: '角色', field: 'roleName', sort: true, align: "center"},
-            {title: '部门', field: 'deptName', sort: true, align: "center", templet: function (d) {
+            {title: '角色', field: 'roleName', align: "center"},
+            {title: '部门', field: 'deptName', align: "center", templet: function (d) {
                 if (d.deptName == '' || d.deptName == null)
                     return "顶级";
                 else
                     return d.deptName;
             }},
-            {title: '电话', field: 'phone', sort: true, align: "center"},
-            {title: '创建时间', field: 'createTime', sort: true, align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
-            {title: '状态', field: 'status', sort: true, align: "center", templet: '#statusTpl'},
-            {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
+            {title: '电话', field: 'phone', align: "center", width: 120},
+            {title: '创建时间', field: 'createTime', align: "center", width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '状态', field: 'status', align: "center", templet: '#statusTpl'},
+            {title: '操作', toolbar: '#tableBar', minWidth: 200, align: 'center'}
         ]];
     };
 
@@ -56,27 +56,34 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + User.tableId,
         url: Feng.ctxPath + '/user/list',
         page: true,
-        height: "full-158",
+        height: "full-95",
         cellMinWidth: 100,
         cols: User.initColumn()
     });
 
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         User.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        User.btnReset();
+    });
 
+    /**
+     * 左侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         User.openAddUser();
     });
 
-    // 导出excel
-    $('#btnExp').click(function () {
-        User.exportExcel();
-    });
-
-    // 工具条点击事件
+    /**
+     * 工具条点击事件
+     */
     table.on('tool(' + User.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
@@ -105,6 +112,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
+     * 重置查询条件
+     */
+    User.btnReset = function () {
+        $("#name").val("");
+    };
+
+    /**
      * 弹出添加用户
      */
     User.openAddUser = function () {
@@ -127,26 +141,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 导出excel按钮
-     */
-    User.exportExcel = function () {
-        var checkRows = table.checkStatus(User.tableId);
-        if (checkRows.data.length === 0) {
-            Feng.error("请选择要导出的数据");
-        } else {
-            table.exportFile(tableResult.config.id, checkRows.data, 'xls');
-        }
-    };
-
-
-    /**
      * 点击删除用户
      */
     User.onDeleteUser = function (data) {
-        Feng.confirm("是否删除用户 " + data.name + "?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/user/deleteLogic", function () {
-                Feng.success("删除成功!");
-                table.reload(User.tableId);
+        Feng.confirm("是否删除用户《" + data.name + "》吗?", function () {
+            var ajax = new $ax(Feng.ctxPath + "/user/deleteLogic", function (data) {
+                if (data.success) {
+                    Feng.success("删除成功!");
+                    table.reload(User.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
@@ -154,7 +159,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             ajax.start();
         });
     };
-
 
     // 修改user状态
     form.on('switch(status)', function (data) {
@@ -172,19 +176,25 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     User.changeUserStatus = function (id, checked) {
         if (checked) {
             var ajax = new $ax(Feng.ctxPath + "/user/unfreeze", function (data) {
-                Feng.success("解除冻结成功!");
+                if (data.success) {
+                    Feng.success("解除冻结成功!");
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
-                Feng.error("解除冻结失败!");
-                table.reload(User.tableId);
+                Feng.error("解除冻结失败!" + data.responseJSON.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
         } else {
             var ajax = new $ax(Feng.ctxPath + "/user/freeze", function (data) {
-                Feng.success("冻结成功!");
+                if (data.success) {
+                    Feng.success("冻结成功!");
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
                 Feng.error("冻结失败!" + data.responseJSON.message + "!");
-                table.reload(User.tableId);
             });
             ajax.set("id", id);
             ajax.start();
@@ -195,11 +205,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 重置密码
      */
     User.resetPassword = function (data) {
-        Feng.confirm("是否重置密码为888888?", function () {
+        Feng.confirm("是否重置密码为《888888》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/user/reset", function (data) {
-                Feng.success("重置密码成功!");
+                if (data.success) {
+                    Feng.success("重置密码成功!");
+                    table.reload(User.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
-                Feng.error("重置密码失败!");
+                Feng.error("重置密码失败!" + data.responseJSON.message + "!");
             });
             ajax.set("id", data.id);
             ajax.start();
@@ -210,14 +225,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 分配角色
      */
     User.roleAssign = function (data) {
-        layer.open({
-            type: 2,
+        func.open({
             title: '角色分配',
             area: ['300px', '400px'],
             content: Feng.ctxPath + '/user/user_role_assign/' + data.id,
-            end: function () {
-                table.reload(User.tableId);
-            }
+            tableId: User.tableId
         });
     };
 

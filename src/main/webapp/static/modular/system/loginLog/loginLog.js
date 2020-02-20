@@ -59,12 +59,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
     LoginLog.initColumn = function () {
         return [[
             {title: '主键', field: 'id', hide: true},
-            {title: '日志', field: 'logName'},
-            {title: '姓名', field: 'userName'},
-            {title: '登录ip', field: 'ipAddress'},
-            {title: 'MAC地址', field: 'macAddress'},
-            {title: '记录时间', field: 'createTime', align: "right", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
-            {title: '具体消息', field: 'message'},
+            {title: '日志', field: 'logName', align: "center"},
+            {title: '姓名', field: 'userName', align: "center"},
+            {title: '登录ip', field: 'ipAddress', align: "center", width: 160},
+            {title: 'MAC地址', field: 'macAddress', align: "center", width: 160},
+            {title: '记录时间', field: 'createTime', align: "center", width: 160, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+            {title: '具体消息', field: 'message', align: "center", width: 400},
         ]];
     };
 
@@ -76,7 +76,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         cellMinWidth: 100,
         cols: LoginLog.initColumn(),
         even: true,
-        height: 'full-158'
+        height: 'full-95'
     });
 
 
@@ -159,9 +159,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
             {title: '用户名称', field: 'userName', align: "center"},
             {title: '类名称', field: 'className', align: "center"},
             {title: '方法名称', field: 'method', align: "center"},
-            {title: '创建时间', field: 'createTime', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+            {title: '创建时间', field: 'createTime', align: "center", width: 160, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
             {title: '是否成功', field: 'succeed', align: "center"},
-            {title: '具体消息', field: 'message', align: "center"}
+            {title: '具体消息', field: 'message', align: "center", width: 400}
         ]];
     };
 
@@ -170,7 +170,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         elem: '#' + OperationLog.tableId,
         url: Feng.ctxPath + '/operationLog/list',
         page: true,
-        height: "full-158",
+        height: "full-95",
         cellMinWidth: 100,
         cols: OperationLog.initColumn()
     });

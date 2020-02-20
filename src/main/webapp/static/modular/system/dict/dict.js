@@ -22,12 +22,12 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
      */
     Dict.initColumn = function () {
         return [[
-            {field: 'dictId', hide: true, title: '字典id'},
+            {field: 'dictId', title: '字典id', hide: true},
             {field: 'name', title: '字典', align: "center"},
             {field: 'createTime', title: '创建时间', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
             {field: 'createUser', title: '创建人', align: "center"},
-            {field: 'sort', align: "center", title: '排序'},
-            {align: 'center', toolbar: '#tableBar', title: '操作'}
+            {field: 'sort', title: '排序', align: "center"},
+            {align: 'center', toolbar: '#tableBar', width: 200, title: '操作'}
         ]];
     };
 
@@ -39,40 +39,8 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         cellMinWidth: 100,
         cols: Dict.initColumn(),
         even: true,
-        height: 'full-97'
+        height: 'full-95'
     });
-
-    // 渲染表格
-    // var tableResult = table.render({
-    //     elem: '#' + Dict.tableId,
-    //     url: Feng.ctxPath + '/dict/ztree?dictTypeId=' + $('#dictTypeId').val(),
-    //     page: true,
-    //     cellMinWidth: 100,
-    //     cols: Dict.initColumn(),
-    //     even: true,
-    //     height: 'full-75'
-    // });
-
-    // 渲染表格
-    /*Dict.initTable = function (id, data) {
-        return treetable.render({
-            elem: '#' + id,
-            url: Feng.ctxPath + '/dict/list?dictTypeId=' + $('#dictTypeId').val(),
-            where: data,
-            page: false,
-            cellMinWidth: 100,
-            cols: Dict.initColumn(),
-            treeColIndex: 2,
-            treeSpid: "0",
-            treeIdName: 'dictId',
-            treePidName: 'parentId',
-            treeDefaultClose: false,
-            treeLinkage: true,
-            even: true,
-            height: 'full-97'
-        });
-    };
-    Dict.initTable(Dict.tableId);*/
 
     /**
      * 左侧搜索
@@ -138,6 +106,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
     Dict.openAddDict = function () {
         func.open({
             title: '添加字典',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/dict/dict_add?dictTypeId=' + $('#dictTypeId').val(),
             tableId: Dict.tableId
         });
@@ -149,7 +118,8 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
     Dict.onEditSysDictType = function (data) {
         console.log(data);
         func.open({
-            title: '编辑字典类型',
+            title: '编辑字典',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/dict/dict_edit?dictId=' + data.id,
             tableId: Dict.tableId
         });
@@ -160,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
      */
     Dict.onDetailSysDictType = function (data) {
         func.open({
-            title: '查看字典类型',
+            title: '查看字典',
             content: Feng.ctxPath + '/dict/dictType_detail?dictTypeId=' + data.id,
             tableId: Dict.tableId
         });

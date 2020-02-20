@@ -26,14 +26,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/dictType/add", function (data) {
             if (data.success) {
-                Feng.success("添加成功!");
+                Feng.success("增加成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框
             } else {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("添加失败！" + data.responseJSON.message)
+            Feng.error("增加失败!" + data.responseJSON.message)
         });
         ajax.set(data.field);
         ajax.start();

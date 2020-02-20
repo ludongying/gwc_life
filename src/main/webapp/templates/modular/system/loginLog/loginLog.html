@@ -1,9 +1,4 @@
 @layout("/common/_container.html",{js:["/modular/system/loginLog/loginLog.js"]}){
-
-<div class="layui-body-header">
-    <span class="layui-body-header-title">登录历史管理</span>
-</div>
-
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -37,7 +32,7 @@
                                                 <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
                                             </div>
                                             <!-- 按钮居右 -->
-                                            <div class="layui-inline" style="float: right;">
+                                            <div style="float: right;">
                                                 @if(shiro.hasPermission("/loginLog/delete")){
                                                 <button id="delete" name="delete" class="layui-btn layui-btn-danger icon-btn"><i class="layui-icon">&#xe640;</i>清空所有</button>
                                                 @}

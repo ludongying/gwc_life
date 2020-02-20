@@ -39,7 +39,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
             url: Feng.ctxPath + '/dept/listTree',
             where: data,
             page: false,
-            height: "full-158",
+            height: "full-95",
             cellMinWidth: 100,
             cols: Dept.initColumn(),
             treeColIndex: 2,
@@ -88,8 +88,9 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     Dept.openAddDept = function () {
         func.open({
             title: '添加部门',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/dept/dept_add',
-            tableId: Dept.initTable(Dept.tableId)
+            tableId: Dept.tableId
         });
     };
 
@@ -99,8 +100,9 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     Dept.onEditDept = function (data) {
         func.open({
             title: '编辑部门',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/dept/dept_edit?id=' + data.id,
-            tableId: Dept.initTable(Dept.tableId)
+            tableId: Dept.tableId
         });
     };
 
@@ -110,10 +112,8 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
      * @param data 点击按钮时候的行数据
      */
     Dept.onDeleteDept = function (data) {
-        Feng.confirm("是否删除部门 " + data.fullName + "?", function () {
+        Feng.confirm("是否删除部门《" + data.fullName + "》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/dept/delete", function (data) {
-                /*Feng.success("删除成功!");
-                table.reload(Dept.tableId);*/
                 if (data.success == true) {
                     Feng.success("删除成功!");
                     Dept.initTable(Dept.tableId);

@@ -1,7 +1,4 @@
 @layout("/common/_container.html",{js:["/modular/system/menu/menu.js"]}){
-<div class="layui-body-header">
-    <span class="layui-body-header-title">菜单管理</span>
-</div>
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -16,12 +13,15 @@
                                 <input id="level" class="layui-input" type="text" placeholder="层级"/>
                             </div>
                             <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnSearch" class="layui-btn layui-btn-normal">搜索</button>
+                                <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                            <div style="float: right">
                                 @if(shiro.hasPermission("/menu/add")){
                                 <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>关联代码</button>
                                 @}
-                                <button id="expandAll" class="layui-btn layui-btn-warm"><i class="layui-icon">&#xe654;</i>展开所有</button>
-                                <button id="foldAll" class="layui-btn icon-btn"><i class="layui-icon">&#xe656;</i>折叠所有</button>
+                                <button id="expandAll" class="layui-btn layui-btn-primary">展开所有</button>
+                                <button id="foldAll" class="layui-btn layui-btn-primary">折叠所有</button>
                             </div>
                         </div>
                     </div>

@@ -66,13 +66,6 @@
                         <input name="password" type="password" lay-verify="required" class="layui-input">
                     </div>
                 </div>
-<!--                <div class="layui-form-item" pane="">-->
-<!--                    <label class="layui-form-label" lay-tips="7天内免登陆">记住我</label>-->
-<!--                    <div class="layui-input-block">-->
-<!--                        <input type="radio" name="remember" value="on" title="是">-->
-<!--                        <input type="radio" name="remember" value="off" title="否" checked="">-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="layui-form-item">
                     <button lay-filter="login-submit" class="layui-btn layui-btn-fluid" lay-submit>登 录</button>
                 </div>
@@ -110,11 +103,6 @@
         form.on('submit(login-submit)', function (obj) {
             return true;
         });
-
-        // 图形验证码
-        // $('.login-captcha').click(function () {
-        //     this.src = this.src + '?t=' + (new Date).getTime();
-        // });
 
         var errorMsg = "${tips!}";
         if (errorMsg) {

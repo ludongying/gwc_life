@@ -17,3 +17,12 @@
     margin-bottom: 25px;
     margin-right: 0;
 }
+
+.form-group-bottom-white {
+    z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+}

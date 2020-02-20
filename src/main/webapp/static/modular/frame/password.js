@@ -11,10 +11,14 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     // 监听提交
     form.on('submit(submit-psw)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/user/changePwd", function (data) {
-            Feng.success("修改成功!");
-            admin.closeThisDialog();
+            if (data.success) {
+                Feng.success("编辑成功!");
+                admin.closeThisDialog();//关掉对话框
+            } else {
+                Feng.error(data.message);
+            }
         }, function (data) {
-            Feng.error("修改失败!" + data.responseJSON.message + "!");
+            Feng.error("编辑失败!" + data.responseJSON.message + "!");
         });
         ajax.setData(data.field);
         ajax.start();

@@ -46,6 +46,8 @@ layui.define(['jquery', 'layer', 'admin', 'table'], function (exports) {
                 } else {
                     param.area = ['1000px', clientHeight + "px"];
                 }
+            } else {
+                param.area = [param.area[0], param.area[1]];
             }
 
             param.skin = 'layui-layer-admin';

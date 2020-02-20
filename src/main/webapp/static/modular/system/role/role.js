@@ -21,16 +21,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Role.initColumn = function () {
         return [[
-            {title: '主键id', field: 'id', sort: true, hide: true},
-            {title: '角色名称', field: 'name', sort: true, align: "center"},
-            {title: '上级角色', field: 'pName', sort: true, align: "center", templet: function (d) {
+            {title: '主键id', field: 'id', hide: true},
+            {title: '角色名称', field: 'name', align: "center"},
+            {title: '上级角色', field: 'pName', align: "center", templet: function (d) {
                 if (d.pName == '' || d.pName == null)
                     return "顶级";
                 else
                     return d.pName;
             }},
-            {title: '别名', field: 'description', sort: true, align: "center"},
-            {title: '排序', field: 'sort', sort: true, align: "center"},
+            {title: '别名', field: 'description', align: "center"},
+            {title: '排序', field: 'sort', align: "center"},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -40,27 +40,34 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Role.tableId,
         url: Feng.ctxPath + '/role/list',
         page: true,
-        height: "full-158",
+        height: "full-95",
         cellMinWidth: 100,
         cols: Role.initColumn()
     });
 
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Role.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        Role.btnReset();
+    });
 
+    /**
+     * 左侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         Role.openAddRole();
     });
 
-    // 导出excel
-    $('#btnExp').click(function () {
-        Role.exportExcel();
-    });
-
-    // 工具条点击事件
+    /**
+     * 工具条点击事件
+    */
     table.on('tool(' + Role.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
@@ -87,11 +94,19 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
+     * 重置查询条件
+     */
+    Role.btnReset = function () {
+        $("#roleName").val("");
+    };
+
+    /**
      * 弹出添加角色
      */
     Role.openAddRole = function () {
         func.open({
             title: '添加角色',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/role/role_add',
             tableId: Role.tableId
         });
@@ -103,6 +118,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Role.onEditRole = function (data) {
         func.open({
             title: '编辑角色',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/role/role_edit?id=' + data.id,
             tableId: Role.tableId
         });
@@ -114,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     Role.onDeleteRole = function (data) {
-        Feng.confirm("是否删除角色 " + data.name + "?", function () {
+        Feng.confirm("是否删除角色《" + data.name + "》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/role/delete", function (data) {
                 if (data.success == true) {
                     Feng.success("删除成功!");
@@ -122,7 +138,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 } else {
                     Feng.success(data.message);
                 }
-
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
@@ -132,31 +147,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 导出excel按钮
-     */
-    Role.exportExcel = function () {
-        var checkRows = table.checkStatus(Role.tableId);
-        if (checkRows.data.length === 0) {
-            Feng.error("请选择要导出的数据");
-        } else {
-            table.exportFile(tableResult.config.id, checkRows.data, 'xls');
-        }
-    };
-
-    /**
      * 分配菜单
      */
     Role.roleAssign = function (data) {
-        layer.open({
-            type: 2,
+        func.open({
             title: '权限配置',
-            area: ['300px', '450px'], //宽高
-            fix: false,
-            maxmin: true,
+            area: ['300px','500px'],
             content: Feng.ctxPath + '/role/role_menu_assign/' + data.id,
-            end: function () {
-                table.reload(Role.tableId);
-            }
+            tableId: Role.tableId
         });
     };
 

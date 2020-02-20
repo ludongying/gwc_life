@@ -1,9 +1,4 @@
 @layout("/common/_container.html",{js:["/modular/system/position/position.js"]}){
-
-<div class="layui-body-header">
-    <span class="layui-body-header-title">岗位管理</span>
-</div>
-
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -15,11 +10,13 @@
                                 <input id="positionName" class="layui-input" type="text" placeholder="岗位名称"/>
                             </div>
                             <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnSearch" class="layui-btn layui-btn-normal">搜索</button>
+                                <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                            <div style="float: right">
                                 @if(shiro.hasPermission("/position/add")){
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
                                 @}
-                                <!--<button id="btnExp" class="layui-btn layui-btn-warm icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
                             </div>
                         </div>
                     </div>
@@ -40,7 +37,6 @@
     @if(shiro.hasPermission("/position/dataAuthority")){
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dataAuthority">数据权限</a>
     @}
-
 </script>
 <script type="text/html" id="statusTpl">
     <input type="checkbox" lay-filter="state" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" {{d.state=='ENABLE'?'checked':''}} />

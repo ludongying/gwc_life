@@ -36,15 +36,15 @@ layui.use(['layer', 'form', 'admin', 'ax', 'ztree'], function () {
     form.on('submit(btnSubmit)', function (data) {
         var menuIds = Feng.zTreeCheckedNodes("deptTree");
         var ajax = new $ax(Feng.ctxPath + "/position/update", function (data) {
-            Feng.success("修改成功!");
-
-            //传给上个页面，刷新table用
-            admin.putTempData('formOk', true);
-
-            //关掉对话框
-            admin.closeThisDialog();
+            if (data.success) {
+                Feng.success("编辑成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                admin.closeThisDialog();//关掉对话框
+            } else {
+                Feng.error(data.message);
+            }
         }, function (data) {
-            Feng.error("修改失败!" + data.responseJSON.message + "!");
+            Feng.error("编辑失败!" + data.responseJSON.message + "!");
         });
         ajax.set("menuIds", menuIds);
         ajax.set(data.field);

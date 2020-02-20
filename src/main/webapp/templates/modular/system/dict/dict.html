@@ -1,9 +1,4 @@
 @layout("/common/_container.html",{js:["/modular/system/dict/dict.js"]}){
-
-<div class="layui-body-header">
-    <span class="layui-body-header-title">字典管理</span>
-</div>
-
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -19,9 +14,11 @@
                                 <input id="sysDictTypeName" class="layui-input" type="text" placeholder="字典名称"/>
                             </div>
                             <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn layui-btn-normal">查询</button>
+                                <button id="btnSearch" class="layui-btn layui-btn-normal">搜索</button>
                                 <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                            </div>
+                            <div style="float: right">
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
                             </div>
                         </div>
                     </div>

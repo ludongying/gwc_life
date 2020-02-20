@@ -52,9 +52,9 @@ public enum ErrorEnum {
     THE_DEPART_EXISTED_DEPART(4002, "该部门含有下级，不可删除"),
     NOT_SUBORDINATES_AS_SUPERIORS(4003, "不能选自己或自己的下级为上级"),
 
-    /********************************✨    部门(5000 * 5999)   ✨*************************************/
-    ERROR_ONLY_MUNITION_TYPE(5000,"物料种类编码已经存在"),
-    ERROR_NO_MUNITION_TYPE(5001,"物料种类编码不存在");
+    /********************************✨    执法船(5000 * 5999)   ✨*************************************/
+    ERROR_ONLY_LAWSHIP_CODE(5000,"执法船编码已经存在");
+
 
     private Integer code;
     private String message;

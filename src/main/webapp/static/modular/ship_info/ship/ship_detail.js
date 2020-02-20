@@ -1,5 +1,5 @@
 /**
- * 物料类型查看对话框
+ * 执法船信息管理查看对话框
  */
 
 
@@ -13,10 +13,10 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
 
-    //初始化物料类型的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/munitonType/detail/" + Feng.getUrlParam("munitonTypeId"));
+    //初始化执法船信息管理的详情数据
+    var ajax = new $ax(Feng.ctxPath + "/ship/detail/" + Feng.getUrlParam("shipId"));
     var result = ajax.start();
-    form.val('munitonTypeForm',result);
+    form.val('shipForm',result);
 
 
 });

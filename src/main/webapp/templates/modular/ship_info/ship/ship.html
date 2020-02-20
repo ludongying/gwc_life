@@ -1,7 +1,7 @@
-@layout("/common/_container.html",{js:["/modular/basic_info/munitonType/munitonType.js"]}){
+@layout("/common/_container.html",{js:["/modular/ship_info/ship/ship.js"]}){
 
 <div class="layui-body-header">
-    <span class="layui-body-header-title">物料类型管理</span>
+    <span class="layui-body-header-title">执法船信息管理管理</span>
 </div>
 
 <div class="layui-fluid">
@@ -12,18 +12,18 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="munitonTypeName" class="layui-input" type="text" placeholder="物料类型名称"/>
+                                <input id="shipName" class="layui-input" type="text" placeholder="船舶编码/名称"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn layui-btn-normal icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                @if(shiro.hasPermission("/munitonType/add")){
+                                @if(shiro.hasPermission("/ship/add")){
                                 <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
                                 @}
                                 <!--<button id="btnExp" class="layui-btn layui-btn-warm icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="munitonTypeTable" lay-filter="munitonTypeTable"></table>
+                    <table class="layui-table" id="shipTable" lay-filter="shipTable"></table>
                 </div>
             </div>
         </div>
@@ -31,15 +31,14 @@
 </div>
 
 <script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/munitonType/update")){
+    @if(shiro.hasPermission("/ship/detail")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail" style="width: 24px" title="查看"><i class="layui-icon layui-icon-more"></i></a>
+    @}
+    @if(shiro.hasPermission("/ship/update")){
     <a class="layui-btn layui-btn-xs" lay-event="edit" style="width: 24px" title="修改"><i class="layui-icon layui-icon-edit"></i></a>
     @}
-    @if(shiro.hasPermission("/munitonType/delete")){
+    @if(shiro.hasPermission("/ship/delete")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" style="width: 24px" title="删除"><i class="layui-icon layui-icon-delete"></i></a>
     @}
-</script>
-
-<script type="text/html" id="statusTpl">
-    <input type="checkbox" lay-filter="state" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" {{d.showFlag=='ENABLE'?'checked':''}} />
 </script>
 @}

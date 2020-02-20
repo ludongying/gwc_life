@@ -28,7 +28,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
                 var url = Feng.ctxPath + '/dict?id=' + d.id;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.name + '</a>';
             }},
-            {field: 'code', title: '类型编码', align: "center", width: 200, templet: function (d) {
+            {field: 'code', title: '编码', align: "center", width: 200, templet: function (d) {
                 var url = Feng.ctxPath + '/dict?id=' + d.id;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
             }},
@@ -41,7 +41,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
             }},
             {field: 'createTime', title: '添加时间', align: "center", width: 160},
             {field: 'createUser', title: '创建人', align: "center"},
-            {field: 'sort', align: "right", title: '排序'},
+            {field: 'sort', align: "center", title: '排序'},
             {align: 'center', toolbar: '#tableBar', title: '操作'}
         ]]
     };

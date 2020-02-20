@@ -41,7 +41,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
                     return "<span class='layui-badge layui-bg-cyan'>按钮</span></b>";
             }},
             {title: '状态', field: 'status', align: "center", templet: '#statusTpl'},
-            {title: '操作', toolbar: '#tableBar', width: 130, align: 'center'}
+            {title: '操作', toolbar: '#tableBar', width: 200, align: 'center'}
         ]];
     };
 

@@ -36,16 +36,16 @@
 
 <script type="text/html" id="tableBar">
     @if(shiro.hasPermission("/user/reset")){
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="reset" style="width: 24px" title="重置密码"><i class="layui-icon layui-icon-refresh"></i></a>
+    <a id="reset" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="reset">重置密码</a>
     @}
     @if(shiro.hasPermission("/user/update")){
-    <a class="layui-btn layui-btn-xs" lay-event="edit" style="width: 24px" title="修改"><i class="layui-icon layui-icon-edit"></i></a>
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
     @}
     @if(shiro.hasPermission("/user/delete")){
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" style="width: 24px" title="删除"><i class="layui-icon layui-icon-delete"></i></a>
+    <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
     @}
     @if(shiro.hasPermission("/user/setRole")){
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="roleAssign" title="分配角色">分配角色</a>
+    <a id="roleAssign" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="roleAssign">分配角色</a>
     @}
 </script>
 

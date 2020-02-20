@@ -45,9 +45,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     return d.deptName;
             }},
             {title: '电话', field: 'phone', align: "center", width: 120},
-            {title: '创建时间', field: 'createTime', align: "center", width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
-            {title: '状态', field: 'status', align: "center", templet: '#statusTpl'},
-            {title: '操作', toolbar: '#tableBar', minWidth: 200, align: 'center'}
+            // {title: '创建时间', field: 'createTime', align: "center", width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '状态', field: 'status', align: "center", width: 100, templet: '#statusTpl'},
+            {title: '操作', toolbar: '#tableBar', width: 280, align: 'center'}
         ]];
     };
 

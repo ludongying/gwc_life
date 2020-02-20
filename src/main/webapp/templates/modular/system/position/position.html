@@ -29,15 +29,16 @@
 
 <script type="text/html" id="tableBar">
     @if(shiro.hasPermission("/position/update")){
-    <a class="layui-btn layui-btn-xs" lay-event="edit" style="width: 24px" title="修改"><i class="layui-icon layui-icon-edit"></i></a>
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit" title="编辑">编辑</a>
     @}
     @if(shiro.hasPermission("/position/delete")){
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" style="width: 24px" title="删除"><i class="layui-icon layui-icon-delete"></i></a>
+    <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" title="删除">删除</a>
     @}
     @if(shiro.hasPermission("/position/dataAuthority")){
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dataAuthority">数据权限</a>
+    <a id="dataAuthority" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dataAuthority">数据权限</a>
     @}
 </script>
+
 <script type="text/html" id="statusTpl">
     <input type="checkbox" lay-filter="state" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" {{d.state=='ENABLE'?'checked':''}} />
 </script>

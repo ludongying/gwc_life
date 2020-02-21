@@ -9,7 +9,7 @@ var UserInfoDlg = {
 };
 
 /**
- * 用户修改对话框
+ * 用户编辑对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function () {
     var $ = layui.jquery;
@@ -22,15 +22,18 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
 
     laydate.render({
         elem: '#birthday',
-        type: 'date'
+        type: 'date',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#updateTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
 

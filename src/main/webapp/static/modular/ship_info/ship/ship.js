@@ -93,7 +93,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Ship.search = function () {
         var queryData = {};
@@ -102,11 +102,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 弹出添加执法船信息管理
+     * 弹出增加执法船信息管理
      */
     Ship.openAddShip = function () {
         func.open({
-            title: '添加执法船信息',
+            title: '增加执法船信息',
             content: Feng.ctxPath + '/ship/ship_add',
             tableId: Ship.tableId
         });

@@ -9,7 +9,7 @@ var MenuInfoDlg = {
 };
 
 /**
- * 菜单添加对话框
+ * 菜单增加对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'iconPicker'], function () {
     var $ = layui.jquery;
@@ -22,11 +22,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'iconPicker'], function ()
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#updateTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应

@@ -38,7 +38,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         page: true,
         cellMinWidth: 100,
         cols: Dict.initColumn(),
-        height: 'full-95'
+        height: 'full-97'
     });
 
     /**
@@ -59,7 +59,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
 
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -84,7 +84,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Dict.search = function () {
         var queryData = {};
@@ -100,11 +100,11 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
     };
 
     /**
-     * 弹出添加字典
+     * 弹出增加字典
      */
     Dict.openAddDict = function () {
         func.open({
-            title: '添加字典',
+            title: '增加字典',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/dict/dict_add?dictTypeId=' + $('#dictTypeId').val(),
             tableId: Dict.tableId

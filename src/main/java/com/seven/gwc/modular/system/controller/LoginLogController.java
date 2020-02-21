@@ -31,7 +31,7 @@ import java.util.List;
 @RequestMapping("loginLog")
 public class LoginLogController extends BaseController {
 
-    private String PREFIX = "/modular/system/loginLog/";
+    private static String PREFIX = "/modular/system/loginLog/";
 
     @Autowired
     private LoginLogService loginLogService;
@@ -82,7 +82,7 @@ public class LoginLogController extends BaseController {
     }
 
     /**
-     * 新增登录历史
+     * 增加登录历史
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -114,7 +114,7 @@ public class LoginLogController extends BaseController {
     }
 
     /**
-     * 修改登录历史
+     * 编辑登录历史
      */
     @RequestMapping("/update")
     @ResponseBody

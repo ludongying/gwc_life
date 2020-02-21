@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * description: 部门服务类
+ * description : 部门服务类
  *
  * @author : GD
  * @date : 2019-08-02
@@ -33,12 +33,12 @@ public interface DeptService extends IService<DeptEntity> {
     List<DeptEntity> listTree(String deptName);
 
     /**
-     * 新增部门
+     * 增加部门
      */
     void saveDept(DeptEntity deptEntity);
 
     /**
-     * 修改部门
+     * 编辑部门
      */
     void updateDept(DeptEntity deptEntity);
 

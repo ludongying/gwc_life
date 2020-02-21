@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
                     return "<span class='layui-badge layui-bg-cyan'>否</span></b>";
                 }
             }},
-            {field: 'createTime', title: '添加时间', align: "center", width: 160},
+            {field: 'createTime', title: '增加时间', align: "center", width: 160},
             {field: 'createUser', title: '创建人', align: "center"},
             {field: 'sort', align: "center", title: '排序'},
             {align: 'center', toolbar: '#tableBar', title: '操作'}
@@ -53,7 +53,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
         page: true,
         cellMinWidth: 100,
         cols: DictType.initColumn(),
-        height: 'full-95'
+        height: 'full-97'
     });
 
 
@@ -71,7 +71,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
 
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -95,7 +95,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     DictType.search = function () {
         var queryData = {};
@@ -111,11 +111,11 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
     };
 
     /**
-     * 弹出添加字典类型
+     * 弹出增加字典类型
      */
     DictType.openAddSysDictType = function () {
         func.open({
-            title: '添加字典类型',
+            title: '增加字典类型',
             content: Feng.ctxPath + '/dictType/dictType_add',
             tableId: DictType.tableId
         });

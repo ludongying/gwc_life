@@ -24,13 +24,11 @@ public interface MenuMapper extends BaseMapper<MenuEntity> {
     /**
      * 根据角色获取菜单
      */
-
     List<FirstMenuNode> getFirstMenusByRoleIds(Collection<Long> roleIds);
 
     /**
      * 根据角色获取菜单
      */
-
     List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds);
 
     /**

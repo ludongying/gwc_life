@@ -36,7 +36,7 @@ public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
 
-    private String PREFIX = "/modular/system/dict/";
+    private static String PREFIX = "/modular/system/dict/";
 
     @RequestMapping("")
     public String index(@RequestParam("id") Long id, Model model) {
@@ -108,7 +108,7 @@ public class DictController extends BaseController {
     }
 
     /**
-     * 修改字典
+     * 编辑字典
      */
     @RequestMapping("/update")
     @ResponseBody

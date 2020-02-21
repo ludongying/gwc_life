@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * @Description: TODO
- * @Date: 2019/12/16 10:07
- * @Author: GD
- * @Version: 1.0
+ * description : TODO
+ * @date : 2019/12/16 10:07
+ * @author : GD
+ * @version : 1.0
  */
 public class SysUtil {
     /**

@@ -1,5 +1,5 @@
 /**
- * dictionary修改对话框
+ * 字典类型编辑对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;

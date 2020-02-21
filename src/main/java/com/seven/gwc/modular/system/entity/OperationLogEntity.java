@@ -16,7 +16,7 @@ import java.util.Date;
 /**
  * description : 操作日志实体
  *
- * @author: GD
+ * @author : GD
  * @date: 2019-12-18
  */
 @Data
@@ -27,122 +27,38 @@ public class OperationLogEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 主键
+    /** 主键 */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    // 日志类型(字典)
+    /** 日志类型(字典) */
     private String logType;
 
-    // 日志名称
+    /** 日志名称 */
     private String logName;
 
-    // 用户id
+    /** 用户id */
     private Long userId;
 
-    // 类名称
+    /** 类名称 */
     private String className;
 
-    // 方法名称
+    /** 方法名称 */
     private String method;
 
-    // 创建时间
+    /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    // 是否成功(字典)
+    /** 是否成功(字典) */
     private String succeed;
 
-    // 备注
+    /** 备注 */
     private String message;
 
-    // 用户名称
+    /** 用户名称 */
     @TableField(exist=false)
     private String userName;
 
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogType() {
-        return logType;
-    }
-
-    public void setLogType(String logType) {
-        this.logType = logType;
-    }
-
-    public String getLogName() {
-        return logName;
-    }
-
-    public void setLogName(String logName) {
-        this.logName = logName;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getSucceed() {
-        return succeed;
-    }
-
-    public void setSucceed(String succeed) {
-        this.succeed = succeed;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

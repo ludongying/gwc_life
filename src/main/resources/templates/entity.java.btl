@@ -17,8 +17,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * description : ${cfg.genQo.bizChName}实体
  *
- * @author: ${author}
- * @date: ${date}
+ * @author : ${author}
+ * @date : ${date}
  */
 <% if(entityLombokModel){ %>
 @Data
@@ -58,7 +58,7 @@ public class ${entity} implements Serializable {
     @ApiModelProperty(value = "${field.comment}")
         <% }else{ %>
 
-    // ${field.comment}
+    /** ${field.comment} */
         <% } %>
     <% } %>
     <% if(field.keyFlag){ %>

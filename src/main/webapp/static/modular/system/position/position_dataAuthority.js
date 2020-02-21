@@ -1,5 +1,5 @@
 /**
- * 岗位添加对话框
+ * 岗位增加对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'ztree'], function () {

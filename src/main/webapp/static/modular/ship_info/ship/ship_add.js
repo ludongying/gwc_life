@@ -1,5 +1,5 @@
 /**
- * 执法船信息管理添加对话框
+ * 执法船信息管理增加对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {

@@ -2,9 +2,12 @@ package com.seven.gwc.modular.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.seven.gwc.config.constant.ConfigConsts;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.DeleteDict;
+import com.seven.gwc.core.dictmap.RoleDict;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
@@ -39,7 +42,7 @@ import java.util.List;
 @RequestMapping("role")
 public class RoleController extends BaseController {
 
-    private String PREFIX = "/modular/system/role/";
+    private static String PREFIX = "/modular/system/role/";
 
     @Autowired
     private RoleService roleService;
@@ -92,8 +95,9 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 新增角色
+     * 增加角色
      */
+    @BussinessLog(value = "增加角色", key = "name", dict = RoleDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
     public BaseResult add(RoleEntity role) {
@@ -115,6 +119,7 @@ public class RoleController extends BaseController {
     /**
      * 删除角色
      */
+    @BussinessLog(value = "删除角色", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
     public BaseResult delete(@RequestParam Long id) {
@@ -133,8 +138,9 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 修改角色
+     * 编辑角色
      */
+    @BussinessLog(value = "编辑角色", key = "name", dict = RoleDict.class)
     @RequestMapping(value = "/update")
     @ResponseBody
     public BaseResult update(RoleEntity role) {
@@ -163,20 +169,6 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 修改角色阈值
-     */
-    @RequestMapping(value = "/updateThreshold")
-    @ResponseBody
-    public BaseResult updateThreshold(RoleEntity role) {
-        if (ToolUtil.isOneEmpty(role, role.getId())) {
-            return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
-        }
-        roleService.editRole(role);
-        return SUCCESS;
-    }
-
-
-    /**
      * 角色详情
      */
     @RequestMapping(value = "/detail/{id}")
@@ -201,16 +193,9 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 跳转到阈值配置
-     */
-    @RequestMapping(value = "/role_threshold")
-    public String roleThreshold(Long id) {
-        return PREFIX + "role_threshold";
-    }
-
-    /**
      * 配置权限
      */
+    @BussinessLog(value = "配置权限", key = "id,ids", dict = RoleDict.class)
     @RequestMapping("/setAuthority")
     @ResponseBody
     public BaseResult setAuthority(@RequestParam("id") Long id, @RequestParam("menuIds") String menuIds) {

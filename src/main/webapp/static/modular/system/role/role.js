@@ -40,7 +40,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Role.tableId,
         url: Feng.ctxPath + '/role/list',
         page: true,
-        height: "full-95",
+        height: "full-97",
         cellMinWidth: 100,
         cols: Role.initColumn()
     });
@@ -58,7 +58,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -85,7 +85,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Role.search = function () {
         var queryData = {};
@@ -101,11 +101,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 弹出添加角色
+     * 弹出增加角色
      */
     Role.openAddRole = function () {
         func.open({
-            title: '添加角色',
+            title: '增加角色',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/role/role_add',
             tableId: Role.tableId

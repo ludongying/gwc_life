@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * description : 执法船信息管理实体
  *
- * @author: LDY
+ * @author : LDY
  * @date: 2020-02-12
  */
 @Data

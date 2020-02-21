@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * description: 字典类型控制器
+ * description : 字典类型控制器
  *
  * @author : LM
  * @date : 2019-10-10
@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping("dictType")
 public class DictTypeController extends BaseController {
 
-    private String PREFIX = "/modular/system/dictType/";
+    private static String PREFIX = "/modular/system/dictType/";
 
     @Autowired
     private DictTypeService dictTypeService;
@@ -81,7 +81,7 @@ public class DictTypeController extends BaseController {
     }
 
     /**
-     * 新增字典类型
+     * 增加字典类型
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -107,7 +107,7 @@ public class DictTypeController extends BaseController {
     }
 
     /**
-     * 修改字典类型
+     * 编辑字典类型
      */
     @RequestMapping("/update")
     @ResponseBody

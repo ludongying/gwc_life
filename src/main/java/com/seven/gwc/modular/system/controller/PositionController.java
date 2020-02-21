@@ -2,9 +2,11 @@ package com.seven.gwc.modular.system.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.PositionDict;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.modular.system.entity.PositionEntity;
@@ -81,8 +83,9 @@ public class PositionController extends BaseController {
     }
 
     /**
-     * 新增岗位
+     * 增加岗位
      */
+    @BussinessLog(value = "增加岗位", key = "name", dict = PositionDict.class)
     @RequestMapping("/add")
     @ResponseBody
     public BaseResult add(PositionEntity position) {
@@ -98,6 +101,7 @@ public class PositionController extends BaseController {
     /**
      * 删除岗位
      */
+    @BussinessLog(value = "删除岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/delete")
     @ResponseBody
     public BaseResult delete(@RequestParam Long positionId) {
@@ -108,8 +112,9 @@ public class PositionController extends BaseController {
     }
 
     /**
-     * 修改岗位
+     * 编辑岗位
      */
+    @BussinessLog(value = "编辑岗位", key = "name", dict = PositionDict.class)
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(PositionEntity position, String menuIds) {
@@ -134,6 +139,7 @@ public class PositionController extends BaseController {
     /**
      * 启动
      */
+    @BussinessLog(value = "启动岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
     public BaseResult unfreeze(@RequestParam Long id) {
@@ -144,6 +150,7 @@ public class PositionController extends BaseController {
     /**
      * 禁用
      */
+    @BussinessLog(value = "禁用岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/freeze")
     @ResponseBody
     public BaseResult freeze(@RequestParam Long id) {

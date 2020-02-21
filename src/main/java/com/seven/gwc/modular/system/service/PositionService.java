@@ -24,7 +24,7 @@ public interface PositionService extends IService<PositionEntity> {
     List<PositionEntity> selectPosition(String positionName);
 
     /**
-     * 修改岗位冻结状态
+     * 编辑岗位冻结状态
      *
      * @param positionId 岗位ID
      * @param state      状态 "ENABLE"非冻结状态
@@ -49,7 +49,7 @@ public interface PositionService extends IService<PositionEntity> {
     boolean delete(Long id);
 
     /**
-     * 新增数据
+     * 增加数据
      *
      * @param position
      * @return

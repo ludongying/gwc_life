@@ -8,6 +8,7 @@ import java.io.Serializable;
  * description : 菜单表
  *
  * @author : GD
+ * @date : 2019-9-30 10:11
  */
 @Data
 public class MenuEntityDTO implements Serializable {

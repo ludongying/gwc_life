@@ -35,7 +35,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Code.tableId,
         url: Feng.ctxPath + '/code/list',
         page: true,
-        height: "full-95",
+        height: "full-97",
         cellMinWidth: 100,
         cols: Code.initColumn()
     });

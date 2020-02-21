@@ -1,5 +1,5 @@
 /**
- * 岗位添加对话框
+ * 岗位增加对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
@@ -12,7 +12,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应

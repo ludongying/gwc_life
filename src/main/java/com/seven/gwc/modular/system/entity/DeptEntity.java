@@ -14,9 +14,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 部门实体
- * @author: GD
- * @since: 2019-08-02
+ * description : 部门实体
+ *
+ * @author : GD
+ * @date : 2019-08-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -30,42 +31,42 @@ public class DeptEntity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    // 父部门id */
+    /** 父部门id */
     private Long pid;
 
-    // 父级ids
+    /** 父级ids */
     private String pids;
 
-    // 简称
+    /** 简称 */
     private String simpleName;
 
-    // 全称
+    /** 全称 */
     private String fullName;
 
-    // 描述
+    /** 描述 */
     private String description;
 
-    // 版本（乐观锁保留字段）
+    /** 版本（乐观锁保留字段） */
     private Integer version;
 
-    // 排序
+    /** 排序 */
     private Integer sort;
 
-    // 创建时间
+    /** 创建时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    // 修改时间
+    /** 编辑时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    // 创建人
+    /** 创建人 */
     private Long createUser;
 
-    // 修改人
+    /** 修改人 */
     private Long updateUser;
 
-    // 部门父级名称
+    /** 部门父级名称 */
     @TableField(exist = false)
     @JsonProperty("pName")
     private String pName;

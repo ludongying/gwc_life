@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**
- * @Author: GD
- * @Description: 权限自定义检查
- * @Date: 2019/10/23 9:39
+ * @author : GD
+ * description : 权限自定义检查
+ * @date : 2019/10/23 9:39
  */
 @Service
 @Transactional(readOnly = true)

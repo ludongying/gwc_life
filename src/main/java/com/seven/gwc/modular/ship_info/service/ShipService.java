@@ -22,7 +22,7 @@ public interface ShipService extends IService<ShipEntity> {
     List<ShipEntity> selectShip(ShipEntity shipEntity);
 
     /**
-     * 新增数据
+     * 增加数据
      * @param ship
      * @return
      */

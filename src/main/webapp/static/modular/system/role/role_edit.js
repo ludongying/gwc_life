@@ -5,7 +5,7 @@ var RoleInfoDlg = {
     }
 };
 /**
- * 角色修改对话框
+ * 角色编辑对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
@@ -17,11 +17,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#updateTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
 

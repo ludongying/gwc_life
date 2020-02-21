@@ -41,7 +41,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
                     return "<span class='layui-badge layui-bg-cyan'>按钮</span></b>";
             }},
             {title: '状态', field: 'status', align: "center", templet: '#statusTpl'},
-            {title: '操作', toolbar: '#tableBar', width: 200, align: 'center'}
+            {title: '操作', toolbar: '#tableBar', minWidth: 200, align: 'center'}
         ]];
     };
 
@@ -52,7 +52,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
             url: Feng.ctxPath + '/menu/listTree',
             where: data,
             page: false,
-            height: "full-95",
+            height: "full-97",
             cellMinWidth: 100,
             cols: Menu.initColumn(),
             treeColIndex: 2,
@@ -78,7 +78,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
     });
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -111,7 +111,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
     });
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Menu.search = function () {
         var queryData = {};
@@ -129,11 +129,11 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
     };
 
     /**
-     * 弹出添加菜单
+     * 弹出增加菜单
      */
     Menu.openAddMenu = function () {
         func.open({
-            title: '添加菜单',
+            title: '增加菜单',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/menu/menu_add',
             tableId: Menu.tableId
@@ -157,7 +157,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
      */
     Menu.onEditMenu = function (data) {
         func.open({
-            title: '修改菜单',
+            title: '编辑菜单',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/menu/menu_edit?id=' + data.id,
             tableId: Menu.tableId

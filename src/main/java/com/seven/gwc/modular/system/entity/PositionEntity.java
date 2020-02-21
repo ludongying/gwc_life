@@ -12,9 +12,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: 岗位实体
- * @author: GD
- * @since: 2019-09-20
+ * description : 岗位实体
+ *
+ * @author : GD
+ * @date : 2019-09-20
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -24,36 +25,36 @@ public class PositionEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // id
+    /** id */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    // 岗位名称
+    /** 岗位名称 */
     private String name;
 
-    // 岗位编码
+    /** 岗位编码 */
     private String code;
 
-    // 排序
+    /** 排序 */
     private Integer sort;
 
-    // 状态
+    /** 状态 */
     private String state;
 
-    // 备注
+    /** 备注 */
     private String description;
 
-    // 创建id
+    /** 创建id */
     private Long createId;
 
-    // 创建人名称
+    /** 创建人名称 */
     private String createUser;
 
-    // 创建时间
+    /** 创建时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    // 数据范围
+    /** 数据范围 */
     private String dataScope;
 
 }

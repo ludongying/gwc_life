@@ -78,7 +78,7 @@ public interface RoleService extends IService<RoleEntity> {
     void delRoleById(Long roleId);
 
     /**
-     * 修改角色
+     * 编辑角色
      *
      * @param roleEntity 角色实体
      */

@@ -35,7 +35,7 @@
             (CASE WHEN (b.id in (SELECT r.basics_id FROM user_basics_relation r WHERE r.user_id = #{userId}) ) THEN true ELSE false END) as state
         FROM basics b where state = 'ENABLE'
     </select>
-    <select id="UserEntityList" resultType="com.seven.gwc.modular.system.entity.UserEntity">
+    <select id="userEntityList" resultType="com.seven.gwc.modular.system.entity.UserEntity">
         SELECT u.*,d.full_name AS deptName,GROUP_CONCAT(r.`name`) AS roleName
         FROM sys_user u
         LEFT JOIN sys_role r ON FIND_IN_SET(r.id,u.role_id)

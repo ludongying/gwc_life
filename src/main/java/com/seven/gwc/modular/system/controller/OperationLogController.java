@@ -33,7 +33,7 @@ public class OperationLogController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private String PREFIX = "/modular/system/operationLog/";
+    private static String PREFIX = "/modular/system/operationLog/";
 
     @Autowired
     private OperationLogService operationLogService;
@@ -84,7 +84,7 @@ public class OperationLogController extends BaseController {
     }
 
     /**
-     * 新增操作日志
+     * 增加操作日志
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -105,7 +105,7 @@ public class OperationLogController extends BaseController {
     }
 
     /**
-     * 修改操作日志
+     * 编辑操作日志
      */
     @RequestMapping("/update")
     @ResponseBody

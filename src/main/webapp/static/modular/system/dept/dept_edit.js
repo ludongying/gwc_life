@@ -9,7 +9,7 @@ var DeptInfoDlg = {
 };
 
 /**
- * 部门修改对话框
+ * 部门编辑对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
@@ -21,11 +21,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#updateTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
 

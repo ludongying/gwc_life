@@ -87,7 +87,7 @@ public class ShipController extends BaseController {
     }
 
     /**
-     * 新增执法船信息管理
+     * 增加执法船信息管理
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -112,7 +112,7 @@ public class ShipController extends BaseController {
     }
 
     /**
-     * 修改执法船信息管理
+     * 编辑执法船信息管理
      */
     @RequestMapping("/update")
     @ResponseBody

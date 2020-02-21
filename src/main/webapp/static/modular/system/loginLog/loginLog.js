@@ -14,25 +14,29 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
     //渲染时间选择框
     laydate.render({
         elem: '#beginTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     //渲染时间选择框
     laydate.render({
         elem: '#endTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     //渲染时间选择框
     laydate.render({
         elem: '#beginTimeO',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     //渲染时间选择框
     laydate.render({
         elem: '#endTimeO',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     /**
@@ -75,7 +79,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         page: true,
         cellMinWidth: 100,
         cols: LoginLog.initColumn(),
-        height: 'full-155'
+        height: 'full-158'
     });
 
 
@@ -96,7 +100,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
     });
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     LoginLog.search = function () {
         var queryData = {};
@@ -169,7 +173,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         elem: '#' + OperationLog.tableId,
         url: Feng.ctxPath + '/operationLog/list',
         page: true,
-        height: "full-155",
+        height: "full-158",
         cellMinWidth: 100,
         cols: OperationLog.initColumn()
     });
@@ -184,7 +188,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
     });
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     OperationLog.search = function () {
         var queryData = {};

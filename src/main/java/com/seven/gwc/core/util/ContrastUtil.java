@@ -7,6 +7,7 @@ import com.seven.gwc.core.dictmap.factory.DictFieldWarpperFactory;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class ContrastUtil {
 
     //记录每个修改字段的分隔符
-    public static final String separator = ";;;";
+    public static final String SEPARATOR = ";";
 
     /**
      * 比较两个对象,并返回不一致的信息
@@ -68,9 +69,9 @@ public class ContrastUtil {
      * @author stylefeng
      * @Date 2017/5/9 19:34
      */
-    public static String contrastObj(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException {
-        AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
-        String str = parseMutiKey(dictMap, key, pojo2) + separator;
+    public static String contrastObj(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        AbstractDictMap dictMap = (AbstractDictMap) dictClass.getDeclaredConstructor().newInstance();
+        String str = parseMutiKey(dictMap, key, pojo2) + SEPARATOR;
         try {
             Class clazz = pojo1.getClass();
             Field[] fields = pojo1.getClass().getDeclaredFields();
@@ -93,7 +94,7 @@ public class ContrastUtil {
                 }
                 if (!o1.toString().equals(o2.toString())) {
                     if (i != 1) {
-                        str += separator;
+                        str += SEPARATOR;
                     }
                     String fieldName = dictMap.get(field.getName());
                     String fieldWarpperMethodName = dictMap.getFieldWarpperMethodName(field.getName());
@@ -119,9 +120,9 @@ public class ContrastUtil {
      * @author stylefeng
      * @Date 2017/5/9 19:34
      */
-    public static String contrastObjByName(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException {
-        AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
-        String str = parseMutiKey(dictMap, key, pojo2) + separator;
+    public static String contrastObjByName(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        AbstractDictMap dictMap = (AbstractDictMap) dictClass.getDeclaredConstructor().newInstance();
+        String str = parseMutiKey(dictMap, key, pojo2) + SEPARATOR;
         try {
             Class clazz = pojo1.getClass();
             Field[] fields = pojo1.getClass().getDeclaredFields();
@@ -132,7 +133,7 @@ public class ContrastUtil {
                 }
                 String prefix = "get";
                 int prefixLength = 3;
-                if (field.getType().getName().equals("java.lang.Boolean")) {
+                if ("java.lang.Boolean".equals(field.getType().getName())) {
                     prefix = "is";
                     prefixLength = 2;
                 }
@@ -155,7 +156,7 @@ public class ContrastUtil {
                 }
                 if (!o1.toString().equals(o2.toString())) {
                     if (i != 1) {
-                        str += separator;
+                        str += SEPARATOR;
                     }
                     String fieldName = dictMap.get(field.getName());
                     String fieldWarpperMethodName = dictMap.getFieldWarpperMethodName(field.getName());

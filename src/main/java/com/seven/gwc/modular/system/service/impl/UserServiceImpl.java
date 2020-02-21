@@ -44,14 +44,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<UserEntity> selectUser(UserEntity userEntity) {
-        return userMapper.UserEntityList(userEntity);
+        return userMapper.userEntityList(userEntity);
     }
 
     @Override
-    public int setStatus(Long userId, String status) {
+    public int setStatus(Long userId, String status, Long currentUserId) {
         LambdaUpdateWrapper<UserEntity> lambdaUpdate = Wrappers.<UserEntity>lambdaUpdate();
         //update sys_user set status = #{status} where id = #{userId}
-        lambdaUpdate.set(UserEntity::getStatus, status).eq(UserEntity::getId, userId);
+        lambdaUpdate.set(UserEntity::getStatus, status).
+                set(UserEntity::getUpdateUser, currentUserId).
+                set(UserEntity::getUpdateTime, new Date()).
+                eq(UserEntity::getId, userId);
         return this.userMapper.update(null, lambdaUpdate);
     }
 
@@ -84,10 +87,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public int setRoles(Long userId, String roleIds) {
+    public int setRoles(Long userId, String roleIds, Long currentUserId) {
         LambdaUpdateWrapper<UserEntity> lambdaUpdate1 = Wrappers.<UserEntity>lambdaUpdate();
         //update sys_user set role_id = #{roleIds} where user_id =#{userId}
-        lambdaUpdate1.eq(UserEntity::getId, userId).set(UserEntity::getRoleId, roleIds);
+        lambdaUpdate1.eq(UserEntity::getId, userId).
+                set(UserEntity::getRoleId, roleIds).
+                set(UserEntity::getUpdateUser, currentUserId).
+                set(UserEntity::getUpdateTime, new Date());
 
         return userMapper.update(null, lambdaUpdate1);
     }

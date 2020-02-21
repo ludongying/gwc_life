@@ -10,7 +10,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var func = layui.func;
 
     /**
-     * 系统管理--${genQo.bizChName}管理
+     * ${genQo.bizChName}管理
      */
     var ${genQo.bizEnBigName} = {
         tableId: "${genQo.bizEnName}Table",
@@ -28,7 +28,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             <% if(item.keyIdentityFlag){%>
             {title: '${item.comment}', field: '${item.propertyName}', hide: true},
             <% }else{%>
-            {title: '${item.comment}', field: '${item.propertyName}', sort: true, align: "center"},
+            {title: '${item.comment}', field: '${item.propertyName}', align: "center"},
             <% } %>
             <% } %>
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
@@ -40,25 +40,32 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + ${genQo.bizEnBigName}.tableId,
         url: Feng.ctxPath + '/${genQo.bizEnName}/list',
         page: true,
-        height: "full-158",
+        height: "full-97",
         cellMinWidth: 100,
         cols: ${genQo.bizEnBigName}.initColumn()
     });
 
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         ${genQo.bizEnBigName}.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        ${genQo.bizEnBigName}.btnReset();
+    });
 
+
+    /**
+     * 右侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         ${genQo.bizEnBigName}.openAdd${genQo.bizEnBigName}();
     });
 
-    // 导出excel
-    $('#btnExp').click(function () {
-        ${genQo.bizEnBigName}.exportExcel();
-    });
 
     // 工具条点击事件
     table.on('tool(' + ${genQo.bizEnBigName}.tableId + ')', function (obj) {
@@ -76,20 +83,28 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     ${genQo.bizEnBigName}.search = function () {
         var queryData = {};
-        queryData['${genQo.bizEnName}Name'] = $("#${genQo.bizEnName}Name").val().time();
+        queryData['${genQo.bizEnName}Name'] = $("#${genQo.bizEnName}Name").val().trim();
         table.reload(${genQo.bizEnBigName}.tableId, {where: queryData});
     };
 
     /**
-     * 弹出添加${genQo.bizChName}
+     * 重置查询条件
+     */
+    ${genQo.bizEnBigName}.btnReset = function () {
+        $("#${genQo.bizEnName}Name").val("");
+    };
+
+    /**
+     * 弹出增加${genQo.bizChName}
      */
     ${genQo.bizEnBigName}.openAdd${genQo.bizEnBigName} = function () {
         func.open({
-            title: '添加${genQo.bizChName}',
+            title: '增加${genQo.bizChName}',
+            area: ['1000px', '500px'],
             content: Feng.ctxPath + '/${genQo.bizEnName}/${genQo.bizEnName}_add',
             tableId: ${genQo.bizEnBigName}.tableId
         });
@@ -101,6 +116,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     ${genQo.bizEnBigName}.onEdit${genQo.bizEnBigName} = function (data) {
         func.open({
             title: '编辑${genQo.bizChName}',
+            area: ['1000px', '500px'],
             content: Feng.ctxPath + '/${genQo.bizEnName}/${genQo.bizEnName}_edit?${genQo.bizEnName}Id=' + data.id,
             tableId: ${genQo.bizEnBigName}.tableId
         });
@@ -112,6 +128,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     ${genQo.bizEnBigName}.onDetail${genQo.bizEnBigName} = function (data) {
         func.open({
             title: '查看${genQo.bizChName}',
+            area: ['1000px', '500px'],
             content: Feng.ctxPath + '/${genQo.bizEnName}/${genQo.bizEnName}_detail?${genQo.bizEnName}Id=' + data.id,
             tableId: ${genQo.bizEnBigName}.tableId
         });
@@ -124,10 +141,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     ${genQo.bizEnBigName}.onDelete${genQo.bizEnBigName} = function (data) {
-        Feng.confirm("是否删除${genQo.bizChName} " + data.name + "?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/${genQo.bizEnName}/delete", function () {
-                Feng.success("删除成功!");
-                table.reload(${genQo.bizEnBigName}.tableId);
+        Feng.confirm("是否删除${genQo.bizChName}《" + data.name + "》吗?", function () {
+            var ajax = new $ax(Feng.ctxPath + "/${genQo.bizEnName}/delete", function (data) {
+                if (data.success) {
+                    Feng.success("删除成功!");
+                    table.reload(${genQo.bizEnBigName}.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
@@ -136,15 +157,4 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         });
     };
 
-    /**
-     * 导出excel按钮
-     */
-    ${genQo.bizEnBigName}.exportExcel = function () {
-        var checkRows = table.checkStatus(${genQo.bizEnBigName}.tableId);
-        if (checkRows.data.length === 0) {
-            Feng.error("请选择要导出的数据");
-        } else {
-            table.exportFile(tableResult.config.id, checkRows.data, 'xls');
-        }
-    };
 });

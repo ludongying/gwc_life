@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description: TODO
- * @Date: 2020/2/18 15:19
- * @Author: GD
- * @Version: 1.0
+ * description : TODO
+ * @date : 2020/2/18 15:19
+ * @author : GD
+ * @version : 1.0
  */
 @Controller
 public class MyErrorController implements ErrorController {

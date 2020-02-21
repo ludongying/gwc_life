@@ -1,5 +1,5 @@
 /**
- * 岗位修改对话框
+ * 岗位编辑对话框
  */
 
 
@@ -13,7 +13,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
 

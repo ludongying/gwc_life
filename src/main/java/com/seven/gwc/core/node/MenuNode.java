@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * @description: 菜单节点
- * @author: GD
- * @since: 2019-08-02
+ * description : 菜单节点
+ * @author : GD
+ * @date : 2019-08-02
  */
 @Data
 @ToString

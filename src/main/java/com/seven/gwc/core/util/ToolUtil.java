@@ -335,13 +335,13 @@ public class ToolUtil {
      * <p>
      * 例如：例如：12345678901234567890123456789012张三.xml -> 12345678901234567890123456789012张三
      */
-    public static String getFileName(String FileUrl) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileName(String fileUrl) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf1 = FileUrl.lastIndexOf("/");
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(lastIndexOf1 + 1, lastIndexOf2);
+            int lastIndexOf1 = fileUrl.lastIndexOf("/");
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(lastIndexOf1 + 1, lastIndexOf2);
         }
     }
 
@@ -353,12 +353,12 @@ public class ToolUtil {
      * <p>
      * 例如：例如：12345678901234567890123456789012张三.xml -> 12345678901234567890123456789012张三.pdf
      */
-    public static String getFileUpSuffix(String FileUrl, String suffix) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileUpSuffix(String fileUrl, String suffix) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(0, lastIndexOf2) + suffix;
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(0, lastIndexOf2) + suffix;
         }
     }
 
@@ -370,13 +370,13 @@ public class ToolUtil {
      * <p>
      * 例如：12345678901234567890123456789012张三.xml -> 张三
      */
-    public static String getFileNameNoUUID(String FileUrl) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileNameNoUUID(String fileUrl) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf1 = FileUrl.lastIndexOf("/");
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(lastIndexOf1 + 33, lastIndexOf2);
+            int lastIndexOf1 = fileUrl.lastIndexOf("/");
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(lastIndexOf1 + 33, lastIndexOf2);
         }
     }
 
@@ -399,7 +399,7 @@ public class ToolUtil {
      *
      * @return
      */
-    public static String RemoveBars() {
+    public static String removeBars() {
         String id = UUID.randomUUID().toString();
         id = id.replace("-", "");
         return id;

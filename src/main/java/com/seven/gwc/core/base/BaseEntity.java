@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: GD
- * @Description: Entity基类
- * @Date: 2019/10/21 16:50
+ * @author : GD
+ * description : Entity基类
+ * @date : 2019/10/21 16:50
  */
 @Data
 public class BaseEntity implements Serializable {

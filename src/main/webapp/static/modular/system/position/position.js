@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Position.tableId,
         url: Feng.ctxPath + '/position/list',
         page: true,
-        height: "full-95",
+        height: "full-97",
         cellMinWidth: 100,
         cols: Position.initColumn()
     });
@@ -58,7 +58,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -86,7 +86,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Position.search = function () {
         var queryData = {};
@@ -102,11 +102,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 弹出添加岗位
+     * 弹出增加岗位
      */
     Position.openAddPosition = function () {
         func.open({
-            title: '添加岗位',
+            title: '增加岗位',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_add',
             tableId: Position.tableIds

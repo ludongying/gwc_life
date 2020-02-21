@@ -31,7 +31,7 @@ import java.util.List;
 @RequestMapping("/code")
 public class CodeController extends BaseController {
 
-    private String PREFIX = "/modular/system/code/";
+    private static String PREFIX = "/modular/system/code/";
 
     @Autowired
     private TablesService tablesService;

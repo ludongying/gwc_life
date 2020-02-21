@@ -35,6 +35,6 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
      * @param roleName 角色名称
      * @return
      */
-    List<RoleEntity> RoleEntityList(@Param("roleName") String roleName);
+    List<RoleEntity> roleEntityList(@Param("roleName") String roleName);
 
 }

@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.DeptDict;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
@@ -39,7 +41,7 @@ import java.util.List;
 @RequestMapping("dept")
 public class DeptController extends BaseController {
 
-    private String PREFIX = "/modular/system/dept/";
+    private static String PREFIX = "/modular/system/dept/";
 
     @Autowired
     private DeptService deptService;
@@ -104,8 +106,9 @@ public class DeptController extends BaseController {
     }
 
     /**
-     * 新增部门
+     * 增加部门
      */
+    @BussinessLog(value = "增加部门", key = "simpleName", dict = DeptDict.class)
     @RequestMapping("/add")
     @ResponseBody
     public BaseResult add(DeptEntity dept) {
@@ -134,6 +137,7 @@ public class DeptController extends BaseController {
     /**
      * 删除部门
      */
+    @BussinessLog(value = "删除部门", key = "id", dict = DeptDict.class)
     @RequestMapping("/delete")
     @ResponseBody
     public BaseResult delete(@RequestParam Long id) {
@@ -156,8 +160,9 @@ public class DeptController extends BaseController {
     }
 
     /**
-     * 修改部门
+     * 编辑部门
      */
+    @BussinessLog(value = "编辑部门", key = "simpleName", dict = DeptDict.class)
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DeptEntity dept) {

@@ -63,7 +63,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     }
 
     /**
-     * 修改字典
+     * 编辑字典
      */
     @Override
     public void update(DictEntity dict) {

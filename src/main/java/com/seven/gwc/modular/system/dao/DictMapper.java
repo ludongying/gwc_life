@@ -17,11 +17,15 @@ public interface DictMapper extends BaseMapper<DictEntity> {
 
     /**
      * 获取ztree的节点列表
+     * @param  dictTypeId 部门类型ID
+     * @return 树
      */
     List<ZTreeNode> dictTree(@Param("dictTypeId") Long dictTypeId);
 
     /**
-     * where parentIds like ''
+     * 根据ID查询字典
+     * @param dictId 字典ID
+     * @return 树
      */
     List<DictEntity> likeParentIds(@Param("dictId") Long dictId);
 

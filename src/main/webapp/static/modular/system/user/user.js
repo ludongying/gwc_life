@@ -47,7 +47,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '电话', field: 'phone', align: "center", width: 120},
             // {title: '创建时间', field: 'createTime', align: "center", width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
             {title: '状态', field: 'status', align: "center", width: 100, templet: '#statusTpl'},
-            {title: '操作', toolbar: '#tableBar', width: 280, align: 'center'}
+            {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
 
@@ -56,7 +56,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + User.tableId,
         url: Feng.ctxPath + '/user/list',
         page: true,
-        height: "full-95",
+        height: "full-97",
         cellMinWidth: 100,
         cols: User.initColumn()
     });
@@ -74,7 +74,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
     /**
-     * 左侧操作
+     * 右侧操作
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
@@ -102,7 +102,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     User.search = function () {
         var queryData = {};
@@ -119,11 +119,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 弹出添加用户
+     * 弹出增加用户
      */
     User.openAddUser = function () {
         func.open({
-            title: '添加用户',
+            title: '增加用户',
             content: Feng.ctxPath + '/user/user_add?deptId=' + deptId + "&deptName=" + deptName,
             tableId: User.tableId
         });

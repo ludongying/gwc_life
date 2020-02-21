@@ -1,117 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+  </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/role/role_add.html" line="4" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="基本类型-物料类型测试">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/BussinessLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeleteDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeptDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/MenuDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/PositionDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/RoleDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/UserDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/base/AbstractDictMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/base/SystemDict.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/factory/DictFieldWarpperFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/MyErrorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogObjectHolder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogTaskFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SysUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/OperationLogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/OperationLogMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/OperationLogEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/OperationLogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/OperationLogServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/403.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/500.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gwc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GWC-WEB.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/ConfigConsts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/ConfigConsts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/SysConsts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/SysConsts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/properties/TonFunProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/properties/GwcProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/cache/EhCacheConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/cache/EhCacheConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/PermissionAop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/PermissionAop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/base/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/base/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/base/BaseResultPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/base/BaseResultPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/PositionDict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/PositionDict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/BusinessException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/BusinessException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/MyErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/MyErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/ServiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/ServiceException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/listener/ConfigListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/listener/ConfigListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/node/MenuNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/node/MenuNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/shiro/service/PermissionCheckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/shiro/service/PermissionCheckService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/shiro/service/impl/PermissionCheckServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/shiro/service/impl/PermissionCheckServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/HttpContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/HttpContextUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/DateTimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/DateTimeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SpringContextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SpringContextUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SysUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SysUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/EnclosureController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/HolidayController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/controller/ShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/controller/ShipController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/entity/ShipEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/entity/ShipEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/ShipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/ShipService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/CodeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/CodeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DeptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictTypeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginLogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/SystemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/SystemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/EnclosureMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/HolidayMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/LoginLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/LoginLogMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/EnclosureMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/HolidayMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/LoginLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/LoginLogMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/EnclosureEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/HolidayEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/DictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/DictMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/MenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/MenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/RoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/RoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/RoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dto/FileEntityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dto/FileEntityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dto/MenuEntityDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dto/MenuEntityDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/ColumnsEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/ColumnsEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DeptEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DeptEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictTypeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictTypeEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/LoginLogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/LoginLogEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/EnclosureService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/HolidayService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/LoginLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/LoginLogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/EnclosureServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/HolidayServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/LoginLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/LoginLogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/enclosure/enclosure.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/enclosure/enclosure_add.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/enclosure/enclosure_detail.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/enclosure/enclosure_edit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/holiday/holiday.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/holiday/holiday_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog_add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/holiday/holiday_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog_detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/holiday/holiday_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/MenuEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/MenuEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/OperationLogEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/OperationLogEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionDeptEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionDeptEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RelationEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RelationEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RoleEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RoleEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/TablesEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/TablesEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/DeptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/DeptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/DictService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/DictService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/PositionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/PositionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/DictServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/DictServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/vo/ListBasicsEntityVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/vo/ListBasicsEntityVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/controller.java.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/controller.java.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/entity.java.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/entity.java.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page.html.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page.html.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page.js.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page.js.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_add.html.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_add.html.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_add.js.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_add.js.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_detail.html.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_detail.html.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_detail.js.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_detail.js.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_edit.html.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_edit.html.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/page_edit.js.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/page_edit.js.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/service.java.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/service.java.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/serviceImpl.java.btl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/serviceImpl.java.btl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/code/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/code/code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dept/dept_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/dictType/dictType_edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog_add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/loginLog/loginLog_edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/_footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/common/_footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/common/_header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/sidebar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/frame/theme.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/frame/theme.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/enclosure/enclosure.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/enclosure/enclosure_add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/enclosure/enclosure_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/enclosure/enclosure_edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/enclosure/enclosure_preview.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/holiday/holiday.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/holiday/holiday_add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/holiday/holiday_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/holiday/holiday_edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/loginLog/loginLog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/system/loginLog/loginLog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/menu/menu_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_dataAuthority.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_dataAuthority.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/role/role_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/system/user/user_edit.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -139,43 +137,13 @@
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="gwc" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/loginLog/loginLog.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -186,20 +154,69 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mapper-locations</find>
-      <find>FILE_UPLOAD_PATH</find>
-      <find>uploadPathFile</find>
-      <find>TonFunProperties</find>
-      <find>TonFun</find>
-      <find>layui-icon layui-icon-notice</find>
-      <find>getErrorPath</find>
-      <find>ControllerAdvice</find>
-      <find>loadMenus</find>
-      <find>ShiroDbRealm</find>
-      <find>BussinessLog</find>
-      <find>notice</find>
-      <find>EnclosureEntity</find>
+      <find>修改对话框</find>
+      <find>修改失败!</find>
+      <find>添加失败！</find>
+      <find>@description</find>
+      <find>@Description</find>
+      <find>description:</find>
+      <find>@author:</find>
+      <find>@Author:</find>
+      <find>@Date:</find>
+      <find>@date :</find>
+      <find>@Version:</find>
+      <find>@since:</find>
+      <find>@data</find>
+      <find>新增${cfg.genQo.bizChName}</find>
+      <find>增加${cfg.genQo.bizChName}</find>
+      <find>新建</find>
+      <find>* 新增</find>
+      <find>//</find>
+      <find>UserEntityList</find>
+      <find>RemoveBars</find>
+      <find>roleEntityList</find>
+      <find>RoleEntityList</find>
+      <find>setRoles</find>
+      <find>setStatus</find>
+      <find>* 修改</find>
+      <find>updateThreshold</find>
+      <find>full-95</find>
+      <find>full-155</find>
+      <find>btnSearch</find>
+      <find>aaaaaName</find>
     </findStrings>
+    <replaceStrings>
+      <replace>&quot;编辑</replace>
+      <replace>编辑</replace>
+      <replace>&quot;增加失败!&quot;</replace>
+      <replace>&quot;编辑失败!&quot;</replace>
+      <replace>&quot;编辑成功</replace>
+      <replace>&lt;/i&gt;增加&lt;/button&gt;</replace>
+      <replace>增加成功!</replace>
+      <replace>搜索&lt;/button&gt;</replace>
+      <replace>title=&quot;编辑&quot;</replace>
+      <replace>title: '增加</replace>
+      <replace>点击搜索按钮</replace>
+      <replace>弹出增加</replace>
+      <replace>右侧操作</replace>
+      <replace>增加对话框</replace>
+      <replace />
+      <replace>详情对话框</replace>
+      <replace>编辑对话框</replace>
+      <replace>description</replace>
+      <replace>description :</replace>
+      <replace>@author :</replace>
+      <replace>@date :</replace>
+      <replace>@version :</replace>
+      <replace>@data :</replace>
+      <replace>@date</replace>
+      <replace>增加${cfg.genQo.bizChName}</replace>
+      <replace>* 增加</replace>
+      <replace>* 编辑</replace>
+      <replace>full-97</replace>
+      <replace>full-158</replace>
+      <replace>/**</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -213,57 +230,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/EnclosureServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/SystemController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/FileUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/ConfigConsts.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/common/_footer.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/cache/EhCacheConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/modular/frame/theme.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/properties/GwcProperties.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/login.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/common/_header.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/common/header.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/HttpContext.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/MyErrorController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/index.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SysUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/page_add.html.btl" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/modular/system/dict/dict_edit.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/page_edit.js.btl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/page_add.js.btl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/DictMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/entity.java.btl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionDeptEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/MenuEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictTypeEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DictEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/ColumnsEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/DeptEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/PositionEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RelationEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/RoleEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/TablesEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/UserEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/OperationLogEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/404.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/500.html" />
-        <option value="$PROJECT_DIR$/src/main/webapp/templates/403.html" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/BussinessLog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogObjectHolder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/SysConsts.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/factory/DictFieldWarpperFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeleteDict.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeptDict.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/MenuDict.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/PositionDict.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/RoleDict.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/UserDict.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/OperationLogServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/OperationLogService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/LoginLogServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/OperationLogMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/LoginLogMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/entity/LoginLogEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dto/MenuEntityDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/CodeController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/controller.java.btl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DictTypeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/RoleMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/RoleMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginLogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/GlobalController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DeptController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogTaskFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/LoginLogService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/LoginLogMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/OperationLogMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/static/common/plugins/notice/notice.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/AaaaaService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/service.java.btl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/AaaaaServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/serviceImpl.java.btl" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/page.js.btl" />
+        <option value="$PROJECT_DIR$/src/main/webapp/static/modular/system/aaaaa/aaaaa.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/templates/modular/system/aaaaa/aaaaa_detail.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/page_detail.html.btl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/MenuMapper.java" />
       </list>
     </option>
   </component>
@@ -292,11 +309,6 @@
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="gwc" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="gwc" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
         </path>
       </expand>
       <select />
@@ -333,6 +345,178 @@
               <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gwc" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GWC-WEB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GWC-WEB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="modular" type="462c0819:PsiDirectoryNode" />
+              <item name="system" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -355,7 +539,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/templates/modular/system" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.51724136" />
@@ -370,11 +561,11 @@
       <recent name="com.seven.gwc.core.annotation" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\webapp\static\modular\system" />
       <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\webapp\templates\modular\system" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\core" />
+      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\webapp\static\modular\system" />
       <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\dao\mapper" />
+      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\dao" />
+      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\service\impl" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -390,53 +581,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="GWC-WEB" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="GWC-WEB" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GwcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="GWC-WEB" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.seven.gwc.GwcApplication" />
@@ -493,62 +637,197 @@
       <workItem from="1578877956584" duration="4894000" />
       <workItem from="1578965397934" duration="2795000" />
       <workItem from="1579049675665" duration="2978000" />
-      <workItem from="1582008643525" duration="11753000" />
+      <workItem from="1582008643525" duration="12050000" />
+      <workItem from="1582074452141" duration="15809000" />
+      <workItem from="1582158751810" duration="28542000" />
+      <workItem from="1582251414356" duration="16087000" />
     </task>
+    <task id="LOCAL-00001" summary="feat : 完善框架&#10;&#10;- 调整登录日志&#10;- 增加操作日志&#10;- 增加403、404、405统一异常处理&#10;- 移除无效功能">
+      <created>1582021669626</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1582021669626</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat : 完善框架&#10;&#10;- 完善403异常处理&#10;- 完善字典类型功能&#10;- 完善字典功能">
+      <created>1582091987070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1582091987070</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat : 完善框架样式&#10;&#10;- 按钮布局&#10;- table样式&#10;- 表单布局样式&#10;- 移除无效功能&#10;- 提示框样式修改&#10;- 弹出框样式调整&#10;- 增加字典类型功能&#10;- 增加字典功能&#10;- 统一按钮名称">
+      <created>1582205997838</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1582205997838</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat : 完善框架样式&#10;&#10;- 修改工具栏样式">
+      <created>1582207293522</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1582207293522</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix : 修改按钮名称及居右">
+      <created>1582209526141</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1582209526141</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix : 调整table高度及table展现形式">
+      <created>1582255249480</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1582255249480</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11753000" />
+    <option name="totallyTimeSpent" value="72488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Capture Tool" />
-      <window_info id="Web" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.260745" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32729805" />
-      <window_info anchor="bottom" id="Problems" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.5835655" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286908" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.04735376" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32729805" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24930362" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23537605" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Maven" weight="0.3295129" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Word Book" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="BPMNPalette" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286908" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32729805" />
+      <window_info anchor="bottom" id="Problems" order="12" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.6420613" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Word Book" order="5" side_tool="true" />
+      <window_info anchor="right" id="BPMNPalette" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.3295129" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" id="Bean Validation" order="10" />
+      <window_info anchor="right" id="Preview" order="11" />
+      <window_info anchor="right" id="Maven" order="12" weight="0.3295129" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.260745" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32729805" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6462396" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23537605" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286908" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32729805" />
+      <window_info anchor="bottom" id="Problems" order="12" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.6420613" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.3295129" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Word Book" order="6" side_tool="true" />
+      <window_info anchor="right" id="BPMNPalette" order="7" />
+      <window_info anchor="right" id="Database" order="8" weight="0.3295129" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Theme Preview" order="10" />
+      <window_info anchor="right" id="Bean Validation" order="11" />
+      <window_info anchor="right" id="Preview" order="12" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="基本类型-物料类型测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="基本类型-物料类型测试" />
+    <MESSAGE value="feat : 完善框架" />
+    <MESSAGE value="feat : 完善框架&#10;&#10;- 调整登录日志" />
+    <MESSAGE value="feat : 完善框架&#10;&#10;- 调整登录日志&#10;- 增加操作日志&#10;- 增加403、404、405统一异常处理&#10;- 移除无效功能" />
+    <MESSAGE value="feat : 完善框架&#10;&#10;- 完善403异常处理&#10;- 完善字典类型功能&#10;- 完善字典功能" />
+    <MESSAGE value="feat : 完善框架样式&#10;&#10;- 按钮布局&#10;- table样式&#10;- 表单布局样式&#10;- 移除无效功能&#10;- 提示框样式修改&#10;- 弹出框样式调整&#10;- 增加字典类型功能&#10;- 增加字典功能&#10;- 统一按钮名称" />
+    <MESSAGE value="feat : 完善框架样式&#10;&#10;- 修改工具栏样式" />
+    <MESSAGE value="fix : 修改按钮名称及居右" />
+    <MESSAGE value="fix : 调整table高度及table展现形式" />
+    <MESSAGE value="fix : 完善框架&#10;&#10;- 根据现有业务更改代码生成&#10;- 提升java编写规范&#10;- 各种demo规范整理" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : 完善框架&#10;&#10;- 根据现有业务更改代码生成&#10;- 提升java编写规范&#10;- 各种demo规范整理" />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" />
@@ -605,7 +884,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_add.js</url>
-          <line>35</line>
+          <line>32</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -616,13 +895,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
-          <line>159</line>
+          <line>166</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
-          <line>160</line>
+          <line>167</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
@@ -638,6 +917,12 @@
           <properties />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/UserController.java</url>
+          <line>54</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -645,377 +930,368 @@
     <SUITE FILE_PATH="coverage/gwc$GwcApplication.ic" NAME="GwcApplication Coverage Results" MODIFIED="1577779395410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/common/images/ic_403.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/common/images/ic_500.svg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/404.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/DateTimeUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+        <state relative-caret-position="154">
+          <caret line="316" column="25" selection-start-line="316" selection-start-column="25" selection-end-line="316" selection-end-column="25" />
+          <folding>
+            <element signature="e#6996#6997#0" expanded="true" />
+            <element signature="e#7038#7039#0" expanded="true" />
+            <element signature="e#7198#7199#0" expanded="true" />
+            <element signature="e#7236#7237#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/500.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        <state relative-caret-position="159">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/403.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="66" lean-forward="true" selection-start-line="6" selection-start-column="66" selection-end-line="6" selection-end-column="66" />
+        <state relative-caret-position="258">
+          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/exception/MyErrorController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="19" column="34" lean-forward="true" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
+        <state relative-caret-position="205">
+          <caret line="392" column="32" lean-forward="true" selection-start-line="392" selection-start-column="32" selection-end-line="392" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/SysUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/dao/ShipMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/controller/ShipController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/base/SystemDict.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/base/AbstractDictMap.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogObjectHolder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/RoleMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="316">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/RoleMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="34" column="27" lean-forward="true" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/shiro/service/impl/PermissionCheckServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/config/properties/GwcProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/LogManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="46" lean-forward="true" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        <state relative-caret-position="185">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/SysConsts.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/entity/ShipEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-522">
-          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+        <state relative-caret-position="91">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/factory/DictFieldWarpperFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/config/generator/action/config/AbstractGeneratorConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        <state relative-caret-position="91">
+          <caret line="94" column="55" selection-start-line="94" selection-start-column="55" selection-end-line="94" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeleteDict.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/base/BaseEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="83">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/DeptDict.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/BeetlConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="55" />
+        <state relative-caret-position="91">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/MenuDict.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/HttpContextUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+        <state relative-caret-position="73">
+          <caret line="23" column="51" lean-forward="true" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/PositionDict.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        <state relative-caret-position="366">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+          <folding>
+            <element signature="e#1690#1691#0" expanded="true" />
+            <element signature="e#1750#1751#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/RoleDict.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/dictmap/UserDict.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/OperationLogService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="59" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+        <state relative-caret-position="663">
+          <caret line="99" column="31" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/LoginLogServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/RoleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="26" column="101" selection-start-line="26" selection-start-column="101" selection-end-line="26" selection-end-column="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1488#1504#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/OperationLogServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="115" lean-forward="true" selection-start-line="25" selection-start-column="115" selection-end-line="25" selection-end-column="115" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1494#1514#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-578">
+          <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/MenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="169" column="21" selection-start-line="169" selection-start-column="21" selection-end-line="169" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/OperationLogMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/LoginLogMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" lean-forward="true" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/OperationLogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="5" column="46" lean-forward="true" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
+        <state relative-caret-position="323">
+          <caret line="214" column="5" lean-forward="true" selection-start-line="214" selection-start-column="5" selection-end-line="214" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginLogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="63" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
-          <folding>
-            <element signature="e#3389#3405#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="162">
+          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="47" lean-forward="true" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/log/factory/LogTaskFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="59" lean-forward="true" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="181" column="28" lean-forward="true" selection-start-line="181" selection-start-column="28" selection-end-line="181" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ToolUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="485" column="14" lean-forward="true" selection-start-line="485" selection-start-column="14" selection-end-line="485" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="81" column="5" lean-forward="true" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/5.1.5.RELEASE/spring-tx-5.1.5.RELEASE.jar!/org/springframework/transaction/annotation/ProxyTransactionManagementConfiguration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.12.RELEASE/spring-context-5.1.12.RELEASE.jar!/org/springframework/cache/annotation/ProxyCachingConfiguration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="119" column="76" lean-forward="true" selection-start-line="119" selection-start-column="76" selection-end-line="119" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/LoginLogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="67" lean-forward="true" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/BussinessLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-boot-starter/3.1.2/mybatis-plus-boot-starter-3.1.2.jar!/com/baomidou/mybatisplus/autoconfigure/MybatisPlusAutoConfiguration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/GwcApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="e#515#516#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/LoginLogMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/OperationLogMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/common/plugins/notice/notice.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/HolidayController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/GlobalController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/common/plugins/notice/notice.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/DeptController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="275" column="53" lean-forward="true" selection-start-line="275" selection-start-column="53" selection-end-line="275" selection-end-column="53" />
+        <state relative-caret-position="196">
+          <caret line="107" column="7" lean-forward="true" selection-start-line="107" selection-start-column="7" selection-end-line="107" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/HolidayServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/annotation/Permission.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="238">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/PermissionAop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/DataScopeAspect.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        <state relative-caret-position="187">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/PositionServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/util/ContrastUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+        <state relative-caret-position="85">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/loginLog/loginLog.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/BussinessLogAop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/page_add.html.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/page_add.js.btl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/operationLog/operationLog.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/modular/system/operationLog/operationLog.js">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/AaaaaController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="42" column="49" lean-forward="true" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+        <state relative-caret-position="176">
+          <caret line="82" column="53" selection-start-line="82" selection-start-column="53" selection-end-line="82" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/AaaaaService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="188">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/AaaaaServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/page.js.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="88" column="27" lean-forward="true" selection-start-line="88" selection-start-column="27" selection-end-line="88" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/modular/system/aaaaa/aaaaa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="82" column="7" lean-forward="true" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/aaaaa/aaaaa.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="52" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/aaaaa/aaaaa_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="37" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/aaaaa/aaaaa_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/static/modular/system/aaaaa/aaaaa_edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/templates/modular/system/aaaaa/aaaaa_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/page_edit.html.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="19" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="26" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/page_detail.html.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/DictTypeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/mapper/LoginLogMapper.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/dao/MenuMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="40" column="7" lean-forward="true" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/service.java.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/serviceImpl.java.btl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="46" lean-forward="true" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
         </state>
       </provider>
     </entry>

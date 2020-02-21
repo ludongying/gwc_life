@@ -26,13 +26,13 @@ public interface UserService extends IService<UserEntity> {
     List<UserEntity> selectUser(UserEntity userEntity);
 
     /**
-     * 修改用户状态
+     * 编辑用户状态
      *
      * @param userId 用户id
      * @param status 状态
      * @return
      */
-    int setStatus(Long userId, String status);
+    int setStatus(Long userId, String status, Long currentUserId);
 
     /**
      * 获取用户菜单列表
@@ -68,7 +68,7 @@ public interface UserService extends IService<UserEntity> {
      * @param roleIds 角色id (例如 1,2)
      * @return
      */
-    int setRoles(Long userId, String roleIds);
+    int setRoles(Long userId, String roleIds, Long currentUserId);
 
     /**
      * 通过账号获取用户
@@ -79,7 +79,7 @@ public interface UserService extends IService<UserEntity> {
     UserEntity getByAccount(String account);
 
     /**
-     * 修改密码
+     * 编辑密码
      *
      * @param oldPassword 原密码
      * @param newPassword 新密码

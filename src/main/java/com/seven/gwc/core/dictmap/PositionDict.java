@@ -3,10 +3,10 @@ package com.seven.gwc.core.dictmap;
 import com.seven.gwc.core.dictmap.base.AbstractDictMap;
 
 /**
- * @Description: TODO
- * @Date: 2019/12/19 14:09
- * @Author: GD
- * @Version: 1.0
+ * description : TODO
+ * @date : 2019/12/19 14:09
+ * @author : GD
+ * @version : 1.0
  */
 public class PositionDict extends AbstractDictMap {
 

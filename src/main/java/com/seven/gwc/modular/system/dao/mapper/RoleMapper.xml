@@ -39,7 +39,7 @@
         ) r1 ON r.id = r1.id
         ORDER BY pid,sort ASC
     </select>
-    <select id="RoleEntityList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
+    <select id="roleEntityList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
         SELECT r.id,r.pid,r.name,r.description,r.sort,r.version,r.create_time,r.update_time,r.create_user,r.update_user,
         (SELECT name FROM sys_role sr WHERE r.pid = sr.id) AS pName
         FROM sys_role r

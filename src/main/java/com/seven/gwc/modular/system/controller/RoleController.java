@@ -10,6 +10,7 @@ import com.seven.gwc.core.dictmap.DeleteDict;
 import com.seven.gwc.core.dictmap.RoleDict;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
@@ -70,6 +71,11 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/role_edit")
     public String roleEdit(Long id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        RoleEntity role = this.roleService.getById(id);
+        LogObjectHolder.me().set(role);
         return PREFIX + "role_edit";
     }
 

@@ -9,7 +9,9 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.dictmap.DeleteDict;
 import com.seven.gwc.core.dictmap.MenuDict;
+import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
@@ -70,6 +72,11 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/menu_edit")
     public String menuEdit(Long id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        MenuEntity menu = this.menuService.getById(id);
+        LogObjectHolder.me().set(menu);
         return PREFIX + "menu_edit";
     }
 

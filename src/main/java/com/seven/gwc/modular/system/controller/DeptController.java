@@ -9,11 +9,14 @@ import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.dictmap.DeptDict;
+import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.DeptMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.DeptEntity;
@@ -71,6 +74,11 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/dept_edit")
     public String deptEdit(Long id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        DeptEntity dept = deptService.getById(id);
+        LogObjectHolder.me().set(dept);
         return PREFIX + "dept_edit";
     }
 

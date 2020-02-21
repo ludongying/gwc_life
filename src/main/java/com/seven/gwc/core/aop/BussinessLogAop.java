@@ -96,7 +96,7 @@ public class BussinessLogAop {
             msg = ContrastUtil.contrastObj(dictClass, key, obj1, obj2);
         } else {
             Map<String, String> parameters = HttpContextUtil.getRequestParameters();
-            AbstractDictMap dictMap = (AbstractDictMap) dictClass.getDeclaredConstructor().newInstance();
+            AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
             msg = ContrastUtil.parseMutiKey(dictMap, key, parameters);
         }
 

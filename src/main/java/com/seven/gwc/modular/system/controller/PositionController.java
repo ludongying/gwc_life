@@ -7,8 +7,11 @@ import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.dictmap.PositionDict;
+import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import com.seven.gwc.modular.system.service.PositionService;
 import com.github.pagehelper.PageHelper;
@@ -58,6 +61,11 @@ public class PositionController extends BaseController {
      */
     @RequestMapping("/position_edit")
     public String positionUpdate(Long positionId) {
+        if (ToolUtil.isEmpty(positionId)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        PositionEntity position = this.positionService.getById(positionId);
+        LogObjectHolder.me().set(position);
         return PREFIX + "position_edit";
     }
 

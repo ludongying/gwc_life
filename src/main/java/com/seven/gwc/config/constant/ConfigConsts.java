@@ -43,5 +43,5 @@ public interface ConfigConsts {
     /**
      * 不需要权限验证的资源表达式
      */
-    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/modular/**","/common/**", "/login", "/error", "/global/error");
+    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/modular/**","/common/**", "/login", "/error", "/global/error", "/**.png", "/**.jpg");
 }

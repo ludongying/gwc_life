@@ -65,5 +65,95 @@ public class RoleEntity implements Serializable {
     @JsonProperty("pName")
     private String pName;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Long getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(Long createUser) {
+        this.createUser = createUser;
+    }
+
+    public Long getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(Long updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getPName() {
+        return pName;
+    }
+
+    public void setPName(String pName) {
+        this.pName = pName;
+    }
 }

@@ -92,6 +92,167 @@ public class MenuEntity implements Serializable {
     private String pcodeName;
 
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPcode() {
+        return pcode;
+    }
+
+    public void setPcode(String pcode) {
+        this.pcode = pcode;
+    }
+
+    public String getPcodes() {
+        return pcodes;
+    }
+
+    public void setPcodes(String pcodes) {
+        this.pcodes = pcodes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Integer getLevels() {
+        return levels;
+    }
+
+    public void setLevels(Integer levels) {
+        this.levels = levels;
+    }
+
+    public String getMenuFlag() {
+        return menuFlag;
+    }
+
+    public void setMenuFlag(String menuFlag) {
+        this.menuFlag = menuFlag;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNewPageFlag() {
+        return newPageFlag;
+    }
+
+    public void setNewPageFlag(String newPageFlag) {
+        this.newPageFlag = newPageFlag;
+    }
+
+    public String getOpenFlag() {
+        return openFlag;
+    }
+
+    public void setOpenFlag(String openFlag) {
+        this.openFlag = openFlag;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Long getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(Long createUser) {
+        this.createUser = createUser;
+    }
+
+    public Long getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(Long updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Long getPId() {
+        return pId;
+    }
+
+    public void setPId(Long pId) {
+        this.pId = pId;
+    }
+
+    public String getPcodeName() {
+        return pcodeName;
+    }
+
+    public void setPcodeName(String pcodeName) {
+        this.pcodeName = pcodeName;
+    }
 }

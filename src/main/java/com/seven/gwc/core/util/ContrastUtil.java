@@ -70,7 +70,7 @@ public class ContrastUtil {
      * @Date 2017/5/9 19:34
      */
     public static String contrastObj(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        AbstractDictMap dictMap = (AbstractDictMap) dictClass.getDeclaredConstructor().newInstance();
+        AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
         String str = parseMutiKey(dictMap, key, pojo2) + SEPARATOR;
         try {
             Class clazz = pojo1.getClass();
@@ -121,7 +121,7 @@ public class ContrastUtil {
      * @Date 2017/5/9 19:34
      */
     public static String contrastObjByName(Class dictClass, String key, Object pojo1, Map<String, String> pojo2) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        AbstractDictMap dictMap = (AbstractDictMap) dictClass.getDeclaredConstructor().newInstance();
+        AbstractDictMap dictMap = (AbstractDictMap) dictClass.newInstance();
         String str = parseMutiKey(dictMap, key, pojo2) + SEPARATOR;
         try {
             Class clazz = pojo1.getClass();

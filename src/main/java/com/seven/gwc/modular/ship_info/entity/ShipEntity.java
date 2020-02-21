@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.ship_info.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import java.io.Serializable;
@@ -85,5 +86,11 @@ public class ShipEntity implements Serializable {
 
     // 核定干舷
     private Integer gunwaleCount;
+
+    @TableField(exist=false)
+    private String nationalityDesp;
+
+    @TableField(exist = false)
+    private String typeDesp;
 
 }

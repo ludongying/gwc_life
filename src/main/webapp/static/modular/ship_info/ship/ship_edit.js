@@ -17,7 +17,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         type: 'date'
     });
 
-
     // 让当前iframe弹层高度适应
     admin.iframeAuto();
 
@@ -26,6 +25,34 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
     var result = ajax.start();
     form.val('shipForm',result);
 
+    //船籍获取下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/selectDictListByDictType?code=BOAT_NATION',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#nationality').append(new Option(item.name, item.sort));//往下拉菜单里添加元素
+            })
+            $('#nationality').val(result.nationality);
+            form.render('select');//表单渲染 把内容加载进去
+
+        }
+    });
+
+    //船舶类型获取下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/selectDictListByDictType?code=BOAT_TYPE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#type').append(new Option(item.name, item.sort));//往下拉菜单里添加元素
+            })
+            $('#type').val(result.type);
+            form.render('select');//表单渲染 把内容加载进去
+        }
+    });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
@@ -72,4 +99,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
             Feng.error("上传船舶图像失败！");
         }
     });
+
+
 });

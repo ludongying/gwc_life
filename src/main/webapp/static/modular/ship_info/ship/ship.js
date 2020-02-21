@@ -28,22 +28,22 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '船舶编码', field: 'shipCode', sort: true, align: "center"},
             {title: '名称', field: 'name', sort: true, align: "center"},
             {title: '船主名称', field: 'owner', sort: true, align: "center"},
-            {title: '船籍', field: 'nationality', sort: true, align: "center"},
-            {title: '船舶类型', field: 'type', sort: true, align: "center"},
-            {title: '船长(m)', field: 'length', sort: true, align: "center"},
-            {title: '船宽(m)', field: 'width', sort: true, align: "center"},
-            {title: '船深(m)', field: 'deep', sort: true, align: "center"},
-            {title: '吨位数', field: 'tonnage', sort: true, align: "center"},
-            {title: '船体材质', field: 'material', sort: true, align: "center"},
-            {title: '核定航区', field: 'area', sort: true, align: "center", hide:true},
-            {title: '核载人数', field: 'peopleNum', sort: true, align: "center"},
-            {title: '主功率(kW)', field: 'mainPower', sort: true, align: "center", hide:true},
-            {title: '船舶图片', field: 'image', sort: true, align: "center", hide:true},
-            {title: '证书编码', field: 'certificateId', sort: true, align: "center", hide:true},
-            {title: '船舶制造厂', field: 'manufacturer', sort: true, align: "center", hide:true},
-            {title: '完成日期', field: 'finishDate', sort: true, align: "center", hide:true},
-            {title: '核定干舷(mm)', field: 'gunwaleCount', sort: true, align: "center", hide:true},
-            {title: '备注', field: 'remark', sort: true, align: "center", hide:true},
+            {title: '船籍', field: 'nationalityDesp', sort: true, align: "center"},
+            {title: '船舶类型', field: 'typeDesp', sort: true, align: "center"},
+            {title: '船长(m)', field: 'length', sort: false, align: "center"},
+            {title: '船宽(m)', field: 'width', sort: false, align: "center"},
+            {title: '船深(m)', field: 'deep', sort: false, align: "center"},
+            {title: '吨位数', field: 'tonnage', sort: false, align: "center"},
+            {title: '船体材质', field: 'material', sort: false, align: "center"},
+            {title: '核定航区', field: 'area', sort: false, align: "center", hide:true},
+            {title: '核载人数', field: 'peopleNum', sort: false, align: "center"},
+            {title: '主功率(kW)', field: 'mainPower', sort: false, align: "center", hide:true},
+            {title: '船舶图片', field: 'image', sort: false, align: "center", hide:true},
+            {title: '证书编码', field: 'certificateId', sort: false, align: "center", hide:true},
+            {title: '船舶制造厂', field: 'manufacturer', sort: false, align: "center", hide:true},
+            {title: '完成日期', field: 'finishDate', sort: false, align: "center", hide:true},
+            {title: '核定干舷(mm)', field: 'gunwaleCount', sort: false, align: "center", hide:true},
+            {title: '备注', field: 'remark', sort: false, align: "center", hide:true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -61,6 +61,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Ship.search();
+    });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        Ship.btnReset();
     });
 
     // 添加按钮点击事件
@@ -159,5 +163,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         } else {
             table.exportFile(tableResult.config.id, checkRows.data, 'xls');
         }
+    };
+
+    /**
+     * 重置查询条件
+     */
+    Ship.btnReset = function () {
+        $("#shipName").val("");
     };
 });

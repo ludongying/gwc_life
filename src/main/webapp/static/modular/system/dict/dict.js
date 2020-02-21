@@ -38,7 +38,6 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         page: true,
         cellMinWidth: 100,
         cols: Dict.initColumn(),
-        even: true,
         height: 'full-95'
     });
 

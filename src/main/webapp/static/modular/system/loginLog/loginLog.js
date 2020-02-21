@@ -75,8 +75,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         page: true,
         cellMinWidth: 100,
         cols: LoginLog.initColumn(),
-        even: true,
-        height: 'full-95'
+        height: 'full-155'
     });
 
 
@@ -170,7 +169,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
         elem: '#' + OperationLog.tableId,
         url: Feng.ctxPath + '/operationLog/list',
         page: true,
-        height: "full-95",
+        height: "full-155",
         cellMinWidth: 100,
         cols: OperationLog.initColumn()
     });

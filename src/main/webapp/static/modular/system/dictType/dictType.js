@@ -53,7 +53,6 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
         page: true,
         cellMinWidth: 100,
         cols: DictType.initColumn(),
-        even: true,
         height: 'full-95'
     });
 

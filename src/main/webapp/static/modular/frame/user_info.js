@@ -26,7 +26,7 @@ layui.use(['form', 'upload', 'element', 'ax', 'laydate'], function () {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("编辑失败!" + data.responseJSON.message + "!");
+            Feng.error("编辑失败!" + data.message + "!");
         });
         ajax.set(data.field);
         ajax.start();
@@ -46,7 +46,7 @@ layui.use(['form', 'upload', 'element', 'ax', 'laydate'], function () {
                     Feng.success("上传成功!");
                     $('.layui-nav-img').attr('src', $("#avatarPreview")[0].src);
                 }, function (data) {
-                    Feng.error("上传失败!" + data.responseJSON.message + "!");
+                    Feng.error("上传失败!" + data.message + "!");
                 });
             ajax.set("portraitUrl", data.content.pictureName);
             ajax.start();

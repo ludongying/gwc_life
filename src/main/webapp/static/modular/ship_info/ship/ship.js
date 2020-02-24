@@ -146,7 +146,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 Feng.success("删除成功!");
                 table.reload(Ship.tableId);
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("shipId", data.id);
             ajax.start();

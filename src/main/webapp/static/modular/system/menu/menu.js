@@ -178,7 +178,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("id", data.id);
             ajax.start();
@@ -209,7 +209,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("启用失败!" + data.responseJSON.message + "!");
+                Feng.error("启用失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
@@ -222,7 +222,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("禁用失败!" + data.responseJSON.message + "!");
+                Feng.error("禁用失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();

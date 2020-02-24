@@ -135,7 +135,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'element
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("清空所有失败!" + data.responseJSON.message + "!");
+                Feng.error("清空所有失败!" + data.message + "!");
             });
             ajax.start();
         });

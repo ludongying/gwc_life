@@ -40,7 +40,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
             }
 
         }, function (data) {
-            Feng.error("添加失败！" + data.responseJSON.message)
+            Feng.error("添加失败！" + data.message)
         });
         ajax.set(data.field);
         ajax.start();
@@ -61,7 +61,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
                 function (data) {
 
                 }, function (data) {
-                    Feng.error("修改失败!" + data.responseJSON.message + "!");
+                    Feng.error("修改失败!" + data.message + "!");
                 });
             ajax.set("image", "/common/images/portrait/"+data.content.pictureName);
             ajax.start();

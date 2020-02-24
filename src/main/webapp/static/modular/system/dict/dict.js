@@ -151,7 +151,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("dictTypeId", data.id);
             ajax.start();

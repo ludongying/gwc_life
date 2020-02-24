@@ -63,7 +63,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'iconPicker'], function ()
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("增加失败!" + data.responseJSON.message)
+            Feng.error("增加失败!" + data.message)
         });
         ajax.set(data.field);
         ajax.start();

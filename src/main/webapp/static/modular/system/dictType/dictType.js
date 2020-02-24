@@ -159,7 +159,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("sysDictTypeId", data.id);
             ajax.start();

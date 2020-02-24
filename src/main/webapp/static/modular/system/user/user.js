@@ -153,7 +153,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("id", data.id);
             ajax.start();
@@ -182,7 +182,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("解除冻结失败!" + data.responseJSON.message + "!");
+                Feng.error("解除冻结失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
@@ -194,7 +194,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("冻结失败!" + data.responseJSON.message + "!");
+                Feng.error("冻结失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
@@ -214,7 +214,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.error(data.message);
                 }
             }, function (data) {
-                Feng.error("重置密码失败!" + data.responseJSON.message + "!");
+                Feng.error("重置密码失败!" + data.message + "!");
             });
             ajax.set("id", data.id);
             ajax.start();

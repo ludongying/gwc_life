@@ -89,7 +89,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.success(data.message);
                 }
             }, function (data) {
-                Feng.error("生成失败！" + data.responseJSON.message)
+                Feng.error("生成失败！" + data.message)
             });
             ajax.set(data.field);
             ajax.set("tableNames", tableNames);

@@ -18,7 +18,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("编辑失败!" + data.responseJSON.message + "!");
+            Feng.error("编辑失败!" + data.message + "!");
         });
         ajax.setData(data.field);
         ajax.start();

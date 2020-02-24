@@ -57,7 +57,7 @@
                 Feng.success("分配角色成功!");
                 parent.layer.close(ZTreeDlg.index);
             }, function (data) {
-                Feng.error("分配角色失败!" + data.responseJSON.message + "!");
+                Feng.error("分配角色失败!" + data.message + "!");
             });
             ajax.set("roleIds", ids);
             ajax.set("id", "${id}");

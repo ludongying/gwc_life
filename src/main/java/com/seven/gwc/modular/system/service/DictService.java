@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface DictService extends IService<DictEntity> {
 
-    List<DictEntity> selectDict(Long dictTypeId);
+    List<DictEntity> selectDict(String dictTypeId);
 
     /**
      * 添加字典
@@ -30,7 +30,7 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 根据ID获取字典详情
      */
-    DictEntity dictDetail(Long dictId);
+    DictEntity dictDetail(String dictId);
 
     /**
      * 获取字典的树形列表  字典列表用

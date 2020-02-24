@@ -70,7 +70,7 @@ public class RoleController extends BaseController {
      * 跳转到修改角色
      */
     @RequestMapping("/role_edit")
-    public String roleEdit(Long id) {
+    public String roleEdit(String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -179,7 +179,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public RoleEntity detail(@PathVariable Long id) {
+    public RoleEntity detail(@PathVariable String id) {
         RoleEntity roleEntity = roleService.getById(id);
         if (roleEntity.getPid().equals(0L)) {
             roleEntity.setPName("顶级");
@@ -193,7 +193,7 @@ public class RoleController extends BaseController {
      * 跳转到权限分配
      */
     @RequestMapping(value = "/role_menu_assign/{id}")
-    public String roleMenuAssign(@PathVariable Long id, Model model) {
+    public String roleMenuAssign(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         return PREFIX + "role_menu_assign";
     }
@@ -204,7 +204,7 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "配置权限", key = "id,ids", dict = RoleDict.class)
     @RequestMapping("/setAuthority")
     @ResponseBody
-    public BaseResult setAuthority(@RequestParam("id") Long id, @RequestParam("menuIds") String menuIds) {
+    public BaseResult setAuthority(@RequestParam("id") String id, @RequestParam("menuIds") String menuIds) {
         if (ToolUtil.isOneEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -217,7 +217,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/roleTreeListByUserId/{id}")
     @ResponseBody
-    public List<ZTreeNode> roleTreeListByUserId(@PathVariable Long id) {
+    public List<ZTreeNode> roleTreeListByUserId(@PathVariable String id) {
         UserEntity theUser = this.userService.getById(id);
         String roleId = theUser.getRoleId();
         if (ToolUtil.isEmpty(roleId)) {

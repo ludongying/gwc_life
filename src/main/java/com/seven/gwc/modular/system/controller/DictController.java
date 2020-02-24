@@ -39,7 +39,7 @@ public class DictController extends BaseController {
     private static String PREFIX = "/modular/system/dict/";
 
     @RequestMapping("")
-    public String index(@RequestParam("id") Long id, Model model) {
+    public String index(@RequestParam("id") String id, Model model) {
         model.addAttribute("dictTypeId", id);
         return PREFIX + "dict";
     }
@@ -48,7 +48,7 @@ public class DictController extends BaseController {
      * 跳转到添加字典类型
      */
     @RequestMapping("/dict_add")
-    public String dictAdd(@RequestParam("dictTypeId") Long dictTypeId, Model model) {
+    public String dictAdd(@RequestParam("dictTypeId") String dictTypeId, Model model) {
         model.addAttribute("dictTypeId", dictTypeId);
         //获取type的名称
         DictTypeEntity dictType = dictTypeService.getById(dictTypeId);
@@ -60,7 +60,7 @@ public class DictController extends BaseController {
      * 跳转到添加字典类型
      */
     @RequestMapping("/dict_edit")
-    public String dictEdit(@RequestParam("dictId") Long dictId, Model model) {
+    public String dictEdit(@RequestParam("dictId") String dictId, Model model) {
         //获取type的id
         DictEntity dict = dictService.getById(dictId);
         //获取type的名称
@@ -73,7 +73,7 @@ public class DictController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<DictTypeEntity> list(Long dictTypeId) {
+    public BaseResultPage<DictTypeEntity> list(String dictTypeId) {
         List<DictEntity> list = dictService.selectDict(dictTypeId);
         return new BaseResultPage().treeData(list);
     }
@@ -103,7 +103,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping("/detail/{dictId}")
     @ResponseBody
-    public DictEntity detail(@PathVariable Long dictId) {
+    public DictEntity detail(@PathVariable String dictId) {
         return this.dictService.dictDetail(dictId);
     }
 
@@ -122,7 +122,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long dictTypeId) {
+    public BaseResult delete(@RequestParam String dictTypeId) {
         dictService.removeById(dictTypeId);
         return SUCCESS;
     }

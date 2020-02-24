@@ -24,13 +24,13 @@ public class RelationEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 菜单id */
-    private Long menuId;
+    private String menuId;
 
     /** 角色id */
-    private Long roleId;
+    private String roleId;
 
 }

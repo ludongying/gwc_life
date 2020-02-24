@@ -61,7 +61,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
         }
         //创建根节点
         MenuEntity menu = new MenuEntity();
-        menu.setId(-1L);
+        menu.setId("-1");
         menu.setName("根节点");
         menu.setCode("0");
         menu.setPcode("-2");
@@ -92,7 +92,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
     }
 
     @Override
-    public List<Object> getMenuIdsByRoleId(Long roleId) {
+    public List<Object> getMenuIdsByRoleId(String roleId) {
         LambdaQueryWrapper<RelationEntity> lambdaQuery = Wrappers.<RelationEntity>lambdaQuery();
         //select menu_id from sys_relation where role_id = 1
         lambdaQuery.select(RelationEntity::getMenuId).eq(RelationEntity::getRoleId, roleId);
@@ -112,7 +112,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
     }
 
     @Override
-    public int setStatus(Long menuId, String status) {
+    public int setStatus(String menuId, String status) {
         LambdaUpdateWrapper<MenuEntity> lambdaUpdate = Wrappers.<MenuEntity>lambdaUpdate();
         //update sys_menu set status = #{status} where id = #{userId}
         lambdaUpdate.set(MenuEntity::getStatus, status).eq(MenuEntity::getId, menuId);
@@ -148,7 +148,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
         //获取旧的菜单
-        Long id = menuDto.getId();
+        String id = menuDto.getId();
         MenuEntity menu = this.getById(id);
 
         if (menu == null) {
@@ -165,7 +165,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
     }
 
     @Override
-    public JSONObject getUserListById(Long id) {
+    public JSONObject getUserListById(String id) {
         JSONObject jsonObject = new JSONObject();
         LambdaQueryWrapper<RelationEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(RelationEntity::getMenuId, id);
@@ -200,7 +200,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
             resultMenu.setPcodes("[0],");
             resultMenu.setLevels(1);
         } else {
-            Long pid = menuParam.getPid();
+            String pid = menuParam.getPid();
             MenuEntity pMenu = this.getById(pid);
             Integer pLevels = pMenu.getLevels();
             resultMenu.setPcode(pMenu.getCode());

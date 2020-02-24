@@ -42,7 +42,7 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, LoginLogEnt
     }
 
     @Override
-    public void insert(LogTypeEnum logTypeEnum, Long userId, String msg, String ip, String macAddress) {
+    public void insert(LogTypeEnum logTypeEnum, String userId, String msg, String ip, String macAddress) {
         LoginLogEntity loginLog = new LoginLogEntity();
         loginLog.setLogName(logTypeEnum.getMessage());
         if (userId != null) {

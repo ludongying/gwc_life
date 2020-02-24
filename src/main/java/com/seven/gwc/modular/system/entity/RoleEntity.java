@@ -28,11 +28,11 @@ public class RoleEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键id */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 父角色id */
-    private Long pid;
+    private String pid;
 
     /** 角色名称 */
     private String name;
@@ -55,10 +55,10 @@ public class RoleEntity implements Serializable {
     private Date updateTime;
 
     /** 创建用户 */
-    private Long createUser;
+    private String createUser;
 
     /** 修改用户 */
-    private Long updateUser;
+    private String updateUser;
 
     /** 父级名称 */
     @TableField(exist=false)
@@ -69,19 +69,19 @@ public class RoleEntity implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -133,19 +133,19 @@ public class RoleEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Long getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Long createUser) {
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
-    public Long getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Long updateUser) {
+    public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
 

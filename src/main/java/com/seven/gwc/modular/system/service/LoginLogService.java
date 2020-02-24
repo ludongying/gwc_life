@@ -28,5 +28,5 @@ public interface LoginLogService extends IService<LoginLogEntity> {
      * @param msg         描述
      * @param ip          IP
      */
-    void insert(LogTypeEnum logTypeEnum, Long userId, String msg, String ip, String macAddress);
+    void insert(LogTypeEnum logTypeEnum, String userId, String msg, String ip, String macAddress);
 }

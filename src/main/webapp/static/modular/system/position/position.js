@@ -109,7 +109,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             title: '增加岗位',
             area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_add',
-            tableId: Position.tableIds
+            tableId: Position.tableId
         });
     };
 

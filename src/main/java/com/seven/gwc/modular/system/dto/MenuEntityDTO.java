@@ -16,11 +16,11 @@ public class MenuEntityDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键id */
-    private Long id;
+    private String id;
     /** 菜单编号 */
     private String code;
     /** 菜单父级id */
-    private Long pid;
+    private String pid;
     /** 菜单父编号 */
     private String pcode;
     /** 菜单父级名称 */

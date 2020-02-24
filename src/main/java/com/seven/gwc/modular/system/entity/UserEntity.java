@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.management.StringValueExp;
 import java.util.Date;
 
 /**
@@ -26,8 +27,8 @@ import java.util.Date;
 public class UserEntity extends BaseEntity {
 
     /** 主键id */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 头像 */
     private String avatar;
@@ -62,7 +63,7 @@ public class UserEntity extends BaseEntity {
     private String roleId;
 
     /** 部门id(多个逗号隔开) */
-    private Long deptId;
+    private String deptId;
 
     /** 岗位id(多个逗号隔开) */
     private String positionId;
@@ -74,13 +75,13 @@ public class UserEntity extends BaseEntity {
     private Date createTime;
 
     /** 创建人 */
-    private Long createUser;
+    private String createUser;
 
     /** 更新时间 */
     private Date updateTime;
 
     /** 更新人 */
-    private Long updateUser;
+    private String updateUser;
 
     /** 乐观锁 */
     private Integer version;
@@ -93,11 +94,11 @@ public class UserEntity extends BaseEntity {
     @TableField(exist=false)
     private String deptName;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -181,11 +182,11 @@ public class UserEntity extends BaseEntity {
         this.roleId = roleId;
     }
 
-    public Long getDeptId() {
+    public String getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public void setDeptId(String deptId) {
         this.deptId = deptId;
     }
 
@@ -213,11 +214,11 @@ public class UserEntity extends BaseEntity {
         this.createTime = createTime;
     }
 
-    public Long getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Long createUser) {
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
@@ -229,11 +230,11 @@ public class UserEntity extends BaseEntity {
         this.updateTime = updateTime;
     }
 
-    public Long getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Long updateUser) {
+    public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
 

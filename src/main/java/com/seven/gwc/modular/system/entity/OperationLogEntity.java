@@ -28,8 +28,8 @@ public class OperationLogEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 日志类型(字典) */
     private String logType;
@@ -38,7 +38,7 @@ public class OperationLogEntity implements Serializable {
     private String logName;
 
     /** 用户id */
-    private Long userId;
+    private String userId;
 
     /** 类名称 */
     private String className;
@@ -66,11 +66,11 @@ public class OperationLogEntity implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -90,11 +90,11 @@ public class OperationLogEntity implements Serializable {
         this.logName = logName;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

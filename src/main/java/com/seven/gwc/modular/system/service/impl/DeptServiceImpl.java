@@ -42,7 +42,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
         List<DeptEntity> deptEntityList = new ArrayList<>();
         if (list.size() > 0) {
             for (DeptEntity deptEntity : list) {
-                if (deptEntity.getPid() != 0) {
+                if (deptEntity.getPid() != "0") {
                     DeptEntity dept = deptMapper.selectById(deptEntity.getPid());
                     deptEntity.setPName(dept.getFullName());
                 }
@@ -98,10 +98,10 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
      */
     private void deptSetPids(DeptEntity deptEntity) {
         if (ToolUtil.isEmpty(deptEntity.getPid()) || deptEntity.getPid().equals(0L)) {
-            deptEntity.setPid(0L);
+            deptEntity.setPid("0");
             deptEntity.setPids("[0],");
         } else {
-            Long pid = deptEntity.getPid();
+            String pid = deptEntity.getPid();
             DeptEntity temp = this.getById(pid);
             String pids = temp.getPids();
             deptEntity.setPid(pid);
@@ -110,7 +110,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
     }
 
     @Override
-    public boolean jude(Long id, Long pid) {
+    public boolean jude(String id, String pid) {
         LambdaQueryWrapper<DeptEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DeptEntity::getId, pid);
         DeptEntity deptEntity = deptMapper.selectOne(lambdaQuery);

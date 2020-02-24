@@ -26,8 +26,8 @@ public class PositionEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** id */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 岗位名称 */
     private String name;
@@ -45,7 +45,7 @@ public class PositionEntity implements Serializable {
     private String description;
 
     /** 创建id */
-    private Long createId;
+    private String createId;
 
     /** 创建人名称 */
     private String createUser;
@@ -61,11 +61,11 @@ public class PositionEntity implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -109,11 +109,11 @@ public class PositionEntity implements Serializable {
         this.description = description;
     }
 
-    public Long getCreateId() {
+    public String getCreateId() {
         return createId;
     }
 
-    public void setCreateId(Long createId) {
+    public void setCreateId(String createId) {
         this.createId = createId;
     }
 

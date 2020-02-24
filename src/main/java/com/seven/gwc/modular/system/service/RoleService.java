@@ -43,7 +43,7 @@ public interface RoleService extends IService<RoleEntity> {
      * @param roleId 角色id
      * @param ids    菜单id集合 （例如1,2）
      */
-    void setAuthority(Long roleId, String ids);
+    void setAuthority(String roleId, String ids);
 
     /**
      * 根据角色父id 获取角色
@@ -68,7 +68,7 @@ public interface RoleService extends IService<RoleEntity> {
      * @param roleName {@code eq roleName}
      * @return
      */
-    RoleEntity getOneByIdAndRoleName(Long id, String roleName);
+    RoleEntity getOneByIdAndRoleName(String id, String roleName);
 
     /**
      * 根据角色id删除角色

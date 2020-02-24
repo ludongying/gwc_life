@@ -22,9 +22,9 @@ public class PositionDeptEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 岗位ID */
-    private Long positionId;
+    private String positionId;
 
     /** 部门ID */
-    private Long deptId;
+    private String deptId;
 
 }

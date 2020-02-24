@@ -32,7 +32,7 @@ public interface UserService extends IService<UserEntity> {
      * @param status 状态
      * @return
      */
-    int setStatus(Long userId, String status, Long currentUserId);
+    int setStatus(String userId, String status, String currentUserId);
 
     /**
      * 获取用户菜单列表
@@ -68,7 +68,7 @@ public interface UserService extends IService<UserEntity> {
      * @param roleIds 角色id (例如 1,2)
      * @return
      */
-    int setRoles(Long userId, String roleIds, Long currentUserId);
+    int setRoles(String userId, String roleIds, String currentUserId);
 
     /**
      * 通过账号获取用户

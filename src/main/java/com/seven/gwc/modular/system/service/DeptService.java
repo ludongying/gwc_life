@@ -52,7 +52,7 @@ public interface DeptService extends IService<DeptEntity> {
      * @param pid 父级部门Id
      * @return 校验是否是自己或自己的下级
      */
-    boolean jude(Long id, Long pid);
+    boolean jude(String id, String pid);
 
     /**
      * @param deptId 数据id

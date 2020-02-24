@@ -10,7 +10,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var laydate = layui.laydate;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化dictionary的详情数据
     var ajax = new $ax(Feng.ctxPath + "/dictType/detail/" + Feng.getUrlParam("dictTypeId"));

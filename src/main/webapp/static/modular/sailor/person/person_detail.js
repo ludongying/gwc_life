@@ -11,7 +11,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化船员信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/person/detail/" + Feng.getUrlParam("personId"));

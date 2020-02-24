@@ -6,7 +6,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var $ax = layui.ax;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 监听提交
     form.on('submit(submit-psw)', function (data) {

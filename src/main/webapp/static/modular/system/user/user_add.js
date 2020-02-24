@@ -79,7 +79,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
 
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //window.parent.$('#name').val("");
     // 点击部门时

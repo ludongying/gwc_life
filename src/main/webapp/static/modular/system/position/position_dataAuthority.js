@@ -11,7 +11,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'ztree'], function () {
 
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
 
     //初始化岗位的详情数据

@@ -29,7 +29,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
     private DeptMapper deptMapper;
 
     @Override
-    public List<DeptEntity> selectDept(String deptName, Long deptId) {
+    public List<DeptEntity> selectDept(String deptName, String deptId) {
         LambdaQueryWrapper<DeptEntity> lambdaQuery = Wrappers.<DeptEntity>lambdaQuery();
         //select * from sys_dept (simple_name like '%张三%' or full_name like '%张三%') and (dept_id like '%10%' or pids like '%10%') order by sort asc
         // 包含全称和简称
@@ -127,7 +127,7 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
     }
 
     @Override
-    public DeptEntity getDeptById(Long deptId) {
+    public DeptEntity getDeptById(String deptId) {
         DeptEntity deptEntity = new DeptEntity();
         if (deptId != null) {
             deptEntity = deptMapper.selectById(deptId);

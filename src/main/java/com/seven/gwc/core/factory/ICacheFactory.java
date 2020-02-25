@@ -27,7 +27,7 @@ public interface ICacheFactory {
     /**
      * 通过角色id获取角色名称
      */
-    String getSingleRoleName(Long roleId);
+    String getSingleRoleName(String roleId);
 
     /**
      * 通过角色id获取角色英文名称
@@ -42,7 +42,7 @@ public interface ICacheFactory {
     /**
      * 通过岗位id获取岗位名称
      */
-    String getSinglePositionName(Long positionId);
+    String getSinglePositionName(String positionId);
 
     /**
      * 获取部门名称

@@ -76,8 +76,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.ROLE_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_ROLE_NAME + "'+#roleId")
-    public String getSingleRoleName(Long roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleName(String roleId) {
+        if ("0".equals(roleId)) {
             return "--";
         }
         RoleEntity roleObj = roleMapper.selectById(roleId);
@@ -120,8 +120,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.POSITION_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_POSITION_NAME + "'+#positionId")
-    public String getSinglePositionName(Long positionId) {
-        if (0 == positionId) {
+    public String getSinglePositionName(String positionId) {
+        if ("0".equals(positionId)) {
             return "--";
         }
         PositionEntity positionObj = positionMapper.selectById(positionId);

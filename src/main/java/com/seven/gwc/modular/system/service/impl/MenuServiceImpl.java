@@ -201,7 +201,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
             resultMenu.setLevels(1);
         } else {
             String pid = menuParam.getPid();
-            MenuEntity pMenu = this.getById(Long.parseLong(pid));
+            MenuEntity pMenu = this.getById(pid);
             Integer pLevels = pMenu.getLevels();
             resultMenu.setPcode(pMenu.getCode());
 

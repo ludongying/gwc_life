@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * @author : zzl
- * description : 渔政船实体父类
+ * @description : 渔政船实体父类
  */
 @Data
 public class GwcBaseEntity extends BaseEntity{

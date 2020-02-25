@@ -52,7 +52,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public List<ZTreeNode> roleTreeListByRoleId(Long[] roleId) {
+    public List<ZTreeNode> roleTreeListByRoleId(String[] roleId) {
         return this.roleMapper.roleTreeListByRoleId(roleId);
     }
 

@@ -21,7 +21,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @param userId 用户id
      * @return
      */
-    List<ListBasicsEntityVO> listBasicsEntity(Long userId);
+    List<ListBasicsEntityVO> listBasicsEntity(String userId);
 
     /**
      * 根据用户信息查询用户列表

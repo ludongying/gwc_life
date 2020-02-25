@@ -35,7 +35,7 @@ public interface RoleService extends IService<RoleEntity> {
      * @param roleId 角色id集合
      * @return
      */
-    List<ZTreeNode> roleTreeListByRoleId(Long[] roleId);
+    List<ZTreeNode> roleTreeListByRoleId(String[] roleId);
 
     /**
      * 设置某个角色的权限

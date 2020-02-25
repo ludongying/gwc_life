@@ -17,7 +17,7 @@ public interface ICacheFactory {
     /**
      * 根据用户id获取用户账号
      */
-    String getUserAccountById(Long userId);
+    String getUserAccountById(String userId);
 
     /**
      * 通过角色ids获取角色名称
@@ -57,12 +57,12 @@ public interface ICacheFactory {
     /**
      * 获取菜单名称
      */
-    String getMenuName(Long menuId);
+    String getMenuName(String menuId);
 
     /**
      * 获取所有父部门id
      */
-    List<Long> getParentDeptIds(Long deptId);
+    List<Long> getParentDeptIds(String deptId);
 
     /**
      * 获取菜单名称通过编号

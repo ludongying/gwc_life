@@ -18,12 +18,12 @@ public class MenuNode implements Comparable, Serializable {
     /**
      * 节点id
      */
-    private Long id;
+    private String id;
 
     /**
      * 父节点
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 节点名称
@@ -69,7 +69,7 @@ public class MenuNode implements Comparable, Serializable {
         super();
     }
 
-    public MenuNode(Long id, Long parentId) {
+    public MenuNode(String id, String parentId) {
         super();
         this.id = id;
         this.parentId = parentId;
@@ -120,11 +120,11 @@ public class MenuNode implements Comparable, Serializable {
      * @param listMap
      * @return
      */
-    private static List<MenuNode> mergeList(List<MenuNode> menuList, int rank, Map<Long, List<MenuNode>> listMap) {
+    private static List<MenuNode> mergeList(List<MenuNode> menuList, int rank, Map<String, List<MenuNode>> listMap) {
         //保存当次调用总共合并了多少元素
         int n;
         //保存当次调用总共合并出来的list
-        Map<Long, List<MenuNode>> currentMap = new HashMap<>();
+        Map<String, List<MenuNode>> currentMap = new HashMap<>();
         //由于按等级从小到大排序，需要从后往前排序
         //判断该节点是否属于当前循环的等级,不等于则跳出循环
         for (n = menuList.size() - 1; n >= 0 && menuList.get(n).getLevels() == rank; n--) {
@@ -132,7 +132,7 @@ public class MenuNode implements Comparable, Serializable {
             if (listMap != null && listMap.get(menuList.get(n).getId()) != null) {
                 menuList.get(n).setChildren(listMap.get(menuList.get(n).getId()));
             }
-            if (menuList.get(n).getParentId() != null && menuList.get(n).getParentId() != 0) {
+            if (menuList.get(n).getParentId() != null && menuList.get(n).getParentId() != "0") {
                 //判断当前节点所属的pid是否已经创建了以该pid为key的键值对，没有则创建新的链表
                 currentMap.computeIfAbsent(menuList.get(n).getParentId(), k -> new LinkedList<>());
                 //将该节点插入到对应的list的头部

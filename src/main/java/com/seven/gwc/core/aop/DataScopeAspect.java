@@ -97,7 +97,7 @@ public class DataScopeAspect {
     public void dataScopeFilter(JoinPoint joinPoint, ShiroUser user, String deptAlias, String userAlias) {
         StringBuilder sqlString = new StringBuilder();
 
-        for (Long positionId : user.getPositionList()) {
+        for (String positionId : user.getPositionList()) {
             PositionEntity positionEntity = positionService.getById(positionId);
             String dataScope = positionEntity.getDataScope();
 

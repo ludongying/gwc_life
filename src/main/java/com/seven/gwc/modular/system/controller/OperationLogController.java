@@ -58,7 +58,7 @@ public class OperationLogController extends BaseController {
      * 跳转到修改操作日志
      */
     @RequestMapping("/operationLog_edit")
-    public String operationLogUpdate(Long operationLogId) {
+    public String operationLogUpdate(String operationLogId) {
         return PREFIX + "operationLog_edit";
     }
 
@@ -66,7 +66,7 @@ public class OperationLogController extends BaseController {
      * 跳转到查看操作日志
      */
     @RequestMapping("/operationLog_detail")
-    public String operationLogDetail(Long operationLogId) {
+    public String operationLogDetail(String operationLogId) {
         return PREFIX + "operationLog_detail";
     }
 
@@ -99,7 +99,7 @@ public class OperationLogController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long operationLogId) {
+    public BaseResult delete(@RequestParam String operationLogId) {
         operationLogService.removeById(operationLogId);
         return SUCCESS;
     }
@@ -120,7 +120,7 @@ public class OperationLogController extends BaseController {
      */
     @RequestMapping("/detail/{operationLogId}")
     @ResponseBody
-    public OperationLogEntity detail(@PathVariable Long operationLogId) {
+    public OperationLogEntity detail(@PathVariable String operationLogId) {
         return operationLogService.getById(operationLogId);
     }
 

@@ -20,7 +20,7 @@ public interface DeptService extends IService<DeptEntity> {
      * @param deptId   部门Id
      * @return 部门查询列表
      */
-    List<DeptEntity> selectDept(String deptName, Long deptId);
+    List<DeptEntity> selectDept(String deptName, String deptId);
 
     /**
      * 获取部门Tree
@@ -58,5 +58,5 @@ public interface DeptService extends IService<DeptEntity> {
      * @param deptId 数据id
      * @return 根据id获取数据
      */
-    DeptEntity getDeptById(Long deptId);
+    DeptEntity getDeptById(String deptId);
 }

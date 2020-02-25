@@ -56,7 +56,7 @@ public class LoginLogController extends BaseController {
      * 跳转到修改登录历史
      */
     @RequestMapping("/loginLog_edit")
-    public String loginLogUpdate(Long loginLogId) {
+    public String loginLogUpdate(String loginLogId) {
         return PREFIX + "loginLog_edit";
     }
 
@@ -64,7 +64,7 @@ public class LoginLogController extends BaseController {
      * 跳转到查看登录历史
      */
     @RequestMapping("/loginLog_detail")
-    public String loginLogDetail(Long loginLogId) {
+    public String loginLogDetail(String loginLogId) {
         return PREFIX + "loginLog_detail";
     }
 
@@ -97,7 +97,7 @@ public class LoginLogController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long loginLogId) {
+    public BaseResult delete(@RequestParam String loginLogId) {
         loginLogService.removeById(loginLogId);
         return SUCCESS;
     }
@@ -129,7 +129,7 @@ public class LoginLogController extends BaseController {
      */
     @RequestMapping("/detail/{loginLogId}")
     @ResponseBody
-    public LoginLogEntity detail(@PathVariable Long loginLogId) {
+    public LoginLogEntity detail(@PathVariable String loginLogId) {
         return loginLogService.getById(loginLogId);
     }
 

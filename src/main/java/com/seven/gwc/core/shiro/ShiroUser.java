@@ -61,7 +61,7 @@ public class ShiroUser implements Serializable {
     /**
      * 岗位集
      */
-    private List<Long> positionList;
+    private List<String> positionList;
 
     /**
      * 岗位名称集

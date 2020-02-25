@@ -21,8 +21,8 @@ public class DictFieldWarpperFactory {
             return method.invoke(constantFactory, parameter);
         } catch (Exception e) {
             try {
-                Method method = ICacheFactory.class.getMethod(methodName, Long.class);
-                return method.invoke(constantFactory, Long.parseLong(parameter.toString()));
+                Method method = ICacheFactory.class.getMethod(methodName, String.class);
+                return method.invoke(constantFactory, parameter.toString());
             } catch (Exception e1) {
                 throw new ServiceException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
             }

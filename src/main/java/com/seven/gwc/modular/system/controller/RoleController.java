@@ -83,7 +83,7 @@ public class RoleController extends BaseController {
      * 跳转到查看角色
      */
     @RequestMapping("/role_detail")
-    public String roleDetail(Long id) {
+    public String roleDetail(String id) {
         return PREFIX + "role_detail";
     }
 
@@ -128,7 +128,7 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "删除角色", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         if (ToolUtil.isEmpty(id)) {
             return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }

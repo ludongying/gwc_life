@@ -73,7 +73,7 @@ public class DeptController extends BaseController {
      * 跳转到修改部门
      */
     @RequestMapping("/dept_edit")
-    public String deptEdit(Long id) {
+    public String deptEdit(String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -86,7 +86,7 @@ public class DeptController extends BaseController {
      * 跳转到查看部门
      */
     @RequestMapping("/dept_detail")
-    public String deptDetail(Long id) {
+    public String deptDetail(String id) {
         return PREFIX + "dept_detail";
     }
 

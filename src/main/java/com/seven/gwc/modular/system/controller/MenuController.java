@@ -71,7 +71,7 @@ public class MenuController extends BaseController {
      * 跳转到修改菜单
      */
     @RequestMapping("/menu_edit")
-    public String menuEdit(Long id) {
+    public String menuEdit(String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -81,7 +81,7 @@ public class MenuController extends BaseController {
     }
 
     @RequestMapping("/menu_look")
-    public String menuLook(Long id) {
+    public String menuLook(String id) {
         return PREFIX + "menu_look";
     }
 
@@ -89,7 +89,7 @@ public class MenuController extends BaseController {
      * 跳转到查看菜单
      */
     @RequestMapping("/menu_detail")
-    public String menuDetail(Long id) {
+    public String menuDetail(String id) {
         return PREFIX + "menu_detail";
     }
 
@@ -139,7 +139,7 @@ public class MenuController extends BaseController {
     @BussinessLog(value = "删除菜单", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         menuService.removeById(id);
         return SUCCESS;
     }
@@ -167,7 +167,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public MenuEntity detail(@PathVariable Long id) {
+    public MenuEntity detail(@PathVariable String id) {
         MenuEntity menuEntity = menuService.getById(id);
         //设置pid和父级名称
         menuEntity.setPId(CacheFactory.me().getMenuIdByCode(menuEntity.getPcode()));
@@ -180,7 +180,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/menuTreeListByRoleId/{id}")
     @ResponseBody
-    public List<ZTreeNode> menuTreeListByRoleId(@PathVariable Long id) {
+    public List<ZTreeNode> menuTreeListByRoleId(@PathVariable String id) {
         List<Object> menuIds = this.menuService.getMenuIdsByRoleId(id);
         if (ToolUtil.isEmpty(menuIds)) {
             return this.menuService.menuTreeList();
@@ -191,7 +191,7 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = "/getUserListById")
     @ResponseBody
-    public JSONObject getUserListById(Long id) {
+    public JSONObject getUserListById(String id) {
         return menuService.getUserListById(id);
     }
 
@@ -201,7 +201,7 @@ public class MenuController extends BaseController {
     @BussinessLog(value = "禁用菜单", key = "id", dict = MenuDict.class)
     @RequestMapping("/freeze")
     @ResponseBody
-    public BaseResult freeze(@RequestParam Long id) {
+    public BaseResult freeze(@RequestParam String id) {
         //不能冻结系统管理
         if (id.equals(ConfigConsts.SYSTEM_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
@@ -216,7 +216,7 @@ public class MenuController extends BaseController {
     @BussinessLog(value = "启动菜单", key = "id", dict = MenuDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
-    public BaseResult unfreeze(@RequestParam Long id) {
+    public BaseResult unfreeze(@RequestParam String id) {
         this.menuService.setStatus(id, TypeStatesEnum.OK.getCode());
         return SUCCESS;
     }

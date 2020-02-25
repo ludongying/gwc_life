@@ -27,8 +27,8 @@ public class MenuEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键id */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 菜单编号 */
     private String code;
@@ -78,14 +78,14 @@ public class MenuEntity implements Serializable {
     private Date updateTime;
 
     /** 创建人 */
-    private Long createUser;
+    private String createUser;
 
     /** 编辑人 */
-    private Long updateUser;
+    private String updateUser;
 
     /** 菜单父级id */
     @TableField(exist=false)
-    private Long pId;
+    private String pId;
 
     /** 菜单父级名称 */
     @TableField(exist=false)
@@ -96,11 +96,11 @@ public class MenuEntity implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -224,27 +224,27 @@ public class MenuEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Long getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Long createUser) {
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
-    public Long getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Long updateUser) {
+    public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
 
-    public Long getPId() {
+    public String getPId() {
         return pId;
     }
 
-    public void setPId(Long pId) {
+    public void setPId(String pId) {
         this.pId = pId;
     }
 

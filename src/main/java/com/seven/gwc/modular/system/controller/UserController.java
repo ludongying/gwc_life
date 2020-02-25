@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.print.DocFlavor;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -168,7 +169,7 @@ public class UserController extends BaseController {
     @BussinessLog(value = "解除冻结用户", key = "id", dict = UserDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
-    public BaseResult unfreeze(@RequestParam Long id) {
+    public BaseResult unfreeze(@RequestParam String id) {
         ShiroUser currentUser = ShiroKit.getUser();
         this.userService.setStatus(id, TypeStatesEnum.OK.getCode(), currentUser.getId());
         return SUCCESS;
@@ -181,7 +182,7 @@ public class UserController extends BaseController {
     @Permission(ConfigConsts.ADMIN_NAME)
     @RequestMapping("/deleteLogic")
     @ResponseBody
-    public BaseResult deleteLogic(@RequestParam Long id) {
+    public BaseResult deleteLogic(@RequestParam String id) {
         ShiroUser currentUser = ShiroKit.getUser();
         //不能冻结超级管理员
         if (id.equals(ConfigConsts.ADMIN_ID)) {
@@ -215,7 +216,7 @@ public class UserController extends BaseController {
      * 跳转到角色分配页面
      */
     @RequestMapping("/user_role_assign/{id}")
-    public String roleRoleAssign(@PathVariable Long id, Model model) {
+    public String roleRoleAssign(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         return PREFIX + "user_role_assign";
     }
@@ -226,7 +227,7 @@ public class UserController extends BaseController {
     @BussinessLog(value = "分配角色", key = "id,roleIds", dict = UserDict.class)
     @RequestMapping("/setRole")
     @ResponseBody
-    public BaseResult setRole(@RequestParam("id") Long id, @RequestParam("roleIds") String roleIds) {
+    public BaseResult setRole(@RequestParam("id") String id, @RequestParam("roleIds") String roleIds) {
         ShiroUser currentUser = ShiroKit.getUser();
         if (ToolUtil.isOneEmpty(id, roleIds)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);

@@ -24,7 +24,7 @@ public class LogTaskFactory {
     private static OperationLogMapper operationLogMapper = SpringContextUtil.getBean(OperationLogMapper.class);
 
 
-    public static TimerTask bussinessLog(final Long userId, final String bussinessName, final String clazzName, final String methodName, final String msg) {
+    public static TimerTask bussinessLog(final String userId, final String bussinessName, final String clazzName, final String methodName, final String msg) {
         return new TimerTask() {
             @Override
             public void run() {
@@ -39,7 +39,7 @@ public class LogTaskFactory {
         };
     }
 
-    public static TimerTask exceptionLog(final Long userId, final Exception exception) {
+    public static TimerTask exceptionLog(final String userId, final Exception exception) {
         return new TimerTask() {
             @Override
             public void run() {

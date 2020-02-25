@@ -58,7 +58,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void setAuthority(Long roleId, String menuIds) {
+    public void setAuthority(String roleId, String menuIds) {
 
         // 删除该角色所有的权限
         LambdaQueryWrapper<RelationEntity> lambdaQuery = Wrappers.<RelationEntity>lambdaQuery();
@@ -66,7 +66,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
         relationMapper.delete(lambdaQuery);
 
         // 添加新的权限
-        for (Long menuId : Convert.toLongArray(menuIds.split(SysConsts.STR_COMMA))) {
+        for (String menuId : menuIds.split(SysConsts.STR_COMMA)) {
             RelationEntity relation = new RelationEntity();
             relation.setRoleId(roleId);
             relation.setMenuId(menuId);
@@ -91,7 +91,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public RoleEntity getOneByIdAndRoleName(Long id, String roleName) {
+    public RoleEntity getOneByIdAndRoleName(String id, String roleName) {
         LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.eq(RoleEntity::getName, roleName).ne(RoleEntity::getId, id);
         return roleMapper.selectOne(lambdaQuery);

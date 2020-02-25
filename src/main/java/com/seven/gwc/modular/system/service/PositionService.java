@@ -30,7 +30,7 @@ public interface PositionService extends IService<PositionEntity> {
      * @param state      状态 "ENABLE"非冻结状态
      * @return
      */
-    int setStatus(Long positionId, String state);
+    int setStatus(String positionId, String state);
 
     /**
      * 获取岗位下拉多选框
@@ -46,7 +46,7 @@ public interface PositionService extends IService<PositionEntity> {
      * @param id 数据id
      * @return
      */
-    boolean delete(Long id);
+    boolean delete(String id);
 
     /**
      * 增加数据

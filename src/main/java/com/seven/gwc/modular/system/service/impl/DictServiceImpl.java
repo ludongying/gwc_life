@@ -36,7 +36,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     private DictTypeMapper dictTypeMapper;
 
     @Override
-    public List<DictEntity> selectDict(Long dictTypeId) {
+    public List<DictEntity> selectDict(String dictTypeId) {
         LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DictEntity::getDictTypeId, dictTypeId)
                 .orderByAsc(DictEntity::getSort)
@@ -91,7 +91,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
      * 根据ID获取字典详情
      */
     @Override
-    public DictEntity dictDetail(Long dictId) {
+    public DictEntity dictDetail(String dictId) {
         DictEntity entity = dictMapper.selectById(dictId);
         return entity;
     }
@@ -164,9 +164,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         return resultTree;
     }*/
 
-    private List<Long> getSubIds(Long dictId) {
+    private List<String> getSubIds(Long dictId) {
 
-        ArrayList<Long> longs = new ArrayList<>();
+        ArrayList<String> longs = new ArrayList<>();
 
         if (ToolUtil.isEmpty(dictId)) {
             return longs;

@@ -26,11 +26,11 @@ public class DictEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     /** 字典类型id */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 所属字典类型的id */
-    private Long dictTypeId;
+    private String dictTypeId;
 
     /** 字典名称 */
     private String name;

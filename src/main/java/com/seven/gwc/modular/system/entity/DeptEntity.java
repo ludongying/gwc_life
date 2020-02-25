@@ -27,12 +27,12 @@ public class DeptEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 主键id
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    /** 主键id */
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
     /** 父部门id */
-    private Long pid;
+    private String pid;
 
     /** 父级ids */
     private String pids;
@@ -61,10 +61,10 @@ public class DeptEntity implements Serializable {
     private Date updateTime;
 
     /** 创建人 */
-    private Long createUser;
+    private String createUser;
 
     /** 修改人 */
-    private Long updateUser;
+    private String updateUser;
 
     /** 部门父级名称 */
     @TableField(exist = false)
@@ -75,19 +75,19 @@ public class DeptEntity implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -155,19 +155,19 @@ public class DeptEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Long getCreateUser() {
+    public String getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(Long createUser) {
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
-    public Long getUpdateUser() {
+    public String getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(Long updateUser) {
+    public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
     }
 

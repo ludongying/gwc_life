@@ -51,7 +51,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
     }
 
     @Override
-    public int setStatus(Long positionId, String state) {
+    public int setStatus(String positionId, String state) {
         LambdaUpdateWrapper<PositionEntity> lambdaUpdate = Wrappers.<PositionEntity>lambdaUpdate();
         lambdaUpdate.set(PositionEntity::getState, state).eq(PositionEntity::getId, positionId);
         return this.positionMapper.update(null, lambdaUpdate);
@@ -68,7 +68,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
             JSONObject jsonObject = new JSONObject();
             if (!SysConsts.STR_NULL.equals(ids) && ids != null && ids.length() > 0) {
                 for (String id : ids.split(SysConsts.STR_COMMA)) {
-                    if (positionEntity.getId() == Integer.parseInt(id)){
+                    if (positionEntity.getId().equals(id)){
                         jsonObject.put("selected", "selected");
                     }
                 }
@@ -119,7 +119,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
             for (String menuId : menuIds.split(SysConsts.STR_COMMA)) {
                 PositionDeptEntity positionDeptEntity = new PositionDeptEntity();
                 positionDeptEntity.setPositionId(position.getId());
-                positionDeptEntity.setDeptId(Long.parseLong(menuId));
+                positionDeptEntity.setDeptId(menuId);
                 //添加岗位范围
                 positionDeptMapper.insert(positionDeptEntity);
             }
@@ -128,7 +128,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(String id) {
         LambdaQueryWrapper<UserEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.isNotNull(UserEntity::getPositionId);
         List<UserEntity> userEntityList = userMapper.selectList(lambdaQuery);

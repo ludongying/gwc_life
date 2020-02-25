@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public int setStatus(Long userId, String status, Long currentUserId) {
+    public int setStatus(String userId, String status, String currentUserId) {
         LambdaUpdateWrapper<UserEntity> lambdaUpdate = Wrappers.<UserEntity>lambdaUpdate();
         //update sys_user set status = #{status} where id = #{userId}
         lambdaUpdate.set(UserEntity::getStatus, status).
@@ -87,7 +87,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public int setRoles(Long userId, String roleIds, Long currentUserId) {
+    public int setRoles(String userId, String roleIds, String currentUserId) {
         LambdaUpdateWrapper<UserEntity> lambdaUpdate1 = Wrappers.<UserEntity>lambdaUpdate();
         //update sys_user set role_id = #{roleIds} where user_id =#{userId}
         lambdaUpdate1.eq(UserEntity::getId, userId).
@@ -110,7 +110,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Override
     public void changePwd(String oldPassword, String newPassword) {
-        Long userId = ShiroKit.getUserNotNull().getId();
+        String userId = ShiroKit.getUserNotNull().getId();
         UserEntity userEntity = this.getById(userId);
 
         String oldMd5 = ShiroKit.md5(oldPassword, userEntity.getSalt());
@@ -158,7 +158,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Override
     public void refreshCurrentUser() {
         ShiroUser user = ShiroKit.getUserNotNull();
-        Long id = user.getId();
+        String id = user.getId();
         UserEntity currentUser = this.getById(id);
         ShiroUser shiroUser = userAuthService.shiroUser(currentUser);
         ShiroUser lastUser = ShiroKit.getUser();

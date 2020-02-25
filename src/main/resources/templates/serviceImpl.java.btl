@@ -43,7 +43,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public void delete${cfg.genQo.bizEnBigName}(Long ${cfg.genQo.bizEnName}Id, ShiroUser user) {
+    public void delete${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Id, ShiroUser user) {
         ${cfg.genQo.bizEnName}Mapper.deleteById(${cfg.genQo.bizEnName}Id);
     }
 

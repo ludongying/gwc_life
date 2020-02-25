@@ -66,7 +66,7 @@ public class ${entity} implements Serializable {
     /*主键*/
     %>
         <% if(field.keyIdentityFlag){ %>
-    @TableId(value = "${field.name}", type = IdType.AUTO)
+    @TableId(value = "${field.name}", type = IdType.UUID)
         <% }else if(isNotEmpty(idType)){ %>
     @TableId(value = "${field.name}", type = IdType.${idType})
         <% }else if(field.convert){ %>

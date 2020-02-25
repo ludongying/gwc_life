@@ -60,7 +60,7 @@ public class PositionController extends BaseController {
      * 跳转到修改岗位
      */
     @RequestMapping("/position_edit")
-    public String positionUpdate(Long positionId) {
+    public String positionUpdate(String positionId) {
         if (ToolUtil.isEmpty(positionId)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -112,7 +112,7 @@ public class PositionController extends BaseController {
     @BussinessLog(value = "删除岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long positionId) {
+    public BaseResult delete(@RequestParam String positionId) {
         if (!positionService.delete(positionId)) {
             return new BaseResult().failure(ErrorEnum.THE_DATA_USED);
         }
@@ -140,7 +140,7 @@ public class PositionController extends BaseController {
      */
     @RequestMapping("/detail/{positionId}")
     @ResponseBody
-    public PositionEntity detail(@PathVariable Long positionId) {
+    public PositionEntity detail(@PathVariable String positionId) {
         return positionService.getById(positionId);
     }
 
@@ -150,7 +150,7 @@ public class PositionController extends BaseController {
     @BussinessLog(value = "启动岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
-    public BaseResult unfreeze(@RequestParam Long id) {
+    public BaseResult unfreeze(@RequestParam String id) {
         this.positionService.setStatus(id, TypeStatesEnum.OK.getCode());
         return SUCCESS;
     }
@@ -161,7 +161,7 @@ public class PositionController extends BaseController {
     @BussinessLog(value = "禁用岗位", key = "id", dict = PositionDict.class)
     @RequestMapping("/freeze")
     @ResponseBody
-    public BaseResult freeze(@RequestParam Long id) {
+    public BaseResult freeze(@RequestParam String id) {
         this.positionService.setStatus(id, TypeStatesEnum.PROHIBIT.getCode());
         return SUCCESS;
     }

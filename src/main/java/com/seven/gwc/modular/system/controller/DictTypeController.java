@@ -55,7 +55,7 @@ public class DictTypeController extends BaseController {
      * 跳转到修改字典类型
      */
     @RequestMapping("/dictType_edit")
-    public String dictTypeUpdate(Long dictTypeId) {
+    public String dictTypeUpdate(String dictTypeId) {
         return PREFIX + "dictType_edit";
     }
 
@@ -63,7 +63,7 @@ public class DictTypeController extends BaseController {
      * 跳转到查看字典类型
      */
     @RequestMapping("/dictType_detail")
-    public String dictTypeDetail(Long dictTypeId) {
+    public String dictTypeDetail(String dictTypeId) {
         return PREFIX + "dictType_detail";
     }
 
@@ -101,7 +101,7 @@ public class DictTypeController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long sysDictTypeId) {
+    public BaseResult delete(@RequestParam String sysDictTypeId) {
         dictTypeService.removeById(sysDictTypeId);
         return SUCCESS;
     }
@@ -127,7 +127,7 @@ public class DictTypeController extends BaseController {
      */
     @RequestMapping("/detail/{sysDictTypeId}")
     @ResponseBody
-    public DictTypeEntity detail(@PathVariable Long sysDictTypeId) {
+    public DictTypeEntity detail(@PathVariable String sysDictTypeId) {
         return dictTypeService.getById(sysDictTypeId);
     }
 }

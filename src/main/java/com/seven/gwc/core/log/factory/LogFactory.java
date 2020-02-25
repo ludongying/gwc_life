@@ -18,7 +18,7 @@ public class LogFactory {
     /**
      * 创建操作日志
      */
-    public static OperationLogEntity createOperationLog(LogTypeEnum logType, Long userId, String bussinessName, String clazzName, String methodName, String msg, LogSucceedEnum succeed) {
+    public static OperationLogEntity createOperationLog(LogTypeEnum logType, String userId, String bussinessName, String clazzName, String methodName, String msg, LogSucceedEnum succeed) {
         OperationLogEntity operationLog = new OperationLogEntity();
         operationLog.setLogType(logType.getMessage());
         operationLog.setLogName(bussinessName);

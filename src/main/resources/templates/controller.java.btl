@@ -74,7 +74,7 @@ public class ${table.controllerName} {
      * 跳转到修改${cfg.genQo.bizChName}
      */
     @RequestMapping("/${cfg.genQo.bizEnName}_edit")
-    public String ${cfg.genQo.bizEnName}Update(Long ${cfg.genQo.bizEnName}Id) {
+    public String ${cfg.genQo.bizEnName}Update(String ${cfg.genQo.bizEnName}Id) {
         return PREFIX + "${cfg.genQo.bizEnName}_edit";
     }
 
@@ -82,7 +82,7 @@ public class ${table.controllerName} {
      * 跳转到查看${cfg.genQo.bizChName}
      */
     @RequestMapping("/${cfg.genQo.bizEnName}_detail")
-    public String ${cfg.genQo.bizEnName}Detail(Long ${cfg.genQo.bizEnName}Id) {
+    public String ${cfg.genQo.bizEnName}Detail(String ${cfg.genQo.bizEnName}Id) {
         return PREFIX + "${cfg.genQo.bizEnName}_detail";
     }
 
@@ -115,7 +115,7 @@ public class ${table.controllerName} {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long ${cfg.genQo.bizEnName}Id) {
+    public BaseResult delete(@RequestParam String ${cfg.genQo.bizEnName}Id) {
         ShiroUser user = ShiroKit.getUser();
         ${cfg.genQo.bizEnName}Service.delete${cfg.genQo.bizEnBigName}(${cfg.genQo.bizEnName}Id, user);
         return SUCCESS;
@@ -137,7 +137,7 @@ public class ${table.controllerName} {
      */
     @RequestMapping("/detail/{${cfg.genQo.bizEnName}Id}")
     @ResponseBody
-    public ${entity} detail(@PathVariable Long ${cfg.genQo.bizEnName}Id) {
+    public ${entity} detail(@PathVariable String ${cfg.genQo.bizEnName}Id) {
         return ${cfg.genQo.bizEnName}Service.getById(${cfg.genQo.bizEnName}Id);
     }
 

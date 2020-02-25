@@ -37,7 +37,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param ${cfg.genQo.bizEnName}Id 唯一标识
      * @param user 当前用户
      */
-    void delete${cfg.genQo.bizEnBigName}(Long ${cfg.genQo.bizEnName}Id, ShiroUser user);
+    void delete${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Id, ShiroUser user);
 
     /**
      * ${cfg.genQo.bizChName}编辑

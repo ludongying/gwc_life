@@ -37,7 +37,7 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.USER_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_USER_NAME + "'+#userId")
-    public String getUserNameById(Long userId) {
+    public String getUserNameById(String userId) {
         UserEntity user = userMapper.selectById(userId);
         if (user != null) {
             return user.getName();
@@ -134,10 +134,10 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.DEPT_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_DEPT_NAME + "'+#deptId")
-    public String getDeptName(Long deptId) {
+    public String getDeptName(String deptId) {
         if (deptId == null) {
             return "";
-        } else if (deptId == 0L) {
+        } else if (deptId == "0") {
             return "顶级";
         } else {
             DeptEntity dept = deptMapper.selectById(deptId);
@@ -209,11 +209,11 @@ public class CacheFactory implements ICacheFactory {
     }
 
     @Override
-    public Long getMenuIdByCode(String code) {
+    public String getMenuIdByCode(String code) {
         if (ToolUtil.isEmpty(code)) {
-            return 0L;
+            return "0";
         } else if ("0".equals(code)) {
-            return 0L;
+            return "0";
         } else {
             MenuEntity menu = new MenuEntity();
             menu.setCode(code);

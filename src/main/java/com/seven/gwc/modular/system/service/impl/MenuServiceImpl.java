@@ -195,13 +195,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
         MenuEntity resultMenu = new MenuEntity();
         BeanUtil.copyProperties(menuParam, resultMenu);
 
-        if (ToolUtil.isEmpty(menuParam.getPid()) || menuParam.getPid().equals(0L)) {
+        if (ToolUtil.isEmpty(menuParam.getPid()) || menuParam.getPid().equals("0")) {
             resultMenu.setPcode("0");
             resultMenu.setPcodes("[0],");
             resultMenu.setLevels(1);
         } else {
             String pid = menuParam.getPid();
-            MenuEntity pMenu = this.getById(pid);
+            MenuEntity pMenu = this.getById(Long.parseLong(pid));
             Integer pLevels = pMenu.getLevels();
             resultMenu.setPcode(pMenu.getCode());
 

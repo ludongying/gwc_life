@@ -26,7 +26,7 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
      * @param roleId 角色id集合
      * @return
      */
-    List<ZTreeNode> roleTreeListByRoleId(Long[] roleId);
+    List<ZTreeNode> roleTreeListByRoleId(String[] roleId);
 
 
     /**

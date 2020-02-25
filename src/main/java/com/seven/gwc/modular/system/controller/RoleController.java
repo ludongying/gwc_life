@@ -225,9 +225,9 @@ public class RoleController extends BaseController {
         } else {
             String[] strArray = roleId.split(",");
             //转化成Long[]
-            Long[] longArray = new Long[strArray.length];
+            String[] longArray = new String[strArray.length];
             for (int i = 0; i < strArray.length; i++) {
-                longArray[i] = Long.valueOf(strArray[i]);
+                longArray[i] = strArray[i];
             }
             return this.roleService.roleTreeListByRoleId(longArray);
         }

@@ -40,7 +40,7 @@ public interface UserService extends IService<UserEntity> {
      * @param roleList 角色id集合
      * @return
      */
-    List<MenuNode> getUserMenuNodes(Collection<Long> roleList);
+    List<MenuNode> getUserMenuNodes(Collection<String> roleList);
 
 
     /**
@@ -49,7 +49,7 @@ public interface UserService extends IService<UserEntity> {
      * @param roleList 角色集合
      * @return
      */
-    List<FirstMenuNode> getFirstMenu(Collection<Long> roleList);
+    List<FirstMenuNode> getFirstMenu(Collection<String> roleList);
 
     /**
      * 获取用户菜单列表
@@ -58,7 +58,7 @@ public interface UserService extends IService<UserEntity> {
      * @param pcode
      * @return
      */
-    List<MenuNode> getUserMenuNodes(Collection<Long> roleList, String pcode);
+    List<MenuNode> getUserMenuNodes(Collection<String> roleList, String pcode);
 
 
     /**

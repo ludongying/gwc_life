@@ -64,11 +64,11 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
         Long[] roleArray = Convert.toLongArray(userEntity.getRoleId());
 
         //获取用户角色列表
-        List<Long> roleList = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
         List<String> roleNameList = new ArrayList<>();
         if (roleArray != null) {
             for (Long roleId : roleArray) {
-                roleList.add(roleId);
+                roleList.add(roleId.toString());
                 roleNameList.add(CacheFactory.me().getSingleRoleName(roleId));
             }
         }
@@ -96,12 +96,12 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
     }
 
     @Override
-    public List<String> findPermissionsByRoleId(Long roleId) {
+    public List<String> findPermissionsByRoleId(String roleId) {
         return menuMapper.getResUrlsByRoleId(roleId);
     }
 
     @Override
-    public String findRoleNameByRoleId(Long roleId) {
+    public String findRoleNameByRoleId(String roleId) {
         return CacheFactory.me().getSingleRoleTip(roleId);
     }
 

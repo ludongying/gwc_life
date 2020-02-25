@@ -72,13 +72,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
     }
 
     @Override
-    public List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds) {
+    public List<MenuNode> getMenusByRoleIds(Collection<String> roleIds) {
         List<MenuNode> menus = this.menuMapper.getMenusByRoleIds(roleIds);
         return menus;
     }
 
     @Override
-    public List<FirstMenuNode> getFirstMenus(Collection<Long> roleIds) {
+    public List<FirstMenuNode> getFirstMenus(Collection<String> roleIds) {
         if (Objects.nonNull(roleIds)) {
             return menuMapper.getFirstMenusByRoleIds(roleIds);
         }
@@ -86,7 +86,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
     }
 
     @Override
-    public List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds, String pcode) {
+    public List<MenuNode> getMenusByRoleIds(Collection<String> roleIds, String pcode) {
         List<MenuNode> menus = this.menuMapper.getMenusByRoleIdsAndPcode(roleIds, pcode);
         return menus;
     }

@@ -45,7 +45,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, String pcode) {
         ShiroUser user = ShiroKit.getUserNotNull();
-        List<Long> roleList = user.getRoleList();
+        List<String> roleList = user.getRoleList();
 
         if (roleList == null || roleList.size() == 0) {
             ShiroKit.getSubject().logout();
@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "loadMenus", method = RequestMethod.GET)
     public String loadMenus(Model model, String pcode) {
         ShiroUser user = ShiroKit.getUserNotNull();
-        List<Long> roleList = user.getRoleList();
+        List<String> roleList = user.getRoleList();
         List<MenuNode> menus = userService.getUserMenuNodes(roleList, pcode);
         model.addAttribute("menus", menus);
         return "common/sidebar";

@@ -89,8 +89,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.ROLE_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_ROLE_TIP + "'+#roleId")
-    public String getSingleRoleTip(Long roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleTip(String roleId) {
+        if ("0" == roleId) {
             return "--";
         }
         RoleEntity roleObj = roleMapper.selectById(roleId);

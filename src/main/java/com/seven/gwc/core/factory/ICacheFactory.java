@@ -32,7 +32,7 @@ public interface ICacheFactory {
     /**
      * 通过角色id获取角色英文名称
      */
-    String getSingleRoleTip(Long roleId);
+    String getSingleRoleTip(String roleId);
 
     /**
      * 通过岗位ids获取岗位名称

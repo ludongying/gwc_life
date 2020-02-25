@@ -1,12 +1,9 @@
 layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
     var $ = layui.$;
-    var layer = layui.layer;
     var form = layui.form;
     var table = layui.table;
     var $ZTree = layui.ztree;
     var $ax = layui.ax;
-    var laydate = layui.laydate;
-    var admin = layui.admin;
     var func = layui.func;
     var deptName = "";
     var deptId = "";

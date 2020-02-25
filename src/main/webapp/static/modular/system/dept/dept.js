@@ -106,9 +106,9 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     Dept.openAddDept = function () {
         func.open({
             title: '增加部门',
-            area: ['500px','500px'],
+            area: ['500px', '500px'],
             content: Feng.ctxPath + '/dept/dept_add',
-            tableId: Dept.tableId
+            tableId: Dept.initTable(Dept.tableId)
         });
     };
 
@@ -118,7 +118,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     Dept.onEditDept = function (data) {
         func.open({
             title: '编辑部门',
-            area: ['500px','500px'],
+            area: ['500px', '500px'],
             content: Feng.ctxPath + '/dept/dept_edit?id=' + data.id,
             tableId: Dept.tableId
         });

@@ -166,6 +166,18 @@ public class UserController extends BaseController {
     /**
      * 解除冻结用户
      */
+    @BussinessLog(value = "冻结用户", key = "id", dict = UserDict.class)
+    @RequestMapping("/freeze")
+    @ResponseBody
+    public BaseResult freeze(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
+        this.userService.setStatus(id, TypeStatesEnum.FREEZED.getCode(), currentUser.getId());
+        return SUCCESS;
+    }
+
+    /**
+     * 解除冻结用户
+     */
     @BussinessLog(value = "解除冻结用户", key = "id", dict = UserDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
@@ -230,7 +242,7 @@ public class UserController extends BaseController {
     public BaseResult setRole(@RequestParam("id") String id, @RequestParam("roleIds") String roleIds) {
         ShiroUser currentUser = ShiroKit.getUser();
         if (ToolUtil.isOneEmpty(id, roleIds)) {
-            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+            return new BaseResult<>(500,"角色不能为空");
         }
         if (id.equals(ConfigConsts.ADMIN_ROLE_ID)) {
             //不能修改超级管理员

@@ -48,7 +48,7 @@ public class CacheFactory implements ICacheFactory {
 
 
     @Override
-    public String getUserAccountById(Long userId) {
+    public String getUserAccountById(String userId) {
         UserEntity user = userMapper.selectById(userId);
         if (user != null) {
             return user.getAccount();
@@ -163,7 +163,7 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.MENT_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_MENU_NAME + "'+#menuId")
-    public String getMenuName(Long menuId) {
+    public String getMenuName(String menuId) {
         if (ToolUtil.isEmpty(menuId)) {
             return "";
         } else {
@@ -178,7 +178,7 @@ public class CacheFactory implements ICacheFactory {
 
 
     @Override
-    public List<Long> getParentDeptIds(Long deptId) {
+    public List<Long> getParentDeptIds(String deptId) {
         DeptEntity dept = deptMapper.selectById(deptId);
         String pids = dept.getPids();
         String[] split = pids.split(",");

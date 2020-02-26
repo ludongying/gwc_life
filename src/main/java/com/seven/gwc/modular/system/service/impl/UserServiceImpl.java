@@ -16,11 +16,14 @@ import com.seven.gwc.core.shiro.service.UserAuthService;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.jwt.JwtTokenUtil;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.UserMapper;
+import com.seven.gwc.modular.system.dto.UserDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.MenuService;
 import com.seven.gwc.modular.system.service.UserService;
 import com.seven.gwc.modular.system.vo.GetTokenVO;
+import com.seven.gwc.modular.system.vo.UserUpdateVO;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -114,10 +117,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public void changePwd(String oldPassword, String newPassword) {
-        String userId = ShiroKit.getUserNotNull().getId();
-        UserEntity userEntity = this.getById(userId);
+    public boolean changePwd(String oldPassword, String newPassword, String userId) {
 
+        UserEntity userEntity = this.getById(userId);
         String oldMd5 = ShiroKit.md5(oldPassword, userEntity.getSalt());
 
         if (userEntity.getPassword().equals(oldMd5)) {
@@ -125,9 +127,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             userEntity.setPassword(newMd5);
             this.updateById(userEntity);
         } else {
-            throw new BusinessException(ErrorEnum.OLD_PWD_NOT_RIGHT);
+            return false;
         }
+        return true;
     }
+
+
 
     @Override
     public int changeAvatar(String portraitUrl) {
@@ -170,11 +175,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         BeanUtil.copyProperties(shiroUser, lastUser);
     }
 
-    /**
-     * @Description: 登录校验
-     * @author: GD
-     * @since: 2019-09-05
-     */
+
     @Override
     public BaseResult login(GetTokenVO getTokenVO) {
         //封装请求账号密码为shiro可验证的token
@@ -202,5 +203,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         } else{
             return new BaseResult().failure(ErrorEnum.ERROR_USER_FAILURE);
         }
+    }
+
+    @Override
+    public UserDTO getUser(String id) {
+        return userMapper.getUser(id);
+    }
+
+    @Override
+    public boolean changeUser(UserUpdateVO userUpdateVO, String userId) {
+        UserEntity user = userMapper.selectById(userId);
+        if (ToolUtil.isNotEmpty(userUpdateVO.getUserName())) {
+            user.setName(userUpdateVO.getUserName());
+        }
+        if (ToolUtil.isNotEmpty(userUpdateVO.getPhone())) {
+            user.setPhone(userUpdateVO.getPhone());
+        }
+        return userMapper.updateById(user) > 0;
     }
 }

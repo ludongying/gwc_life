@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.system.service;
 
 import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.modular.system.dto.DeptDTO;
 import com.seven.gwc.modular.system.entity.DeptEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -59,4 +60,12 @@ public interface DeptService extends IService<DeptEntity> {
      * @return 根据id获取数据
      */
     DeptEntity getDeptById(String deptId);
+
+    /**
+     * 根据用户ID获取部门信息
+     *
+     * @param id
+     * @return
+     */
+    DeptDTO getDept(String id);
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.node.FirstMenuNode;
 import com.seven.gwc.core.node.MenuNode;
@@ -14,17 +15,21 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.shiro.service.UserAuthService;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
+import com.seven.gwc.core.jwt.JwtTokenUtil;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.MenuService;
 import com.seven.gwc.modular.system.service.UserService;
+import com.seven.gwc.modular.system.vo.GetTokenVO;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * description : 用户服务实现类
@@ -165,5 +170,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         BeanUtil.copyProperties(shiroUser, lastUser);
     }
 
+    /**
+     * @Description: 登录校验
+     * @author: GD
+     * @since: 2019-09-05
+     */
+    @Override
+    public BaseResult login(GetTokenVO getTokenVO) {
+        //封装请求账号密码为shiro可验证的token
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(getTokenVO.getAccount(), getTokenVO.getPassword().toCharArray());
 
+        //获取数据库中的账号密码，准备比对
+        UserEntity user = userMapper.selectByAccount(getTokenVO.getAccount().replaceAll(" ", ""));
+        if (user == null){
+            return new BaseResult().failure(ErrorEnum.ERROR_USER_NOT_EXIST);
+        }
+        String credentials = user.getPassword();
+        ByteSource credentialsSalt = new Md5Hash(user.getSalt());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+                new ShiroUser(), credentials, credentialsSalt, "");
+
+        //校验用户账号密码
+        HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
+        md5CredentialsMatcher.setHashAlgorithmName(ShiroKit.HASH_ALGORITHM_NAME);
+        md5CredentialsMatcher.setHashIterations(ShiroKit.HASH_ITERATIONS);
+        boolean passwordTrueFlag = md5CredentialsMatcher.doCredentialsMatch(usernamePasswordToken, simpleAuthenticationInfo);
+
+        if (passwordTrueFlag) {
+            String jwtToken = JwtTokenUtil.generateToken(user);
+            return new BaseResult().successContent("bearer;" + jwtToken);
+        } else{
+            return new BaseResult().failure(ErrorEnum.ERROR_USER_FAILURE);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.seven.gwc.core.exception;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +30,17 @@ public class MyErrorController implements ErrorController {
 
     }
 
+    /**
+     * 跳转到session超时页面
+     */
+    @RequestMapping(path = "/sessionError")
+    public String errorPageInfo(Model model) {
+        model.addAttribute("tips", "session超时");
+        return "/login";
+    }
 
     @Override
     public String getErrorPath() {
-        return "/error";
+        return null;
     }
 }

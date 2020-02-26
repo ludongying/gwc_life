@@ -31,7 +31,7 @@ public enum ErrorEnum {
 
 
     /********************************✨    用户(2000 * 2999)   ✨*************************************/
-    ERROR_USER_FAILURE(2000, "用户名密码错误"),
+    ERROR_USER_FAILURE(2000, "账号密码错误"),
     ERROR_USER_EXIST(2001, "用户已存在"),
     ERROR_VERIFY_CODE(2002, "验证码错误"),
     ERROR_USER_UNLOGIN(2003, "用户未登录"),
@@ -39,6 +39,8 @@ public enum ErrorEnum {
     OLD_PWD_NOT_RIGHT(2005, "原密码不正确"),
     MENU_PCODE_COINCIDENCE(2006, "菜单编号和副编号不能一致"),
     EXISTED_THE_MENU(2007, "菜单编号重复，不能添加"),
+    ERROR_USER_NOT_EXIST(2008, "用户不存在"),
+    ERROR_USER_BLANK(2009, "账号密码不能为空"),
 
 
     /********************************✨    角色(3000 * 3999)   ✨*************************************/

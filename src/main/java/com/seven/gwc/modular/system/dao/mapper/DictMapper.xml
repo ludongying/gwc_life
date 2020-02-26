@@ -7,11 +7,11 @@
         id AS "dictId", dict_type_id AS "dictTypeId", code AS "code", name AS "name", parent_id AS "parentId", parent_ids AS "parentIds", status AS "status", sort AS "sort", description AS "description", create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser"
     </sql>
 
-    <select id="dictTree" resultType="com.seven.gwc.core.node.ZTreeNode">
+    <select id="getDictTree" resultType="com.seven.gwc.core.node.ZTreeNode">
         select id AS id, parent_id as "pId", name as name,
 		(
 		CASE
-		WHEN (parent_id = 0 OR parent_id IS NULL) THEN
+		WHEN (parent_id = "0" OR parent_id IS NULL) THEN
 		'true'
 		ELSE
 		'false'

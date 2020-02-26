@@ -97,21 +97,23 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     }
 
     @Override
-    public List<ZTreeNode> dictTreeList(Long dictTypeId, Long dictId) {
-        return null;
+    public List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode) {
+        LambdaQueryWrapper<DictTypeEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(ToolUtil.isNotEmpty(dictTypeCode), DictTypeEntity::getCode, dictTypeCode);
+        DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(lambdaQuery);
+        return dictMapper.getDictTree(dictTypeEntity.getId());
     }
 
     @Override
-    public List<DictEntity> selectDictListByDictType(String code) {
+    public List<DictEntity> getDictListByDictTypeCode(String dictTypeCode) {
         LambdaQueryWrapper<DictTypeEntity> dictTypeLambda = Wrappers.lambdaQuery();
-        dictTypeLambda.eq(DictTypeEntity::getCode, code);
+        dictTypeLambda.eq(DictTypeEntity::getCode, dictTypeCode);
         DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(dictTypeLambda);
 
         LambdaQueryWrapper<DictEntity> dictLambda = Wrappers.lambdaQuery();
         dictLambda.eq(DictEntity::getDictTypeId, dictTypeEntity.getId());
-        List<DictEntity> dictEntityList = dictMapper.selectList(dictLambda);
 
-        return dictEntityList;
+        return dictMapper.selectList(dictLambda);
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface DictMapper extends BaseMapper<DictEntity> {
      * @param  dictTypeId 部门类型ID
      * @return 树
      */
-    List<ZTreeNode> dictTree(@Param("dictTypeId") String dictTypeId);
+    List<ZTreeNode> getDictTree(@Param("dictTypeId") String dictTypeId);
 
     /**
      * 根据ID查询字典

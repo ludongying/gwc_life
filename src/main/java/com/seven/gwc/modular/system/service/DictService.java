@@ -35,7 +35,7 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 获取字典的树形列表  字典列表用
      */
-    List<ZTreeNode> dictTreeList(Long dictTypeId, Long dictId);
+    List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode);
 
     /**
      * 获取某个类型下字典树的列表，选择上级字典时用
@@ -46,7 +46,7 @@ public interface DictService extends IService<DictEntity> {
      * @author : SHQ
      * @return
      */
-    List<DictEntity> selectDictListByDictType(String dictTypeCode);
+    List<DictEntity> getDictListByDictTypeCode(String dictTypeCode);
 
     /**
      * 根据字典名称跟地点类型获取字典数据

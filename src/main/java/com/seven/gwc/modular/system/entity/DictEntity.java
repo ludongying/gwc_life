@@ -29,6 +29,9 @@ public class DictEntity implements Serializable {
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
+    // 父ID
+    private String parentId;
+
     /** 所属字典类型的id */
     private String dictTypeId;
 

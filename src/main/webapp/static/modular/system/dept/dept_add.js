@@ -18,22 +18,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var form = layui.form;
     var admin = layui.admin;
     var layer = layui.layer;
-    var laydate = layui.laydate;
-
-    laydate.render({
-        elem: '#createTime',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#updateTime',
-        type: 'datetime',
-        trigger: 'click'
-    });
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
-
 
     // 点击上级角色时
     $('#pName').click(function () {

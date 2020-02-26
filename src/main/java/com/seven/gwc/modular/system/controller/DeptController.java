@@ -73,7 +73,7 @@ public class DeptController extends BaseController {
      * 跳转到修改部门
      */
     @RequestMapping("/dept_edit")
-    public String deptEdit(Long id) {
+    public String deptEdit(String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -86,7 +86,7 @@ public class DeptController extends BaseController {
      * 跳转到查看部门
      */
     @RequestMapping("/dept_detail")
-    public String deptDetail(Long id) {
+    public String deptDetail(String id) {
         return PREFIX + "dept_detail";
     }
 
@@ -95,7 +95,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<DeptEntity> list(String deptName, Long id) {
+    public BaseResultPage<DeptEntity> list(String deptName, String id) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<DeptEntity> depts = deptService.selectDept(deptName, id);
@@ -148,7 +148,7 @@ public class DeptController extends BaseController {
     @BussinessLog(value = "删除部门", key = "id", dict = DeptDict.class)
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         LambdaQueryWrapper<UserEntity> userEntityQueryWrapper = Wrappers.lambdaQuery();
         userEntityQueryWrapper.eq(UserEntity::getDeptId, id);
         List<UserEntity> userEntityList = userMapper.selectList(userEntityQueryWrapper);
@@ -205,7 +205,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/detail/{id}")
     @ResponseBody
-    public DeptEntity detail(@PathVariable Long id) {
+    public DeptEntity detail(@PathVariable String id) {
         DeptEntity deptEntity = deptService.getById(id);
         deptEntity.setPName(CacheFactory.me().getDeptName(deptEntity.getPid()));
         return deptEntity;
@@ -234,7 +234,7 @@ public class DeptController extends BaseController {
 
     @RequestMapping("/getDeptById")
     @ResponseBody
-    public DeptEntity getDeptById(Long deptId) {
+    public DeptEntity getDeptById(String deptId) {
         return deptService.getDeptById(deptId);
     }
 }

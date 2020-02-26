@@ -24,17 +24,17 @@ public interface MenuMapper extends BaseMapper<MenuEntity> {
     /**
      * 根据角色获取菜单
      */
-    List<FirstMenuNode> getFirstMenusByRoleIds(Collection<Long> roleIds);
+    List<FirstMenuNode> getFirstMenusByRoleIds(Collection<String> roleIds);
 
     /**
      * 根据角色获取菜单
      */
-    List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds);
+    List<MenuNode> getMenusByRoleIds(Collection<String> roleIds);
 
     /**
      * 根据角色获取菜单
      */
-    List<MenuNode> getMenusByRoleIdsAndPcode(Collection<Long> roleIds, String pcode);
+    List<MenuNode> getMenusByRoleIdsAndPcode(Collection<String> roleIds, String pcode);
 
     /**
      * 获取菜单列表树
@@ -49,7 +49,7 @@ public interface MenuMapper extends BaseMapper<MenuEntity> {
     /**
      * 获取资源url通过角色id
      */
-    List<String> getResUrlsByRoleId(@Param("roleId") Long roleId);
+    List<String> getResUrlsByRoleId(@Param("roleId") String roleId);
 
     /**
      * 获取pcodes like某个code的菜单列表

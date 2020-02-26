@@ -59,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public List<MenuNode> getUserMenuNodes(Collection<Long> roleList) {
+    public List<MenuNode> getUserMenuNodes(Collection<String> roleList) {
         if (roleList == null || roleList.size() == 0) {
             return new ArrayList<>();
         } else {
@@ -71,12 +71,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public List<FirstMenuNode> getFirstMenu(Collection<Long> roleList) {
+    public List<FirstMenuNode> getFirstMenu(Collection<String> roleList) {
         return menuService.getFirstMenus(roleList);
     }
 
     @Override
-    public List<MenuNode> getUserMenuNodes(Collection<Long> roleList, String pcode) {
+    public List<MenuNode> getUserMenuNodes(Collection<String> roleList, String pcode) {
         if (roleList == null || roleList.size() == 0) {
             return new ArrayList<>();
         } else {

@@ -71,7 +71,7 @@ public class UserController extends BaseController {
      * 跳转到修改用户
      */
     @RequestMapping("/user_edit")
-    public String userEdit(Long id) {
+    public String userEdit(String id) {
         if (ToolUtil.isEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -84,7 +84,7 @@ public class UserController extends BaseController {
      * 跳转到查看用户
      */
     @RequestMapping("/user_detail")
-    public String userDetail(Long id) {
+    public String userDetail(String id) {
         return PREFIX + "user_detail";
     }
 
@@ -124,7 +124,7 @@ public class UserController extends BaseController {
     @Permission({ConfigConsts.ADMIN_NAME})
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         if (id.equals(ConfigConsts.ADMIN_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
         }
@@ -156,12 +156,24 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public UserEntity detail(@PathVariable Long id) {
+    public UserEntity detail(@PathVariable String id) {
         UserEntity userEntity = userService.getById(id);
         userEntity.setDeptName(CacheFactory.me().getDeptName(userEntity.getDeptId()));
         return userEntity;
     }
 
+
+    /**
+     * 解除冻结用户
+     */
+    @BussinessLog(value = "冻结用户", key = "id", dict = UserDict.class)
+    @RequestMapping("/freeze")
+    @ResponseBody
+    public BaseResult freeze(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
+        this.userService.setStatus(id, TypeStatesEnum.FREEZED.getCode(), currentUser.getId());
+        return SUCCESS;
+    }
 
     /**
      * 解除冻结用户
@@ -198,7 +210,7 @@ public class UserController extends BaseController {
     @BussinessLog(value = "重置用户密码", key = "id", dict = UserDict.class)
     @RequestMapping("/reset")
     @ResponseBody
-    public BaseResult reset(@RequestParam Long id) {
+    public BaseResult reset(@RequestParam String id) {
         ShiroUser currentUser = ShiroKit.getUser();
 
         UserEntity user = this.userService.getById(id);
@@ -230,7 +242,7 @@ public class UserController extends BaseController {
     public BaseResult setRole(@RequestParam("id") String id, @RequestParam("roleIds") String roleIds) {
         ShiroUser currentUser = ShiroKit.getUser();
         if (ToolUtil.isOneEmpty(id, roleIds)) {
-            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+            return new BaseResult<>(500,"角色不能为空");
         }
         if (id.equals(ConfigConsts.ADMIN_ROLE_ID)) {
             //不能修改超级管理员

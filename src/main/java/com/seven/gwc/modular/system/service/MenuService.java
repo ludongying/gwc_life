@@ -39,7 +39,7 @@ public interface MenuService extends IService<MenuEntity> {
      * @param roleIds 多角色Id
      * @return 角色获取菜单
      */
-    List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds);
+    List<MenuNode> getMenusByRoleIds(Collection<String> roleIds);
 
 
     /**
@@ -48,14 +48,14 @@ public interface MenuService extends IService<MenuEntity> {
      * @param roleIds
      * @return
      */
-    List<FirstMenuNode> getFirstMenus(Collection<Long> roleIds);
+    List<FirstMenuNode> getFirstMenus(Collection<String> roleIds);
 
     /**
      * @param roleIds 多角色Id
      * @return 角色获取菜单
      * @Param pcode  父级菜单的code
      */
-    List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds, String pcode);
+    List<MenuNode> getMenusByRoleIds(Collection<String> roleIds, String pcode);
 
     /**
      * @param roleId 角色Id

@@ -132,11 +132,14 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
      * 弹出增加菜单
      */
     Menu.openAddMenu = function () {
-        func.open({
-            title: '增加菜单',
-            area: ['500px','500px'],
+        admin.putTempData('formOk', false);
+        top.layui.admin.open({
+            type: 2,
+            title: '添加菜单',
             content: Feng.ctxPath + '/menu/menu_add',
-            tableId: Menu.tableId
+            end: function () {
+                admin.getTempData('formOk') && Menu.initTable(Menu.tableId);
+            }
         });
     };
 
@@ -156,12 +159,19 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
      * 点击编辑菜单
      */
     Menu.onEditMenu = function (data) {
-        func.open({
-            title: '编辑菜单',
-            area: ['500px','500px'],
+        admin.putTempData('formOk', false);
+        top.layui.admin.open({
+            type: 2,
+            title: '修改菜单',
             content: Feng.ctxPath + '/menu/menu_edit?id=' + data.id,
-            tableId: Menu.tableId
+            end: function () {
+                admin.getTempData('formOk') && Menu.initTable(Menu.tableId);
+            }
         });
+
+
+
+
     };
 
     /**
@@ -173,7 +183,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
             var ajax = new $ax(Feng.ctxPath + "/menu/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
-                    table.reload(Menu.tableId);
+                    Menu.initTable(Menu.tableId);
                 } else {
                     Feng.error(data.message);
                 }
@@ -204,7 +214,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
             var ajax = new $ax(Feng.ctxPath + "/menu/unfreeze", function (data) {
                 if (data.success) {
                     Feng.success("启用成功!");
-                    table.reload(Menu.tableId);
+                    Menu.initTable(Menu.tableId);
                 } else {
                     Feng.error(data.message);
                 }
@@ -217,7 +227,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
             var ajax = new $ax(Feng.ctxPath + "/menu/freeze", function (data) {
                 if (data.success) {
                     Feng.success("禁用成功!");
-                    table.reload(Menu.tableId);
+                    Menu.initTable(Menu.tableId);
                 } else {
                     Feng.error(data.message);
                 }

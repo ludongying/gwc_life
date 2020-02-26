@@ -19,18 +19,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
 
-    laydate.render({
-        elem: '#createTime',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#updateTime',
-        type: 'datetime',
-        trigger: 'click'
-    });
-
-
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
@@ -58,8 +46,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             }
         });
     });
-
-
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

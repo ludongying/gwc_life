@@ -83,7 +83,7 @@ public class RoleController extends BaseController {
      * 跳转到查看角色
      */
     @RequestMapping("/role_detail")
-    public String roleDetail(Long id) {
+    public String roleDetail(String id) {
         return PREFIX + "role_detail";
     }
 
@@ -128,7 +128,7 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "删除角色", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         if (ToolUtil.isEmpty(id)) {
             return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -225,9 +225,9 @@ public class RoleController extends BaseController {
         } else {
             String[] strArray = roleId.split(",");
             //转化成Long[]
-            Long[] longArray = new Long[strArray.length];
+            String[] longArray = new String[strArray.length];
             for (int i = 0; i < strArray.length; i++) {
-                longArray[i] = Long.valueOf(strArray[i]);
+                longArray[i] = strArray[i];
             }
             return this.roleService.roleTreeListByRoleId(longArray);
         }

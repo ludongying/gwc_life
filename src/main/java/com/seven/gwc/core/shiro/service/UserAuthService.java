@@ -24,12 +24,12 @@ public interface UserAuthService {
     /**
      * 获取权限列表通过角色id
      */
-    List<String> findPermissionsByRoleId(Long roleId);
+    List<String> findPermissionsByRoleId(String roleId);
 
     /**
      * 根据角色id获取角色名称
      */
-    String findRoleNameByRoleId(Long roleId);
+    String findRoleNameByRoleId(String roleId);
 
     /**
      * 获取shiro的认证信息

@@ -73,7 +73,7 @@ public class PositionController extends BaseController {
      * 跳转到数据权限
      */
     @RequestMapping("/position_dataAuthority")
-    public String positionDataAuthority(Long positionId) {
+    public String positionDataAuthority(String positionId) {
         return PREFIX + "position_dataAuthority";
     }
 

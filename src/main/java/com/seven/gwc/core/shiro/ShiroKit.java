@@ -267,8 +267,8 @@ public class ShiroKit {
      * 判断当前用户是否是超级管理员
      */
     public static boolean isAdmin() {
-        List<Long> roleList = ShiroKit.getUser().getRoleList();
-        for (Long integer : roleList) {
+        List<String> roleList = ShiroKit.getUser().getRoleList();
+        for (String integer : roleList) {
             String singleRoleTip = CacheFactory.me().getSingleRoleTip(integer);
             if (singleRoleTip.equals(ConfigConsts.ADMIN_NAME)) {
                 return true;

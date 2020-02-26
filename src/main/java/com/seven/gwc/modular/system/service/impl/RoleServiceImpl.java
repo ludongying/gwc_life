@@ -52,7 +52,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public List<ZTreeNode> roleTreeListByRoleId(Long[] roleId) {
+    public List<ZTreeNode> roleTreeListByRoleId(String[] roleId) {
         return this.roleMapper.roleTreeListByRoleId(roleId);
     }
 
@@ -77,7 +77,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public RoleEntity getOneById(Long id) {
+    public RoleEntity getOneById(String id) {
         LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.eq(RoleEntity::getPid, id);
         return roleMapper.selectOne(lambdaQuery);
@@ -100,7 +100,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delRoleById(Long roleId) {
+    public void delRoleById(String roleId) {
         //缓存被删除的角色名称
         CacheFactory.me().getSingleRoleName(roleId);
         //删除角色

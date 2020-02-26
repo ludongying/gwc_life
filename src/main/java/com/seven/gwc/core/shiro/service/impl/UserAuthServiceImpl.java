@@ -64,12 +64,12 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
         Long[] roleArray = Convert.toLongArray(userEntity.getRoleId());
 
         //获取用户角色列表
-        List<Long> roleList = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
         List<String> roleNameList = new ArrayList<>();
         if (roleArray != null) {
             for (Long roleId : roleArray) {
-                roleList.add(roleId);
-                roleNameList.add(CacheFactory.me().getSingleRoleName(roleId));
+                roleList.add(roleId.toString());
+                roleNameList.add(CacheFactory.me().getSingleRoleName(roleId.toString()));
             }
         }
         shiroUser.setRoleList(roleList);
@@ -80,12 +80,12 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
         Long[] positionArray = Convert.toLongArray(userEntity.getPositionId());
 
         //获取用户岗位列表
-        List<Long> positionList = new ArrayList<>();
+        List<String> positionList = new ArrayList<>();
         List<String> positionNameList = new ArrayList<>();
         if (positionArray != null) {
             for (Long positionId : positionArray) {
-                positionList.add(positionId);
-                positionNameList.add(CacheFactory.me().getSinglePositionName(positionId));
+                positionList.add(positionId.toString());
+                positionNameList.add(CacheFactory.me().getSinglePositionName(positionId.toString()));
             }
         }
         shiroUser.setPositionList(positionList);
@@ -96,12 +96,12 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
     }
 
     @Override
-    public List<String> findPermissionsByRoleId(Long roleId) {
+    public List<String> findPermissionsByRoleId(String roleId) {
         return menuMapper.getResUrlsByRoleId(roleId);
     }
 
     @Override
-    public String findRoleNameByRoleId(Long roleId) {
+    public String findRoleNameByRoleId(String roleId) {
         return CacheFactory.me().getSingleRoleTip(roleId);
     }
 

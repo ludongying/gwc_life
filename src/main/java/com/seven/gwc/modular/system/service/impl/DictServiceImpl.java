@@ -171,7 +171,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         if (ToolUtil.isEmpty(dictId)) {
             return longs;
         } else {
-            List<DictEntity> list = dictMapper.likeParentIds(dictId);
+            List<DictEntity> list = dictMapper.likeParentIds(dictId.toString());
             for (DictEntity dict : list) {
                 longs.add(dict.getId());
             }

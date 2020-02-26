@@ -122,9 +122,9 @@
 
     <select id="menuTreeList" resultType="com.seven.gwc.core.node.ZTreeNode">
         SELECT m1.id AS id,
-        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0 ELSE m2.id END ) AS pId,
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 0 ELSE m2.id END ) AS pId,
         m1.name AS name,
-        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 'true' ELSE 'false' END ) as "open"
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 'true' ELSE 'false' END ) as "open"
         FROM sys_menu m1
         LEFT join sys_menu m2 ON m1.pcode = m2.code
         WHERE m1.`status`='ENABLE'

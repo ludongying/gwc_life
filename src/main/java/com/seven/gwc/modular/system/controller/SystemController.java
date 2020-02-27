@@ -180,17 +180,35 @@ public class SystemController extends BaseController {
     }
 
 
+    /**
+     * 附件上传
+     * @param file
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/uploadFile")
     @ResponseBody
     public JSONObject uploadFile(@RequestParam("file") MultipartFile file) throws Exception {
         return FileUtil.uploadFile(uploadPathFile, file);
     }
 
-
+    /**
+     * 文件下载
+     * @param response
+     * @param file
+     */
     @RequestMapping(value = "downloadFile")
     public void downloadFile(HttpServletResponse response, @RequestParam String file) {
         FileUtil.download(uploadPathFile, file, response);
     }
 
-
+    /**
+     * 删除文件
+     * @param fileName 文件名
+     * @return
+     */
+    @RequestMapping(value = "deleteFile")
+    public JSONObject deleteFile(String fileName) {
+        return FileUtil.deleteFile(uploadPathFile, fileName);
+    }
 }

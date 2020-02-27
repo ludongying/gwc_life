@@ -1,10 +1,14 @@
 package com.seven.gwc.modular.api;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.modular.system.dto.UserDTO;
+import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.DeptService;
 import com.seven.gwc.modular.system.service.UserService;
 import com.seven.gwc.modular.system.vo.UserUpdatePsdVO;
@@ -13,12 +17,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * 用戶控制器
@@ -36,6 +39,8 @@ public class UserApi extends BaseController {
     private DeptService deptService;
     @Value("${server.ip}")
     private String ip;
+    @Value("${FILE_UPLOAD_PATH_IMAGE}")
+    private String uploadPathImage;
 
     @GetMapping(value = "/getUser")
     @ApiOperation(value = "获取用户(SHQ)")
@@ -65,6 +70,28 @@ public class UserApi extends BaseController {
             throw new BusinessException(ErrorEnum.ERROR_UPDATE);
         }
         return SUCCESS;
+    }
+
+
+    @PostMapping("avatarUpload")
+    @ApiOperation(value = "上传头像(SHQ)")
+    public BaseResult avatarUpload(HttpServletRequest request, @RequestBody String avatar){
+        try {
+            String userId = request.getAttribute("userId").toString();
+            String avatarCode = URLDecoder.decode(avatar, "UTF-8");
+            String path = FileUtil.base64ToFile(uploadPathImage, avatarCode.substring(7));
+
+            if (path == null){
+                return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+            }
+            UserEntity entity = userService.getById(userId);
+            entity.setAvatar(path);
+            userService.updateById(entity);
+            return new BaseResult().content(path);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
     }
 
 }

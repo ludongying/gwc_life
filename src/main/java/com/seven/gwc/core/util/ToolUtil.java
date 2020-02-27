@@ -395,11 +395,11 @@ public class ToolUtil {
 
 
     /**
-     * UUID清楚横杠方法
+     * 随即UUID移除横杠方法
      *
      * @return
      */
-    public static String removeBars() {
+    public static String getUUIDremoveBars() {
         String id = UUID.randomUUID().toString();
         id = id.replace("-", "");
         return id;

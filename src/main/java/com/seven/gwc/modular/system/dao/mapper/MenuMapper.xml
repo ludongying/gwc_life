@@ -132,10 +132,10 @@
     </select>
     <select id="menuTreeListByMenuIds" resultType="com.seven.gwc.core.node.ZTreeNode">
         SELECT m1.id AS id,
-        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0 ELSE m2.id END) AS "pId",
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN "0" ELSE m2.id END) AS "pId",
         m1.name AS name,
-        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 'true' ELSE 'false' END) as "open",
-        (CASE WHEN (m3.id = 0 OR m3.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 'true' ELSE 'false' END) as "open",
+        (CASE WHEN (m3.id = "0" OR m3.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
         FROM sys_menu m1
         LEFT JOIN sys_menu m2 ON m1.pcode = m2.code
         LEFT JOIN (SELECT id FROM sys_menu WHERE id IN

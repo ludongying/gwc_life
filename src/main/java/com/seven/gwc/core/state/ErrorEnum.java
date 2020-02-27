@@ -28,6 +28,7 @@ public enum ErrorEnum {
     ERROR_ONLY_CODE(1002, "CODE已存在"),
     THE_DATA_USED(1003, "该数据已被使用"),
     NO_POWER_TO_RESOURCES(1004, "无权访问该资源"),
+    ERROR_UPDATE(1005, "修改失败"),
 
 
     /********************************✨    用户(2000 * 2999)   ✨*************************************/

@@ -258,10 +258,13 @@ public class UserController extends BaseController {
     @RequestMapping("/changePwd")
     @ResponseBody
     public Object changePwd(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+        String userId = ShiroKit.getUserNotNull().getId();
         if (ToolUtil.isOneEmpty(oldPassword, newPassword)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
-        this.userService.changePwd(oldPassword, newPassword);
+        if (!userService.changePwd(oldPassword, newPassword, userId)){
+            throw new BusinessException(ErrorEnum.OLD_PWD_NOT_RIGHT);
+        }
         return SUCCESS;
     }
 

@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.node.FirstMenuNode;
 import com.seven.gwc.core.node.MenuNode;
+import com.seven.gwc.modular.system.dto.UserDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.vo.GetTokenVO;
+import com.seven.gwc.modular.system.vo.UserUpdateVO;
 
 import java.util.Collection;
 import java.util.List;
@@ -86,7 +88,7 @@ public interface UserService extends IService<UserEntity> {
      * @param oldPassword 原密码
      * @param newPassword 新密码
      */
-    void changePwd(String oldPassword, String newPassword);
+    boolean changePwd(String oldPassword, String newPassword, String userId);
 
     /**
      * 设置用户头像
@@ -116,5 +118,21 @@ public interface UserService extends IService<UserEntity> {
      */
     BaseResult login(GetTokenVO getTokenVO);
 
+    /**
+     * 根据ID获取用户API基本信息
+     *
+     * @param id
+     * @return
+     */
+    UserDTO getUser(String id);
+
+    /**
+     * 修改用户信息
+     *
+     * @param userUpdateVO
+     * @param userId
+     * @return
+     */
+    boolean changeUser(UserUpdateVO userUpdateVO, String userId);
 
 }

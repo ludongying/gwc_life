@@ -1,5 +1,6 @@
 server:
-  port: 88                                                  #服务器端口
+  port: 88                                                  #默认端口号
+  ip: http://172.38.232.222:88/                             #服务器IP地址
 spring:
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${FILE_UPLOAD_PATH_FILE},file:${FILE_UPLOAD_PATH_IMAGE} #外挂文件地址
@@ -53,10 +54,10 @@ tonfun:
 
 ############################### start上传地址配置start ###############################
 
-#FILE_UPLOAD_PATH_FILE: E:\myfile\file                       #文件上传物理路径
-#FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理路径
-FILE_UPLOAD_PATH_FILE: /opt/files/integral/file             #文件上传物理路径
-FILE_UPLOAD_PATH_IMAGE: /opt/files/integral/images/portrait #文件上传物理路径
+FILE_UPLOAD_PATH_FILE: E:\myfile\file                       #文件上传物理路径
+FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理路径
+#FILE_UPLOAD_PATH_FILE: /opt/files/integral/file             #文件上传物理路径
+#FILE_UPLOAD_PATH_IMAGE: /opt/files/integral/images/portrait #文件上传物理路径
 
 ############################### end上传地址配置end ###############################
 

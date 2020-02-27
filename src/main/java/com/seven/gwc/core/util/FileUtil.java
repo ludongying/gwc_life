@@ -257,4 +257,18 @@ public class FileUtil {
     }
 
 
+    public static JSONObject deleteFile(String fileDown, String fileName) {
+        JSONObject jsonObject = new JSONObject();
+        File folder = new File(fileDown);
+        File[] files = folder.listFiles();
+        for(File file:files){
+            if(file.getName().equals(fileName)){
+                file.delete();
+            }
+        }
+        jsonObject.put("CODE",200);
+        jsonObject.put("fileName",fileName);
+        return jsonObject;
+    }
+
 }

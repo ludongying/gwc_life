@@ -17,7 +17,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
     });
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // // 添加表单验证方法
     // form.verify({

@@ -121,7 +121,7 @@ layui.config({
             if (sessionstatus === "timeout") {
 
                 //如果超时就处理 ，指定要跳转的页面
-                window.location = Feng.ctxPath + "/global/sessionError";
+                window.location = Feng.ctxPath + "/sessionError";
             }
         }
     });

@@ -28,7 +28,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化角色的详情数据
     var ajax = new $ax(Feng.ctxPath + "/role/detail/" + Feng.getUrlParam("id"));

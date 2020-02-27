@@ -27,6 +27,11 @@
         @if(array.contain(plugins,"ztree")){
         <link href="${ctxPath}/common/plugins/ztree/zTreeStyle.css" rel="stylesheet" type="text/css" />
         @}
+        @if(array.contain(plugins,"calendar")){
+        <link href="${ctxPath}/common/plugins/packages/core/main.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/packages/daygrid/main.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/packages/timegrid/main.css" rel="stylesheet" type="text/css" />
+        @}
     @}
 
     @/* 其他业务用的css */
@@ -75,6 +80,14 @@
         @if(array.contain(plugins,"media")){
         <script src="${ctxPath}/common/plugins/jquery/jquery.min.js"></script>
         <script src="${ctxPath}/common/plugins/jquery/jquery.media.pdf.js"></script>
+        @}
+        @if(array.contain(plugins,"calendar")){
+        <script src="${ctxPath}/common/plugins/packages/core/main.js"></script>
+        <script src="${ctxPath}/common/plugins/packages/interaction/main.js"></script>
+        <script src="${ctxPath}/common/plugins/packages/daygrid/main.js"></script>
+        <script src="${ctxPath}/common/plugins/packages/timegrid/main.js"></script>
+        <script src="${ctxPath}/common/plugins/packages/core/locales/zh-cn.js"></script>
+        <script src="${ctxPath}/common/plugins/jquery/jquery-3.2.1.min.js"></script>
         @}
     @}
 

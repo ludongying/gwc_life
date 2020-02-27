@@ -38,7 +38,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
 
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化用户的详情数据
     var ajax = new $ax(Feng.ctxPath + "/user/detail/" + Feng.getUrlParam("id"));

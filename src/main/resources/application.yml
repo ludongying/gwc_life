@@ -1,5 +1,6 @@
 server:
-  port: 88                                                  #服务器端口
+  port: 88                                                  #默认端口号
+  ip: http://172.38.232.222:88/                             #服务器IP地址
 spring:
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${FILE_UPLOAD_PATH_FILE},file:${FILE_UPLOAD_PATH_IMAGE} #外挂文件地址
@@ -44,6 +45,7 @@ logging:                                                    #日志配置
 ############################### start框架配置start ###############################
 
 tonfun:
+  swagger-open: true                #是否开启swagger (true/false)
   spring-session-open: false        #是否开启spring session,如果是多机环境需要开启(true/false)
   session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
   session-validation-interval: 900  #多久检测一次失效的session(只在单机环境下生效) 单位：秒
@@ -52,10 +54,10 @@ tonfun:
 
 ############################### start上传地址配置start ###############################
 
-#FILE_UPLOAD_PATH_FILE: E:\myfile\file                       #文件上传物理路径
-#FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理路径
-FILE_UPLOAD_PATH_FILE: /opt/files/integral/file             #文件上传物理路径
-FILE_UPLOAD_PATH_IMAGE: /opt/files/integral/images/portrait #文件上传物理路径
+FILE_UPLOAD_PATH_FILE: E:\myfile\file                       #文件上传物理路径
+FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理路径
+#FILE_UPLOAD_PATH_FILE: /opt/files/integral/file             #文件上传物理路径
+#FILE_UPLOAD_PATH_IMAGE: /opt/files/integral/images/portrait #文件上传物理路径
 
 ############################### end上传地址配置end ###############################
 

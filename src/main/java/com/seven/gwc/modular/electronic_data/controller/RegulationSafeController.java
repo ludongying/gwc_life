@@ -127,5 +127,14 @@ public class RegulationSafeController extends BaseController {
         return regulationSafeService.getById(regulationSafeId);
     }
 
+    /**
+     * 文档名称验重
+     */
+    @RequestMapping("/selectOnlyByName")
+    @ResponseBody
+    public boolean selectOnlyByName(String name,String type) {
+        return regulationSafeService.selectOnlyByName(name,type);
+    }
+
 }
 

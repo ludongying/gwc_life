@@ -1,13 +1,22 @@
-@layout("/common/_container.html",{js:["/modular/electronic_data/regulationSafe/regulationSafe.js"]}){
+@layout("/common/_container.html",{plugins:["ztree"],js:["/modular/electronic_data/regulationSafe/regulationSafe.js"]}){
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+        <div class="layui-col-sm12 layui-col-md3 layui-col-lg2">
+            <div class="layui-card" style="height: calc(100vh - 29px);">
+                <div class="layui-card-body mini-bar">
+                    <div class="ztree" id="deptTree"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg10">
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="regulationSafeName" class="layui-input" type="text" placeholder="法律法规/航线安全名称"/>
+                                <input id="regulationSafeName" class="layui-input" type="text" placeholder="文档名称"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn layui-btn-normal">搜索</button>

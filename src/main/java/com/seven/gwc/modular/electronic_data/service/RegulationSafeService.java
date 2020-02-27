@@ -47,4 +47,11 @@ public interface RegulationSafeService extends IService<RegulationSafeEntity> {
      */
     void editRegulationSafe(RegulationSafeEntity regulationSafe, ShiroUser user);
 
+    /**
+     * 根据文档名称验重
+     * @param name
+     * @param type
+     */
+    boolean selectOnlyByName(String name,String type);
+
 }

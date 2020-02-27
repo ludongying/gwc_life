@@ -1,11 +1,10 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
+layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function () {
     var $ = layui.$;
     var layer = layui.layer;
     var form = layui.form;
     var table = layui.table;
     var $ZTree = layui.ztree;
     var $ax = layui.ax;
-    var laydate = layui.laydate;
     var admin = layui.admin;
     var func = layui.func;
 
@@ -15,6 +14,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var RegulationSafe = {
         tableId: "regulationSafeTable",
         condition: {
+            treeId: "",
             regulationSafeName: ""
         }
     };
@@ -24,11 +24,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     RegulationSafe.initColumn = function () {
         return [[
-            {title: 'ID', field: 'id', align: "center"},
-            {title: '法规id', field: 'lawRegularId', align: "center"},
+            {title: 'id', field: 'id', hide: true},
+            {title: '序号', type: 'numbers'},
+            {title: '分类名称', field: 'lawRegularId', align: "center"},
             {title: '文档名称', field: 'name', align: "center"},
             {title: '创建时间', field: 'createDate', align: "center"},
-            {title: '法律法规/航行安全', field: 'type', align: "center"},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -88,6 +88,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     RegulationSafe.search = function () {
         var queryData = {};
         queryData['regulationSafeName'] = $("#regulationSafeName").val().trim();
+        queryData['treeId'] = RegulationSafe.condition.treeId;
         table.reload(RegulationSafe.tableId, {where: queryData});
     };
 
@@ -104,8 +105,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     RegulationSafe.openAddRegulationSafe = function () {
         func.open({
             title: '增加法律法规/航线安全',
-            area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/regulationSafe/regulationSafe_add',
+            area: ['800px', '500px'],
+            content: Feng.ctxPath + '/regulationSafe/regulationSafe_add?treeId=' + RegulationSafe.condition.treeId,
             tableId: RegulationSafe.tableId
         });
     };
@@ -156,5 +157,21 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             ajax.start();
         });
     };
+
+
+    RegulationSafe.onClickTree = function (e, treeId, treeNode) {
+        RegulationSafe.condition.treeId = treeNode.id;
+        console.log(RegulationSafe.condition.treeId);
+        // deptName = treeNode.name;
+        // deptId = treeNode.id;
+        RegulationSafe.search();
+    };
+
+
+    //初始化左侧部门树
+    var ztree = new $ZTree("deptTree", "/dict/getDictTreeByDictTypeCode?dictTypeCode=LAWS_REGULATION");
+    ztree.bindOnClick(RegulationSafe.onClickTree);
+    ztree.init();
+
 
 });

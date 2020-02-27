@@ -17,6 +17,7 @@
 		'false'
 		END
 		) as "open" from sys_dict where dict_type_id = #{dictTypeId}
+		ORDER BY sort
     </select>
 
     <select id="likeParentIds" resultType="com.seven.gwc.modular.system.entity.DictEntity">

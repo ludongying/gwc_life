@@ -66,7 +66,10 @@ public class BaseResult <T extends Object> implements Serializable {
     }
 
     public BaseResult<T> content(T t) {
+        this.setCode(200);
         this.setContent(t);
+        this.setMessage("操作成功!");
+        this.setSuccess(true);
         return this;
     }
 
@@ -74,6 +77,7 @@ public class BaseResult <T extends Object> implements Serializable {
         this.setCode(200);
         this.setContent(t);
         this.setMessage(message);
+        this.setSuccess(true);
         return this;
     }
 

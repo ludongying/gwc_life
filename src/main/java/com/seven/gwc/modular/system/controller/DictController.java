@@ -89,13 +89,7 @@ public class DictController extends BaseController {
     @ResponseBody
     public BaseResult add(DictEntity dict) {
         ShiroUser user = ShiroKit.getUser();
-
-        if (dict.getSort() == null) {
-            dict.setSort(0);
-        }
-        dict.setCreateUser(user.getName());
-        this.dictService.add(dict);
-        return SUCCESS;
+        return dictService.add(dict, user);
     }
 
     /**
@@ -113,8 +107,8 @@ public class DictController extends BaseController {
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DictEntity dict) {
-        dictService.update(dict);
-        return SUCCESS;
+        ShiroUser user = ShiroKit.getUser();
+        return dictService.update(dict, user);
     }
 
     /**
@@ -128,18 +122,23 @@ public class DictController extends BaseController {
     }
 
     /**
-     * 获取某个类型下字典树的列表，ztree格式
+     * 通过字典类型CODE获取树的列表，ztree格式
      */
-    @RequestMapping(value = "/ztree")
+    @RequestMapping(value = "/getDictTreeByDictTypeCode")
     @ResponseBody
-    public List<ZTreeNode> ztree(@RequestParam("dictTypeId") Long dictTypeId, @RequestParam(value = "dictId", required = false) Long dictId) {
-        return this.dictService.dictTreeList(dictTypeId, dictId);
+    public List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode) {
+        return this.dictService.getDictTreeByDictTypeCode(dictTypeCode);
     }
 
-    @RequestMapping(value = "/selectDictListByDictType")
+    /**
+     * 通过字典类型CODE获取字典列表
+     * @param dictTypeCode
+     * @return
+     */
+    @RequestMapping(value = "/getDictListByDictTypeCode")
     @ResponseBody
-    public List<DictEntity> selectDictListByDictType(String code) {
-        return dictService.selectDictListByDictType(code);
+    public List<DictEntity> selectDictListByDictType(String dictTypeCode) {
+        return dictService.getDictListByDictTypeCode(dictTypeCode);
     }
 
 }

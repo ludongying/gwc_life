@@ -1,9 +1,11 @@
 package com.seven.gwc.modular.system.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.seven.gwc.modular.system.dto.UserDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.vo.ListBasicsEntityVO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -30,5 +32,22 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @return
      */
     List<UserEntity> userEntityList(@Param("user") UserEntity userEntity);
+
+    /**
+     * 根据账号获取用户实体
+     * @param account 账号
+     * @return 用户实体
+     */
+    @Select("select * from sys_user where account = #{account} and status != 'DELETED'")
+    UserEntity selectByAccount(@Param("account") String account);
+
+
+    /**
+     * 根据ID获取用户API基础信息
+     * @param id
+     * @return
+     */
+    @Select("select * from sys_user where id = #{id}")
+    UserDTO getUser(@Param("id") String id);
 
 }

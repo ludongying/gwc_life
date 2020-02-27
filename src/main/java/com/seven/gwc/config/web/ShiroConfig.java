@@ -1,6 +1,7 @@
 package com.seven.gwc.config.web;
 
 import com.seven.gwc.config.constant.ConfigConsts;
+import com.seven.gwc.config.filter.TonFunUserFilter;
 import com.seven.gwc.core.shiro.ShiroDbRealm;
 import com.seven.gwc.config.properties.GwcProperties;
 import org.apache.shiro.cache.CacheManager;
@@ -115,7 +116,7 @@ public class ShiroConfig {
         /** 登陆成功后跳转的url */
         shiroFilter.setSuccessUrl("/");
         /** 没有权限跳转的url */
-        shiroFilter.setUnauthorizedUrl("/global/error");
+        shiroFilter.setUnauthorizedUrl("/error");
 
         /** 覆盖默认的user拦截器(默认拦截器解决不了ajax请求 session超时的问题,若有更好的办法请及时反馈TonFun) */
         HashMap<String, Filter> myFilters = new HashMap<>();

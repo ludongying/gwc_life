@@ -8,6 +8,7 @@ import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.DeptMapper;
+import com.seven.gwc.modular.system.dto.DeptDTO;
 import com.seven.gwc.modular.system.entity.DeptEntity;
 import com.seven.gwc.modular.system.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,5 +134,10 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, DeptEntity> impleme
             deptEntity = deptMapper.selectById(deptId);
         }
         return deptEntity;
+    }
+
+    @Override
+    public DeptDTO getDept(String id) {
+        return deptMapper.getDept(id);
     }
 }

@@ -1,24 +1,50 @@
 package com.seven.gwc.core.util;
 
 
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * 文件上传工具类
  */
 public class FileUtil {
 
-    public static void uploadFile(byte[] file, String filePath, String fileName) throws Exception {
-        File targetFile = new File(filePath);
-        if (!targetFile.exists()) {
-            targetFile.mkdirs();
+    public static JSONObject uploadFile(String fileDown, @RequestParam("file") MultipartFile file) throws Exception {
+        String fileName = "";
+        JSONObject jsonObject = new JSONObject();
+        try {
+            if (!file.isEmpty()) {
+                byte[] bytes = file.getBytes();
+
+                File nodeFile = new File(fileDown);
+                if (!nodeFile.exists()) {//如果文件夹不存在
+                    nodeFile.mkdirs();//创建文件夹
+                }
+                fileName = System.currentTimeMillis() + file.getOriginalFilename().replaceAll(",", "");
+
+                String fileFullName = nodeFile + "//" + fileName;
+
+                Path path = Paths.get(fileFullName);
+                Files.write(path, bytes);
+
+                jsonObject.put("CODE",200);
+                jsonObject.put("fileName",fileName);
+                return jsonObject;
+            }
+        } catch (Exception e) {
+            jsonObject.put("CODE",500);
+            jsonObject.put("fileName", file.getOriginalFilename() + "上传失败");
+            e.printStackTrace();
         }
-        FileOutputStream out = new FileOutputStream(filePath + fileName);
-        out.write(file);
-        out.flush();
-        out.close();
+        return jsonObject;
     }
 
     /**

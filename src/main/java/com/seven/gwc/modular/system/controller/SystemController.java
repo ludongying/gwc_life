@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -179,7 +180,11 @@ public class SystemController extends BaseController {
     }
 
 
-
+    @RequestMapping(value = "/uploadFile")
+    @ResponseBody
+    public JSONObject uploadFile(@RequestParam("file") MultipartFile file) throws Exception {
+        return FileUtil.uploadFile(uploadPathFile, file);
+    }
 
 
     @RequestMapping(value = "downloadFile")

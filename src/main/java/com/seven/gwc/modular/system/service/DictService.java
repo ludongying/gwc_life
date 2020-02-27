@@ -1,7 +1,9 @@
 package com.seven.gwc.modular.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.system.entity.DictEntity;
 
 import java.util.List;
@@ -20,12 +22,12 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 添加字典
      */
-    void add(DictEntity dict);
+    BaseResult add(DictEntity dict, ShiroUser user);
 
     /**
      * 编辑字典
      */
-    void update(DictEntity dict);
+    BaseResult update(DictEntity dict, ShiroUser user);
 
     /**
      * 根据ID获取字典详情
@@ -35,7 +37,7 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 获取字典的树形列表  字典列表用
      */
-    List<ZTreeNode> dictTreeList(Long dictTypeId, Long dictId);
+    List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode);
 
     /**
      * 获取某个类型下字典树的列表，选择上级字典时用
@@ -46,7 +48,7 @@ public interface DictService extends IService<DictEntity> {
      * @author : SHQ
      * @return
      */
-    List<DictEntity> selectDictListByDictType(String dictTypeCode);
+    List<DictEntity> getDictListByDictTypeCode(String dictTypeCode);
 
     /**
      * 根据字典名称跟地点类型获取字典数据

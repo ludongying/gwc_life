@@ -24,6 +24,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         return [[
             {field: 'dictId', title: '字典id', hide: true},
             {field: 'name', title: '字典', align: "center"},
+            {field: 'pname', title: '上级字典', align: "center"},
             {field: 'createTime', title: '创建时间', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
             {field: 'createUser', title: '创建人', align: "center"},
             {field: 'sort', title: '排序', align: "center"},

@@ -20,7 +20,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 点击上级角色时
     $('#pName').click(function () {

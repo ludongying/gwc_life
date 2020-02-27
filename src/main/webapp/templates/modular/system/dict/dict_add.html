@@ -20,6 +20,14 @@
             </div>
 
             <div class="layui-col-md12">
+                <label class="layui-form-label">上级字典</label>
+                <div class="layui-input-block">
+                    <input id="pid" name="pid" type="hidden">
+                    <input id="pName" name="pName" placeholder="请选择上级字典" readonly type="text" class="layui-input" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
                 <label class="layui-form-label">排序</label>
                 <div class="layui-input-block">
                     <input id="sort" name="sort" placeholder="请输入排序" type="text" class="layui-input" lay-verify="notNumber">

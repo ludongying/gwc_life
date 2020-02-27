@@ -32,7 +32,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'iconPicker'], function ()
     });
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 点击父级菜单
     $('#pcodeName').click(function () {

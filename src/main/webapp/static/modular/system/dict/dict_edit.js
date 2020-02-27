@@ -2,7 +2,12 @@
  * 字典编辑对话框
  */
 
-
+var MenuInfoDlg = {
+    data: {
+        pid: "",
+        pName: ""
+    }
+};
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
@@ -40,4 +45,23 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
         return false;
     });
+
+    // 点击父级菜单
+    $('#pname').click(function () {
+        var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
+        var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
+        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode=LAWS_REGULATION");
+
+        layer.open({
+            type: 2,
+            title: '上级字典',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                $("#pid").val(MenuInfoDlg.data.pid);
+                $("#pName").val(MenuInfoDlg.data.pcodeName);
+            }
+        });
+    });
+
 });

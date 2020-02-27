@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.ServiceException;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
@@ -41,50 +42,66 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         lambdaQuery.eq(DictEntity::getDictTypeId, dictTypeId)
                 .orderByAsc(DictEntity::getSort)
                 .orderByDesc(DictEntity::getCreateTime);
-        return dictMapper.selectList(lambdaQuery);
+        List<DictEntity> list = dictMapper.selectList(lambdaQuery);
+        for (DictEntity dictEntity : list) {
+            LambdaQueryWrapper<DictEntity> lambda = Wrappers.lambdaQuery();
+            lambda.eq(DictEntity::getId, dictEntity.getPid());
+            DictEntity dict = dictMapper.selectOne(lambda);
+            if (ToolUtil.isNotEmpty(dict)) {
+                dictEntity.setPName(dict.getName());
+            }
+        }
+        return list;
     }
 
     /**
      * 添加字典
      */
     @Override
-    public void add(DictEntity dict) {
+    public BaseResult add(DictEntity dict, ShiroUser user) {
         //判断是否已经存在同编码或同名称字典
-        QueryWrapper<DictEntity> dictQueryWrapper = new QueryWrapper<>();
-        dictQueryWrapper
-                .and(i -> i.eq("name", dict.getName()))
-                .and(i -> i.eq("dict_type_id", dict.getDictTypeId()));
-        List<DictEntity> list = this.list(dictQueryWrapper);
-        if (list != null && list.size() > 0) {
-            throw new ServiceException(ErrorEnum.ERROR_ONLY_STATUS);
+        LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(DictEntity::getDictTypeId, dict.getDictTypeId())
+                .eq(DictEntity::getName, dict.getName());
+        DictEntity dictEntity = dictMapper.selectOne(lambdaQuery);
+        if (ToolUtil.isNotEmpty(dictEntity)) {
+            throw new ServiceException(ErrorEnum.ERROR_ONLY_NAME);
+        }
+        if (dict.getSort() == null) {
+            dict.setSort(0);
+        }
+        if (dict.getPid() == null) {
+            dict.setPid("0");
         }
         dict.setCreateTime(new Date());
-        this.save(dict);
+        dict.setCreateUser(user.getName());
+        dictMapper.insert(dict);
+        return new BaseResult(true, "操作成功");
     }
 
     /**
      * 编辑字典
      */
     @Override
-    public void update(DictEntity dict) {
-        ShiroUser user = ShiroKit.getUser();
-        DictEntity dictEntity = this.getById(dict.getId());
+    public BaseResult update(DictEntity dict, ShiroUser user) {
         LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DictEntity::getName, dict.getName())
                 .eq(DictEntity::getDictTypeId, dict.getDictTypeId())
                 .ne(DictEntity::getId, dict.getId());
+        DictEntity dictEntity = dictMapper.selectOne(lambdaQuery);
 
-        DictEntity list = dictMapper.selectOne(lambdaQuery);
-        if (list != null) {
-            throw new ServiceException(ErrorEnum.ERROR_ONLY_CODE);
+        if (ToolUtil.isNotEmpty(dictEntity)) {
+            throw new ServiceException(ErrorEnum.ERROR_ONLY_NAME);
         }
         if (dict.getSort() == null) {
             dict.setSort(0);
         }
+
         dict.setUpdateUser(user.getName());
         dict.setUpdateTime(new Date());
+        dictMapper.updateById(dict);
 
-        this.updateById(dict);
+        return new BaseResult(true, "操作成功");
     }
 
     /**
@@ -93,13 +110,20 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     @Override
     public DictEntity dictDetail(String dictId) {
         DictEntity entity = dictMapper.selectById(dictId);
+
+        LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(DictEntity::getId, entity.getPid());
+        DictEntity dict = dictMapper.selectOne(lambdaQuery);
+        if (ToolUtil.isNotEmpty(dict)) {
+            entity.setPName(dict.getName());
+        }
         return entity;
     }
 
     @Override
     public List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode) {
         LambdaQueryWrapper<DictTypeEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(ToolUtil.isNotEmpty(dictTypeCode), DictTypeEntity::getCode, dictTypeCode);
+        lambdaQuery.eq(DictTypeEntity::getCode, dictTypeCode);
         DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(lambdaQuery);
         return dictMapper.getDictTree(dictTypeEntity.getId());
     }

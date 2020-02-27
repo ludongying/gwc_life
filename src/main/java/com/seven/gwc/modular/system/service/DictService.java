@@ -1,7 +1,9 @@
 package com.seven.gwc.modular.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.system.entity.DictEntity;
 
 import java.util.List;
@@ -20,12 +22,12 @@ public interface DictService extends IService<DictEntity> {
     /**
      * 添加字典
      */
-    void add(DictEntity dict);
+    BaseResult add(DictEntity dict, ShiroUser user);
 
     /**
      * 编辑字典
      */
-    void update(DictEntity dict);
+    BaseResult update(DictEntity dict, ShiroUser user);
 
     /**
      * 根据ID获取字典详情

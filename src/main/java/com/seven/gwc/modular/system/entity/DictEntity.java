@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.system.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -30,7 +31,7 @@ public class DictEntity implements Serializable {
     private String id;
 
     // 父ID
-    private String parentId;
+    private String pid;
 
     /** 所属字典类型的id */
     private String dictTypeId;
@@ -60,5 +61,7 @@ public class DictEntity implements Serializable {
     /** 修改人 */
     private String updateUser;
 
+    @TableField(exist=false)
+    private String pName;
 
 }

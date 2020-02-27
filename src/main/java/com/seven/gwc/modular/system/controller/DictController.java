@@ -89,13 +89,7 @@ public class DictController extends BaseController {
     @ResponseBody
     public BaseResult add(DictEntity dict) {
         ShiroUser user = ShiroKit.getUser();
-
-        if (dict.getSort() == null) {
-            dict.setSort(0);
-        }
-        dict.setCreateUser(user.getName());
-        this.dictService.add(dict);
-        return SUCCESS;
+        return dictService.add(dict, user);
     }
 
     /**
@@ -113,8 +107,8 @@ public class DictController extends BaseController {
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DictEntity dict) {
-        dictService.update(dict);
-        return SUCCESS;
+        ShiroUser user = ShiroKit.getUser();
+        return dictService.update(dict, user);
     }
 
     /**
@@ -132,7 +126,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping(value = "/getDictTreeByDictTypeCode")
     @ResponseBody
-    public List<ZTreeNode> getDictTreeByDictTypeCode(@RequestParam("dictTypeId") String dictTypeCode) {
+    public List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode) {
         return this.dictService.getDictTreeByDictTypeCode(dictTypeCode);
     }
 

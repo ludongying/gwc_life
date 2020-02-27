@@ -8,10 +8,10 @@
     </sql>
 
     <select id="getDictTree" resultType="com.seven.gwc.core.node.ZTreeNode">
-        select id AS id, parent_id as "pId", name as name,
+        select id AS id, pid as "pId", name as name,
 		(
 		CASE
-		WHEN (parent_id = "0" OR parent_id IS NULL) THEN
+		WHEN (pid = "0" OR pid IS NULL) THEN
 		'true'
 		ELSE
 		'false'

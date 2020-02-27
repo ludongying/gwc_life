@@ -73,8 +73,8 @@
               {
                 "objectType": "TableField_MYSQL",
                 "name": "id",
-                "type": "int",
-                "length": -2147483648,
+                "type": "varchar",
+                "length": 64,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -203,8 +203,8 @@
               {
                 "objectType": "TableField_MYSQL",
                 "name": "create_date",
-                "type": "datetime",
-                "length": 255,
+                "type": "date",
+                "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,

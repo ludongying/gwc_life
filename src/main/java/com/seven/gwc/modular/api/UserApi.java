@@ -75,13 +75,13 @@ public class UserApi extends BaseController {
 
     @PostMapping("avatarUpload")
     @ApiOperation(value = "上传头像(SHQ)")
-    public BaseResult avatarUpload(HttpServletRequest request, @RequestBody String avatar){
+    public BaseResult avatarUpload(HttpServletRequest request, @RequestBody JSONObject avatar) {
         try {
             String userId = request.getAttribute("userId").toString();
-            String avatarCode = URLDecoder.decode(avatar, "UTF-8");
-            String path = FileUtil.base64ToFile(uploadPathImage, avatarCode.substring(7));
+            String avatarCode = URLDecoder.decode(avatar.get("avatar").toString(), "UTF-8");
+            String path = FileUtil.base64ToFile(uploadPathImage,avatarCode);
 
-            if (path == null){
+            if (path == null) {
                 return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
             }
             UserEntity entity = userService.getById(userId);

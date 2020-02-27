@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var Calendar = FullCalendar.Calendar;
-    var Draggable = FullCalendarInteraction.Draggable
-
-    /* initialize the external events
-    -----------------------------------------------------------------*/
+    var Draggable = FullCalendarInteraction.Draggable;
 
     var containerEl = document.getElementById('external-events-list');
     new Draggable(containerEl, {
@@ -15,21 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    //// the individual way to do it
-    // var containerEl = document.getElementById('external-events-list');
-    // var eventEls = Array.prototype.slice.call(
-    //   containerEl.querySelectorAll('.fc-event')
-    // );
-    // eventEls.forEach(function(eventEl) {
-    //   new Draggable(eventEl, {
-    //     eventData: {
-    //       title: eventEl.innerText.trim(),
-    //     }
-    //   });
-    // });
-
-    /* initialize the calendar
-    -----------------------------------------------------------------*/
 
     var calendarEl = document.getElementById('calendar');
     var calendar = new Calendar(calendarEl, {
@@ -40,11 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
         editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
+        droppable: true,
         drop: function(arg) {
-            // is the "remove after drop" checkbox checked?
+            // 左侧移动后移除勾选
             if (document.getElementById('drop-remove').checked) {
-                // if so, remove the element from the "Draggable Events" list
                 arg.draggedEl.parentNode.removeChild(arg.draggedEl);
             }
         }

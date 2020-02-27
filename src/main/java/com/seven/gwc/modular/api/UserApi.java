@@ -76,22 +76,15 @@ public class UserApi extends BaseController {
     @PostMapping("avatarUpload")
     @ApiOperation(value = "上传头像(SHQ)")
     public BaseResult avatarUpload(HttpServletRequest request, @RequestBody JSONObject avatar) {
-        try {
-            String userId = request.getAttribute("userId").toString();
-            String avatarCode = URLDecoder.decode(avatar.get("avatar").toString(), "UTF-8");
-            String path = FileUtil.base64ToFile(uploadPathImage,avatarCode);
-
-            if (path == null) {
-                return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
-            }
-            UserEntity entity = userService.getById(userId);
-            entity.setAvatar(path);
-            userService.updateById(entity);
-            return new BaseResult().content(path);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        String userId = request.getAttribute("userId").toString();
+        String path = FileUtil.base64ToFile(uploadPathImage, avatar.get("avatar").toString().replace("\r\n", ""));
+        if (path == null) {
             return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
+        UserEntity entity = userService.getById(userId);
+        entity.setAvatar(path);
+        userService.updateById(entity);
+        return new BaseResult().content(path);
     }
 
 }

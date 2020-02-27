@@ -201,25 +201,19 @@ public class FileUtil {
         FileOutputStream fos = null;
         try {
             String suf = "";
-            if (base64.indexOf("jpeg;base64") > 0) {
+            String str = base64;
+            if (str.indexOf("jpeg;base64") > 0) {
                 suf = ".jpeg";
-                base64 = base64.replace("data:image/jpeg;base64,", "");
-            } else if (base64.indexOf("png;base64") > 0) {
+                str = str.replace("data:image/jpeg;base64,", "");
+            } else if (str.indexOf("png;base64") > 0) {
                 suf = ".png";
-                base64 = base64.replace("data:image/png;base64,", "");
-            } else if (base64.indexOf("jpg;base64") > 0) {
+                str = str.replace("data:image/png;base64,", "");
+            } else if (str.indexOf("jpg;base64") > 0) {
                 suf = ".jpg";
-                base64 = base64.replace("data:image/jpg;base64,", "");
-            } else {
-                return null;
+                str = str.replace("data:image/jpg;base64,", "");
             }
             String path = ToolUtil.getUUIDremoveBars() + suf;
-
-            byte[] bytes = Base64.getDecoder().decode(base64);
-            file = new File(filePath + File.separator + path);
-            fos = new FileOutputStream(file);
-            bos = new BufferedOutputStream(fos);
-            bos.write(bytes);
+            base64ToFile(destPath, str, path);
             return path;
         } catch (Exception e) {
             e.printStackTrace();
@@ -242,14 +236,54 @@ public class FileUtil {
         return null;
     }
 
+    /**
+     * BASE64解码成File文件
+     * baseStr = baseStr.replace("data:image/jpeg;base64,", "");
+     * base64解密部分乱码问题（“+” 号，在urlecode编码中会被解码成空格）
+     */
+    private static void base64ToFile(String destPath, String base64, String fileName) {
+        File file = null;
+        //创建文件目录
+        String filePath = destPath;
+        File dir = new File(filePath);
+        if (!dir.exists() && !dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        BufferedOutputStream bos = null;
+        java.io.FileOutputStream fos = null;
+        try {
+            byte[] bytes = Base64.getDecoder().decode(base64);
+            file = new File(filePath + "/" + fileName);
+            fos = new java.io.FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     public static List<String> base64ToFiles(String destPath, List<String> fileList) {
         List<String> fileNames = new ArrayList<>();
         if (Objects.nonNull(fileList) && !fileList.isEmpty()) {
             for (int i = 0; i < fileList.size(); i++) {
                 String s = base64ToFile(destPath, fileList.get(i));
-                if (s == null){
-                    log.error("第"+i+"个文件存储失败。");
+                if (s == null) {
+                    log.error("第" + i + "个文件存储失败。");
                 }
             }
         }
@@ -261,13 +295,13 @@ public class FileUtil {
         JSONObject jsonObject = new JSONObject();
         File folder = new File(fileDown);
         File[] files = folder.listFiles();
-        for(File file:files){
-            if(file.getName().equals(fileName)){
+        for (File file : files) {
+            if (file.getName().equals(fileName)) {
                 file.delete();
             }
         }
-        jsonObject.put("CODE",200);
-        jsonObject.put("fileName",fileName);
+        jsonObject.put("CODE", 200);
+        jsonObject.put("fileName", fileName);
         return jsonObject;
     }
 

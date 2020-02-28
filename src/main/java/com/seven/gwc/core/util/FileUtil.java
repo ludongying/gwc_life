@@ -134,6 +134,12 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 删除文件
+     * @param fileDown 文件路径
+     * @param fileName 文件名
+     * @return
+     */
     public static JSONObject deleteFile(String fileDown, String fileName) {
         JSONObject jsonObject = new JSONObject();
         File folder = new File(fileDown);

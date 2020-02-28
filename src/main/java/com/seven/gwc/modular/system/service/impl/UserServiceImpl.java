@@ -221,4 +221,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         }
         return userMapper.updateById(user) > 0;
     }
+
+    @Override
+    public UserEntity getUserById(String userId) {
+        LambdaQueryWrapper<UserEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(UserEntity::getId, userId);
+        return userMapper.selectOne(lambdaQuery);
+    }
 }

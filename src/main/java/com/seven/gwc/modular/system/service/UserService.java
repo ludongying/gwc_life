@@ -135,4 +135,6 @@ public interface UserService extends IService<UserEntity> {
      */
     boolean changeUser(UserUpdateVO userUpdateVO, String userId);
 
+    UserEntity getUserById(String userId);
+
 }

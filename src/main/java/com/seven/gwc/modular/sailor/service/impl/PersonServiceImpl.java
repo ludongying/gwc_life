@@ -66,12 +66,12 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 //            UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
 
         UserEntity userEntityInput = new UserEntity();
-        userEntityInput.setId(person.getUserId());
+        userEntityInput.setId(person.getPersonId());
         userEntityInput.setName(person.getPersonName());
         userEntityInput.setBirthday(person.getBirthday());
         userEntityInput.setPhone(person.getPhone());
         userEntityInput.setEmail(person.getEmail());
-        userEntityInput.setPositionId(person.getPosition_id());
+        userEntityInput.setPositionId(person.getPositionId());
 
 //            if(userEntity != null) {
         //更新
@@ -92,8 +92,27 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void editPerson(PersonEntity person, ShiroUser user) {
+    public boolean editPerson(PersonEntity person, ShiroUser user) {
+        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(PersonEntity::getIdNumber,person.getIdNumber()).ne(PersonEntity::getId,person.getId());
+        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
+        if(personEntity != null){
+            return false;
+        }
         personMapper.updateById(person);
+        //更新user表
+        UserEntity userEntityInput = new UserEntity();
+        userEntityInput.setId(person.getPersonId());
+        userEntityInput.setName(person.getPersonName());
+        userEntityInput.setBirthday(person.getBirthday());
+        userEntityInput.setPhone(person.getPhone());
+        userEntityInput.setEmail(person.getEmail());
+        userEntityInput.setPositionId(person.getPositionId());
+
+//            if(userEntity != null) {
+        //更新
+        userMapper.updateById(userEntityInput);
+        return true;
     }
 
     @Override

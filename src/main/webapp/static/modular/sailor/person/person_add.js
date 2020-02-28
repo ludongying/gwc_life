@@ -13,7 +13,7 @@ var UserInfoDlg = {
         sex: "",
         phone: "",
         email: "",
-        position_id: ""
+        positionId: ""
     }
 };
 

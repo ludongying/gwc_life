@@ -211,4 +211,12 @@ public class SystemController extends BaseController {
     public JSONObject deleteFile(String fileName) {
         return FileUtil.deleteFile(uploadPathFile, fileName);
     }
+
+    @RequestMapping(value = "previewPdf")
+    public String previewPdf(@RequestParam String fileName, Model model) {
+        String file = ToolUtil.getFileName(fileName);
+        model.addAttribute("file", file);
+        model.addAttribute("fileName", fileName);
+        return "/common/previewPdf";
+    }
 }

@@ -77,10 +77,10 @@ public class RegulationSafeController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<RegulationSafeEntity> list(String regulationSafeName) {
+    public BaseResultPage<RegulationSafeEntity> list(String regulationSafeName,String lawRegularId,String type) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<RegulationSafeEntity> regulationSafes = regulationSafeService.selectRegulationSafe(regulationSafeName);
+        List<RegulationSafeEntity> regulationSafes = regulationSafeService.selectRegulationSafe(regulationSafeName,lawRegularId,type);
         PageInfo pageInfo = new PageInfo<>(regulationSafes);
         return new BaseResultPage().createPage(pageInfo);
     }

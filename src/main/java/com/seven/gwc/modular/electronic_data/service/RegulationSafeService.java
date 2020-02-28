@@ -21,7 +21,7 @@ public interface RegulationSafeService extends IService<RegulationSafeEntity> {
      * @param regulationSafeName 名称
      * @return List<法律法规/航线安全服务对象>
      */
-    List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName);
+    List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName,String lawRegularId,String type);
 
     /**
      * 法律法规/航线安全新建

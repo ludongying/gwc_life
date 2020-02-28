@@ -63,26 +63,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         , choose: function (obj) {
             var files = obj.pushFile();
             obj.preview(function (index, file, result) {
-                console.log(index); //得到文件索引
-                console.log(file); //得到文件对象
                 $('.layui-upload').append('<span class="layui-inline layui-upload-choose">' + file.name + '</span>');
-                console.log($('#name').val());
                 if ($('#name').val() === "") {
-                    $('#name').val(file.name);
+                    $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));
                 }
+                $('#fileName').val(file.name)
             });
         }
-        // , before: function (obj) { //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
-        //
-        //     // if (selectOnlyByName("111")) {
-        //     //     layer.load(); //上传loading
-        //     // } else {
-        //     //     alert("aaa")
-        //     // }
-        //
-        // }
         , done: function (res) {
             if (res.CODE === 200) {
+                formData.fileName = res.fileName;
+                formData.type = "REGULATIONS";
                 ajax = new $ax(Feng.ctxPath + "/regulationSafe/add", function (data) {
                     if (data.success) {
                         Feng.success("增加成功!");
@@ -101,23 +92,37 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
     });
 
 
-    function selectOnlyByName(data) {
+    function selectOnlyByName() {
+        var insertStatus = false;
         $.ajax({
             url: Feng.ctxPath + '/regulationSafe/selectOnlyByName',
             type: "GET",
+            async: false,
             data: {
-                name: '组织结构20200210.pdf',
+                name: $('#name').val(),
                 type: 'SAFE'
+            },
+            success: function (data) {
+                if (data) {
+                    insertStatus = data;
+                }
             }
         });
+        return insertStatus;
     }
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        formData = data.field;
-        console.log(formData);
-        uploadInst.upload();
-        return false
-
+        if ($('#fileName').val() === "") {
+            layer.msg("附件不能为空");
+            return false
+        } else {
+            console.log(selectOnlyByName());
+            if (selectOnlyByName()) {
+                formData = data.field;
+                uploadInst.upload();
+            }
+            return false
+        }
     });
 });

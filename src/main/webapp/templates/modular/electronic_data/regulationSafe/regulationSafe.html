@@ -37,14 +37,14 @@
 </div>
 
 <script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/regulationSafe/detail")){
-    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    @}
-    @if(shiro.hasPermission("/regulationSafe/update")){
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    @if(shiro.hasPermission("/regulationSafe/preview")){
+    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">预览</a>
     @}
     @if(shiro.hasPermission("/regulationSafe/delete")){
     <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+    @if(shiro.hasPermission("/regulationSafe/print")){
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="print">打印</a>
     @}
 </script>
 @}

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,7 +36,7 @@ public class PersonEntity implements Serializable {
     private String shipId;
 
     /** 用户id */
-    private Long personId;
+    private String personId;
 
     /** 手机ip */
     private String phoneIp;
@@ -57,14 +58,18 @@ public class PersonEntity implements Serializable {
 
     /** 政治面貌（枚举） */
     private Integer political;
-
-    //用户编码
-    @TableField(exist = false)
-    private String UserId;
+//
+//    //用户编码
+//    @TableField(exist = false)
+//    private String UserId;
 
     //姓名
     @TableField(exist = false)
     private String personName;
+
+    //性别
+    @TableField(exist = false)
+    private String sex;
 
     //所属执法船
     @TableField (exist = false)
@@ -72,12 +77,13 @@ public class PersonEntity implements Serializable {
 
     //出生年月
     @TableField (exist = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     //岗位
     @TableField (exist = false)
-    private String position_id;
+    private String positionId;
 
     //联系方式
     @TableField (exist = false)

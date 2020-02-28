@@ -123,7 +123,9 @@ public class PersonController extends BaseController {
     @ResponseBody
     public BaseResult update(PersonEntity person) {
         ShiroUser user = ShiroKit.getUser();
-        personService.editPerson(person, user);
+        if(!personService.editPerson(person, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_PERSON_ID);
+        }
         return SUCCESS;
     }
 
@@ -133,7 +135,6 @@ public class PersonController extends BaseController {
     @RequestMapping("/detail/{id}")
     @ResponseBody
     public PersonEntity detail(@PathVariable String id) {
-        PersonEntity person = personService.getOneById(id);
         return personService.getOneById(id);
     }
 

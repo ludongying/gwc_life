@@ -3,7 +3,9 @@
     <form id="personForm" lay-filter="personForm" class="layui-form">
         <div class="layui-row layui-col-space10">
 
+            <input id="id" name="id" type="hidden" class="layui-input" />
             <input id="personId" name="personId" type="hidden" class="layui-input" />
+
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">船员姓名<span style="color: red;">*</span></label>
@@ -68,7 +70,8 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">所属执法船</label>
                 <div class="layui-input-block">
-                    <select id="shipId" name="shipId" lay-verify="required" lay-search="">
+<!--                    lay-verify="required"-->
+                    <select id="shipId" name="shipId" lay-search="">
                         <option value="">请选择所属执法船</option>
                     </select>
                 </div>

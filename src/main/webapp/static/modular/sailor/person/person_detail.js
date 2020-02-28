@@ -13,7 +13,7 @@ var UserInfoDlg = {
         sex: "",
         phone: "",
         email: "",
-        position_id: ""
+        positionId: ""
     }
 };
 
@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'formSelects'], function () {
 
     //获取岗位下拉框分组多选
     $.ajax({
-        url: Feng.ctxPath + '/position/listPositions?ids='+result.position_id,
+        url: Feng.ctxPath + '/position/listPositions?ids='+result.positionId,
         dataType: 'json',
         type: 'get',
         success: function (data) {

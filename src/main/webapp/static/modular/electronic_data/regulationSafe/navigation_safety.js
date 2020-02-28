@@ -40,7 +40,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
         elem: '#' + RegulationSafe.tableId,
         url: Feng.ctxPath + '/regulationSafe/list',
         where:{
-            type:'REGULATIONS'
+            type:'NAVIGATION'
         },
         page: true,
         height: "full-97",
@@ -105,7 +105,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
      */
     RegulationSafe.openAddRegulationSafe = function () {
         func.open({
-            title: '增加法律法规',
+            title: '增加航线安全',
             area: ['800px', '500px'],
             content: Feng.ctxPath + '/regulationSafe/navigationSafety_add?treeId=' + RegulationSafe.condition.treeId,
             tableId: RegulationSafe.tableId
@@ -130,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
      * @param data 点击按钮时候的行数据
      */
     RegulationSafe.onDeleteRegulationSafe = function (data) {
-        Feng.confirm("是否删除法律法规《" + data.name + "》吗?", function () {
+        Feng.confirm("是否删除航线安全《" + data.name + "》吗?", function () {
             if (deleteFile(data.fileName)) {
                 var ajax = new $ax(Feng.ctxPath + "/regulationSafe/delete", function (data) {
                     if (data.success) {
@@ -175,7 +175,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
     };
 
     //初始化左侧部门树
-    var ztree = new $ZTree("deptTree", "/dict/getDictTreeByDictTypeCode?dictTypeCode=LAWS_REGULATION");
+    var ztree = new $ZTree("deptTree", "/dict/getDictTreeByDictTypeCode?dictTypeCode=NAVIGATION_SAFETY");
     ztree.bindOnClick(RegulationSafe.onClickTree);
     ztree.init();
 

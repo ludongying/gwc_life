@@ -37,10 +37,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
     $('#lawRegularName').click(function () {
         var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
         var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
-        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode=LAWS_REGULATION");
+        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode=NAVIGATION_SAFETY");
         layer.open({
             type: 2,
-            title: '法律法规',
+            title: '航线安全',
             area: ['300px', '400px'],
             content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
             end: function () {
@@ -73,7 +73,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         , done: function (res) {
             if (res.CODE === 200) {
                 formData.fileName = res.fileName;
-                formData.type = "REGULATIONS";
+                formData.type = "NAVIGATION";
                 ajax = new $ax(Feng.ctxPath + "/regulationSafe/add", function (data) {
                     if (data.success) {
                         Feng.success("增加成功!");
@@ -100,7 +100,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
             async: false,
             data: {
                 name: $('#name').val(),
-                type: 'REGULATIONS'
+                type: 'NAVIGATION'
             },
             success: function (data) {
                 if (data) {

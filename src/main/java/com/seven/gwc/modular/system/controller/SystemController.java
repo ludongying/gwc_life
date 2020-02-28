@@ -208,6 +208,7 @@ public class SystemController extends BaseController {
      * @return
      */
     @RequestMapping(value = "deleteFile")
+    @ResponseBody
     public JSONObject deleteFile(String fileName) {
         return FileUtil.deleteFile(uploadPathFile, fileName);
     }

@@ -41,7 +41,7 @@ public class RegulationSafeController extends BaseController {
     private RegulationSafeService regulationSafeService;
 
     /**
-     * 跳转到法律法规/航线安全首页
+     * 跳转到法律法规
      */
     @RequestMapping("")
     public String index() {
@@ -49,7 +49,15 @@ public class RegulationSafeController extends BaseController {
     }
 
     /**
-     * 跳转到添加法律法规/航线安全
+     * 跳转到航线安全首页
+     */
+    @RequestMapping("/navigationSafety")
+    public String navigationSafety() {
+        return PREFIX + "navigationSafety";
+    }
+
+    /**
+     * 跳转到添加法律法规
      */
     @RequestMapping("/regulationSafe_add")
     public String regulationSafeAdd() {
@@ -57,19 +65,11 @@ public class RegulationSafeController extends BaseController {
     }
 
     /**
-     * 跳转到修改法律法规/航线安全
+     * 跳转到添加/航线安全
      */
-    @RequestMapping("/regulationSafe_edit")
-    public String regulationSafeUpdate(String regulationSafeId) {
-        return PREFIX + "regulationSafe_edit";
-    }
-
-    /**
-     * 跳转到查看法律法规/航线安全
-     */
-    @RequestMapping("/regulationSafe_detail")
-    public String regulationSafeDetail(String regulationSafeId) {
-        return PREFIX + "regulationSafe_detail";
+    @RequestMapping("/navigationSafety_add")
+    public String navigationSafetyAdd() {
+        return PREFIX + "navigationSafety_add";
     }
 
     /**
@@ -107,25 +107,6 @@ public class RegulationSafeController extends BaseController {
         return SUCCESS;
     }
 
-    /**
-     * 编辑法律法规/航线安全
-     */
-    @RequestMapping("/update")
-    @ResponseBody
-    public BaseResult update(RegulationSafeEntity regulationSafe) {
-        ShiroUser user = ShiroKit.getUser();
-        regulationSafeService.editRegulationSafe(regulationSafe, user);
-        return SUCCESS;
-    }
-
-    /**
-     * 法律法规/航线安全详情
-     */
-    @RequestMapping("/detail/{regulationSafeId}")
-    @ResponseBody
-    public RegulationSafeEntity detail(@PathVariable String regulationSafeId) {
-        return regulationSafeService.getById(regulationSafeId);
-    }
 
     /**
      * 文档名称验重

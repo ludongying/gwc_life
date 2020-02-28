@@ -4,16 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
-import com.seven.gwc.core.base.BaseEntity;
 import com.seven.gwc.core.base.GwcBaseEntity;
+import com.seven.gwc.modular.system.service.UserService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.annotation.PostConstruct;
 
 /**
  * description : 法律法规/航线安全实体
@@ -49,7 +50,7 @@ public class RegulationSafeEntity extends GwcBaseEntity implements  Serializable
     private String fileName;
 
     /** 附件地址*/
-    @Value("${FILE_UPLOAD_PATH_FILE}")
     private String filePath;
+
 
 }

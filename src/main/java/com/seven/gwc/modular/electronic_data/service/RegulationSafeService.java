@@ -39,13 +39,6 @@ public interface RegulationSafeService extends IService<RegulationSafeEntity> {
      */
     void deleteRegulationSafe(String regulationSafeId, ShiroUser user);
 
-    /**
-     * 法律法规/航线安全编辑
-     *
-     * @param regulationSafe 实体对象
-     * @param user 当前用户
-     */
-    void editRegulationSafe(RegulationSafeEntity regulationSafe, ShiroUser user);
 
     /**
      * 根据文档名称验重

@@ -14,6 +14,7 @@ import com.seven.gwc.modular.electronic_data.dao.RegulationSafeMapper;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,14 +32,16 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     private RegulationSafeMapper regulationSafeMapper;
 
     @Override
-    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName){
-        LambdaQueryWrapper<RegulationSafeEntity> lambdaQuery = Wrappers.<RegulationSafeEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(regulationSafeName),RegulationSafeEntity::getName,regulationSafeName);
-        return regulationSafeMapper.selectList(lambdaQuery);
+    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName,String lawRegularId,String type) {
+        return regulationSafeMapper.selectRegulationSafeList(regulationSafeName,lawRegularId,type);
     }
 
     @Override
     public void addRegulationSafe(RegulationSafeEntity regulationSafe, ShiroUser user) {
+        regulationSafe.setSynFlag(false);
+        regulationSafe.setDeleteFlag(false);
+        regulationSafe.setCreateDate(new Date());
+        regulationSafe.setCreatePerson(user.getId());
         regulationSafeMapper.insert(regulationSafe);
     }
 
@@ -50,6 +53,15 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     @Override
     public void editRegulationSafe(RegulationSafeEntity regulationSafe, ShiroUser user) {
         regulationSafeMapper.updateById(regulationSafe);
+    }
+
+    @Override
+    public boolean selectOnlyByName(String name, String type) {
+
+        LambdaQueryWrapper<RegulationSafeEntity> query = Wrappers.lambdaQuery();
+        query.eq(RegulationSafeEntity::getName, name)
+                .eq(RegulationSafeEntity::getType, type);
+        return regulationSafeMapper.selectList(query).size() == 0;
     }
 
 }

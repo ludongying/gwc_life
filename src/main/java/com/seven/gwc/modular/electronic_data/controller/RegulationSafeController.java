@@ -77,10 +77,10 @@ public class RegulationSafeController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<RegulationSafeEntity> list(String regulationSafeName) {
+    public BaseResultPage<RegulationSafeEntity> list(String regulationSafeName,String lawRegularId,String type) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<RegulationSafeEntity> regulationSafes = regulationSafeService.selectRegulationSafe(regulationSafeName);
+        List<RegulationSafeEntity> regulationSafes = regulationSafeService.selectRegulationSafe(regulationSafeName,lawRegularId,type);
         PageInfo pageInfo = new PageInfo<>(regulationSafes);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -125,6 +125,15 @@ public class RegulationSafeController extends BaseController {
     @ResponseBody
     public RegulationSafeEntity detail(@PathVariable String regulationSafeId) {
         return regulationSafeService.getById(regulationSafeId);
+    }
+
+    /**
+     * 文档名称验重
+     */
+    @RequestMapping("/selectOnlyByName")
+    @ResponseBody
+    public boolean selectOnlyByName(String name,String type) {
+        return regulationSafeService.selectOnlyByName(name,type);
     }
 
 }

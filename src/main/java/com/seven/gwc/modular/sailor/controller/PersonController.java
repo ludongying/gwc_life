@@ -1,5 +1,9 @@
 package com.seven.gwc.modular.sailor.controller;
 
+import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.core.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -13,6 +17,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.seven.gwc.core.base.BaseController;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -60,7 +67,7 @@ public class PersonController extends BaseController {
      * 跳转到修改船员信息
      */
     @RequestMapping("/person_edit")
-    public String personUpdate(Long personId) {
+    public String personUpdate(String id) {
         return PREFIX + "person_edit";
     }
 
@@ -68,7 +75,7 @@ public class PersonController extends BaseController {
      * 跳转到查看船员信息
      */
     @RequestMapping("/person_detail")
-    public String personDetail(Long personId) {
+    public String personDetail(String id) {
         return PREFIX + "person_detail";
     }
 
@@ -77,10 +84,10 @@ public class PersonController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<PersonEntity> list(String personName) {
+    public BaseResultPage<PersonEntity> list(PersonEntity personEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<PersonEntity> persons = personService.selectPerson(personName);
+        List<PersonEntity> persons = personService.selectPerson(personEntity);
         PageInfo pageInfo = new PageInfo<>(persons);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -92,7 +99,9 @@ public class PersonController extends BaseController {
     @ResponseBody
     public BaseResult add(PersonEntity person) {
         ShiroUser user = ShiroKit.getUser();
-        personService.addPerson(person, user);
+        if(personService.addPerson(person, user)){
+            return new BaseResult().failure((ErrorEnum.ERROR_ONLY_PERSON_ID));
+        }
         return SUCCESS;
     }
 
@@ -101,9 +110,9 @@ public class PersonController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long personId) {
+    public BaseResult delete(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-        personService.deletePerson(personId, user);
+        personService.deletePerson(id, user);
         return SUCCESS;
     }
 
@@ -121,11 +130,23 @@ public class PersonController extends BaseController {
     /**
      * 船员信息详情
      */
-    @RequestMapping("/detail/{personId}")
+    @RequestMapping("/detail/{id}")
     @ResponseBody
-    public PersonEntity detail(@PathVariable Long personId) {
-        return personService.getById(personId);
+    public PersonEntity detail(@PathVariable String id) {
+        PersonEntity person = personService.getOneById(id);
+        return personService.getOneById(id);
     }
+
+//    /**
+//     * 获取用户姓名列表,ztree格式
+//     */
+//    @RequestMapping("/tree")
+//    @ResponseBody
+//    public List<ZTreeNode> tree(){
+//        List<ZTreeNode> tree = this.personService.tree();
+//        tree.add(ZTreeNode.createParent());
+//        return tree;
+//    }
 
 }
 

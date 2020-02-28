@@ -1,8 +1,8 @@
 package com.seven.gwc.core.util;
 
 import com.seven.gwc.config.constant.SysConsts;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -395,11 +395,11 @@ public class ToolUtil {
 
 
     /**
-     * UUID清楚横杠方法
+     * 随即UUID移除横杠方法
      *
      * @return
      */
-    public static String removeBars() {
+    public static String getUUIDremoveBars() {
         String id = UUID.randomUUID().toString();
         id = id.replace("-", "");
         return id;
@@ -417,43 +417,43 @@ public class ToolUtil {
 
 
     //处理数据格式，最后输出全是String类型
-    public static String getCellValue(Cell cell) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Object result = "";
-        if (cell != null) {
-            switch (cell.getCellType()) {
-                case Cell.CELL_TYPE_STRING:
-                    result = cell.getStringCellValue();
-                    break;
-                case Cell.CELL_TYPE_NUMERIC:
-                    if (DateUtil.isCellDateFormatted(cell)) {
-                        result = sdf.format(cell.getDateCellValue());
-                    } else {
-                        BigDecimal db = new BigDecimal(cell.getNumericCellValue());
-                        result = db.toPlainString();
-                    }
-                    break;
-                case Cell.CELL_TYPE_BOOLEAN:
-                    result = cell.getBooleanCellValue();
-                    break;
-                case Cell.CELL_TYPE_FORMULA:
-                    try {
-                        result = String.valueOf(cell.getNumericCellValue());
-                    } catch (IllegalStateException e) {
-                        result = String.valueOf(cell.getRichStringCellValue());
-                    }
-                    break;
-                case Cell.CELL_TYPE_ERROR:
-                    result = cell.getErrorCellValue();
-                    break;
-                case Cell.CELL_TYPE_BLANK:
-                    break;
-                default:
-                    break;
-            }
-        }
-        return result.toString();
-    }
+//    public static String getCellValue(Cell cell) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Object result = "";
+//        if (cell != null) {
+//            switch (cell.getCellType()) {
+//                case Cell.CELL_TYPE_STRING:
+//                    result = cell.getStringCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_NUMERIC:
+//                    if (DateUtil.isCellDateFormatted(cell)) {
+//                        result = sdf.format(cell.getDateCellValue());
+//                    } else {
+//                        BigDecimal db = new BigDecimal(cell.getNumericCellValue());
+//                        result = db.toPlainString();
+//                    }
+//                    break;
+//                case Cell.CELL_TYPE_BOOLEAN:
+//                    result = cell.getBooleanCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_FORMULA:
+//                    try {
+//                        result = String.valueOf(cell.getNumericCellValue());
+//                    } catch (IllegalStateException e) {
+//                        result = String.valueOf(cell.getRichStringCellValue());
+//                    }
+//                    break;
+//                case Cell.CELL_TYPE_ERROR:
+//                    result = cell.getErrorCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_BLANK:
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        return result.toString();
+//    }
 
     /**
      * 计算天数

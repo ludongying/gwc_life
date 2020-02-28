@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.ship_info.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -41,4 +42,13 @@ public interface ShipService extends IService<ShipEntity> {
      * @return
      */
     boolean delete(String id);
+
+
+    /**
+     * 获取执法船下拉框
+     *
+     * @param id
+     * @return
+     */
+    List<ShipEntity> listShips(String id);
 }

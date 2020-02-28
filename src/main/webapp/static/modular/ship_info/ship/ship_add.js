@@ -36,11 +36,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
                 //关掉对话框
                 admin.closeThisDialog();
             }else{
-                Feng.success(data.message);
+                Feng.error(data.message);
             }
 
         }, function (data) {
-            Feng.error("添加失败！" + data.message)
+            Feng.error("添加失败！" + data.responseJSON.message)
         });
         ajax.set(data.field);
         ajax.start();

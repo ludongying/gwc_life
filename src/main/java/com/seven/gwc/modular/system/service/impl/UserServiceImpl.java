@@ -10,6 +10,7 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.node.FirstMenuNode;
 import com.seven.gwc.core.node.MenuNode;
+import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.shiro.service.UserAuthService;
@@ -175,6 +176,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         BeanUtil.copyProperties(shiroUser, lastUser);
     }
 
+    /**
+     * 查询所有用户姓名
+     * @return
+     */
+    @Override
+    public List<ZTreeNode> tree() {
+        return this.userMapper.tree();
+    }
 
     @Override
     public BaseResult login(GetTokenVO getTokenVO) {

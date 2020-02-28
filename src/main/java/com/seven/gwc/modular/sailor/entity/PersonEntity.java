@@ -1,8 +1,13 @@
 package com.seven.gwc.modular.sailor.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,6 +28,7 @@ public class PersonEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
 
     /** 执法船id */
@@ -52,6 +58,10 @@ public class PersonEntity implements Serializable {
     /** 政治面貌（枚举） */
     private Integer political;
 
+    //用户编码
+    @TableField(exist = false)
+    private String UserId;
+
     //姓名
     @TableField(exist = false)
     private String personName;
@@ -62,15 +72,20 @@ public class PersonEntity implements Serializable {
 
     //出生年月
     @TableField (exist = false)
-    private String brithday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
 
     //岗位
     @TableField (exist = false)
-    private String position;
+    private String position_id;
 
     //联系方式
     @TableField (exist = false)
     private String phone;
+
+    //邮箱
+    @TableField (exist = false)
+    private String email;
 
     //证书
     @TableField (exist = false)

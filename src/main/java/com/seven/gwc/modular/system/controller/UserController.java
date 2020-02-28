@@ -10,6 +10,7 @@ import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.dictmap.DeleteDict;
 import com.seven.gwc.core.dictmap.UserDict;
 import com.seven.gwc.core.log.LogObjectHolder;
+import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
@@ -266,6 +267,17 @@ public class UserController extends BaseController {
             throw new BusinessException(ErrorEnum.OLD_PWD_NOT_RIGHT);
         }
         return SUCCESS;
+    }
+
+    /**
+     * 获取用户姓名列表,ztree格式
+     */
+    @RequestMapping("/tree")
+    @ResponseBody
+    public List<ZTreeNode> tree(){
+        List<ZTreeNode> tree = this.userService.tree();
+        tree.add(ZTreeNode.createParent());
+        return tree;
     }
 
 }

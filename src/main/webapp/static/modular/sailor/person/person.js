@@ -26,9 +26,15 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         return [[
             {title: 'ID', field: 'id', sort: true, align: "center", hide:true},
             {title: '姓名', field: 'personName', sort: true, align: "center"},
-            {title: '所属执法船', field: 'shipId', sort: false, align: "center"},
-            {title: '出生年月', field: 'birthday', sort: true, align: "center"},
-            {title: '性别', field: 'sex', sort: false, align: "center"},
+            {title: '所属执法船', field: 'lawShipName', sort: false, align: "center"},
+            {title: '出生年月', field: 'birthday', sort: true, align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '性别', field: 'sex', sort: false, align: "center", templet: function (d) {
+                    if (d.sex === 'M')
+                        return "<span class='layui-badge layui-bg-blue'>男</span></b>";
+                    else
+                        return "<span class='layui-badge layui-bg-orange'>女</span></b>";
+                }
+            },
             {title: '民族', field: 'nation', sort: false, align: "center"},
             {title: '身份证号', field: 'idNumber', sort: false, align: "center"},
             {title: '籍贯', field: 'birthPlace', sort: false, align: "center"},
@@ -72,6 +78,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     $('#btnAdd').click(function () {
         Person.openAddPerson();
     });
+
+
 
 
     // 工具条点击事件
@@ -124,7 +132,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '编辑船员信息',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/person/person_edit?personId=' + data.id,
+            content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
             tableId: Person.tableId
         });
     };
@@ -136,7 +144,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '查看船员信息',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/person/person_detail?personId=' + data.id,
+            content: Feng.ctxPath + '/person/person_detail?id=' + data.id,
             tableId: Person.tableId
         });
     };
@@ -148,7 +156,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     Person.onDeletePerson = function (data) {
-        Feng.confirm("是否删除船员信息《" + data.name + "》吗?", function () {
+        Feng.confirm("是否删除船员信息《" + data.personName + "》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/person/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
@@ -159,7 +167,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("personId", data.id);
+            ajax.set("id", data.id);
             ajax.start();
         });
     };

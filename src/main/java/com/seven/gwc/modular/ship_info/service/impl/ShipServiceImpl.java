@@ -1,8 +1,13 @@
 package com.seven.gwc.modular.ship_info.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.state.TypeStatesEnum;
+import com.seven.gwc.modular.system.entity.PositionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Service;
@@ -44,6 +49,7 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean add(ShipEntity ship) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode());
@@ -70,8 +76,18 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean delete(String id) {
         shipMapper.deleteById(id);
         return true;
+    }
+
+    @Override
+    public List<ShipEntity> listShips(String id) {
+        LambdaQueryWrapper<ShipEntity> lambdaQueryShip = Wrappers.<ShipEntity>lambdaQuery();
+//        lambdaQueryShip.eq(ShipEntity::getId, id);
+        List<ShipEntity> shipEntities = shipMapper.selectList(lambdaQueryShip);
+        //List<ShipEntity> shipEntities = shipMapper.ShipEntityList(new ShipEntity());
+        return shipEntities;
     }
 }

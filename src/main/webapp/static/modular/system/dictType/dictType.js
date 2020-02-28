@@ -25,11 +25,11 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
         return [[
             {field: 'id', title: '字典类型id', hide: true},
             {field: 'name', title: '类型', align: "center", width: 200, templet: function (d) {
-                var url = Feng.ctxPath + '/dict?id=' + d.id;
+                var url = Feng.ctxPath + '/dict?id=' + d.id+'&code=' + d.code;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.name + '</a>';
             }},
             {field: 'code', title: '编码', align: "center", width: 200, templet: function (d) {
-                var url = Feng.ctxPath + '/dict?id=' + d.id;
+                var url = Feng.ctxPath + '/dict?id=' + d.id+'&code=' + d.code;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
             }},
             {field: 'systemFlag', align: "center", title: '是否是系统字典', templet: function (d) {

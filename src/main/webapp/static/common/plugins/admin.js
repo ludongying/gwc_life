@@ -9,7 +9,7 @@
     var d = "admin-side-nav";
     var c = "theme-admin";
     var m = {
-        defaultTheme: "theme-admin",
+        defaultTheme: "theme-cyan",
         tableName: "easyweb",
         flexible: function(n) {
             var o = h(".layui-layout-admin").hasClass("admin-nav-mini");

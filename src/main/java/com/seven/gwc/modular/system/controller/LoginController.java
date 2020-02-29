@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.system.controller;
 
+import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.node.MenuNode;
 import com.seven.gwc.core.shiro.ShiroKit;
@@ -101,17 +102,17 @@ public class LoginController extends BaseController {
 
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
-//        String remember = request.getParameter("remember");
+        String remember = request.getParameter("remember");
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
 
         //如果开启了记住我功能
-//        if (SysConsts.STR_ON.equals(remember)) {
-//            token.setRememberMe(true);
-//        } else {
-        token.setRememberMe(false);
-//        }
+        if (SysConsts.STR_ON.equals(remember)) {
+            token.setRememberMe(true);
+        } else {
+            token.setRememberMe(false);
+        }
 
         //执行shiro登录操作
         currentUser.login(token);

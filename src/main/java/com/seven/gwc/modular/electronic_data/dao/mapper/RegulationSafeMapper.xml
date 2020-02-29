@@ -4,17 +4,46 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity">
-        <id column="id" property="id" />
-        <result column="law_regular_id" property="lawRegularId" />
-        <result column="name" property="name" />
-        <result column="create_date" property="createDate" />
-        <result column="type" property="type" />
+        <id column="id" property="id"/>
+        <result column="law_regular_id" property="lawRegularId"/>
+        <result column="name" property="name"/>
+        <result column="create_date" property="createDate"/>
+        <result column="type" property="type"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, law_regular_id, name, create_date, type
     </sql>
+
+    <select id="selectRegulationSafeList"
+            resultType="com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity">
+        SELECT
+            l.id,
+            d.`name` AS lawRegularName,
+            l.`name`,
+            l.create_date AS createDate,
+            l.file_path AS filePath,
+            l.file_name AS fileName
+            FROM
+            law_regulation_safe l
+            LEFT JOIN sys_dict d ON l.law_regular_id = d.id
+            WHERE
+            l.delete_flag = 1
+        <if test="regulationSafeName != null and regulationSafeName != ''">
+             AND l.name like CONCAT('%',#{regulationSafeName},'%')
+        </if>
+        <if test="type != null and type != ''">
+            AND l.type = #{type}
+        </if>
+
+        <if test="type != null and type != ''">
+            AND l.type = #{type}
+        </if>
+        <if test="lawRegularId != null and lawRegularId != ''">
+            AND l.law_regular_id = #{lawRegularId}
+        </if>
+    </select>
 
 
 </mapper>

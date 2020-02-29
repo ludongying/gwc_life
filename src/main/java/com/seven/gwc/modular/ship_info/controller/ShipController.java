@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.ship_info.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.seven.gwc.core.state.ErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,5 +135,13 @@ public class ShipController extends BaseController {
         return shipService.getById(shipId);
     }
 
+    /**
+     * 获取执法船列表
+     */
+    @RequestMapping("/listShips")
+    @ResponseBody
+    public List<ShipEntity> listShips(String id) {
+        return shipService.listShips(id);
+    }
 }
 

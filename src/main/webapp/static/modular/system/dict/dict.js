@@ -107,7 +107,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         func.open({
             title: '增加字典',
             area: ['500px','500px'],
-            content: Feng.ctxPath + '/dict/dict_add?dictTypeId=' + $('#dictTypeId').val(),
+            content: Feng.ctxPath + '/dict/dict_add?dictTypeId=' + $('#dictTypeId').val()+'&code='+$('#dictTypeCode').val(),
             tableId: Dict.tableId
         });
     };
@@ -120,7 +120,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
         func.open({
             title: '编辑字典',
             area: ['500px','500px'],
-            content: Feng.ctxPath + '/dict/dict_edit?dictId=' + data.id,
+            content: Feng.ctxPath + '/dict/dict_edit?dictId=' + data.id+'&code='+$('#dictTypeCode').val(),
             tableId: Dict.tableId
         });
     };

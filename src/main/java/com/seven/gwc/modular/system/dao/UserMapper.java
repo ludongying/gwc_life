@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.system.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.modular.system.dto.UserDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.vo.ListBasicsEntityVO;
@@ -34,6 +35,12 @@ public interface UserMapper extends BaseMapper<UserEntity> {
     List<UserEntity> userEntityList(@Param("user") UserEntity userEntity);
 
     /**
+     * 用户列表树
+     * @return
+     */
+    List<ZTreeNode> tree();
+
+    /**
      * 根据账号获取用户实体
      * @param account 账号
      * @return 用户实体
@@ -49,5 +56,4 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      */
     @Select("select * from sys_user where id = #{id}")
     UserDTO getUser(@Param("id") String id);
-
 }

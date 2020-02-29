@@ -39,8 +39,9 @@ public class DictController extends BaseController {
     private static String PREFIX = "/modular/system/dict/";
 
     @RequestMapping("")
-    public String index(@RequestParam("id") String id, Model model) {
+    public String index(@RequestParam("id") String id,@RequestParam("code") String code, Model model) {
         model.addAttribute("dictTypeId", id);
+        model.addAttribute("dictTypeCode", code);
         return PREFIX + "dict";
     }
 

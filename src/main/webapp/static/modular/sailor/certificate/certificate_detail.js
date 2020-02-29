@@ -1,5 +1,5 @@
 /**
- * 法律法规/航线安全详情对话框
+ * 证书信息详情对话框
  */
 
 
@@ -11,12 +11,12 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
-    //初始化法律法规/航线安全的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/regulationSafe/detail/" + Feng.getUrlParam("regulationSafeId"));
+    //初始化证书信息的详情数据
+    var ajax = new $ax(Feng.ctxPath + "/certificate/detail/" + Feng.getUrlParam("certificateId"));
     var result = ajax.start();
-    form.val('regulationSafeForm',result);
+    form.val('certificateForm',result);
 
 
 });

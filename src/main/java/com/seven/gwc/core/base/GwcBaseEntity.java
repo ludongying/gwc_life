@@ -1,6 +1,8 @@
 package com.seven.gwc.core.base;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.annotation.PostConstruct;
 import java.util.Date;
 
@@ -16,15 +18,17 @@ public class GwcBaseEntity extends BaseEntity{
      */
     protected Date updateDate;
     /**
-     * 更新人
+     * 更新人ID
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected String updatePerson;
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected Date createDate;
     /**
-     * 创建人
+     * 创建人ID
      */
     protected String createPerson;
 
@@ -36,7 +40,7 @@ public class GwcBaseEntity extends BaseEntity{
     @PostConstruct
     public void init(){
        this.createDate=new Date();
-       this.deleteFlag=false;
+       this.deleteFlag=true;
     }
 
 

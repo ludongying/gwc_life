@@ -34,9 +34,9 @@
         select s.*,b.name as nationalityDesp,c.name as typeDesp
         from ship_info_ship s
         LEFT JOIN
-        (SELECT d.name, d.sort,t.`code` FROM sys_dict d LEFT JOIN sys_dict_type t on t.id = d.dict_type_id where t.code='BOAT_NATION') b on b.sort = s.nationality
+        (SELECT d.name, d.id,t.`code` FROM sys_dict d LEFT JOIN sys_dict_type t on t.id = d.dict_type_id where t.code='BOAT_NATION') b on b.id = s.nationality
         LEFT JOIN
-        (SELECT e.name, e.sort,f.`code` FROM sys_dict e LEFT JOIN sys_dict_type f on f.id = e.dict_type_id where f.code='BOAT_TYPE') c on c.sort = s.type
+        (SELECT e.name, e.id,f.`code` FROM sys_dict e LEFT JOIN sys_dict_type f on f.id = e.dict_type_id where f.code='BOAT_TYPE') c on c.id = s.type
         <where>
         <if test="ship.name != null and ship.name != ''">
             s.name like CONCAT('%',#{ship.name},'%') or s.ship_code like CONCAT('%',#{ship.name},'%')

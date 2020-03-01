@@ -276,7 +276,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public List<ZTreeNode> tree(){
         List<ZTreeNode> tree = this.userService.tree();
-        tree.add(ZTreeNode.createParent());
+//        tree.add(ZTreeNode.createParent());
         return tree;
     }
 

@@ -35,8 +35,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+
+    form.verify({
+        ip: [
+            /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
+            ,'IP地址不符合规则'
+        ]
+    });
+
     // 点击弹出用户列表
     $('#selUsers').click(function () {
+       // $('personName').attr("readonly","true");
         var formId = encodeURIComponent("parent.UserInfoDlg.data.personId");
         var formName = encodeURIComponent("parent.UserInfoDlg.data.personName");
         var treeUrl = encodeURIComponent("/user/tree");
@@ -71,6 +80,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
                 }
             }
         });
+
     });
 
     //获取岗位下拉框分组多选
@@ -93,17 +103,18 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#belongShip').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                // alert(item.name);
+                // alert(item.shipCode);
+                $('#shipId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
-            form.render();//表单渲染 把内容加载进去
+            form.render('select');//表单渲染 把内容加载进去
         }
     });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        alert(data.shipId);
         var ajax = new $ax(Feng.ctxPath + "/person/add", function (data) {
-            if (data.success = true) {
+            if (data.success) {
                 Feng.success("增加成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框

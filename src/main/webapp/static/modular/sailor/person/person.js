@@ -31,20 +31,29 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '性别', field: 'sex', sort: false, align: "center", templet: function (d) {
                     if (d.sex === 'M')
                         return "<span class='layui-badge layui-bg-blue'>男</span></b>";
-                    else
+                    else if(d.sex === 'F')
                         return "<span class='layui-badge layui-bg-orange'>女</span></b>";
+                    else
+                        return "</b>";
                 }
             },
             {title: '民族', field: 'nation', sort: false, align: "center"},
             {title: '身份证号', field: 'idNumber', sort: false, align: "center"},
             {title: '籍贯', field: 'birthPlace', sort: false, align: "center"},
             {title: '职务', field: 'duty', sort: false, align: "center"},
-            {title: '岗位', field: 'positionId', sort: false, align: "center"},
+            {title: '岗位', field: 'positionId', sort: false, align: "center", hide:true},
             {title: '手机IP', field: 'phoneIp', sort: false, align: "center"},
             {title: '联系方式', field: 'phone', sort: false, align: "center", hide:true},
-            {title: '证书', field: 'certificate', sort: false, align: "center", templet: function (d) {
-                    var url = Feng.ctxPath + '/certificate?id=' + d.certificate;
-                    return '<a style="color: #01AAED;" href="' + url + '">共2张</a>';
+            {title: '证书', field: 'certificateId', sort: false, align: "center", templet: function (d) {
+                    var url = Feng.ctxPath + '/certificate?id=' + d.certificateId;
+                    if(d.certificateId === null || d.certificateId === ''){
+                        return '<a style="color: #01AAED;" href="' + url + '">共0张</a>';
+                    }
+                    else {
+                        var certificateStrs = d.certificateId.split(",");
+                        //alert(certificateStrs);
+                        return '<a style="color: #01AAED;" href="' + url + '">共'+ certificateStrs.length + '张</a>';
+                    }
                 }},
             {title: '政治面貌（枚举）', field: 'political', sort: true, align: "center", hide:true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}

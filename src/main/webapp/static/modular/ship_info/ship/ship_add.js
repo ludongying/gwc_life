@@ -73,27 +73,27 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     //船籍获取下拉框
     $.ajax({
-        url: Feng.ctxPath + '/dict/selectDictListByDictType?code=BOAT_NATION',
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=BOAT_NATION',
         dataType: 'json',
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#nationality').append(new Option(item.name, item.sort));//往下拉菜单里添加元素
+                $('#nationality').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
-            form.render();//表单渲染 把内容加载进去
+            form.render('select');//表单渲染 把内容加载进去
         }
     });
 
     //船舶类型获取下拉框
     $.ajax({
-        url: Feng.ctxPath + '/dict/selectDictListByDictType?code=BOAT_TYPE',
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=BOAT_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#type').append(new Option(item.name, item.sort));//往下拉菜单里添加元素
+                $('#type').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
-            form.render();//表单渲染 把内容加载进去
+            form.render('select');//表单渲染 把内容加载进去
         }
     });
 

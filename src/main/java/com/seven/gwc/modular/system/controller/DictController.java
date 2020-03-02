@@ -138,7 +138,7 @@ public class DictController extends BaseController {
      */
     @RequestMapping(value = "/getDictListByDictTypeCode")
     @ResponseBody
-    public List<DictEntity> selectDictListByDictType(String dictTypeCode) {
+    public List<DictEntity> getDictListByDictTypeCode(String dictTypeCode) {
         return dictService.getDictListByDictTypeCode(dictTypeCode);
     }
 

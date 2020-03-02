@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.ship.dao.ShipWorkPlanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.ship.entity.ShipWorkPlanEntity">
+        <id column="id" property="id" />
+        <result column="ship_id" property="shipId" />
+        <result column="start_date" property="startDate" />
+        <result column="end_date" property="endDate" />
+        <result column="work_content" property="workContent" />
+        <result column="person_ids" property="personIds" />
+        <result column="plan_type" property="planType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ship_id, start_date, end_date, work_content, person_ids, plan_type
+    </sql>
+
+
+</mapper>

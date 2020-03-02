@@ -99,7 +99,7 @@ public class PersonController extends BaseController {
     @ResponseBody
     public BaseResult add(PersonEntity person) {
         ShiroUser user = ShiroKit.getUser();
-        if(personService.addPerson(person, user)){
+        if(!personService.addPerson(person, user)){
             return new BaseResult().failure((ErrorEnum.ERROR_ONLY_PERSON_ID));
         }
         return SUCCESS;

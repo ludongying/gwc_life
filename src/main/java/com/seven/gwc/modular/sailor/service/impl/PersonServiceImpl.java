@@ -2,8 +2,10 @@ package com.seven.gwc.modular.sailor.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.seven.gwc.modular.system.dao.UserMapper;
+import com.seven.gwc.modular.system.entity.RelationEntity;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,66 +59,87 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
         if (personEntity != null) {
             return false;
+        } else {
+            //判断user表是否存在，存在则更新，不存在则插入
+            LambdaQueryWrapper<UserEntity> lambdaQueryUser = Wrappers.<UserEntity>lambdaQuery();
+            lambdaQueryUser.eq(UserEntity::getId, person.getPersonId());
+            UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
+            UserEntity userEntityInput = new UserEntity();
+            if (userEntity != null) {
+                userEntityInput.setId(person.getPersonId());
+                userEntityInput.setName(person.getPersonName());
+                userEntityInput.setBirthday(person.getBirthday());
+                userEntityInput.setPhone(person.getPhone());
+                userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setPositionId(person.getPositionId());
+                userMapper.updateById(userEntityInput);
+            } else {
+                userEntityInput.setName(person.getPersonName());
+                userEntityInput.setBirthday(person.getBirthday());
+                userEntityInput.setPhone(person.getPhone());
+                userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setPositionId(person.getPositionId());
+                userMapper.insert(userEntityInput);
+                //获取新插入的user表id赋值给person表中的person_id
+                LambdaQueryWrapper<UserEntity> lambdaQueryUserNew = Wrappers.<UserEntity>lambdaQuery();
+                lambdaQueryUserNew.eq(UserEntity::getName, person.getPersonName());
+                UserEntity userEntityNew = userMapper.selectOne(lambdaQueryUserNew);
+                person.setPersonId(userEntityNew.getId());
+            }
+            personMapper.insert(person);
         }
-        personMapper.insert(person);
-//        else {
-        //再判断user表是否存在
-//            LambdaQueryWrapper<UserEntity> lambdaQueryUser = Wrappers.lambdaQuery();
-//            lambdaQuery.eq(UserEntity::getId,person.getUserId());
-//            UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
-
-        UserEntity userEntityInput = new UserEntity();
-        userEntityInput.setId(person.getPersonId());
-        userEntityInput.setName(person.getPersonName());
-        userEntityInput.setBirthday(person.getBirthday());
-        userEntityInput.setPhone(person.getPhone());
-        userEntityInput.setEmail(person.getEmail());
-        userEntityInput.setPositionId(person.getPositionId());
-
-//            if(userEntity != null) {
-        //更新
-        userMapper.updateById(userEntityInput);
-//            }else{
-//                //插入
-//                userMapper.insert(userEntityInput);
-//            }
-//        }
-        return true;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void deletePerson(String id, ShiroUser user) {
-        personMapper.deleteById(id);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean editPerson(PersonEntity person, ShiroUser user) {
-        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(PersonEntity::getIdNumber,person.getIdNumber()).ne(PersonEntity::getId,person.getId());
-        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
-        if(personEntity != null){
-            return false;
+            return true;
         }
-        personMapper.updateById(person);
-        //更新user表
-        UserEntity userEntityInput = new UserEntity();
-        userEntityInput.setId(person.getPersonId());
-        userEntityInput.setName(person.getPersonName());
-        userEntityInput.setBirthday(person.getBirthday());
-        userEntityInput.setPhone(person.getPhone());
-        userEntityInput.setEmail(person.getEmail());
-        userEntityInput.setPositionId(person.getPositionId());
 
-//            if(userEntity != null) {
-        //更新
-        userMapper.updateById(userEntityInput);
-        return true;
-    }
+        @Override
+        @Transactional(rollbackFor = Exception.class)
+        public void deletePerson (String id, ShiroUser user){
+            personMapper.deleteById(id);
+        }
 
-    @Override
-    public PersonEntity getOneById(String id) {
-        return personMapper.PersonEntity(id);
+        @Override
+        @Transactional(rollbackFor = Exception.class)
+        public boolean editPerson (PersonEntity person, ShiroUser user){
+            LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
+            lambdaQuery.eq(PersonEntity::getIdNumber, person.getIdNumber()).ne(PersonEntity::getId, person.getId());
+            PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
+            if (personEntity != null) {
+                return false;
+            }
+           else {
+                //判断user表是否存在，存在则更新，不存在则插入
+                LambdaQueryWrapper<UserEntity> lambdaQueryUser = Wrappers.<UserEntity>lambdaQuery();
+                lambdaQueryUser.eq(UserEntity::getId, person.getPersonId());
+                UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
+                UserEntity userEntityInput = new UserEntity();
+                if (userEntity != null) {
+                    userEntityInput.setId(person.getPersonId());
+                    userEntityInput.setName(person.getPersonName());
+                    userEntityInput.setBirthday(person.getBirthday());
+                    userEntityInput.setPhone(person.getPhone());
+                    userEntityInput.setEmail(person.getEmail());
+                    userEntityInput.setPositionId(person.getPositionId());
+                    userMapper.updateById(userEntityInput);
+                } else {
+                    userEntityInput.setName(person.getPersonName());
+                    userEntityInput.setBirthday(person.getBirthday());
+                    userEntityInput.setPhone(person.getPhone());
+                    userEntityInput.setEmail(person.getEmail());
+                    userEntityInput.setPositionId(person.getPositionId());
+                    userMapper.insert(userEntityInput);
+                    //获取新插入的user表id赋值给person表中的person_id
+                    LambdaQueryWrapper<UserEntity> lambdaQueryUserNew = Wrappers.<UserEntity>lambdaQuery();
+                    lambdaQueryUserNew.eq(UserEntity::getName, person.getPersonName());
+                    UserEntity userEntityNew = userMapper.selectOne(lambdaQueryUserNew);
+                    person.setPersonId(userEntityNew.getId());
+                }
+                personMapper.updateById(person);
+            }
+            return true;
+        }
+
+        @Override
+        public PersonEntity getOneById (String id){
+            return personMapper.PersonEntity(id);
+        }
     }
-}

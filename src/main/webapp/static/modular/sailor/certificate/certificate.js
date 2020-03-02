@@ -24,7 +24,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Certificate.initColumn = function () {
         return [[
-            {title: '', field: 'id', align: "center", hidden:true},
+            {title: '', field: 'id', align: "center", hide:true},
             {title: '证书编码', field: 'certificateId', align: "center"},
             {title: '证书名称', field: 'name', align: "center"},
             {title: '归属类型', field: 'ownerType', align: "center"},
@@ -38,8 +38,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '责任部门', field: 'responseDept', align: "center"},
             {title: '发证地点', field: 'certificatePlace', align: "center"},
             {title: '联系方式', field: 'contact', align: "center"},
-            {title: '附件', field: 'attachment', align: "center", hidden: true},
-            {title: '备注', field: 'remark', align: "center", hidden: true},
+            {title: '附件', field: 'attachment', align: "center", hide: true},
+            {title: '备注', field: 'remark', align: "center", hide: true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -57,6 +57,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 左侧搜索
      */
+    // 关闭页面
+    $('#btnBack').click(function () {
+        window.location.href = Feng.ctxPath + "/person";
+    });
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Certificate.search();

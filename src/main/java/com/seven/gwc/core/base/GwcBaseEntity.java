@@ -1,15 +1,18 @@
 package com.seven.gwc.core.base;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author : zzl
  * @description : 渔政船实体父类
  */
+@NoArgsConstructor
 @Data
 public class GwcBaseEntity extends BaseEntity{
 
@@ -37,10 +40,17 @@ public class GwcBaseEntity extends BaseEntity{
      */
     protected Boolean deleteFlag;
 
-    @PostConstruct
-    public void init(){
-       this.createDate=new Date();
-       this.deleteFlag=true;
+
+    public void init(String id,String userId){
+        if(Objects.isNull(id) || id.trim().isEmpty()){
+            this.createPerson=userId;
+            this.createDate=new Date();
+        }else{
+            this.updatePerson=userId;
+            this.updateDate=new Date();
+        }
+        this.deleteFlag=true;
+        this.synFlag=false;
     }
 
 

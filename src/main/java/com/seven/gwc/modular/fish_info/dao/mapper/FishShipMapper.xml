@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.fish_info.dao.FishShipMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.fish_info.entity.FishShipEntity">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="registry" property="registry" />
+        <result column="tonnage" property="tonnage" />
+        <result column="product_date" property="productDate" />
+        <result column="area_type" property="areaType" />
+        <result column="ship_type" property="shipType" />
+        <result column="ship_long" property="shipLong" />
+        <result column="ship_deep" property="shipDeep" />
+        <result column="total_power" property="totalPower" />
+        <result column="ship_owner_id" property="shipOwnerId" />
+        <result column="ship_captain_id" property="shipCaptainId" />
+        <result column="ship_person_count" property="shipPersonCount" />
+        <result column="area" property="area" />
+        <result column="work_type" property="workType" />
+        <result column="should_certificate" property="shouldCertificate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, code, registry, tonnage, product_date, area_type, ship_type, ship_long, ship_deep, total_power, ship_owner_id, ship_captain_id, ship_person_count, area, work_type, should_certificate
+    </sql>
+
+
+</mapper>

@@ -13,4 +13,8 @@ public class FriendListVO {
     private String userName;
     @ApiModelProperty(value = "手机号")
     private String phone;
+    @ApiModelProperty(value = "用户头像")
+    private String avatar;
+    @ApiModelProperty(value = "姓名首字母")
+    private String initials;
 }

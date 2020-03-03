@@ -135,7 +135,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(dictTypeLambda);
 
         LambdaQueryWrapper<DictEntity> dictLambda = Wrappers.lambdaQuery();
-        dictLambda.eq(DictEntity::getDictTypeId, dictTypeEntity.getId());
+        dictLambda.eq(DictEntity::getDictTypeId, dictTypeEntity.getId())
+                .orderByAsc(DictEntity::getSort);
 
         return dictMapper.selectList(dictLambda);
     }

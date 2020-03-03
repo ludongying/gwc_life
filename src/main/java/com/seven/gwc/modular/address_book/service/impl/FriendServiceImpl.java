@@ -2,12 +2,14 @@ package com.seven.gwc.modular.address_book.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.util.ChineseCharacterUtil;
 import com.seven.gwc.modular.address_book.vo.FriendListVO;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
@@ -37,6 +39,8 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
     private FriendMapper friendMapper;
     @Autowired
     private UserMapper userMapper;
+    @Value("${server.ip}")
+    private String ip;
 
     @Override
     public List<FriendListVO> getFriendListByPersonalId(String personalId, String search) {
@@ -53,6 +57,9 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                         friendListVO.setPersonalId(userEntity.getId());
                         friendListVO.setUserName(userEntity.getName());
                         friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                        friendListVO.setInitials(initials.substring(0, 1).toUpperCase());
                         friendListVOList.add(friendListVO);
                     }
                 } else {
@@ -60,6 +67,9 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                     friendListVO.setPersonalId(userEntity.getId());
                     friendListVO.setUserName(userEntity.getName());
                     friendListVO.setPhone(userEntity.getPhone());
+                    friendListVO.setAvatar(ip + userEntity.getAvatar());
+                    String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                    friendListVO.setInitials(initials.substring(0, 1).toUpperCase());
                     friendListVOList.add(friendListVO);
                 }
             }
@@ -77,6 +87,9 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                         friendListVO.setPersonalId(userEntity.getId());
                         friendListVO.setUserName(userEntity.getName());
                         friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                        friendListVO.setInitials(initials.substring(0, 1).toUpperCase());
                         friendListVOList.add(friendListVO);
                     }
                 } else {
@@ -84,6 +97,9 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                     friendListVO.setPersonalId(userEntity.getId());
                     friendListVO.setUserName(userEntity.getName());
                     friendListVO.setPhone(userEntity.getPhone());
+                    friendListVO.setAvatar(ip + userEntity.getAvatar());
+                    String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                    friendListVO.setInitials(initials.substring(0, 1).toUpperCase());
                     friendListVOList.add(friendListVO);
                 }
             }

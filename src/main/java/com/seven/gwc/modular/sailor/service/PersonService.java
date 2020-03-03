@@ -47,7 +47,7 @@ public interface PersonService extends IService<PersonEntity> {
      * @param person 实体对象
      * @param user 当前用户
      */
-    void editPerson(PersonEntity person, ShiroUser user);
+    boolean editPerson(PersonEntity person, ShiroUser user);
 
     /**
      * 通过id获取船员信息

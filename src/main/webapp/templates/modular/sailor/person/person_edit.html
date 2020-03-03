@@ -3,7 +3,9 @@
     <form id="personForm" lay-filter="personForm" class="layui-form">
         <div class="layui-row layui-col-space10">
 
+            <input id="id" name="id" type="hidden" class="layui-input" />
             <input id="personId" name="personId" type="hidden" class="layui-input" />
+
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">船员姓名<span style="color: red;">*</span></label>
@@ -38,9 +40,9 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">民族<span style="color: red;">*</span></label>
+                <label class="layui-form-label">民族</label>
                 <div class="layui-input-block">
-                    <input id="nation" name="nation" placeholder="请输入民族" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="nation" name="nation" placeholder="请输入民族" type="text" class="layui-input"/>
                 </div>
             </div>
 
@@ -54,22 +56,23 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">身份证号<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="idNumber" name="idNumber" placeholder="请输入身份证号" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="idNumber" name="idNumber" placeholder="请输入身份证号" type="text" class="layui-input" lay-verify="required|identity" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">手机IP<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="phoneIp" name="phoneIp" placeholder="请输入手机IP" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="phoneIp" name="phoneIp" placeholder="请输入手机IP" type="text" class="layui-input" lay-verify="required|ip" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">所属执法船</label>
                 <div class="layui-input-block">
-                    <select id="shipId" name="shipId" lay-verify="required" lay-search="">
-                        <option value="">请选择所属执法船</option>
+<!--                    lay-verify="required"-->
+                    <select id="shipId" name="shipId" lay-search="">
+<!--                        <option value="">请选择所属执法船</option>-->
                     </select>
                 </div>
             </div>
@@ -93,7 +96,7 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-block">
-                    <input id="phone" name="phone" placeholder="请输入联系方式" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="phone" name="phone" placeholder="请输入联系方式" type="text" class="layui-input"/>
                 </div>
             </div>
 
@@ -101,7 +104,7 @@
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
                     <input type="text" style="display: none;"/>
-                    <input id="email" name="email" placeholder="请输入邮箱" type="text" value="" class="layui-input" lay-verify="email" autocomplete="off" />
+                    <input id="email" name="email" placeholder="请输入邮箱" type="text" value="" class="layui-input" />
                 </div>
             </div>
 

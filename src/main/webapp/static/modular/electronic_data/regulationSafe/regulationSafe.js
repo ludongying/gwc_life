@@ -39,6 +39,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
     table.render({
         elem: '#' + RegulationSafe.tableId,
         url: Feng.ctxPath + '/regulationSafe/list',
+        where:{
+            type:'REGULATIONS'
+        },
         page: true,
         height: "full-97",
         cellMinWidth: 100,
@@ -65,7 +68,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
         RegulationSafe.openAddRegulationSafe();
     });
 
-
     /**
      * 工具条点击事件
      */
@@ -87,7 +89,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
     RegulationSafe.search = function () {
         var queryData = {};
         queryData['regulationSafeName'] = $("#regulationSafeName").val().trim();
-        queryData['treeId'] = RegulationSafe.condition.treeId;
+        queryData['lawRegularId'] = RegulationSafe.condition.treeId;
         table.reload(RegulationSafe.tableId, {where: queryData});
     };
 
@@ -103,33 +105,21 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
      */
     RegulationSafe.openAddRegulationSafe = function () {
         func.open({
-            title: '增加法律法规/航线安全',
+            title: '增加法律法规',
             area: ['800px', '500px'],
-            content: Feng.ctxPath + '/regulationSafe/regulationSafe_add?treeId=' + RegulationSafe.condition.treeId,
+            content: Feng.ctxPath + '/regulationSafe/navigationSafety_add?treeId=' + RegulationSafe.condition.treeId,
             tableId: RegulationSafe.tableId
         });
     };
 
     /**
-     * 点击编辑法律法规/航线安全
+     * 预览
      */
     RegulationSafe.onPreviewRegulationSafe = function (data) {
         func.open({
             title: '预览',
             maxmin: true,
-            content: Feng.ctxPath + '/system/previewPdf?fileName='+ data.fileName
-        });
-    };
-
-    /**
-     * 点击查看法律法规/航线安全
-     */
-    RegulationSafe.onDetailRegulationSafe = function (data) {
-        func.open({
-            title: '查看法律法规/航线安全',
-            area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/regulationSafe/regulationSafe_detail?regulationSafeId=' + data.id,
-            tableId: RegulationSafe.tableId
+            content: Feng.ctxPath + '/system/previewPdf?fileName=' + data.fileName
         });
     };
 
@@ -140,21 +130,43 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
      * @param data 点击按钮时候的行数据
      */
     RegulationSafe.onDeleteRegulationSafe = function (data) {
-        Feng.confirm("是否删除法律法规/航线安全《" + data.name + "》吗?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/regulationSafe/delete", function (data) {
-                if (data.success) {
-                    Feng.success("删除成功!");
-                    table.reload(RegulationSafe.tableId);
-                } else {
-                    Feng.error(data.message);
-                }
-            }, function (data) {
-                Feng.error("删除失败!" + data.message + "!");
-            });
-            ajax.set("regulationSafeId", data.id);
-            ajax.start();
+        Feng.confirm("是否删除法律法规《" + data.name + "》吗?", function () {
+            if (deleteFile(data.fileName)) {
+                var ajax = new $ax(Feng.ctxPath + "/regulationSafe/delete", function (data) {
+                    if (data.success) {
+                        Feng.success("删除成功!");
+                        table.reload(RegulationSafe.tableId);
+                    } else {
+                        Feng.error(data.message);
+                    }
+                }, function (data) {
+                    Feng.error("删除失败!" + data.message + "!");
+                });
+                ajax.set("regulationSafeId", data.id);
+                ajax.start();
+            }
+            return false
         });
     };
+
+
+    function deleteFile(fileName) {
+        var deleteStatus = false;
+        $.ajax({
+            url: Feng.ctxPath + '/system/deleteFile',
+            type: "GET",
+            async: false,
+            data: {
+                fileName: fileName
+            },
+            success: function (res) {
+                if (res.CODE === 200) {
+                    deleteStatus = true;
+                }
+            }
+        });
+        return deleteStatus;
+    }
 
 
     RegulationSafe.onClickTree = function (e, treeId, treeNode) {

@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
+        locale: 'zh-cn',
         editable: true,
         droppable: true,
         drop: function(arg) {

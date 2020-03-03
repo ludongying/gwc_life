@@ -16,6 +16,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var laydate = layui.laydate;
 
 
+
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
@@ -42,7 +43,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     $('#pName').click(function () {
         var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
         var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
-        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode=LAWS_REGULATION");
+        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode="+Feng.getUrlParam('code'));
 
         layer.open({
             type: 2,

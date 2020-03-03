@@ -29,12 +29,19 @@
             law_regulation_safe l
             LEFT JOIN sys_dict d ON l.law_regular_id = d.id
             WHERE
-            l.delete_flag = 0
+            l.delete_flag = 1
         <if test="regulationSafeName != null and regulationSafeName != ''">
              AND l.name like CONCAT('%',#{regulationSafeName},'%')
         </if>
         <if test="type != null and type != ''">
-            AND l.type like =#{type}
+            AND l.type = #{type}
+        </if>
+
+        <if test="type != null and type != ''">
+            AND l.type = #{type}
+        </if>
+        <if test="lawRegularId != null and lawRegularId != ''">
+            AND l.law_regular_id = #{lawRegularId}
         </if>
     </select>
 

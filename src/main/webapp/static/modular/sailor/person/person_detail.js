@@ -13,7 +13,7 @@ var UserInfoDlg = {
         sex: "",
         phone: "",
         email: "",
-        position_id: ""
+        positionId: ""
     }
 };
 
@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'formSelects'], function () {
 
     //获取岗位下拉框分组多选
     $.ajax({
-        url: Feng.ctxPath + '/position/listPositions?ids='+result.position_id,
+        url: Feng.ctxPath + '/position/listPositions?ids='+result.positionId,
         dataType: 'json',
         type: 'get',
         success: function (data) {
@@ -54,10 +54,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'formSelects'], function () {
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#belongShip').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                $('#shipId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
-            $('#belongShip').val(result.shipId);
-            form.render();//表单渲染 把内容加载进去
+            $('#shipId').val(result.shipId);
+            form.render('select');//表单渲染 把内容加载进去
         }
     });
 

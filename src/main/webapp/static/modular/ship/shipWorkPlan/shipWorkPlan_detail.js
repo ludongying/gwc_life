@@ -1,5 +1,5 @@
 /**
- * 法律法规/航线安全详情对话框
+ * 工作计划详情对话框
  */
 
 
@@ -11,12 +11,12 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
-    //初始化法律法规/航线安全的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/regulationSafe/detail/" + Feng.getUrlParam("regulationSafeId"));
+    //初始化工作计划的详情数据
+    var ajax = new $ax(Feng.ctxPath + "/shipWorkPlan/detail/" + Feng.getUrlParam("shipWorkPlanId"));
     var result = ajax.start();
-    form.val('regulationSafeForm',result);
+    form.val('shipWorkPlanForm',result);
 
 
 });

@@ -100,11 +100,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
             async: false,
             data: {
                 name: $('#name').val(),
-                type: 'SAFE'
+                type: 'REGULATIONS'
             },
             success: function (data) {
                 if (data) {
                     insertStatus = data;
+                }else {
+                    Feng.error("文件名称已存在!");
                 }
             }
         });
@@ -114,7 +116,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         if ($('#fileName').val() === "") {
-            layer.msg("附件不能为空");
+            Feng.error("附件不能为空");
             return false
         } else {
             console.log(selectOnlyByName());

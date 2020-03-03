@@ -54,7 +54,7 @@
     </select>
 
     <select id="tree" resultType="com.seven.gwc.core.node.ZTreeNode">
-		SELECT id AS id, birthday, sex, email, phone, position_id, '#' AS "pId", name AS name,'true' AS "open"
+		SELECT id AS id, birthday, sex, email, phone, position_id, '' AS "pId", name AS name,'true' AS "open"
         FROM sys_user ORDER BY id asc
 	</select>
 

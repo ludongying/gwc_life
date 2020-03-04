@@ -47,8 +47,11 @@ public class ShipController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "ship";
+        return PREFIX + "ship_detail_main";
     }
+//    public String index() {
+//        return PREFIX + "ship";
+//    }
 
     /**
      * 跳转到添加执法船信息管理
@@ -143,5 +146,41 @@ public class ShipController extends BaseController {
     public List<ShipEntity> listShips(String id) {
         return shipService.listShips(id);
     }
+
+    /**
+     * 获取执法船信息管理列表
+     */
+    @RequestMapping("/detailFirst")
+    @ResponseBody
+    public ShipEntity shipFirst(ShipEntity shipEntity) {
+        List<ShipEntity> ships = shipService.selectShip(shipEntity);
+        return ships.get(0);
+    }
+
+    /**
+     * 多船舶图片上传
+     */
+    @RequestMapping("/upload")
+    @ResponseBody
+    public void upload(){
+//        $pathName  =  $this->request->param('path');//图片存放的目录
+//        $file = request()->file('file');//获取文件信息
+//        $path =  'static/uploads/' . (!empty($pathName) ? $pathName : 'case_images');//文件目录
+//        //创建文件夹
+//        if(!is_dir($path)){
+//            mkdir($path, 0755, true);
+//        }
+//        $info = $file->move($path);//保存在目录文件下
+//        if ($info && $info->getPathname()) {
+//            $data = [
+//            'status' => 1,
+//                    'data' =>  '/'.$info->getPathname(),
+//        ];
+//            echo exit(json_encode($data));
+//        } else {
+//            echo exit(json_encode($file->getError()));
+//        }
+    }
+
 }
 

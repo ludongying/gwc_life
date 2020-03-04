@@ -73,11 +73,18 @@ public class CertificateController extends BaseController {
     }
 
     /**
+     * 跳转到查看证书列表页面
+     */
+    @RequestMapping("certificate_list")
+     public String certificateList(String id,String htmltype){return PREFIX + "certificate";}
+
+    /**
      * 获取证书信息列表
      */
     @RequestMapping("/list")
     @ResponseBody
     public BaseResultPage<CertificateEntity> list(String certificateName) {
+//    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName);

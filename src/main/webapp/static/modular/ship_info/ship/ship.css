@@ -1,112 +1,53 @@
-.ship-info-head {
-    width: 150px;
-    height: 100px;
-    position: relative;
+.my-form-label {
+    float: left;
+    display: block;
+    /*padding: 9px 15px;*/
+    width: 90px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+}
+
+.my-form-label-edit {
+    float: left;
+    display: block;
+    padding: 9px 15px;
+    width: 80px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+}
+
+.label-long-text{
+    float: left;
+    display: block;
+    /*padding: 5px 15px;*/
+    width: 70%;
+    font-weight: bolder;
+    line-height: 20px;
+    text-align: left;
+}
+
+.label-long-text-title{
+    float: left;
     display: inline-block;
+    padding: 5px 15px;
+    width: 100%;
+    font-weight: bolder;
+    line-height: 200px;
+    text-align: left;
 }
 
-.ship-info-head:hover:after {
-    content: '\e65d';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    color: #eee;
-    background: rgba(0, 0, 0, 0.5);
-    font-family: layui-icon;
-    font-size: 24px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    cursor: pointer;
-    line-height: 100px;
-    border-radius: 10%;
-    text-align: center;
-}
-
-.ship-info-head img {
-    width: 150px;
-    height: 100px;
-    border-radius: 10%;
-}
-
-.ship-info-head-unedit {
-    width: 150px;
-    height: 100px;
-    position: relative;
+.img-thumbnail {
     display: inline-block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
-
-.ship-info-head-unedit img {
-    width: 150px;
-    height: 100px;
-    border-radius: 10%;
-}
-
-/*.info-list-item {*/
-/*    position: relative;*/
-/*    padding-bottom: 8px;*/
-/*}*/
-
-/*.info-list-item > .layui-icon {*/
-/*    position: absolute;*/
-/*}*/
-
-/*.info-list-item > p {*/
-/*    padding-left: 30px;*/
-/*}*/
-
-/*.dash {*/
-/*    border-bottom: 1px dashed #ccc;*/
-/*    margin: 15px 0;*/
-/*}*/
-
-/*.layui-badge-list .layui-badge {*/
-/*    margin-right: 6px;*/
-/*}*/
-
-/*.layui-badge-list .layui-badge {*/
-/*    padding: 2px 7px;*/
-/*    border: 1px solid #ccc;*/
-/*    margin-bottom: 8px;*/
-/*    background-color: #fafafa !important;*/
-/*}*/
-
-/*.bd-list-item {*/
-/*    padding: 14px 0;*/
-/*    border-bottom: 1px solid #e8e8e8;*/
-/*    position: relative;*/
-/*}*/
-
-/*.bd-list-item .bd-list-item-img {*/
-/*    width: 48px;*/
-/*    height: 48px;*/
-/*    line-height: 48px;*/
-/*    margin-right: 12px;*/
-/*    display: inline-block;*/
-/*    vertical-align: middle;*/
-/*}*/
-
-/*.bd-list-item .bd-list-item-content {*/
-/*    display: inline-block;*/
-/*    vertical-align: middle;*/
-/*}*/
-
-/*.bd-list-item .bd-list-item-lable {*/
-/*    margin-bottom: 4px;*/
-/*    color: #333;*/
-/*}*/
-
-/*.bd-list-item .bd-list-item-oper {*/
-/*    position: absolute;*/
-/*    right: 0;*/
-/*    top: 50%;*/
-/*    text-decoration: none !important;*/
-/*    cursor: pointer;*/
-/*    transform: translateY(-50%);*/
-/*}*/
-
-/*.user-info-form .layui-form-item {*/
-/*    margin-bottom: 25px;*/
-/*}*/

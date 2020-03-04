@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * @author : zzl
  * @Date: 2020-03-02
- * @description :性别枚举
+ * @description :性别
  */
 @Getter
 public enum SexEnum implements IEnum<Integer> {

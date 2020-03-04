@@ -50,7 +50,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         });
     });
 
-
     //选完文件后不自动上传
     var uploadInst = upload.render({
         elem: '#upload'
@@ -61,12 +60,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         , auto: false
         // , bindAction: '#btnSubmit'
         , choose: function (obj) {
+            obj.pushFile().getFiles()
             var files = obj.pushFile();
             obj.preview(function (index, file, result) {
-                $('.layui-upload').append('<span class="layui-inline layui-upload-choose">' + file.name + '</span>');
-                if ($('#name').val() === "") {
-                    $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));
-                }
+                $('#choose').remove();
+                $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));
+                $('.layui-upload').append('<span id="choose" class="layui-inline layui-upload-choose">' + file.name + '</span>');
                 $('#fileName').val(file.name)
             });
         }

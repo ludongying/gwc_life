@@ -16,5 +16,5 @@ public class FriendListVO {
     @ApiModelProperty(value = "用户头像")
     private String avatar;
     @ApiModelProperty(value = "姓名首字母")
-    private String initials;
+    private String initial;
 }

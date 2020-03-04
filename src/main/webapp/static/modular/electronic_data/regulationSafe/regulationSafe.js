@@ -107,7 +107,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
         func.open({
             title: '增加法律法规',
             area: ['800px', '500px'],
-            content: Feng.ctxPath + '/regulationSafe/navigationSafety_add?treeId=' + RegulationSafe.condition.treeId,
+            content: Feng.ctxPath + '/regulationSafe/regulationSafe_add?treeId=' + RegulationSafe.condition.treeId,
             tableId: RegulationSafe.tableId
         });
     };

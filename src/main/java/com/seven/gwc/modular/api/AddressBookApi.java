@@ -7,6 +7,7 @@ import com.seven.gwc.modular.address_book.service.GroupPersonService;
 import com.seven.gwc.modular.address_book.vo.FriendListVO;
 import com.seven.gwc.modular.address_book.vo.GroupPersonalVO;
 import com.seven.gwc.modular.address_book.vo.GroupVO;
+import com.seven.gwc.modular.address_book.vo.InitialsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,7 +40,7 @@ public class AddressBookApi extends BaseController {
     public BaseResult<List<FriendListVO>> getFriendListByPersonalId(HttpServletRequest request,
                             @ApiParam( name = "search", value = "查询条件")String search){
         String userId = request.getAttribute("userId").toString();
-        List<FriendListVO> listVO = friendService.getFriendListByPersonalId(userId, search);
+        List<InitialsVO> listVO = friendService.getFriendListByPersonalId(userId, search);
         return new BaseResult().content(listVO);
     }
 

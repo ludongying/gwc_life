@@ -18,8 +18,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
     //图片轮播
     var ins =  carousel.render({
         elem: '#imgBoat'
-        , width: '90%'
-        , height: '240px'
+        // , width: '90%'
+        // , height: '240px'
         , arrow: 'always'
         , indicator: 'inside'
     });

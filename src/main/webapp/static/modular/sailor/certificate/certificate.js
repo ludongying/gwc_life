@@ -27,13 +27,20 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '', field: 'id', align: "center", hide:true},
             {title: '证书编码', field: 'certificateId', align: "center"},
             {title: '证书名称', field: 'name', align: "center"},
-            {title: '归属类型', field: 'ownerType', align: "center"},
-            {title: '证书类型', field: 'certificateType', align: "center"},
+            {title: '归属类型', field: 'ownerTypeName', align: "center"},
+            {title: '证书类型', field: 'certificateTypeName', align: "center"},
             {title: '签发机构', field: 'issuer', align: "center"},
-            {title: '签发日期', field: 'issueDate', align: "center"},
-            {title: '到期日期', field: 'outDate', align: "center"},
+            {title: '签发日期', field: 'issueDate', align: "center", templet: "<div>{{layui.util.toDateString(d.birthday, 'yyyy-MM-dd')}}</div>"},
+            {title: '到期日期', field: 'outDate', align: "center", templet: "<div>{{layui.util.toDateString(d.birthday, 'yyyy-MM-dd')}}</div>"},
             {title: '存放地点', field: 'storePlace', align: "center"},
-            {title: '是否常用', field: 'isOften', align: "center"},
+            {title: '是否常用', field: 'isOften', align: "center", templet: function (d) {
+                    if (d.isOften === 0)
+                        return "<span class='layui-badge layui-bg-blue'>常用</span></b>";
+                    else if(d.isOften === 1)
+                        return "<span class='layui-badge layui-bg-orange'>不常用</span></b>";
+                    else
+                        return "</b>";
+                }},
             {title: '窗口期', field: 'windowPhase', align: "center"},
             {title: '责任部门', field: 'responseDept', align: "center"},
             {title: '发证地点', field: 'certificatePlace', align: "center"},
@@ -120,7 +127,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Certificate.openAddCertificate = function () {
         func.open({
             title: '增加证书信息',
-            area: ['1000px', '500px'],
+            area: ['1000px', '600px'],
             content: Feng.ctxPath + '/certificate/certificate_add',
             tableId: Certificate.tableId
         });
@@ -132,7 +139,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Certificate.onEditCertificate = function (data) {
         func.open({
             title: '编辑证书信息',
-            area: ['1000px', '500px'],
+            area: ['1000px', '600px'],
             content: Feng.ctxPath + '/certificate/certificate_edit?certificateId=' + data.id,
             tableId: Certificate.tableId
         });

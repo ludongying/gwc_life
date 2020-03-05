@@ -1,5 +1,8 @@
 package com.seven.gwc.modular.sailor.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import java.io.Serializable;
@@ -21,6 +24,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CertificateEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
 
     /** 证书编码 */
@@ -30,24 +35,28 @@ public class CertificateEntity implements Serializable {
     private String name;
 
     /** 归属类型：船员or船舶 */
-    private Integer ownerType;
+    private String ownerType;
+    @TableField(exist=false)
+    private String ownerTypeName;
 
     /** 证书类型 */
-    private Integer certificateType;
+    private String certificateType;
+    @TableField(exist=false)
+    private String certificateTypeName;
 
     /** 签发机构 */
     private String issuer;
 
     /** 签发日期 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date issueDate;
 
     /** 到期日期 */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date outDate;
 
     /** 存放地点 */
-    private Integer storePlace;
+    private String storePlace;
 
     /** 是否常用 */
     private Integer isOften;

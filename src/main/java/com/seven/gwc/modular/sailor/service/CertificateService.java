@@ -29,7 +29,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    void addCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean addCertificate(CertificateEntity certificate, ShiroUser user);
 
     /**
      * 证书信息删除

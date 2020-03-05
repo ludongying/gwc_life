@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.sailor.controller;
 
+import com.seven.gwc.core.state.ErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -99,7 +100,9 @@ public class CertificateController extends BaseController {
     @ResponseBody
     public BaseResult add(CertificateEntity certificate) {
         ShiroUser user = ShiroKit.getUser();
-        certificateService.addCertificate(certificate, user);
+        if(!certificateService.addCertificate(certificate, user)){
+            return new BaseResult().failure((ErrorEnum.ERROR_ONLY_CERTIFICATE_ID));
+        }
         return SUCCESS;
     }
 

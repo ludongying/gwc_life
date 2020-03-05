@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.sailor.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.entity.DictEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Service;
@@ -29,17 +31,43 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
 
     @Autowired
     private CertificateMapper certificateMapper;
+    @Autowired
+    private DictMapper dictMapper;
 
     @Override
     public List<CertificateEntity> selectCertificate(String certificateName){
         LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
-        return certificateMapper.selectList(lambdaQuery);
+
+        List<CertificateEntity> list = certificateMapper.selectList(lambdaQuery);
+        for(CertificateEntity certificateEntity : list){
+            if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
+                DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());
+                if(certificateTypeDict!= null){
+                    certificateEntity.setCertificateTypeName(certificateTypeDict.getName());
+                }
+            }
+            if(ToolUtil.isNotEmpty(certificateEntity.getOwnerType())){
+                DictEntity ownerTypeDict = dictMapper.selectById(certificateEntity.getOwnerType());
+                if(ownerTypeDict != null){
+                    certificateEntity.setOwnerTypeName(ownerTypeDict.getName());
+                }
+            }
+        }
+        return list;
     }
 
     @Override
-    public void addCertificate(CertificateEntity certificate, ShiroUser user) {
+    public boolean addCertificate(CertificateEntity certificate, ShiroUser user) {
+        //判断证书编码是否存在
+        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(CertificateEntity::getId,certificate.getId());
+        CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
+        if(certificateEntity!=null){
+            return false;
+        }
         certificateMapper.insert(certificate);
+        return true;
     }
 
     @Override

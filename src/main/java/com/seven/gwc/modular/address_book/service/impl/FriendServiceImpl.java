@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.address_book.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.util.ChineseCharacterUtil;
 import com.seven.gwc.modular.address_book.vo.FriendListVO;
@@ -44,70 +45,11 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
     private String ip;
 
     @Override
-    public List<InitialsVO> getFriendListByPersonalId(String personalId, String search) {
-        System.out.println(System.currentTimeMillis());
+    public List<InitialsVO> getFriendListByPersonalId(String personalId) {
         List<InitialsVO> initialsVOList = new ArrayList<>();
-        List<FriendListVO> friendListVOList = new ArrayList<>();
-        LambdaQueryWrapper<FriendEntity> lambdaQuery1 = Wrappers.lambdaQuery();
-        lambdaQuery1.eq(FriendEntity::getPerson1Id, personalId);
-        List<FriendEntity> friendEntityList1 = friendMapper.selectList(lambdaQuery1);
-        for (FriendEntity friendEntity : friendEntityList1) {
-            UserEntity userEntity = userMapper.selectById(friendEntity.getPerson2Id());
-            if (ToolUtil.isNotEmpty(userEntity)) {
-                if (ToolUtil.isNotEmpty(search)) {
-                    if (userEntity.getName().contains(search) || userEntity.getPhone().contains(search)) {
-                        FriendListVO friendListVO = new FriendListVO();
-                        friendListVO.setPersonalId(userEntity.getId());
-                        friendListVO.setUserName(userEntity.getName());
-                        friendListVO.setPhone(userEntity.getPhone());
-                        friendListVO.setAvatar(ip + userEntity.getAvatar());
-                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
-                        friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
-                        friendListVOList.add(friendListVO);
-                    }
-                } else {
-                    FriendListVO friendListVO = new FriendListVO();
-                    friendListVO.setPersonalId(userEntity.getId());
-                    friendListVO.setUserName(userEntity.getName());
-                    friendListVO.setPhone(userEntity.getPhone());
-                    friendListVO.setAvatar(ip + userEntity.getAvatar());
-                    String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
-                    friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
-                    friendListVOList.add(friendListVO);
-                }
-            }
-        }
 
-        LambdaQueryWrapper<FriendEntity> lambdaQuery2 = Wrappers.lambdaQuery();
-        lambdaQuery2.eq(FriendEntity::getPerson2Id, personalId);
-        List<FriendEntity> friendEntityList2 = friendMapper.selectList(lambdaQuery2);
-        for (FriendEntity friendEntity : friendEntityList2) {
-            UserEntity userEntity = userMapper.selectById(friendEntity.getPerson1Id());
-            if (ToolUtil.isNotEmpty(userEntity)) {
-                if (ToolUtil.isNotEmpty(search)) {
-                    if (userEntity.getName().contains(search) || userEntity.getPhone().contains(search)) {
-                        FriendListVO friendListVO = new FriendListVO();
-                        friendListVO.setPersonalId(userEntity.getId());
-                        friendListVO.setUserName(userEntity.getName());
-                        friendListVO.setPhone(userEntity.getPhone());
-                        friendListVO.setAvatar(ip + userEntity.getAvatar());
-                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
-                        friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
-                        friendListVOList.add(friendListVO);
-                    }
-                } else {
-                    FriendListVO friendListVO = new FriendListVO();
-                    friendListVO.setPersonalId(userEntity.getId());
-                    friendListVO.setUserName(userEntity.getName());
-                    friendListVO.setPhone(userEntity.getPhone());
-                    friendListVO.setAvatar(ip + userEntity.getAvatar());
-                    String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
-                    friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
-                    friendListVOList.add(friendListVO);
-                }
-            }
-        }
-        System.out.println(System.currentTimeMillis());
+        List<FriendListVO> friendListVOList = this.getFriendListVO(personalId);
+
         for(int i = 1; i<=26; i++){
             InitialsVO  initialsVO = new InitialsVO();
             initialsVO.setInitial(String.valueOf(Character.toUpperCase((char)(96+i))));
@@ -118,7 +60,8 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                     friendList.setPersonalId(friendListVO.getPersonalId());
                     friendList.setUserName(friendListVO.getUserName());
                     friendList.setPhone(friendListVO.getPhone());
-                    friendList.setAvatar(ip + friendListVO.getAvatar());
+                    friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+                    // friendList.setAvatar(friendListVO.getAvatar());
                     String initials = ChineseCharacterUtil.convertHanzi2Pinyin(friendListVO.getUserName(), true);
                     friendList.setInitial(initials.substring(0, 1).toUpperCase());
                     friendListVOS.add(friendListVO);
@@ -126,23 +69,19 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
             }
             initialsVO.setFriendListVOList(friendListVOS);
             initialsVOList.add(initialsVO);
-            //System.out.println(  Character.toUpperCase( (char)(96+i))  );//大写
         }
-        System.out.println(System.currentTimeMillis());
+
         return initialsVOList;
     }
 
     @Override
     public BaseResult addFriend(String userId, String personalId) {
-        if (userId.equals(personalId)) {
-            return new BaseResult(500, "不能添加自己为好友");
-        }
         LambdaQueryWrapper<FriendEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(FriendEntity::getPerson1Id, userId)
                 .eq(FriendEntity::getPerson2Id, personalId);
         FriendEntity friendEntity = friendMapper.selectOne(lambdaQuery);
         if (ToolUtil.isNotEmpty(friendEntity)) {
-            return new BaseResult(500, "已是好友，不可重复添加");
+            return new BaseResult(false, 500, "已是好友，不可重复添加");
         }
 
         LambdaQueryWrapper<FriendEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -150,7 +89,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                 .eq(FriendEntity::getPerson2Id, userId);
         FriendEntity friend = friendMapper.selectOne(lambdaQueryWrapper);
         if (ToolUtil.isNotEmpty(friend)) {
-            return new BaseResult(500, "已是好友，不可重复添加");
+            return new BaseResult(false, 500, "已是好友，不可重复添加");
         }
 
         FriendEntity entity = new FriendEntity();
@@ -158,7 +97,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
         entity.setPerson2Id(personalId);
         friendMapper.insert(entity);
 
-        return new BaseResult(200, "操作成功");
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override
@@ -168,7 +107,7 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                 .eq(FriendEntity::getPerson2Id, personalId);
         FriendEntity friendEntity = friendMapper.selectOne(lambdaQuery);
         if (ToolUtil.isNotEmpty(friendEntity)) {
-            friendMapper.deleteById(friendEntity);
+            friendMapper.delete(lambdaQuery);
         }
 
         LambdaQueryWrapper<FriendEntity> lambdaQueryWrapper = Wrappers.lambdaQuery();
@@ -176,8 +115,145 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
                 .eq(FriendEntity::getPerson2Id, userId);
         FriendEntity friend = friendMapper.selectOne(lambdaQueryWrapper);
         if (ToolUtil.isNotEmpty(friend)) {
-            friendMapper.deleteById(friendEntity);
+            friendMapper.delete(lambdaQueryWrapper);
         }
-        return new BaseResult(200, "操作成功");
+        return new BaseResult(true,200, "操作成功");
+    }
+
+    @Override
+    public List<FriendListVO> searchFriendList(String personalId, String search) {
+        List<FriendListVO> friendListVOList = new ArrayList<>();
+        if (ToolUtil.isNotEmpty(search)) {
+            LambdaQueryWrapper<FriendEntity> lambdaQuery1 = Wrappers.lambdaQuery();
+            lambdaQuery1.eq(FriendEntity::getPerson1Id, personalId);
+            List<FriendEntity> friendEntityList1 = friendMapper.selectList(lambdaQuery1);
+            for (FriendEntity friendEntity : friendEntityList1) {
+                UserEntity userEntity = userMapper.selectById(friendEntity.getPerson2Id());
+                if (ToolUtil.isNotEmpty(userEntity)) {
+                    if (userEntity.getName().contains(search) || userEntity.getPhone().contains(search)) {
+                        FriendListVO friendListVO = new FriendListVO();
+                        friendListVO.setPersonalId(userEntity.getId());
+                        friendListVO.setUserName(userEntity.getName());
+                        friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+                        // friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                        friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
+                        friendListVOList.add(friendListVO);
+                    }
+                }
+            }
+
+            LambdaQueryWrapper<FriendEntity> lambdaQuery2 = Wrappers.lambdaQuery();
+            lambdaQuery2.eq(FriendEntity::getPerson2Id, personalId);
+            List<FriendEntity> friendEntityList2 = friendMapper.selectList(lambdaQuery2);
+            for (FriendEntity friendEntity : friendEntityList2) {
+                UserEntity userEntity = userMapper.selectById(friendEntity.getPerson1Id());
+                if (ToolUtil.isNotEmpty(userEntity)) {
+                    if (userEntity.getName().contains(search) || userEntity.getPhone().contains(search)) {
+                        FriendListVO friendListVO = new FriendListVO();
+                        friendListVO.setPersonalId(userEntity.getId());
+                        friendListVO.setUserName(userEntity.getName());
+                        friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+                        // friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                        friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
+                        friendListVOList.add(friendListVO);
+                    }
+                }
+            }
+        }
+
+        return friendListVOList;
+    }
+
+    @Override
+    public List<FriendListVO> addSearchFriendList(String personalId, String search) {
+        List<FriendListVO> friendList = new ArrayList<>();
+        if (ToolUtil.isNotEmpty(search)) {
+            QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda()
+                    .and(obj -> obj.like(UserEntity::getName, search).or().like(UserEntity::getPhone, search));
+            List<UserEntity> userEntityList = userMapper.selectList(queryWrapper);
+
+            //获取好友列表，用来判断搜索用户是不是现有好友
+            List<FriendListVO> friendListVOList = this.getFriendListVO(personalId);
+
+            List<String> friendIds = new ArrayList<>();
+            for (FriendListVO friendListVO : friendListVOList) {
+                friendIds.add(friendListVO.getPersonalId());
+            }
+
+            for (UserEntity userEntity : userEntityList) {
+                if (!userEntity.getId().equals(personalId)) {
+                    if (friendIds.contains(userEntity.getId())) {
+                        FriendListVO friendListVO = new FriendListVO();
+                        friendListVO.setPersonalId(userEntity.getId());
+                        friendListVO.setUserName(userEntity.getName());
+                        friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+                        // friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        friendListVO.setFlag(true);
+                        friendList.add(friendListVO);
+                    } else {
+                        FriendListVO friendListVO = new FriendListVO();
+                        friendListVO.setPersonalId(userEntity.getId());
+                        friendListVO.setUserName(userEntity.getName());
+                        friendListVO.setPhone(userEntity.getPhone());
+                        friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+                        // friendListVO.setAvatar(ip + userEntity.getAvatar());
+                        friendListVO.setFlag(false);
+                        friendList.add(friendListVO);
+                    }
+                }
+            }
+        }
+        return friendList;
+    }
+
+    /**
+     * 通过用户ID获取好友列表
+     * @param personalId
+     * @return
+     */
+    public List<FriendListVO> getFriendListVO(String personalId) {
+        //好友列表
+        List<FriendListVO> friendListVOList = new ArrayList<>();
+        LambdaQueryWrapper<FriendEntity> lambdaQuery1 = Wrappers.lambdaQuery();
+        lambdaQuery1.eq(FriendEntity::getPerson1Id, personalId);
+        List<FriendEntity> friendEntityList1 = friendMapper.selectList(lambdaQuery1);
+        for (FriendEntity friendEntity : friendEntityList1) {
+            UserEntity userEntity = userMapper.selectById(friendEntity.getPerson2Id());
+            if (ToolUtil.isNotEmpty(userEntity)) {
+                FriendListVO friendListVO = new FriendListVO();
+                friendListVO.setPersonalId(userEntity.getId());
+                friendListVO.setUserName(userEntity.getName());
+                friendListVO.setPhone(userEntity.getPhone());
+                friendListVO.setAvatar(ip + userEntity.getAvatar());
+                String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
+                friendListVOList.add(friendListVO);
+            }
+        }
+
+        LambdaQueryWrapper<FriendEntity> lambdaQuery2 = Wrappers.lambdaQuery();
+        lambdaQuery2.eq(FriendEntity::getPerson2Id, personalId);
+        List<FriendEntity> friendEntityList2 = friendMapper.selectList(lambdaQuery2);
+        for (FriendEntity friendEntity : friendEntityList2) {
+            UserEntity userEntity = userMapper.selectById(friendEntity.getPerson1Id());
+            if (ToolUtil.isNotEmpty(userEntity)) {
+                FriendListVO friendListVO = new FriendListVO();
+                friendListVO.setPersonalId(userEntity.getId());
+                friendListVO.setUserName(userEntity.getName());
+                friendListVO.setPhone(userEntity.getPhone());
+                friendListVO.setAvatar(ip + userEntity.getAvatar());
+                String initials = ChineseCharacterUtil.convertHanzi2Pinyin(userEntity.getName(), true);
+                friendListVO.setInitial(initials.substring(0, 1).toUpperCase());
+                friendListVOList.add(friendListVO);
+            }
+        }
+
+        return friendListVOList;
     }
 }

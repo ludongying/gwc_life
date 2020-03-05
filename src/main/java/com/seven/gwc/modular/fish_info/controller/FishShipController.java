@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.fish_info.controller;
 
+import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
+import com.seven.gwc.modular.lawrecord.data.export.ExcelData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -127,5 +129,12 @@ public class FishShipController extends BaseController {
         return fishShipService.detailFishShip(fishShipId);
     }
 
+    @RequestMapping("/exportExcel")
+    @ResponseBody
+    public void exportExcel(String code, String phone, String shipType) {
+        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(code, phone, shipType);
+        List<ExportExcelVO> exportExcelVOList = fishShipService.getExportData(shipEntityList);
+        new ExcelData<>(exportExcelVOList){}.exportExcel();
+    }
 }
 

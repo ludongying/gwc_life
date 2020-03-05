@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.core.util.CalculationDateUtil;
+import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
 import com.seven.gwc.modular.fish_info.service.FishShipService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +40,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public List<FishShipEntity> selectFishShip(String code, String phone, String shipType){
-        LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.<FishShipEntity>lambdaQuery();
+        LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(code), FishShipEntity::getCode, code)
                 .like(ToolUtil.isNotEmpty(phone), FishShipEntity::getPhone, phone)
                 .eq(ToolUtil.isNotEmpty(shipType), FishShipEntity::getShipType, shipType);
@@ -99,6 +103,55 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
         DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
         fishShipEntity.setWorkTypeName(workTypeDict.getName());
         return fishShipEntity;
+    }
+
+    @Override
+    public List<ExportExcelVO> getExportData(List<FishShipEntity> shipEntityList) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        List<ExportExcelVO> exportDataList = new ArrayList<>();
+        for (FishShipEntity fishShipEntity : shipEntityList) {
+            ExportExcelVO exportExcelVO = new ExportExcelVO();
+            exportExcelVO.setName(fishShipEntity.getName());
+            if (ToolUtil.isNotEmpty(fishShipEntity.getAreaType())) {
+                DictEntity areaTypeDict = dictMapper.selectById(fishShipEntity.getAreaType());
+                exportExcelVO.setAreaTypeName(areaTypeDict.getName());
+            }
+            exportExcelVO.setCode(fishShipEntity.getCode());
+            exportExcelVO.setRegistry(fishShipEntity.getRegistry());
+            if (ToolUtil.isNotEmpty(fishShipEntity.getShipType())) {
+                DictEntity shipTypeDict = dictMapper.selectById(fishShipEntity.getShipType());
+                exportExcelVO.setShipTypeName(shipTypeDict.getName());
+            }
+            exportExcelVO.setHullMaterial(fishShipEntity.getHullMaterial());
+            DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
+            exportExcelVO.setWorkTypeName(workTypeDict.getName());
+            exportExcelVO.setShipLong(fishShipEntity.getShipLong());
+            exportExcelVO.setShipWide(fishShipEntity.getShipWide());
+            exportExcelVO.setShipDeep(fishShipEntity.getShipDeep());
+            exportExcelVO.setTotalPower(fishShipEntity.getTotalPower());
+            exportExcelVO.setTonnage(fishShipEntity.getTonnage());
+            exportExcelVO.setProductDate(sdf.format(fishShipEntity.getProductDate()));
+            if (ToolUtil.isNotEmpty(fishShipEntity.getProductDate())) {
+                Integer shipAge = CalculationDateUtil.getAge(fishShipEntity.getProductDate());
+                exportExcelVO.setShipAge(shipAge);
+            }
+
+            exportExcelVO.setShipOwner(fishShipEntity.getShipOwner());
+            exportExcelVO.setIdentity(fishShipEntity.getIdentity());
+            exportExcelVO.setPhone(fishShipEntity.getPhone());
+            exportExcelVO.setAddress(fishShipEntity.getAddress());
+            if (ToolUtil.isNotEmpty(fishShipEntity.getSeaState())) {
+                DictEntity seaStateDict = dictMapper.selectById(fishShipEntity.getSeaState());
+                exportExcelVO.setSeaStateName(seaStateDict.getName());
+            }
+            if (fishShipEntity.getKeyPoints()) {
+                exportExcelVO.setKeyPoints("是");
+            } else {
+                exportExcelVO.setKeyPoints("否");
+            }
+            exportDataList.add(exportExcelVO);
+        }
+        return exportDataList;
     }
 
 }

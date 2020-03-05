@@ -17,4 +17,6 @@ public class FriendListVO {
     private String avatar;
     @ApiModelProperty(value = "姓名首字母")
     private String initial;
+    @ApiModelProperty(value = "是否是好友(true是，false不是)")
+    private Boolean flag;
 }

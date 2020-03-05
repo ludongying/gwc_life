@@ -3,6 +3,7 @@ package com.seven.gwc.modular.fish_info.service;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
 
 import java.util.List;
 
@@ -55,5 +56,7 @@ public interface FishShipService extends IService<FishShipEntity> {
      * @param fishShipId 实体ID
      */
     FishShipEntity detailFishShip(String fishShipId);
+
+    List<ExportExcelVO> getExportData(List<FishShipEntity> shipEntityList);
 
 }

@@ -80,6 +80,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         FishShip.openAddFishShip();
     });
 
+    // 导出按钮点击事件
+    $('#btnExport').click(function () {
+        FishShip.openExportFishShip();
+    });
+
 
     /**
      * 工具条点击事件
@@ -140,6 +145,20 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             content: Feng.ctxPath + '/fishShip/fishShip_add',
             tableId: FishShip.tableId
         });
+    };
+
+    FishShip.openExportFishShip = function () {
+        var code = $("#code").val().trim();
+        var phone = $("#phone").val().trim();
+        var shipType = $("#shipType").val();
+
+        var exportForm = $("<form action='/fishShip/exportExcel' method='post'></form>");
+        exportForm.append("<input type='hidden' name='code' value='" + code + "'/>");
+        exportForm.append("<input type='hidden' name='phone' value='" + phone + "'/>");
+        exportForm.append("<input type='hidden' name='shipType' value='" + shipType + "'/>");
+        $(document.body).append(exportForm);
+        exportForm.submit();
+        exportForm.remove();
     };
 
     /**

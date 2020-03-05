@@ -3,6 +3,7 @@ package com.seven.gwc.modular.address_book.service;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.address_book.entity.FriendEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.address_book.vo.FriendListVO;
 import com.seven.gwc.modular.address_book.vo.InitialsVO;
 
 import java.util.List;
@@ -37,5 +38,15 @@ public interface FriendService extends IService<FriendEntity> {
      * @param personalId 用户ID
      * @return
      */
-    List<InitialsVO> getFriendListByPersonalId(String personalId, String search);
+    List<InitialsVO> getFriendListByPersonalId(String personalId);
+
+    /**
+     * 好友列表查询
+     * @param personalId 用户ID
+     * @param search 查询条件
+     * @return
+     */
+    List<FriendListVO> searchFriendList(String personalId, String search);
+
+    List<FriendListVO> addSearchFriendList(String personalId, String search);
 }

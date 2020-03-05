@@ -37,10 +37,25 @@ public class AddressBookApi extends BaseController {
 
     @GetMapping(value = "/getFriendListByPersonalId")
     @ApiOperation(value = "获取好友列表")
-    public BaseResult<List<FriendListVO>> getFriendListByPersonalId(HttpServletRequest request,
-                            @ApiParam( name = "search", value = "查询条件")String search){
+    public BaseResult<List<InitialsVO>> getFriendListByPersonalId(HttpServletRequest request){
         String userId = request.getAttribute("userId").toString();
-        List<InitialsVO> listVO = friendService.getFriendListByPersonalId(userId, search);
+        List<InitialsVO> listVO = friendService.getFriendListByPersonalId(userId);
+        return new BaseResult().content(listVO);
+    }
+
+    @GetMapping(value = "/searchFriendList")
+    @ApiOperation(value = "好友列表查询")
+    public BaseResult<List<FriendListVO>> searchFriendList(HttpServletRequest request, String search) {
+        String userId = request.getAttribute("userId").toString();
+        List<FriendListVO> listVO = friendService.searchFriendList(userId, search);
+        return new BaseResult().content(listVO);
+    }
+
+    @GetMapping(value = "/addSearchFriendList")
+    @ApiOperation(value = "添加好友查询")
+    public BaseResult<List<FriendListVO>> addSearchFriendList(HttpServletRequest request, String search) {
+        String userId = request.getAttribute("userId").toString();
+        List<FriendListVO> listVO = friendService.addSearchFriendList(userId, search);
         return new BaseResult().content(listVO);
     }
 

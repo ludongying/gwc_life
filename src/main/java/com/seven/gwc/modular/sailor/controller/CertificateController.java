@@ -45,7 +45,7 @@ public class CertificateController extends BaseController {
      * 跳转到证书信息首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(String ids) {
         return PREFIX + "certificate";
     }
 
@@ -82,13 +82,16 @@ public class CertificateController extends BaseController {
     /**
      * 获取证书信息列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/{ids}")
     @ResponseBody
-    public BaseResultPage<CertificateEntity> list(String certificateName) {
+    public BaseResultPage<CertificateEntity> list(String certificateName,@PathVariable String ids) {
 //    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
+        if(ids.equals("null")){
+            ids="";
+        }
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName);
+        List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName,ids);
         PageInfo pageInfo = new PageInfo<>(certificates);
         return new BaseResultPage().createPage(pageInfo);
     }

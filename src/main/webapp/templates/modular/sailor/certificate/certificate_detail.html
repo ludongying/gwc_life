@@ -6,37 +6,36 @@
             <input name="id" type="hidden"/>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label"></label>
-                <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">证书编码</label>
+                <label class="layui-form-label">证书编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="certificateId" name="certificateId" placeholder="请输入证书编码" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">证书名称</label>
+                <label class="layui-form-label">证书名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="name" name="name" placeholder="请输入证书名称" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">归属类型：船员or船舶</label>
+                <label class="layui-form-label">归属类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="ownerType" name="ownerType" placeholder="请输入归属类型：船员or船舶" type="text" class="layui-input" disabled="disabled"/>
+                    <!--                    <input id="ownerType" name="ownerType" placeholder="请输入归属类型：船员or船舶" type="text" class="layui-input" lay-verify="required" required/>-->
+                    <select id="ownerType" name="ownerType" lay-verify="required" lay-search="" disabled="disabled">
+                        <option value="">归属类型</option>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">证书类型</label>
+                <label class="layui-form-label">证书类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="certificateType" name="certificateType" placeholder="请输入证书类型" type="text" class="layui-input" disabled="disabled"/>
+                    <!--                    <input id="certificateType" name="certificateType" placeholder="请输入证书类型" type="text" class="layui-input" lay-verify="required" required/>-->
+                    <select id="certificateType" name="certificateType" lay-verify="required" lay-search="" disabled="disabled">
+                        <option value="">证书类型</option>
+                    </select>
                 </div>
             </div>
 
@@ -50,14 +49,14 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">签发日期</label>
                 <div class="layui-input-block">
-                    <input id="issueDate" name="issueDate" placeholder="请输入签发日期" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="issueDate" name="issueDate" placeholder="请输入签发日期" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">到期日期</label>
+                <label class="layui-form-label">到期日期<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="outDate" name="outDate" placeholder="请输入到期日期" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="outDate" name="outDate" placeholder="请输入到期日期" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
                 </div>
             </div>
 
@@ -71,7 +70,9 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">是否常用</label>
                 <div class="layui-input-block">
-                    <input id="isOften" name="isOften" placeholder="请输入是否常用" type="text" class="layui-input" disabled="disabled"/>
+                    <!--                    <input id="isOften" name="isOften" placeholder="请输入是否常用" type="text" class="layui-input" lay-verify="required" required/>-->
+                    <input id="often" type="radio" name="isOften" value="0" title="是" disabled="disabled" checked/>
+                    <input id="notOften" type="radio" name="isOften" value="1" title="否" disabled="disabled"/>
                 </div>
             </div>
 
@@ -104,17 +105,28 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">附件</label>
-                <div class="layui-input-block">
-                    <input id="attachment" name="attachment" placeholder="请输入附件" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">
                     <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" disabled="disabled"/>
                 </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">证书附件</label>
+                <!--                <div class="layui-input-block">-->
+                <!--                    <input id="attachment" name="attachment" placeholder="请输入附件" type="text" class="layui-input" lay-verify="required" required/>-->
+                <!--                </div>-->
+                <div class="layui-input-block layui-upload">
+<!--                    <button type="button" class="layui-btn" id="PreviewBtn">图片上传</button>-->
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        预览图：
+                        <div class="layui-upload-list" id="attachment"></div>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="layui-col-md12 text-right">
+                <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
             </div>
 
         </div>

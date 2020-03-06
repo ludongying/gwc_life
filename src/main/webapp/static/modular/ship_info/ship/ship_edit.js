@@ -14,7 +14,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
 
     laydate.render({
         elem: '#finishDate',
-        type: 'date'
+        type: 'date',
+        trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应

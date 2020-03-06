@@ -26,6 +26,18 @@
     <sql id="Base_Column_List">
         id, certificate_id, name, owner_type, certificate_type, issuer, issue_date, out_date, store_place, is_often, window_phase, response_dept, certificate_place, contact, attachment, remark
     </sql>
+    <select id="CertificateEntityList" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
+        select c.* from ship_info_certificate c
+        <where>
+            <if test="certificateName != null and certificateName != ''">
+                c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%')
+            </if>
+            <if test="ids != null and ids != ''">
+                and c.id in (#{ids})
+            </if>
+        </where>
+
+    </select>
 
 
 </mapper>

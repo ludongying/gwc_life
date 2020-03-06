@@ -18,10 +18,10 @@ public interface CertificateService extends IService<CertificateEntity> {
     /**
      * 证书信息查询列表
      *
-     * @param certificateName 名称
+     * @param certificateName 名称;ids 所属的所有证书编码
      * @return List<证书信息服务对象>
      */
-    List<CertificateEntity> selectCertificate(String certificateName);
+    List<CertificateEntity> selectCertificate(String certificateName, String ids);
 
     /**
      * 证书信息新建

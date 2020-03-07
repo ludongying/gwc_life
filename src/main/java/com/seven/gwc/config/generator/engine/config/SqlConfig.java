@@ -104,7 +104,7 @@ public class SqlConfig {
         for (MenuEntity menuEntity : menus) {
             PreparedStatement pstmt = null;
             try {
-                pstmt = connection.prepareStatement("INSERT INTO `gwc`.`sys_menu` (`code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `sort`, `levels`, `menu_flag`, `description`, `status`, `open_flag`,`id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);");
+                pstmt = connection.prepareStatement("INSERT INTO `gwc_work`.`sys_menu` (`code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `sort`, `levels`, `menu_flag`, `description`, `status`, `open_flag`,`id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);");
                 pstmt.setString(1, menuEntity.getCode());
                 pstmt.setString(2, menuEntity.getPcode());
                 pstmt.setString(3, menuEntity.getPcodes());

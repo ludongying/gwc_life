@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.lawrecord.dao.InquisitionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.entity.InquisitionEntity">
+        <id column="id" property="id" />
+        <result column="ship_case_name" property="shipCaseName" />
+        <result column="ship_case_registry" property="shipCaseRegistry" />
+        <result column="ship_registry" property="shipRegistry" />
+        <result column="ship_case_card" property="shipCaseCard" />
+        <result column="ship_case_credentials" property="shipCaseCredentials" />
+        <result column="ship_case_fish" property="shipCaseFish" />
+        <result column="ship_credentials_code" property="shipCredentialsCode" />
+        <result column="ship_code" property="shipCode" />
+        <result column="ship_operate_person" property="shipOperatePerson" />
+        <result column="ship_power" property="shipPower" />
+        <result column="ship_credentials_owner" property="shipCredentialsOwner" />
+        <result column="ship_credentials_owner_identity" property="shipCredentialsOwnerIdentity" />
+        <result column="ship_status" property="shipStatus" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_person" property="updatePerson" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="syn_flag" property="synFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ship_case_name, ship_case_registry, ship_registry, ship_case_card, ship_case_credentials, ship_case_fish, ship_credentials_code, ship_code, ship_operate_person, ship_power, ship_credentials_owner, ship_credentials_owner_identity, ship_status, create_date, update_date, create_person, update_person, delete_flag, syn_flag
+    </sql>
+
+
+</mapper>

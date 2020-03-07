@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.lawrecord.dao.LawRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.entity.LawRecordEntity">
+        <id column="id" property="id" />
+        <result column="status" property="status" />
+        <result column="prospect_date" property="prospectDate" />
+        <result column="inquire_date" property="inquireDate" />
+        <result column="tel_apply_date" property="telApplyDate" />
+        <result column="accept_date" property="acceptDate" />
+        <result column="deal_date" property="dealDate" />
+        <result column="punish_date" property="punishDate" />
+        <result column="decision_date" property="decisionDate" />
+        <result column="finish_date" property="finishDate" />
+        <result column="law_type" property="lawType" />
+        <result column="writ" property="writ" />
+        <result column=" Illegal_ship_name" property=" illegalShipName" />
+        <result column=" Illegal_person" property=" illegalPerson" />
+        <result column=" Illegal_person_tel" property=" illegalPersonTel" />
+        <result column="create_date" property="createDate" />
+        <result column="source" property="source" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, status, prospect_date, inquire_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date, law_type, writ,  Illegal_ship_name,  Illegal_person,  Illegal_person_tel, create_date, source
+    </sql>
+
+
+</mapper>

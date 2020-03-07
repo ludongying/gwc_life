@@ -55,9 +55,7 @@ public class ExportExcel {
         Font titleFont = wb.createFont();
         titleFont.setFontName("微软雅黑");
         titleFont.setBoldweight((short)10);
-        // titleFont.setFontHeightInPoints((short) 14);
         titleFont.setColor(IndexedColors.BLACK.index);
-
         XSSFCellStyle titleStyle = wb.createCellStyle();
         titleStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
         titleStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
@@ -84,18 +82,14 @@ public class ExportExcel {
 
         Font dataFont = wb.createFont();
         dataFont.setFontName("simsun");
-        // dataFont.setFontHeightInPoints((short) 14);
         dataFont.setColor(IndexedColors.BLACK.index);
-
         XSSFCellStyle dataStyle = wb.createCellStyle();
         dataStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
         dataStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
         dataStyle.setFont(dataFont);
-        //setBorder(dataStyle, BorderStyle.THIN, new XSSFColor(new Color(0, 0, 0)));
 
         for (List<Object> rowData : rows) {
             Row dataRow = sheet.createRow(rowIndex);
-            // dataRow.setHeightInPoints(25);
             colIndex = 0;
 
             for (Object cellData : rowData) {

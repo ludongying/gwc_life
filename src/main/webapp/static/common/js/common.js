@@ -129,6 +129,7 @@ layui.config({
 });
 
 
+
 /**
  * 文件上传 下载
  * @param $ layui对象
@@ -148,7 +149,7 @@ layui.config({
  *    2选择多文件  <button id="select_list">选择多文件</button> id必须为select_list
  *    3开始上传 <button id="start_upload">选择多文件</button> id必须为start_upload
  */
-function initFiles($,upload,fileParam,index){
+var initFiles=function ($,upload,fileParam,index){
     if(!index){
         index='';
     }
@@ -193,20 +194,21 @@ function initFiles($,upload,fileParam,index){
             }
             ,done: function(res, index, upload){
                 if(res.success){ //上传成功
-                var tr = demoListView.find('tr#upload-'+ index);
-                var tds = tr.children();
-                tds.eq(2).html('<span style="color: #5FB878;" data-file-path="'+res.content.path+'">已上传</span>');
-                tds.eq(3).html('');
-                if(fileParam.delete){
-                    tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete-2" data-file-path="'+res.content.path+'">删除</button>');
+                    var tr = demoListView.find('tr#upload-'+ index);
+                    var tds = tr.children();
+                    tds.eq(2).html('<span style="color: #5FB878;" data-file-path="'+res.content.path+'">已上传</span>');
+                    tds.eq(3).html('');
+                    if(fileParam.delete){
+                        tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete-2" data-file-path="'+res.content.path+'">删除</button>');
+                    }
+                    if(fileParam.down){
+                        tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-down-1" data-file-path="'+res.content.path+'">下载</button>');
+                    }
+                    addClickEvent(tr);
+                    delete this.files[index]; //删除文件队列已经上传成功的文件
+                    // saveFilePath(res.content.path);
+                    return;
                 }
-                if(fileParam.down){
-                    tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-down-1" data-file-path="'+res.content.path+'">下载</button>');
-                }
-                addClickEvent(tr);
-                delete this.files[index]; //删除文件队列已经上传成功的文件
-                return;
-            }
                 this.error(index, upload);
             }
             ,error: function(index, upload){
@@ -271,4 +273,8 @@ function initFiles($,upload,fileParam,index){
         dlform.submit();
         document.body.removeChild(dlform);
     }
+
+
+
+
 }

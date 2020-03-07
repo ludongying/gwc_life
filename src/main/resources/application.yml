@@ -9,7 +9,7 @@ spring:
       max-file-size: 10MB                                   #单个文件的大小
       max-request-size: 100MB                               #单次请求的文件的总大小
   profiles:
-    active: @spring.active@                                 #默认开发环境
+    active: test                                #默认开发环境
   mvc:
     view:
       prefix: /templates                                    #指定视图的前缀路径
@@ -27,6 +27,9 @@ beetl:
 # MyBatis
 mybatis-plus:
   typeAliasesPackage: com.seven.gwc.modular.*.entity        # 搜索指定包别名
+  typeEnumsPackage: com.seven.gwc.core.state,com.seven.gwc.modular.*.enums
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
   mapper-locations:                                         # 配置mapper的扫描，找到所有的mapper.xml映射文件
     - classpath*:/com/seven/gwc/modular/*/dao/mapper/*Mapper.xml
   global-config:
@@ -38,7 +41,6 @@ logging:                                                    #日志配置
     com.seven.gwc.modular.system.dao: debug
   pattern:
     console: '%d %clr(%p) : %m%n'
-
 
 
 
@@ -63,11 +65,17 @@ FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理�
 
 ############################### start代码生成配置字段start ###############################
 
+#genQo:
+#  Driver: com.mysql.cj.jdbc.Driver
+#  Url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+#  UserName: gwc
+#  Password: ^5ADg#^5v2ZGF%rT
 genQo:
   Driver: com.mysql.cj.jdbc.Driver
-  Url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-  UserName: gwc
-  Password: ^5ADg#^5v2ZGF%rT
+  Url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+  UserName: root
+  Password: 123456
+
 
 ################################# end代码生成配置字段end #################################
 
@@ -87,8 +95,8 @@ spring:
   profiles: test                                            #测试环境
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-    username: gwcTest
+    url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
     password: 123456
 
 ---

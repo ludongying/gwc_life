@@ -118,6 +118,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Ship.onEditShip = function (data) {
         func.open({
             title: '编辑执法船信息',
+            area: ['1000px', '500px'],
             content: Feng.ctxPath + '/ship/ship_edit?shipId=' + data.id,
             tableId: Ship.tableId
         });

@@ -25,7 +25,8 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         "delete":false,
         "down":true,
         "exts":'png|jpg|jpeg|avi|mp4',
-        "size":20*1024
+        "size":20*1024,
+        "preview":true
         }
 
         initPage();
@@ -90,14 +91,9 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
                     for(var i=0;i<data_length;i++){
                         var index = initContent();
                         var evidence=content[i];
-
-                        initFiles($,upload,{
-                            delete:fileParam.delete,
-                            down:fileParam.down,
-                            exts:fileParam.exts,
-                            size:fileParam.size,
-                            data:evidence.path
-                        },index);
+                        var param=Object.assign({},fileParam);;
+                        param.data=evidence.path;
+                        initFiles($,upload,param,index);
                         var inputs = $("#evidence_box .content_"+index+" input");
                         if(inputs){
                             if(inputs.length>2){

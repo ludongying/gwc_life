@@ -26,7 +26,7 @@ public class EvidenceDTO implements Serializable {
         this.id=entity.getId();
         this.evidenceContent=entity.getEvidenceContent();
         this.evidenceTime= DateTimeUtil.parse2String(entity.getEvidenceDate(),"yyyy-MM-dd HH:mm:ss");
-        this.path=FileUtils.listFile(entity.getEvidenceFilePath());
+
     }
 
 }

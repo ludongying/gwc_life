@@ -22,10 +22,7 @@ public class FileData extends FileBase{
      * 文件存储名称
      */
     protected String realName;
-    /**
-     * 文件类型
-     */
-    private Integer type;
+
     /**
      * 文件尺寸
      */

@@ -19,6 +19,15 @@ public class FileBase implements Serializable {
      * 物理地址
      */
     protected String path;
+    /**
+     * 预览地址
+     */
+    protected String url;
+
+    /**
+     * 文件类型
+     */
+    private Integer type;
 
 
     public FileBase(String path) {

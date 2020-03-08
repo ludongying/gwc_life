@@ -3,6 +3,8 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.dto.EvidenceDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
@@ -32,6 +34,9 @@ public class EvidenceServiceImpl extends ServiceImpl<EvidenceMapper, EvidenceEnt
     @Autowired
     private LawRecordService lawRecordService;
 
+    @Autowired
+    private FileManager fileManager;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateEvidence(LawEvidenceVO vo) {
@@ -60,7 +65,9 @@ public class EvidenceServiceImpl extends ServiceImpl<EvidenceMapper, EvidenceEnt
         List<EvidenceEntity> list = this.list(wrapper);
         if(Objects.nonNull(list) && !list.isEmpty()){
             for (EvidenceEntity evidenceEntity : list) {
-                datas.add(new EvidenceDTO(evidenceEntity));
+                EvidenceDTO evidenceDTO = new EvidenceDTO(evidenceEntity);
+                evidenceDTO.setPath(fileManager.listFile(evidenceEntity.getEvidenceFilePath()));
+                datas.add(evidenceDTO);
             }
             result.setContent(datas);
         }

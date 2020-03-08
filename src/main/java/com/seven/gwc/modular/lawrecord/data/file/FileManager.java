@@ -24,7 +24,8 @@ public class FileManager {
 
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String dirPath;
-
+    @Value("${server.ip}")
+    private String ip;
 
     /**
      * 上传单个文件
@@ -44,6 +45,8 @@ public class FileManager {
                     Files.write(path, bytes);
                     FileBase fileBase=new FileBase();
                     fileBase.setPath(fileFullName);
+                    fileBase.setUrl(ip+FileUtils.file_sep+ fileName);
+                    fileBase.setType(FileUtils.getFileType(fileName).getCode());
                     result.setContent(fileBase);
                     result.setSuccess(true);
                 }catch (IOException e){
@@ -115,6 +118,41 @@ public class FileManager {
         }catch (Exception e){
             log.error(">>>>>文件流生成关闭异常");
         }
+    }
+
+
+    /**
+     * 加载文件列表
+     * @param paths
+     * @return
+     */
+    public List<FileData> listFile(Collection<String> paths){
+        List<FileData> list=new ArrayList<>();
+        if(Objects.nonNull(paths) && !paths.isEmpty()){
+            paths = paths.stream().map(String::trim).filter(p->!p.isEmpty()).filter(FileUtils::existFile).collect(Collectors.toList());
+            if(!paths.isEmpty()){
+                for (String path : paths) {
+                    FileData data = FileUtils.getByPath(path);
+                    data.setUrl(ip+FileUtils.file_sep+data.getRealName());
+                    list.add(data);
+                }
+            }
+        }
+        return list;
+    }
+    /**
+     * 加载文件列表--单个字段存路径 ","分隔路径
+     * @param pathStr
+     * @return
+     */
+    public List<FileData> listFile(String pathStr){
+        if(Objects.nonNull(pathStr) && !pathStr.trim().isEmpty()){
+            String[] list = pathStr.split(FileUtils.file_2_file_sep);
+            if(Objects.nonNull(list) && list.length>0){
+                return listFile(Arrays.asList(list));
+            }
+        }
+        return listFile(new ArrayList<>());
     }
 
 

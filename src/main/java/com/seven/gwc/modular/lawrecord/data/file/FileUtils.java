@@ -113,38 +113,6 @@ public class FileUtils {
         return null;
     }
 
-    /**
-     * 加载文件列表
-     * @param paths
-     * @return
-     */
-    public static List<FileData> listFile(Collection<String> paths){
-        List<FileData> list=new ArrayList<>();
-        if(Objects.nonNull(paths) && !paths.isEmpty()){
-            paths = paths.stream().map(String::trim).filter(p->!p.isEmpty()).filter(FileUtils::existFile).collect(Collectors.toList());
-            if(!paths.isEmpty()){
-                for (String path : paths) {
-                    list.add(FileUtils.getByPath(path));
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 加载文件列表--单个字段存路径 ","分隔路径
-     * @param pathStr
-     * @return
-     */
-    public static List<FileData> listFile(String pathStr){
-        if(Objects.nonNull(pathStr) && !pathStr.trim().isEmpty()){
-            String[] list = pathStr.split(FileUtils.file_2_file_sep);
-            if(Objects.nonNull(list) && list.length>0){
-                return listFile(Arrays.asList(list));
-            }
-        }
-        return listFile(new ArrayList<>());
-    }
 
 
 }

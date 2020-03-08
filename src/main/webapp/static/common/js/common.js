@@ -129,7 +129,6 @@ layui.config({
 });
 
 
-
 /**
  * 文件上传 下载
  * @param $ layui对象
@@ -138,8 +137,9 @@ layui.config({
  *        {
  *            delete: true 上传成功后 是否可以删除文件
  *            down: true   上传成功后 是否提供下载功能
+ *            preview: true 图片上传成功后预览
  *            ext:  layui 限制文件格式 参考官方
- *            data:[] 后台FileUtils-->listFile 接口返回对象
+ *            data:[] 后台FileManager-->listFile 接口返回对象
  *        }
  *@param index id索引 （索引大于0 或者有意义的字符串）
  *             一个页面中出现多个上传框的时候避免id重复设置
@@ -148,6 +148,7 @@ layui.config({
  *    1文件列表 <tbody id="file_list"></tbody> id必须为 file_list
  *    2选择多文件  <button id="select_list">选择多文件</button> id必须为select_list
  *    3开始上传 <button id="start_upload">选择多文件</button> id必须为start_upload
+ *
  */
 var initFiles=function ($,upload,fileParam,index){
     if(!index){
@@ -173,8 +174,8 @@ var initFiles=function ($,upload,fileParam,index){
                         ,'<td>'+ (file.size/1024).toFixed(1) +'kb</td>'
                         ,'<td>等待上传</td>'
                         ,'<td>'
-                        ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-                        ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        ,'<button type="button" style="margin-left: 0" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        ,'<button type="button" style="margin-left: 0" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
                         ,'</td>'
                         ,'</tr>'].join(''));
 
@@ -204,6 +205,9 @@ var initFiles=function ($,upload,fileParam,index){
                     if(fileParam.down){
                         tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-down-1" data-file-path="'+res.content.path+'">下载</button>');
                     }
+                    if(fileParam.preview && res.content.type===1){
+                        tds.eq(3).append('<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-preview-1" data-file-path="'+res.content.url+'">预览</button>');
+                    }
                     addClickEvent(tr);
                     delete this.files[index]; //删除文件队列已经上传成功的文件
                     // saveFilePath(res.content.path);
@@ -227,6 +231,21 @@ var initFiles=function ($,upload,fileParam,index){
         tr.find('.demo-down-1').on('click', function(){
             downLoad(Feng.ctxPath + "/file/downFile",$(this).data("filePath"));
         });
+        tr.find('.demo-preview-1').on('click', function(){
+            var url = $(this).data("filePath");
+            if(url){
+                layer.open({
+                    type: 1,
+                    area:'auto',
+                    offset: '100px',
+                    title:false,
+                    closeBtn:false,
+                    shadeClose:true,
+                    content: '<img src="'+url+'"/>'
+                });
+            }
+
+        });
     }
     function addData(data){
         if(data){
@@ -236,12 +255,17 @@ var initFiles=function ($,upload,fileParam,index){
                     var file=data[i];
                     var td_del='';
                     var td_down='';
+                    var td_preview='';
                     if(fileParam.delete){
                         td_del='<button type="button" class="layui-btn layui-btn-xs layui-btn-danger demo-delete-2" data-file-path="'+file.path+'">删除</button>'
                     }
                     if(fileParam.down){
                         td_down='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-down-1" data-file-path="'+file.path+'">下载</button>';
                     }
+                    if(fileParam.preview && file.type===1){
+                        td_preview='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-preview-1" data-file-path="'+file.url+'">预览</button>';
+                    }
+
                     var tr = $(['<tr id="upload-'+ index +'">'
                         ,'<td>'+ file.name +'</td>'
                         ,'<td>'+ (file.length/1024).toFixed(1) +'kb</td>'
@@ -249,6 +273,7 @@ var initFiles=function ($,upload,fileParam,index){
                         ,'<td>'
                         ,td_del
                         ,td_down
+                        ,td_preview
                         ,'</td>'
                         ,'</tr>'].join(''));
                     addClickEvent(tr);

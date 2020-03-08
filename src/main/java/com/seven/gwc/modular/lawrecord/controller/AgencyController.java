@@ -30,7 +30,7 @@ public class AgencyController extends BaseController {
      * 办案机关
      */
     @RequestMapping("")
-    public String agency(String lawType,String id, Model model) {
+    public String agency(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         //案件来源

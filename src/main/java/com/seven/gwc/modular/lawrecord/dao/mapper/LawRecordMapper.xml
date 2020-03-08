@@ -27,6 +27,54 @@
     <sql id="Base_Column_List">
         id, status, prospect_date, inquire_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date, law_type, writ,  Illegal_ship_name,  Illegal_person,  Illegal_person_tel, create_date, source
     </sql>
+    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
+        SELECT
+            law_record.id,
+            law_record.law_type,
+            CONCAT(law_record_agency.law_case_fine_code,'罚',law_record_agency.law_case_code,'号') law_case_code,
+            law_record_agency.law_case_source,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
+            law_record.create_date
+        FROM
+            law_record
+        LEFT JOIN law_record_agency ON law_record.id=law_record_agency.id
+        LEFT JOIN law_record_inquire ON law_record.id=law_record_inquire.id
+        LEFT JOIN law_record_inquire_safe ON law_record.id=law_record_inquire_safe.id
+        <where>
+            <if test="lawType!=null and lawType>0 ">
+                law_record.law_type =#{lawType}
+            </if>
+            <if test="lawCaseCode!=null and lawCaseCode!=''">
+                AND CONCAT(law_record_agency.law_case_fine_code,'罚',law_record_agency.law_case_code,'号')=#{lawCaseCode}
+            </if>
+            <if test="shipName!=null and shipName!=''">
+                AND (
+                    law_record_inquire.ship_name like CONCAT("%",#{shipName},"%")
+                    or
+                    law_record_inquire_safe.ship_name like CONCAT("%",#{shipName},"%")
+                )
+            </if>
+            <if test="investigateTel!=null and investigateTel!=''">
+                AND (law_record_inquire.investigate_tel=#{investigateTel} or law_record_inquire_safe.investigate_tel=#{investigateTel})
+            </if>
+            <if test="investigateName!=null and investigateName!=''">
+                AND (
+                     law_record_inquire.investigate_name like CONCAT("%",#{investigateName},"%")
+                     or
+                     law_record_inquire_safe.investigate_name like CONCAT("%",#{investigateName},"%")
+                     )
+            </if>
+            <if test="createStartTime!=null and createStartTime!='' ">
+                AND law_record.create_date &gt; #{createStartTime}
+            </if>
+            <if test="createEndTime!=null and createEndTime!=''">
+                AND law_record.create_date &lt; #{createEndTime}
+            </if>
+        </where>
+
+    </select>
 
 
 </mapper>

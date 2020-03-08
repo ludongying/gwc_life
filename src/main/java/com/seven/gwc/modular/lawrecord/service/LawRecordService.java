@@ -1,8 +1,11 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
+import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 
 import java.util.List;
 
@@ -28,6 +31,15 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      * @return
      */
     LawRecordEntity createLawRecord(String userId,Integer lawType);
+
+
+    /**
+     * 加载列表
+     * @param lawRecordVO
+     * @return
+     */
+    BaseResultPage<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO);
+
 
 
 

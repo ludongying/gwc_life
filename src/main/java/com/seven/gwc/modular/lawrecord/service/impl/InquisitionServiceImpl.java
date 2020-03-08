@@ -13,6 +13,7 @@ import com.seven.gwc.modular.lawrecord.entity.InquisitionEntity;
 import com.seven.gwc.modular.lawrecord.dao.InquisitionMapper;
 import com.seven.gwc.modular.lawrecord.service.InquisitionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ public class InquisitionServiceImpl extends ServiceImpl<InquisitionMapper, Inqui
     private LawRecordService lawRecordService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquisition(InquisitionVO vo) {
         String id=vo.getId();
         //新建

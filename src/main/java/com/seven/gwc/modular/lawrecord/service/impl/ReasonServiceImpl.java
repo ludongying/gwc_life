@@ -8,6 +8,7 @@ import com.seven.gwc.modular.lawrecord.service.ReasonService;
 import com.seven.gwc.modular.lawrecord.vo.ReasonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ public class ReasonServiceImpl implements ReasonService {
     private LawRecordService lawRecordService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public BaseResult updateReason(ReasonVO vo) {
         String id=vo.getId();
         LawRecordEntity lawRecordEntity;

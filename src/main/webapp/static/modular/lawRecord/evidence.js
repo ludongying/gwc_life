@@ -54,9 +54,7 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
             var ajax = new $ax(Feng.ctxPath + "/lawRecord/evidence/detail?id="+$("#id").val());
             var result = ajax.start();
             if(result.content){
-                if(!setDatas(result)){
-                    //多文件列表示例
-                    initFiles($,upload,fileParam,initContent());
+                if(setDatas(result)){
                     return;
                 }
             }

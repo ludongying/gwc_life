@@ -14,6 +14,7 @@ import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import com.seven.gwc.modular.lawrecord.dao.EvidenceMapper;
 import com.seven.gwc.modular.lawrecord.service.EvidenceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class EvidenceServiceImpl extends ServiceImpl<EvidenceMapper, EvidenceEnt
     private LawRecordService lawRecordService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public BaseResult updateEvidence(LawEvidenceVO vo) {
         String id=vo.getId();
         //新建

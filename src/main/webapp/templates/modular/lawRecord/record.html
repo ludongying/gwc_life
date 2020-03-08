@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/lawRecord/lawRecord.js"]}){
+@layout("/common/_container.html",{js:["/modular/lawRecord/record.js"]}){
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -8,25 +8,25 @@
 
                             <div class="layui-form-item">
                                 <div class="layui-inline">
-                                    <input  class="layui-input" type="text" placeholder="案件编号"/>
+                                    <input id="lawCaseCode"  class="layui-input" type="text" placeholder="案件编号"/>
                                 </div>
                                 <div class="layui-inline">
-                                    <input class="layui-input" type="text" placeholder="被执法船"/>
+                                    <input id="shipName" class="layui-input" type="text" placeholder="被执法船"/>
                                 </div>
                                 <div class="layui-inline">
-                                    <input class="layui-input" type="text" placeholder="被询问人电话"/>
-                                </div>
-
-                                <div class="layui-inline">
-                                    <input class="layui-input" type="text" placeholder="案件类型"/>
+                                    <input id="investigateTel" class="layui-input" type="text" placeholder="被询问人电话"/>
                                 </div>
 
                                 <div class="layui-inline">
-                                    <input class="layui-input" type="text" placeholder="被执法人"/>
+                                    <input id="lawType" class="layui-input" type="text" placeholder="案件类型"/>
                                 </div>
 
                                 <div class="layui-inline">
-                                    <input class="layui-input" type="text" placeholder="案件创建时间"/>
+                                    <input id="investigateName" class="layui-input" type="text" placeholder="被询问人"/>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <input id="createTime" class="layui-input" type="text" placeholder="案件创建时间"/>
                                 </div>
 
                                 <div class="layui-inline">

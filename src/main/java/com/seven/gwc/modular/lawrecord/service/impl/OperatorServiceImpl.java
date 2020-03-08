@@ -9,6 +9,7 @@ import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
 import com.seven.gwc.modular.lawrecord.dao.OperatorMapper;
 import com.seven.gwc.modular.lawrecord.service.OperatorService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class OperatorServiceImpl extends ServiceImpl<OperatorMapper, OperatorEnt
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateOperator(String userId,String operatorEntities,String recordId) {
         if(Objects.nonNull(operatorEntities) && !operatorEntities.trim().isEmpty()){
             List<OperatorEntity> operators = JSON.parseArray(operatorEntities, OperatorEntity.class);

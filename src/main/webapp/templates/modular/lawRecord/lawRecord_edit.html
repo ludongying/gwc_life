@@ -1,0 +1,137 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/lawRecord/lawRecord_edit.js"]}){
+<div class="layui-tab-content">
+    <form id="lawRecordForm" lay-filter="lawRecordForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">id<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="id" name="id" placeholder="请输入id" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="status" name="status" placeholder="请输入状态" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">勘探时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="prospectDate" name="prospectDate" placeholder="请输入勘探时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">询问时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="inquireDate" name="inquireDate" placeholder="请输入询问时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">电话请示时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="telApplyDate" name="telApplyDate" placeholder="请输入电话请示时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">受案时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="acceptDate" name="acceptDate" placeholder="请输入受案时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">处理时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="dealDate" name="dealDate" placeholder="请输入处理时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">处罚时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="punishDate" name="punishDate" placeholder="请输入处罚时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">处决时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="decisionDate" name="decisionDate" placeholder="请输入处决时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">结案时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="finishDate" name="finishDate" placeholder="请输入结案时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">案件类型（安全/生产--枚举）<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="lawType" name="lawType" placeholder="请输入案件类型（安全/生产--枚举）" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">文书地址<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="writ" name="writ" placeholder="请输入文书地址" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">违法船名<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id=" illegalShipName" name=" illegalShipName" placeholder="请输入违法船名" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">违法船法人<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id=" illegalPerson" name=" illegalPerson" placeholder="请输入违法船法人" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">违法船法人手机号<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id=" illegalPersonTel" name=" illegalPersonTel" placeholder="请输入违法船法人手机号" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">开始时间<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="createDate" name="createDate" placeholder="请输入开始时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">案件来源<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="source" name="source" placeholder="请输入案件来源" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+
+            <div class="layui-col-md12 text-right">
+                <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
+                <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+@}
+

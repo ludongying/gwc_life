@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
 import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
+import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
@@ -36,14 +37,14 @@ public class DecisionController extends BaseController {
      * 跳转到决定首页
      */
     @RequestMapping("")
-    public String decision(String lawType,String id, Model model) {
+    public String decision(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         //处罚人类型
         model.addAttribute("punishmentType", PunishmentTypeEnum.values());
         //情节严重性
         model.addAttribute("plotSeverity", PlotSeverityEnum.values());
-        return PREFIX + "decision";
+        return PREFIX + "decision_"+LawTypeEnum.findByCode(lawType).toString().toLowerCase();
     }
 
     /**

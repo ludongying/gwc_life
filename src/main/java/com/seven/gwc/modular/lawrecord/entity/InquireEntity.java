@@ -2,15 +2,8 @@ package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
-import com.seven.gwc.core.state.SexEnum;
-import com.seven.gwc.modular.lawrecord.enums.InvestigatePositionEnum;
-import com.seven.gwc.modular.lawrecord.enums.ShipRatedTypeEnum;
-import com.seven.gwc.modular.lawrecord.enums.ShipRealTypeEnum;
-import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

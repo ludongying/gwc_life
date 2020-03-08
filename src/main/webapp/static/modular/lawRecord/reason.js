@@ -20,8 +20,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
           'key':"law_reason"
     }
 
-    initPage();
 
+    initRadio();
+    initPage();
     function initPage(){
         if($("#id").val()){
             var ajax = new $ax(Feng.ctxPath + "/lawRecord/reason/detail?id="+$("#id").val());
@@ -33,11 +34,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 return;
             }
         }
-        initRadio();
     }
 
-
-    //初始化页面 单选
+    //初始化页面 单选 多选
     function initRadio(){
         $("#secondReason div.layui-form-checkbox").eq(0).data("relateFlag",1);
         form.on('radio(mainReason)', function(data){

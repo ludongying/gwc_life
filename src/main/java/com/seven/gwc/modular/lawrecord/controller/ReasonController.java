@@ -3,7 +3,9 @@ package com.seven.gwc.modular.lawrecord.controller;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.modular.lawrecord.dto.ReasonDTO;
+import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.ProduceReasonEnum;
+import com.seven.gwc.modular.lawrecord.enums.SafeReasonEnum;
 import com.seven.gwc.modular.lawrecord.service.ReasonService;
 import com.seven.gwc.modular.lawrecord.vo.ReasonVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +32,15 @@ public class ReasonController {
      * @return
      */
     @RequestMapping("")
-    public String reason(String lawType,String id, Model model) {
+    public String reason(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
-        model.addAttribute("reasons", ProduceReasonEnum.values());
-        return PREFIX + "reason";
+        if(lawType.equals(LawTypeEnum.PRODUCE.getCode())){
+            model.addAttribute("reasons", ProduceReasonEnum.values());
+        }else if(lawType.equals(LawTypeEnum.SAFE.getCode())){
+            model.addAttribute("reasons", SafeReasonEnum.values());
+        }
+        return PREFIX + "reason_"+LawTypeEnum.findByCode(lawType).toString().toLowerCase();
     }
 
 

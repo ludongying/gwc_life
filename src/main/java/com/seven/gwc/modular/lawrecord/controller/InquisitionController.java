@@ -35,7 +35,7 @@ public class InquisitionController extends BaseController {
      * 勘验
      */
     @RequestMapping("")
-    public String inquisition(String lawType,String id, Model model) {
+    public String inquisition(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         //涂写情况

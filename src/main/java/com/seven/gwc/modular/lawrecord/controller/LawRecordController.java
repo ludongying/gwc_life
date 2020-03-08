@@ -1,19 +1,15 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
-import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageHelper;
 import com.seven.gwc.core.base.BaseResultPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
+import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.seven.gwc.core.base.BaseController;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,30 +33,24 @@ public class LawRecordController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "lawRecord";
+        return PREFIX + "record";
     }
-
-
-
-    /**
-     * 获取执法记录列表
-     */
-    @RequestMapping("/list")
-    @ResponseBody
-    public BaseResultPage<LawRecordEntity> list(String lawRecordName) {
-        Page page = BaseResultPage.defaultPage();
-        PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<LawRecordEntity> lawRecords = new ArrayList<>();
-        PageInfo pageInfo = new PageInfo<>(lawRecords);
-        return new BaseResultPage().createPage(pageInfo);
-    }
-
 
     @RequestMapping("/states")
     @ResponseBody
     public List<StateData> getStates(){
         return lawRecordService.getStates();
     }
+
+    /**
+     * 获取执法记录列表
+     */
+    @RequestMapping("/list")
+    @ResponseBody
+    public BaseResultPage<LawRecordDTO> list(LawRecordVO lawRecordVO) {
+        return lawRecordService.listLawRecord(lawRecordVO);
+    }
+
 
 
 

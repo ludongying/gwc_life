@@ -2,7 +2,6 @@ package com.seven.gwc.modular.lawrecord.dto;
 
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import lombok.Data;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;

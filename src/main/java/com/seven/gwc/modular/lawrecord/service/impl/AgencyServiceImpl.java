@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.seven.gwc.modular.lawrecord.service.AgencyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Objects;
 
 /**
@@ -36,6 +38,7 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     private AgencyMapper agencyMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public BaseResult updateAgency(AgencyVO agencyVO) {
          String id=agencyVO.getId();
          //新建

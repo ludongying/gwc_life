@@ -35,7 +35,7 @@ public class EvidenceController extends BaseController {
      * @return
      */
     @RequestMapping("")
-    public String evidence(String lawType,String id, Model model) {
+    public String evidence(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         return PREFIX + "evidence";

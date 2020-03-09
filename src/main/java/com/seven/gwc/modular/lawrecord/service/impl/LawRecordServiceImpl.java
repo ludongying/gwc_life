@@ -59,7 +59,10 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         List<LawRecordDTO> lawRecordDTOS = lawRecordMapper.listLawRecord(lawRecordVO);
         PageInfo pageInfo = new PageInfo<>(lawRecordDTOS);
         if(Objects.nonNull(lawRecordDTOS) && !lawRecordDTOS.isEmpty()){
-            lawRecordDTOS.stream().forEach(dto -> dto.setLawCaseSourceName(LawCaseSourceEnum.findByCode(dto.getLawCaseSource()).getMessage()));
+            lawRecordDTOS.stream().forEach(dto ->{
+                        if(Objects.nonNull(dto.getLawCaseSource())){
+                            dto.setLawCaseSourceName(LawCaseSourceEnum.findByCode(dto.getLawCaseSource()).getMessage());
+                        } });
         }
         return new BaseResultPage().createPage(pageInfo);
 

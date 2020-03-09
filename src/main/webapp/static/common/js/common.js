@@ -130,7 +130,7 @@ layui.config({
 
 
 /**
- * 文件上传 下载
+ * 文件上传 下载 删除 图片预览
  * @param $ layui对象
  * @param upload layui 对象
  * @param fileParam 参数 是否开启上传后 删除 下载 功能
@@ -141,7 +141,7 @@ layui.config({
  *            ext:  layui 限制文件格式 参考官方
  *            data:[] 后台FileManager-->listFile 接口返回对象
  *        }
- *@param index id索引 （索引大于0 或者有意义的字符串）
+ *@param index （一般一个页面多个文件 提交列表会用）id索引 （索引大于0 或者有意义的字符串）
  *             一个页面中出现多个上传框的时候避免id重复设置
  *             使用此项时需要配合layui模板使用
  * 注意：
@@ -151,6 +151,7 @@ layui.config({
  *
  */
 var initFiles=function ($,upload,fileParam,index){
+    var img_type=new Array("png","jpg","jpeg");
     if(!index){
         index='';
     }
@@ -169,13 +170,20 @@ var initFiles=function ($,upload,fileParam,index){
                 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                 //读取本地文件
                 obj.preview(function(index, file, result){
+
+                    var td_preview;
+                    if(result && fileParam.preview && getFileType(file.name)===1){
+                        td_preview='<button type="button" style="margin-left: 10px" data-index="" class="layui-btn layui-btn-xs demo-preview">预览</button>'
+                    }
+
                     var tr = $(['<tr id="upload-'+ index +'">'
                         ,'<td>'+ file.name +'</td>'
                         ,'<td>'+ (file.size/1024).toFixed(1) +'kb</td>'
                         ,'<td>等待上传</td>'
                         ,'<td>'
-                        ,'<button type="button" style="margin-left: 0" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        ,'<button type="button" style="margin-left: 0;margin-right:10px" class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
                         ,'<button type="button" style="margin-left: 0" class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        , td_preview
                         ,'</td>'
                         ,'</tr>'].join(''));
 
@@ -190,6 +198,19 @@ var initFiles=function ($,upload,fileParam,index){
                         tr.remove();
                         uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                     });
+                    //预览
+                    tr.find('.demo-preview').on('click',function(){
+                            var index=$(this).data("index");
+                            if(!index){
+                                $(this).data("index","1")
+                            }
+                            var reader = new FileReader();
+                            reader.readAsDataURL(file);
+                            reader.onload = function() {
+                            preview_img(reader.result,index);
+                        }
+                    })
+
                     demoListView.append(tr);
                 });
             }
@@ -233,19 +254,37 @@ var initFiles=function ($,upload,fileParam,index){
         });
         tr.find('.demo-preview-1').on('click', function(){
             var url = $(this).data("filePath");
-            if(url){
-                layer.open({
-                    type: 1,
-                    area:'auto',
-                    offset: '100px',
-                    title:false,
-                    closeBtn:false,
-                    shadeClose:true,
-                    content: '<img src="'+url+'"/>'
-                });
-            }
-
+            preview_img(url);
         });
+    }
+    function getFileType(name){
+        if(name){
+            var suf=name.toString().split(".")[1];
+            if(img_type.includes(suf)){
+               return 1;
+            }
+        }
+        return 99;
+
+    }
+    function preview_img(url,index){
+        var html='<div><img src="'+url+'"/></div>'
+        if(url){
+            var area='auto'
+            if(index){
+                area=['auto','auto'];
+            }
+            layer.open({
+                type: 1,
+                area: area,
+                offset:'100px',
+                title:false,
+                closeBtn:false,
+                shadeClose:true,
+                content: html
+            });
+        }
+
     }
     function addData(data){
         if(data){

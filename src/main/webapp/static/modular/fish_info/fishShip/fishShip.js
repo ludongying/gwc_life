@@ -98,6 +98,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             FishShip.onDeleteFishShip(data);
         } else if (layEvent === 'detail') {
             FishShip.onDetailFishShip(data);
+        } else if (layEvent === 'preview') {
+            FishShip.onPreviewFishShip(data);
         }
     });
 
@@ -185,6 +187,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         });
     };
 
+    /**
+     * 预览
+     */
+    FishShip.onPreviewFishShip = function (data) {
+        func.open({
+            title: '预览',
+            maxmin: true,
+            content: Feng.ctxPath + '/system/previewPdf?fileName=' + data.fullName
+        });
+    };
 
     /**
      * 点击删除渔船信息

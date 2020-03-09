@@ -35,11 +35,34 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     private DictMapper dictMapper;
 
     @Override
-    public List<CertificateEntity> selectCertificate(String certificateName){
-        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
+    public List<CertificateEntity> selectCertificateAll(String certificateName){
+//        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
+//        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
 
-        List<CertificateEntity> list = certificateMapper.selectList(lambdaQuery);
+        List<CertificateEntity> list = certificateMapper.CertificateEntityListAll(certificateName);
+        for(CertificateEntity certificateEntity : list){
+            if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
+                DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());
+                if(certificateTypeDict!= null){
+                    certificateEntity.setCertificateTypeName(certificateTypeDict.getName());
+                }
+            }
+            if(ToolUtil.isNotEmpty(certificateEntity.getOwnerType())){
+                DictEntity ownerTypeDict = dictMapper.selectById(certificateEntity.getOwnerType());
+                if(ownerTypeDict != null){
+                    certificateEntity.setOwnerTypeName(ownerTypeDict.getName());
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<CertificateEntity> selectCertificate(String certificateName, String ids){
+//        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
+//        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
+
+        List<CertificateEntity> list = certificateMapper.CertificateEntityList(certificateName,ids);
         for(CertificateEntity certificateEntity : list){
             if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
                 DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());

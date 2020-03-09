@@ -1,12 +1,14 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.util.CalculationDateUtil;
 import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
@@ -37,6 +39,8 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     private FishShipMapper fishShipMapper;
     @Autowired
     private DictMapper dictMapper;
+    @Value("${FILE_UPLOAD_PATH_FILE}")
+    private String uploadPathFile;
 
     @Override
     public List<FishShipEntity> selectFishShip(String code, String phone, String shipType){
@@ -70,6 +74,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void addFishShip(FishShipEntity fishShip, ShiroUser user) {
+        fishShip.setFilePath(uploadPathFile);
         fishShipMapper.insert(fishShip);
     }
 
@@ -80,6 +85,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void editFishShip(FishShipEntity fishShip, ShiroUser user) {
+        fishShip.setFilePath(uploadPathFile);
         fishShipMapper.updateById(fishShip);
     }
 

@@ -212,6 +212,19 @@ public class FriendServiceImpl extends ServiceImpl<FriendMapper, FriendEntity> i
         return friendList;
     }
 
+    @Override
+    public FriendListVO getUserInfoByPersonalId(String personalId) {
+        FriendListVO friendListVO = new FriendListVO();
+        UserEntity userEntity = userMapper.selectById(personalId);
+        if (ToolUtil.isNotEmpty(userEntity)) {
+            friendListVO.setPersonalId(userEntity.getId());
+            friendListVO.setUserName(userEntity.getName());
+            friendListVO.setPhone(userEntity.getPhone());
+            friendListVO.setAvatar("https://img.yzcdn.cn/vant/cat.jpeg");
+        }
+        return friendListVO;
+    }
+
     /**
      * 通过用户ID获取好友列表
      * @param personalId

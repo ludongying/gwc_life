@@ -14,7 +14,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     // admin.iframeAuto();
 
     //初始化证书信息的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/certificate/detail/" + Feng.getUrlParam("certificateId"));
+    var ajax = new $ax(Feng.ctxPath + "/certificateShip/detail/" + Feng.getUrlParam("certificateId"));
     var result = ajax.start();
     form.val('certificateForm',result);
 

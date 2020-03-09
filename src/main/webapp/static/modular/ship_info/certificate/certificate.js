@@ -51,19 +51,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         ]];
     };
 
+
+
     // 渲染表格
-    //alert(Feng.getUrlParam('ids'));
-    var url = "";
-    if(Feng.getUrlParam('ids')===null){
-        url = Feng.ctxPath + '/certificate/list';
-    }
-    else {
-        url = Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam('ids');
-    }
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
         // url: Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam("id") + '&' + + Feng.getUrlParam("htmltype"),
-        url: url,
+        url: Feng.ctxPath + '/certificateShip/list/'+ Feng.getUrlParam('ids'),
         page: true,
         height: "full-97",
         cellMinWidth: 100,
@@ -75,7 +69,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     // 关闭页面
     $('#btnBack').click(function () {
-        window.location.href = Feng.ctxPath + "/person";
+        window.location.href = Feng.ctxPath + "/ship";
     });
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
@@ -136,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '增加证书信息',
             area: ['1000px', '600px'],
-            content: Feng.ctxPath + '/certificate/certificate_add',
+            content: Feng.ctxPath + '/certificateShip/certificate_add',
             tableId: Certificate.tableId
         });
     };
@@ -148,7 +142,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '编辑证书信息',
             area: ['1000px', '600px'],
-            content: Feng.ctxPath + '/certificate/certificate_edit?certificateId=' + data.id,
+            content: Feng.ctxPath + '/certificateShip/certificate_edit?certificateId=' + data.id,
             tableId: Certificate.tableId
         });
     };
@@ -160,7 +154,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '查看证书信息',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/certificate/certificate_detail?certificateId=' + data.id,
+            content: Feng.ctxPath + '/certificateShip/certificate_detail?certificateId=' + data.id,
             tableId: Certificate.tableId
         });
     };
@@ -173,7 +167,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Certificate.onDeleteCertificate = function (data) {
         Feng.confirm("是否删除证书信息《" + data.name + "》吗?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/certificate/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/certificateShip/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
                     table.reload(Certificate.tableId);

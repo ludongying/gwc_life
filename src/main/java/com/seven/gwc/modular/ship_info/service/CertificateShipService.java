@@ -1,8 +1,8 @@
-package com.seven.gwc.modular.sailor.service;
+package com.seven.gwc.modular.ship_info.service;
 
-import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
 
 import java.util.List;
 
@@ -13,15 +13,7 @@ import java.util.List;
  * @date : 2020-02-28
  */
 
-public interface CertificateService extends IService<CertificateEntity> {
-
-    /**
-     * 证书信息查询列表
-     *
-     * @param certificateName 名称;
-     * @return List<证书信息服务对象>
-     */
-    List<CertificateEntity> selectCertificateAll(String certificateName);
+public interface CertificateShipService extends IService<CertificateShipEntity> {
 
     /**
      * 证书信息查询列表
@@ -29,7 +21,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificateName 名称;ids 所属的所有证书编码
      * @return List<证书信息服务对象>
      */
-    List<CertificateEntity> selectCertificate(String certificateName, String ids);
+    List<CertificateShipEntity> selectCertificate(String certificateName, String ids);
 
     /**
      * 证书信息新建
@@ -37,7 +29,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    boolean addCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean addCertificate(CertificateShipEntity certificate, ShiroUser user);
 
     /**
      * 证书信息删除
@@ -53,6 +45,6 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    void editCertificate(CertificateEntity certificate, ShiroUser user);
+    void editCertificate(CertificateShipEntity certificate, ShiroUser user);
 
 }

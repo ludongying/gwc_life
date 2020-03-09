@@ -39,6 +39,8 @@ logging:                                                    #日志配置
   level:
     #root: warn
     com.seven.gwc.modular.system.dao: debug
+    com.seven.gwc.modular.sailor.dao: debug
+    com.seven.gwc.modular.ship_info.dao: debug
   pattern:
     console: '%d %clr(%p) : %m%n'
 

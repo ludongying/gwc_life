@@ -59,6 +59,13 @@ public class AddressBookApi extends BaseController {
         return new BaseResult().content(listVO);
     }
 
+    @GetMapping(value = "/getUserInfoByPersonalId")
+    @ApiOperation(value = "根据用户ID获取用户信息")
+    public BaseResult<FriendListVO> getUserInfoByPersonalId(String personalId) {
+        FriendListVO friendListVO= friendService.getUserInfoByPersonalId(personalId);
+        return new BaseResult().content(friendListVO);
+    }
+
     @GetMapping(value = "/addFriend")
     @ApiOperation(value = "添加好友")
     public BaseResult addFriend(HttpServletRequest request,

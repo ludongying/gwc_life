@@ -47,6 +47,9 @@ public class ShipEntity implements Serializable {
     // 船舶类型
     private Integer type;
 
+    // 总长
+    private Double lengthTotal;
+
     // 船长
     private Double length;
 
@@ -59,8 +62,11 @@ public class ShipEntity implements Serializable {
     // 船深
     private Double deep;
 
-    // 吨位数
+    // 总吨位
     private Double tonnage;
+
+    // 净吨位
+    private Double tonnageNet;
 
     // 核定航区
     private String area;

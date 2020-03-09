@@ -14,7 +14,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
 
     laydate.render({
         elem: '#finishDate',
-        type: 'date'
+        type: 'date',
+        trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应
@@ -60,9 +61,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             if (data.success == true) {
                 Feng.success("修改成功!");
 
-                //传给上个页面，刷新table用
-                admin.putTempData('formOk', true);
-
+                // //传给上个页面，刷新table用
+                // admin.putTempData('formOk', true);
+                parent.location.reload();
                 //关掉对话框
                 admin.closeThisDialog();
             } else {

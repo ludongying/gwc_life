@@ -61,12 +61,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         , auto: false
         // , bindAction: '#btnSubmit'
         , choose: function (obj) {
-            var files = obj.pushFile();
+            var files = obj.pushLastFile();
             obj.preview(function (index, file, result) {
-                $('.layui-upload').append('<span class="layui-inline layui-upload-choose">' + file.name + '</span>');
-                if ($('#name').val() === "") {
-                    $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));
-                }
+                $('#choose').remove();
+                $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));
+                $('.layui-upload').append('<span id="choose" class="layui-inline layui-upload-choose">' + file.name + '</span>');
                 $('#fileName').val(file.name)
             });
         }

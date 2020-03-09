@@ -98,4 +98,12 @@ public class FishShipEntity implements Serializable {
     /** 是否重点 */
     private Boolean keyPoints;
 
+    /** 文件名 */
+    private String fileName;
+
+    /** 路径 */
+    private String filePath;
+
+    /** 文档名 */
+    private String fullName;
 }

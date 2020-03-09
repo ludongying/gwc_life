@@ -333,6 +333,10 @@ layui.define('layer' , function(exports){
                     });
                     return that.files;
                 }
+                //单文件上传，只获取最后一个文件
+                ,pushLastFile: function () {
+                    return that.chooseFiles;
+                }
             }
 
             //提交上传

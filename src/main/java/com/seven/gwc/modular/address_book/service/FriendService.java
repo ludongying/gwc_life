@@ -48,5 +48,13 @@ public interface FriendService extends IService<FriendEntity> {
      */
     List<FriendListVO> searchFriendList(String personalId, String search);
 
+    /**
+     * 添加查询好友列表
+     * @param personalId
+     * @param search
+     * @return
+     */
     List<FriendListVO> addSearchFriendList(String personalId, String search);
+
+    FriendListVO getUserInfoByPersonalId(String personalId);
 }

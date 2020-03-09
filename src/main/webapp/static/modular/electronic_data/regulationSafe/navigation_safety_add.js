@@ -60,8 +60,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'upload'], function () {
         , auto: false
         // , bindAction: '#btnSubmit'
         , choose: function (obj) {
-            obj.pushFile().getFiles()
-            var files = obj.pushFile();
+            var files = obj.pushLastFile();
             obj.preview(function (index, file, result) {
                 $('#choose').remove();
                 $('#name').val(file.name.substring(0, file.name.lastIndexOf(".")));

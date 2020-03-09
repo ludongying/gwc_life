@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.fish_info.service;
 
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;

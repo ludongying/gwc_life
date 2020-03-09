@@ -1,12 +1,56 @@
+/*上下结构-left*/
 .my-form-label {
     float: left;
     display: block;
-    /*padding: 9px 15px;*/
+    padding: 5px 0px;
     width: 90px;
     font-weight: 400;
     line-height: 20px;
-    text-align: right;
+    text-align: left;
+    font-size: 14px;
+    color: #999999;
 }
+
+
+/*上下结构-left*/
+.label-long-text{
+    float: left;
+    display: block;
+    padding: 5px 0px;
+    width: 100%;
+    font-weight: bolder;
+    /*line-height: 20px;*/
+    text-align: left;
+    font-size: 16px;
+    color: #666666;
+}
+
+/*上下结构-居中*/
+.my-form-label-center {
+    float: left;
+    display: block;
+    padding: 5px 0px;
+    width: 90px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    font-size: 14px;
+    color: #999999;
+}
+
+/*上下结构-居中*/
+.label-long-text-center{
+    float: left;
+    display: block;
+    padding: 5px 0px;
+    width: 90px;
+    font-weight: bolder;
+    line-height: 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #666666;
+}
+
 
 .my-form-label-edit {
     float: left;
@@ -18,30 +62,21 @@
     text-align: right;
 }
 
-.label-long-text{
-    float: left;
-    display: block;
-    /*padding: 5px 15px;*/
-    width: 70%;
-    font-weight: bolder;
-    line-height: 20px;
-    text-align: left;
-}
-
-.label-long-text-title{
-    float: left;
-    display: inline-block;
-    padding: 5px 15px;
-    width: 100%;
-    font-weight: bolder;
-    line-height: 200px;
-    text-align: left;
-}
+/*.label-long-text-title{*/
+/*    float: left;*/
+/*    display: inline-block;*/
+/*    padding: 5px 15px;*/
+/*    width: 100%;*/
+/*    font-weight: bolder;*/
+/*    line-height: 200px;*/
+/*    text-align: left;*/
+/*}*/
 
 .img-thumbnail {
     display: inline-block;
-    max-width: 100%;
-    height: auto;
+    /*max-width: 90%;*/
+    width:80%;
+    height: 95%;
     padding: 4px;
     line-height: 1.42857143;
     background-color: #fff;

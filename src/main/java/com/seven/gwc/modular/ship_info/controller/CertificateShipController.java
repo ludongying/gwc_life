@@ -1,26 +1,24 @@
-package com.seven.gwc.modular.sailor.controller;
+package com.seven.gwc.modular.ship_info.controller;
 
-import com.seven.gwc.core.state.ErrorEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
-import com.seven.gwc.modular.sailor.service.CertificateService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
+import com.seven.gwc.modular.ship_info.service.CertificateShipService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -31,15 +29,15 @@ import java.util.List;
  * @date : 2020-02-28
  */
 @Controller
-@RequestMapping("certificate")
-public class CertificateController extends BaseController {
+@RequestMapping("certificateShip")
+public class CertificateShipController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private static String PREFIX = "/modular/sailor/certificate/";
+    private static String PREFIX = "/modular/ship_info/certificate/";
 
     @Autowired
-    private CertificateService certificateService;
+    private CertificateShipService certificateService;
 
     /**
      * 跳转到证书信息首页
@@ -84,27 +82,33 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<CertificateEntity> list(String certificateName) {
+    public BaseResultPage<CertificateShipEntity> list(String certificateName) {
+//    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
+//        if(ids.equals("null")){
+//            ids="";
+//        }
+        String ids="";
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateEntity> certificates = certificateService.selectCertificateAll(certificateName);
+        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids);
         PageInfo pageInfo = new PageInfo<>(certificates);
         return new BaseResultPage().createPage(pageInfo);
     }
+
 
     /**
      * 获取证书信息列表
      */
     @RequestMapping("/list/{ids}")
     @ResponseBody
-    public BaseResultPage<CertificateEntity> list(String certificateName,@PathVariable String ids) {
+    public BaseResultPage<CertificateShipEntity> list(String certificateName, @PathVariable String ids) {
 //    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
 //        if(ids.equals("null")){
 //            ids="";
 //        }
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName,ids);
+        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids);
         PageInfo pageInfo = new PageInfo<>(certificates);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -114,7 +118,7 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(CertificateEntity certificate) {
+    public BaseResult add(CertificateShipEntity certificate) {
         ShiroUser user = ShiroKit.getUser();
         if(!certificateService.addCertificate(certificate, user)){
             return new BaseResult().failure((ErrorEnum.ERROR_ONLY_CERTIFICATE_ID));
@@ -138,7 +142,7 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResult update(CertificateEntity certificate) {
+    public BaseResult update(CertificateShipEntity certificate) {
         ShiroUser user = ShiroKit.getUser();
         certificateService.editCertificate(certificate, user);
         return SUCCESS;
@@ -149,7 +153,7 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/detail/{certificateId}")
     @ResponseBody
-    public CertificateEntity detail(@PathVariable String certificateId) {
+    public CertificateShipEntity detail(@PathVariable String certificateId) {
         return certificateService.getById(certificateId);
     }
 

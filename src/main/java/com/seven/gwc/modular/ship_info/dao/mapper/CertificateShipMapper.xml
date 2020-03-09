@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.seven.gwc.modular.sailor.dao.CertificateMapper">
+<mapper namespace="com.seven.gwc.modular.ship_info.dao.CertificateShipMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.sailor.entity.CertificateEntity">
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
         <id column="id" property="id"/>
         <result column="certificate_id" property="certificateId"/>
         <result column="name" property="name"/>
@@ -26,29 +26,18 @@
     <sql id="Base_Column_List">
         id, certificate_id, name, owner_type, certificate_type, issuer, issue_date, out_date, store_place, is_often, window_phase, response_dept, certificate_place, contact, attachment, remark
     </sql>
-
-    <select id="CertificateEntityListAll" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
+    <select id="CertificateEntityList" resultType="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
         select c.* from ship_info_certificate c
         left join sys_dict d on d.id = c.owner_type
-        where d.name = '船员证书'
-        <if test="certificateName != null and certificateName != ''">
-            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%')
-        </if>
-
-    </select>
-
-    <select id="CertificateEntityList" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
-        select c.* from ship_info_certificate c
-        left join sys_dict d on d.id = c.owner_type
-        where d.name = '船员证书'
+        where d.name = '船舶证书'
 
         <if test="certificateName != null and certificateName != ''">
-            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%')
+            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like
+            CONCAT('%',#{certificateName},'%')
         </if>
         <if test="ids != null">
             and c.id in (#{ids})
         </if>
-
 
     </select>
 

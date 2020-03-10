@@ -52,18 +52,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     // 渲染表格
-    //alert(Feng.getUrlParam('ids'));
-    var url = "";
-    if(Feng.getUrlParam('ids')===null){
-        url = Feng.ctxPath + '/certificate/list';
-    }
-    else {
-        url = Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam('ids');
-    }
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
-        // url: Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam("id") + '&' + + Feng.getUrlParam("htmltype"),
-        url: url,
+        url: Feng.ctxPath + '/certificate/list?ids='+ $('#ids').val(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,

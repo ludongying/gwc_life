@@ -23,12 +23,12 @@ public enum ProduceReasonEnum implements IEnum<Integer> {
     NETTING(8,"使用最小网目尺寸的网具"),
 
     JOB_TYPE(21,"违反关于作业类型的规定"),
-    JOB_YARD(22,"违反关于作业场的规定"),
+    JOB_YARD(22,"违反关于作业场所的规定"),
     TIME_LIMIT(23,"违反关于作业时限的规定"),
 
     FINE(41,"罚款"),
-    RESOURCE(42,"资源补偿费"),
-    FINE_RESOURCE(43,"罚款+资源补偿费"),
+    RESOURCE(42,"资源赔偿费"),
+    FINE_RESOURCE(43,"罚款+资源赔偿费"),
 
     OTHER(99,"其他");
 

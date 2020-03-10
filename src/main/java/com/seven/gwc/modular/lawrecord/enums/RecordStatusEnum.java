@@ -7,35 +7,30 @@ import lombok.Getter;
 /**
  * @author : zzl
  * @Date: 2020-02-28
- * @description :生产案由
+ * @description :执法记录状态
  */
 @Getter
-public enum SafeReasonEnum implements IEnum<Integer> {
+public enum RecordStatusEnum implements IEnum<Integer> {
 
-    /**
-     * 未按规定
-     */
-    DUTY_CREW(1,"配备职务船员"),
-    PRODUCTION_EQUIPMENT(2,"配备渔业安全生产设备"),
-    SHIP_NAME(3,"刷写船名号"),
-    HOME_PORT(4,"刷写船籍港"),
-    SHIP_NAMEPLATE(5,"悬挂船名牌"),
-    OTHER(99,"其他");
+    OPEN_CASE(50,"未结案"),
+    INVALID (80,"作废"),
+    SETTLE(90,"结案");
+
 
     Integer code;
     @JsonValue
     String message;
 
-    SafeReasonEnum(Integer code, String message) {
+    RecordStatusEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public static SafeReasonEnum findByCode(Integer value) {
+    public static RecordStatusEnum findByCode(Integer value) {
         if (value == null) {
             return null;
         } else {
-            for (SafeReasonEnum ms : SafeReasonEnum.values()) {
+            for (RecordStatusEnum ms : RecordStatusEnum.values()) {
                 if (ms.getCode().equals(value)) {
                     return ms;
                 }

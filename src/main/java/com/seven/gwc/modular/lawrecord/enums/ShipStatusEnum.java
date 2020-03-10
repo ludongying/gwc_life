@@ -7,7 +7,7 @@ import lombok.Getter;
 /**
  * @author : zzl
  * @Date: 2020-02-28
- * @description :案件类型
+ * @description :渔船状态
  */
 @Getter
 public enum ShipStatusEnum implements IEnum<Integer> {

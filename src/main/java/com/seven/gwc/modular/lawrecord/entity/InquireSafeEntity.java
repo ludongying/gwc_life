@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 
 
 /**
- * description : 笔录实体
+ * description : 询问笔录-安全
  *
  * @author : ZZL
  * @date : 2020-03-07

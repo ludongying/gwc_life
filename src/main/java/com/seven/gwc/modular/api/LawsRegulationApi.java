@@ -43,16 +43,11 @@ public class LawsRegulationApi {
         return new BaseResult().content(listVO);
     }
 
-    //    @GetMapping("/previewFile")
-//    @ApiOperation(value = "预览文件")
-//    public void previewFile(HttpServletResponse response,
-//                            @ApiParam(name = "filePath", value = "文件路径") String filePath) {
-//        fileManager.download(filePath, response);
-//    }
     @GetMapping("/previewFile")
     @ApiOperation(value = "预览文件")
     public ResponseEntity<Resource> previewFile(HttpServletResponse response,
+                                                @ApiParam(name = "fileName", value = "文件名") String fileName,
                                                 @ApiParam(name = "filePath", value = "文件路径") String filePath) {
-        return FileUtil.previewFile(filePath, response);
+        return FileUtil.previewFile(fileName + ".pdf", filePath, response);
     }
 }

@@ -317,7 +317,7 @@ public class FileUtil {
     }
 
     //文件转流预览
-    public static ResponseEntity<Resource> previewFile(String fileName, HttpServletResponse response) {
+    public static ResponseEntity<Resource> previewFile(String fileName, String filePath, HttpServletResponse response) {
         DataInputStream in = null;
         OutputStream out = null;
         try {
@@ -330,7 +330,7 @@ public class FileUtil {
             response.setHeader("Access-Control-Allow-Credentials", "true");
             //输入流：本地文件路径
             in = new DataInputStream(
-                    new FileInputStream(new File(fileName)));
+                    new FileInputStream(new File(filePath)));
             out = response.getOutputStream();
             //输出文件
             int bytes = 0;

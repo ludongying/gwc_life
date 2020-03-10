@@ -19,7 +19,7 @@ public class GwcIdBaseEntity extends GwcBaseEntity {
     private String id;
 
     public void init(String userId){
-         super.init(this.id,userId);
+         super.init(this.id, userId);
     }
 
 

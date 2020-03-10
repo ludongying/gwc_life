@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.electronic_data.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.modular.electronic_data.vo.LawsRegulationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import com.seven.gwc.modular.electronic_data.dao.RegulationSafeMapper;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +37,8 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     private String uploadPathFile;
 
     @Override
-    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName,String lawRegularId,String type) {
-        return regulationSafeMapper.selectRegulationSafeList(regulationSafeName,lawRegularId,type);
+    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName, String lawRegularId, String type) {
+        return regulationSafeMapper.selectRegulationSafeList(regulationSafeName, lawRegularId, type);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     @Override
     public void deleteRegulationSafe(String regulationSafeId, ShiroUser user) {
         RegulationSafeEntity regulationSafe = regulationSafeMapper.selectById(regulationSafeId);
-        if (regulationSafe!=null){
+        if (regulationSafe != null) {
             regulationSafe.setDeleteFlag(false);
             regulationSafe.setSynFlag(false);
             regulationSafe.setUpdateDate(new Date());
@@ -65,8 +67,23 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     public boolean selectOnlyByName(String name, String type) {
         LambdaQueryWrapper<RegulationSafeEntity> query = Wrappers.lambdaQuery();
         query.eq(RegulationSafeEntity::getName, name)
-                .eq(RegulationSafeEntity::getDeleteFlag,true)
+                .eq(RegulationSafeEntity::getDeleteFlag, true)
                 .eq(RegulationSafeEntity::getType, type);
         return regulationSafeMapper.selectList(query).size() == 0;
+    }
+
+    @Override
+    public List<LawsRegulationVO> getLawsRegulationList() {
+        List<LawsRegulationVO> list = new ArrayList<>();
+        List<RegulationSafeEntity> regulationSafeEntityList = this.selectRegulationSafe(null, null, "REGULATIONS");
+        for (RegulationSafeEntity regulationSafeEntity : regulationSafeEntityList) {
+            LawsRegulationVO lawsRegulationVO = new LawsRegulationVO();
+            lawsRegulationVO.setId(regulationSafeEntity.getId());
+            lawsRegulationVO.setFileName(regulationSafeEntity.getName());
+            lawsRegulationVO.setFileID(regulationSafeEntity.getFileName());
+            lawsRegulationVO.setFilePath(regulationSafeEntity.getFilePath() + "\\" + regulationSafeEntity.getFileName());
+            list.add(lawsRegulationVO);
+        }
+        return list;
     }
 }

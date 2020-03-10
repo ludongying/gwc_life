@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,7 +67,7 @@ public class AddressBookApi extends BaseController {
         return new BaseResult().content(friendListVO);
     }
 
-    @GetMapping(value = "/addFriend")
+    @PostMapping(value = "/addFriend")
     @ApiOperation(value = "添加好友")
     public BaseResult addFriend(HttpServletRequest request,
                                 @ApiParam(required = true, name = "personalId", value = "被添加人ID")String personalId){
@@ -74,7 +75,7 @@ public class AddressBookApi extends BaseController {
         return friendService.addFriend(userId, personalId);
     }
 
-    @GetMapping(value = "/deleteFriend")
+    @PostMapping(value = "/deleteFriend")
     @ApiOperation(value = "删除好友")
     public BaseResult deleteFriend(HttpServletRequest request,
                                    @ApiParam(required = true, name = "personalId", value = "被删除人ID")String personalId){
@@ -99,7 +100,7 @@ public class AddressBookApi extends BaseController {
         return new BaseResult().content(list);
     }
 
-    @GetMapping(value = "/deletePersonalByGroupId")
+    @PostMapping(value = "/deletePersonalByGroupId")
     @ApiOperation(value = "根据群组ID删除群组成员信息")
     public BaseResult deletePersonalByGroupId(String groupId, String personalIds) {
         return groupPersonService.deletePersonalByGroupId(groupId, personalIds);

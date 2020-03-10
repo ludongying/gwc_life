@@ -10,5 +10,7 @@ public class LawsRegulationVO {
 
     private String fileName;
 
+    private String fileID;
+
     private String filePath;
 }

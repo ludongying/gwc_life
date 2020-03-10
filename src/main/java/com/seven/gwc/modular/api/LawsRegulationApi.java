@@ -6,6 +6,7 @@ import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.modular.address_book.vo.InitialsVO;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
 import com.seven.gwc.modular.electronic_data.vo.LawsRegulationVO;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,18 +33,26 @@ import java.util.List;
 public class LawsRegulationApi {
     @Autowired
     private RegulationSafeService regulationSafeService;
+    @Autowired
+    private FileManager fileManager;
 
     @GetMapping(value = "/getLawsRegulationList")
     @ApiOperation(value = "获取法律法规列表")
-    public BaseResult<List<LawsRegulationVO>> getLawsRegulationList(){
+    public BaseResult<List<LawsRegulationVO>> getLawsRegulationList() {
         List<LawsRegulationVO> listVO = regulationSafeService.getLawsRegulationList();
         return new BaseResult().content(listVO);
     }
 
+    //    @GetMapping("/previewFile")
+//    @ApiOperation(value = "预览文件")
+//    public void previewFile(HttpServletResponse response,
+//                            @ApiParam(name = "filePath", value = "文件路径") String filePath) {
+//        fileManager.download(filePath, response);
+//    }
     @GetMapping("/previewFile")
     @ApiOperation(value = "预览文件")
     public ResponseEntity<Resource> previewFile(HttpServletResponse response,
-                                                @ApiParam(name = "filePath", value = "文件路径")String filePath) {
+                                                @ApiParam(name = "filePath", value = "文件路径") String filePath) {
         return FileUtil.previewFile(filePath, response);
     }
 }

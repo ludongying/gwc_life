@@ -297,6 +297,7 @@ public class FileUtil {
 
     /**
      * 删除文件
+     *
      * @param fileDown 文件路径
      * @param fileName 文件名
      * @return
@@ -330,7 +331,6 @@ public class FileUtil {
             //输入流：本地文件路径
             in = new DataInputStream(
                     new FileInputStream(new File(fileName)));
-            //输出流
             out = response.getOutputStream();
             //输出文件
             int bytes = 0;
@@ -338,6 +338,7 @@ public class FileUtil {
             while ((bytes = in.read(bufferOut)) != -1) {
                 out.write(bufferOut, 0, bytes);
             }
+            out.flush();     //清空缓存的内容
         } catch (Exception e) {
             e.printStackTrace();
             response.reset();

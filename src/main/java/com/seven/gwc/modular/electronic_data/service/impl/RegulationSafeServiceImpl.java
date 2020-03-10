@@ -37,8 +37,8 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     private String uploadPathFile;
 
     @Override
-    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName,String lawRegularId,String type) {
-        return regulationSafeMapper.selectRegulationSafeList(regulationSafeName,lawRegularId,type);
+    public List<RegulationSafeEntity> selectRegulationSafe(String regulationSafeName, String lawRegularId, String type) {
+        return regulationSafeMapper.selectRegulationSafeList(regulationSafeName, lawRegularId, type);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     @Override
     public void deleteRegulationSafe(String regulationSafeId, ShiroUser user) {
         RegulationSafeEntity regulationSafe = regulationSafeMapper.selectById(regulationSafeId);
-        if (regulationSafe!=null){
+        if (regulationSafe != null) {
             regulationSafe.setDeleteFlag(false);
             regulationSafe.setSynFlag(false);
             regulationSafe.setUpdateDate(new Date());
@@ -67,7 +67,7 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
     public boolean selectOnlyByName(String name, String type) {
         LambdaQueryWrapper<RegulationSafeEntity> query = Wrappers.lambdaQuery();
         query.eq(RegulationSafeEntity::getName, name)
-                .eq(RegulationSafeEntity::getDeleteFlag,true)
+                .eq(RegulationSafeEntity::getDeleteFlag, true)
                 .eq(RegulationSafeEntity::getType, type);
         return regulationSafeMapper.selectList(query).size() == 0;
     }
@@ -80,6 +80,7 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
             LawsRegulationVO lawsRegulationVO = new LawsRegulationVO();
             lawsRegulationVO.setId(regulationSafeEntity.getId());
             lawsRegulationVO.setFileName(regulationSafeEntity.getName());
+            lawsRegulationVO.setFileID(regulationSafeEntity.getFileName());
             lawsRegulationVO.setFilePath(regulationSafeEntity.getFilePath() + "\\" + regulationSafeEntity.getFileName());
             list.add(lawsRegulationVO);
         }

@@ -42,8 +42,8 @@ public class LawsRegulationApi {
 
     @GetMapping("/previewFile")
     @ApiOperation(value = "预览文件")
-    public BaseResult<ResponseEntity<Resource>> previewFile(HttpServletResponse response,
+    public ResponseEntity<Resource> previewFile(HttpServletResponse response,
                                                 @ApiParam(name = "filePath", value = "文件路径")String filePath) {
-        return new BaseResult().content(FileUtil.previewFile(filePath, response));
+        return FileUtil.previewFile(filePath, response);
     }
 }

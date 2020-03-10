@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +44,8 @@ public class CertificateShipController extends BaseController {
      * 跳转到证书信息首页
      */
     @RequestMapping("")
-    public String index(String ids) {
+    public String index(@RequestParam("ids") String ids, Model model) {
+        model.addAttribute("ids",ids);
         return PREFIX + "certificate";
     }
 
@@ -82,30 +84,7 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<CertificateShipEntity> list(String certificateName) {
-//    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
-//        if(ids.equals("null")){
-//            ids="";
-//        }
-        String ids="";
-        Page page = BaseResultPage.defaultPage();
-        PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids);
-        PageInfo pageInfo = new PageInfo<>(certificates);
-        return new BaseResultPage().createPage(pageInfo);
-    }
-
-
-    /**
-     * 获取证书信息列表
-     */
-    @RequestMapping("/list/{ids}")
-    @ResponseBody
-    public BaseResultPage<CertificateShipEntity> list(String certificateName, @PathVariable String ids) {
-//    public BaseResultPage<CertificateEntity> list(String certificateName, String id, String htmltype) {
-//        if(ids.equals("null")){
-//            ids="";
-//        }
+    public BaseResultPage<CertificateShipEntity> list(String certificateName, String ids) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids);

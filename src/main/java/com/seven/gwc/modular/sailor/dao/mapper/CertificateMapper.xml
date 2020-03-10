@@ -43,7 +43,7 @@
         where d.name = '船员证书'
 
         <if test="certificateName != null and certificateName != ''">
-            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%')
+            and (c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%'))
         </if>
         <if test="ids != null">
             and c.id in (#{ids})

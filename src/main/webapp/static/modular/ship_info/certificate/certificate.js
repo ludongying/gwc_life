@@ -57,7 +57,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
         // url: Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam("id") + '&' + + Feng.getUrlParam("htmltype"),
-        url: Feng.ctxPath + '/certificateShip/list/'+ Feng.getUrlParam('ids'),
+        url: Feng.ctxPath + '/certificateShip/list?ids='+ $('#ids').val(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,

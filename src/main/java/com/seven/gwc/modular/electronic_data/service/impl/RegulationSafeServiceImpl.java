@@ -81,7 +81,7 @@ public class RegulationSafeServiceImpl extends ServiceImpl<RegulationSafeMapper,
             lawsRegulationVO.setId(regulationSafeEntity.getId());
             lawsRegulationVO.setFileName(regulationSafeEntity.getName());
             lawsRegulationVO.setFileID(regulationSafeEntity.getFileName());
-            lawsRegulationVO.setFilePath(regulationSafeEntity.getFilePath() + "\\" + regulationSafeEntity.getFileName());
+            lawsRegulationVO.setFilePath(regulationSafeEntity.getFilePath().replaceAll("\\\\", "/") + "/" + regulationSafeEntity.getFileName());
             list.add(lawsRegulationVO);
         }
         return list;

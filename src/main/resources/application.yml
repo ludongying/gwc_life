@@ -74,9 +74,9 @@ FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理�
 #  Password: ^5ADg#^5v2ZGF%rT
 genQo:
   Driver: com.mysql.cj.jdbc.Driver
-  Url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-  UserName: root
-  Password: 123456
+  Url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+  UserName: gwc
+  Password: ^5ADg#^5v2ZGF%rT
 
 
 ################################# end代码生成配置字段end #################################
@@ -97,9 +97,9 @@ spring:
   profiles: test                                            #测试环境
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-    username: root
-    password: 123456
+    url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: gwc
+    password: ^5ADg#^5v2ZGF%rT
 
 ---
 

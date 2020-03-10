@@ -3,7 +3,6 @@ package com.seven.gwc.modular.api;
 import cn.hutool.core.io.resource.Resource;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.util.FileUtil;
-import com.seven.gwc.modular.address_book.vo.InitialsVO;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
 import com.seven.gwc.modular.electronic_data.vo.LawsRegulationVO;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 

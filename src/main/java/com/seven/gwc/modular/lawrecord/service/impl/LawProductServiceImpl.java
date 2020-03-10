@@ -179,6 +179,7 @@ public class LawProductServiceImpl implements LawProductService {
         return list;
     }
 
+    //询问笔录VO转对象
     private InquireEntity inquireVOToInquire(AppInquireVO appInquireVO) {
         InquireEntity inquireEntity = new InquireEntity();
         inquireEntity.setInvestigateName(appInquireVO.getInvestigateName());
@@ -207,6 +208,7 @@ public class LawProductServiceImpl implements LawProductService {
         return inquireEntity;
     }
 
+    //执法人员VO转对象
     private OperatorEntity operatorVOToOperator1(AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName1());
@@ -214,6 +216,7 @@ public class LawProductServiceImpl implements LawProductService {
         return operatorEntity;
     }
 
+    //执法人员VO转对象
     private OperatorEntity operatorVOToOperator2(AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName2());

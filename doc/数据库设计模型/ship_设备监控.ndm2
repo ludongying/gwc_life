@@ -22,7 +22,7 @@
         "tables": [
           {
             "objectType": "Table_MYSQL",
-            "name": "ship_equipment_warn_type(设备告警类型)",
+            "name": "ship_equipment_warn_type()",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -300,9 +300,9 @@
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "type_id",
-                "type": "varchar",
-                "length": 64,
+                "name": "warn_type",
+                "type": "int",
+                "length": 3,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -315,14 +315,14 @@
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
                 "isAutoInc": false,
-                "comment": "类型id",
+                "comment": "类型(枚举)",
                 "columnFormat": "",
                 "storage": "",
                 "isVirtual": false,
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "type_id"
+                "oldName": "warn_type"
               },
               {
                 "objectType": "TableField_MYSQL",
@@ -399,10 +399,10 @@
                 "objectType": "ForeignKey_MYSQL",
                 "name": "fk_ship_equipment_warn(设备告警)_ship_equipment_warn(设备告警)_1",
                 "fields": [
-                  "type_id"
+                  "warn_type"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "ship_equipment_warn_type(设备告警类型)",
+                "referenceTable": "ship_equipment_warn_type()",
                 "referenceFields": [
                   "id"
                 ],
@@ -452,22 +452,6 @@
           }
         },
         {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "ship_equipment_warn_type(设备告警类型)",
-          "x": 350,
-          "y": 240,
-          "width": 350,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
           "type": "note",
           "name": "Note 1",
           "x": 40,
@@ -489,42 +473,7 @@
         }
       ],
       "layers": [],
-      "relations": [
-        {
-          "name": "fk_ship_equipment_warn(设备告警)_ship_equipment_warn(设备告警)_1",
-          "sourceTableName": "ship_equipment_warn(设备告警)",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 305,
-              "y": 340
-            },
-            {
-              "x": 335,
-              "y": 340
-            }
-          ],
-          "label": {
-            "x": 0,
-            "y": 302,
-            "width": 468,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        }
-      ],
+      "relations": [],
       "viewRelations": []
     }
   ]

@@ -37,9 +37,6 @@ public class JwtConfig extends HandlerInterceptorAdapter {
         if (request.getServletPath().equals(JwtConstants.PDF_PATH)) {
             return true;
         }
-        if (request.getServletPath().equals(JwtConstants.PDF_WEB_PATH)) {
-            return true;
-        }
         final String requestHeader = request.getHeader(JwtConstants.AUTH_HEADER);
         String authToken;
         if (requestHeader != null && requestHeader.startsWith("bearer;")) {

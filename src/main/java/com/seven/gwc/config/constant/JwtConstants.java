@@ -16,8 +16,6 @@ public interface JwtConstants {
 
     String PDF_PATH = "/gwcApi/lawsRegulation/previewFile";
 
-    String PDF_WEB_PATH = "/system/previewFile";
-
     String SECRET = "ZGIyNTk5YTMwNjllNDc4ZTkwZTEyZmExMGJiZWIxMDM=";
 
     Long EXPIRATION = 172800L;

@@ -14,7 +14,7 @@ public interface JwtConstants {
 
     String AUTH_PATH = "/gwcApi/apiLogin";
 
-    String PDF_PATH = ".pdf";
+    String PDF_PATH = "previewFile";
 
     String SECRET = "ZGIyNTk5YTMwNjllNDc4ZTkwZTEyZmExMGJiZWIxMDM=";
 

@@ -97,7 +97,7 @@ public class ShipController extends BaseController {
     @ResponseBody
     public BaseResult add(ShipEntity ship) {
         ShiroUser user = ShiroKit.getUser();
-        ship.setCertificateId("1");
+        //ship.setCertificateId("1");
         if(!shipService.add(ship)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_LAWSHIP_CODE);
         }

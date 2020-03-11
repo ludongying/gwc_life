@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.equipment_info.controller;
 
+import com.seven.gwc.core.state.ErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -80,7 +81,7 @@ public class EquipController extends BaseController {
     public BaseResultPage<EquipEntity> list(String equipName,String equipType) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<EquipEntity> equips = equipService.selectEquip(equipName);
+        List<EquipEntity> equips = equipService.selectEquip(equipName,equipType);
         PageInfo pageInfo = new PageInfo<>(equips);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -92,7 +93,9 @@ public class EquipController extends BaseController {
     @ResponseBody
     public BaseResult add(EquipEntity equip) {
         ShiroUser user = ShiroKit.getUser();
-        equipService.addEquip(equip, user);
+        if(!equipService.addEquip(equip, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_EQUIP_CODE);
+        }
         return SUCCESS;
     }
 
@@ -114,7 +117,9 @@ public class EquipController extends BaseController {
     @ResponseBody
     public BaseResult update(EquipEntity equip) {
         ShiroUser user = ShiroKit.getUser();
-        equipService.editEquip(equip, user);
+        if(!equipService.editEquip(equip, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_EQUIP_CODE);
+        }
         return SUCCESS;
     }
 
@@ -124,7 +129,7 @@ public class EquipController extends BaseController {
     @RequestMapping("/detail/{equipId}")
     @ResponseBody
     public EquipEntity detail(@PathVariable String equipId) {
-        return equipService.getById(equipId);
+        return equipService.selectEquipById(equipId);
     }
 
 }

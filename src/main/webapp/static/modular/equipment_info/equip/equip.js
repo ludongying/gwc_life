@@ -27,14 +27,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
         return [[
             {title: '', field: 'id', align: "center", hide:true},
             {title: '设备名称', field: 'name', align: "center"},
-            {title: '设备类型', field: 'type', align: "center"},
+            {title: '设备类型', field: 'typeDesp', align: "center"},
             {title: '设备型号', field: 'specification', align: "center"},
-            {title: '生产厂商', field: 'producer', align: "center"},
+            {title: '生产厂商', field: 'producer', align: "center", hide:true},
             {title: '出厂编码', field: 'serialNumber', align: "center"},
-            {title: '图纸编码', field: 'drawingNumber', align: "center"},
+            {title: '图纸编码', field: 'drawingNumber', align: "center", hide:true},
             {title: '出厂日期', field: 'produceDate', align: "center"},
             {title: '保养周期', field: 'maintainCycle', align: "center"},
-            {title: '设备状态', field: 'state', align: "center"},
+            {title: '设备状态', field: 'stateDesp', align: "center"},
             {title: '备注', field: 'remark', align: "center", hide:true},
             {title: '最近保养时间', field: 'lastMaintenanceDate', align: "center", hide:true},
             {title: '设备信息', field: 'info', align: "center", hide:true},
@@ -115,7 +115,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
         func.open({
             title: '增加设备信息',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/equip/equip_add',
+            content: Feng.ctxPath + '/equip/equip_add?treeId=' + Equip.condition.treeId,
             tableId: Equip.tableId
         });
     };
@@ -175,6 +175,5 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
     var ztree = new $ZTree("equipTypeTree", "/dict/getDictTreeByDictTypeCode?dictTypeCode=EQUIPMENT_TYPE");
     ztree.bindOnClick(Equip.onClickTree);
     ztree.init();
-    ztree.expandAll(true);
 
 });

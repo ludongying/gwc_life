@@ -1,8 +1,14 @@
 package com.seven.gwc.modular.equipment_info.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -18,9 +24,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("ship_equip")
-public class EquipEntity implements Serializable {
+public class EquipEntity extends GwcBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
 
     /** 设备名称 */
@@ -28,6 +36,11 @@ public class EquipEntity implements Serializable {
 
     /** 设备类型 */
     private String type;
+
+    /** 设备类型 描述*/
+    @TableField(exist = false)
+    private String typeDesp;
+
 
     /** 设备型号 */
     private String specification;
@@ -42,13 +55,19 @@ public class EquipEntity implements Serializable {
     private String drawingNumber;
 
     /** 出厂日期 */
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date produceDate;
 
     /** 保养周期（时间） */
     private Integer maintainCycle;
 
-    /** 设备状态：使用/维修/保养 */
-    private Integer state;
+    /** 设备状态*/
+    private String state;
+
+    /** 设备状态：描述*/
+    @TableField(exist = false)
+    private String stateDesp;
 
     /** 备注 */
     private String remark;

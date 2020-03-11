@@ -4,25 +4,36 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.equipment_info.entity.EquipEntity">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="type" property="type" />
-        <result column="specification" property="specification" />
-        <result column="producer" property="producer" />
-        <result column="serial_number" property="serialNumber" />
-        <result column="drawing_number" property="drawingNumber" />
-        <result column="produce_date" property="produceDate" />
-        <result column="maintain_cycle" property="maintainCycle" />
-        <result column="state" property="state" />
-        <result column="remark" property="remark" />
-        <result column="last_maintenance_date" property="lastMaintenanceDate" />
-        <result column="info" property="info" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="specification" property="specification"/>
+        <result column="producer" property="producer"/>
+        <result column="serial_number" property="serialNumber"/>
+        <result column="drawing_number" property="drawingNumber"/>
+        <result column="produce_date" property="produceDate"/>
+        <result column="maintain_cycle" property="maintainCycle"/>
+        <result column="state" property="state"/>
+        <result column="remark" property="remark"/>
+        <result column="last_maintenance_date" property="lastMaintenanceDate"/>
+        <result column="info" property="info"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, type, specification, producer, serial_number, drawing_number, produce_date, maintain_cycle, state, remark, last_maintenance_date, info
     </sql>
+    <select id="selectEquipList" resultType="com.seven.gwc.modular.equipment_info.entity.EquipEntity">
+        SELECT e.*, d.name as typeDesp FROM ship_equip e
+        LEFT JOIN sys_dict d ON e.type = d.id
+        where e.delete_flag = 1
+        <if test="equipName != null and equipName != ''">
+            and e.name like CONCAT('%',#{equipName},'%')
+        </if>
+        <if test="equipType != null and equipType != ''">
+            and e.type = #{equipType}
+        </if>
+    </select>
 
 
 </mapper>

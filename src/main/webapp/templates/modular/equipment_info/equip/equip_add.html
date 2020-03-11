@@ -4,13 +4,6 @@
         <div class="layui-row layui-col-space10">
 
             <div class="layui-col-md6">
-                <label class="layui-form-label"><span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
                 <label class="layui-form-label">设备名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="name" name="name" placeholder="请输入设备名称" type="text" class="layui-input" lay-verify="required" required/>
@@ -20,7 +13,8 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">设备类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="type" name="type" placeholder="请输入设备类型" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="type" name="type" type="hidden">
+                    <input id="typeDesp" name="typeDesp" placeholder="分类名称" type="text" class="layui-input" lay-verify="required" autocomplete="off"/>
                 </div>
             </div>
 
@@ -32,13 +26,6 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">生产厂商<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="producer" name="producer" placeholder="请输入生产厂商" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
                 <label class="layui-form-label">出厂编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="serialNumber" name="serialNumber" placeholder="请输入出厂编码" type="text" class="layui-input" lay-verify="required" required/>
@@ -46,53 +33,72 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">图纸编码<span style="color: red;">*</span></label>
+                <label class="layui-form-label">出厂日期</label>
                 <div class="layui-input-block">
-                    <input id="drawingNumber" name="drawingNumber" placeholder="请输入图纸编码" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="produceDate" name="produceDate" placeholder="请输入出厂日期" type="text" readonly class="layui-input date-icon"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">出厂日期<span style="color: red;">*</span></label>
+                <label class="layui-form-label">图纸编码</label>
                 <div class="layui-input-block">
-                    <input id="produceDate" name="produceDate" placeholder="请输入出厂日期" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="drawingNumber" name="drawingNumber" placeholder="请输入图纸编码" type="text" class="layui-input"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">保养周期（时间）<span style="color: red;">*</span></label>
+                <label class="layui-form-label">生产厂商</label>
                 <div class="layui-input-block">
-                    <input id="maintainCycle" name="maintainCycle" placeholder="请输入保养周期（时间）" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="producer" name="producer" placeholder="请输入生产厂商" type="text" class="layui-input"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">设备状态：使用/维修/保养<span style="color: red;">*</span></label>
+                <label class="layui-form-label">设备状态</label>
                 <div class="layui-input-block">
-                    <input id="state" name="state" placeholder="请输入设备状态：使用/维修/保养" type="text" class="layui-input" lay-verify="required" required/>
+                    <select id="state" name="state" lay-search="">
+                        <option value="">请选择设备状态</option>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">备注<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                <div class="layui-form-item">
+                <label class="layui-form-label">保养周期<span style="color: red;">*</span></label>
+                <div class="layui-input-inline" style="width: 340px">
+                    <input id="maintainCycle" name="maintainCycle" placeholder="请输入保养周期（时间）" type="text" class="layui-input" lay-verify="required|number" required/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">月</div>
                 </div>
             </div>
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">最近保养时间<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="lastMaintenanceDate" name="lastMaintenanceDate" placeholder="请输入最近保养时间" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">设备状态：使用/维修/保养<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input id="state" name="state" placeholder="请输入设备状态：使用/维修/保养" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">设备信息<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="info" name="info" placeholder="请输入设备信息" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">备注<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">最近保养时间<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input id="lastMaintenanceDate" name="lastMaintenanceDate" placeholder="请输入最近保养时间" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">设备信息<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input id="info" name="info" placeholder="请输入设备信息" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                </div>-->
+<!--            </div>-->
 
 
             <div class="layui-col-md12 text-right">

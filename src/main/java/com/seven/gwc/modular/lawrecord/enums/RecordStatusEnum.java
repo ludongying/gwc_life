@@ -14,7 +14,7 @@ public enum RecordStatusEnum implements IEnum<Integer> {
 
     OPEN_CASE(50,"未结案"),
     INVALID (80,"作废"),
-    SETTLE(90,"结案");
+    FINISH(90,"结案");
 
 
     Integer code;

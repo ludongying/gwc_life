@@ -27,7 +27,7 @@ public class LawRecordEntity extends GwcIdBaseEntity {
     private Integer status;
 
     /** 案件类型（安全/生产--枚举） */
-    private LawTypeEnum lawType;
+    private Integer lawType;
 
     /** 文书地址 */
     private String writFilePath;

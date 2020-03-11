@@ -55,12 +55,15 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
          return baseResult;
     }
 
+    /**
+     * {@code detail.setAddress();}
+     */
     @Override
     public AgencyDTO detail(String id) {
         AgencyDTO detail = agencyMapper.detail(id);
         if(Objects.nonNull(detail)){
             detail.setTimeStr();
-            detail.setAddress();
+            //此处设置地址
             detail.setOperators(operatorService.getByRecord(id));
         }
         return detail;

@@ -27,11 +27,21 @@
     <sql id="Base_Column_List">
         id, status, prospect_date, inquire_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date, law_type, writ,  Illegal_ship_name,  Illegal_person,  Illegal_person_tel, create_date, source
     </sql>
+
+    <sql id="law_case_code">
+     CONCAT(law_record_agency.law_case_fine_code,
+                  (CASE law_record_agency.law_case_fine_code WHEN '' THEN '' ELSE '罚'  END),
+                  law_record_agency.law_case_code,
+                  (CASE law_record_agency.law_case_code WHEN '' THEN '' ELSE '号'  END)
+           )
+    </sql>
+
     <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
         SELECT
             law_record.id,
             law_record.law_type,
-            CONCAT(law_record_agency.law_case_fine_code,'罚',law_record_agency.law_case_code,'号') law_case_code,
+            law_record.status,
+            <include refid="law_case_code"/> law_case_code,
             law_record_agency.law_case_source,
             (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
             (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
@@ -47,7 +57,7 @@
                 law_record.law_type =#{lawType}
             </if>
             <if test="lawCaseCode!=null and lawCaseCode!=''">
-                AND CONCAT(law_record_agency.law_case_fine_code,'罚',law_record_agency.law_case_code,'号')=#{lawCaseCode}
+                AND <include refid="law_case_code"/> like CONCAT("%",#{lawCaseCode},"%")
             </if>
             <if test="shipName!=null and shipName!=''">
                 AND (
@@ -73,6 +83,7 @@
                 AND law_record.create_date &lt; #{createEndTime}
             </if>
         </where>
+        order by law_record.create_date desc
 
     </select>
 

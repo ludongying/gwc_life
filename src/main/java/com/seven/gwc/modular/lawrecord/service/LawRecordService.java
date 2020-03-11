@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
@@ -39,6 +40,22 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      * @return
      */
     BaseResultPage<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO);
+
+    /**
+     * 执法记录作废
+     * @param id
+     * @return
+     */
+    BaseResult invalidRecord(String id);
+
+    /**
+     * 结案
+     * @param id
+     * @return
+     */
+    BaseResult finishRecord(String id);
+
+
 
 
 

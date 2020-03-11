@@ -17,6 +17,11 @@ public class LawRecordDTO {
      * 主键
      */
     private String id;
+
+    /**
+     * 案件状态
+     */
+    private Integer status;
     /**
      * 案件编号
      */

@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
@@ -33,8 +34,11 @@ public class AgencyController extends BaseController {
     public String agency(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
+        //固定值设置
+        model.addAttribute("value", GwcConsts.getFileds());
         //案件来源
         model.addAttribute("lawCaseSource", LawCaseSourceEnum.values());
+
         return PREFIX + "agency";
     }
 

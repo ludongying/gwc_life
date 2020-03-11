@@ -1,10 +1,13 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
+import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,8 @@ public class LawRecordController extends BaseController {
      * 跳转到执法记录首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index( Model model) {
+        model.addAttribute("lawTypes", LawTypeEnum.values());
         return PREFIX + "record";
     }
 
@@ -51,7 +55,31 @@ public class LawRecordController extends BaseController {
         return lawRecordService.listLawRecord(lawRecordVO);
     }
 
+    /**
+     * 执法记录作废
+     */
+    @RequestMapping("/invalid")
+    @ResponseBody
+    public BaseResult invalid(String id) {
+        return lawRecordService.invalidRecord(id);
+    }
 
+    /**
+     * 执法记录结案
+     */
+    @RequestMapping("/finish")
+    @ResponseBody
+    public BaseResult finish(String id) {
+        return lawRecordService.finishRecord(id);
+    }
+
+    /**
+     * 详情页
+     */
+    @RequestMapping("/detail")
+    public String detail(String id,Model model) {
+        return PREFIX + "detail";
+    }
 
 
 

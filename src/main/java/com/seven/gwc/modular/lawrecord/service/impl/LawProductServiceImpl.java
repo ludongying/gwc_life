@@ -1,18 +1,11 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dao.AgencyMapper;
-import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
-import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
-import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
-import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
+import com.seven.gwc.modular.lawrecord.entity.*;
 import com.seven.gwc.modular.lawrecord.enums.*;
 import com.seven.gwc.modular.lawrecord.service.LawProductService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
-import com.seven.gwc.modular.lawrecord.vo.AppAgencyVO;
-import com.seven.gwc.modular.lawrecord.vo.AppInquireVO;
-import com.seven.gwc.modular.lawrecord.vo.AppOperatorVO;
-import com.seven.gwc.modular.lawrecord.vo.EnumVO;
+import com.seven.gwc.modular.lawrecord.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +19,13 @@ public class LawProductServiceImpl implements LawProductService {
 
 
     @Override
-    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO) {
+    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquisitionEntityVO) {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.PRODUCE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(appAgencyVO);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(appOperatorVO);
         InquireEntity inquireEntity = this.inquireVOToInquire(appInquireVO);
+        InquisitionEntity inquisitionEntity = this.inquisitionVOToInquisition(appInquisitionEntityVO);
 
         return null;
     }
@@ -87,6 +81,18 @@ public class LawProductServiceImpl implements LawProductService {
     public List<EnumVO> getPunishmentTypeList() {
         List<EnumVO> list = new ArrayList<>();
         for (PunishmentTypeEnum vo : PunishmentTypeEnum.values()) {
+            EnumVO enumVO = new EnumVO();
+            enumVO.setId(vo.getCode());
+            enumVO.setName(vo.getMessage());
+            list.add(enumVO);
+        }
+        return list;
+    }
+
+    @Override
+    public List<EnumVO> getRecordStatusList() {
+        List<EnumVO> list = new ArrayList<>();
+        for (RecordStatusEnum vo : RecordStatusEnum.values()) {
             EnumVO enumVO = new EnumVO();
             enumVO.setId(vo.getCode());
             enumVO.setName(vo.getMessage());
@@ -179,7 +185,27 @@ public class LawProductServiceImpl implements LawProductService {
         return list;
     }
 
-    //询问笔录VO转对象
+    //勘验笔录VO转对象
+    private InquisitionEntity inquisitionVOToInquisition(AppInquisitionEntityVO appInquireSafeEntityVO) {
+        InquisitionEntity inquisitionEntity = new InquisitionEntity();
+        inquisitionEntity.setShipCaseName(appInquireSafeEntityVO.getShipCaseName());
+        inquisitionEntity.setShipCaseRegistry(appInquireSafeEntityVO.getShipCaseRegistry());
+        inquisitionEntity.setShipRegistry(appInquireSafeEntityVO.getShipRegistry());
+        inquisitionEntity.setShipCaseCard(appInquireSafeEntityVO.getShipCaseCard());
+        inquisitionEntity.setShipCaseCredentials(appInquireSafeEntityVO.getShipCaseCredentials());
+        inquisitionEntity.setShipCaseFish(appInquireSafeEntityVO.getShipCaseFish());
+        inquisitionEntity.setShipCredentialsCode(appInquireSafeEntityVO.getShipCredentialsCode());
+        inquisitionEntity.setShipCode(appInquireSafeEntityVO.getShipCode());
+        inquisitionEntity.setShipOperatePerson(appInquireSafeEntityVO.getShipOperatePerson());
+        inquisitionEntity.setShipPower(appInquireSafeEntityVO.getShipPower());
+        inquisitionEntity.setShipCredentialsOwner(appInquireSafeEntityVO.getShipCredentialsOwner());
+        inquisitionEntity.setShipIdentityCase(appInquireSafeEntityVO.getShipIdentityCase());
+        inquisitionEntity.setShipCredentialsOwnerIdentity(appInquireSafeEntityVO.getShipCredentialsOwnerIdentity());
+        inquisitionEntity.setShipStatus(appInquireSafeEntityVO.getShipStatus());
+        return inquisitionEntity;
+    }
+
+    //询问笔录生产VO转对象
     private InquireEntity inquireVOToInquire(AppInquireVO appInquireVO) {
         InquireEntity inquireEntity = new InquireEntity();
         inquireEntity.setInvestigateName(appInquireVO.getInvestigateName());

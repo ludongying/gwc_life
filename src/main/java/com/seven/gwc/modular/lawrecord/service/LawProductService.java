@@ -1,10 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service;
 
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.vo.AppAgencyVO;
-import com.seven.gwc.modular.lawrecord.vo.AppInquireVO;
-import com.seven.gwc.modular.lawrecord.vo.AppOperatorVO;
-import com.seven.gwc.modular.lawrecord.vo.EnumVO;
+import com.seven.gwc.modular.lawrecord.vo.*;
 
 import java.util.List;
 
@@ -22,19 +19,22 @@ public interface LawProductService {
     //获取情节严重类型
     List<EnumVO> getPlotSeverityList();
 
-    //获取案件类型
+    //获取生产案由
     List<EnumVO> getProduceReasonList();
 
-    //获取生产案由
+    //获取处罚人类型
     List<EnumVO> getPunishmentTypeList();
 
-    //获取案件类型
+    //执法记录状态
+    List<EnumVO> getRecordStatusList();
+
+    //获取安全生产案由
     List<EnumVO> getSafeReasonList();
 
-    //获取
+    //获取船牌悬挂类型
     List<EnumVO> getShipCaseCardList();
 
-    //获取
+    //获取船涂写情况
     List<EnumVO> getShipCaseList();
 
     //获取核定作业类型
@@ -43,8 +43,9 @@ public interface LawProductService {
     //获取实际作业类型
     List<EnumVO> getShipRealTypeList();
 
-    //获取
+    //获取渔船状态
     List<EnumVO> getShipStatusList();
 
-    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO);
+    //案件生产新增
+    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO);
 }

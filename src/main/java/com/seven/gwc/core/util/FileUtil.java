@@ -1,25 +1,21 @@
 package com.seven.gwc.core.util;
 
 
-import cn.hutool.core.io.resource.Resource;
+import org.springframework.core.io.Resource;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 文件上传工具类
@@ -317,20 +313,14 @@ public class FileUtil {
     }
 
     //文件转流预览
-    public static ResponseEntity<Resource> previewFile(String fileName, String filePath, HttpServletResponse response) {
+    public static ResponseEntity<Resource> previewFile(String filePath, HttpServletResponse response) {
         DataInputStream in = null;
         OutputStream out = null;
         try {
-            response.reset();// 清空输出流
-            response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-disposition", "attachment; filename=" + new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));// 设定输出文件头
-            response.setContentType("application/pdf");// 定义输出类型
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-            response.setHeader("Access-Control-Allow-Credentials", "true");
             //输入流：本地文件路径
             in = new DataInputStream(
                     new FileInputStream(new File(filePath)));
+            //输出流
             out = response.getOutputStream();
             //输出文件
             int bytes = 0;

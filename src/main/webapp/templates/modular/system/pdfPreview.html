@@ -70,12 +70,12 @@
         var local = curWwwPath.substring(0, curWwwPath.indexOf(pathName));// 获取主机地址,如： http://localhost:8080
         var filePath = getUrlParam('filePath');
 
-        $("#app").remove()
-        $("#demo").show()
+        $("#app").remove();
+        $("#demo").show();
         //当前默认优先获取浏览器地址栏？file=后面的地址，如果地址栏没有，再拿配置项的pdfurl或者data来渲染pdf
         //优先顺序：  ？file= > pdfurl > data
         var pdfh5 = new Pdfh5('#demo', {
-            pdfurl: local + filePath,
+            pdfurl: local + "/system/previewFile?filePath=" + filePath,
             // limit:2, // 限制加载最大页数
             renderType: "canvas",
             // type:"ajax",
@@ -84,20 +84,20 @@
 
         pdfh5.on("ready", function () {
             console.log("总页数：" + this.totalNum)
-        })
+        });
         //监听pdf渲染过程，currentPageDom当前加载的pdf的dom,currentNum当前加载的pdf页数,
         pdfh5.on("render", function (currentNum, time, currentPageDom) {
             console.log("当前渲染页：" + currentNum + "，耗时：" + time + "毫秒")
-        })
+        });
         //监听完成事件，加载失败、渲染成功都会触发
         pdfh5.on("complete", function (status, msg, time) {
             console.log("状态：" + status + "，信息：" + msg + "，耗时：" + time + "毫秒，总页数：" + this.totalNum)
-        })
+        });
         //监听pdf渲染成功
         pdfh5.on("success", function (time) {
             console.log("加载完成，耗时" + time + "毫秒")
         })
-    })
+    });
 
 
     function getUrlParam(name) {

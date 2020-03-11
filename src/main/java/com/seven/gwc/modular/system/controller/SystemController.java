@@ -226,6 +226,7 @@ public class SystemController extends BaseController {
     }
 
     @GetMapping("/previewFile")
+    @ResponseBody
     @ApiOperation(value = "预览文件")
     public ResponseEntity<Resource> previewFile(HttpServletResponse response,
                                                 @ApiParam(name = "filePath", value = "文件路径") String filePath) {

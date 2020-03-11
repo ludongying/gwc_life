@@ -11,8 +11,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,7 @@ import java.util.List;
  * @date : 2020-03-09
  */
 
-@RestController
+@Controller
 @Api(tags = "法律法规")
 @RequestMapping("gwcApi/lawsRegulation")
 public class LawsRegulationApi {

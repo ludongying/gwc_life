@@ -15,17 +15,26 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@Api(tags = "执法生产")
-@RequestMapping("gwcApi/lawProduct")
-public class LawProductApi {
+@Api(tags = "执法")
+@RequestMapping("gwcApi/lawRecord")
+public class LawRecordApi {
     @Autowired
     private LawProductService lawProductService;
 
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
-    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO){
+    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO,
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppLawRecordVO appLawRecordVO){
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireVO, appInquireSafeEntityVO);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireVO, appInquireSafeEntityVO, appDecisionVO, appLawRecordVO);
+    }
+
+    @PostMapping(value = "/addLawSafe")
+    @ApiOperation(value = "新增新案件-安全")
+    public BaseResult addLawSafe(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
+                                 AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppLawRecordVO appLawRecordVO) {
+        String userId = request.getAttribute("userId").toString();
+        return lawProductService.addLawSafe(userId, appAgencyVO, appOperatorVO, appInquireSafeVO, appDecisionSafeVO, appLawRecordVO);
     }
 
     @GetMapping(value = "/getInvestigatePositionList")

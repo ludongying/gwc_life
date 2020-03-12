@@ -47,5 +47,8 @@ public interface LawProductService {
     List<EnumVO> getShipStatusList();
 
     //案件生产新增
-    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO);
+    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppLawRecordVO appLawRecordVO);
+
+    //案件安全新增
+    BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppLawRecordVO appLawRecordVO);
 }

@@ -1,24 +1,20 @@
 package com.seven.gwc.modular.api;
 
-import org.springframework.core.io.Resource;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
 import com.seven.gwc.modular.electronic_data.vo.LawsRegulationVO;
+import com.seven.gwc.modular.electronic_data.vo.LawsTypeVO;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.system.entity.DictEntity;
+import com.seven.gwc.modular.system.service.DictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -28,33 +24,24 @@ import java.util.List;
  * @date : 2020-03-09
  */
 
-@Controller
+@RestController
 @Api(tags = "法律法规")
 @RequestMapping("gwcApi/lawsRegulation")
 public class LawsRegulationApi {
     @Autowired
     private RegulationSafeService regulationSafeService;
-    @Autowired
-    private FileManager fileManager;
 
-    @GetMapping(value = "/getLawsRegulationList")
-    @ApiOperation(value = "获取法律法规列表")
-    public BaseResult<List<LawsRegulationVO>> getLawsRegulationList() {
-        List<LawsRegulationVO> listVO = regulationSafeService.getLawsRegulationList();
+    @GetMapping(value = "/getLawsTypeList")
+    @ApiOperation(value = "获取法律法规类型列表")
+    public BaseResult<List<LawsTypeVO>> getLawsTypeList() {
+        List<LawsTypeVO> listVO = regulationSafeService.getLawsTypeVOList();
         return new BaseResult().content(listVO);
     }
 
-    @RequestMapping("/preview")
-    @ApiOperation(value = "预览文件")
-    public String previewFile(@ApiParam(name = "filePath", value = "文件路径") String filePath) {
-        return "/modular/system/pdfPreview";
-    }
-
-    @GetMapping("/previewFile")
-    @ResponseBody
-    @ApiOperation(value = "预览文件")
-    public ResponseEntity<Resource> previewFile(HttpServletResponse response,
-                                                @ApiParam(name = "filePath", value = "文件路径") String filePath) {
-        return FileUtil.previewFile(filePath, response);
+    @GetMapping(value = "/getListByLawRegularId")
+    @ApiOperation(value = "获取法律法规列表")
+    public BaseResult<List<LawsRegulationVO>> getListByLawRegularId(@ApiParam(name = "lawRegularId", required = true, value = "法律法规类型ID")String lawRegularId) {
+        List<LawsRegulationVO> listVO = regulationSafeService.getListByLawRegularId(lawRegularId);
+        return new BaseResult().content(listVO);
     }
 }

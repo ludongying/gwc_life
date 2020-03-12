@@ -40,10 +40,6 @@ public interface DictService extends IService<DictEntity> {
     List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode);
 
     /**
-     * 获取某个类型下字典树的列表，选择上级字典时用
-     */
-
-    /**
      * 根据字典类型编码获取车场类型字典数据
      * @author : SHQ
      * @return

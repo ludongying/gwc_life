@@ -37,8 +37,4 @@ public class EvidenceEntity extends GwcIdBaseEntity {
 
     /** 路径 */
     private String evidenceFilePath;
-
-
-
-
 }

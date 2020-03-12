@@ -324,7 +324,7 @@ var initFiles=function ($,upload,fileParam,index){
             }
         }
     }
-    var dowLoad = function(filePath){
+    var downLoad = function(filePath){
         var dlform = document.createElement('form');
         dlform.style = "display:none;";
         dlform.method = 'post';
@@ -341,7 +341,7 @@ var initFiles=function ($,upload,fileParam,index){
     }
     return{
         preview_img:preview_img,
-        downLoad:dowLoad
+        downLoad:downLoad
     }
 
 }

@@ -3,6 +3,7 @@ package com.seven.gwc.modular.sailor.service;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 
 import java.util.List;
 
@@ -54,5 +55,12 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param user 当前用户
      */
     void editCertificate(CertificateEntity certificate, ShiroUser user);
+
+    /**
+     * 获证书详细信息（图片url转换）
+     * @param id 表编码
+     * @return
+     */
+    CertificateEntity getCertificateById(String id);
 
 }

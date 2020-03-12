@@ -135,7 +135,7 @@ public class ShipController extends BaseController {
     @RequestMapping("/detail/{shipId}")
     @ResponseBody
     public ShipEntity detail(@PathVariable String shipId) {
-        return shipService.getById(shipId);
+        return shipService.getShipById(shipId);
     }
 
     /**
@@ -155,15 +155,6 @@ public class ShipController extends BaseController {
     public ShipEntity shipFirst(ShipEntity shipEntity) {
         List<ShipEntity> ships = shipService.selectShip(shipEntity);
         return ships.get(0);
-    }
-
-    /**
-     * 多船舶图片上传
-     */
-    @RequestMapping("/upload")
-    @ResponseBody
-    public void upload(){
-
     }
 
 }

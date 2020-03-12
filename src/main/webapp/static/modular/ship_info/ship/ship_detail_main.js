@@ -85,7 +85,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
         // alert($('#id').val());
         func.open({
             title: '编辑执法船信息',
-            area: ['1000px', '750px'],
+            area: ['1000px', '805px'],
             content: Feng.ctxPath + '/ship/ship_edit?shipId=' + $('#id').val()
             // tableId: Ship.tableId
         });

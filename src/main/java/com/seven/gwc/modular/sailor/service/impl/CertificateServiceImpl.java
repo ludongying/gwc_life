@@ -1,6 +1,10 @@
 package com.seven.gwc.modular.sailor.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.seven.gwc.modular.lawrecord.data.file.FileData;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,8 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     private CertificateMapper certificateMapper;
     @Autowired
     private DictMapper dictMapper;
+    @Autowired
+    private FileManager fileManager;
 
     @Override
     public List<CertificateEntity> selectCertificateAll(String certificateName){
@@ -101,6 +107,20 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     @Override
     public void editCertificate(CertificateEntity certificate, ShiroUser user) {
         certificateMapper.updateById(certificate);
+    }
+
+    @Override
+    public CertificateEntity getCertificateById(String id) {
+        CertificateEntity certificateEntity = certificateMapper.selectById(id);
+        if (ToolUtil.isNotEmpty(certificateEntity.getAttachFilePath())) {
+            List<FileData> files = fileManager.listFile(certificateEntity.getAttachFilePath());
+            String urls = "";
+            for(FileData fileData: files){
+                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
+            }
+            certificateEntity.setAttachFilePath(urls);
+        }
+        return certificateEntity;
     }
 
 }

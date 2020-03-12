@@ -78,7 +78,7 @@ public class CertificateShipEntity implements Serializable {
     private String contact;
 
     /** 附件 */
-    private String attachment;
+    private String attachFilePath;
 
     /** 备注 */
     private String remark;

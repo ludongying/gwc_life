@@ -51,10 +51,10 @@ public class DecisionEntity extends GwcBaseEntity {
     private Integer severity;
 
     /** 证据是否有物价局价格指导 */
-    private Boolean caseBureauPrice;
+    private Integer caseBureauPrice;
 
     /** 证据是否有禁渔期通告(农业部) */
-    private Boolean caseNotification;
+    private Integer caseNotification;
 
     /** 罚款 */
     private String fine;
@@ -66,6 +66,6 @@ public class DecisionEntity extends GwcBaseEntity {
     private String description;
 
     /** 是否有暴力抗法 */
-    private Boolean caseViolenceLaw;
+    private Integer caseViolenceLaw;
 
 }

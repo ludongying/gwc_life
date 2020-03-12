@@ -7,6 +7,7 @@ import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -54,6 +55,13 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      * @return
      */
     BaseResult finishRecord(String id);
+
+    /**
+     * 详情
+     * @param id
+     * @param model
+     */
+    void detail(String id,Model model);
 
 
 

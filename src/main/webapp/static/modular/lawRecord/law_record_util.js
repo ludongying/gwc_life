@@ -96,7 +96,7 @@ var loc=(function(){
  * 初始化from 表单中地址，并监听变化
  * @param form
  */
-function loadAddr($,form,stateCode,cityCode){
+function loadAddr($,form,stateCode,cityCode,region){
     //初始化数据
     $(".addr_state").html(loc.getStateOptions(stateCode));
     var code=$(".addr_state").val();
@@ -105,7 +105,8 @@ function loadAddr($,form,stateCode,cityCode){
     //增加监听
     form.on('select(addr_state)', function(data){
         $(data.elem).parent().parent().find(".addr_city").html(loc.getCityOptions(data.value));
-        $(data.elem).parent().parent().find(".addr_region").val("");
+        if(!region){region=""}
+        $(data.elem).parent().parent().find(".addr_region").val(region);
         //清空数据3
         form.render();
     });
@@ -345,3 +346,24 @@ Date.prototype.format = function (fmt) {
 }
 
 /************************************************************/
+function msg_tip($,msg){
+    layer.msg(msg, {icon: 7, shift: 6},function(){});
+}
+
+/************************************************************/
+function operate_table(param) {
+    Feng.confirm(param.title, function () {
+        var ajax = new param.$ax(Feng.ctxPath + param.url, function (data) {
+            if (data.success) {
+                Feng.success("操作成功!");
+                param.table.reload(param.tableId);
+            } else {
+                Feng.error(data.message);
+            }
+        }, function (data) {
+            Feng.error("操作失败!" + data.message + "!");
+        });
+        ajax.set("id",param.data.id);
+        ajax.start();
+    });
+};

@@ -61,7 +61,7 @@ public class DecisionSafeEntity extends GwcBaseEntity {
     private String description;
 
     /** 是否有暴力抗法 */
-    private Boolean caseViolenceLaw;
+    private Integer caseViolenceLaw;
 
 
 }

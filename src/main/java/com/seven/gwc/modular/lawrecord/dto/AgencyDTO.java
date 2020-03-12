@@ -4,6 +4,7 @@ import com.seven.gwc.core.util.DateTimeUtil;
 import com.seven.gwc.modular.lawrecord.data.local.AddrData;
 import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
 import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
+import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -52,6 +53,22 @@ public class AgencyDTO extends AgencyEntity {
      */
     private String agencyAddrRegion;
 
+    /****************全详情添加*********************/
+
+    /**
+     * 案件来源
+     */
+    private String lawCaseSourceStr;
+    /**
+     * 案件编号
+     */
+    private String lawCaseCodeStr;
+    /**
+     * 经纬度
+     */
+    private String lawCaseLonLatStr;
+
+    /**************************************/
 
     private String concatTime(Date start, Date end){
        return DateTimeUtil.parse2String(start,"yyyy-MM-dd HH:mm")
@@ -77,6 +94,28 @@ public class AgencyDTO extends AgencyEntity {
         }
     }
 
+    public void setDetailContent(){
+        LawCaseSourceEnum lawCaseSourceEnum = LawCaseSourceEnum.findByCode(this.getLawCaseSource());
+        this.lawCaseSourceStr=Objects.isNull(lawCaseSourceEnum)?"":lawCaseSourceEnum.getMessage();
+        String lawCaseCode = this.getLawCaseCode();
+        String lawCaseFineCode = this.getLawCaseFineCode();
+        this.lawCaseCodeStr="";
+        if(Objects.nonNull(lawCaseFineCode)){
+            lawCaseCodeStr+=lawCaseFineCode+"罚 ";
+        }
+        if(Objects.nonNull(lawCaseCode)){
+            lawCaseCodeStr+=lawCaseCode+"号";
+        }
+        this.lawCaseLonLatStr="";
+        String lawCaseLon = this.getLawCaseLon();
+        String lawCaseLat = this.getLawCaseLat();
+        if(Objects.nonNull(lawCaseLon)){
+            lawCaseLonLatStr+=lawCaseLon+"经度";
+        }
+        if(Objects.nonNull(lawCaseLat)){
+            lawCaseLonLatStr+=lawCaseLat+"纬度";
+        }
+    }
 
 
 

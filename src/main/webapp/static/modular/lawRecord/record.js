@@ -24,12 +24,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
     initPage();
+    loadVerify(form)
 
     function initPage(){
         LawRecord.initColumn = function () {
             return [[
-                {title: 'id', field: 'id', align: "center",hide:true},
+                {title: 'ID', field: 'id', align: "center",hide:true},
                 {title: '类型', field: 'lawType', align: "center",hide:true},
+                {title: '状态', field: 'status', align: "center",hide:true},
                 {title: '序号', type:'numbers'},
                 {title: '案件编号', field: 'lawCaseCode', align: "center"},
                 {title: '案件创建时间', field: 'createDate', align: "center"},
@@ -37,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 {title: '被询问人', field: 'investigateName', align: "center"},
                 {title: '被询问人手机号', field: 'investigateTel', align: "center"},
                 {title: '案件来源', field: 'lawCaseSourceName', align: "center"},
-                {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
+                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
             ]];
         };
         table.render({
@@ -49,17 +51,36 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             cols: LawRecord.initColumn()
         });
     }
-
     /**
      * 左侧搜索
      */
     $('#btnSearch').click(function () {
         var queryData = {};
-        queryData['lawCaseCode'] = $("#lawCaseCode").val().trim();
-        queryData['shipName'] = $("#shipName").val().trim();
-        queryData['investigateTel'] = $("#investigateTel").val().trim();
+        var lawCaseCode=$("#lawCaseCode").val().trim();
+        if(lawCaseCode.length>50){
+            msg_style($,"lawCaseCode","字符长度不能超过50")
+          return;
+        }
+        queryData['lawCaseCode'] = lawCaseCode;
+        var shipName=$("#shipName").val().trim();
+        if(shipName.length>50){
+            msg_style($,"shipName","字符长度不能超过50")
+            return;
+        }
+        queryData['shipName'] = shipName;
+        var investigateTel=$("#investigateTel").val().trim();
+        if(investigateTel.length>11){
+            msg_style($,"investigateTel","字符长度不能超过11")
+            return;
+        }
+        queryData['investigateTel'] = investigateTel;
         queryData['lawType'] = $("#lawType").val().trim();
-        queryData['investigateName'] = $("#investigateName").val().trim();
+        var investigateName=$("#investigateName").val().trim();
+        if(investigateName.length>20){
+            msg_style($,"investigateName","字符长度不能超过20")
+            return;
+        }
+        queryData['investigateName'] = investigateName
         var createTime=$("#createTime").val().trim();
         if(createTime){
             var times = createTime.split("~");
@@ -73,7 +94,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 重置按钮点击事件
      */
     $('#btnReset').click(function () {
-        LawRecord.btnReset();
+        $("#conditionInput input").val("");
     });
 
 
@@ -98,45 +119,37 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         var layEvent = obj.event;
         if (layEvent === 'edit') {
             window.location.href=Feng.ctxPath+"lawRecord/agency?lawType="+data.lawType+"&id="+data.id;
-        } else if (layEvent === 'delete') {
-            LawRecord.onDeleteLawRecord(data);
-        } else if (layEvent === 'detail') {
-            LawRecord.onDetailLawRecord(data);
+        } else if (layEvent === 'invalid') {
+            operate_table({
+                $ax:$ax,
+                table:table,
+                tableId:LawRecord.tableId,
+                data:data,
+                title:"是作废《" + data.lawCaseCode+ "》吗?",
+                url:"/lawRecord/invalid"
+            })
+        } else if (layEvent === 'finish') {
+            operate_table({
+                $ax:$ax,
+                table:table,
+                tableId:LawRecord.tableId,
+                data:data,
+                title:"是结案《" + data.lawCaseCode+ "》吗?",
+                url:"/lawRecord/finish"
+            })
+        } else if(layEvent === 'instrument'){
+            msg_tip($,"文书还未开发");
+        } else if(layEvent === 'detail'){
+            window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
+        } else if(layEvent === 'export'){
+            msg_tip($,"导出还未开发");
+        } else if(layEvent === 'print'){
+            msg_tip($,"打印还未开发");
         }
     });
 
-    /**
-     * 点击查看执法记录
-     */
-    LawRecord.onDetailLawRecord = function (data) {
-        func.open({
-            title: '查看执法记录',
-            area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/lawRecord/lawRecord_detail?lawRecordId=' + data.id,
-            tableId: LawRecord.tableId
-        });
-    };
 
-    /**
-     * 点击删除执法记录
-     *
-     * @param data 点击按钮时候的行数据
-     */
-    LawRecord.onDeleteLawRecord = function (data) {
-        Feng.confirm("是否删除执法记录《" + data.name + "》吗?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/lawRecord/delete", function (data) {
-                if (data.success) {
-                    Feng.success("删除成功!");
-                    table.reload(LawRecord.tableId);
-                } else {
-                    Feng.error(data.message);
-                }
-            }, function (data) {
-                Feng.error("删除失败!" + data.message + "!");
-            });
-            ajax.set("lawRecordId", data.id);
-            ajax.start();
-        });
-    };
+
+
 
 });

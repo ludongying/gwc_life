@@ -25,7 +25,7 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         "delete":false,
         "down":true,
         "exts":'png|jpg|jpeg|avi|mp4',
-        "size":20*1024,
+        "size":50*1024,
         "preview":true
         }
 

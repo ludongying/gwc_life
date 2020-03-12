@@ -2,20 +2,16 @@
 function loadVerify(form){
     //自定义验证规则
     form.verify({
-        title: function(value){
-            if(value.length < 5){
-                return '标题至少得5个字符啊';
+        length20: function(value){
+            if(value.length > 20){
+                return '字符长度不能超过20';
             }
         }
-        ,pass: [
-            /^[\S]{6,12}$/
-            ,'密码必须6到12位，且不能出现空格'
-        ]
-        ,money:[
-            /^\d+\.?\d{0,2}$/
-            ,'请输入正确金额'
-        ]
-
+        ,length50:function(value){
+            if(value.length > 50){
+                return '字符长度不能超过50';
+            }
+        }
     });
 }
 
@@ -53,6 +49,18 @@ function money_verify($,id){
     });
 }
 
+function msg_style($,id,msg){
+    $("#"+id).attr("style","border:1px solid red");
+    $("#"+id).focus(function(){
+        //修改规则 小写金额
+        $("#"+id).attr("style","");
+    });
+    layer.msg(msg, {icon: 5, shift: 6},function(){});
+}
+
 function msg_error($,msg){
     layer.msg(msg, {icon: 5, shift: 6},function(){});
 }
+
+
+

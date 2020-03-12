@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/lawRecord/agency.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/agency_related_time.js"]}){
+@layout("/common/_container.html",{js:["/modular/lawRecord/agency.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/agency_related_time.js","/modular/lawRecord/law_form_verify.js"]}){
 <style>
     .container {
         padding-top: 40px;
@@ -49,7 +49,7 @@
     }
 
     .bg_input input{
-        width:252px;
+        width:254px;
     }
 
 </style>
@@ -71,7 +71,7 @@
                                     <div class="dot dot_blue"></div>
                                     <div class="item"></div>
                                 </div>
-                                @if(lawType=="1"){
+                                @if(lawType==1){
                                 <div style="flex:1;display:flex">
                                     <div class="item"></div>
                                     <div class="dot dot_gray"></div>
@@ -105,7 +105,7 @@
                                     <div class="dot_content">办案机关</div>
                                     <div class="item_content"></div>
                                 </div>
-                                @if(lawType=="1"){
+                                @if(lawType==1){
                                 <div style="flex:1;display:flex">
                                     <div class="item_content"></div>
                                     <div class="dot_content">询问笔录</div>
@@ -145,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="layui-col-md12">
+                <div class="layui-col-md12 bg_input">
                     <div class="layui-card">
                         <div class="layui-card-header">执法情况</div>
                         <div class="layui-card-body">
@@ -159,8 +159,8 @@
                                 </div>
                                 <div class="layui-inline" style="margin-left: 42px">
                                     <label class="layui-form-label">执法单位</label>
-                                    <div class="layui-input-inline" style="width: 290px">
-                                        <input type="text" name="enforcementAgency" autocomplete="off" class="layui-input">
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="enforcementAgency" value="${value.enforcementAgency}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -195,6 +195,12 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">案发时间</label>
+                                    <div class="layui-input-inline bg_input">
+                                        <input type="text" id="lawCaseDate" name="lawCaseDate" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -212,16 +218,16 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">案发地点</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="lawCaseAddr" autocomplete="off" class="layui-input">
+                                        <input type="text" name="lawCaseAddr"  autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">询问时间</label>
+                                    <div class="layui-input-inline  bg_input">
+                                        <input type="text" id="inquireDate"  name="inquireDateStr" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">案发时间</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" id="lawCaseDate" name="lawCaseDate" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
 
                             </div>
 
@@ -244,12 +250,7 @@
                                         <input type="text" id="prospectDate" name="prospectDateStr" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">询问时间</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" id="inquireDate" name="inquireDateStr" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
+
 
                             </div>
 
@@ -342,7 +343,7 @@
                     </div>
                 </div>
 
-                <div class="layui-col-md12 ">
+                <div class="layui-col-md12 bg_input">
                     <div class="layui-card">
                         <div class="layui-card-header">处罚机关</div>
                         <div class="layui-card-body">
@@ -351,55 +352,60 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">联系人</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="agencyPerson" autocomplete="off" class="layui-input">
+                                        <input type="text" name="agencyPerson" value="${value.agencyPerson}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">电话号码</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="agencyTel" autocomplete="off" class="layui-input">
+                                        <input type="text" name="agencyTel" value="${value.agencyTel}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
-                                <div class="layui-inline" id="agency_addr">
-                                    <label class="layui-form-label">地址</label>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <select class="addr_state" id="agencyAddr1" lay-filter="addr_state" name="agencyAddrState" filter>
-                                            <option value="">选择省</option>
-                                            <option value="11" selected="">北京</option>
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <select class="addr_city" name="agencyAddrCity">
-                                            <option value="">选择市</option>
-                                            <option value="1">东城</option>
+<!--                                <div class="layui-inline" id="agency_addr">-->
+<!--                                    <label class="layui-form-label">地址</label>-->
+<!--                                    <div class="layui-input-inline" style="width: 90px">-->
+<!--                                        <select class="addr_state" id="agencyAddr1" lay-filter="addr_state" name="agencyAddrState" filter>-->
+<!--                                            <option value="">选择省</option>-->
+<!--                                            <option value="11" selected="">北京</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <div class="layui-input-inline" style="width: 90px">-->
+<!--                                        <select class="addr_city" name="agencyAddrCity">-->
+<!--                                            <option value="">选择市</option>-->
+<!--                                            <option value="1">东城</option>-->
 
-                                        </select>
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <div class="layui-input-inline" style="width: 90px">-->
+<!--                                        <input type="text" name="agencyAddrRegion" autocomplete="off" class="layui-input addr_region">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                    <div class="layui-inline" id="agency_addr">
+                                        <label class="layui-form-label">地址</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="agencyAddr"  value="${value.agencyAddr}" autocomplete="off" class="layui-input">
+                                        </div>
                                     </div>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <input type="text" name="agencyAddrRegion" autocomplete="off" class="layui-input addr_region">
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div class="layui-form-item">
                                 <div class="layui-inline">
                                     <label class="layui-form-label">指定银行</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="bank" autocomplete="off" class="layui-input">
+                                        <input type="text" name="bank" value="${value.bank}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">复议机关</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="reviewAgency" autocomplete="off" class="layui-input">
+                                        <input type="text" name="reviewAgency" value="${value.reviewAgency}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">诉讼机关</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="lawsuitAgency" autocomplete="off" class="layui-input">
+                                        <input type="text" name="lawsuitAgency" value="${value.lawsuitAgency}" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                             </div>

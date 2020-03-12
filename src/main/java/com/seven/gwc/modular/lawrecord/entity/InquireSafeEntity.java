@@ -88,7 +88,7 @@ public class InquireSafeEntity extends GwcBaseEntity {
     private Integer shipLength;
 
     /** 查获时候捕鱼状态 */
-    private String shipStatus;
+    private Integer shipStatus;
 
 
 

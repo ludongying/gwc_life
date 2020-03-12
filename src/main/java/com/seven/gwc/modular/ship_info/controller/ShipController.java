@@ -163,23 +163,7 @@ public class ShipController extends BaseController {
     @RequestMapping("/upload")
     @ResponseBody
     public void upload(){
-//        $pathName  =  $this->request->param('path');//图片存放的目录
-//        $file = request()->file('file');//获取文件信息
-//        $path =  'static/uploads/' . (!empty($pathName) ? $pathName : 'case_images');//文件目录
-//        //创建文件夹
-//        if(!is_dir($path)){
-//            mkdir($path, 0755, true);
-//        }
-//        $info = $file->move($path);//保存在目录文件下
-//        if ($info && $info->getPathname()) {
-//            $data = [
-//            'status' => 1,
-//                    'data' =>  '/'.$info->getPathname(),
-//        ];
-//            echo exit(json_encode($data));
-//        } else {
-//            echo exit(json_encode($file->getError()));
-//        }
+
     }
 
 }

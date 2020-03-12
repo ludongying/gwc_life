@@ -155,9 +155,10 @@ var initFiles=function ($,upload,fileParam,index){
     if(!index){
         index='';
     }
-    var demoListView = $('#file_list'+index);
-    addData(fileParam.data);
-    var uploadParam={
+    if(fileParam){
+        var demoListView = $('#file_list'+index);
+        addData(fileParam.data);
+        var uploadParam={
             elem: '#select_list'+index
             ,url: '/file/uploadFile'
             ,accept: 'file'
@@ -200,13 +201,13 @@ var initFiles=function ($,upload,fileParam,index){
                     });
                     //预览
                     tr.find('.demo-preview').on('click',function(){
-                            var index=$(this).data("index");
-                            if(!index){
-                                $(this).data("index","1")
-                            }
-                            var reader = new FileReader();
-                            reader.readAsDataURL(file);
-                            reader.onload = function() {
+                        var index=$(this).data("index");
+                        if(!index){
+                            $(this).data("index","1")
+                        }
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function() {
                             preview_img(reader.result,index);
                         }
                     })
@@ -241,16 +242,18 @@ var initFiles=function ($,upload,fileParam,index){
                     ,tds = tr.children();
                 tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
                 tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
-           }
+            }
+        }
+        var uploadListIns = upload.render(uploadParam);
     }
-    var uploadListIns = upload.render(uploadParam);
+
     function addClickEvent(tr){
         tr.find('.demo-delete-2').on('click', function(){
             $.post(Feng.ctxPath + "/file/deleteFile",{path:$(this).data("filePath")},function(result){});
             tr.remove();
         });
         tr.find('.demo-down-1').on('click', function(){
-            downLoad(Feng.ctxPath + "/file/downFile",$(this).data("filePath"));
+            downLoad($(this).data("filePath"));
         });
         tr.find('.demo-preview-1').on('click', function(){
             var url = $(this).data("filePath");
@@ -267,7 +270,7 @@ var initFiles=function ($,upload,fileParam,index){
         return 99;
 
     }
-    function preview_img(url,index){
+    var preview_img=function(url,index){
         var html='<div><img src="'+url+'"/></div>'
         if(url){
             var area='auto'
@@ -284,7 +287,6 @@ var initFiles=function ($,upload,fileParam,index){
                 content: html
             });
         }
-
     }
     function addData(data){
         if(data){
@@ -303,7 +305,7 @@ var initFiles=function ($,upload,fileParam,index){
                     }
                     if(fileParam.preview && file.type===1){
                         td_preview='<button type="button" class="layui-btn layui-btn-xs layui-btn-normal demo-preview-1" data-file-path="'+file.url+'">预览</button>';
-                    }
+                }
 
                     var tr = $(['<tr id="upload-'+ index +'">'
                         ,'<td>'+ file.name +'</td>'
@@ -322,11 +324,11 @@ var initFiles=function ($,upload,fileParam,index){
             }
         }
     }
-    function downLoad(url,filePath){
+    var dowLoad = function(filePath){
         var dlform = document.createElement('form');
         dlform.style = "display:none;";
         dlform.method = 'post';
-        dlform.action = url;
+        dlform.action = Feng.ctxPath + "/file/downFile";
         dlform.target = 'callBackTarget';
         var hdnFilePath = document.createElement('input');
         hdnFilePath.type = 'hidden';
@@ -337,8 +339,9 @@ var initFiles=function ($,upload,fileParam,index){
         dlform.submit();
         document.body.removeChild(dlform);
     }
-
-
-
+    return{
+        preview_img:preview_img,
+        downLoad:dowLoad
+    }
 
 }

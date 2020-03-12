@@ -67,21 +67,21 @@ function relateTime($,laydate) {
      * 点击关联时间
      */
     $("#relatedTime").click(function () {
-        var prospect = $("#prospectDate").val();
+        // var prospect = $("#prospectDate").val();
         var inquire_end;
-        if(prospect){
-            var prospect_ = prospect.split(law_record_relate_time_separate);
-            var prospect_end = prospect_[1];
-            //获取询问时间
-            inquire_end = setInquireDate(prospect_end);
-        }else{
+        // if(prospect){
+        //     var prospect_ = prospect.split(law_record_relate_time_separate);
+        //     var prospect_end = prospect_[1];
+        //     //获取询问时间
+        //     inquire_end = setInquireDate(prospect_end);
+        // }else{
             var inquire = $("#inquireDate").val();
             if(inquire){
                 var inquire_=inquire.split(law_record_relate_time_separate);
                 inquire_end=new Date(inquire_[1]);
                 setProspectDate(inquire_[0]);
             }
-        }
+        // }
         if(inquire_end){
             //获取电话请示时间
             var tel_apply=setTelApplyDate(inquire_end);
@@ -97,7 +97,7 @@ function relateTime($,laydate) {
             setFinishDate(decision);
         }else{
             //提示
-            alert("please set prospectDate or inquireDate");
+            msg_tip($,"请输入案件信息-询问时间")
         }
     });
 

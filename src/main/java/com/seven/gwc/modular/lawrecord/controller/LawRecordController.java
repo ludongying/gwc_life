@@ -5,7 +5,7 @@ import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
-import com.seven.gwc.modular.lawrecord.service.LawRecordService;
+import com.seven.gwc.modular.lawrecord.service.*;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +30,7 @@ public class LawRecordController extends BaseController {
 
     @Autowired
     private LawRecordService lawRecordService;
+
 
     /**
      * 跳转到执法记录首页
@@ -78,6 +79,7 @@ public class LawRecordController extends BaseController {
      */
     @RequestMapping("/detail")
     public String detail(String id,Model model) {
+        lawRecordService.detail(id,model);
         return PREFIX + "detail";
     }
 

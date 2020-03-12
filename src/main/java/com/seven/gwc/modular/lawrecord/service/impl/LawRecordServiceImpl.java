@@ -8,19 +8,19 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
-import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
+import com.seven.gwc.modular.lawrecord.dto.*;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.RecordStatusEnum;
+import com.seven.gwc.modular.lawrecord.service.*;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
-import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +40,24 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
 
     @Autowired
     private LawRecordMapper lawRecordMapper;
+
+    @Autowired
+    private AgencyService agencyService;
+    @Autowired
+    private InquireService inquireService;
+    @Autowired
+    private InquireSafeService inquireSafeService;
+    @Autowired
+    private InquisitionService inquisitionService;
+    @Autowired
+    private ReasonService reasonService;
+    @Autowired
+    private EvidenceService evidenceService;
+    @Autowired
+    private DecisionService decisionService;
+    @Autowired
+    private DecisionSafeService decisionSafeService;
+
 
     @Override
     public List<StateData> getStates(){
@@ -86,6 +104,37 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         lawRecordEntity.setStatus(RecordStatusEnum.FINISH.getCode());
         this.updateById(lawRecordEntity);
         return new BaseResult(true,"");
+    }
+
+    @Override
+    public void detail(String id,Model model) {
+        LawRecordEntity lawRecordEntity = this.getById(id);
+        Integer lawType = lawRecordEntity.getLawType();
+        model.addAttribute("lawType",lawType);
+        AgencyDTO agencyDTO = agencyService.detail(id);
+        if(Objects.nonNull(agencyDTO)){ agencyDTO.setDetailContent(); }
+        model.addAttribute("agency",agencyDTO);
+        model.addAttribute("evidence",evidenceService.detail(id));
+        if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
+            InquireDTO inquireDTO = inquireService.detail(id);
+            if(Objects.nonNull(inquireDTO)){inquireDTO.setDetailContent();}
+            model.addAttribute("inquire",inquireDTO);
+            InquisitionDTO inquisitionDTO = inquisitionService.detail(id);
+            if(Objects.nonNull(inquisitionDTO)){inquisitionDTO.setDetailContent();}
+            model.addAttribute("inquisition",inquisitionDTO);
+            model.addAttribute("reason",new ReasonProduceDTO(lawRecordEntity));
+            DecisionDTO decisionDTO = decisionService.detail(id);
+            if(Objects.nonNull(decisionDTO)){decisionDTO.setDetailContent();}
+            model.addAttribute("decision",decisionDTO);
+        }else{
+            InquireSafeDTO inquire = inquireSafeService.detail(id);
+            if(Objects.nonNull(inquire)){inquire.setDetailContent();}
+            model.addAttribute("inquire",inquire);
+            model.addAttribute("reason",new ReasonSafeDTO(lawRecordEntity));
+            DecisionSafeDTO decisionSafeDTO = decisionSafeService.detail(id);
+            if(Objects.nonNull(decisionSafeDTO)){decisionSafeDTO.setDetailContent();}
+            model.addAttribute("decision",decisionSafeDTO);
+        }
     }
 
 

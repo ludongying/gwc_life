@@ -25,6 +25,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     relateTime($,laydate);
     //初始化页面内容
     initPage();
+    //载入表达验证
+    loadVerify(form);
     //办案人员处理
     function getOperators(data){
         var operators=[];
@@ -61,11 +63,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             if(result){
                 form.val('agencyForm',result);
                 setOperators(result.operators);
-                loadAddr($,form,result.agencyAddrStateCode,result.agencyAddrCityCode);
+                // loadAddr($,form,result.agencyAddrStateCode,result.agencyAddrCityCode);
                 return;
             }
         }
-         loadAddr($,form,"32","7");
+         // loadAddr($,form,"32","7");
 
     }
 
@@ -77,7 +79,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         setProspectInquire($,data);
         //设置办案人员
         getOperators(data);
-        data.field.agencyAddr= JSON.stringify(getLocAddr($,"agency_addr"));
+        // data.field.agencyAddr= JSON.stringify(getLocAddr($,"agency_addr"));
         //开启监听后，下一步操作验证
         nextStep({
             "lay":lay,

@@ -81,10 +81,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     function submitData(des,data){
         //设置数据
         data.field.punishAddr= JSON.stringify(getLocAddr($,"punish_addr"));
+        var url="decision/update";
+        if($("#lawType").val()==2){
+            url="decision_safe/update";
+        }
         //开启监听后，下一步操作验证
         nextStep({
             "lay":lay,
-            "url":"decision/update",
+            "url":url,
             "next":des,
             "data":data,
         });

@@ -52,7 +52,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     //开启表单内容监听
     startListen($,lay.key);
-    console.log("开启表单监听。。");
 
     //下一步
     form.on('submit(nextStep)', function (data) {

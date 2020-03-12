@@ -1,15 +1,15 @@
 server:
   port: 88                                                  #默认端口号
-  ip: http://172.38.232.222:88/                             #服务器IP地址
+  ip: http://192.168.18.4:88/                             #服务器IP地址
 spring:
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${FILE_UPLOAD_PATH_FILE},file:${FILE_UPLOAD_PATH_IMAGE} #外挂文件地址
   servlet:
     multipart:
-      max-file-size: 10MB                                   #单个文件的大小
+      max-file-size: 50MB                                   #单个文件的大小
       max-request-size: 100MB                               #单次请求的文件的总大小
   profiles:
-    active: test                                #默认开发环境
+    active: test                               #默认开发环境
   mvc:
     view:
       prefix: /templates                                    #指定视图的前缀路径
@@ -41,6 +41,7 @@ logging:                                                    #日志配置
     com.seven.gwc.modular.system.dao: debug
     com.seven.gwc.modular.sailor.dao: debug
     com.seven.gwc.modular.ship_info.dao: debug
+    com.seven.gwc.modular.lawrecord.dao: debug
   pattern:
     console: '%d %clr(%p) : %m%n'
 
@@ -97,9 +98,9 @@ spring:
   profiles: test                                            #测试环境
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-    username: gwc
-    password: ^5ADg#^5v2ZGF%rT
+    url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: 123456
 
 ---
 

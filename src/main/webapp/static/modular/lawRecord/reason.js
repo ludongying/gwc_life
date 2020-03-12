@@ -23,6 +23,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     initRadio();
     initPage();
+
     function initPage(){
         if($("#id").val()){
             var ajax = new $ax(Feng.ctxPath + "/lawRecord/reason/detail?id="+$("#id").val());

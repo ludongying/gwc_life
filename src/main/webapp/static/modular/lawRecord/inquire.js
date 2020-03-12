@@ -34,7 +34,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     //时间初始化
     initTime();
     initPage();
-
+    loadVerify(form);
     function initPage(){
         if($("#id").val()){
             var ajax = new $ax(Feng.ctxPath + "/lawRecord/inquire/detail?id="+$("#id").val());

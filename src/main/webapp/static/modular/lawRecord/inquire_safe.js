@@ -22,6 +22,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     initPage();
+    loadVerify(form);
     function initPage(){
         if($("#id").val()){
             var ajax = new $ax(Feng.ctxPath + "/lawRecord/inquire_safe/detail?id="+$("#id").val());

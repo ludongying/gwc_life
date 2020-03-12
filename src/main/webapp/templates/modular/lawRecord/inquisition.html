@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/lawRecord/inquisition.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js"]}){
+@layout("/common/_container.html",{js:["/modular/lawRecord/inquisition.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/law_form_verify.js"]}){
 <style>
     .container {
         padding-top: 40px;
@@ -217,7 +217,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">作业方式</label>
                                     <div class="layui-input-inline" style="width: 152px">
-                                        <input placeholder="" name="shipOperatePerson" autocomplete="off" class="layui-input">
+                                        <input placeholder="" name="shipOperatePerson" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">人</div>
                                 </div>

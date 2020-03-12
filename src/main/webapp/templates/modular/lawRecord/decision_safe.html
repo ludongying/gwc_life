@@ -274,7 +274,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-inline">
-                <input type="text" name="punishAge" autocomplete="off" class="layui-input">
+                <input type="text" name="punishAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -292,7 +292,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">身份证号码</label>
             <div class="layui-input-inline" style="width: 290px">
-                <input type="text" name="punishIdentityCard" autocomplete="off" class="layui-input">
+                <input type="text" name="punishIdentityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
             </div>
         </div>
 

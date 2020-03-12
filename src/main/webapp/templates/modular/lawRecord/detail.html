@@ -962,7 +962,7 @@
 
                                         </div>
 
-                                        @if(decision.punishPersonType==2){
+                                        @if(isNotEmpty(decision) && decision.punishPersonType==2){
                                         <div class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">姓名</label>
@@ -1028,7 +1028,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="layui-form-item">
                                             <div class="layui-inline">
                                                 <label class="layui-form-label">情节严重性</label>
@@ -1037,7 +1036,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="layui-form-item">
 
                                             <div class="layui-inline">
@@ -1077,7 +1075,6 @@
                                             </div>
 
                                         </div>
-
                                         <div class="layui-form-item ">
 
                                             <div class="layui-inline label_bg">
@@ -1087,7 +1084,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 

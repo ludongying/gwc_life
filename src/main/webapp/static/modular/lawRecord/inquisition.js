@@ -19,7 +19,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
          'func':func,
          'key':'law_inquisition'
     }
-
+    loadVerify(form);
     //编辑
     if($("#id").val()){
         var ajax = new $ax(Feng.ctxPath + "/lawRecord/inquisition/detail?id="+$("#id").val());

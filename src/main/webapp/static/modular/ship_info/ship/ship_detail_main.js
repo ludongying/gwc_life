@@ -62,19 +62,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
         //alert(certificateStrs);
         $('#certificateId').append('<a style="color: #01AAED;" href="' + url + '">共'+ certificateStrs.length + '张</a>');
     }
+
     //加载船舶图像轮播
-    var images = result.image.split(",");
+    var images = result.imageFilePath.split(",");
     var count = 0;
     $.each(images, function (index, item) {
         $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
-        // count = count + 1;
-        // if(count%2!=0)
-        // {
-        //     $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '>');
-        // }
-        // else {
-        //     $('#image').append('<img class="img-thumbnail" src=' + item + '></div>');
-        // }
     })
     ins.reload({
         elem: '#imgBoat'
@@ -84,6 +77,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
         , indicator: 'none'
         , autoplay:'false'
     });
+
     /**
      * 点击编辑执法船信息管理
      */
@@ -91,7 +85,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
         // alert($('#id').val());
         func.open({
             title: '编辑执法船信息',
-            area: ['1000px', '700px'],
+            area: ['1000px', '750px'],
             content: Feng.ctxPath + '/ship/ship_edit?shipId=' + $('#id').val()
             // tableId: Ship.tableId
         });

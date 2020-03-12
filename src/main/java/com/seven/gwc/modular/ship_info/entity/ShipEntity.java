@@ -78,7 +78,7 @@ public class ShipEntity implements Serializable {
     private Double mainPower;
 
     // 船舶图片
-    private String image;
+    private String imageFilePath;
 
     // 证书编码
     private String certificateId;

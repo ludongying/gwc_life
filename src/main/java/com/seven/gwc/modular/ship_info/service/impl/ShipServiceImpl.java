@@ -7,6 +7,8 @@ import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.TypeStatesEnum;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;

@@ -20,7 +20,7 @@
         <result column="area" property="area" />
         <result column="people_num" property="peopleNum" />
         <result column="main_power" property="mainPower" />
-        <result column="image" property="image" />
+        <result column="image_file_path" property="imageFilePath" />
         <result column="certificate_id" property="certificateId" />
         <result column="remark" property="remark" />
         <result column="manufacturer" property="manufacturer" />
@@ -30,7 +30,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, ship_code, name, owner, nationality, type, length,length_total, width, material, deep, tonnage,tonnage_net, area, people_num, main_power, image, certificate_id, remark, manufacturer, finish_date, gunwale_count
+        id, ship_code, name, owner, nationality, type, length,length_total, width, material, deep, tonnage,tonnage_net, area, people_num, main_power, image_file_path, certificate_id, remark, manufacturer, finish_date, gunwale_count
     </sql>
     <select id="ShipEntityList" resultType="com.seven.gwc.modular.ship_info.entity.ShipEntity">
         select s.*,b.name as nationalityDesp,c.name as typeDesp

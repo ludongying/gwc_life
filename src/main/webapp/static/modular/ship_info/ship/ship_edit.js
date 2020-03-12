@@ -11,6 +11,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
     var upload = layui.upload;
+    //多图容器
+    var image_path = [];
 
     laydate.render({
         elem: '#finishDate',
@@ -25,6 +27,18 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var ajax = new $ax(Feng.ctxPath + "/ship/detail/" + Feng.getUrlParam("shipId"));
     var result = ajax.start();
     form.val('shipForm', result);
+
+    //多图片回显
+    $().ready(function() {
+        var imgStr = result.imageFilePath;
+        imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
+        imgStrArr = imgStr1.split(",")
+        // alert(imgStrArr.length);
+        for (var i = 0; i < imgStrArr.length; i++) {
+           if(imgStrArr[i] != '')
+                $('#boatPreviewMulti').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
+        }
+    });
 
     //船籍获取下拉框
     $.ajax({
@@ -81,29 +95,34 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     upload.render({
         elem: '#boatPreviewBtn'
         , accept: 'images'
-        , url: 'ship/updateImages' //改成您自己的上传接口
+        , url: '/file/uploadFile'
+        ,acceptMime: 'image/jpg,image/png,image/jpeg'
+        , exts: 'jpg|png|jpeg'
+        , size: 1024
         , multiple: true
+        , auto: true
         , before: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                $('#boatPreviewMulti').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="100px">')
+                $('#boatPreviewMulti').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="150px">')
             });
         }
-        , done: function (data) {
-            alert('aaaa');
-            var ajax = new $ax(Feng.ctxPath + "/system/updateImages",
-                function (data) {
-
-                }, function (data) {
-                    Feng.error("修改失败!" + data.message + "!");
-                });
-            alert(data.content.pictureName);
-            ajax.set("image", "/common/images/portrait/" + data.content.pictureName);
-            ajax.start();
+        , done: function (res, index, upload) {
+            if(res.success){//上传图片成功
+                Feng.success("上传成功!");
+                image_path.push(res.content.path);
+                $('#imageFilePath').val(image_path);
+            }
         },
         error: function () {
             Feng.error("上传船舶图像失败！");
         }
+    });
+
+    //清空图片列表
+    $('#PreviewClearBtn').click(function () {
+        $('#boatPreviewMulti').empty();
+        $('#imageFilePath').val("");
     });
 
     // upload.render({

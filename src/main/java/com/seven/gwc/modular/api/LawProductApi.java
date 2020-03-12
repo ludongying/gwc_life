@@ -2,13 +2,9 @@ package com.seven.gwc.modular.api;
 
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.service.LawProductService;
-import com.seven.gwc.modular.lawrecord.vo.AppAgencyVO;
-import com.seven.gwc.modular.lawrecord.vo.AppInquireVO;
-import com.seven.gwc.modular.lawrecord.vo.AppOperatorVO;
-import com.seven.gwc.modular.lawrecord.vo.EnumVO;
+import com.seven.gwc.modular.lawrecord.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +23,9 @@ public class LawProductApi {
 
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
-    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO){
+    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO){
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireVO);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireVO, appInquireSafeEntityVO);
     }
 
     @GetMapping(value = "/getInvestigatePositionList")
@@ -56,24 +52,38 @@ public class LawProductApi {
         return new BaseResult().content(lawProductService.getPlotSeverityList());
     }
 
+    @GetMapping(value = "/getProduceReasonList")
+    @ApiOperation(value = "生产获取生产案由列表")
     public BaseResult<List<EnumVO>> getProduceReasonList() {
         return new BaseResult().content(lawProductService.getProduceReasonList());
     }
 
+    @GetMapping(value = "/getPunishmentTypeList")
+    @ApiOperation(value = "获取处罚人类型列表")
     public BaseResult<List<EnumVO>> getPunishmentTypeList() {
         return new BaseResult().content(lawProductService.getPunishmentTypeList());
     }
 
+    @GetMapping(value = "/getRecordStatusList")
+    @ApiOperation(value = "获取执法记录状态列表")
+    public BaseResult<List<EnumVO>> getRecordStatusList() {
+        return new BaseResult().content(lawProductService.getRecordStatusList());
+    }
+
     @GetMapping(value = "/getSafeReasonList")
-    @ApiOperation(value = "获取生产案由列表")
+    @ApiOperation(value = "安全获取生产案由列表")
     public BaseResult<List<EnumVO>> getSafeReasonList() {
         return new BaseResult().content(lawProductService.getSafeReasonList());
     }
 
+    @GetMapping(value = "/getShipCaseCardList")
+    @ApiOperation(value = "获取船牌悬挂类型列表")
     public BaseResult<List<EnumVO>> getShipCaseCardList() {
         return new BaseResult().content(lawProductService.getShipCaseCardList());
     }
 
+    @GetMapping(value = "/getShipCaseList")
+    @ApiOperation(value = "获取船涂写情况列表")
     public BaseResult<List<EnumVO>> getShipCaseList() {
         return new BaseResult().content(lawProductService.getShipCaseList());
     }
@@ -90,6 +100,8 @@ public class LawProductApi {
         return new BaseResult().content(lawProductService.getShipRealTypeList());
     }
 
+    @GetMapping(value = "/getShipStatusList")
+    @ApiOperation(value = "获取渔船状态列表")
     public BaseResult<List<EnumVO>> getShipStatusList() {
         return new BaseResult().content(lawProductService.getShipStatusList());
     }

@@ -1,6 +1,6 @@
 package com.seven.gwc.modular.api;
 
-import cn.hutool.core.io.resource.Resource;
+import org.springframework.core.io.Resource;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.modular.electronic_data.service.RegulationSafeService;
@@ -11,10 +11,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -25,7 +28,7 @@ import java.util.List;
  * @date : 2020-03-09
  */
 
-@RestController
+@Controller
 @Api(tags = "法律法规")
 @RequestMapping("gwcApi/lawsRegulation")
 public class LawsRegulationApi {
@@ -41,11 +44,17 @@ public class LawsRegulationApi {
         return new BaseResult().content(listVO);
     }
 
+    @RequestMapping("/preview")
+    @ApiOperation(value = "预览文件")
+    public String previewFile(@ApiParam(name = "filePath", value = "文件路径") String filePath) {
+        return "/modular/system/pdfPreview";
+    }
+
     @GetMapping("/previewFile")
+    @ResponseBody
     @ApiOperation(value = "预览文件")
     public ResponseEntity<Resource> previewFile(HttpServletResponse response,
-                                                @ApiParam(name = "fileName", value = "文件名") String fileName,
                                                 @ApiParam(name = "filePath", value = "文件路径") String filePath) {
-        return FileUtil.previewFile(fileName + ".pdf", filePath, response);
+        return FileUtil.previewFile(filePath, response);
     }
 }

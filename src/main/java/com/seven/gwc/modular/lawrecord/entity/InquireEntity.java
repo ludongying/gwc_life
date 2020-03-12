@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * description : 询问笔录关实体
+ * description : 询问笔录-生产实体
  *
  * @author : ZZL
  * @date : 2020-02-28

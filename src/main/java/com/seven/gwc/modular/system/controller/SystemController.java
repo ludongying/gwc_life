@@ -17,8 +17,12 @@ import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dto.FileEntityDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -219,5 +223,13 @@ public class SystemController extends BaseController {
         model.addAttribute("file", file);
         model.addAttribute("fileName", fileName);
         return "/common/previewPdf";
+    }
+
+    @GetMapping("/previewFile")
+    @ResponseBody
+    @ApiOperation(value = "预览文件")
+    public ResponseEntity<Resource> previewFile(HttpServletResponse response,
+                                                @ApiParam(name = "filePath", value = "文件路径") String filePath) {
+        return FileUtil.previewFile(filePath, response);
     }
 }

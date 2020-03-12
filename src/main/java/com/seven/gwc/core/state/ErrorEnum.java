@@ -58,7 +58,9 @@ public enum ErrorEnum {
     /********************************✨    执法船和船员(5000 * 5999)   ✨*************************************/
     ERROR_ONLY_LAWSHIP_CODE(5000,"执法船编码已经存在"),
     ERROR_ONLY_PERSON_ID(5001,"人员身份证号已存在"),
-    ERROR_ONLY_CERTIFICATE_ID(5002,"证书编码已存在");
+    ERROR_ONLY_CERTIFICATE_ID(5002,"证书编码已存在"),
+    ERROR_ONLY_EQUIP_CODE(5003,"设备出厂编码已存在");
+
 
     private Integer code;
     private String message;

@@ -51,4 +51,12 @@ public interface ShipService extends IService<ShipEntity> {
      * @return
      */
     List<ShipEntity> listShips(String id);
+
+    /**
+     * 获取执法船详细信息（图片url转换）
+     * @param id 表编码
+     * @return
+     */
+    ShipEntity getShipById(String id);
+
 }

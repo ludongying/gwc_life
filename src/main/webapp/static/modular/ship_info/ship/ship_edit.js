@@ -31,12 +31,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     //多图片回显
     $().ready(function() {
         var imgStr = result.imageFilePath;
-        imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
-        imgStrArr = imgStr1.split(",")
-        // alert(imgStrArr.length);
-        for (var i = 0; i < imgStrArr.length; i++) {
-           if(imgStrArr[i] != '')
-                $('#boatPreviewMulti').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
+        if(imgStr != null) {
+            var imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
+            var imgStrArr = imgStr1.split(",")
+            // alert(imgStrArr.length);
+            for (var i = 0; i < imgStrArr.length; i++) {
+                if (imgStrArr[i] != '')
+                    $('#boatPreviewMulti').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
+            }
         }
     });
 
@@ -98,13 +100,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         , url: '/file/uploadFile'
         ,acceptMime: 'image/jpg,image/png,image/jpeg'
         , exts: 'jpg|png|jpeg'
-        , size: 1024
         , multiple: true
         , auto: true
         , before: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                $('#boatPreviewMulti').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="150px">')
+                $('#boatPreviewMulti').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">')
             });
         }
         , done: function (res, index, upload) {
@@ -124,30 +125,5 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         $('#boatPreviewMulti').empty();
         $('#imageFilePath').val("");
     });
-
-    // upload.render({
-    //     elem: '#imgBoat',
-    //     accept: 'images',
-    //     url: '/system/uploadImage', // 上传接口
-    //     before: function (obj) {
-    //         obj.preview(function (index, file, result) {
-    //             $('#boatPreview').attr('src', result);
-    //         });
-    //     },
-    //     done: function (data) {
-    //         var ajax = new $ax(Feng.ctxPath + "/system/updateAvatar",
-    //             function (data) {
-    //
-    //             }, function (data) {
-    //                 Feng.error("修改失败!" + data.message + "!");
-    //             });
-    //         ajax.set("image", "/common/images/portrait/"+data.content.pictureName);
-    //         ajax.start();
-    //     },
-    //     error: function () {
-    //         Feng.error("上传船舶图像失败！");
-    //     }
-    // });
-
 
 });

@@ -5,6 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.lawrecord.data.file.FileData;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.dao.CertificateShipMapper;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
 import com.seven.gwc.modular.ship_info.service.CertificateShipService;
@@ -32,6 +36,8 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     private CertificateShipMapper certificateMapper;
     @Autowired
     private DictMapper dictMapper;
+    @Autowired
+    private FileManager fileManager;
 
     @Override
     public List<CertificateShipEntity> selectCertificate(String certificateName, String ids){
@@ -77,6 +83,20 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     @Override
     public void editCertificate(CertificateShipEntity certificate, ShiroUser user) {
         certificateMapper.updateById(certificate);
+    }
+
+    @Override
+    public CertificateShipEntity getCertificateById(String id) {
+        CertificateShipEntity certificateEntity = certificateMapper.selectById(id);
+        if (ToolUtil.isNotEmpty(certificateEntity.getAttachFilePath())) {
+            List<FileData> files = fileManager.listFile(certificateEntity.getAttachFilePath());
+            String urls = "";
+            for(FileData fileData: files){
+                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
+            }
+            certificateEntity.setAttachFilePath(urls);
+        }
+        return certificateEntity;
     }
 
 }

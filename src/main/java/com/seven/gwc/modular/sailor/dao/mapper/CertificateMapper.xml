@@ -18,13 +18,13 @@
         <result column="response_dept" property="responseDept"/>
         <result column="certificate_place" property="certificatePlace"/>
         <result column="contact" property="contact"/>
-        <result column="attachment" property="attachment"/>
+        <result column="attach_file_path" property="attachFilePath"/>
         <result column="remark" property="remark"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, certificate_id, name, owner_type, certificate_type, issuer, issue_date, out_date, store_place, is_often, window_phase, response_dept, certificate_place, contact, attachment, remark
+        id, certificate_id, name, owner_type, certificate_type, issuer, issue_date, out_date, store_place, is_often, window_phase, response_dept, certificate_place, contact, attach_file_path, remark
     </sql>
 
     <select id="CertificateEntityListAll" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">

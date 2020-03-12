@@ -32,16 +32,15 @@ public class LawRecordEntity extends GwcIdBaseEntity {
     /** 文书地址 */
     private String writFilePath;
 
-    /** 文书名称 */
-    private String writFileName;
-
     /** 主案由 */
     private Integer mainReason;
 
     /** 副案由 */
     private String secondReason;
 
-
+    /** 文书名称
+     private String writFileName;
+     */
 
 
 }

@@ -7,7 +7,9 @@ import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.TypeStatesEnum;
+import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,16 +40,33 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
 
     @Autowired
     private ShipMapper shipMapper;
+    @Autowired
+    private FileManager fileManager;
 
     /**
      * 执法船信息管理查询列表
      */
     @Override
-    public List<ShipEntity> selectShip(ShipEntity shipEntity){
+    public List<ShipEntity> selectShip(ShipEntity shipEntity) {
 //        LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.<ShipEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(shipName),ShipEntity::getName,shipName);
 //        return shipMapper.selectList(lambdaQuery);
-        return shipMapper.ShipEntityList(shipEntity);
+        List<ShipEntity> ships = shipMapper.ShipEntityList(shipEntity);
+        for (ShipEntity ship : ships) {
+            if (ToolUtil.isNotEmpty(ship.getImageFilePath())) {
+                 List<FileData> files = fileManager.listFile(ship.getImageFilePath());
+                 String urls = "";
+                 for(FileData fileData: files){
+                     if(urls.isEmpty()){
+                         urls = fileData.getUrl();
+                     }else{
+                         urls = urls + FileUtils.file_2_file_sep + fileData.getUrl();
+                     }
+                 }
+                ship.setImageFilePath(urls);
+            }
+        }
+        return ships;
     }
 
     @Override
@@ -91,5 +110,19 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
         List<ShipEntity> shipEntities = shipMapper.selectList(lambdaQueryShip);
         //List<ShipEntity> shipEntities = shipMapper.ShipEntityList(new ShipEntity());
         return shipEntities;
+    }
+
+    @Override
+    public ShipEntity getShipById(String id) {
+        ShipEntity ship = shipMapper.selectById(id);
+        if (ToolUtil.isNotEmpty(ship.getImageFilePath())) {
+            List<FileData> files = fileManager.listFile(ship.getImageFilePath());
+            String urls = "";
+            for(FileData fileData: files){
+                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
+            }
+            ship.setImageFilePath(urls);
+        }
+        return ship;
     }
 }

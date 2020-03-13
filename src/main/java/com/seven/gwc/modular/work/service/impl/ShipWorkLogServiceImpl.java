@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.DateTimeUtil;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.work.dao.ShipWorkLogMapper;
 import com.seven.gwc.modular.work.entity.ShipWorkLogEntity;
@@ -33,9 +34,9 @@ public class ShipWorkLogServiceImpl extends ServiceImpl<ShipWorkLogMapper, ShipW
     private ShipWorkLogMapper shipWorkLogMapper;
 
     @Override
-    public List<ShipWorkLogEntity> selectShipWorkLog(String shipWorkLogName){
+    public List<ShipWorkLogEntity> selectShipWorkLog(String shipWorkLogName) {
         LambdaQueryWrapper<ShipWorkLogEntity> lambdaQuery = Wrappers.<ShipWorkLogEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(shipWorkLogName),ShipWorkLogEntity::getId,shipWorkLogName);
+        lambdaQuery.like(ToolUtil.isNotEmpty(shipWorkLogName), ShipWorkLogEntity::getId, shipWorkLogName);
         return shipWorkLogMapper.selectList(lambdaQuery);
     }
 
@@ -53,8 +54,9 @@ public class ShipWorkLogServiceImpl extends ServiceImpl<ShipWorkLogMapper, ShipW
     public void editShipWorkLog(ShipWorkLogEntity shipWorkLog, ShiroUser user) {
         shipWorkLogMapper.updateById(shipWorkLog);
     }
+
     @Override
-    public JSONArray listLogs(ShipWorkLogEntity shipWorkLog,ShiroUser user) {
+    public JSONArray listLogs(ShipWorkLogEntity shipWorkLog, ShiroUser user) {
 //        LambdaQueryWrapper<ShipWorkLogEntity> lambdaQuery =Wrappers.lambdaQuery();
 //        lambdaQuery.eq(ShipWorkLogEntity::getCreatePerson,user.getId())
 //                .eq(ShipWorkLogEntity::getId,shipWorkLog.getId());
@@ -63,20 +65,20 @@ public class ShipWorkLogServiceImpl extends ServiceImpl<ShipWorkLogMapper, ShipW
 
 
         JSONArray jsonArray = new JSONArray();
-        for (ShipWorkLogEntity shipWorkLogEntity:shipWorkLogEntities) {
+        for (ShipWorkLogEntity shipWorkLogEntity : shipWorkLogEntities) {
             JSONObject jsonObject = new JSONObject();
             var ids = shipWorkLogEntity.getId();
             if (!SysConsts.STR_NULL.equals(ids) && ids != null && ids.length() > 0) {
                 for (String id : ids.split(SysConsts.STR_COMMA)) {
-                    if (shipWorkLogEntity.getId().equals(id)){
+                    if (shipWorkLogEntity.getId().equals(id)) {
                         jsonObject.put("selected", "selected");
                     }
                 }
             }
 
             jsonObject.put("id", shipWorkLogEntity.getId());
-            jsonObject.put("start", shipWorkLogEntity.getRecordDate());
-            jsonObject.put("end", shipWorkLogEntity.getRecordEndDate());
+            jsonObject.put("start", DateTimeUtil.parse2String(shipWorkLogEntity.getRecordDate(), "yyyy-MM-dd HH:mm:ss"));
+            jsonObject.put("end", DateTimeUtil.parse2String(shipWorkLogEntity.getRecordEndDate(), "yyyy-MM-dd HH:mm:ss"));
             jsonObject.put("title", shipWorkLogEntity.getContent());
             jsonObject.put("type", shipWorkLogEntity.getRecordType());
             jsonArray.add(jsonObject);

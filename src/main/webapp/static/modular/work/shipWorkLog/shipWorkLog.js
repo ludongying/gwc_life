@@ -160,14 +160,14 @@
 //
 // });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var Calendar = FullCalendar.Calendar;
     var Draggable = FullCalendarInteraction.Draggable;
 
     var containerEl = document.getElementById('external-events-list');
     new Draggable(containerEl, {
         itemSelector: '.fc-event',
-        eventData: function(eventEl) {
+        eventData: function (eventEl) {
             return {
                 title: eventEl.innerText.trim(),
                 Color: eventEl.style.backgroundColor
@@ -176,23 +176,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     var calendarEl = document.getElementById('calendar');
     var calendar = new Calendar(calendarEl, {
-        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+        plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
 
         customButtons: {            //自定义header属性中按钮[customButtons与header并用]
             myCustomButton: {
                 text: '导出',
-                click: function() {
+                click: function () {
                     alert('点击导出按钮!');
                 }
             }
         }
-        ,header: {
+        , header: {
             left: 'prev,next today',
             center: 'title',
-            right:'myCustomButton'
+            right: 'myCustomButton'
         },
 
-        defaultView:'timeGridDay',
+        defaultView: 'timeGridDay',
         locale: 'zh-cn',
         editable: true,
         droppable: true,
@@ -200,58 +200,31 @@ document.addEventListener('DOMContentLoaded', function() {
         eventLimit: 4, // 显示更多
         displayEventEnd: true, // 显示结束时间
         //显示事件详情
-        events: function (start,end,timezone, callback) {
+        events: function (info, successCallback, failureCallback) {
             $.ajax({
                 url: Feng.ctxPath + '/shipWorkLog/listLogs',
                 type: "post",
                 // contentType: "application/json; charset=utf-8",
-                data:{},
-                dataType:"json",
+                data: {},
+                dataType: "json",
                 success: function (data) {
-                    // alert("成功");
-                    console.log(data);
-                    var events = [];
-                    for (var i = 0; i < data.content.length; i++) {
-                        events.push({
-                            id: data.content[i].id,
-                            title:data.content[i].title,
-                            start:'2020-03-12 12:00:00',
-                            end: '2020-03-12 18:00:00',
-                        });
-                    }
-                    try {
-                        callback(data);
-
-                    } catch (e) {
-
-                        console.info(e);
-                    }
+                    successCallback(data.content)
                 },
                 //#3这个error函数调试时非常有用，如果解析不正确，将会弹出错误框
-                    error:function f(XMLHttpRequest, textStatus, errorThrown) {
-                        alert(XMLHttpRequest.status);
-                        alert(XMLHttpRequest.readyState);
-                        alert(textStatus); // paser error;
-                    }
+                error: function f(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                    alert(XMLHttpRequest.readyState);
+                    alert(textStatus); // paser error;
+                }
 
             });
         }
-        // events:[
-        //     {
-        //         title: 'Event1',
-        //         start: '2020-03-12 12:00:00',
-        //         end:'2020-03-12 18:00:00'
-        //     },
-        //     {
-        //         title: 'Event2',
-        //         start: '2020-03-11'
-        //     }
-        // ]
+
 
         , dateClick: function () {
             openLayer();
         }
-        ,eventClick: function (calEvent, jsEvent, view, callback) {
+        , eventClick: function (calEvent, jsEvent, view, callback) {
             console.log(calEvent.title());
             console.log(jsEvent);
             console.log(view);

@@ -96,6 +96,8 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
             return false;
         }
         certificateMapper.insert(certificate);
+        //更新船员表证书
+
         return true;
     }
 

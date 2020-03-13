@@ -29,16 +29,18 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
      *
      * @param certificate 实体对象
      * @param user 当前用户
+     * @param personId 船员表id
      */
-    boolean addCertificate(CertificateShipEntity certificate, ShiroUser user);
+    boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String personId);
 
     /**
      * 证书信息删除
      *
      * @param certificateId 唯一标识
      * @param user 当前用户
+     * @param personId 船员表id
      */
-    void deleteCertificate(String certificateId, ShiroUser user);
+    void deleteCertificate(String certificateId, ShiroUser user, String personId);
 
     /**
      * 证书信息编辑

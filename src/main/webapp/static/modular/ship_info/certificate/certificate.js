@@ -130,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '增加证书信息',
             area: ['1000px', '710px'],
-            content: Feng.ctxPath + '/certificateShip/certificate_add',
+            content: Feng.ctxPath + '/certificateShip/certificate_add?personId='+$('#personId').val().trim(),
             tableId: Certificate.tableId
         });
     };
@@ -167,7 +167,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Certificate.onDeleteCertificate = function (data) {
         Feng.confirm("是否删除证书信息《" + data.name + "》吗?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/certificateShip/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + '/certificateShip/delete?personId='+$('#personId').val().trim(), function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
                     table.reload(Certificate.tableId);

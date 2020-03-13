@@ -46,7 +46,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '联系方式', field: 'phone', sort: false, align: "center", hide:true},
             {title: '证书', field: 'certificateId', sort: false, align: "center", templet: function (d) {
                     // var url = Feng.ctxPath + '/certificate?id=' + d.certificateId + 'htmltype=person';
-                    var url = Feng.ctxPath + '/certificate?ids=' + d.certificateId;
+                    var url = Feng.ctxPath + '/certificate?ids=' + d.certificateId +'&personId=' + d.id;
                     if(d.certificateId === null || d.certificateId === ''){
                         return '<a style="color: #01AAED;" href="' + url + '">共0张</a>';
                     }

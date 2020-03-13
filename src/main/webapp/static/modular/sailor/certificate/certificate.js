@@ -54,7 +54,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
-        url: Feng.ctxPath + '/certificate/list?ids='+ $('#ids').val(),
+        url: Feng.ctxPath + '/certificate/list?ids='+ $('#ids').val() + '&personId=' + $('#personId').val().trim(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,

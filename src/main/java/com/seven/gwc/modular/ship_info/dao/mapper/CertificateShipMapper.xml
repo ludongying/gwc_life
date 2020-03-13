@@ -29,15 +29,15 @@
     <select id="CertificateEntityList" resultType="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
         select c.* from ship_info_certificate c
         left join sys_dict d on d.id = c.owner_type
-        where d.name = '船舶证书'
+        where d.name = '船舶证书' and #{ids} like CONCAT('%',c.id,'%')
 
         <if test="certificateName != null and certificateName != ''">
             and (c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like
             CONCAT('%',#{certificateName},'%'))
         </if>
-        <if test="ids != null">
-            and #{ids} like CONCAT('%',c.id,'%')
-        </if>
+<!--        <if test="ids != null">-->
+<!--            and #{ids} like CONCAT('%',c.id,'%')-->
+<!--        </if>-->
 
     </select>
 

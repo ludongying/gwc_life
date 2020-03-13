@@ -51,13 +51,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         ]];
     };
 
-
-
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
         // url: Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam("id") + '&' + + Feng.getUrlParam("htmltype"),
-        url: Feng.ctxPath + '/certificateShip/list?ids='+ $('#ids').val(),
+        url: Feng.ctxPath + '/certificateShip/list?ids='+ $('#ids').val().trim() + '&personId=' + $('#personId').val().trim(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,

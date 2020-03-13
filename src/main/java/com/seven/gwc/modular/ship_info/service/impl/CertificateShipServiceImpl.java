@@ -50,11 +50,11 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     private ShipMapper shipMapper;
 
     @Override
-    public List<CertificateShipEntity> selectCertificate(String certificateName, String ids){
+    public List<CertificateShipEntity> selectCertificate(String certificateName, String ids, String personId){
 //        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
-
-        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName,ids);
+        String idsNew = shipMapper.selectById(personId).getCertificateId();
+        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName,idsNew);
         for(CertificateShipEntity certificateEntity : list){
             if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
                 DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());

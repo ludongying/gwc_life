@@ -89,7 +89,7 @@ public class AppInquireSafeVO {
 
     /** 船的长度 */
     @ApiModelProperty(value = "船的长度")
-    private Integer shipLength;
+    private Double shipLength;
 
     /** 查获时候捕鱼状态 */
     @ApiModelProperty(value = "查获时候捕鱼状态")

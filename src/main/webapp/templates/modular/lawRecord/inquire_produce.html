@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/lawRecord/inquire.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js"]}){
+@layout("/common/_container.html",{js:["/modular/lawRecord/inquire.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/law_form_verify.js"]}){
 <style>
     .container {
         padding-top: 40px;
@@ -154,7 +154,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">年龄</label>
                                     <div class="layui-input-inline" >
-                                        <input type="text" name="investigateAge" autocomplete="off" class="layui-input">
+                                        <input type="text" name="investigateAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -177,7 +177,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">手机号</label>
                                     <div class="layui-input-inline">
-                                        <input name="investigateTel" autocomplete="off" class="layui-input">
+                                        <input name="investigateTel" lay-verify="phoneNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -185,7 +185,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">身份证号码</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="identityCard" autocomplete="off" class="layui-input">
+                                        <input type="text" name="identityCard" layui-verify="identityNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -247,7 +247,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">船上总人数</label>
                                     <div class="layui-input-inline" style="width: 73px">
-                                        <input placeholder="" name="shipMember" autocomplete="off" class="layui-input">
+                                        <input placeholder="" lay-verify="positiveNumber" name="shipMember" autocomplete="off" class="layui-input">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">人</div>
                                 </div>
@@ -278,14 +278,14 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">实际主机功率</label>
                                     <div class="layui-input-inline" style="width: 73px">
-                                        <input placeholder="" name="shipRealPower" autocomplete="off" class="layui-input">
+                                        <input placeholder="" lay-verify="positiveFloatNumber" name="shipRealPower" autocomplete="off" class="layui-input">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">马力</div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">核定主机功率</label>
                                     <div class="layui-input-inline" style="width: 73px">
-                                        <input placeholder="" name="shipRatedPower" autocomplete="off" class="layui-input">
+                                        <input placeholder="" lay-verify="positiveFloatNumber" name="shipRatedPower" autocomplete="off" class="layui-input">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">马力</div>
                                 </div>
@@ -353,7 +353,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">本航次产生次数</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="shipGenerateCount" autocomplete="off" class="layui-input">
+                                        <input type="text" name="shipGenerateCount" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">

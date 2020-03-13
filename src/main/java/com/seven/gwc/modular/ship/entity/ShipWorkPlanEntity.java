@@ -1,12 +1,15 @@
 package com.seven.gwc.modular.ship.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * description : 工作计划实体
@@ -23,6 +26,7 @@ public class ShipWorkPlanEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
 
     /** 执法船id */

@@ -42,4 +42,14 @@
             </if>
         </where>
     </select>
+    <select id="PersonNamesEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.id,u.name as personName, p.person_id   from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        <where>
+            <if test="id != null and id!= ''">
+                p.id = #{id}
+            </if>
+        </where>
+    </select>
 </mapper>

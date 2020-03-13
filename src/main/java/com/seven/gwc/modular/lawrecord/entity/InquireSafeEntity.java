@@ -85,7 +85,7 @@ public class InquireSafeEntity extends GwcBaseEntity {
     private Integer shipCommonCertificateCount;
 
     /** 船的长度 */
-    private Integer shipLength;
+    private Double shipLength;
 
     /** 查获时候捕鱼状态 */
     private Integer shipStatus;

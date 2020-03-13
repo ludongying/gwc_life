@@ -1,5 +1,5 @@
 /**
- * 执法记录增加对话框
+ * 设备维护增加对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
@@ -11,57 +11,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var laydate = layui.laydate;
 
     laydate.render({
-        elem: '#prospectDate',
+        elem: '#startTime',
         type: 'datetime',
         trigger: 'click'
     });
     laydate.render({
-        elem: '#inquireDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#telApplyDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#acceptDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#dealDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#punishDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#decisionDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#finishDate',
-        type: 'datetime',
-        trigger: 'click'
-    });
-    laydate.render({
-        elem: '#createDate',
+        elem: '#endTime',
         type: 'datetime',
         trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/lawRecord/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/equipMaintain/add", function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用

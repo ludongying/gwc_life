@@ -25,8 +25,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     //初始化显示内容
     initShowContent($("#punishPersonType").val());
     loadVerify(form);
-    money_verify($,"fine");
-    money_verify($,"resourceCompensation");
+    money_verify(lay,"fine");
+    money_verify(lay,"resourceCompensation");
     initPage();
 
     function initPage() {

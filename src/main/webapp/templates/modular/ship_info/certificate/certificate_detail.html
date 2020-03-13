@@ -8,14 +8,14 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">证书编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="certificateId" name="certificateId" placeholder="请输入证书编码" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="certificateId" name="certificateId" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">证书名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="name" name="name" placeholder="请输入证书名称" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="name" name="name" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -30,10 +30,17 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">证书类型<span style="color: red;">*</span></label>
+<!--                <label class="layui-form-label">证书类型<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    &lt;!&ndash;                    <input id="certificateType" name="certificateType" placeholder="请输入证书类型" type="text" class="layui-input" lay-verify="required" required/>&ndash;&gt;-->
+<!--                    <select id="certificateType" name="certificateType" lay-verify="required" lay-search="" disabled="disabled">-->
+<!--                        <option value="">证书类型</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+                <label class="layui-form-label">证书类型</label>
                 <div class="layui-input-block">
                     <!--                    <input id="certificateType" name="certificateType" placeholder="请输入证书类型" type="text" class="layui-input" lay-verify="required" required/>-->
-                    <select id="certificateType" name="certificateType" lay-verify="required" lay-search="" disabled="disabled">
+                    <select id="certificateType" name="certificateType" lay-search="" disabled="disabled">
                         <option value="">证书类型</option>
                     </select>
                 </div>
@@ -42,28 +49,28 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">签发机构</label>
                 <div class="layui-input-block">
-                    <input id="issuer" name="issuer" placeholder="请输入签发机构" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="issuer" name="issuer" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">签发日期</label>
                 <div class="layui-input-block">
-                    <input id="issueDate" name="issueDate" placeholder="请输入签发日期" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
+                    <input id="issueDate" name="issueDate" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">到期日期<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="outDate" name="outDate" placeholder="请输入到期日期" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
+                    <input id="outDate" name="outDate" readonly type="text" class="layui-input  date-icon" autocomplete="off" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">存放地点</label>
                 <div class="layui-input-block">
-                    <input id="storePlace" name="storePlace" placeholder="请输入存放地点" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="storePlace" name="storePlace" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -79,35 +86,35 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">窗口期</label>
                 <div class="layui-input-block">
-                    <input id="windowPhase" name="windowPhase" placeholder="请输入窗口期" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="windowPhase" name="windowPhase" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">责任部门</label>
                 <div class="layui-input-block">
-                    <input id="responseDept" name="responseDept" placeholder="请输入责任部门" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="responseDept" name="responseDept" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">发证地点</label>
                 <div class="layui-input-block">
-                    <input id="certificatePlace" name="certificatePlace" placeholder="请输入发证地点" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="certificatePlace" name="certificatePlace" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-block">
-                    <input id="contact" name="contact" placeholder="请输入联系方式" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="contact" name="contact" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="remark" name="remark" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 

@@ -1,10 +1,9 @@
 package com.seven.gwc.modular.sailor.service;
 
 import com.alibaba.fastjson.JSONArray;
-import com.seven.gwc.core.node.ZTreeNode;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -55,5 +54,13 @@ public interface PersonService extends IService<PersonEntity> {
      * @return
      */
     PersonEntity getOneById(String id);
+
+    /**
+     * 获取船员名册下拉多选框
+     *
+     * @param ids 编辑时，数据已关联ID，用","分隔
+     * @return
+     */
+    JSONArray listPersons(String ids);
 
 }

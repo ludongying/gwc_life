@@ -44,8 +44,9 @@ public class CertificateShipController extends BaseController {
      * 跳转到证书信息首页
      */
     @RequestMapping("")
-    public String index(@RequestParam("ids") String ids, Model model) {
+    public String index(@RequestParam("ids") String ids,@RequestParam("personId") String personId, Model model) {
         model.addAttribute("ids",ids);
+        model.addAttribute("personId",personId);
         return PREFIX + "certificate";
     }
 
@@ -53,7 +54,8 @@ public class CertificateShipController extends BaseController {
      * 跳转到添加证书信息
      */
     @RequestMapping("/certificate_add")
-    public String certificateAdd() {
+    public String certificateAdd(@RequestParam("personId") String personId, Model model) {
+        model.addAttribute("personId",personId);
         return PREFIX + "certificate_add";
     }
 
@@ -84,10 +86,10 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<CertificateShipEntity> list(String certificateName, String ids) {
+    public BaseResultPage<CertificateShipEntity> list(String certificateName, String ids, String personId) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids);
+        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,ids,personId);
         PageInfo pageInfo = new PageInfo<>(certificates);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -97,9 +99,9 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(CertificateShipEntity certificate) {
+    public BaseResult add(CertificateShipEntity certificate, String personId) {
         ShiroUser user = ShiroKit.getUser();
-        if(!certificateService.addCertificate(certificate, user)){
+        if(!certificateService.addCertificate(certificate, user, personId)){
             return new BaseResult().failure((ErrorEnum.ERROR_ONLY_CERTIFICATE_ID));
         }
         return SUCCESS;
@@ -110,9 +112,9 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam String certificateId) {
+    public BaseResult delete(@RequestParam String certificateId, String personId) {
         ShiroUser user = ShiroKit.getUser();
-        certificateService.deleteCertificate(certificateId, user);
+        certificateService.deleteCertificate(certificateId, user, personId);
         return SUCCESS;
     }
 

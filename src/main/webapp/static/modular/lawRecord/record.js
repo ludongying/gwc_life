@@ -97,7 +97,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         $("#conditionInput input").val("");
     });
 
-
     /**
      * 新建生产案件
      */
@@ -111,12 +110,26 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     $('#createSafe').click(function () {
         window.location.href=Feng.ctxPath+"lawRecord/agency?lawType=2";
     });
+
+    /**
+     *文书模板
+     */
+    $('#clericalTemplate').click(function () {
+        msg_tip($,"文书模板功能尚未开发");
+    });
+
     /**
      * 工具条点击事件
      */
     table.on('tool(' + LawRecord.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
+        var name=data.lawCaseCode;
+        if(!name){
+            name="此项记录";
+        }else{
+            name="《" +name+ "》";
+        }
         if (layEvent === 'edit') {
             window.location.href=Feng.ctxPath+"lawRecord/agency?lawType="+data.lawType+"&id="+data.id;
         } else if (layEvent === 'invalid') {
@@ -125,7 +138,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 table:table,
                 tableId:LawRecord.tableId,
                 data:data,
-                title:"是作废《" + data.lawCaseCode+ "》吗?",
+                title:"是作废"+name+"吗?",
                 url:"/lawRecord/invalid"
             })
         } else if (layEvent === 'finish') {
@@ -134,7 +147,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 table:table,
                 tableId:LawRecord.tableId,
                 data:data,
-                title:"是结案《" + data.lawCaseCode+ "》吗?",
+                title:"是结案"+name+"吗?",
                 url:"/lawRecord/finish"
             })
         } else if(layEvent === 'instrument'){

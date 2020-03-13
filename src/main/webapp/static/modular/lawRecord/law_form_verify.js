@@ -11,18 +11,56 @@ function loadVerify(form){
             if(value.length > 50){
                 return '字符长度不能超过50';
             }
+        },floatNumber:function (value) {
+            var reg=/^-?[1-9][0-9]*\.?[0-9]*$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正确的数字";
+                }
+            }
+        },positiveFloatNumber:function (value) {
+            var reg=/^[1-9][0-9]*\.?[0-9]*$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正确的数字";
+                }
+            }
+        },positiveNumber:function(value){
+            var reg=/^[1-9][0-9]*$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正整数";
+                }
+            }
+        },identityNumber:function(value){
+            var reg=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正确的身份证号";
+                }
+            }
+        },phoneNumber:function(value){
+            var reg=/^1\d{10}$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"请输入正确的手机号";
+                }
+            }
         }
+
+
     });
 }
 
 
 /**
  * 金额自动切换大小写
- * @param $
+ * @param lay
  * @param id
  */
-function money_verify($,id){
-    $("#"+id).focus(function(){
+function money_verify(lay,id){
+     var $=lay.$;
+     $("#"+id).focus(function(){
         //修改规则 小写金额
         $("#"+id).attr("style","");
         lay.verify=false;

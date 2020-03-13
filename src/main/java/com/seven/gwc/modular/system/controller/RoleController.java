@@ -243,6 +243,5 @@ public class RoleController extends BaseController {
         roleTreeList.add(ZTreeNode.createParent());
         return roleTreeList;
     }
-
 }
 

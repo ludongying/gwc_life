@@ -1,55 +1,49 @@
 /**
- * 工作计划增加对话框
+ * 工作日志记录编辑对话框
  */
 
-layui.use(['layer', 'form', 'admin', 'ax', 'laydate','formSelects'], function () {
+
+layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
     var layer = layui.layer;
     var laydate = layui.laydate;
-    var formSelects = layui.formSelects;
 
     laydate.render({
-        elem: '#startDate',
+        elem: '#recordDate',
         type: 'datetime',
         trigger: 'click'
     });
     laydate.render({
-        elem: '#endDate',
+        elem: '#createDate',
         type: 'datetime',
         trigger: 'click'
     });
+
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
-    //获取下拉框分组多选下拉框
-    $.ajax({
-        url: Feng.ctxPath + '/person/listPersons?ids=',
-        dataType: 'json',
-        type: 'get',
-        success: function (data) {
-            var content = data.content;
-            persons=content;
-            formSelects.data('selPersons', 'local', {
-                arr: content
-            });
-        }
-    });
+    //初始化工作日志记录的详情数据
+    var ajax = new $ax(Feng.ctxPath + "/shipWorkLog/detail/" + Feng.getUrlParam("shipWorkLogId"));
+    var result = ajax.start();
+    form.val('shipWorkLogForm',result);
+
+
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/shipWorkPlan/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/shipWorkLog/update", function (data) {
             if (data.success) {
-                Feng.success("增加成功!");
+                Feng.success("编辑成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框
             } else {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("增加失败!" + data.message)
+            Feng.error("编辑失败!" + data.message + "!");
         });
         ajax.set(data.field);
         ajax.start();

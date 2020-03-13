@@ -1,9 +1,7 @@
 package com.seven.gwc.modular.sailor.dao;
 
-import com.seven.gwc.core.node.ZTreeNode;
-import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.seven.gwc.modular.ship_info.entity.ShipEntity;
+import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +23,5 @@ public interface PersonMapper extends BaseMapper<PersonEntity> {
 
     PersonEntity PersonEntity(@Param("id") String id);
 
+    List<PersonEntity> PersonNamesEntityList(@Param("id") String id);
 }

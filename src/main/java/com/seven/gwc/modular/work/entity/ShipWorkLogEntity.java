@@ -1,4 +1,4 @@
-package com.seven.gwc.modular.ship.entity;
+package com.seven.gwc.modular.work.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,41 +12,42 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * description : 工作计划实体
+ * description : 工作日志记录实体
  *
  * @author : 李晓晖
- * @date : 2020-02-27
+ * @date : 2020-03-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("ship_work_plan")
-public class ShipWorkPlanEntity implements Serializable {
+@TableName("ship_work_log")
+public class ShipWorkLogEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    // 编码
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
-    /** 执法船id */
-    private String shipId;
-
-    /** 开始时间 */
+    /** 记录时间（yyyy-MM-dd HH:mm:ss） */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date startDate;
+    private Date recordDate;
 
-    /** 结束时间 */
+    /** 记录结束时间（yyyy-MM-dd HH:mm:ss） */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endDate;
+    private Date recordEndDate;
 
-    /** 工作内容 */
-    private String workContent;
+    /** 记录内容 */
+    private String content;
 
-    /** 工作人员 */
-    private String personIds;
+    /** 工作日程类型 */
+    private Integer recordType;
 
-    /** 类型（枚举）颜色 */
-    private Integer planType;
+    /** 创建人 */
+    private String createPerson;
+
+    /** 创建时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createDate;
 
 }

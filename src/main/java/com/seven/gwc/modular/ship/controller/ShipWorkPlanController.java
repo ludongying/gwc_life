@@ -74,15 +74,17 @@ public class ShipWorkPlanController extends BaseController {
 
     /**
      * 获取工作计划列表
+     * @return
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<ShipWorkPlanEntity> list(String shipWorkPlanName) {
+    public BaseResultPage list(String shipWorkPlanName) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<ShipWorkPlanEntity> shipWorkPlans = shipWorkPlanService.selectShipWorkPlan(shipWorkPlanName);
         PageInfo pageInfo = new PageInfo<>(shipWorkPlans);
         return new BaseResultPage().createPage(pageInfo);
+
     }
 
     /**

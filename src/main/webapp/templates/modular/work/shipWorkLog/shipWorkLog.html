@@ -1,16 +1,17 @@
-@layout("/common/_container.html",{plugins:["calendar"],bg:"bg-white",js:["/modular/ship/shipWorkPlan/shipWorkPlan.js","/common/plugins/layui/lay.modules/layer.js"]}){
+@layout("/common/_container.html",{plugins:["calendar"],bg:"bg-white",js:["/modular/work/shipWorkLog/shipWorkLog.js"]}){
 
 <div class="layui-fluid">
-    <div class="layui-row layui-col-space12">
+    <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md9 layui-col-lg12">
-            <div id='external-events' style="float: right" >
-                <h4>工作计划类型</h4>
+            <div id='external-events'  style="float: right">
+                <h4>工作日程类型</h4>
                 <div id='external-events-list'>
-                    <div class='fc-event' style="background: #3987AD">全船级工作计划</div>
-                    <div class='fc-event' style="background: #82AE6F">部门级工作计划</div>
-                    <div class='fc-event' style="background: #D25B47">党支部工作计划</div>
+                    <div class='fc-event' name="ordinary" style="background: #3987AD">一般工作内容</div>
+                    <div class='fc-event' name="important" style="background: #D25B47">重要工作内容</div>
+                    <div class='fc-event' name="temporary" style="background: #FE9400">临时工作内容</div>
                 </div>
             </div>
+
             <div id='calendar-container'>
                 <div id='calendar'></div>
             </div>
@@ -19,7 +20,6 @@
     </div>
 </div>
 @}
-
 
 <style>
     body {

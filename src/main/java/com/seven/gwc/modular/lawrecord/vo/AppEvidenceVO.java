@@ -9,9 +9,6 @@ import java.util.Date;
 @Data
 @ApiModel(value = "证据")
 public class AppEvidenceVO {
-    /** 执法记录id */
-    @ApiModelProperty(value = "记录id")
-    private String recordId;
 
     /** 内容 */
     @ApiModelProperty(value = "内容")

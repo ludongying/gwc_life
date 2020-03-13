@@ -11,9 +11,6 @@ import java.util.Date;
 @Data
 @ApiModel(value = "办案机关")
 public class AppAgencyVO {
-    /** 记录id */
-    @ApiModelProperty(value = "记录id")
-    private String id;
     /** 执法船号 */
     @ApiModelProperty(value = "执法船号")
     private String lawShipCode;

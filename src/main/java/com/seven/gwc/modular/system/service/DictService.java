@@ -51,5 +51,5 @@ public interface DictService extends IService<DictEntity> {
      * @author : SHQ
      * @return
      */
-    DictEntity findByNameAndTypeId(String name, String typeCode);
+    DictEntity findByNameAndTypeCode(String name, String typeCode);
 }

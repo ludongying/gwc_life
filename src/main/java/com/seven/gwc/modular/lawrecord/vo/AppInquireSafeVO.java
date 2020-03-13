@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "笔录-安全")
 public class AppInquireSafeVO {
-    /** 记录id */
-    @ApiModelProperty(value = "记录id")
-    private String id;
-
     /** 姓名 */
     @ApiModelProperty(value = "姓名")
     private String investigateName;
@@ -97,5 +93,5 @@ public class AppInquireSafeVO {
 
     /** 查获时候捕鱼状态 */
     @ApiModelProperty(value = "查获时候捕鱼状态")
-    private String shipStatus;
+    private Integer shipStatus;
 }

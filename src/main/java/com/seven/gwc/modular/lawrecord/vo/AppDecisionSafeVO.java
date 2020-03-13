@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "决定实体-安全")
 public class AppDecisionSafeVO {
-    /** 主键 */
-    @ApiModelProperty(value = "主键")
-    private String id;
-
     /** 当事人类型（枚举） */
     @ApiModelProperty(value = "当事人类型（枚举）")
     private Integer punishPersonType;
@@ -61,5 +57,5 @@ public class AppDecisionSafeVO {
 
     /** 是否有暴力抗法 */
     @ApiModelProperty(value = "是否有暴力抗法")
-    private Boolean caseViolenceLaw;
+    private Integer caseViolenceLaw;
 }

@@ -1,6 +1,9 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.dao.*;
 import com.seven.gwc.modular.lawrecord.entity.*;
 import com.seven.gwc.modular.lawrecord.enums.*;
@@ -37,7 +40,7 @@ public class LawProductServiceImpl implements LawProductService {
 
 
     @Override
-    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppLawRecordVO appLawRecordVO) {
+    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.PRODUCE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
@@ -45,7 +48,7 @@ public class LawProductServiceImpl implements LawProductService {
         InquireEntity inquireEntity = this.inquireVOToInquire(personalId, lawRecordEntity.getId(), appInquireVO);
         InquisitionEntity inquisitionEntity = this.inquisitionVOToInquisition(personalId, lawRecordEntity.getId(), appInquisitionEntityVO);
         DecisionEntity decisionEntity = this.decisionVOToDecisionEntity(personalId, lawRecordEntity.getId(), appDecisionVO);
-        LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appLawRecordVO);
+        LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
         agencyMapper.insert(agencyEntity);
         operatorMapper.insert(operatorEntity1);
         operatorMapper.insert(operatorEntity2);
@@ -57,14 +60,14 @@ public class LawProductServiceImpl implements LawProductService {
     }
 
     @Override
-    public BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppLawRecordVO appLawRecordVO) {
+    public BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO) {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.SAFE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
         InquireSafeEntity inquireSafeEntity = this.inquireSafeVOToInquireSafe(personalId, lawRecordEntity.getId(), appInquireSafeVO);
         DecisionSafeEntity decisionSafeEntity = this.decisionSafeVOToDecisionSafe(personalId, lawRecordEntity.getId(), appDecisionSafeVO);
-        LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appLawRecordVO);
+        LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
         lawRecordMapper.updateById(lawRecord);
         agencyMapper.insert(agencyEntity);
         operatorMapper.insert(operatorEntity1);
@@ -72,6 +75,57 @@ public class LawProductServiceImpl implements LawProductService {
         inquireSafeMapper.insert(inquireSafeEntity);
         decisionSafeMapper.insert(decisionSafeEntity);
         return new BaseResult(true, 200, "操作成功");
+    }
+
+    @Override
+    public List<AppLawRecordVO> getLawRecordList() {
+        List<AppLawRecordVO> list = new ArrayList<>();
+        LambdaQueryWrapper<LawRecordEntity> lawRecordVOLambdaQueryWrapper = Wrappers.lambdaQuery();
+        lawRecordVOLambdaQueryWrapper.eq(LawRecordEntity::getDeleteFlag, true);
+        List<LawRecordEntity> lawRecordEntityList = lawRecordMapper.selectList(lawRecordVOLambdaQueryWrapper);
+        for (LawRecordEntity lawRecordEntity : lawRecordEntityList) {
+            AppLawRecordVO lawRecordVO = new AppLawRecordVO();
+            AgencyEntity agencyEntity = agencyMapper.selectById(lawRecordEntity.getId());
+            if (ToolUtil.isNotEmpty(agencyEntity)) {
+                lawRecordVO.setId(lawRecordEntity.getId());
+                lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode());
+                lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
+                lawRecordVO.setLawCaseLon(agencyEntity.getLawCaseLon());
+                lawRecordVO.setLawCaseLat(agencyEntity.getLawCaseLat());
+                lawRecordVO.setLawCaseDate(agencyEntity.getLawCaseDate());
+            }
+            list.add(lawRecordVO);
+        }
+        return list;
+    }
+
+    @Override
+    public List<AppLawRecordVO> searchLawRecordList(String search) {
+        List<AppLawRecordVO> list = new ArrayList<>();
+        LambdaQueryWrapper<LawRecordEntity> lawRecordVOLambdaQueryWrapper = Wrappers.lambdaQuery();
+        lawRecordVOLambdaQueryWrapper.eq(LawRecordEntity::getDeleteFlag, true);
+        List<LawRecordEntity> lawRecordEntityList = lawRecordMapper.selectList(lawRecordVOLambdaQueryWrapper);
+        if (ToolUtil.isNotEmpty(search)) {
+            for (LawRecordEntity lawRecordEntity : lawRecordEntityList) {
+                AgencyEntity agencyEntity = agencyMapper.selectById(lawRecordEntity.getId());
+                if (ToolUtil.isNotEmpty(agencyEntity)) {
+                    String code = agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode();
+                    if (code.contains(search)){
+                        AppLawRecordVO lawRecordVO = new AppLawRecordVO();
+                        lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode());
+                        lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
+                        lawRecordVO.setLawCaseLon(agencyEntity.getLawCaseLon());
+                        lawRecordVO.setLawCaseLat(agencyEntity.getLawCaseLat());
+                        lawRecordVO.setLawCaseDate(agencyEntity.getLawCaseDate());
+                        lawRecordVO.setId(lawRecordEntity.getId());
+                        list.add(lawRecordVO);
+                    }
+                }
+            }
+        } else {
+            list = this.getLawRecordList();
+        }
+        return list;
     }
 
     public List<EnumVO> getLawCaseSourceList() {
@@ -229,9 +283,9 @@ public class LawProductServiceImpl implements LawProductService {
         return list;
     }
 
-    private LawRecordEntity lawRecordVOToLawRecord(LawRecordEntity lawRecordEntity, AppLawRecordVO appLawRecordVO) {
-        lawRecordEntity.setMainReason(appLawRecordVO.getMainReason());
-        lawRecordEntity.setSecondReason(appLawRecordVO.getSecondReason());
+    private LawRecordEntity lawRecordVOToLawRecord(LawRecordEntity lawRecordEntity, AppReasonVO appReasonVO) {
+        lawRecordEntity.setMainReason(appReasonVO.getMainReason());
+        lawRecordEntity.setSecondReason(appReasonVO.getSecondReason());
         return lawRecordEntity;
     }
 

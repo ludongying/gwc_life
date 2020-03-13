@@ -9,10 +9,6 @@ import java.util.Date;
 @Data
 @ApiModel(value = "询问笔录-生产")
 public class AppInquireVO {
-    /** 记录id */
-    @ApiModelProperty(value = "记录id")
-    private String id;
-
     /** 姓名 */
     @ApiModelProperty(value = "姓名")
     private String investigateName;

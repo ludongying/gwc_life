@@ -21,7 +21,6 @@ public class OperatorEntity extends GwcIdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-
     /** 记录id */
     private String recordId;
 

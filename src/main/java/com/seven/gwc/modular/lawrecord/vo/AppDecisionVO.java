@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "决定实体-生产")
 public class AppDecisionVO {
-    /** 主键 */
-    @ApiModelProperty(value = "主键")
-    private String id;
-
     /** 当事人类型（枚举） */
     @ApiModelProperty(value = "当事人类型（枚举）")
     private Integer punishPersonType;
@@ -49,11 +45,11 @@ public class AppDecisionVO {
 
     /** 证据是否有物价局价格指导 */
     @ApiModelProperty(value = "证据是否有物价局价格指导")
-    private Boolean caseBureauPrice;
+    private Integer caseBureauPrice;
 
     /** 证据是否有禁渔期通告(农业部) */
     @ApiModelProperty(value = "证据是否有禁渔期通告(农业部)")
-    private Boolean caseNotification;
+    private Integer caseNotification;
 
     /** 罚款 */
     @ApiModelProperty(value = "罚款")
@@ -69,5 +65,5 @@ public class AppDecisionVO {
 
     /** 是否有暴力抗法 */
     @ApiModelProperty(value = "是否有暴力抗法")
-    private Boolean caseViolenceLaw;
+    private Integer caseViolenceLaw;
 }

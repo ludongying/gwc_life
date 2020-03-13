@@ -142,7 +142,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     }
 
     @Override
-    public DictEntity findByNameAndTypeId(String name, String typeCode) {
+    public DictEntity findByNameAndTypeCode(String name, String typeCode) {
         LambdaQueryWrapper<DictTypeEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DictTypeEntity::getCode, typeCode);
         DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(lambdaQuery);

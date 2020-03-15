@@ -37,7 +37,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 {title: '案件创建时间', field: 'createDate', align: "center"},
                 {title: '被执法船', field: 'shipName', align: "center"},
                 {title: '被询问人', field: 'investigateName', align: "center"},
-                {title: '被询问人手机号', field: 'investigateTel', align: "center"},
+                {title: '被询问人电话', field: 'investigateTel', align: "center"},
                 {title: '案件来源', field: 'lawCaseSourceName', align: "center"},
                 {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
             ]];

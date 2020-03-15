@@ -2,13 +2,14 @@
  * 工作计划增加对话框
  */
 
-layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
+layui.use(['layer', 'form', 'admin', 'ax', 'laydate','formSelects'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
     var layer = layui.layer;
     var laydate = layui.laydate;
+    var formSelects = layui.formSelects;
 
     laydate.render({
         elem: '#startDate',
@@ -24,6 +25,19 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+    //获取下拉框分组多选下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/person/listPersons?ids=',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            var content = data.content;
+            persons=content;
+            formSelects.data('selPersons', 'local', {
+                arr: content
+            });
+        }
+    });
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/shipWorkPlan/add", function (data) {

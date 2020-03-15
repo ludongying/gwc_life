@@ -4,6 +4,7 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.electronic_data.vo.LawsRegulationVO;
+import com.seven.gwc.modular.electronic_data.vo.LawsTypeVO;
 
 import java.util.List;
 
@@ -52,5 +53,11 @@ public interface RegulationSafeService extends IService<RegulationSafeEntity> {
      * 获取法律法规列表
      * @return
      */
-    List<LawsRegulationVO> getLawsRegulationList();
+    List<LawsRegulationVO> getListByLawRegularId(String lawRegularId);
+
+    /**
+     * 获取法律法规分类列表
+     * @return
+     */
+    List<LawsTypeVO> getLawsTypeVOList();
 }

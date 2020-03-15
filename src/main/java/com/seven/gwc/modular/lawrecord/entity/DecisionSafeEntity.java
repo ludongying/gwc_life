@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * description : 决定实体
+ * description : 决定实体-安全
  *
  * @author : ZZL
  * @date : 2020-03-07

@@ -1,21 +1,23 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/modular/ship/shipWorkPlan/shipWorkPlan_edit.js"]}){
 <div class="layui-tab-content">
     <form id="shipWorkPlanForm" lay-filter="shipWorkPlanForm" class="layui-form">
-        <div class="layui-row layui-col-space10">
+        <div class="layui-row  layui-col-space20 " >
 
-            <input name="id" type="hidden"/>
+<!--            <input name="id" type="hidden"/>-->
+            <input id="id" name="id" type="hidden" class="layui-input" />
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">ID<span style="color: red;">*</span></label>
+
+<!--            <div class="layui-col-md6" >-->
+<!--                <label class="layui-form-label" type="hidden">计划序号<span style="color: red;">*</span></label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <input id="id" name="id" placeholder="请输入序号" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="layui-col-md6 ">
+                <label class="layui-form-label " >执法船名称</label>
                 <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入ID" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">执法船id<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="shipId" name="shipId" placeholder="请输入执法船id" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="shipId" name="shipId"  type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -33,31 +35,38 @@
                 </div>
             </div>
 
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">计划类型<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input name="planType" title="全船级工作计划" type="radio" checked="" value="0">
+                    <input name="planType" title="部门级工作计划" type="radio" value="1">
+                    <input name="planType" title="党支部工作计划"  type="radio" value="2">
+                </div>
+            </div>
+
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">参与人员<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <select id="personIds" name="personIds" xm-select="selPersons" xm-select-skin="normal" lay-ignore="" xm-select-height="5px" xm-select-direction="up">
+                        <option value="">请选择参与工作人员</option>
+                    </select>
+                </div>
+            </div>
+
+
             <div class="layui-col-md6">
                 <label class="layui-form-label">工作内容<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="workContent" name="workContent" placeholder="请输入工作内容" type="text" class="layui-input" lay-verify="required" required/>
+                    <textarea id="workContent" name="workContent" class="layui-textarea" placeholder="请输入计划具体内容" lay-verify="required" required></textarea>
                 </div>
             </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">工作人员<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="personIds" name="personIds" placeholder="请输入工作人员" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">类型（枚举）颜色<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="planType" name="planType" placeholder="请输入类型（枚举）颜色" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
-
 
             <div class="layui-col-md12 text-right">
                 <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
                 <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+                <button class="layui-btn layui-btn-danger" lay-filter="btnDelete" id="delete">&emsp;删除&emsp;</button>
             </div>
 
         </div>
@@ -65,3 +74,8 @@
 </div>
 @}
 
+<style>
+    body {
+        margin: 20px;
+    }
+</style>

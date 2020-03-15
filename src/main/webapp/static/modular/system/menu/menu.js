@@ -163,6 +163,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
+            area: ['500px','500px'],
             title: '修改菜单',
             content: Feng.ctxPath + '/menu/menu_edit?id=' + data.id,
             end: function () {

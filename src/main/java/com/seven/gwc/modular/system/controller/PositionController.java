@@ -2,6 +2,8 @@ package com.seven.gwc.modular.system.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
@@ -14,8 +16,6 @@ import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import com.seven.gwc.modular.system.service.PositionService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -175,7 +175,5 @@ public class PositionController extends BaseController {
         JSONArray jsonArray = positionService.listPositions(ids);
         return new BaseResult().content(jsonArray);
     }
-
-
 }
 

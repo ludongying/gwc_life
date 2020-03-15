@@ -1,4 +1,4 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
+layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 'upload'], function () {
     var $ = layui.$;
     var layer = layui.layer;
     var form = layui.form;
@@ -8,6 +8,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var laydate = layui.laydate;
     var admin = layui.admin;
     var func = layui.func;
+    var upload = layui.upload;
 
     /**
      * 渔船信息管理
@@ -219,5 +220,34 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             ajax.start();
         });
     };
+
+    upload.render({
+        elem: '#btnImport'
+        , url: '/fishShip/importExcel'
+        , accept: 'file' //普通文件
+        , exts: 'xls|xlsx'
+        , done: function (res) {
+            if (res.message.substring(13, 15) == "插入") {
+                layer.confirm(res.message.substring(13), {
+                    btn: ['确定'],
+                    btn1:function (index) {
+                        layer.close(index);
+                        table.reload(FishShip.tableId);
+                    }
+                });
+                if (res.message.substring(res.message.length - 5) != "失败0条。") {
+                    var exportForm = $("<form action='/system/downloadFile' method='post'></form>")
+                    exportForm.append("<input type='hidden' name='fileName' value='" + res.message.substring(0, 13) + ".xlsx" + "'/>")
+                    $(document.body).append(exportForm);
+                    exportForm.submit();
+                    exportForm.remove();
+                }
+            } else {
+                layer.alert(res.message, {
+                    closeBtn: 0
+                });
+            }
+        }
+    });
 
 });

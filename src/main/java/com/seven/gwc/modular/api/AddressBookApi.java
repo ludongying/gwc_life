@@ -94,7 +94,7 @@ public class AddressBookApi extends BaseController {
 
     @GetMapping(value = "/getPersonalListByGroupId")
     @ApiOperation(value = "根据群组ID获取群组成员信息")
-    public BaseResult<List<GroupPersonalVO>> getPersonalListByGroupId(@ApiParam(required = true, name = "groupId", value = "群组ID")String groupId,
+    public BaseResult<List<GroupPersonalVO>> getPersonalListByGroupId(@ApiParam(required = true, name = "groupId",  value = "群组ID")String groupId,
                                                           @ApiParam(name = "search", value = "查询条件")String search) {
         List<GroupPersonalVO> list = groupPersonService.getPersonalListByGroupId(groupId, search);
         return new BaseResult().content(list);

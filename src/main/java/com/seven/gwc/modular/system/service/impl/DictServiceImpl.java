@@ -1,13 +1,11 @@
 package com.seven.gwc.modular.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.ServiceException;
 import com.seven.gwc.core.node.ZTreeNode;
-import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.util.ToolUtil;
@@ -142,7 +140,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     }
 
     @Override
-    public DictEntity findByNameAndTypeId(String name, String typeCode) {
+    public DictEntity findByNameAndTypeCode(String name, String typeCode) {
         LambdaQueryWrapper<DictTypeEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DictTypeEntity::getCode, typeCode);
         DictTypeEntity dictTypeEntity = dictTypeMapper.selectOne(lambdaQuery);

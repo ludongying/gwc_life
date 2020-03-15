@@ -4,8 +4,11 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
+import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -58,6 +61,13 @@ public interface FishShipService extends IService<FishShipEntity> {
      */
     FishShipEntity detailFishShip(String fishShipId);
 
-    List<ExportExcelVO> getExportData(List<FishShipEntity> shipEntityList);
+    /**
+     * 需导出的List转成需要的VO
+     * @param shipEntityList
+     * @return
+     */
+    List<ExportFishShipVO> getExportData(List<FishShipEntity> shipEntityList);
+
+    BaseResult importExcelFile(MultipartFile file, HttpServletResponse resp) throws IOException;
 
 }

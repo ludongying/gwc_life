@@ -22,7 +22,6 @@ public class LawRecordEntity extends GwcIdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-
     /** 状态 */
     private Integer status;
 

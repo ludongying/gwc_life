@@ -98,7 +98,7 @@ public class ShipController extends BaseController {
     public BaseResult add(ShipEntity ship) {
         ShiroUser user = ShiroKit.getUser();
         //ship.setCertificateId("1");
-        if(!shipService.add(ship)){
+        if(!shipService.add(ship,user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_LAWSHIP_CODE);
         }
         return SUCCESS;
@@ -110,8 +110,9 @@ public class ShipController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public BaseResult delete(@RequestParam String shipId) {
+        ShiroUser user = ShiroKit.getUser();
         //shipService.removeById(shipId);
-        shipService.delete(shipId);
+        shipService.delete(shipId,user);
         return SUCCESS;
     }
 
@@ -122,7 +123,7 @@ public class ShipController extends BaseController {
     @ResponseBody
     public BaseResult update(ShipEntity ship) {
         ShiroUser user = ShiroKit.getUser();
-        if(!shipService.update(ship)){
+        if(!shipService.update(ship,user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_LAWSHIP_CODE);
         }
         //shipService.updateById(ship);

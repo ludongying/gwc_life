@@ -20,6 +20,7 @@
             resultType="com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity">
         SELECT
             l.id,
+            l.law_regular_id AS lawRegularId,
             d.`name` AS lawRegularName,
             l.`name`,
             l.create_date AS createDate,

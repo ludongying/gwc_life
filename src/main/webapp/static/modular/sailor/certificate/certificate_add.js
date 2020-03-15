@@ -29,7 +29,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     //证书类型获取下拉框
     $.ajax({
-        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_TYPE',
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_PERSON_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
@@ -47,7 +47,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#ownerType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                if(item.name === '船员证书'){
+                    $('#ownerType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                }
+
             })
             form.render('select');//表单渲染 把内容加载进去
         }
@@ -56,7 +59,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/certificate/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/certificate/add?personId="+$('#personId').val().trim(), function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用

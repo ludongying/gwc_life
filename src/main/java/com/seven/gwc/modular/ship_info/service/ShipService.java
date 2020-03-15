@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.ship_info.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -27,21 +28,21 @@ public interface ShipService extends IService<ShipEntity> {
      * @param ship
      * @return
      */
-    boolean add(ShipEntity ship);
+    boolean add(ShipEntity ship, ShiroUser user);
 
     /**
      * 更新船舶信息
      * @param ship
      * @return
      */
-    boolean update(ShipEntity ship);
+    boolean update(ShipEntity ship, ShiroUser user);
 
     /**
      * 根据id删除数据
      * @param id（数据id)
      * @return
      */
-    boolean delete(String id);
+    boolean delete(String id, ShiroUser user);
 
 
     /**

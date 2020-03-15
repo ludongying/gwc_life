@@ -199,11 +199,11 @@ public class SystemController extends BaseController {
     /**
      * 文件下载
      * @param response
-     * @param file
+     * @param fileName
      */
     @RequestMapping(value = "downloadFile")
-    public void downloadFile(HttpServletResponse response, @RequestParam String file) {
-        FileUtil.download(uploadPathFile, file, response);
+    public void downloadFile(HttpServletResponse response, @RequestParam String fileName) {
+        FileUtil.download(uploadPathFile, fileName, response);
     }
 
     /**

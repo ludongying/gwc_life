@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.sailor.entity.PersonEntity">
-        <id column="id" property="id" />
-        <result column="ship_id" property="shipId" />
-        <result column="person_id" property="personId" />
-        <result column="phone_ip" property="phoneIp" />
-        <result column="nation" property="nation" />
-        <result column="id_number" property="idNumber" />
-        <result column="birth_place" property="birthPlace" />
-        <result column="duty" property="duty" />
-        <result column="certificate_id" property="certificateId" />
-        <result column="political" property="political" />
+        <id column="id" property="id"/>
+        <result column="ship_id" property="shipId"/>
+        <result column="person_id" property="personId"/>
+        <result column="phone_ip" property="phoneIp"/>
+        <result column="nation" property="nation"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="birth_place" property="birthPlace"/>
+        <result column="duty" property="duty"/>
+        <result column="certificate_id" property="certificateId"/>
+        <result column="political" property="political"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -21,25 +21,35 @@
         id, ship_id, person_id, phone_ip, nation, id_number, birth_place, duty, certificate_id, political
     </sql>
     <select id="PersonEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
-        select p.*,u.name as personName,u.birthday,u.sex,u.email,u.phone,u.position_id as positionId,s.name as lawShipName
+        select p.*,u.name as personName,u.birthday,u.sex,u.email,u.phone,u.position_id as positionId,s.name as
+        lawShipName
         from ship_person p
         LEFT JOIN sys_user u on p.person_id = u.id
         LEFT JOIN ship_info_ship s on p.ship_id = s.id
-        <where>
-            <if test="person.personName != null and person.personName != ''">
-                u.name like CONCAT('%',#{person.personName},'%')
-            </if>
-        </where>
+        where p.delete_flag = 1
+        <if test="person.personName != null and person.personName != ''">
+            u.name like CONCAT('%',#{person.personName},'%')
+        </if>
     </select>
+
     <select id="PersonEntity" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
-        select p.*,u.name as personName,u.birthday,u.sex,u.email,u.phone,u.position_id as positionId,s.name as lawShipName
+        select p.*,u.name as personName,u.birthday,u.sex,u.email,u.phone,u.position_id as positionId,s.name as
+        lawShipName
         from ship_person p
         LEFT JOIN sys_user u on p.person_id = u.id
         LEFT JOIN ship_info_ship s on p.ship_id = s.id
-        <where>
-            <if test="id != null and id!= ''">
-                p.id = #{id}
-            </if>
-        </where>
+        where p.delete_flag = 1
+        <if test="id != null and id!= ''">
+            p.id = #{id}
+        </if>
+    </select>
+    <select id="PersonNamesEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.id,u.name as personName, p.person_id from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="id != null and id!= ''">
+            p.id = #{id}
+        </if>
     </select>
 </mapper>

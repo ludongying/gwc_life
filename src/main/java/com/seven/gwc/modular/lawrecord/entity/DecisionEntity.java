@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * description : 决定实体
+ * description : 决定实体-生产
  *
  * @author : ZZL
  * @date : 2020-03-06
@@ -31,8 +31,10 @@ public class DecisionEntity extends GwcBaseEntity {
 
     /** 单位法定代表人/处罚人名称*/
     private String punishPersonName;
+
     /** 年龄*/
     private Integer punishAge;
+
     /** 性别*/
     private Integer punishSex;
 

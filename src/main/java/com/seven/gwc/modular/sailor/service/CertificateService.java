@@ -27,26 +27,30 @@ public interface CertificateService extends IService<CertificateEntity> {
     /**
      * 证书信息查询列表
      *
-     * @param certificateName 名称;ids 所属的所有证书编码
+     * @param certificateName 名称;
+     * @param ids 所属的所有证书编码
+     * @param personId 船员表id
      * @return List<证书信息服务对象>
      */
-    List<CertificateEntity> selectCertificate(String certificateName, String ids);
+    List<CertificateEntity> selectCertificate(String certificateName, String ids, String personId);
 
     /**
      * 证书信息新建
      *
      * @param certificate 实体对象
      * @param user 当前用户
+     * @param personId 船员表id
      */
-    boolean addCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean addCertificate(CertificateEntity certificate, ShiroUser user, String personId);
 
     /**
      * 证书信息删除
      *
      * @param certificateId 唯一标识
      * @param user 当前用户
+     * @param personId 船员表id
      */
-    void deleteCertificate(String certificateId, ShiroUser user);
+    void deleteCertificate(String certificateId, ShiroUser user, String personId);
 
     /**
      * 证书信息编辑
@@ -54,7 +58,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    void editCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean editCertificate(CertificateEntity certificate, ShiroUser user);
 
     /**
      * 获证书详细信息（图片url转换）

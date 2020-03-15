@@ -1,8 +1,9 @@
 @layout("/common/_container.html",{plugins:["calendar"],bg:"bg-white",js:["/modular/ship/shipWorkPlan/shipWorkPlan.js","/common/plugins/layui/lay.modules/layer.js"]}){
+
 <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
-            <div id='external-events'  style="float: right">
+    <div class="layui-row layui-col-space12">
+        <div class="layui-col-sm12 layui-col-md9 layui-col-lg12">
+            <div id='external-events' style="float: right" >
                 <h4>工作计划类型</h4>
                 <div id='external-events-list'>
                     <div class='fc-event' style="background: #3987AD">全船级工作计划</div>
@@ -13,38 +14,12 @@
             <div id='calendar-container'>
                 <div id='calendar'></div>
             </div>
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="layui-form toolbar">
-                        <div class="layui-form-item">
-                            <div style="float: right">
-                                @if(shiro.hasPermission("/shipWorkPlan/add")){
-<!--                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>-->
-                                @}
-                            </div>
-                        </div>
-                    </div>
-                    <table class="layui-table" id="shipWorkPlanTable" lay-filter="shipWorkPlanTable"></table>
-                </div>
-            </div>
         </div>
+        <div style='clear:both'></div>
     </div>
 </div>
-
-
-<script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/shipWorkPlan/detail")){
-    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    @}
-    @if(shiro.hasPermission("/shipWorkPlan/update")){
-    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    @}
-    @if(shiro.hasPermission("/shipWorkPlan/delete")){
-    <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-    @}
-
-</script>
 @}
+
 
 <style>
     body {
@@ -52,17 +27,17 @@
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     }
 
-    wrap {
+    #wrap {
         width: 1100px;
         margin: 0 auto;
     }
 
     #external-events {
-        float: left;
+        float: right;
         width: 150px;
         padding: 0 10px;
-        border: 1px solid #CCC;
-        background: #edf2f8;
+        /*border: 1px solid #ccc;*/
+        background: #eee;
         text-align: left;
     }
 
@@ -70,17 +45,20 @@
         font-size: 16px;
         margin-top: 0;
         padding-top: 1em;
+        padding-right: 0;
     }
 
     #external-events .fc-event {
         margin: 10px 0;
-        cursor: pointer;
+        /*cursor: pointer;*/
+        border: #ffffff;
+        padding:5px;
     }
 
     #external-events p {
         margin: 1.5em 0;
         font-size: 11px;
-        color: #edf2f8;
+        color: #666;
     }
 
     #external-events p input {
@@ -90,9 +68,7 @@
 
     #calendar {
         float: left;
-        padding-left: 120px;
-        width: 900px;
-        border-bottom:1px solid #f5f4f7;
+        padding-left: 100px;
+        width: 1000px;
     }
-
 </style>

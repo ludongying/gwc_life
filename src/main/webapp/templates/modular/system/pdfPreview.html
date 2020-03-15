@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>文件预览</title>
     <link rel="stylesheet" href="https://www.gjtool.cn/pdfh5/css/style.css"/>
     <link rel="stylesheet" href="https://www.gjtool.cn/pdfh5/css/pdfh5.css"/>
     <style>
@@ -52,11 +52,6 @@
 </div>
 
 <div id="demo"></div>
-<div class="pdfjs" id="dplayer">
-</div>
-<div class="pdfjs" id="aplayer">
-</div>
-
 
 <script type="text/javascript" src="https://www.gjtool.cn/pdfh5/js/pdf.js"></script>
 <script type="text/javascript" src="https://www.gjtool.cn/pdfh5/js/pdf.worker.js"></script>
@@ -74,7 +69,7 @@
         //当前默认优先获取浏览器地址栏？file=后面的地址，如果地址栏没有，再拿配置项的pdfurl或者data来渲染pdf
         //优先顺序：  ？file= > pdfurl > data
         var pdfh5 = new Pdfh5('#demo', {
-            pdfurl: local + "/gwcApi/lawsRegulation/previewFile?filePath=" + filePath,
+            pdfurl: local + "/gwcApi/reviewFile/previewFileDownLoad?filePath=" + filePath,
             // limit:2, // 限制加载最大页数
             renderType: "canvas",
             // type:"ajax",

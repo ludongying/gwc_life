@@ -11,8 +11,8 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@FieldName(value = "渔船信息.xls")
-public class ExportExcelVO {
+@FieldName(value = "渔船信息.xlsx")
+public class ExportFishShipVO {
 
     /** 名称 */
     @FieldName(value = "船名称")

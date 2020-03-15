@@ -110,7 +110,7 @@ public class FileUtil {
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Content-type", "application-download");
             //输入流：本地文件路径
-            in = new DataInputStream(new FileInputStream(new File(path + fileName)));
+            in = new DataInputStream(new FileInputStream(new File(path + "/" + fileName)));
             //输出流
             out = response.getOutputStream();
             //输出文件

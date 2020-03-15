@@ -7,10 +7,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "勘验笔录")
 public class AppInquisitionEntityVO {
-    /** 主键 */
-    @ApiModelProperty(value = "记录id")
-    private String id;
-
     /** 船名号书写情况 */
     @ApiModelProperty(value = "船名号书写情况")
     private Integer shipCaseName;

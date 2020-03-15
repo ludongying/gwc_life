@@ -11,6 +11,7 @@ import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
+import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -25,6 +26,7 @@ import com.seven.gwc.modular.ship_info.service.ShipService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,7 +73,7 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean add(ShipEntity ship) {
+    public boolean add(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode());
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
@@ -79,27 +81,41 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
         {
             return false;
         }
+        ship.setSynFlag(false);
+        ship.setDeleteFlag(true);
+        ship.setCreateDate(new Date());
+        ship.setCreatePerson(user.getId());
         shipMapper.insert(ship);
         return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(ShipEntity ship) {
+    public boolean update(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).ne(ShipEntity::getId,ship.getId());
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
         if(shipEntity != null){
             return false;
         }
+        ship.setUpdateDate(new Date());
+        ship.setUpdatePerson(user.getId());
         shipMapper.updateById(ship);
         return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delete(String id) {
-        shipMapper.deleteById(id);
+    public boolean delete(String id, ShiroUser user) {
+        ShipEntity shipEntity = shipMapper.selectById(id);
+        if (shipEntity != null) {
+            shipEntity.setDeleteFlag(false);
+            shipEntity.setSynFlag(false);
+            shipEntity.setUpdateDate(new Date());
+            shipEntity.setUpdatePerson(user.getId());
+        }
+        shipMapper.updateById(shipEntity);
+//        shipMapper.deleteById(id);
         return true;
     }
 

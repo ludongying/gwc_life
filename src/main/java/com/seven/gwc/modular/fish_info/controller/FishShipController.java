@@ -1,6 +1,6 @@
 package com.seven.gwc.modular.fish_info.controller;
 
-import com.seven.gwc.modular.fish_info.vo.ExportExcelVO;
+import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
 import com.seven.gwc.modular.lawrecord.data.export.ExcelData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -129,12 +132,25 @@ public class FishShipController extends BaseController {
         return fishShipService.detailFishShip(fishShipId);
     }
 
+    /**
+     * 导出渔船信息
+     * @param code 船编号
+     * @param phone 联系方式
+     * @param shipType 船类型
+     */
     @RequestMapping("/exportExcel")
     @ResponseBody
     public void exportExcel(String code, String phone, String shipType) {
         List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(code, phone, shipType);
-        List<ExportExcelVO> exportExcelVOList = fishShipService.getExportData(shipEntityList);
-        new ExcelData<>(exportExcelVOList){}.exportExcel();
+        List<ExportFishShipVO> exportFishShipVOList = fishShipService.getExportData(shipEntityList);
+        new ExcelData<>(exportFishShipVOList){}.exportExcel();
     }
+
+    @RequestMapping(value = "/importExcel")
+    @ResponseBody
+    public BaseResult importExcel(@RequestParam(value = "file", required = true) MultipartFile file, HttpServletResponse resp) throws IOException {
+        return fishShipService.importExcelFile(file, resp);
+    }
+
 }
 

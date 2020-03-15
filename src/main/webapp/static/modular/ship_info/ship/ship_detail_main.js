@@ -52,7 +52,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
     $('#finishDate').text(result.finishDate);
     $('#remark').text(result.remark);
     // 证书信息
-    var url = Feng.ctxPath + '/certificateShip?ids=' + result.certificateId + '&personId=' + result.id;
+    var url = Feng.ctxPath + '/certificateShip?ids=' + result.certificateId + '&shipId=' + result.id;
     // var url = Feng.ctxPath + '/certificate/certificate_list?id=' + result.certificateId + '&htmltype=ship';
     if(result.certificateId === null || result.certificateId === ''){
         $('#certificateId').append('<a style="color: #01AAED;" href="' + url + '">共0张</a>');

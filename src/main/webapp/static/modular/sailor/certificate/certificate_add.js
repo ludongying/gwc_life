@@ -29,7 +29,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     //证书类型获取下拉框
     $.ajax({
-        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_TYPE',
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_PERSON_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
@@ -47,7 +47,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#ownerType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                if(item.name === '船员证书'){
+                    $('#ownerType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+                }
+
             })
             form.render('select');//表单渲染 把内容加载进去
         }

@@ -8,9 +8,6 @@ import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
-import com.seven.gwc.modular.sailor.dao.PersonMapper;
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
-import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.ship_info.dao.CertificateShipMapper;
 import com.seven.gwc.modular.ship_info.dao.ShipMapper;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
@@ -25,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,10 +48,10 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     private ShipMapper shipMapper;
 
     @Override
-    public List<CertificateShipEntity> selectCertificate(String certificateName, String ids, String personId){
+    public List<CertificateShipEntity> selectCertificate(String certificateName, String shipId){
 //        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
-        String idsNew = shipMapper.selectById(personId).getCertificateId();
+        String idsNew = shipMapper.selectById(shipId).getCertificateId();
         List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName,idsNew);
         for(CertificateShipEntity certificateEntity : list){
             if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
@@ -73,7 +71,7 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     }
 
     @Override
-    public boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String personId) {
+    public boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId) {
         //判断证书编码是否存在
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(CertificateShipEntity::getId,certificate.getId());
@@ -81,10 +79,14 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
         if(certificateEntity!=null){
             return false;
         }
+        certificate.setSynFlag(false);
+        certificate.setDeleteFlag(true);
+        certificate.setCreateDate(new Date());
+        certificate.setCreatePerson(user.getId());
         certificateMapper.insert(certificate);
         //更新船员表证书
         LambdaQueryWrapper<ShipEntity> lamdaQueryShip = Wrappers.lambdaQuery();
-        lamdaQueryShip.eq(ShipEntity::getId,personId);
+        lamdaQueryShip.eq(ShipEntity::getId,shipId);
         ShipEntity shipEntity = shipMapper.selectOne(lamdaQueryShip);
         String certificateids = shipEntity.getCertificateId();
         if(certificateids==null|| certificateids.isEmpty()){
@@ -93,15 +95,17 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
             certificateids += FileUtils.file_2_file_sep + certificate.getId();
         }
         shipEntity.setCertificateId(certificateids);
+        shipEntity.setUpdateDate(new Date());
+        shipEntity.setUpdatePerson(user.getId());
         shipMapper.updateById(shipEntity);
         return true;
     }
 
     @Override
-    public void deleteCertificate(String certificateId, ShiroUser user, String personId) {
+    public void deleteCertificate(String certificateId, ShiroUser user, String shipId) {
         //更新船员表
         LambdaQueryWrapper<ShipEntity> lamdaQueryShip = Wrappers.lambdaQuery();
-        lamdaQueryShip.eq(ShipEntity::getId,personId);
+        lamdaQueryShip.eq(ShipEntity::getId,shipId);
         ShipEntity shipEntity = shipMapper.selectOne(lamdaQueryShip);
         ArrayList<String> certificateIds =
                 Stream.of(shipEntity.getCertificateId().split(FileUtils.file_2_file_sep))
@@ -109,14 +113,33 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
         certificateIds.removeAll(Collections.singleton(certificateId));
         String result = certificateIds.stream().collect(Collectors.joining(","));
         shipEntity.setCertificateId(result);
+        shipEntity.setUpdateDate(new Date());
+        shipEntity.setUpdatePerson(user.getId());
         shipMapper.updateById(shipEntity);
-        //删除证书
-        certificateMapper.deleteById(certificateId);
+        //逻辑删除证书
+        CertificateShipEntity certificateEntity = certificateMapper.selectById(certificateId);
+        if (certificateEntity != null) {
+            certificateEntity.setDeleteFlag(false);
+            certificateEntity.setSynFlag(false);
+            certificateEntity.setUpdateDate(new Date());
+            certificateEntity.setUpdatePerson(user.getId());
+        }
+        certificateMapper.updateById(certificateEntity);
+//        certificateMapper.deleteById(certificateId);
     }
 
     @Override
-    public void editCertificate(CertificateShipEntity certificate, ShiroUser user) {
+    public boolean editCertificate(CertificateShipEntity certificate, ShiroUser user) {
+        LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(CertificateShipEntity::getCertificateId, certificate.getCertificateId()).ne(CertificateShipEntity::getId, certificate.getId());
+        CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
+        if (certificateEntity != null) {
+            return false;
+        }
+        certificate.setUpdateDate(new Date());
+        certificate.setUpdatePerson(user.getId());
         certificateMapper.updateById(certificate);
+        return true;
     }
 
     @Override

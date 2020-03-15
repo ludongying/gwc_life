@@ -30,7 +30,7 @@
         select c.* from ship_info_certificate c
         left join sys_dict d on d.id = c.owner_type
         where d.name = '船舶证书' and #{ids} like CONCAT('%',c.id,'%')
-
+        and c.delete_flag = 1
         <if test="certificateName != null and certificateName != ''">
             and (c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like
             CONCAT('%',#{certificateName},'%'))

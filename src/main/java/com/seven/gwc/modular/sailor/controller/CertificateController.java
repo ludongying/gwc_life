@@ -127,7 +127,9 @@ public class CertificateController extends BaseController {
     @ResponseBody
     public BaseResult update(CertificateEntity certificate) {
         ShiroUser user = ShiroKit.getUser();
-        certificateService.editCertificate(certificate, user);
+        if(!certificateService.editCertificate(certificate, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_CERTIFICATE_ID);
+        }
         return SUCCESS;
     }
 

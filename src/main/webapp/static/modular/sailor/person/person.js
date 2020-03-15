@@ -39,10 +39,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             },
             {title: '民族', field: 'nation', sort: false, align: "center"},
             {title: '身份证号', field: 'idNumber', sort: false, align: "center"},
-            {title: '籍贯', field: 'birthPlace', sort: false, align: "center"},
+            {title: '籍贯', field: 'birthPlace', sort: false, align: "center", hide:true},
             {title: '职务', field: 'duty', sort: false, align: "center"},
-            {title: '岗位', field: 'positionId', sort: false, align: "center", hide:true},
-            {title: '手机IP', field: 'phoneIp', sort: false, align: "center"},
+            {title: '岗位', field: 'positionName', sort: false, align: "center"},
+            {title: '手机IP', field: 'phoneIp', sort: false, align: "center", hide:true},
             {title: '联系方式', field: 'phone', sort: false, align: "center", hide:true},
             {title: '证书', field: 'certificateId', sort: false, align: "center", templet: function (d) {
                     // var url = Feng.ctxPath + '/certificate?id=' + d.certificateId + 'htmltype=person';

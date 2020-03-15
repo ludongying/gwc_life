@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'admin', 'ax','upload'], function () {
 
     //证书类型获取下拉框
     $.ajax({
-        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_TYPE',
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=CERTIFICATE_PERSON_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {

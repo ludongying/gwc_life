@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("ship_info_ship")
-public class ShipEntity implements Serializable {
+public class ShipEntity extends GwcBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

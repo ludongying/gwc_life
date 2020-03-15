@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("ship_person")
-public class PersonEntity implements Serializable {
+public class PersonEntity extends GwcBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -84,6 +84,10 @@ public class PersonEntity implements Serializable {
     //岗位
     @TableField (exist = false)
     private String positionId;
+    //岗位名称
+    @TableField (exist = false)
+    private String positionName;
+
 
     //联系方式
     @TableField (exist = false)

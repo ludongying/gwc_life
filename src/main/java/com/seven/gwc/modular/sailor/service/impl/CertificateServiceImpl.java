@@ -23,8 +23,10 @@ import com.seven.gwc.modular.sailor.service.CertificateService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -105,6 +107,10 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         if(certificateEntity!=null){
             return false;
         }
+        certificate.setSynFlag(false);
+        certificate.setDeleteFlag(true);
+        certificate.setCreateDate(new Date());
+        certificate.setCreatePerson(user.getId());
         certificateMapper.insert(certificate);
         //更新船员表证书
         LambdaQueryWrapper<PersonEntity> lamdaQueryPerson = Wrappers.lambdaQuery();
@@ -112,11 +118,13 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         PersonEntity personEntity = personMapper.selectOne(lamdaQueryPerson);
         String certificateids = personEntity.getCertificateId();
         if(certificateids==null|| certificateids.isEmpty()){
-            certificateids += certificate.getId();
+            certificateids = certificate.getId();
         }else{
             certificateids += FileUtils.file_2_file_sep + certificate.getId();
         }
         personEntity.setCertificateId(certificateids);
+        personEntity.setUpdateDate(new Date());
+        personEntity.setUpdatePerson(user.getId());
         personMapper.updateById(personEntity);
         return true;
     }
@@ -134,15 +142,34 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         certificateIds.removeAll(Collections.singleton(certificateId));
         String result = certificateIds.stream().collect(Collectors.joining(","));
         personEntity.setCertificateId(result);
+        personEntity.setUpdateDate(new Date());
+        personEntity.setUpdatePerson(user.getId());
         personMapper.updateById(personEntity);
-        //删除证书
-        certificateMapper.deleteById(certificateId);
+        //逻辑删除证书
+        CertificateEntity certificateEntity = certificateMapper.selectById(certificateId);
+        if (certificateEntity != null) {
+            certificateEntity.setDeleteFlag(false);
+            certificateEntity.setSynFlag(false);
+            certificateEntity.setUpdateDate(new Date());
+            certificateEntity.setUpdatePerson(user.getId());
+        }
+        certificateMapper.updateById(certificateEntity);
+//        certificateMapper.deleteById(certificateId);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void editCertificate(CertificateEntity certificate, ShiroUser user) {
+    public boolean editCertificate(CertificateEntity certificate, ShiroUser user) {
+        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).ne(CertificateEntity::getId, certificate.getId());
+        CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
+        if (certificateEntity != null) {
+            return false;
+        }
+        certificate.setUpdateDate(new Date());
+        certificate.setUpdatePerson(user.getId());
         certificateMapper.updateById(certificate);
+        return true;
     }
 
     @Override

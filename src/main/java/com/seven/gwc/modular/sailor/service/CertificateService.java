@@ -58,7 +58,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    void editCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean editCertificate(CertificateEntity certificate, ShiroUser user);
 
     /**
      * 获证书详细信息（图片url转换）

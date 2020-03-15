@@ -4,28 +4,28 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.ship_info.entity.ShipEntity">
-        <id column="id" property="id" />
-        <result column="ship_code" property="shipCode" />
-        <result column="name" property="name" />
-        <result column="owner" property="owner" />
-        <result column="nationality" property="nationality" />
-        <result column="type" property="type" />
-        <result column="length_total" property="lengthTotal" />
-        <result column="length" property="length" />
-        <result column="width" property="width" />
-        <result column="material" property="material" />
-        <result column="deep" property="deep" />
-        <result column="tonnage" property="tonnage" />
-        <result column="tonnage_net" property="tonnageNet" />
-        <result column="area" property="area" />
-        <result column="people_num" property="peopleNum" />
-        <result column="main_power" property="mainPower" />
-        <result column="image_file_path" property="imageFilePath" />
-        <result column="certificate_id" property="certificateId" />
-        <result column="remark" property="remark" />
-        <result column="manufacturer" property="manufacturer" />
-        <result column="finish_date" property="finishDate" />
-        <result column="gunwale_count" property="gunwaleCount" />
+        <id column="id" property="id"/>
+        <result column="ship_code" property="shipCode"/>
+        <result column="name" property="name"/>
+        <result column="owner" property="owner"/>
+        <result column="nationality" property="nationality"/>
+        <result column="type" property="type"/>
+        <result column="length_total" property="lengthTotal"/>
+        <result column="length" property="length"/>
+        <result column="width" property="width"/>
+        <result column="material" property="material"/>
+        <result column="deep" property="deep"/>
+        <result column="tonnage" property="tonnage"/>
+        <result column="tonnage_net" property="tonnageNet"/>
+        <result column="area" property="area"/>
+        <result column="people_num" property="peopleNum"/>
+        <result column="main_power" property="mainPower"/>
+        <result column="image_file_path" property="imageFilePath"/>
+        <result column="certificate_id" property="certificateId"/>
+        <result column="remark" property="remark"/>
+        <result column="manufacturer" property="manufacturer"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="gunwale_count" property="gunwaleCount"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -36,14 +36,15 @@
         select s.*,b.name as nationalityDesp,c.name as typeDesp
         from ship_info_ship s
         LEFT JOIN
-        (SELECT d.name, d.id,t.`code` FROM sys_dict d LEFT JOIN sys_dict_type t on t.id = d.dict_type_id where t.code='BOAT_NATION') b on b.id = s.nationality
+        (SELECT d.name, d.id,t.`code` FROM sys_dict d LEFT JOIN sys_dict_type t on t.id = d.dict_type_id where
+        t.code='BOAT_NATION') b on b.id = s.nationality
         LEFT JOIN
-        (SELECT e.name, e.id,f.`code` FROM sys_dict e LEFT JOIN sys_dict_type f on f.id = e.dict_type_id where f.code='BOAT_TYPE') c on c.id = s.type
-        <where>
+        (SELECT e.name, e.id,f.`code` FROM sys_dict e LEFT JOIN sys_dict_type f on f.id = e.dict_type_id where
+        f.code='BOAT_TYPE') c on c.id = s.type
+        where s.delete_flag = 1
         <if test="ship.name != null and ship.name != ''">
             s.name like CONCAT('%',#{ship.name},'%') or s.ship_code like CONCAT('%',#{ship.name},'%')
         </if>
-        </where>
     </select>
 
 </mapper>

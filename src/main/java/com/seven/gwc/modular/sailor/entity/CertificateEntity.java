@@ -8,6 +8,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -23,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("ship_info_certificate")
-public class CertificateEntity implements Serializable {
+public class CertificateEntity extends GwcBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

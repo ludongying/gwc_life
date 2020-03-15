@@ -55,7 +55,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
         // url: Feng.ctxPath + '/certificate/list/'+ Feng.getUrlParam("id") + '&' + + Feng.getUrlParam("htmltype"),
-        url: Feng.ctxPath + '/certificateShip/list?ids='+ $('#ids').val().trim() + '&personId=' + $('#personId').val().trim(),
+        url: Feng.ctxPath + '/certificateShip/list?ids='+ $('#ids').val().trim() + '&shipId=' + $('#shipId').val().trim(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,
@@ -128,7 +128,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         func.open({
             title: '增加证书信息',
             area: ['1000px', '710px'],
-            content: Feng.ctxPath + '/certificateShip/certificate_add?personId='+$('#personId').val().trim(),
+            content: Feng.ctxPath + '/certificateShip/certificate_add?shipId='+$('#shipId').val().trim(),
             tableId: Certificate.tableId
         });
     };
@@ -165,7 +165,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Certificate.onDeleteCertificate = function (data) {
         Feng.confirm("是否删除证书信息《" + data.name + "》吗?", function () {
-            var ajax = new $ax(Feng.ctxPath + '/certificateShip/delete?personId='+$('#personId').val().trim(), function (data) {
+            var ajax = new $ax(Feng.ctxPath + '/certificateShip/delete?shipId='+$('#shipId').val().trim(), function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
                     table.reload(Certificate.tableId);

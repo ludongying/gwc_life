@@ -1,8 +1,9 @@
 package com.seven.gwc.modular.ship.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.ship.entity.ShipWorkPlanEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -47,4 +48,10 @@ public interface ShipWorkPlanService extends IService<ShipWorkPlanEntity> {
      */
     void editShipWorkPlan(ShipWorkPlanEntity shipWorkPlan, ShiroUser user);
 
+    /**
+     * 获取计划信息列表
+     *
+     * @param shipWorkPlan 实体对象
+     */
+    JSONArray listPlans(ShipWorkPlanEntity shipWorkPlan);
 }

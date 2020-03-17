@@ -3,58 +3,58 @@
     <form id="shipWorkLogForm" lay-filter="shipWorkLogForm" class="layui-form">
         <div class="layui-row layui-col-space10">
 
-            <input name="id" type="hidden"/>
+            <input id="id" name="id" type="hidden" class="layui-input" />
+
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">ID<span style="color: red;">*</span></label>
+                <label class="layui-form-label">开始时间<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入ID" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="recordDate" name="recordDate" placeholder="请输入开始时间" readonly type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">记录时间（yyyy-MM-dd HH:mm:ss）<span style="color: red;">*</span></label>
+                <label class="layui-form-label">结束时间<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="recordDate" name="recordDate" placeholder="请输入记录时间（yyyy-MM-dd HH:mm:ss）" readonly type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="recordEndDate" name="recordEndDate" placeholder="请输入结束时间" readonly type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">记录内容<span style="color: red;">*</span></label>
+                <label class="layui-form-label">日志类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="content" name="content" placeholder="请输入记录内容" type="text" class="layui-input" lay-verify="required" required/>
+                    <input name="recordType" title="一般工作日志" type="radio" checked="" value="0">
+                    <input name="recordType" title="重要工作日志" type="radio" value="1">
+                    <input name="recordType" title="临时工作日志"  type="radio" value="2">
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">工作日程类型<span style="color: red;">*</span></label>
+                <label class="layui-form-label">日志内容<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="recordType" name="recordType" placeholder="请输入工作日程类型" type="text" class="layui-input" lay-verify="required" required/>
+                    <textarea id="content" name="content" class="layui-textarea" placeholder="请输入工作日志内容" lay-verify="required" required></textarea>
                 </div>
             </div>
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">创建人<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="createPerson" name="createPerson" placeholder="请输入创建人" type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
+            <input id="createPerson" name="createPerson" type="hidden" class="layui-input" />
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">创建时间<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="createDate" name="createDate" placeholder="请输入创建时间" readonly type="text" class="layui-input" lay-verify="required" required/>
-                </div>
-            </div>
+            <input id="createDate" name="createDate" type="hidden" class="layui-input" />
 
 
             <div class="layui-col-md12 text-right">
                 <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
                 <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+                <button class="layui-btn layui-btn-danger" lay-filter="btnDelete" lay-submit="">&emsp;删除&emsp;</button>
             </div>
 
         </div>
     </form>
 </div>
 @}
+
+<style>
+    body {
+        margin: 20px;
+    }
+</style>
 

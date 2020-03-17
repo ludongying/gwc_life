@@ -191,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'myCustomButton'
         },
-
         defaultView: 'timeGridDay',
         locale: 'zh-cn',
         editable: true,
@@ -204,7 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
             $.ajax({
                 url: Feng.ctxPath + '/shipWorkLog/listLogs',
                 type: "post",
-                // contentType: "application/json; charset=utf-8",
                 data: {},
                 dataType: "json",
                 success: function (data) {
@@ -216,18 +214,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert(XMLHttpRequest.readyState);
                     alert(textStatus); // paser error;
                 }
-
             });
         }
-
-
         , dateClick: function () {
             openLayer();
+
         }
-        , eventClick: function (calEvent, jsEvent, view, callback) {
-            console.log(calEvent.title());
-            console.log(jsEvent);
-            console.log(view);
+        , eventClick: function (info) {
+            EditLayer(info);
         }
     });
     calendar.render();
@@ -251,14 +245,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //编辑工作日程
-    function EditLayer(wlid) {
-        addIndex = layer.open({
+    function EditLayer(info) {
+            addIndex = layer.open({
             title: '<i class="fa fa-plus"></i>&nbsp;编辑工作日程',
             type: 2,
             fix: false,
-            area: ['800px', '550px'],
+            area: ['600px', '400px'],
             // 宽高
-            content: Feng.ctxPath + '/shipWorkLog/shipWorkLog_detail?shipWorkLogId=' + wlid.id,
+            content: Feng.ctxPath + '/shipWorkLog/shipWorkLog_edit?shipWorkLogId=' + info.event.id,
         });
     }
 

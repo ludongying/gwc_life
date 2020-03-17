@@ -42,6 +42,7 @@ logging:                                                    #日志配置
     com.seven.gwc.modular.sailor.dao: debug
     com.seven.gwc.modular.ship_info.dao: debug
     com.seven.gwc.modular.lawrecord.dao: debug
+    com.seven.gwc.modular.work.dao: debug
   pattern:
     console: '%d %clr(%p) : %m%n'
 

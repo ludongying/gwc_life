@@ -57,9 +57,6 @@ public class ShipWorkLogServiceImpl extends ServiceImpl<ShipWorkLogMapper, ShipW
 
     @Override
     public JSONArray listLogs(ShipWorkLogEntity shipWorkLog, ShiroUser user) {
-//        LambdaQueryWrapper<ShipWorkLogEntity> lambdaQuery =Wrappers.lambdaQuery();
-//        lambdaQuery.eq(ShipWorkLogEntity::getCreatePerson,user.getId())
-//                .eq(ShipWorkLogEntity::getId,shipWorkLog.getId());
         shipWorkLog.setCreatePerson(user.getId());
         List<ShipWorkLogEntity> shipWorkLogEntities = shipWorkLogMapper.WorkLogList(shipWorkLog);
 
@@ -77,10 +74,25 @@ public class ShipWorkLogServiceImpl extends ServiceImpl<ShipWorkLogMapper, ShipW
             }
 
             jsonObject.put("id", shipWorkLogEntity.getId());
+
             jsonObject.put("start", DateTimeUtil.parse2String(shipWorkLogEntity.getRecordDate(), "yyyy-MM-dd HH:mm:ss"));
-            jsonObject.put("end", DateTimeUtil.parse2String(shipWorkLogEntity.getRecordEndDate(), "yyyy-MM-dd HH:mm:ss"));
-            jsonObject.put("title", shipWorkLogEntity.getContent());
+//            jsonObject.put("end", DateTimeUtil.parse2String(shipWorkLogEntity.getRecordEndDate(), "yyyy-MM-dd HH:mm:ss"));
+            var str ="至"+DateTimeUtil.parse2String(shipWorkLogEntity.getRecordEndDate(), "yyyy-MM-dd HH:mm:ss")+"\t"+shipWorkLogEntity.getContent();
+            jsonObject.put("title", str);
+//            jsonObject.put("title", shipWorkLogEntity.getContent());
             jsonObject.put("type", shipWorkLogEntity.getRecordType());
+            if (shipWorkLogEntity.getRecordType() == 0) {
+                jsonObject.put("color", "#3987AD");
+                jsonObject.put("textColor", "white");
+            }
+            else if(shipWorkLogEntity.getRecordType() == 1){
+                jsonObject.put("color", "#D25B47");
+                jsonObject.put("textColor", "white");
+            }
+            else if(shipWorkLogEntity.getRecordType() == 2){
+                jsonObject.put("color", "#FE9400");
+                jsonObject.put("textColor", "white");
+            }
             jsonArray.add(jsonObject);
         }
         return jsonArray;

@@ -87,5 +87,16 @@
 
     </select>
 
+    <sql id="detail">
+         id, status, law_type, writ,  Illegal_ship_name,  Illegal_person,  Illegal_person_tel, create_date, source
+
+
+    </sql>
+
+   <select id="detail" resultType="java.util.Map">
+
+   </select>
+
+
 
 </mapper>

@@ -84,10 +84,12 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">窗口期</label>
-                <div class="layui-input-block">
-                    <input id="windowPhase" name="windowPhase" type="text" class="layui-input" disabled="disabled"/>
+                <label class="layui-form-label">提前预警<span style="color: red;">*</span></label>
+                <div class="layui-input-inline" style="width: 340px">
+                    <input id="windowPhase" name="windowPhase" placeholder="请提前预警天数" type="text" class="layui-input"
+                           lay-verify="required|positiveNumber" disabled="disabled" required/>
                 </div>
+                <div class="layui-input-inline layui-word-aux">天</div>
             </div>
 
             <div class="layui-col-md6">

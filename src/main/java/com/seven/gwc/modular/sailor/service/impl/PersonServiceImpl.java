@@ -74,7 +74,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     public boolean addPerson(PersonEntity person, ShiroUser user) {
         //先判断person表是否存在
         LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(PersonEntity::getIdNumber, person.getIdNumber());
+        lambdaQuery.eq(PersonEntity::getIdNumber, person.getIdNumber()).eq(PersonEntity::getDeleteFlag,1);
         PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
         if (personEntity != null) {
             return false;
@@ -107,7 +107,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userMapper.insert(userEntityInput);
                 //获取新插入的user表id赋值给person表中的person_id
                 LambdaQueryWrapper<UserEntity> lambdaQueryUserNew = Wrappers.<UserEntity>lambdaQuery();
-                lambdaQueryUserNew.eq(UserEntity::getName, person.getPersonName());
+                lambdaQueryUserNew.eq(UserEntity::getId, userEntityInput.getId());
                 UserEntity userEntityNew = userMapper.selectOne(lambdaQueryUserNew);
                 person.setPersonId(userEntityNew.getId());
             }
@@ -138,7 +138,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         @Transactional(rollbackFor = Exception.class)
         public boolean editPerson (PersonEntity person, ShiroUser user){
             LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
-            lambdaQuery.eq(PersonEntity::getIdNumber, person.getIdNumber()).ne(PersonEntity::getId, person.getId());
+            lambdaQuery.eq(PersonEntity::getIdNumber, person.getIdNumber()).eq(PersonEntity::getDeleteFlag,1).ne(PersonEntity::getId, person.getId());
             PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
             if (personEntity != null) {
                 return false;
@@ -172,7 +172,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                     userMapper.insert(userEntityInput);
                     //获取新插入的user表id赋值给person表中的person_id
                     LambdaQueryWrapper<UserEntity> lambdaQueryUserNew = Wrappers.<UserEntity>lambdaQuery();
-                    lambdaQueryUserNew.eq(UserEntity::getName, person.getPersonName());
+                    lambdaQueryUserNew.eq(UserEntity::getId, userEntityInput.getId());
                     UserEntity userEntityNew = userMapper.selectOne(lambdaQueryUserNew);
                     person.setPersonId(userEntityNew.getId());
                 }

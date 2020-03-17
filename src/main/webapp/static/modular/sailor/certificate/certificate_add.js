@@ -26,6 +26,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+    loadVerify(form);
 
     //证书类型获取下拉框
     $.ajax({

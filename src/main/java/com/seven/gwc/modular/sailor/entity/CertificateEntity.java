@@ -84,4 +84,7 @@ public class CertificateEntity extends GwcBaseEntity implements Serializable {
     /** 备注 */
     private String remark;
 
+    /**证书状态*/
+    private Integer state;
+
 }

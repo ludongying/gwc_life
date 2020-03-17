@@ -28,6 +28,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+    loadVerify(form);
 
     //初始化证书信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/certificateShip/detail/" + Feng.getUrlParam("certificateId"));

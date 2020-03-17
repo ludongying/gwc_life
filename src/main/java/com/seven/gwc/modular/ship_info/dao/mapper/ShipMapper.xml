@@ -43,7 +43,7 @@
         f.code='BOAT_TYPE') c on c.id = s.type
         where s.delete_flag = 1
         <if test="ship.name != null and ship.name != ''">
-            s.name like CONCAT('%',#{ship.name},'%') or s.ship_code like CONCAT('%',#{ship.name},'%')
+            and s.name like CONCAT('%',#{ship.name},'%') or s.ship_code like CONCAT('%',#{ship.name},'%')
         </if>
     </select>
 

@@ -10,14 +10,14 @@
                 <label class="my-form-label-edit">船舶编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="shipCode" name="shipCode" type="text" class="layui-input"
-                           lay-verify="required" required/>
+                           lay-verify="required|length20" required/>
                 </div>
             </div>
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船舶名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="name" name="name" type="text" class="layui-input"
-                           lay-verify="required" required/>
+                           lay-verify="required|length20" required/>
                 </div>
             </div>
             <!--        </div>-->
@@ -27,7 +27,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船舶所有人<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="owner" name="owner" type="text" class="layui-input" lay-verify="required"
+                    <input id="owner" name="owner" type="text" class="layui-input" lay-verify="required|length20"
                            required/>
                 </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">总长(m)</label>
                 <div class="layui-input-block">
-                    <input id="lengthTotal" name="lengthTotal" type="text" class="layui-input"/>
+                    <input id="lengthTotal" name="lengthTotal" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="my-form-mid layui-word-aux">m</div>-->
             </div>
@@ -67,7 +67,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船长(m)</label>
                 <div class="layui-input-block">
-                    <input id="length" name="length" type="text" class="layui-input"/>
+                    <input id="length" name="length" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="my-form-mid layui-word-aux">m</div>-->
             </div>
@@ -75,7 +75,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船宽(m)</label>
                 <div class="layui-input-block">
-                    <input id="width" name="width" type="text" class="layui-input"/>
+                    <input id="width" name="width" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
             </div>
@@ -83,7 +83,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船深(m)</label>
                 <div class="layui-input-block">
-                    <input id="deep" name="deep" type="text" class="layui-input"/>
+                    <input id="deep" name="deep" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
             </div>
@@ -91,35 +91,35 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">总吨位</label>
                 <div class="layui-input-block">
-                    <input id="tonnage" name="tonnage" type="text" class="layui-input"/>
+                    <input id="tonnage" name="tonnage" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">净吨位</label>
                 <div class="layui-input-block">
-                    <input id="tonnageNet" name="tonnageNet" type="text" class="layui-input"/>
+                    <input id="tonnageNet" name="tonnageNet" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船体材质</label>
                 <div class="layui-input-block">
-                    <input id="material" name="material" type="text" class="layui-input"/>
+                    <input id="material" name="material" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">核定航区</label>
                 <div class="layui-input-block">
-                    <input id="area" name="area" type="text" class="layui-input"/>
+                    <input id="area" name="area" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">核定干舷</label>
                 <div class="layui-input-block">
-                    <input id="gunwaleCount" name="gunwaleCount" type="text" class="layui-input"/>
+                    <input id="gunwaleCount" name="gunwaleCount" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
             </div>
@@ -127,14 +127,14 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">核载乘员(人)</label>
                 <div class="layui-input-block">
-                    <input id="peopleNum" name="peopleNum" type="text" class="layui-input"/>
+                    <input id="peopleNum" name="peopleNum" type="text" class="layui-input" lay-verify="notpositiveNumber"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">主功率(kW)</label>
                 <div class="layui-input-block">
-                    <input id="mainPower" name="mainPower" type="text" class="layui-input"/>
+                    <input id="mainPower" name="mainPower" type="text" class="layui-input" lay-verify="notpositiveFloatNumber"/>
                 </div>
                 <!--        <div class="layui-form-mid layui-word-aux">kw</div>-->
             </div>
@@ -142,7 +142,7 @@
             <div class="layui-col-md6">
                 <label class="my-form-label-edit">船舶制造厂</label>
                 <div class="layui-input-block">
-                    <input id="manufacturer" name="manufacturer" type="text" class="layui-input"/>
+                    <input id="manufacturer" name="manufacturer" type="text" class="layui-input" lay-verify="length50"/>
                 </div>
             </div>
 
@@ -151,7 +151,7 @@
                 <div class="layui-input-block">
                     <!--            <input id="finishDate" name="finishDate" placeholder="请输入完成日期" type="text" class="layui-input"/>-->
                     <input id="finishDate" name="finishDate" type="text" class="layui-input date-icon"
-                           autocomplete="off"/>
+                           autocomplete="off" readonly/>
                 </div>
             </div>
 

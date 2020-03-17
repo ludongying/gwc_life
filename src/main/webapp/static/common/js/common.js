@@ -394,6 +394,55 @@ function loadVerify(form){
                     return"请输入正确的手机号";
                 }
             }
+        },notchinese:function (value) {
+            var reg = /^S|^[\u4E00-\u9FA5]+$/;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"只能输入汉字";
+                }
+            }
+        },notemail:function (value) {
+            var reg = /^S|^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"邮箱格式不正确";
+                }
+            }
+        },ip:function (value) {
+            var reg =  /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"IP地址不符合规则";
+                }
+            }
+        },notip:function (value) {
+            var reg =  /^S|^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"IP地址不符合规则";
+                }
+            }
+        },notpositiveFloatNumber:function (value) {
+            var reg=/^S|^[1-9][0-9]*\.?[0-9]*$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正确的数字";
+                }
+            }
+        },notpositiveNumber:function(value){
+            var reg=/^S|^[1-9][0-9]*$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return "请输入正整数";
+                }
+            }
+        },notphoneNumber:function(value){
+            var reg=/^S|^1\d{10}$/i;
+            if(value){
+                if(value.toString().search(reg)<0){
+                    return"请输入正确的手机号";
+                }
+            }
         }
 
 

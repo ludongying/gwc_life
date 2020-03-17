@@ -8,14 +8,14 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">证书编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="certificateId" name="certificateId" placeholder="请输入证书编码" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="certificateId" name="certificateId" placeholder="请输入证书编码" type="text" class="layui-input" lay-verify="required|length20" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">证书名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="name" name="name" placeholder="请输入证书名称" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="name" name="name" placeholder="请输入证书名称" type="text" class="layui-input" lay-verify="required|length20" required/>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">签发机构</label>
                 <div class="layui-input-block">
-                    <input id="issuer" name="issuer" placeholder="请输入签发机构" type="text" class="layui-input" />
+                    <input id="issuer" name="issuer" placeholder="请输入签发机构" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">存放地点</label>
                 <div class="layui-input-block">
-                    <input id="storePlace" name="storePlace" placeholder="请输入存放地点" type="text" class="layui-input" />
+                    <input id="storePlace" name="storePlace" placeholder="请输入存放地点" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
@@ -84,37 +84,39 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">窗口期</label>
-                <div class="layui-input-block">
-                    <input id="windowPhase" name="windowPhase" placeholder="请输入窗口期" type="text" class="layui-input" />
+                <label class="layui-form-label">提前预警<span style="color: red;">*</span></label>
+                <div class="layui-input-inline" style="width: 340px">
+                    <input id="windowPhase" name="windowPhase" placeholder="请提前预警天数" type="text" class="layui-input"
+                           lay-verify="required|positiveNumber" required/>
                 </div>
+                <div class="layui-input-inline layui-word-aux">天</div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">责任部门</label>
                 <div class="layui-input-block">
-                    <input id="responseDept" name="responseDept" placeholder="请输入责任部门" type="text" class="layui-input" />
+                    <input id="responseDept" name="responseDept" placeholder="请输入责任部门" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">发证地点</label>
                 <div class="layui-input-block">
-                    <input id="certificatePlace" name="certificatePlace" placeholder="请输入发证地点" type="text" class="layui-input" />
+                    <input id="certificatePlace" name="certificatePlace" placeholder="请输入发证地点" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">联系方式</label>
                 <div class="layui-input-block">
-                    <input id="contact" name="contact" placeholder="请输入联系方式" type="text" class="layui-input" />
+                    <input id="contact" name="contact" placeholder="请输入联系方式" type="text" class="layui-input" lay-verify="notphoneNumber"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="length20"/>
                 </div>
             </div>
 

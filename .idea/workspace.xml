@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="工作计划信息管理">
-      <change afterPath="$PROJECT_DIR$/hs_err_pid18600.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/controller/ShipWorkPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/controller/ShipWorkPlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/ShipWorkPlanMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/ShipWorkPlanMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/mapper/ShipWorkPlanMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/mapper/ShipWorkPlanMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/ShipWorkPlanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/ShipWorkPlanService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/impl/ShipWorkPlanServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/impl/ShipWorkPlanServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/service/impl/ShipWorkLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/service/impl/ShipWorkLogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan_edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog_edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog_edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -392,54 +376,54 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="490" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1583997388160" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1583732963267">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1584435865742">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1583732963267" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1584435865742" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1583995888510">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583995888510" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.0.bottom" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.0.center" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.0.center" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.0.left" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.0.left" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.0.right" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.0.right" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.1.bottom" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.1.center" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.1.center" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.1.left" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.1.left" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="177" key="GridCell.Tab.1.right" timestamp="1584435410236">
+    <state width="1493" height="177" key="GridCell.Tab.1.right" timestamp="1584436277032">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1584435410236" />
+    <state width="1493" height="177" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1584436277032" />
     <state width="1877" height="157" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
     <state width="1493" height="220" key="GridCell.Tab.2.bottom" timestamp="1584433974269">
       <screen x="0" y="0" width="1536" height="824" />
@@ -484,10 +468,10 @@
     </state>
     <state x="498" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584001311433" />
     <state x="739" y="296" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="285" y="133" key="Vcs.Push.Dialog.v2" timestamp="1584435529614">
+    <state x="285" y="133" key="Vcs.Push.Dialog.v2" timestamp="1584435847589">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="285" y="133" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584435529614" />
+    <state x="285" y="133" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584435847589" />
     <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
     <state x="523" y="170" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1583995552433">
       <screen x="0" y="0" width="1536" height="824" />

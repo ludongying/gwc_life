@@ -22,6 +22,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         trigger: 'click'
     });
 
+    // 打开弹窗的按钮对象
+    var btndelete = document.getElementById("delete");
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
@@ -50,31 +52,28 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         return false;
     });
 
-    window.onload = function () {
-        // 删除按钮点击事件
-        $('#btnDelete').οnclick = function () {
-            var delId = document.getElementsByName("id").value;
-            // Feng.confirm("是否删除工作日志记录?", function () {
-            delData(delId);
-            // });
-        };
-    }
 
-
-    function delData(delId){
-            var ajax = new $ax(Feng.ctxPath + "/shipWorkLog/delete", function (delId) {
-                if (data.success) {
-                    Feng.success("删除成功!");
-                    admin.putTempData('formDelete', true);//传给上个页面，刷新table用
-                    admin.closeThisDialog();//关掉对话框
-                } else {
-                    Feng.error(data.message);
-                }
-            }, function (data) {
+    // 删除按钮点击事件
+    btndelete.onclick = function () {
+        // Feng.confirm("是否删除工作日志?", function () {
+        $.ajax({
+            url: Feng.ctxPath + '/shipWorkLog/delete?shipWorkLogId='+result.id,
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                Feng.success("删除成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+            },
+            //#3这个error函数调试时非常有用，如果解析不正确，将会弹出错误框
+            error: function f(XMLHttpRequest, textStatus, errorThrown) {
                 Feng.error("删除失败!" + data.message + "!");
-            });
-            ajax.set("shipWorkLogId", data.id);
-            ajax.start();
+                alert(XMLHttpRequest.status);
+                alert(XMLHttpRequest.readyState);
+                alert(textStatus); // paser error;
+            }
+        })
+        admin.closeThisDialog();//关掉对话框
+        // });
     }
-
 });

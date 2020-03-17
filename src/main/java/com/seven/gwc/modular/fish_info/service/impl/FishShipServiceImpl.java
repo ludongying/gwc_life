@@ -59,7 +59,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     public List<FishShipEntity> selectFishShip(String code, String phone, String shipType){
         LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(code), FishShipEntity::getCode, code)
-                .like(ToolUtil.isNotEmpty(phone), FishShipEntity::getPhone, phone)
+                //.like(ToolUtil.isNotEmpty(phone), FishShipEntity::getPhone, phone)
                 .eq(ToolUtil.isNotEmpty(shipType), FishShipEntity::getShipType, shipType);
 
         List<FishShipEntity> list = fishShipMapper.selectList(lambdaQuery);
@@ -159,7 +159,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
             exportFishShipVO.setShipOwner(fishShipEntity.getShipOwner());
             exportFishShipVO.setIdentity(fishShipEntity.getIdentity());
-            exportFishShipVO.setPhone(fishShipEntity.getPhone());
+            //exportFishShipVO.setPhone(fishShipEntity.getPhone());
             exportFishShipVO.setAddress(fishShipEntity.getAddress());
             if (ToolUtil.isNotEmpty(fishShipEntity.getSeaState())) {
                 DictEntity seaStateDict = dictMapper.selectById(fishShipEntity.getSeaState());
@@ -257,7 +257,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
                         }
                         fishShipEntity.setShipOwner(ToolUtil.getCellValue(sheet.getRow(i).getCell(13)));
                         fishShipEntity.setIdentity(ToolUtil.getCellValue(sheet.getRow(i).getCell(14)));
-                        fishShipEntity.setPhone(ToolUtil.getCellValue(sheet.getRow(i).getCell(15)));
+                        //fishShipEntity.setPhone(ToolUtil.getCellValue(sheet.getRow(i).getCell(15)));
                         fishShipEntity.setAddress(ToolUtil.getCellValue(sheet.getRow(i).getCell(16)));
                         if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(17)))) {
                             DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(17)), "SEA_STATE");

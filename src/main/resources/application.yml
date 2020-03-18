@@ -1,6 +1,6 @@
 server:
   port: 88                                                  #默认端口号
-  ip: http://192.168.18.4:88/                             #服务器IP地址
+  ip: http://192.168.18.73:88/                             #服务器IP地址
 spring:
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${FILE_UPLOAD_PATH_FILE},file:${FILE_UPLOAD_PATH_IMAGE} #外挂文件地址
@@ -46,6 +46,12 @@ logging:                                                    #日志配置
   pattern:
     console: '%d %clr(%p) : %m%n'
 
+#jodconverter:
+#  local:
+#    enabled: true
+#    office-home: C:\\Program Files (x86)\\OpenOffice 4
+#    max-tasks-per-process: 10
+#    port-numbers: 8100
 
 
 ############################### start框架配置start ###############################

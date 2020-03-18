@@ -75,7 +75,7 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     @Transactional(rollbackFor = Exception.class)
     public boolean add(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode());
+        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).eq(ShipEntity::getDeleteFlag,1);
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
         if(shipEntity != null)
         {
@@ -93,7 +93,7 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     @Transactional(rollbackFor = Exception.class)
     public boolean update(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).ne(ShipEntity::getId,ship.getId());
+        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).eq(ShipEntity::getDeleteFlag,1).ne(ShipEntity::getId,ship.getId());
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
         if(shipEntity != null){
             return false;

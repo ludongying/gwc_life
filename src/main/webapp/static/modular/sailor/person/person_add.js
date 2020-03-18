@@ -35,13 +35,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+    loadVerify(form);
 
-    form.verify({
-        ip: [
-            /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
-            ,'IP地址不符合规则'
-        ]
-    });
+    // form.verify({
+    //     ip: [
+    //         /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
+    //         ,'IP地址不符合规则'
+    //     ]
+    // });
 
     // 点击弹出用户列表
     $('#selUsers').click(function () {
@@ -106,6 +107,21 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
                 // alert(item.name);
                 // alert(item.shipCode);
                 $('#shipId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+            })
+            form.render('select');//表单渲染 把内容加载进去
+        }
+    });
+
+    //政治面貌获取下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=POLITICAL',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                // alert(item.name);
+                // alert(item.shipCode);
+                $('#political').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
             form.render('select');//表单渲染 把内容加载进去
         }

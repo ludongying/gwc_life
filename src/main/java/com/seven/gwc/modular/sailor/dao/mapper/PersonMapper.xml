@@ -28,7 +28,7 @@
         LEFT JOIN ship_info_ship s on p.ship_id = s.id
         where p.delete_flag = 1
         <if test="person.personName != null and person.personName != ''">
-            u.name like CONCAT('%',#{person.personName},'%')
+            and u.name like CONCAT('%',#{person.personName},'%')
         </if>
     </select>
 
@@ -40,7 +40,7 @@
         LEFT JOIN ship_info_ship s on p.ship_id = s.id
         where p.delete_flag = 1
         <if test="id != null and id!= ''">
-            p.id = #{id}
+            and p.id = #{id}
         </if>
     </select>
     <select id="PersonNamesEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
@@ -49,7 +49,7 @@
         LEFT JOIN ship_info_ship s on p.ship_id = s.id
         where p.delete_flag = 1
         <if test="id != null and id!= ''">
-            p.id = #{id}
+            and p.id = #{id}
         </if>
     </select>
 </mapper>

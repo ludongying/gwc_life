@@ -25,9 +25,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         trigger: 'click'
     });
 
-
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+    //表单验证加载
+    loadVerify(form);
+
+    //图片放大预览
+    var renderImg = function () {
+        $('#attachment img').on('click', function () {
+            layer.photos({
+                photos: '#attachment',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+    }
 
     //初始化证书信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/certificate/detail/" + Feng.getUrlParam("certificateId"));
@@ -47,6 +60,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
             }
         }
     });
+    renderImg();
 
     //证书类型获取下拉框
     $.ajax({
@@ -116,6 +130,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
                 Feng.success("上传成功!");
                 image_path.push(res.content.path);
                 $('#attachFilePath').val(image_path);
+                renderImg();
             }
         },
         error: function () {
@@ -128,4 +143,5 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         $('#attachment').empty();
         $('#attachFilePath').val("");
     });
+
 });

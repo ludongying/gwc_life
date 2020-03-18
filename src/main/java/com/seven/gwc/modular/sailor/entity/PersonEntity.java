@@ -57,7 +57,7 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
     private String certificateId;
 
     /** 政治面貌（枚举） */
-    private Integer political;
+    private String political;
 //
 //    //用户编码
 //    @TableField(exist = false)

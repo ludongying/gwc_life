@@ -26,6 +26,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+    loadVerify(form);
 
     //证书类型获取下拉框
     $.ajax({
@@ -94,6 +95,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
                 Feng.success("上传成功!");
                 image_path.push(res.content.path);
                 $('#attachFilePath').val(image_path);
+                renderImg();
             }
         },
         error: function () {
@@ -106,4 +108,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         $('#attachment').empty();
         $('#attachFilePath').val("");
     });
+
+    //图片放大
+    var renderImg = function () {
+        $('#attachment img').on('click', function () {
+            layer.photos({
+                photos: '#attachment',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+    }
+
 });

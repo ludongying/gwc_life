@@ -35,6 +35,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+    loadVerify(form);
+
     //初始化船员信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/person/detail/" + Feng.getUrlParam("id"));
     var result = ajax.start();
@@ -63,6 +65,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
                 $('#shipId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
             $('#shipId').val(result.shipId);
+            form.render('select');//表单渲染 把内容加载进去
+        }
+    });
+
+    //政治面貌获取下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=POLITICAL',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                // alert(item.name);
+                // alert(item.shipCode);
+                $('#political').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+            })
+            $('#political').val(result.political);
             form.render('select');//表单渲染 把内容加载进去
         }
     });

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -99,7 +100,7 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(CertificateShipEntity certificate, String shipId) {
+    public BaseResult add(CertificateShipEntity certificate, String shipId) throws ParseException {
         ShiroUser user = ShiroKit.getUser();
         if(!certificateService.addCertificate(certificate, user, shipId)){
             return new BaseResult().failure((ErrorEnum.ERROR_ONLY_CERTIFICATE_ID));
@@ -123,7 +124,7 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResult update(CertificateShipEntity certificate) {
+    public BaseResult update(CertificateShipEntity certificate) throws ParseException {
         ShiroUser user = ShiroKit.getUser();
         if(!certificateService.editCertificate(certificate, user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_CERTIFICATE_ID);

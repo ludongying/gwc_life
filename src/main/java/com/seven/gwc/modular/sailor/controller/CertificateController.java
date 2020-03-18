@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.seven.gwc.core.base.BaseController;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -91,7 +92,7 @@ public class CertificateController extends BaseController {
     public BaseResultPage<CertificateEntity> list(String certificateName, String ids, String personId) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName,ids,personId);
+        List<CertificateEntity> certificates = certificateService.selectCertificate(certificateName,personId);
         PageInfo pageInfo = new PageInfo<>(certificates);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -101,7 +102,7 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(CertificateEntity certificate, String personId) {
+    public BaseResult add(CertificateEntity certificate, String personId) throws ParseException {
         ShiroUser user = ShiroKit.getUser();
         if(!certificateService.addCertificate(certificate, user, personId)){
             return new BaseResult().failure((ErrorEnum.ERROR_ONLY_CERTIFICATE_ID));
@@ -125,7 +126,7 @@ public class CertificateController extends BaseController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResult update(CertificateEntity certificate) {
+    public BaseResult update(CertificateEntity certificate) throws ParseException {
         ShiroUser user = ShiroKit.getUser();
         if(!certificateService.editCertificate(certificate, user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_CERTIFICATE_ID);

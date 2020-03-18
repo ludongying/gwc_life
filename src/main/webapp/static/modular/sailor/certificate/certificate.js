@@ -27,7 +27,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '', field: 'id', align: "center", hide:true},
             {title: '证书编码', field: 'certificateId', align: "center"},
             {title: '证书名称', field: 'name', align: "center"},
-            {title: '归属类型', field: 'ownerTypeName', align: "center"},
+            {title: '归属类型', field: 'ownerTypeName', align: "center", hide:true},
             {title: '证书类型', field: 'certificateTypeName', align: "center"},
             {title: '签发机构', field: 'issuer', align: "center"},
             {title: '签发日期', field: 'issueDate', align: "center", templet: "<div>{{layui.util.toDateString(d.issueDate, 'yyyy-MM-dd')}}</div>"},
@@ -41,12 +41,22 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     else
                         return "</b>";
                 }},
-            {title: '窗口期', field: 'windowPhase', align: "center"},
-            {title: '责任部门', field: 'responseDept', align: "center"},
-            {title: '发证地点', field: 'certificatePlace', align: "center"},
-            {title: '联系方式', field: 'contact', align: "center"},
+            {title: '证书提醒', field: 'state', align: "center", templet: function (d) {
+                    if (d.state === 0)
+                        return "<span class='layui-badge layui-bg-blue'>正常</span></b>";
+                    else if(d.state === 1)
+                        return "<span class='layui-badge layui-bg-orange'>即将过期</span></b>";
+                    else if(d.state === 2)
+                        return "<span class='layui-badge layui-bg-red'>已过期</span></b>";
+                    else
+                        return "</b>";
+                }},
+            {title: '窗口期', field: 'windowPhase', align: "center", hide:true},
+            {title: '责任部门', field: 'responseDept', align: "center", hide:true},
+            {title: '发证地点', field: 'certificatePlace', align: "center", hide:true},
+            {title: '联系方式', field: 'contact', align: "center", hide:true},
             {title: '附件', field: 'attachment', align: "center", hide: true},
-            {title: '备注', field: 'remark', align: "center", hide: true},
+            {title: '备注', field: 'remark', align: "center"},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -126,7 +136,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Certificate.openAddCertificate = function () {
         func.open({
             title: '增加证书信息',
-            area: ['1000px', '710px'],
+            area: ['1000px', '660px'],
             content: Feng.ctxPath + '/certificate/certificate_add?personId='+$('#personId').val().trim(),
             tableId: Certificate.tableId
         });
@@ -138,7 +148,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Certificate.onEditCertificate = function (data) {
         func.open({
             title: '编辑证书信息',
-            area: ['1000px', '710px'],
+            area: ['1000px', '660px'],
             content: Feng.ctxPath + '/certificate/certificate_edit?certificateId=' + data.id,
             tableId: Certificate.tableId
         });
@@ -150,7 +160,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Certificate.onDetailCertificate = function (data) {
         func.open({
             title: '查看证书信息',
-            area: ['1000px', '710px'],
+            area: ['1000px', '660px'],
             content: Feng.ctxPath + '/certificate/certificate_detail?certificateId=' + data.id,
             tableId: Certificate.tableId
         });

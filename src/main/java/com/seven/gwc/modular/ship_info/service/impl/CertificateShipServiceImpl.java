@@ -8,6 +8,7 @@ import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.dao.CertificateShipMapper;
 import com.seven.gwc.modular.ship_info.dao.ShipMapper;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
@@ -20,10 +21,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,21 +48,21 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     private ShipMapper shipMapper;
 
     @Override
-    public List<CertificateShipEntity> selectCertificate(String certificateName, String shipId){
+    public List<CertificateShipEntity> selectCertificate(String certificateName, String shipId) {
 //        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
         String idsNew = shipMapper.selectById(shipId).getCertificateId();
-        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName,idsNew);
-        for(CertificateShipEntity certificateEntity : list){
-            if(ToolUtil.isNotEmpty(certificateEntity.getCertificateType())){
+        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName, idsNew);
+        for (CertificateShipEntity certificateEntity : list) {
+            if (ToolUtil.isNotEmpty(certificateEntity.getCertificateType())) {
                 DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());
-                if(certificateTypeDict!= null){
+                if (certificateTypeDict != null) {
                     certificateEntity.setCertificateTypeName(certificateTypeDict.getName());
                 }
             }
-            if(ToolUtil.isNotEmpty(certificateEntity.getOwnerType())){
+            if (ToolUtil.isNotEmpty(certificateEntity.getOwnerType())) {
                 DictEntity ownerTypeDict = dictMapper.selectById(certificateEntity.getOwnerType());
-                if(ownerTypeDict != null){
+                if (ownerTypeDict != null) {
                     certificateEntity.setOwnerTypeName(ownerTypeDict.getName());
                 }
             }
@@ -71,27 +71,41 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     }
 
     @Override
-    public boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId) {
+    public boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId) throws ParseException {
         //判断证书编码是否存在
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(CertificateShipEntity::getId,certificate.getId());
+        lambdaQuery.eq(CertificateShipEntity::getId, certificate.getId()).eq(CertificateShipEntity::getDeleteFlag, 1);
         CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
-        if(certificateEntity!=null){
+        if (certificateEntity != null) {
             return false;
         }
         certificate.setSynFlag(false);
         certificate.setDeleteFlag(true);
         certificate.setCreateDate(new Date());
         certificate.setCreatePerson(user.getId());
+        //计算证书是否过期
+        Date date = new Date();
+        if (ToolUtil.isNotEmpty(certificate.getOutDate())) {
+            int intervalDays = daysBetween(date,certificate.getOutDate());
+            if(intervalDays <0){//已过期
+                certificate.setState(2);
+            }else{
+                if(intervalDays <= certificate.getWindowPhase()){//即将过期
+                    certificate.setState(1);
+                }else{//正常
+                    certificate.setState(0);
+                }
+            }
+        }
         certificateMapper.insert(certificate);
         //更新船员表证书
         LambdaQueryWrapper<ShipEntity> lamdaQueryShip = Wrappers.lambdaQuery();
-        lamdaQueryShip.eq(ShipEntity::getId,shipId);
+        lamdaQueryShip.eq(ShipEntity::getId, shipId);
         ShipEntity shipEntity = shipMapper.selectOne(lamdaQueryShip);
         String certificateids = shipEntity.getCertificateId();
-        if(certificateids==null|| certificateids.isEmpty()){
+        if (certificateids == null || certificateids.isEmpty()) {
             certificateids += certificate.getId();
-        }else{
+        } else {
             certificateids += FileUtils.file_2_file_sep + certificate.getId();
         }
         shipEntity.setCertificateId(certificateids);
@@ -105,7 +119,7 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     public void deleteCertificate(String certificateId, ShiroUser user, String shipId) {
         //更新船员表
         LambdaQueryWrapper<ShipEntity> lamdaQueryShip = Wrappers.lambdaQuery();
-        lamdaQueryShip.eq(ShipEntity::getId,shipId);
+        lamdaQueryShip.eq(ShipEntity::getId, shipId);
         ShipEntity shipEntity = shipMapper.selectOne(lamdaQueryShip);
         ArrayList<String> certificateIds =
                 Stream.of(shipEntity.getCertificateId().split(FileUtils.file_2_file_sep))
@@ -129,15 +143,29 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     }
 
     @Override
-    public boolean editCertificate(CertificateShipEntity certificate, ShiroUser user) {
+    public boolean editCertificate(CertificateShipEntity certificate, ShiroUser user) throws ParseException {
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(CertificateShipEntity::getCertificateId, certificate.getCertificateId()).ne(CertificateShipEntity::getId, certificate.getId());
+        lambdaQuery.eq(CertificateShipEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateShipEntity::getDeleteFlag, 1).ne(CertificateShipEntity::getId, certificate.getId());
         CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         if (certificateEntity != null) {
             return false;
         }
         certificate.setUpdateDate(new Date());
         certificate.setUpdatePerson(user.getId());
+        //计算证书是否过期
+        Date date = new Date();
+        if (ToolUtil.isNotEmpty(certificate.getOutDate())) {
+            int intervalDays = daysBetween(date,certificate.getOutDate());
+            if(intervalDays <0){//已过期
+                certificate.setState(2);
+            }else{
+                if(intervalDays <= certificate.getWindowPhase()){//即将过期
+                    certificate.setState(1);
+                }else{//正常
+                    certificate.setState(0);
+                }
+            }
+        }
         certificateMapper.updateById(certificate);
         return true;
     }
@@ -148,12 +176,59 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
         if (ToolUtil.isNotEmpty(certificateEntity.getAttachFilePath())) {
             List<FileData> files = fileManager.listFile(certificateEntity.getAttachFilePath());
             String urls = "";
-            for(FileData fileData: files){
+            for (FileData fileData : files) {
                 urls += fileData.getUrl() + FileUtils.file_2_file_sep;
             }
             certificateEntity.setAttachFilePath(urls);
         }
         return certificateEntity;
+    }
+
+    @Override
+    public void warn() throws ParseException {
+        LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.<CertificateShipEntity>lambdaQuery();
+        List<CertificateShipEntity> list = certificateMapper.selectList(lambdaQuery);
+        Date date = new Date();
+        for (CertificateShipEntity certificateShipEntity : list) {
+            int stateCal;
+            if (ToolUtil.isNotEmpty(certificateShipEntity.getOutDate())) {
+                int intervalDays = daysBetween(date,certificateShipEntity.getOutDate());
+                if(intervalDays <0){//已过期
+                    stateCal = 2;
+                }else{
+                    if(intervalDays <= certificateShipEntity.getWindowPhase()){//即将过期
+                        stateCal = 1;
+                    }else{//正常
+                        stateCal = 0;
+                    }
+                }
+                if(stateCal != certificateShipEntity.getState())
+                {
+                    certificateShipEntity.setState(stateCal);
+                    certificateMapper.updateById(certificateShipEntity);
+                }
+            }
+        }
+    }
+
+    /**
+     * 日期格式的计算
+     * @param smdate 较小的时间
+     * @param bdate  较大的时间
+     * @return 相差天数
+     */
+    public static int daysBetween(Date smdate,Date bdate) throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        smdate=sdf.parse(sdf.format(smdate));
+        bdate=sdf.parse(sdf.format(bdate));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(smdate);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(bdate);
+        long time2 = cal.getTimeInMillis();
+        long between_days=(time2-time1)/(1000*3600*24);
+
+        return (int)between_days;
     }
 
 }

@@ -1,25 +1,24 @@
 package com.seven.gwc.modular.ship.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import com.seven.gwc.modular.ship.entity.ShipWorkPlanEntity;
 import com.seven.gwc.modular.ship.service.ShipWorkPlanService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -129,5 +128,15 @@ public class ShipWorkPlanController extends BaseController {
         return shipWorkPlanService.getById(shipWorkPlanId);
     }
 
+    /**
+     * 获取工作列表
+     */
+    @RequestMapping("/listPlans")
+    @ResponseBody
+    public Object listPlans(ShipWorkPlanEntity shipWorkPlan) {
+        ShiroUser user = ShiroKit.getUser();
+        JSONArray jsonArray = shipWorkPlanService.listPlans(shipWorkPlan);
+        return new BaseResult().content(jsonArray);
+    }
 }
 

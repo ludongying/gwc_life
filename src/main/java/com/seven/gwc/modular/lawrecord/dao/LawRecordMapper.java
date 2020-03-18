@@ -7,6 +7,7 @@ import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * description : 执法记录Mapper 接口
@@ -22,5 +23,13 @@ public interface LawRecordMapper extends BaseMapper<LawRecordEntity> {
      * @return
      */
     List<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO);
+
+
+    /**
+     * 获取详情
+     * @param id
+     * @return
+     */
+    Map<String,String> detail(String id);
 
 }

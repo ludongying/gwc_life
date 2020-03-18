@@ -5,6 +5,7 @@ import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -28,11 +29,10 @@ public interface CertificateService extends IService<CertificateEntity> {
      * 证书信息查询列表
      *
      * @param certificateName 名称;
-     * @param ids 所属的所有证书编码
      * @param personId 船员表id
      * @return List<证书信息服务对象>
      */
-    List<CertificateEntity> selectCertificate(String certificateName, String ids, String personId);
+    List<CertificateEntity> selectCertificate(String certificateName, String personId);
 
     /**
      * 证书信息新建
@@ -41,7 +41,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param user 当前用户
      * @param personId 船员表id
      */
-    boolean addCertificate(CertificateEntity certificate, ShiroUser user, String personId);
+    boolean addCertificate(CertificateEntity certificate, ShiroUser user, String personId) throws ParseException;
 
     /**
      * 证书信息删除
@@ -58,7 +58,7 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    boolean editCertificate(CertificateEntity certificate, ShiroUser user);
+    boolean editCertificate(CertificateEntity certificate, ShiroUser user) throws ParseException;
 
     /**
      * 获证书详细信息（图片url转换）
@@ -66,5 +66,11 @@ public interface CertificateService extends IService<CertificateEntity> {
      * @return
      */
     CertificateEntity getCertificateById(String id);
+
+    /**
+     * 证书到期判断，并更新证书状态
+     * @return
+     */
+    void warn() throws ParseException;
 
 }

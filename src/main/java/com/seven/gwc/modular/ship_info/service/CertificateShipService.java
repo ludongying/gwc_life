@@ -5,6 +5,7 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
      * @param user 当前用户
      * @param shipId 船员表id
      */
-    boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId);
+    boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId) throws ParseException;
 
     /**
      * 证书信息删除
@@ -49,7 +50,7 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
      * @param certificate 实体对象
      * @param user 当前用户
      */
-    boolean editCertificate(CertificateShipEntity certificate, ShiroUser user);
+    boolean editCertificate(CertificateShipEntity certificate, ShiroUser user) throws ParseException;
 
     /**
      * 获证书详细信息（图片url转换）
@@ -57,5 +58,11 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
      * @return
      */
     CertificateShipEntity getCertificateById(String id);
+
+    /**
+     * 证书到期判断，并更新证书状态
+     * @return
+     */
+    void warn() throws ParseException;
 
 }

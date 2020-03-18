@@ -9,7 +9,7 @@ spring:
       max-file-size: 50MB                                   #单个文件的大小
       max-request-size: 100MB                               #单次请求的文件的总大小
   profiles:
-    active: dev                               #默认开发环境
+    active: pro                             #默认开发环境
   mvc:
     view:
       prefix: /templates                                    #指定视图的前缀路径

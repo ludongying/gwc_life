@@ -63,7 +63,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             dataType: "json",
             success: function (data) {
                 Feng.success("删除成功!");
-                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                // admin.putTempData('formOk', true);//传给上个页面，刷新table用
             },
             //#3这个error函数调试时非常有用，如果解析不正确，将会弹出错误框
             error: function f(XMLHttpRequest, textStatus, errorThrown) {

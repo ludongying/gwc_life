@@ -1,0 +1,47 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_detail.js"]}){
+<div class="layui-tab-content">
+    <form id="shipEquipmentWarnForm" lay-filter="shipEquipmentWarnForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">ID</label>
+                <div class="layui-input-block">
+                    <input id="id" name="id" placeholder="请输入ID" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">设备id</label>
+                <div class="layui-input-block">
+                    <input id="equipId" name="equipId" placeholder="请输入设备id" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">告警类型</label>
+                <div class="layui-input-block">
+                    <input id="warnType" name="warnType" placeholder="请输入告警类型" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">报警内容</label>
+                <div class="layui-input-block">
+                    <input id="warnDescribe" name="warnDescribe" placeholder="请输入报警内容" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-block">
+                    <input id="createDate" name="createDate" placeholder="请输入创建时间" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+@}
+

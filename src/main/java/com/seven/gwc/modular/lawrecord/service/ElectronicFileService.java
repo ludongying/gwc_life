@@ -1,11 +1,12 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
-import com.seven.gwc.modular.lawrecord.vo.ElectronicFileListVO;
+import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 
-import java.util.List;
 
-public interface ElectronicFileService {
-    List<LawRecordDTO> getElectronicFileList(LawRecordVO lawRecordVO);
+public interface ElectronicFileService extends IService<LawRecordEntity> {
+    BaseResultPage<LawRecordDTO> getElectronicFileList(LawRecordVO lawRecordVO);
 }

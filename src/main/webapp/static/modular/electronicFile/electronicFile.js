@@ -12,32 +12,39 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 执法记录管理
      */
     var ElectronicFile = {
-        tableId: "electronicFileTable"
+        tableId: "lawRecordTable",
+        condition: {
+            lawRecordName: ""
+        }
     };
 
-    ElectronicFile.initColumn = function () {
-        return [[
-            {title: 'ID', field: 'id', align: "center", hide: true},
-            {title: '类型', field: 'lawType', align: "center", hide: true},
-            {title: '状态', field: 'status', align: "center", hide: true},
-            {title: '序号', type: 'numbers'},
-            {title: '案件编号', field: 'lawCaseCode', align: "center"},
-            {title: '案件创建时间', field: 'createDate', align: "center"},
-            {title: '被执法船', field: 'shipName', align: "center"},
-            {title: '被询问人', field: 'investigateName', align: "center"},
-            {title: '被询问人电话', field: 'investigateTel', align: "center"},
-            {title: '案件来源', field: 'lawCaseSourceName', align: "center"},
-            {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
-        ]];
-    };
-    table.render({
-        elem: '#' + ElectronicFile.tableId,
-        url: Feng.ctxPath + '/electronicFile/list',
-        page: true,
-        height: "full-164",
-        cellMinWidth: 100,
-        cols: ElectronicFile.initColumn()
-    });
+    initPage();
+
+    function initPage() {
+        ElectronicFile.initColumn = function () {
+            return [[
+                {title: 'ID', field: 'id', align: "center", hide: true},
+                {title: '类型', field: 'lawType', align: "center", hide: true},
+                {title: '状态', field: 'status', align: "center", hide: true},
+                {title: '序号', type: 'numbers'},
+                {title: '案件编号', field: 'lawCaseCode', align: "center"},
+                {title: '案件创建时间', field: 'createDate', align: "center"},
+                {title: '被执法船', field: 'shipName', align: "center"},
+                {title: '被询问人', field: 'investigateName', align: "center"},
+                {title: '被询问人电话', field: 'investigateTel', align: "center"},
+                {title: '案件来源', field: 'lawCaseSourceName', align: "center"},
+                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
+            ]];
+        };
+        table.render({
+            elem: '#' + ElectronicFile.tableId,
+            url: Feng.ctxPath + '/electronic/list?status=90',
+            page: true,
+            height: "full-164",
+            cellMinWidth: 100,
+            cols: ElectronicFile.initColumn()
+        });
+    }
 
     /**
      * 左侧搜索
@@ -58,4 +65,4 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         table.reload(ElectronicFile.tableId, {where: queryData});
     });
 
-})
+});

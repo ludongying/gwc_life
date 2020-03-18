@@ -6,25 +6,16 @@
             <input name="id" type="hidden"/>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">船名称<span style="color: red;">*</span></label>
+                <label class="layui-form-label">渔船编号<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="name" name="name" placeholder="请输入船名称" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="code" name="code" placeholder="请输入渔船编号" type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">管理类别</label>
+                <label class="layui-form-label">船名<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <select id="areaType" name="areaType" lay-search="">
-                        <option value="">请选择管理类别</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">船编号<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="code" name="code" placeholder="请输入船编号" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="name" name="name" placeholder="请输入船名" type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
@@ -32,6 +23,24 @@
                 <label class="layui-form-label">船籍<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
                     <input id="registry" name="registry" placeholder="请输入船籍" type="text" class="layui-input" lay-verify="required" required/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">水域分类</label>
+                <div class="layui-input-block">
+                    <select id="watersType" name="watersType" lay-search="">
+                        <option value="">请选择水域分类</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">区域分类</label>
+                <div class="layui-input-block">
+                    <select id="areaType" name="areaType" lay-search="">
+                        <option value="">请选择区域分类</option>
+                    </select>
                 </div>
             </div>
 
@@ -48,15 +57,6 @@
                 <label class="layui-form-label">船体材质</label>
                 <div class="layui-input-block">
                     <input id="hullMaterial" name="hullMaterial" placeholder="请输入船体材质" type="text" class="layui-input"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">作业类型<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <select id="workType" name="workType" lay-verify="required" lay-search="">
-                        <option value="">请选择作业类型</option>
-                    </select>
                 </div>
             </div>
 
@@ -82,16 +82,34 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">总功率</label>
+                <label class="layui-form-label">总吨位</label>
+                <div class="layui-input-block">
+                    <input id="tonnage" name="tonnage" placeholder="请输入吨位" type="text" class="layui-input"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">主机总功率</label>
                 <div class="layui-input-block">
                     <input id="totalPower" name="totalPower" placeholder="请输入主机总功率" type="text" class="layui-input"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">总吨位</label>
+                <label class="layui-form-label">作业类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="tonnage" name="tonnage" placeholder="请输入吨位" type="text" class="layui-input"/>
+                    <select id="workType" name="workType" lay-verify="required" lay-search="">
+                        <option value="">请选择作业类型</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">作业方式<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <select id="practice" name="practice" lay-verify="required" lay-search="">
+                        <option value="">请选择作业类型</option>
+                    </select>
                 </div>
             </div>
 
@@ -105,63 +123,35 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label">船主名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="shipOwner" name="shipOwner" placeholder="请输入船长" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="shipOwner" name="shipOwner" placeholder="请输入船主名称" type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
                 <label class="layui-form-label">证件号码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="identity" name="identity" placeholder="请输入船长" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="identity" name="identity" placeholder="请输入证件号码" type="text" class="layui-input" lay-verify="required" required/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">手机号码<span style="color: red;">*</span></label>
+                <label class="layui-form-label">船主地址</label>
                 <div class="layui-input-block">
-                    <input id="phone" name="phone" placeholder="请输入船长" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="address" name="address" placeholder="请输入船主地址" type="text" class="layui-input"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">地址</label>
+                <label class="layui-form-label">核定航区</label>
                 <div class="layui-input-block">
-                    <input id="address" name="address" placeholder="请输入船长" type="text" class="layui-input"/>
+                    <input id="approvedArea" name="approvedArea" placeholder="请输入核定航区" type="text" class="layui-input"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">出海状态</label>
+                <label class="layui-form-label">核定成员</label>
                 <div class="layui-input-block">
-                    <select id="seaState" name="seaState" lay-search="">
-                        <option value="">请选择出海状态</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">是否重点</label>
-                <div class="layui-input-block">
-                    <select id="keyPoints" name="keyPoints" >
-                        <option value="">请选择是否重点</option>
-                        <option value="1">是</option>
-                        <option value="0">否</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="layui-col-md12">
-                <label class="layui-form-label">文档名称<span style="color: red;">*</span></label>
-                <div class="layui-input-block">
-                    <input id="fileName" name="fileName" placeholder="文档名称" type="text" class="layui-input"
-                           lay-verify="required"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md12">
-                <div class="layui-upload" style="padding-left: 10px">
-                    <button type="button" class="layui-btn layui-btn-normal" id="upload">选择文件</button>
-                    <input id="fullName" name="fullName" type="text" hidden/>
+                    <input id="authorizedMember" name="authorizedMember" placeholder="请输入核定成员" type="text" class="layui-input"/>
                 </div>
             </div>
 

@@ -22,6 +22,7 @@ public class LawRecordDTO {
      * 案件状态
      */
     private Integer status;
+
     /**
      * 案件编号
      */
@@ -41,7 +42,7 @@ public class LawRecordDTO {
     /**
      * 案件类型名称
      */
-    private Integer lawTypeName;
+    private String lawTypeName;
     /**
      * 被执法人
      */

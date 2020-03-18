@@ -15,18 +15,7 @@
         <result column="ship_long" property="shipLong" />
         <result column="ship_deep" property="shipDeep" />
         <result column="total_power" property="totalPower" />
-        <result column="ship_owner_id" property="shipOwnerId" />
-        <result column="ship_captain_id" property="shipCaptainId" />
-        <result column="ship_person_count" property="shipPersonCount" />
-        <result column="area" property="area" />
         <result column="work_type" property="workType" />
-        <result column="should_certificate" property="shouldCertificate" />
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, name, code, registry, tonnage, product_date, area_type, ship_type, ship_long, ship_deep, total_power, ship_owner_id, ship_captain_id, ship_person_count, area, work_type, should_certificate
-    </sql>
-
 
 </mapper>

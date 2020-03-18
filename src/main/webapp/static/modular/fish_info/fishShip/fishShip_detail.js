@@ -19,11 +19,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'func'], function () {
     $('#fileName').val(result.fileName);
 
     fuiiName = result.fullName;
-    if (result.keyPoints) {
-        result.keyPoints = "是"
-    } else {
-        result.keyPoints = "否"
-    }
     form.val('fishShipForm',result);
 
     $('#preview').click(function () {

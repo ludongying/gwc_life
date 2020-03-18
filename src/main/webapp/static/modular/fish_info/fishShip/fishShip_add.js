@@ -58,14 +58,27 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    //获取出海状态下拉框
+    //获取水域分类下拉框
     $.ajax({
-        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=SEA_STATE',
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=WATERS_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#seaState').append(new Option(item.name, item.id));// 下拉菜单里添加元素
+                $('#watersType').append(new Option(item.name, item.id));// 下拉菜单里添加元素
+            });
+            layui.form.render("select");
+        }
+    });
+
+    //获取作业方式下拉框
+    $.ajax({
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=PRACTICE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#practice').append(new Option(item.name, item.id));// 下拉菜单里添加元素
             });
             layui.form.render("select");
         }
@@ -74,7 +87,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
-    var uploadInst = upload.render({
+    /*var uploadInst = upload.render({
         elem: '#upload'
         , url: '/system/uploadFile' //改成您自己的上传接口
         , accept: 'file'
@@ -123,10 +136,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             uploadInst.upload();
             return false
         }
-    });
+    });*/
 
-    /*form.on('submit(btnSubmit)', function (data) {
-        uploadInst.upload();
+    form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/fishShip/add", function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
@@ -141,7 +153,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         ajax.set(data.field);
         ajax.start();
         return false;
-    });*/
+    });
 
 
 });

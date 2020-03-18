@@ -84,41 +84,41 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    //获取出海状态下拉框
+    //获取水域分类下拉框
     $.ajax({
-        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=SEA_STATE',
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=WATERS_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                if (result.seaState == item.id) {
-                    $('#seaState').append(new Option(item.name, item.id, null, true));// 下拉菜单里添加元素
+                if (result.watersType == item.id) {
+                    $('#watersType').append(new Option(item.name, item.id, null, true));// 下拉菜单里添加元素
                 } else {
-                    $('#seaState').append(new Option(item.name, item.id));// 下拉菜单里添加元素
+                    $('#watersType').append(new Option(item.name, item.id));// 下拉菜单里添加元素
                 }
             });
             layui.form.render("select");
         }
     });
 
-    $("#keyPoints").each(function () {
-        if (result.keyPoints != null) {
-            var keyPoints = "";
-            if (result.keyPoints) {
-                keyPoints = "是"
-            } else {
-                keyPoints = "否"
-            }
-            $(this).children("option").each(function () {
-                if (this.text === keyPoints) {
-                    $(this).attr("selected", "selected");
+    //获取作业方式下拉框
+    $.ajax({
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=PRACTICE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                if (result.practice == item.id) {
+                    $('#practice').append(new Option(item.name, item.id, null, true));// 下拉菜单里添加元素
+                } else {
+                    $('#practice').append(new Option(item.name, item.id));// 下拉菜单里添加元素
                 }
-                layui.form.render("select");
             });
+            layui.form.render("select");
         }
     });
 
-    var uploadInst = upload.render({
+    /*var uploadInst = upload.render({
         elem: '#upload'
         , url: '/system/uploadFile' //改成您自己的上传接口
         , accept: 'file'
@@ -179,10 +179,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             uploadInst.upload();
         }
         return false
-    });
+    });*/
 
     // 表单提交事件
-    /*form.on('submit(btnSubmit)', function (data) {
+    form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/fishShip/update", function (data) {
             if (data.success) {
                 Feng.success("编辑成功!");
@@ -197,5 +197,5 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         ajax.set(data.field);
         ajax.start();
         return false;
-    });*/
+    });
 });

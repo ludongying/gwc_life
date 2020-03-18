@@ -45,6 +45,9 @@ public class LawRecordVO implements Serializable {
      */
     private String createEndTime;
 
-
+    /**
+     * 案件类型
+     */
+    private Integer status;
 
 }

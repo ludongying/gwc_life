@@ -76,6 +76,9 @@
                      law_record_inquire_safe.investigate_name like CONCAT("%",#{investigateName},"%")
                      )
             </if>
+            <if test="status!=null">
+                AND law_record.status =#{status}
+            </if>
             <if test="createStartTime!=null and createStartTime!='' ">
                 AND law_record.create_date &gt; #{createStartTime}
             </if>

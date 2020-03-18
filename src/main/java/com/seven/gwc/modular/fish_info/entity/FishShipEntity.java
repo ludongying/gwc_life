@@ -89,6 +89,9 @@ public class FishShipEntity implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date productDate;
 
+    @TableField(exist=false)
+    private Integer shipAge;
+
     /** 船主名称 */
     private String shipOwner;
 
@@ -106,20 +109,4 @@ public class FishShipEntity implements Serializable {
 
     /** 文件名 */
     private String fileName;
-
-
-
-    /** 出海状态 */
-    private String seaState;
-    @TableField(exist=false)
-    private String seaStateName;
-
-    /** 是否重点 */
-    private Boolean keyPoints;
-
-    /** 路径 */
-    private String filePath;
-
-    /** 文档名 */
-    private String fullName;
 }

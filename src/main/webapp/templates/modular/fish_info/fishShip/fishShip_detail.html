@@ -2,24 +2,18 @@
 <div class="layui-tab-content">
     <form id="fishShipForm" lay-filter="fishShipForm" class="layui-form">
         <div class="layui-row layui-col-space10">
-            <div class="layui-col-md6">
-                <label class="layui-form-label">船名称</label>
-                <div class="layui-input-block">
-                    <input id="name" name="name" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">管理类别</label>
-                <div class="layui-input-block">
-                    <input id="areaTypeName" name="areaTypeName" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">船编号</label>
+                <label class="layui-form-label">渔船编号</label>
                 <div class="layui-input-block">
                     <input id="code" name="code" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">船名</label>
+                <div class="layui-input-block">
+                    <input id="name" name="name" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -27,6 +21,20 @@
                 <label class="layui-form-label">船籍</label>
                 <div class="layui-input-block">
                     <input id="registry" name="registry" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">水域分类</label>
+                <div class="layui-input-block">
+                    <input id="watersTypeName" name="watersTypeName" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">区域分类</label>
+                <div class="layui-input-block">
+                    <input id="areaTypeName" name="areaTypeName" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -41,13 +49,6 @@
                 <label class="layui-form-label">船体材质</label>
                 <div class="layui-input-block">
                     <input id="hullMaterial" name="hullMaterial" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">作业类型</label>
-                <div class="layui-input-block">
-                    <input id="workTypeName" name="workTypeName" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -73,13 +74,6 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">总功率</label>
-                <div class="layui-input-block">
-                    <input id="totalPower" name="totalPower" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
                 <label class="layui-form-label">总吨位</label>
                 <div class="layui-input-block">
                     <input id="tonnage" name="tonnage" type="text" class="layui-input" disabled="disabled"/>
@@ -87,9 +81,37 @@
             </div>
 
             <div class="layui-col-md6">
+                <label class="layui-form-label">主机总功率</label>
+                <div class="layui-input-block">
+                    <input id="totalPower" name="totalPower" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">作业类型</label>
+                <div class="layui-input-block">
+                    <input id="workTypeName" name="workTypeName" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">作业方式</label>
+                <div class="layui-input-block">
+                    <input id="practiceName" name="practiceName" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
                 <label class="layui-form-label">建成日期</label>
                 <div class="layui-input-block">
                     <input id="productDate" name="productDate" readonly type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">船龄</label>
+                <div class="layui-input-block">
+                    <input id="shipAge" name="shipAge" readonly type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
@@ -108,44 +130,26 @@
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">手机号码</label>
-                <div class="layui-input-block">
-                    <input id="phone" name="phone" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">地址</label>
+                <label class="layui-form-label">船主地址</label>
                 <div class="layui-input-block">
                     <input id="address" name="address" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">出海状态</label>
+                <label class="layui-form-label">核定航区</label>
                 <div class="layui-input-block">
-                    <input id="seaStateName" name="seaStateName" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="approvedArea" name="approvedArea" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">是否重点</label>
+                <label class="layui-form-label">核定成员</label>
                 <div class="layui-input-block">
-                    <input id="keyPoints" name="keyPoints" type="text" class="layui-input" disabled="disabled"/>
+                    <input id="authorizedMember" name="authorizedMember" type="text" class="layui-input" disabled="disabled"/>
                 </div>
             </div>
 
-            <div class="layui-col-md10">
-                <label class="layui-form-label">文档名称</label>
-                <div class="layui-input-block">
-                    <input id="fileName" name="fileName" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-
-            </div>
-
-            <div class="layui-col-md2">
-                <button class="layui-btn" lay-filter="preview" lay-submit="">预览</button>
-            </div>
         </div>
     </form>
 </div>

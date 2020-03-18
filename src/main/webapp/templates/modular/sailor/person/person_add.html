@@ -25,6 +25,15 @@
             </div>
 
             <div class="layui-col-md6">
+                <label class="layui-form-label">政治面貌<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <select id="political" name="political" lay-search="" required>
+                    </select>
+<!--                    <input id="political" name="political" placeholder="请输入政治面貌" type="text" class="layui-input" lay-verify="required|length20" required/>-->
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
                 <label class="layui-form-label">出生日期</label>
                 <div class="layui-input-block">
                     <input id="birthday" name="birthday" placeholder="请输入出生日期" type="text" readonly class="layui-input date-icon"/>
@@ -111,14 +120,6 @@
                     <input id="email" name="email" placeholder="请输入邮箱" type="text" value="" class="layui-input" lay-verify="notemail"/>
                 </div>
             </div>
-
-<!--            <div class="layui-col-md6">-->
-<!--                <label class="layui-form-label">政治面貌（枚举）<span style="color: red;">*</span></label>-->
-<!--                <div class="layui-input-block">-->
-<!--                    <input id="political" name="political" placeholder="请输入政治面貌（枚举）" type="text" class="layui-input" lay-verify="required" required/>-->
-<!--                </div>-->
-<!--            </div>-->
-
 
             <div class="layui-col-md12 text-right">
                 <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>

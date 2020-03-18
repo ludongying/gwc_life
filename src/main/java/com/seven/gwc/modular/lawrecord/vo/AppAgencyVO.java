@@ -25,7 +25,7 @@ public class AppAgencyVO {
 
     /** 案件编号 */
     @ApiModelProperty(value = "案件编号")
-    private String lawCaseCode;
+    private Integer lawCaseCode;
 
     /** 案件来源 */
     @ApiModelProperty(value = "案件来源")

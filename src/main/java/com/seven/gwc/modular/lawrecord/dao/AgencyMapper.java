@@ -1,10 +1,8 @@
 package com.seven.gwc.modular.lawrecord.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
 import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-
-import java.util.List;
 
 /**
  * description : 办案机关Mapper 接口
@@ -20,4 +18,11 @@ public interface  AgencyMapper extends BaseMapper<AgencyEntity> {
      * @return
      */
     AgencyDTO detail(String id);
+
+    /**
+     * 查询最大编号
+     * @param fineCode
+     * @return
+     */
+    Integer maxCode(String fineCode);
 }

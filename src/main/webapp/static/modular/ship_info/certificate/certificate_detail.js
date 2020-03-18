@@ -62,4 +62,14 @@ layui.use(['layer', 'form', 'admin', 'ax','upload'], function () {
         }
     });
 
+    //图片放大
+    $('#attachment img').on('click', function () {
+        layer.photos({
+            photos: '#attachment',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+
 });

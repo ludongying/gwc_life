@@ -127,4 +127,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         $('#imageFilePath').val("");
     });
 
+    //图片放大
+    $('#boatPreviewMulti img').on('click', function () {
+        layer.photos({
+            photos: '#boatPreviewMulti',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+
 });

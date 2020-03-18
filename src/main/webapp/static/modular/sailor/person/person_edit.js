@@ -69,6 +69,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
         }
     });
 
+    //政治面貌获取下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=POLITICAL',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                // alert(item.name);
+                // alert(item.shipCode);
+                $('#political').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+            })
+            $('#political').val(result.political);
+            form.render('select');//表单渲染 把内容加载进去
+        }
+    });
+
 
     // 点击用户姓名时
     $('#selUsers').click(function () {

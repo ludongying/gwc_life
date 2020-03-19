@@ -83,23 +83,35 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
         ,acceptMime: 'image/jpg,image/png,image/jpeg'
         , exts: 'jpg|png|jpeg'
         , multiple: true
-        , auto: true
-        , before: function (obj) {
+        , number: 6
+        , auto: false
+        , bindAction: '#UploadBtn'
+        , choose: function (obj) {
+            files = obj.pushFile();
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                $('#attachment').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">')
+                $('#attachment').append('<img src="' + result + '" id="' + index + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">');
+                //双击删除指定预上传图片
+                $('#'+index).bind('dblclick', function () {
+                    delete files[index];//删除指定图片
+                    $(this).remove();
+                });
+                //放大预览
+                renderImg();
             });
         }
         , done: function (res, index, upload) {
             if(res.success){//上传图片成功
                 Feng.success("上传成功!");
-                image_path.push(res.content.path);
-                $('#attachFilePath').val(image_path);
-                renderImg();
+                // image_path.push(res.content.path);
+                // $('#attachFilePath').val(image_path);
+                var appendUrl = $('#attachFilePath').val().trim();
+                appendUrl = appendUrl + "," + res.content.path;
+                $('#attachFilePath').val(appendUrl);
             }
         },
         error: function () {
-            Feng.error("上传船舶图像失败！");
+            Feng.error("上传图像失败！");
         }
     });
 

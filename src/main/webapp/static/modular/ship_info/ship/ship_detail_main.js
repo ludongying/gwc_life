@@ -18,13 +18,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
     //图片轮播
     //获取浏览器宽度
     var H = $(window).height();
-    var ins =  carousel.render({
+    var ins = carousel.render({
         elem: '#imgBoat'
         , width: '100%'
-        , height: (H*0.75).toString() + 'px'
+        , height: (H * 0.75).toString() + 'px'
         , arrow: 'always'
         , indicator: 'none'
-        , autoplay:'false'
+        , autoplay: 'false'
     });
 
     //初始化执法船信息管理的详情数据
@@ -54,29 +54,30 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
     // 证书信息
     var url = Feng.ctxPath + '/certificateShip?ids=' + result.certificateId + '&shipId=' + result.id;
     // var url = Feng.ctxPath + '/certificate/certificate_list?id=' + result.certificateId + '&htmltype=ship';
-    if(result.certificateId === null || result.certificateId === ''){
+    if (result.certificateId === null || result.certificateId === '') {
         $('#certificateId').append('<a style="color: #01AAED;" href="' + url + '">共0张</a>');
-    }
-    else {
+    } else {
         var certificateStrs = result.certificateId.split(",");
         //alert(certificateStrs);
-        $('#certificateId').append('<a style="color: #01AAED;" href="' + url + '">共'+ certificateStrs.length + '张</a>');
+        $('#certificateId').append('<a style="color: #01AAED;" href="' + url + '">共' + certificateStrs.length + '张</a>');
     }
 
     //加载船舶图像轮播
-    var images = result.imageFilePath.split(",");
-    var count = 0;
-    $.each(images, function (index, item) {
-        $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
-    })
-    ins.reload({
-        elem: '#imgBoat'
-        , width: '100%'
-        , height: (H*0.75).toString() + 'px'
-        , arrow: 'always'
-        , indicator: 'none'
-        , autoplay:'false'
-    });
+    if (result.imageUrl != null) {
+        var images = result.imageUrl.split(",");
+        var count = 0;
+        $.each(images, function (index, item) {
+            $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
+        })
+        ins.reload({
+            elem: '#imgBoat'
+            , width: '100%'
+            , height: (H * 0.75).toString() + 'px'
+            , arrow: 'always'
+            , indicator: 'none'
+            , autoplay: 'false'
+        });
+    }
 
     /**
      * 点击编辑执法船信息管理

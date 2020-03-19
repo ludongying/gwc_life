@@ -1,7 +1,5 @@
 package com.seven.gwc.modular.sync.controller;
 
-import com.seven.gwc.modular.sync.service.DataService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,13 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/sync")
 public class SyncController {
 
-    @Autowired
-    private DataService dataService;
+//    @Autowired
+//    private DataService dataService;
 
     @RequestMapping("")
     @ResponseBody
     public String sync(){
-        dataService.read();
+//        dataService.read();
         return "success";
     }
 

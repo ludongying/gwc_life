@@ -64,4 +64,9 @@ public class LawRecordDTO {
      */
     private String lawCaseSourceName;
 
+    /**
+     * 处罚人类型
+     */
+    private Integer punishPersonType;
+
 }

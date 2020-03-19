@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Objects;
 
 /**
@@ -29,7 +28,6 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> implements AgencyService {
-
 
     @Autowired
     private LawRecordService lawRecordService;
@@ -43,17 +41,23 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateAgency(AgencyVO agencyVO) {
+        BaseResult baseResult = new BaseResult(true, "");
          String id=agencyVO.getId();
          //新建
          if(Objects.isNull(id) || id.trim().isEmpty()){
              LawRecordEntity lawRecordEntity =
-                     lawRecordService.createLawRecord(agencyVO.getUserId(),agencyVO.getLawType());
+                     lawRecordService.createAgencyRecord(agencyVO.getUserId(),agencyVO.getLawType());
              agencyVO.setId(lawRecordEntity.getId());
          }
          //设置办案人员
          operatorService.updateOperator(agencyVO.getUserId(),agencyVO.getOperators(),agencyVO.getId());
+         //查看编号是否被占用
+        boolean res = this.existLawCode(agencyVO.getLawCaseFineCode(), agencyVO.getLawCaseCode());
+        if(!res){
+             agencyVO.setLawCaseCode(this.getLawCode(agencyVO.getLawCaseFineCode()));
+             baseResult.setMessage("案件编号已被占用 更改为:"+agencyVO.getLawCaseFineCode()+"罚"+agencyVO.getLawCaseCode()+"号");
+         }
          this.saveOrUpdate(agencyVO);
-         BaseResult baseResult = new BaseResult(true, "");
          baseResult.setContent(agencyVO.getId());
          return baseResult;
     }
@@ -73,25 +77,18 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     }
 
     @Override
-    public String getLawCode(String fineCode) {
+    public Integer getLawCode(String fineCode) {
+        fineCode=fineCode.replace(GwcConsts.lawCode,"");
         Integer code = agencyMapper.maxCode(fineCode);
-        code = Objects.isNull(code) ? 1 : ++code;
-        return GwcConsts.getCodeStr(code);
+        return Objects.isNull(code) ? 1001 : ++code;
     }
 
-    @Override
-    public BaseResult existLawCode(String fineCode, String code) {
-        BaseResult result=new BaseResult();
-        result.setSuccess(true);
+    private boolean existLawCode(String fineCode, Integer code) {
         LambdaQueryWrapper<AgencyEntity> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(AgencyEntity::getLawCaseFineCode, fineCode).eq(AgencyEntity::getLawCaseCode, GwcConsts.getCode(code));
+        wrapper.eq(AgencyEntity::getLawCaseFineCode, fineCode).eq(AgencyEntity::getLawCaseCode, code);
         int count = this.count(wrapper);
-        if(count>0){
-            result.setSuccess(false);
-            result.setMessage("编号已被占用");
-            result.setContent(getLawCode(fineCode));
-        }
-        return result;
+        return count==0;
     }
+
 
 }

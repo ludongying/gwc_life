@@ -1,4 +1,4 @@
-package com.seven.gwc.modular.lawrecord.data.word;
+package com.seven.gwc.modular.lawrecord.data.instrument;
 
 
 import org.apache.poi.openxml4j.opc.OPCPackage;

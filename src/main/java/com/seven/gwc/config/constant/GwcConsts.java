@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 
 /**
@@ -18,15 +17,11 @@ public class GwcConsts {
      * 执法船船号
      */
     public static final String lawShipCode="中国渔政32511";
-    /**
-     * 船号
-     */
-    public static final String shipCode="1";
 
     /**
      * 案件编号
      */
-    public static final String lawCode="连海渔执";
+    public static final String lawCode="苏连渔执";
     /**
      * 执法单位
      */
@@ -82,37 +77,6 @@ public class GwcConsts {
          }
          return fileds;
      }
-
-    /**
-     * 将编号转换成三位
-     * @param code
-     */
-     public static String getCodeStr(Integer code){
-         if(Objects.nonNull(code)){
-             int length = code.toString().length();
-             switch (length){
-                 case 1:
-                     return shipCode+"00"+code;
-                 case 2:
-                     return shipCode+"0"+code;
-                 default:
-                     return shipCode+code.toString();
-             }
-         }
-         return "";
-     }
-
-    /**
-     *  code转int
-     * @param code
-     */
-    public static Integer getCode(String code){
-        if(Objects.nonNull(code) && !code.isEmpty()){
-            String val = code.substring(shipCode.length());
-            return Integer.parseInt(val);
-        }
-        return 0;
-    }
 
 
     /**

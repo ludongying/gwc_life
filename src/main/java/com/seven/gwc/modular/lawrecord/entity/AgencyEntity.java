@@ -28,6 +28,10 @@ public class  AgencyEntity extends GwcBaseEntity {
     private String id;
     /** 执法船号 */
     private String lawShipCode;
+    /**
+     * 单位简称
+     */
+    private String shortName;
 
     /** 执法单位 */
     private String enforcementAgency;

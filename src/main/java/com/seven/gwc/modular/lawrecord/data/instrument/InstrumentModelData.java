@@ -1,6 +1,6 @@
-package com.seven.gwc.modular.lawrecord.data.word;
+package com.seven.gwc.modular.lawrecord.data.instrument;
 
-import com.seven.gwc.modular.lawrecord.data.word.config.InstrumentContrast;
+import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;

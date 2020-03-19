@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+import java.util.Objects;
+
 /**
  * @author : zzl
  * @Date: 2020-02-28
@@ -34,8 +37,15 @@ public class AgencyController extends BaseController {
     public String agency(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
+        Map<String, Object> value = GwcConsts.getFileds();
         //固定值设置
-        model.addAttribute("value", GwcConsts.getFileds());
+        if(Objects.isNull(id) || id.trim().isEmpty()){
+            //获取编号
+            String lawCaseFineCode = GwcConsts.getLawCaseFineCode();
+            value.put("lawCaseFineCode",lawCaseFineCode);
+            value.put("lawCaseCode",agencyService.getLawCode(lawCaseFineCode));
+        }
+        model.addAttribute("value", value);
         //案件来源
         model.addAttribute("lawCaseSource", LawCaseSourceEnum.values());
 

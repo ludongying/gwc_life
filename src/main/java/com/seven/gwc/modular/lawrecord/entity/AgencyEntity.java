@@ -1,18 +1,14 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
-import com.seven.gwc.core.base.GwcIdBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * description : 办案机关实体
@@ -40,7 +36,7 @@ public class  AgencyEntity extends GwcBaseEntity {
     private String lawCaseFineCode;
 
     /** 案件编号 */
-    private String lawCaseCode;
+    private Integer lawCaseCode;
 
     /** 案件来源 */
     private Integer lawCaseSource;

@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * description : 证书信息实体
@@ -80,6 +80,10 @@ public class CertificateEntity extends GwcBaseEntity implements Serializable {
 
     /** 附件 */
     private String attachFilePath;
+
+    @TableField(exist=false)
+    /** 附件url */
+    private String attachUrl;
 
     /** 备注 */
     private String remark;

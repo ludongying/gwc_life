@@ -8,7 +8,6 @@ import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.dao.CertificateShipMapper;
 import com.seven.gwc.modular.ship_info.dao.ShipMapper;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
@@ -76,7 +75,9 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(CertificateShipEntity::getId, certificate.getId()).eq(CertificateShipEntity::getDeleteFlag, 1);
         CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
-        if (certificateEntity != null) {
+        //确定是否为船舶证书
+        DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+        if (certificateEntity != null && dictEntity.getName().equals("船舶证书")) {
             return false;
         }
         certificate.setSynFlag(false);
@@ -147,7 +148,9 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(CertificateShipEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateShipEntity::getDeleteFlag, 1).ne(CertificateShipEntity::getId, certificate.getId());
         CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
-        if (certificateEntity != null) {
+        //确定是否为船舶证书
+        DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+        if (certificateEntity != null && dictEntity.getName().equals("船舶证书")) {
             return false;
         }
         certificate.setUpdateDate(new Date());

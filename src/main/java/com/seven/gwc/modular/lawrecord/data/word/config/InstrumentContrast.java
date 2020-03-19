@@ -32,17 +32,22 @@ public class InstrumentContrast {
    public InstrumentContrast(){
       this.map=new HashMap<>();
       readExcel();
-
    }
 
    private  void readExcel() {
-      File f = new File(path);// 读取excel文件
+      // 读取excel文件
+      File f = new File(path);
       try {
-         FileInputStream is = new FileInputStream(f);// 创建文件流
-         HSSFWorkbook wbs = new HSSFWorkbook(is);// 加载文件流
-         HSSFSheet childSheet = wbs.getSheetAt(0);// 读取第一个Sheet
-         for (int i = 1; i < childSheet.getLastRowNum() + 1; i++) {// 遍历行
-            HSSFRow row = childSheet.getRow(i);// 获得行对象
+         // 创建文件流
+         FileInputStream is = new FileInputStream(f);
+         // 加载文件流
+         HSSFWorkbook wbs = new HSSFWorkbook(is);
+         // 读取第一个Sheet
+         HSSFSheet childSheet = wbs.getSheetAt(0);
+         // 遍历行
+         for (int i = 1; i < childSheet.getLastRowNum() + 1; i++) {
+            // 获得行对象
+            HSSFRow row = childSheet.getRow(i);
             if (null != row) {
                HSSFCell value = row.getCell(1);
                HSSFCell name = row.getCell(2);

@@ -22,7 +22,7 @@ layui.use(['layer', 'form', 'admin', 'ax','upload'], function () {
 
     //多图片回显
     $().ready(function() {
-        var imgStr = result.attachFilePath;
+        var imgStr = result.attachUrl;
         if(imgStr != null) {
             var imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
             var imgStrArr = imgStr1.split(",")

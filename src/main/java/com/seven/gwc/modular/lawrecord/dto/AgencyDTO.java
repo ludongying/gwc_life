@@ -97,7 +97,7 @@ public class AgencyDTO extends AgencyEntity {
     public void setDetailContent(){
         LawCaseSourceEnum lawCaseSourceEnum = LawCaseSourceEnum.findByCode(this.getLawCaseSource());
         this.lawCaseSourceStr=Objects.isNull(lawCaseSourceEnum)?"":lawCaseSourceEnum.getMessage();
-        String lawCaseCode = this.getLawCaseCode();
+        Integer lawCaseCode = this.getLawCaseCode();
         String lawCaseFineCode = this.getLawCaseFineCode();
         this.lawCaseCodeStr="";
         if(Objects.nonNull(lawCaseFineCode)){

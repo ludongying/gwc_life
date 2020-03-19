@@ -6,15 +6,13 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.DateTimeUtil;
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.system.dto.FileEntityDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -214,7 +210,7 @@ public class SystemController extends BaseController {
     @RequestMapping(value = "deleteFile")
     @ResponseBody
     public JSONObject deleteFile(String fileName) {
-        return FileUtil.deleteFile(uploadPathFile, fileName);
+        return FileUtil.deleteFile(uploadPathFile + "/" + fileName, fileName);
     }
 
     @RequestMapping(value = "previewPdf")

@@ -11,8 +11,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
     var upload = layui.upload;
-    //多图容器
-    var image_path = [];
 
     laydate.render({
         elem: '#finishDate',
@@ -22,7 +20,20 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+    //表单验证
     loadVerify(form);
+
+    //图片放大
+    var renderImg = function () {
+        $('#boatPreviewMulti img').on('click', function () {
+            layer.photos({
+                photos: '#boatPreviewMulti',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+    }
 
     //初始化执法船信息管理的详情数据
     var ajax = new $ax(Feng.ctxPath + "/ship/detail/" + Feng.getUrlParam("shipId"));
@@ -30,18 +41,21 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     form.val('shipForm', result);
 
     //多图片回显
-    $().ready(function() {
-        var imgStr = result.imageFilePath;
-        if(imgStr != null) {
+    $().ready(function () {
+        var imgStr = result.imageUrl;
+        if (imgStr != null) {
             var imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
             var imgStrArr = imgStr1.split(",")
             // alert(imgStrArr.length);
             for (var i = 0; i < imgStrArr.length; i++) {
                 if (imgStrArr[i] != '')
                     $('#boatPreviewMulti').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
+                //如何绑定删除事件？？？
             }
         }
     });
+    //多图片放大预览
+    renderImg();
 
     //船籍获取下拉框
     $.ajax({
@@ -99,21 +113,32 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         elem: '#boatPreviewBtn'
         , accept: 'images'
         , url: '/file/uploadFile'
-        ,acceptMime: 'image/jpg,image/png,image/jpeg'
+        , acceptMime: 'image/jpg,image/png,image/jpeg'
         , exts: 'jpg|png|jpeg'
         , multiple: true
-        , auto: true
-        , before: function (obj) {
+        , number: 6
+        , auto: false
+        , bindAction: '#UploadBtn'
+        , choose: function (obj) {
             //预读本地文件示例，不支持ie8
             obj.preview(function (index, file, result) {
-                $('#boatPreviewMulti').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">')
+                $('#boatPreviewMulti').append('<img src="' + result + '" id="' + index + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">');
+                //双击删除指定预上传图片
+                $('#' + index).bind('dblclick', function () {
+                    delete files[index];//删除指定图片
+                    $(this).remove();
+                });
+                //放大预览
+                renderImg();
             });
         }
         , done: function (res, index, upload) {
-            if(res.success){//上传图片成功
+            if (res.success) {//上传图片成功
                 Feng.success("上传成功!");
-                image_path.push(res.content.path);
-                $('#imageFilePath').val(image_path);
+                // image_path.push(res.content.path);
+                var appendUrl = $('#imageFilePath').val().trim();
+                appendUrl = appendUrl + "," + res.content.path;
+                $('#imageFilePath').val(appendUrl);
             }
         },
         error: function () {
@@ -123,18 +148,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
 
     //清空图片列表
     $('#PreviewClearBtn').click(function () {
+        // var ajax = new $ax(Feng.ctxPath + "/file/deleteFile", function (data) {
+        //     if (data.success == true) {
+        //         Feng.success("修改成功!");
+        //     } else {
+        //         Feng.success(data.message);
+        //     }
+        // }, function (data) {
+        //     Feng.error("删除失败!" + data.message + "!");
+        // });
         $('#boatPreviewMulti').empty();
         $('#imageFilePath').val("");
     });
-
-    //图片放大
-    $('#boatPreviewMulti img').on('click', function () {
-        layer.photos({
-            photos: '#boatPreviewMulti',
-            shadeClose: false,
-            closeBtn: 2,
-            anim: 0
-        });
-    })
 
 });

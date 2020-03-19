@@ -12,10 +12,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 执法记录管理
      */
     var ElectronicFile = {
-        tableId: "lawRecordTable",
-        condition: {
-            lawRecordName: ""
-        }
+        tableId: "lawRecordTable"
     };
 
     initPage();
@@ -63,6 +60,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             queryData['createEndTime'] = times[1].trim();
         }
         table.reload(ElectronicFile.tableId, {where: queryData});
+    });
+
+    /**
+     * 工具条点击事件
+     */
+    table.on('tool(' + ElectronicFile.tableId + ')', function (obj) {
+        var data = obj.data;
+        var layEvent = obj.event;
+        if (layEvent === 'detail') {
+            window.location.href=Feng.ctxPath+"electronic/detail?id="+data.id;
+        }
     });
 
 });

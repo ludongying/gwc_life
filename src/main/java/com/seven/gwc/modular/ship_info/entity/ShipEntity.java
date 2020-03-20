@@ -80,9 +80,9 @@ public class ShipEntity extends GwcBaseEntity implements Serializable {
     // 船舶图片
     private String imageFilePath;
 
-    // 船舶图片url
-    @TableField(exist = false)
-    private String imageUrl;
+//    // 船舶图片url
+//    @TableField(exist = false)
+//    private String imageUrl;
 
     // 证书编码
     private String certificateId;

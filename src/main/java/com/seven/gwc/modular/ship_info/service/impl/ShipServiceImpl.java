@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.ship_info.dao.ShipMapper;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.seven.gwc.modular.ship_info.service.ShipService;
@@ -45,20 +42,6 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
 //        lambdaQuery.like(ToolUtil.isNotEmpty(shipName),ShipEntity::getName,shipName);
 //        return shipMapper.selectList(lambdaQuery);
         List<ShipEntity> ships = shipMapper.ShipEntityList(shipEntity);
-        for (ShipEntity ship : ships) {
-            if (ToolUtil.isNotEmpty(ship.getImageFilePath())) {
-                 List<FileData> files = fileManager.listFile(ship.getImageFilePath());
-                 String urls = "";
-                 for(FileData fileData: files){
-                     if(urls.isEmpty()){
-                         urls = fileData.getUrl();
-                     }else{
-                         urls = urls + FileUtils.file_2_file_sep + fileData.getUrl();
-                     }
-                 }
-                ship.setImageUrl(urls);
-            }
-        }
         return ships;
     }
 
@@ -66,10 +49,9 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     @Transactional(rollbackFor = Exception.class)
     public boolean add(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).eq(ShipEntity::getDeleteFlag,1);
+        lambdaQuery.eq(ShipEntity::getShipCode, ship.getShipCode()).eq(ShipEntity::getDeleteFlag, 1);
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
-        if(shipEntity != null)
-        {
+        if (shipEntity != null) {
             return false;
         }
         ship.setSynFlag(false);
@@ -84,9 +66,9 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     @Transactional(rollbackFor = Exception.class)
     public boolean update(ShipEntity ship, ShiroUser user) {
         LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(ShipEntity::getShipCode,ship.getShipCode()).eq(ShipEntity::getDeleteFlag,1).ne(ShipEntity::getId,ship.getId());
+        lambdaQuery.eq(ShipEntity::getShipCode, ship.getShipCode()).eq(ShipEntity::getDeleteFlag, 1).ne(ShipEntity::getId, ship.getId());
         ShipEntity shipEntity = shipMapper.selectOne(lambdaQuery);
-        if(shipEntity != null){
+        if (shipEntity != null) {
             return false;
         }
         ship.setUpdateDate(new Date());
@@ -119,17 +101,4 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
         return shipEntities;
     }
 
-    @Override
-    public ShipEntity getShipById(String id) {
-        ShipEntity ship = shipMapper.selectById(id);
-        if (ToolUtil.isNotEmpty(ship.getImageFilePath())) {
-            List<FileData> files = fileManager.listFile(ship.getImageFilePath());
-            String urls = "";
-            for(FileData fileData: files){
-                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
-            }
-            ship.setImageUrl(urls);
-        }
-        return ship;
-    }
 }

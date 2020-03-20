@@ -81,10 +81,6 @@ public class CertificateShipEntity extends GwcBaseEntity implements Serializable
     /** 附件 */
     private String attachFilePath;
 
-    @TableField(exist=false)
-    /** 附件url */
-    private String attachUrl;
-
     /** 备注 */
     private String remark;
 

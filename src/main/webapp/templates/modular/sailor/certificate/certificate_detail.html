@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{bg:"bg-white",js:["/modular/sailor/certificate/certificate_detail.js"]}){
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/sailor/certificate/certificate_detail.js"],css:["/modular/ship_info/ship/ship.css"]}){
 <div class="layui-tab-content">
     <form id="certificateForm" lay-filter="certificateForm" class="layui-form">
         <div class="layui-row layui-col-space10">
@@ -122,15 +122,12 @@
 
             <div class="layui-col-md12">
                 <label class="layui-form-label">证书附件</label>
-                <!--                <div class="layui-input-block">-->
-                <!--                    <input id="attachment" name="attachment" placeholder="请输入附件" type="text" class="layui-input" lay-verify="required" required/>-->
-                <!--                </div>-->
+
                 <div class="layui-input-block layui-upload">
-<!--                    <button type="button" class="layui-btn" id="PreviewBtn">图片上传</button>-->
                     <input id="attachFilePath" name="attachFilePath" type="hidden"/>
-                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 160px">
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 110px">
                         <!--                        预览图：-->
-                        <div class="layui-upload-list" id="attachment"></div>
+                        <div class="layui-upload-list uploader-list" id="attachment"></div>
                     </blockquote>
                 </div>
             </div>

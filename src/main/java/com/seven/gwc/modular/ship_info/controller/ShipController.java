@@ -1,27 +1,24 @@
 package com.seven.gwc.modular.ship_info.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.seven.gwc.core.state.ErrorEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.seven.gwc.modular.ship_info.service.ShipService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -136,7 +133,7 @@ public class ShipController extends BaseController {
     @RequestMapping("/detail/{shipId}")
     @ResponseBody
     public ShipEntity detail(@PathVariable String shipId) {
-        return shipService.getShipById(shipId);
+        return shipService.getById(shipId);
     }
 
     /**

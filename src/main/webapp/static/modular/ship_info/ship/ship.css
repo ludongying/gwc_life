@@ -87,29 +87,48 @@
     transition: all .2s ease-in-out;
 }
 
-.layui-upload-list .handle {
+.uploader-list {
+    margin-left: -15px;
+    margin-top:-10px;
+}
+
+.uploader-list .info {
+    position: relative;
+    margin-top: -25px;
+    background-color: black;
+    color: white;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    display: none;
+}
+
+.uploader-list .handle {
     position: relative;
     background-color: black;
     color: white;
     filter: alpha(Opacity=80);
     -moz-opacity: 0.5;
     opacity: 0.5;
-    /*width: 100px;*/
+    width: 100px;
     text-align: right;
     height: 18px;
     margin-bottom: -18px;
     display: none;
 }
 
-.layui-upload-list .handle i {
+.uploader-list .handle i {
     margin-right: 5px;
 }
 
-.layui-upload-list .handle i:hover {
+.uploader-list .handle i:hover {
     cursor: pointer;
 }
 
-.layui-upload-list .file-iteme {
+.uploader-list .file-iteme {
     margin: 12px 0 0 15px;
     padding: 1px;
     float: left;

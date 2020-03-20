@@ -2,7 +2,6 @@ package com.seven.gwc.modular.ship_info.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.ship_info.entity.CertificateShipEntity;
 
 import java.text.ParseException;
@@ -51,13 +50,6 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
      * @param user 当前用户
      */
     boolean editCertificate(CertificateShipEntity certificate, ShiroUser user) throws ParseException;
-
-    /**
-     * 获证书详细信息（图片url转换）
-     * @param id 表编码
-     * @return
-     */
-    CertificateShipEntity getCertificateById(String id);
 
     /**
      * 证书到期判断，并更新证书状态

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.dao.CertificateMapper;
@@ -101,9 +100,11 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         lambdaQuery.eq(CertificateEntity::getId, certificate.getId()).eq(CertificateEntity::getDeleteFlag, 1);
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船员证书
-        DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
-        if (certificateEntity != null && dictEntity.getName().equals("船员证书")) {
-            return false;
+        if(certificateEntity != null){
+            DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+            if (dictEntity.getName().equals("船员证书")){
+                return false;
+            }
         }
         certificate.setSynFlag(false);
         certificate.setDeleteFlag(true);
@@ -176,9 +177,11 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateEntity::getDeleteFlag, 1).ne(CertificateEntity::getId, certificate.getId());
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船员证书
-        DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
-        if (certificateEntity != null && dictEntity.getName().equals("船员证书")) {
-            return false;
+        if(certificateEntity != null){
+            DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+            if (dictEntity.getName().equals("船员证书")){
+                return false;
+            }
         }
         certificate.setUpdateDate(new Date());
         certificate.setUpdatePerson(user.getId());
@@ -198,20 +201,6 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         }
         certificateMapper.updateById(certificate);
         return true;
-    }
-
-    @Override
-    public CertificateEntity getCertificateById(String id) {
-        CertificateEntity certificateEntity = certificateMapper.selectById(id);
-        if (ToolUtil.isNotEmpty(certificateEntity.getAttachFilePath())) {
-            List<FileData> files = fileManager.listFile(certificateEntity.getAttachFilePath());
-            String urls = "";
-            for (FileData fileData : files) {
-                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
-            }
-            certificateEntity.setAttachFilePath(urls);
-        }
-        return certificateEntity;
     }
 
     @Override

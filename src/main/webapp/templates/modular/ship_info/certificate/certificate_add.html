@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{bg:"bg-white",js:["/modular/ship_info/certificate/certificate_add.js"]}){
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/ship_info/certificate/certificate_add.js"],css:["/modular/ship_info/ship/ship.css"]}){
 <div class="layui-tab-content">
     <form id="certificateForm" lay-filter="certificateForm" class="layui-form">
         <div class="layui-row layui-col-space10">
@@ -128,18 +128,12 @@
 
             <div class="layui-col-md12">
                 <label class="layui-form-label">证书附件</label>
-                <!--                <div class="layui-input-block">-->
-                <!--                    <input id="attachment" name="attachment" placeholder="请输入附件" type="text" class="layui-input" lay-verify="required" required/>-->
-                <!--                </div>-->
                 <div class="layui-input-block layui-upload">
-<!--                    <button type="button" class="layui-btn" id="PreviewBtn">选择图片</button>-->
-                    <button type="button" class="layui-btn" id="UploadBtn">上传图片</button>
-<!--                    <button type="button" class="layui-btn" id="PreviewClearBtn">清空图片</button>-->
-<!--                    <label class="layui-word-aux">双击图片删除</label>-->
+                    <button type="button" class="layui-btn" id="PreviewBtn">上传图片</button>
                     <input id="attachFilePath" name="attachFilePath" type="hidden"/>
-                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 160px">
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 110px">
                         <!--                        预览图：-->
-                        <div class="layui-upload-list" id="attachment"></div>
+                        <div class="layui-upload-list uploader-list" style="overflow: auto;" id="attachment"></div>
                     </blockquote>
                 </div>
             </div>

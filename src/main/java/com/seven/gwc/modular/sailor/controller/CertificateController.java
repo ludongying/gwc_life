@@ -140,7 +140,7 @@ public class CertificateController extends BaseController {
     @RequestMapping("/detail/{certificateId}")
     @ResponseBody
     public CertificateEntity detail(@PathVariable String certificateId) {
-        return certificateService.getCertificateById(certificateId);
+        return certificateService.getById(certificateId);
     }
 
 }

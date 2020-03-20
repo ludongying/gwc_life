@@ -63,11 +63,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
     }
 
     //加载船舶图像轮播
-    if (result.imageUrl != null) {
-        var images = result.imageUrl.split(",");
+    if (result.imageFilePath != null) {
+        var images = result.imageFilePath.split(",");
         var count = 0;
         $.each(images, function (index, item) {
-            $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
+            if(item !=null && item !="" ){
+                $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
+            }
         })
         ins.reload({
             elem: '#imgBoat'

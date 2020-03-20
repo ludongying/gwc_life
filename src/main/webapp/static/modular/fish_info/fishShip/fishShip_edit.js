@@ -25,9 +25,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     //初始化渔船信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/fishShip/detail/" + Feng.getUrlParam("fishShipId"));
     var result = ajax.start();
-    fileName = result.fileName;
-    if (fileName != null) {
-        var files = fileName.split(",");
+    if (result.fileName != null) {
+        var files = result.fileName.split(",");
         for (i = 0; i < files.length - 1; i++) {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
@@ -147,8 +146,18 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
                 '<div class="info">' + res.fileName + '</div>' +
                 '</div>'
             );
-            fileName = fileName + res.fileName + ","
+
+            fileName = fileName + res.fileName + ",";
             $("#fileName").val(fileName);
+
+            $('#uploader-list img').on('click', function () {
+                layer.photos({
+                    photos: '#uploader-list',
+                    shadeClose: false,
+                    closeBtn: 2,
+                    anim: 0
+                });
+            })
         }
     });
 

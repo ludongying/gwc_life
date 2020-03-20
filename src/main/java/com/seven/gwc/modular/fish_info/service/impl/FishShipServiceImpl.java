@@ -215,7 +215,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
             String[] head = heads.split(",");
             List<String> listHead = Arrays.asList(head);
 
-            if (listHead.get(0).equals("渔船编码") && listHead.get(1).equals("船名") && listHead.get(16).equals("船主名称")) {
+            if (listHead.get(0).equals("渔船编码") && listHead.get(1).equals("船名") && listHead.get(15).equals("船主名称")) {
                 for (int i = 1; i <= lastRowNum; i++) {
                     try {
                         FishShipEntity fishShipEntity = new FishShipEntity();

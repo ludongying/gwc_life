@@ -106,7 +106,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             );
             fileName = fileName + res.fileName + ","
             $("#fileName").val(fileName);
-            renderImg();
         }
     });
 
@@ -159,15 +158,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     }
 
     //图片放大
-    var renderImg = function () {
-        $('#boatPreviewMulti img').on('click', function () {
-            layer.photos({
-                photos: '#boatPreviewMulti',
-                shadeClose: false,
-                closeBtn: 2,
-                anim: 0
-            });
-        })
-    }
+    $('#uploader-list img').on('click', function () {
+        layer.photos({
+            photos: '#uploader-list',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
 
 });

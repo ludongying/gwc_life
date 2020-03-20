@@ -3,11 +3,10 @@
  */
 
 
-layui.use(['layer', 'form', 'admin', 'ax', 'func'], function () {
+layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
-    var func = layui.func;
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
@@ -15,9 +14,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'func'], function () {
     //初始化渔船信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/fishShip/detail/" + Feng.getUrlParam("fishShipId"));
     var result = ajax.start();
-    var fileName = result.fileName;
-    if (fileName != null) {
-        var files = fileName.split(",");
+    if (result.fileName != null) {
+        var files = result.fileName.split(",");
         for (i = 0; i < files.length - 1; i++) {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
@@ -30,12 +28,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'func'], function () {
     }
     form.val('fishShipForm',result);
 
-    $('#preview').click(function () {
-        func.open({
-            title: '预览',
-            maxmin: true,
-            content: Feng.ctxPath + '/system/previewPdf?fileName=' + fuiiName
+    $('#uploader-list img').on('click', function () {
+        layer.photos({
+            photos: '#uploader-list',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
         });
-    });
+    })
 
 });

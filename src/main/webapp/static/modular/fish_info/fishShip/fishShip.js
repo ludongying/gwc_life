@@ -149,12 +149,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
 
     FishShip.openExportFishShip = function () {
         var code = $("#code").val().trim();
-        var phone = $("#phone").val().trim();
         var shipType = $("#shipType").val();
 
         var exportForm = $("<form action='/fishShip/exportExcel' method='post'></form>");
         exportForm.append("<input type='hidden' name='code' value='" + code + "'/>");
-        exportForm.append("<input type='hidden' name='phone' value='" + phone + "'/>");
         exportForm.append("<input type='hidden' name='shipType' value='" + shipType + "'/>");
         $(document.body).append(exportForm);
         exportForm.submit();

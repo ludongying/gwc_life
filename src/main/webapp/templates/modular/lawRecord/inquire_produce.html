@@ -179,12 +179,12 @@
                                 </div>
 
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">手机号</label>
+                                    <label class="layui-form-label">身份证</label>
                                     <div class="layui-input-inline">
-                                        <input name="investigateTel" lay-verify="phoneNumber" autocomplete="off" class="layui-input">
+                                        <input type="radio" name="identityCase" value="1" title="携带">
+                                        <input type="radio" name="identityCase" value="0" title="未携带" checked>
                                     </div>
                                 </div>
-
 
                                 <div class="layui-inline">
                                     <label class="layui-form-label">身份证号码</label>
@@ -196,13 +196,12 @@
                             </div>
                             <div class="layui-form-item">
 
-<!--                                <div class="layui-inline">
-                                    <label class="layui-form-label">身份证</label>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">手机号</label>
                                     <div class="layui-input-inline">
-                                        <input type="radio" name="identityCase" value="1" title="携带">
-                                        <input type="radio" name="identityCase" value="0" title="未携带" checked>
+                                        <input name="investigateTel" lay-verify="phoneNumber" autocomplete="off" class="layui-input">
                                     </div>
-                                </div>-->
+                                </div>
 
                                 <div class="layui-inline" id="investigate_addr">
                                     <label class="layui-form-label">住址</label>
@@ -284,14 +283,29 @@
                                     <div class="layui-input-inline" style="width: 73px">
                                         <input placeholder="" lay-verify="positiveFloatNumber" name="shipRealPower" autocomplete="off" class="layui-input">
                                     </div>
-                                    <div class="layui-form-mid layui-word-aux">马力</div>
+                                    <div class="layui-input-inline" style="width:85px">
+                                        <select name="shipRealPowerUnit" id="shipRealPowerUnit" lay-filter="powerUnit">
+                                            @for(item in powerUnit){
+                                            <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
                                 </div>
+
+
+
                                 <div class="layui-inline">
                                     <label class="layui-form-label">核定主机功率</label>
                                     <div class="layui-input-inline" style="width: 73px">
                                         <input placeholder="" lay-verify="positiveFloatNumber" name="shipRatedPower" autocomplete="off" class="layui-input">
                                     </div>
-                                    <div class="layui-form-mid layui-word-aux">马力</div>
+                                    <div class="layui-input-inline" style="width:85px">
+                                        <select name="shipRatedPowerUnit" id="shipRatedPowerUnit" lay-filter="powerUnit">
+                                            @for(item in powerUnit){
+                                             <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 

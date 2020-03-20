@@ -1,13 +1,14 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * description : 询问笔录-生产实体
@@ -67,10 +68,12 @@ public class InquireEntity extends GwcBaseEntity {
 
     /** 实际主机功率 */
     private Double shipRealPower;
-
+    /** 实际主机功率单位 */
+    private Integer shipRealPowerUnit;
     /** 核定主机功率 */
     private Double shipRatedPower;
-
+    /** 核定主机功率单位 */
+    private Integer shipRatedPowerUnit;
     /** 船上信息 */
     private String shipInfo;
     /** 渔船状态 */

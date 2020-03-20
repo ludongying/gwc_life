@@ -24,5 +24,5 @@ public interface  AgencyMapper extends BaseMapper<AgencyEntity> {
      * @param fineCode
      * @return
      */
-    Integer maxCode(String fineCode);
+    Integer maxCode(Integer fineCode);
 }

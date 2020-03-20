@@ -37,7 +37,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-       law_record_agency.id, law_ship_code, enforcement_agency,law_case_fine_code, law_case_code, law_case_source, law_case_lon, law_case_lat,law_case_addr, law_case_date, agency_person, agency_tel, agency_addr, bank, review_agency, lawsuit_agency, prospect_start_date,prospect_end_date, inquire_start_date,inquire_end_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date
+       law_record_agency.id, law_ship_code, enforcement_agency,short_name,law_case_fine_code, law_case_code, law_case_source, law_case_lon, law_case_lat,law_case_addr, law_case_date, agency_person, agency_tel, agency_addr, bank, review_agency, lawsuit_agency, prospect_start_date,prospect_end_date, inquire_start_date,inquire_end_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date
     </sql>
 
     <select id="maxCode" resultType="java.lang.Integer">

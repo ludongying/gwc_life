@@ -36,8 +36,8 @@ public class  AgencyEntity extends GwcBaseEntity {
     /** 执法单位 */
     private String enforcementAgency;
 
-    /** 案件编号 罚*/
-    private String lawCaseFineCode;
+    /** 案件编号 罚 因该为年份 这是被设计坑了*/
+    private Integer lawCaseFineCode;
 
     /** 案件编号 */
     private Integer lawCaseCode;
@@ -126,4 +126,10 @@ public class  AgencyEntity extends GwcBaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date finishDate;
+
+    /** 保管年限 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date saveDate;
+
 }

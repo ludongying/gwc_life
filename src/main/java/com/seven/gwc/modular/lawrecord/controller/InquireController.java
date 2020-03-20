@@ -38,6 +38,7 @@ public class InquireController extends BaseController {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         if(lawType.equals(LawTypeEnum.PRODUCE.getCode())){
+            model.addAttribute("powerUnit",PowerUnitEnum.values());
             //实际作业类型
             model.addAttribute("shipRealType", ShipRealTypeEnum.values());
             //核定作业类型

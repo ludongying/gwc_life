@@ -308,14 +308,24 @@ Date.prototype.addMilliseconds=function (number) {
  * @param number
  */
 Date.prototype.addMonths=function (number) {
-    var month_total=this.getMonth()+1+number;
-    var year_add = month_total/12;
+    let month_total=this.getMonth()+1+number;
+    let year_add = month_total/12;
     if(year_add>0){
         this.setFullYear(this.getFullYear()+year_add);
     }
-    var month=month_total%12-1;
+    let month=month_total%12-1;
     this.setMonth(month);
 }
+
+Date.prototype.addYears=function(number){
+    let fullYear = this.getFullYear();
+    this.setFullYear(fullYear+number);
+}
+
+function getFloat(number){
+   return Math.round(number*100)/100;
+}
+
 
 /**
  * 时间格式化

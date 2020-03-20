@@ -1,10 +1,8 @@
 package com.seven.gwc.config.constant;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-
 
 /**
  * @author : zzl
@@ -19,9 +17,9 @@ public class GwcConsts {
     public static final String lawShipCode="中国渔政32511";
 
     /**
-     * 案件编号
+     * 执法单位简称
      */
-    public static final String lawCode="苏连渔执";
+    public static final String shortName="苏连渔执";
     /**
      * 执法单位
      */
@@ -79,13 +77,6 @@ public class GwcConsts {
      }
 
 
-    /**
-     * 获取罚号
-     * @return
-     */
-     public static String getLawCaseFineCode(){
-         return lawCode+ LocalDate.now().getYear();
-     }
 
 
 

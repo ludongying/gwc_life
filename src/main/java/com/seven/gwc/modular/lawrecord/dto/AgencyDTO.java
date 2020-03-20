@@ -53,6 +53,9 @@ public class AgencyDTO extends AgencyEntity {
      */
     private String agencyAddrRegion;
 
+
+    private String lawCode;
+
     /****************全详情添加*********************/
 
     /**
@@ -85,6 +88,10 @@ public class AgencyDTO extends AgencyEntity {
         }
     }
 
+    public void setLawCodeStr(){
+        setLawCode(this.getLawCaseFineCode()+""+this.getLawCaseCode());
+    }
+
     public void setAddress(){
         AddrData addrData = AddrData.generateAddr(this.getAgencyAddr());
         if(Objects.nonNull(addrData)){
@@ -98,7 +105,7 @@ public class AgencyDTO extends AgencyEntity {
         LawCaseSourceEnum lawCaseSourceEnum = LawCaseSourceEnum.findByCode(this.getLawCaseSource());
         this.lawCaseSourceStr=Objects.isNull(lawCaseSourceEnum)?"":lawCaseSourceEnum.getMessage();
         Integer lawCaseCode = this.getLawCaseCode();
-        String lawCaseFineCode = this.getLawCaseFineCode();
+        Integer lawCaseFineCode = this.getLawCaseFineCode();
         this.lawCaseCodeStr="";
         if(Objects.nonNull(lawCaseFineCode)){
             lawCaseCodeStr+=lawCaseFineCode+"罚 ";

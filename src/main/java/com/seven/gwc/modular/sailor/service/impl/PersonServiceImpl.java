@@ -8,17 +8,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
 import com.seven.gwc.modular.system.dao.PositionMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
-import com.seven.gwc.modular.system.entity.PositionEntity;
 import com.seven.gwc.modular.system.entity.UserEntity;
-import com.seven.gwc.modular.system.service.PositionService;
-import com.seven.gwc.modular.system.service.impl.PositionServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,4 +206,6 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         }
         return jsonArray;
     }
+
+
 }

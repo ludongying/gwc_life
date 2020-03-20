@@ -3,7 +3,6 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dao.AgencyMapper;
 import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
@@ -17,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Objects;
 
 /**
@@ -72,18 +72,19 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
             detail.setTimeStr();
             //此处设置地址
             detail.setOperators(operatorService.getByRecord(id));
+
+            detail.setLawCodeStr();
         }
         return detail;
     }
 
     @Override
-    public Integer getLawCode(String fineCode) {
-        fineCode=fineCode.replace(GwcConsts.lawCode,"");
+    public Integer getLawCode(Integer fineCode) {
         Integer code = agencyMapper.maxCode(fineCode);
         return Objects.isNull(code) ? 1001 : ++code;
     }
 
-    private boolean existLawCode(String fineCode, Integer code) {
+    private boolean existLawCode(Integer fineCode, Integer code) {
         LambdaQueryWrapper<AgencyEntity> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(AgencyEntity::getLawCaseFineCode, fineCode).eq(AgencyEntity::getLawCaseCode, code);
         int count = this.count(wrapper);

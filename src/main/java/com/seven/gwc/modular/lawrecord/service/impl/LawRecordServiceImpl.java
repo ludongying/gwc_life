@@ -9,9 +9,9 @@ import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
-import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import com.seven.gwc.modular.lawrecord.dto.*;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -80,10 +81,11 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
 
     @Override
     public LawRecordEntity createLawRecord(String userId, Integer lawType) {
-        LawRecordEntity lawRecord = createLawRecord(userId, lawType);
+        LawRecordEntity lawRecord = createAgencyRecord(userId, lawType);
         AgencyVO agencyVO=new AgencyVO();
         agencyVO.setId(lawRecord.getId());
-        agencyVO.setLawCaseFineCode(GwcConsts.getLawCaseFineCode());
+        agencyVO.setShortName(GwcConsts.shortName);
+        agencyVO.setLawCaseFineCode(LocalDate.now().getYear());
         agencyVO.setLawCaseCode(agencyService.getLawCode(agencyVO.getLawCaseFineCode()));
         agencyService.updateAgency(agencyVO);
         return lawRecord;
@@ -153,12 +155,25 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         }
     }
 
+    @Override
+    public void generateInstrument(String id) {
+
+    }
+
+    /**
+     * 获取所有录入数值
+     * @param id
+     * @return
+     */
     private Map<String,String> getParams(String id){
         Map<String, String> map = instrumentContrast.getMap();
 
         return null;
 
     }
+
+
+
 
 
 }

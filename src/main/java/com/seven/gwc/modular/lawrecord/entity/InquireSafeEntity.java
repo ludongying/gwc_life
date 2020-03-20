@@ -42,6 +42,8 @@ public class InquireSafeEntity extends GwcBaseEntity {
     /** 地址 */
     private String investigateAddr;
 
+    /** 是否携带身份证*/
+    private Integer identityCase;
     /** 身份证号 */
     private String identityCard;
 

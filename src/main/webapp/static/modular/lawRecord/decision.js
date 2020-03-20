@@ -32,12 +32,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     function initPage() {
         //编辑
         if($("#id").val()){
-            var ajax = new $ax(Feng.ctxPath + "/lawRecord/decision/detail?id="+$("#id").val());
-            var result = ajax.start();
+            let lawType= $("#lawType").val();
+            let url="decision";
+            if(lawType==="2"){
+                url="decision_safe";
+            }
+            let ajax= new $ax(Feng.ctxPath + "/lawRecord/"+url+"/detail?id="+$("#id").val());
+            let result = ajax.start();
             if(result){
                 form.val('decisionForm',result);
                 loadAddr($,form,result.punishAddrStateCode,result.punishAddrCityCode);
-                $("#punishPersonType").attr("disabled","disabled")
+                $("#punishPersonType").attr("disabled","disabled");
                 form.render();
                 return;
             }

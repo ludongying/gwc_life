@@ -42,7 +42,12 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
     });
     //上一步
     form.on('submit(preStep)', function (data) {
-        submitData("inquisition",data);
+        if($("#lawType").val()==="1"){
+            submitData("inquisition",data);
+        }else{
+            submitData("inquire",data);
+        }
+
     });
     //添加
     $("#addEvidence").click(function () {

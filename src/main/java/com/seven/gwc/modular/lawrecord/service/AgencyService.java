@@ -35,7 +35,9 @@ public interface AgencyService extends IService<AgencyEntity> {
       * @param fineCode
       * @return
       */
-     Integer getLawCode(String fineCode);
+     Integer getLawCode(Integer fineCode);
+
+
 
 
 

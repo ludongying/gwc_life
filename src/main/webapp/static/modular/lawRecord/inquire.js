@@ -50,6 +50,42 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     }
 
 
+    let shipRatedPowerUnit=$("#shipRatedPowerUnit").val();
+    let shipRealPowerUnit=$("#shipRealPowerUnit").val();
+    form.on('select(powerUnit)', function(data){
+        let input_=$(data.elem).parent().prev().find("input");
+        let val=input_.val();
+        let dataValue=parseInt(data.value);
+        console.log(data);
+        let type=$(data.elem).attr("name");
+        if("shipRatedPowerUnit"===type){
+            if(data.value==shipRatedPowerUnit){
+                return;
+            }
+            shipRatedPowerUnit=dataValue;
+        }else{
+            if(data.value==shipRealPowerUnit){
+                return;
+            }
+            shipRealPowerUnit=dataValue;
+        }
+
+        if(val && dataValue){
+            switch (dataValue) {
+                case 1:
+                    input_.val(getFloat(parseFloat(val)/1.36));
+                    break;
+                case 2:
+                    input_.val(getFloat(parseFloat(val)*1.36));
+                    break;
+                default:
+            }
+        }
+    });
+
+
+
+
     //开启表单内容监听
     startListen($,lay.key);
 

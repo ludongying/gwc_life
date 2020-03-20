@@ -10,8 +10,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
     var upload = layui.upload;
-    var ajax;
-    var formData;
+    var fileName = "";
 
     laydate.render({
         elem: '#productDate',
@@ -84,59 +83,51 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    // 让当前iframe弹层高度适应
-    // admin.iframeAuto();
-
-    /*var uploadInst = upload.render({
-        elem: '#upload'
-        , url: '/system/uploadFile' //改成您自己的上传接口
-        , accept: 'file'
-        , exts: 'pdf'
-        , size: 1024
-        , auto: false
-        // , bindAction: '#btnSubmit'
-        , choose: function (obj) {
-            var files = obj.pushLastFile();
-            obj.preview(function (index, file, result) {
-                $('#choose').remove();
-                $('#fileName').val(file.name.substring(0, file.name.lastIndexOf(".")));
-                $('.layui-upload').append('<span id="choose" class="layui-inline layui-upload-choose">' + file.name + '</span>');
-                $('#fullName').val(file.name)
-            });
+    upload.render({
+        elem: '#test2'
+        ,url: '/system/uploadFile'
+        ,multiple: true
+        ,before: function(obj){
+            layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
         }
-        , done: function (res) {
-            if (res.CODE === 200) {
-                formData.fullName = res.fileName;
-                ajax = new $ax(Feng.ctxPath + "/fishShip/add", function (data) {
-                    if (data.success) {
-                        Feng.success("增加成功!");
-                        admin.putTempData('formOk', true);//传给上个页面，刷新table用
-                        admin.closeThisDialog();//关掉对话框
-                    } else {
-                        Feng.error(data.message);
-                    }
-                }, function (data) {
-                    Feng.error("增加失败!" + data.message)
-                });
-                ajax.set(formData);
-                ajax.start();
-
-                return false;
-            }
+        ,done: function(res){
+            layer.close(layer.msg());//关闭上传提示窗口
+            //上传完毕
+            $('#uploader-list').append(
+                '<div id="" class="file-iteme">' +
+                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
+                '<div class="info">' + res.fileName + '</div>' +
+                '</div>'
+            );
+            fileName = fileName + res.fileName + ","
+            $("#fileName").val(fileName);
+            renderImg();
         }
     });
 
-    // 表单提交事件
-    form.on('submit(btnSubmit)', function (data) {
-        if ($('#fileName').val() === "") {
-            Feng.error("附件不能为空");
-            return false
-        } else {
-            formData = data.field;
-            uploadInst.upload();
-            return false
+    $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            //$(this).children(".info").fadeIn("fast");    //文件名
+            $(this).children(".handle").fadeIn("fast");   //删除按钮
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            //$(this).children(".info").hide();
+            $(this).children(".handle").hide();
         }
-    });*/
+    });
+
+    // 删除图片
+    $(document).on("click", ".file-iteme .handle", function(event){
+        $(this).parent().remove();
+        //$(this).parent()[0].textContent
+        deleteFIle(fileName, $(this).parent()[0].textContent)
+    });
 
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/fishShip/add", function (data) {
@@ -155,5 +146,28 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         return false;
     });
 
+    function deleteFIle(names, deleteFile) {
+        var name = "";
+        var files = names.split(",");
+        for (i = 0; i < files.length - 1; i++ ) {
+            if (files[i] !== deleteFile) {
+                name += files[i] + ",";
+            }
+        }
+        fileName = name;
+        $("#fileName").val(fileName);
+    }
+
+    //图片放大
+    var renderImg = function () {
+        $('#boatPreviewMulti img').on('click', function () {
+            layer.photos({
+                photos: '#boatPreviewMulti',
+                shadeClose: false,
+                closeBtn: 2,
+                anim: 0
+            });
+        })
+    }
 
 });

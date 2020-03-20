@@ -1,10 +1,16 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
-import cn.hutool.core.lang.Dict;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.CalculationDateUtil;
 import com.seven.gwc.core.util.ExcelUtil;
+import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
+import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
+import com.seven.gwc.modular.fish_info.service.FishShipService;
 import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
@@ -12,19 +18,11 @@ import com.seven.gwc.modular.system.service.DictService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
-import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
-import com.seven.gwc.modular.fish_info.service.FishShipService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -77,7 +75,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
                 fishShip.setWatersTypeName(watersTypeDict.getName());
             }
             if (ToolUtil.isNotEmpty(fishShip.getPractice())) {
-                DictEntity practiceDict = dictMapper.selectById(fishShip.getWatersType());
+                DictEntity practiceDict = dictMapper.selectById(fishShip.getPractice());
                 fishShip.setPracticeName(practiceDict.getName());
             }
             DictEntity workTypeDict = dictMapper.selectById(fishShip.getWorkType());
@@ -118,7 +116,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
             fishShipEntity.setWatersTypeName(watersTypeDict.getName());
         }
         if (ToolUtil.isNotEmpty(fishShipEntity.getPractice())) {
-            DictEntity practiceDict = dictMapper.selectById(fishShipEntity.getWatersType());
+            DictEntity practiceDict = dictMapper.selectById(fishShipEntity.getPractice());
             fishShipEntity.setPracticeName(practiceDict.getName());
         }
         if (ToolUtil.isNotEmpty(fishShipEntity.getProductDate())) {

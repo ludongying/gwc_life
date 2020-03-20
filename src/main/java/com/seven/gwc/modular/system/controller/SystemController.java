@@ -49,6 +49,8 @@ public class SystemController extends BaseController {
     private String uploadPathFile;
     @Value("${FILE_UPLOAD_PATH_IMAGE}")
     private String uploadPathImage;
+    @Value("${server.ip}")
+    private String ip;
 
     /**
      * 主页面
@@ -189,7 +191,7 @@ public class SystemController extends BaseController {
     @RequestMapping(value = "/uploadFile")
     @ResponseBody
     public JSONObject uploadFile(@RequestParam("file") MultipartFile file) throws Exception {
-        return FileUtil.uploadFile(uploadPathFile, file);
+        return FileUtil.uploadFile(uploadPathFile, file, ip);
     }
 
     /**

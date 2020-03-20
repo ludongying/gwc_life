@@ -110,7 +110,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
     FishShip.search = function () {
         var queryData = {};
         queryData['code'] = $("#code").val().trim();
-        queryData['phone'] = $("#phone").val().trim();
         queryData['shipType'] = $("#shipType").val();
         table.reload(FishShip.tableId, {where: queryData});
     };
@@ -120,7 +119,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
      */
     FishShip.btnReset = function () {
         $("#code").val("");
-        $("#phone").val("");
         $("#shipType").empty();
 
         $.ajax({

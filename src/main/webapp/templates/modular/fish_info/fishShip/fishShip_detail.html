@@ -1,4 +1,52 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/modular/fish_info/fishShip/fishShip_detail.js"]}){
+
+<style type="text/css">
+    .uploader-list {
+        margin-left: -15px;
+    }
+
+    .uploader-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .uploader-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .uploader-list .handle i {
+        margin-right: 5px;
+    }
+
+    .uploader-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .uploader-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
 <div class="layui-tab-content">
     <form id="fishShipForm" lay-filter="fishShipForm" class="layui-form">
         <div class="layui-row layui-col-space10">
@@ -150,6 +198,16 @@
                 </div>
             </div>
 
+            <div class="layui-col-md12">
+                <div class="layui-upload">
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
+                        预览图：
+                        <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
         </div>
     </form>
 </div>

@@ -1,21 +1,24 @@
 package com.seven.gwc.core.util;
 
 
-import org.springframework.core.io.Resource;
 import com.alibaba.fastjson.JSONObject;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 文件上传工具类
@@ -23,7 +26,8 @@ import java.util.*;
 @Slf4j
 public class FileUtil {
 
-    public static JSONObject uploadFile(String fileDown, @RequestParam("file") MultipartFile file) throws Exception {
+
+    public static JSONObject uploadFile(String fileDown, @RequestParam("file") MultipartFile file, String ip) throws Exception {
         String fileName = "";
         JSONObject jsonObject = new JSONObject();
         try {
@@ -42,7 +46,7 @@ public class FileUtil {
                 Files.write(path, bytes);
 
                 jsonObject.put("CODE", 200);
-                jsonObject.put("fileName", fileName);
+                jsonObject.put("fileName", ip + FileUtils.file_sep + fileName);
                 return jsonObject;
             }
         } catch (Exception e) {

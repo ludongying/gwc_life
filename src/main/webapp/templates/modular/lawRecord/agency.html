@@ -129,8 +129,6 @@
                                     <div class="item_content"></div>
                                 </div>
                                 @}
-
-
                                 <div style="flex:1;display:flex">
                                     <div class="item_content"></div>
                                     <div class="dot_content">证据</div>
@@ -169,7 +167,6 @@
                                         <input type="text" name="enforcementAgency" value="${value.enforcementAgency}" autocomplete="off" class="layui-input" disabled>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -183,11 +180,11 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">案件编号</label>
                                 <div class="layui-input-inline" style="width: 80px">
-                                    <input name="lawCaseFineCode" placeholder="" autocomplete="off" class="layui-input">
+                                    <input name="lawCaseFineCode" value="${value.lawCaseFineCode}" placeholder="" autocomplete="off" class="layui-input" disabled>
                                 </div>
                                 <div class="layui-form-mid layui-word-aux">罚&nbsp;&nbsp;&nbsp;</div>
                                 <div class="layui-input-inline" style="width: 80px">
-                                    <input name="lawCaseCode" placeholder="" autocomplete="off" class="layui-input">
+                                    <input name="lawCaseCode" value="${value.lawCaseCode}" placeholder="" autocomplete="off" class="layui-input" disabled>
                                 </div>
                                 <div class="layui-form-mid layui-word-aux">号&nbsp;&nbsp;&nbsp;</div>
 
@@ -233,9 +230,7 @@
                                         <input type="text" id="inquireDate"  name="inquireDateStr" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -278,8 +273,6 @@
                                         <input type="text" id="dealDate" name="dealDate" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <div class="layui-form-item">
@@ -303,7 +296,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

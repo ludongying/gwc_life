@@ -238,7 +238,7 @@ function clearListen(key){
 var submitFrom=function(param){
     var ajax = new param.lay.$ax(Feng.ctxPath + param.url, function (data) {
         if (data.success) {
-            Feng.success("提交成功!");
+            Feng.success("提交成功!"+data.message);
             if(param.next){
                 window.location.href=param.next+"&id="+data.content;
             }else{

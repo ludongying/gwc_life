@@ -18,6 +18,7 @@ public class BeanFactory {
     public LocData locData(){
         return new LocData();
     }
+
     @Bean
     public FileManager fileManager(){
         return new FileManager();

@@ -35,16 +35,7 @@ public interface AgencyService extends IService<AgencyEntity> {
       * @param fineCode
       * @return
       */
-     String getLawCode(String fineCode);
-
-     /**
-      * 案件编号是否存在
-      * @param fineCode
-      * @param code
-      * @return
-      */
-     BaseResult existLawCode(String fineCode,String code);
-
+     Integer getLawCode(String fineCode);
 
 
 

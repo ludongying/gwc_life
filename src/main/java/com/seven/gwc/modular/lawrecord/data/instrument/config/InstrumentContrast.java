@@ -1,12 +1,10 @@
-package com.seven.gwc.modular.lawrecord.data.word.config;
+package com.seven.gwc.modular.lawrecord.data.instrument.config;
 
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
@@ -16,21 +14,23 @@ import java.util.Map;
 import java.util.Objects;
 
 
+/**
+ * @author zzl
+ * 文书模板
+ */
 @Slf4j
 @Configuration
 public class InstrumentContrast {
 
    private Map<String,String> map;
 
-   @Value("${FILE_UPLOAD_PATH_FILE}")
-   private String file_upload_path;
+   private Map<String,String> fixedValue;
 
-   private String savePath;
-
-   private final String path=System.getProperty("user.dir")+"/src/main/resources/lawrecord/config.xls";
+   private final String path="src/main/resources/lawrecord/config.xls";
 
    public InstrumentContrast(){
       this.map=new HashMap<>();
+      this.fixedValue=new HashMap<>();
       readExcel();
    }
 
@@ -52,8 +52,11 @@ public class InstrumentContrast {
                HSSFCell value = row.getCell(1);
                HSSFCell name = row.getCell(2);
                if(Objects.nonNull(name)){
-                  String val=Objects.nonNull(value)?value.toString():"";
-                  map.put("${"+name.toString()+"}",val);
+                  String val=Objects.nonNull(value)?value.toString().trim():"";
+                  map.put(name.toString(),val);
+                  if(!val.isEmpty()){
+                     fixedValue.put(name.toString(),val);
+                  }
                }
             }
          }
@@ -67,15 +70,7 @@ public class InstrumentContrast {
       return map;
    }
 
-   public String getSavePath() {
-      return file_upload_path+ FileUtils.file_sep +"instrument";
+   public Map<String, String> getFixedValue() {
+      return fixedValue;
    }
-
-   public static void main(String[] args) {
-      InstrumentContrast instrumentConfig = new InstrumentContrast();
-      Map<String, String> map = instrumentConfig.getMap();
-      System.out.println(map);
-
-   }
-
 }

@@ -2,27 +2,31 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
+import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import com.seven.gwc.modular.lawrecord.dto.*;
+import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.RecordStatusEnum;
 import com.seven.gwc.modular.lawrecord.service.*;
+import com.seven.gwc.modular.lawrecord.vo.AgencyVO;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
-import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -37,10 +41,10 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
 
     @Autowired
     private LocData locData;
-
+    @Autowired
+    private InstrumentContrast instrumentContrast;
     @Autowired
     private LawRecordMapper lawRecordMapper;
-
     @Autowired
     private AgencyService agencyService;
     @Autowired
@@ -50,13 +54,13 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
     @Autowired
     private InquisitionService inquisitionService;
     @Autowired
-    private ReasonService reasonService;
-    @Autowired
     private EvidenceService evidenceService;
     @Autowired
     private DecisionService decisionService;
     @Autowired
     private DecisionSafeService decisionSafeService;
+    @Autowired
+    private OperatorService operatorService;
 
 
     @Override
@@ -65,13 +69,24 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
     }
 
     @Override
-    public LawRecordEntity createLawRecord(String userId,Integer lawType) {
+    public LawRecordEntity createAgencyRecord(String userId,Integer lawType) {
         LawRecordEntity lawRecordEntity=new LawRecordEntity();
         lawRecordEntity.init(userId);
         lawRecordEntity.setLawType(lawType);
         lawRecordEntity.setStatus(RecordStatusEnum.OPEN_CASE.getCode());
         this.save(lawRecordEntity);
         return lawRecordEntity;
+    }
+
+    @Override
+    public LawRecordEntity createLawRecord(String userId, Integer lawType) {
+        LawRecordEntity lawRecord = createLawRecord(userId, lawType);
+        AgencyVO agencyVO=new AgencyVO();
+        agencyVO.setId(lawRecord.getId());
+        agencyVO.setLawCaseFineCode(GwcConsts.getLawCaseFineCode());
+        agencyVO.setLawCaseCode(agencyService.getLawCode(agencyVO.getLawCaseFineCode()));
+        agencyService.updateAgency(agencyVO);
+        return lawRecord;
     }
 
     @Override
@@ -136,6 +151,13 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
             if(Objects.nonNull(decisionSafeDTO)){decisionSafeDTO.setDetailContent();}
             model.addAttribute("decision",decisionSafeDTO);
         }
+    }
+
+    private Map<String,String> getParams(String id){
+        Map<String, String> map = instrumentContrast.getMap();
+
+        return null;
+
     }
 
 

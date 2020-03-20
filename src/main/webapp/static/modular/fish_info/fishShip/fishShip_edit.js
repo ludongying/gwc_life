@@ -200,4 +200,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         fileName = name;
         $("#fileName").val(fileName);
     }
+
+    //放大预览
+    $('#uploader-list img').on('click', function () {
+        layer.photos({
+            photos: '#uploader-list',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
 });

@@ -23,18 +23,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     //表单验证
     loadVerify(form);
 
-    //图片放大
-    var renderImg = function () {
-        $('#boatPreviewMulti img').on('click', function () {
-            layer.photos({
-                photos: '#boatPreviewMulti',
-                shadeClose: false,
-                closeBtn: 2,
-                anim: 0
-            });
-        })
-    }
-
     //初始化执法船信息管理的详情数据
     var ajax = new $ax(Feng.ctxPath + "/ship/detail/" + Feng.getUrlParam("shipId"));
     var result = ajax.start();
@@ -49,13 +37,16 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             // alert(imgStrArr.length);
             for (var i = 0; i < imgStrArr.length; i++) {
                 if (imgStrArr[i] != '')
-                    $('#boatPreviewMulti').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
-                //如何绑定删除事件？？？
+                    $('#boatPreviewMulti').append(
+                        '<div id="" class="file-iteme">' +
+                        '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                        '<img style="width: 100px;height: 100px;" src='+ imgStrArr[i] +'>' +
+                        // '<div class="info">' + res.content.fileName + '</div>' +
+                        '</div>'
+                    );
             }
         }
     });
-    //多图片放大预览
-    renderImg();
 
     //船籍获取下拉框
     $.ajax({
@@ -117,20 +108,21 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         , exts: 'jpg|png|jpeg'
         , multiple: true
         , number: 6
-        , auto: false
-        , bindAction: '#UploadBtn'
-        , choose: function (obj) {
-            //预读本地文件示例，不支持ie8
-            obj.preview(function (index, file, result) {
-                $('#boatPreviewMulti').append('<img src="' + result + '" id="' + index + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">');
-                //双击删除指定预上传图片
-                $('#' + index).bind('dblclick', function () {
-                    delete files[index];//删除指定图片
-                    $(this).remove();
-                });
-                //放大预览
-                renderImg();
-            });
+        // , auto: false
+        // , bindAction: '#UploadBtn'
+        , before: function (obj) {
+            // // files = obj.pushFile();
+            // //预读本地文件示例，不支持ie8
+            // obj.preview(function (index, file, result) {
+            //     // $('#boatPreviewMulti').append('<img src="' + result + '" id="' + index + '" alt="' + file.name + '" class="layui-upload-img" width="200px" height="140px">');
+            //     // //双击删除指定预上传图片
+            //     // $('#' + index).bind('click', function () {
+            //     //     delete files[index];//删除指定图片
+            //     //     $(this).remove();
+            //     // });
+            //     //放大预览
+            //     renderImg();
+            // });
         }
         , done: function (res, index, upload) {
             if (res.success) {//上传图片成功
@@ -139,6 +131,14 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
                 var appendUrl = $('#imageFilePath').val().trim();
                 appendUrl = appendUrl + "," + res.content.path;
                 $('#imageFilePath').val(appendUrl);
+                //显示图片
+                $('#boatPreviewMulti').append(
+                    '<div id="" class="file-iteme">' +
+                    '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                    '<img style="width: 100px;height: 100px;" src='+ res.content.url +'>' +
+                    '<div class="info">' + res.content.fileName + '</div>' +
+                    '</div>'
+                );
             }
         },
         error: function () {
@@ -146,19 +146,31 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    //清空图片列表
-    $('#PreviewClearBtn').click(function () {
-        // var ajax = new $ax(Feng.ctxPath + "/file/deleteFile", function (data) {
-        //     if (data.success == true) {
-        //         Feng.success("修改成功!");
-        //     } else {
-        //         Feng.success(data.message);
-        //     }
-        // }, function (data) {
-        //     Feng.error("删除失败!" + data.message + "!");
-        // });
-        $('#boatPreviewMulti').empty();
-        $('#imageFilePath').val("");
+    $(".file-iteme").on("mouseenter mouseleave",  function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            // $(this).children(".info").fadeIn("fast");
+            $(this).children(".handle").fadeIn("fast");
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            // $(this).children(".info").hide();
+            $(this).children(".handle").hide();
+        }
     });
 
+    // 删除图片
+    $(".file-iteme .handle").on("click", function(event){
+        $(this).parent().remove();
+        $(this).parent()[0].textContent;
+    });
+
+    //放大预览
+    $('#boatPreviewMulti img').on('click', function () {
+        layer.photos({
+            photos: '#boatPreviewMulti',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
 });

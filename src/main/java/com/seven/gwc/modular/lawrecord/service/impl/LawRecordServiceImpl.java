@@ -14,6 +14,7 @@ import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.*;
+import com.seven.gwc.modular.lawrecord.entity.InquireBase;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
@@ -30,6 +31,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * description : 执法记录服务实现类
@@ -97,16 +99,22 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<LawRecordDTO> lawRecordDTOS = lawRecordMapper.listLawRecord(lawRecordVO);
+        System.out.println(">>>"+JSON.toJSONString(lawRecordDTOS));
         PageInfo pageInfo = new PageInfo<>(lawRecordDTOS);
         if (Objects.nonNull(lawRecordDTOS) && !lawRecordDTOS.isEmpty()) {
             lawRecordDTOS.stream().forEach(dto -> {
                 if (Objects.nonNull(dto.getLawCaseSource())) {
                     dto.setLawCaseSourceName(LawCaseSourceEnum.findByCode(dto.getLawCaseSource()).getMessage());
                 }
+                List<InquireBase> inquires = dto.getInquires();
+                if(Objects.nonNull(inquires) && !inquires.isEmpty()){
+                    String name = inquires.stream().map(InquireBase::getInvestigateName).filter(Objects::nonNull).filter(s->!s.trim().isEmpty()).collect(Collectors.joining(","));
+                    String tel=inquires.stream().map(InquireBase::getInvestigateTel).filter(Objects::nonNull).filter(s->!s.trim().isEmpty()).collect(Collectors.joining(","));
+                    dto.setInvestigateName(name);
+                    dto.setInvestigateTel(tel);
+                }
             });
         }
-        System.out.println(">>>输出测试");
-        System.out.println(JSON.toJSONString(lawRecordMapper.listLawRecord2(lawRecordVO)));
         return new BaseResultPage().createPage(pageInfo);
 
     }

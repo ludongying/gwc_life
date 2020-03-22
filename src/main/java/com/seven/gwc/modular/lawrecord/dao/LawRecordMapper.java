@@ -22,6 +22,7 @@ public interface LawRecordMapper extends BaseMapper<LawRecordEntity> {
      * @return
      */
     List<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO);
+    @Deprecated
     List<LawRecordDTO> listLawRecord2(LawRecordVO lawRecordVO);
 
     /**

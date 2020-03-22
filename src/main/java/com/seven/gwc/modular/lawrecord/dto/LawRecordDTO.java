@@ -1,7 +1,7 @@
 package com.seven.gwc.modular.lawrecord.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
+import com.seven.gwc.modular.lawrecord.entity.InquireBase;
 import lombok.Data;
 
 import java.util.Date;
@@ -76,6 +76,6 @@ public class LawRecordDTO {
     /**
      * 被询问人信息
      */
-    private List<InquireEntity> inquires;
+    private List<InquireBase> inquires;
 
 }

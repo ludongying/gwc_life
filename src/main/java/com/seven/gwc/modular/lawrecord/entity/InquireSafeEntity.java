@@ -1,7 +1,6 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -17,15 +16,13 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("law_record_inquire_safe")
-public class InquireSafeEntity extends GwcBaseEntity {
+public class InquireSafeEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
-    /** 记录id */
-    private String id;
 
-    /** 姓名 */
-    private String investigateName;
+
+
 
     /** 性别 */
     private Integer investigateSex;
@@ -36,8 +33,7 @@ public class InquireSafeEntity extends GwcBaseEntity {
     /** 职务 */
     private Integer investigatePosition;
 
-    /** 手机号码 */
-    private String investigateTel;
+
 
     /** 地址 */
     private String investigateAddr;

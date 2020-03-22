@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
-        <result column="id" property="id" />
+        <id column="id" property="id" />
         <result column="law_type" property="lawType" />
         <result column="status" property="status" />
         <result column="law_case_code" property="lawCaseCode"/>
@@ -12,7 +12,8 @@
         <result column="ship_name" property="shipName" />
         <result column="punish_person_type" property="punishPersonType" />
         <result column="create_date" property="createDate" />
-            <collection property="inquires" ofType="com.seven.gwc.modular.lawrecord.entity.InquireEntity">
+        <collection property="inquires" ofType="com.seven.gwc.modular.lawrecord.entity.InquireBase">
+            <id column="inquire_id" property="id"/>
             <result column="investigate_name" property="investigateName"/>
             <result column="investigate_tel" property="investigateTel"/>
         </collection>
@@ -31,7 +32,7 @@
            )
     </sql>
 
-    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
+    <select id="listLawRecord2" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
         SELECT
             law_record.id,
             law_record.law_type,
@@ -89,14 +90,15 @@
 
     </select>
 
-    <select id="listLawRecord2" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultMap="BaseResultMap">
+    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultMap="BaseResultMap">
         SELECT
-        law_record.id,
+        law_record.id id,
         law_record.law_type,
         law_record.status,
         <include refid="law_case_code"/> law_case_code,
         law_record_agency.law_case_source,
         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
+        (CASE law_record.law_type WHEN 1 THEN law_record_inquire.id ELSE law_record_inquire_safe.id END) inquire_id,
         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
         (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,

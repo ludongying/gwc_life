@@ -2,7 +2,6 @@ package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,18 +19,16 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("law_record_inquire")
-public class InquireEntity extends GwcBaseEntity {
+public class InquireEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
-    /** 询问笔录id */
-    private String id;
+
 
     /** 记录id */
     private String recordId;
 
-    /** 姓名 */
-    private String investigateName;
+
 
     /** 性别(枚举) */
     private Integer investigateSex;
@@ -42,8 +39,7 @@ public class InquireEntity extends GwcBaseEntity {
     /** 职务 */
     private Integer investigatePosition;
 
-    /** 手机号码 */
-    private String investigateTel;
+
 
     /** 地址 */
     private String investigateAddr;

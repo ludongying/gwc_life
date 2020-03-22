@@ -2,10 +2,11 @@ package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.seven.gwc.core.base.GwcIdBaseEntity;
-import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.util.List;
 
 
 /**
@@ -37,9 +38,18 @@ public class LawRecordEntity extends GwcIdBaseEntity {
     /** 副案由 */
     private String secondReason;
 
+    /**
+     * 办案人员
+     */
+    private List<OperatorEntity> operators;
+
     /** 文书名称
      private String writFileName;
      */
+
+
+
+
 
 
 }

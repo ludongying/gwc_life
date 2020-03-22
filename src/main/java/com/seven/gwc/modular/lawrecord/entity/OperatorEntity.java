@@ -30,4 +30,7 @@ public class OperatorEntity extends GwcIdBaseEntity {
     /** 执法编码 */
     private String lawCredentialCode;
 
+    /** 执法人员ID */
+    private String lawPersonId;
+
 }

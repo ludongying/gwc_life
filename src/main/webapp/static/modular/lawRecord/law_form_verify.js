@@ -1,5 +1,5 @@
-
-function loadVerify(form){
+//转移到common.js
+/*function loadVerify(form){
     //自定义验证规则
     form.verify({
         length20: function(value){
@@ -50,7 +50,7 @@ function loadVerify(form){
 
 
     });
-}
+}*/
 
 
 /**

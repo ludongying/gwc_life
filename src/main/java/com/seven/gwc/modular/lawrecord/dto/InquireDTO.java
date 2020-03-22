@@ -9,6 +9,7 @@ import com.seven.gwc.modular.lawrecord.enums.ShipRealTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,6 +33,11 @@ public class InquireDTO extends InquireEntity {
      * 区
      */
     private String investigateAddrRegion;
+
+    /**
+     * 补录信息
+     */
+    private List<InquireEntity> inquireContent;
 
     /**************全详情*********************/
 

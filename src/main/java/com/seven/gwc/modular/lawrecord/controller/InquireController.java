@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("lawRecord/inquire")
 @Slf4j
-public class InquireController extends BaseController {
+public class  InquireController extends BaseController {
 
     @Autowired
     private InquireService inquireService;

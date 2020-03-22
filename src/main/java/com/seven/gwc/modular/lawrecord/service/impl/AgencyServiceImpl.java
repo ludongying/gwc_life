@@ -52,11 +52,14 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
          //设置办案人员
          operatorService.updateOperator(agencyVO.getUserId(),agencyVO.getOperators(),agencyVO.getId());
          //查看编号是否被占用
-        boolean res = this.existLawCode(agencyVO.getLawCaseFineCode(), agencyVO.getLawCaseCode());
-        if(!res){
-             agencyVO.setLawCaseCode(this.getLawCode(agencyVO.getLawCaseFineCode()));
-             baseResult.setMessage("案件编号已被占用 更改为:"+agencyVO.getLawCaseFineCode()+"罚"+agencyVO.getLawCaseCode()+"号");
-         }
+        AgencyEntity agency = this.getById(agencyVO.getId());
+        if(Objects.isNull(agency) || Objects.isNull(agency.getLawCaseCode())){
+            boolean res = this.existLawCode(agencyVO.getLawCaseFineCode(), agencyVO.getLawCaseCode());
+            if(!res){
+                agencyVO.setLawCaseCode(this.getLawCode(agencyVO.getLawCaseFineCode()));
+                baseResult.setMessage("案件编号已被占用 更改为:"+agencyVO.getLawCaseFineCode()+"罚"+agencyVO.getLawCaseCode()+"号");
+            }
+        }
          this.saveOrUpdate(agencyVO);
          baseResult.setContent(agencyVO.getId());
          return baseResult;
@@ -72,7 +75,7 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
             detail.setTimeStr();
             //此处设置地址
             detail.setOperators(operatorService.getByRecord(id));
-
+            detail.setPersons();
             detail.setLawCodeStr();
         }
         return detail;

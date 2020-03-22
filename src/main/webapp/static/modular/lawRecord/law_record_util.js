@@ -112,6 +112,32 @@ function loadAddr($,form,stateCode,cityCode,region){
     });
 }
 
+function loadAddrIndex(param){
+     let $=param.$;
+     let form=param.form;
+     let stateCode=param.stateCode;
+     let cityCode=param.cityCode;
+     let region=param.region;
+     let index=param.index;
+    //初始化数据
+    $(".addr_state"+index).html(loc.getStateOptions(stateCode));
+    let code=$(".addr_state"+index).val();
+    $(".addr_city"+index).html(loc.getCityOptions(code,cityCode));
+    if(region){
+        $(".addr_region"+index).val(region);
+    }
+
+    //增加监听
+    form.on('select(addr_state'+index+')', function(data){
+        $(data.elem).parent().parent().find(".addr_city"+index).html(loc.getCityOptions(data.value));
+        if(!region){region=""}
+        $(data.elem).parent().parent().find(".addr_region"+index).val(region);
+        //清空数据3
+        form.render();
+    });
+}
+
+
 
 /**
  *获取地址

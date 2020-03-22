@@ -24,8 +24,11 @@ public class InquireEntity extends GwcBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    /** 记录id */
+    /** 询问笔录id */
     private String id;
+
+    /** 记录id */
+    private String recordId;
 
     /** 姓名 */
     private String investigateName;
@@ -100,8 +103,6 @@ public class InquireEntity extends GwcBaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date shipFishAreaDate;
-
-
 
 
 

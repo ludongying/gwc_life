@@ -68,7 +68,7 @@
                     y += '      <span class="layui-body-header-title"></span>';
                     y += '      <span class="layui-breadcrumb pull-right">';
                     y += '         <a ew-href="' + c + '">首页</a>';
-                    y += "         <a><cite></cite></a>";
+                    y += "         <a ew-href='"+x+"'><cite></cite></a>";
                     y += "      </span>";
                     y += "   </div>";
                     y += '   <div style="-webkit-overflow-scrolling: touch;">';

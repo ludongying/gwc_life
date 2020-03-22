@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
@@ -104,6 +105,8 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
                 }
             });
         }
+        System.out.println(">>>输出测试");
+        System.out.println(JSON.toJSONString(lawRecordMapper.listLawRecord2(lawRecordVO)));
         return new BaseResultPage().createPage(pageInfo);
 
     }

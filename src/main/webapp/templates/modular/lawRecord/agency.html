@@ -58,6 +58,10 @@
         margin-bottom: 0;
     }
 
+    .layui-form-select dl {
+        max-height:200px;
+    }
+
 </style>
 
 <div class="layui-fluid">
@@ -321,13 +325,19 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">姓名</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" data-id="" autocomplete="off" class="layui-input">
+                                        <select name="personId1" lay-filter="law_person" lay-search=""  id="law_person1">
+                                            <option value="">请选择执法人员</option>
+                                             @for(item in person){
+                                             <option value="${item.id}"  data-certificate="${item.personId}">${item.personName}</option>
+                                             @}
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">执法证号</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" data-id="" autocomplete="off" class="layui-input">
+                                        <input type="text" name="credentialCode1" value=""  autocomplete="off" class="layui-input" disabled>
+                                        <input type="hidden" id="id1" name="id1" value="">
                                     </div>
                                 </div>
                             </div>
@@ -336,13 +346,19 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">姓名</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" data-id="" autocomplete="off" class="layui-input">
+                                        <select name="personId2" lay-filter="law_person" lay-search="" lay-verify="person2" id="law_person2">
+                                            <option value="">请选择执法人员</option>
+                                            @for(item in person){
+                                            <option value="${item.id}"  data-certificate="${item.personId}">${item.personName}</option>
+                                            @}
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">执法证号</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" data-id="" autocomplete="off" class="layui-input">
+                                        <input type="text" name="credentialCode2" value=""  autocomplete="off" class="layui-input" disabled>
+                                        <input type="hidden" id="id2" name="id2" value="">
                                     </div>
                                 </div>
                             </div>

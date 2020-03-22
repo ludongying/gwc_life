@@ -54,11 +54,9 @@ public class LocData {
         }
     }
 
-
     public List<StateData> getStateDataList() {
         return stateDataList;
     }
-
 
 
 }

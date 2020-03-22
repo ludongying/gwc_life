@@ -1,9 +1,11 @@
 package com.seven.gwc.modular.lawrecord.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author : zzl
@@ -32,10 +34,6 @@ public class LawRecordDTO {
      */
     private String shipName;
     /**
-     * 被询问人
-     */
-    private String investigateTel;
-    /**
      * 案件类型
      */
     private Integer lawType;
@@ -43,8 +41,14 @@ public class LawRecordDTO {
      * 案件类型名称
      */
     private String lawTypeName;
+
     /**
-     * 被执法人
+     * 被询问人
+     */
+    private String investigateTel;
+
+    /**
+     * 被询问人电话
      */
     private String investigateName;
 
@@ -68,5 +72,10 @@ public class LawRecordDTO {
      * 处罚人类型
      */
     private Integer punishPersonType;
+
+    /**
+     * 被询问人信息
+     */
+    private List<InquireEntity> inquires;
 
 }

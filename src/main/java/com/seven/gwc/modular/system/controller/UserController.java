@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seven.gwc.config.constant.ConfigConsts;
 import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.annotation.Permission;
@@ -9,19 +11,17 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.dictmap.DeleteDict;
 import com.seven.gwc.core.dictmap.UserDict;
+import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
-import com.seven.gwc.core.exception.BusinessException;
-import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.DocFlavor;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;

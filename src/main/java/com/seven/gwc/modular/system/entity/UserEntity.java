@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.seven.gwc.core.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.seven.gwc.core.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.management.StringValueExp;
 import java.util.Date;
 
 /**
@@ -46,7 +45,7 @@ public class UserEntity extends BaseEntity {
     private String name;
 
     /** 生日 */
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 

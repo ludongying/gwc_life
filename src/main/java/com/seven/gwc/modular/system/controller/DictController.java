@@ -74,8 +74,8 @@ public class DictController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<DictTypeEntity> list(String dictTypeId) {
-        List<DictEntity> list = dictService.selectDict(dictTypeId);
+    public BaseResultPage<DictEntity> list(String dictTypeId, String name) {
+        List<DictEntity> list = dictService.selectDict(dictTypeId, name);
         return new BaseResultPage().treeData(list);
     }
 

@@ -15,8 +15,12 @@ import java.util.List;
 @Getter
 public enum InstrumentEnum {
 
-    INSTRUMENT_01(1,"封面_法人.docx", 1,Arrays.asList(2),Arrays.asList(1),Arrays.asList(1)),
-    INSTRUMENT_02(2,"封面_目录.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1));
+    INSTRUMENT_01(1,"01封面_法人.docx", 1,Arrays.asList(2),Arrays.asList(1),Arrays.asList(1)),
+    INSTRUMENT_02(2,"02封面_目录.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_03(3,"03行政处罚决定书_法人.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_04(4,"06勘验笔录.docx.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_05(5,"07询问笔录.docx.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_06(6,"12查封（扣押）决定书和清单.docx", 1,Arrays.asList(2),Arrays.asList(1,2),Arrays.asList(1));
 
     Integer code;
     /**

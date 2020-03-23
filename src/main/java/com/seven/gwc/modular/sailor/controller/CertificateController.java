@@ -140,8 +140,19 @@ public class CertificateController extends BaseController {
     @RequestMapping("/detail/{certificateId}")
     @ResponseBody
     public CertificateEntity detail(@PathVariable String certificateId) {
-        return certificateService.getCertificateById(certificateId);
+        return certificateService.getById(certificateId);
     }
+
+//    /**
+//     * 通过船员id获取其执法证编号
+//     * @param personId 船员id
+//     * @return
+//     */
+//    @RequestMapping("/getLawCode/{personId}")
+//    @ResponseBody
+//    public String  getLawCode(@PathVariable String personId){
+//        return certificateService.getLawCode(personId);
+//    }
 
 }
 

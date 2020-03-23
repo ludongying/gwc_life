@@ -50,5 +50,10 @@
 <!--        </if>-->
     </select>
 
+    <select id="CertificateLawEntityList" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
+        select c.* from ship_info_certificate c
+        left join sys_dict d on d.id = c.certificate_type
+        where c.delete_flag = 1 and d.name = '执法证' and #{ids} like CONCAT('%',c.id,'%')
+    </select>
 
 </mapper>

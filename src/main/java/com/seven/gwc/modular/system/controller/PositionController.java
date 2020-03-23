@@ -100,10 +100,7 @@ public class PositionController extends BaseController {
         if (position.getSort() == null) {
             position.setSort(0);
         }
-        if (!positionService.add(position)) {
-            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_NAME);
-        }
-        return SUCCESS;
+        return positionService.add(position);
     }
 
     /**
@@ -129,10 +126,7 @@ public class PositionController extends BaseController {
         if (position.getSort() == null) {
             position.setSort(0);
         }
-        if (!positionService.update(position, menuIds)) {
-            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_NAME);
-        }
-        return SUCCESS;
+        return positionService.update(position, menuIds);
     }
 
     /**

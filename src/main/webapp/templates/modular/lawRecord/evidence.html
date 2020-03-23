@@ -48,7 +48,11 @@
         width: 120px;
     }
 
-
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
 </style>
 
 <div class="layui-fluid">
@@ -60,8 +64,8 @@
                 <input type="hidden" id="evidence_content" name="content" value="">
                 <div class="layui-col-md12">
 <!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
-<!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->
-                    <div class="layui-card">
+<!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->^
+                    <div class="layui-card" style="height: 110px">
                         <div class="container">
                             <div style="display:flex;">
                                 <div style="flex:1;display:flex">
@@ -144,20 +148,24 @@
                 <div id="evidence_box">
 
                 </div>
-                <div style="background-color: white;">
-                    <div style="text-align: center; margin: auto 10px; font-size: 17px" >
-                        <button id="addEvidence" type="button" class="layui-btn layui-btn-primary" style="border:1px dotted;width: 99%;" >+&nbsp;&nbsp;添加内容</button>
+
+                <div class="layui-col-md12" >
+                    <div class="layui-card" style="border:1px dotted;width: 100%; text-align: center">
+                        <div class="layui-card-header" >
+                            <button id="addEvidence" type="button" class="layui-btn layui-btn-primary" style="border:0; width: 100%;">+&nbsp;&nbsp;添加内容</button>
+                        </div>
                     </div>
                 </div>
 
 
+
                 <div class="layui-col-md12 ">
-                    <div class="layui-card">
-                        <div class="layui-card-header" style="text-align: center;">
+                    <div class="layui-card" style="padding: 20px">
+                        <div  style="text-align: center;">
                             <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
                             <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
                         </div>
-                        <div style="margin:5px;">&nbsp;</div>
+
 
                     </div>
                 </div>

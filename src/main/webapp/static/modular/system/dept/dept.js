@@ -108,6 +108,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable','admin'], function () {
         top.layui.admin.open({
             type: 2,
             title: '添加部门',
+            area: ["800px", "450px"],
             content: Feng.ctxPath + '/dept/dept_add',
             end: function () {
                 admin.getTempData('formOk') && Dept.initTable(Dept.tableId);
@@ -123,6 +124,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable','admin'], function () {
         top.layui.admin.open({
             type: 2,
             title: '编辑部门',
+            area: ["800px", "450px"],
             content: Feng.ctxPath + '/dept/dept_edit?id=' + data.id,
             end: function () {
                 admin.getTempData('formOk') && Dept.initTable(Dept.tableId);
@@ -136,7 +138,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable','admin'], function () {
      * @param data 点击按钮时候的行数据
      */
     Dept.onDeleteDept = function (data) {
-        Feng.confirm("是否删除部门《" + data.fullName + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/dept/delete", function (data) {
                 if (data.success == true) {
                     Feng.success("删除成功!");

@@ -151,7 +151,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 url:"/lawRecord/finish"
             })
         } else if(layEvent === 'instrument'){
-            msg_tip($,"文书还未开发");
+            LawRecord.onInstrument(data);
         } else if(layEvent === 'detail'){
             window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
         } else if(layEvent === 'export'){
@@ -162,6 +162,16 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
 
+    /**
+     * 点击查看渔船信息
+     */
+    LawRecord.onInstrument = function (data) {
+        func.open({
+            title: '文书',
+            area: ['1000px', '500px'],
+            content: Feng.ctxPath + '/lawRecord/instrument?id=' + data.id,
+        });
+    };
 
 
 

@@ -2,28 +2,37 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.*;
+import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.RecordStatusEnum;
 import com.seven.gwc.modular.lawrecord.service.*;
+import com.seven.gwc.modular.lawrecord.vo.AgencyVO;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
-import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.ui.Model;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.seven.gwc.modular.lawrecord.data.file.FileUtils.file_2_file_sep;
 
 /**
  * description : 执法记录服务实现类
@@ -37,10 +46,10 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
 
     @Autowired
     private LocData locData;
-
+    @Autowired
+    private InstrumentContrast instrumentContrast;
     @Autowired
     private LawRecordMapper lawRecordMapper;
-
     @Autowired
     private AgencyService agencyService;
     @Autowired
@@ -50,13 +59,13 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
     @Autowired
     private InquisitionService inquisitionService;
     @Autowired
-    private ReasonService reasonService;
-    @Autowired
     private EvidenceService evidenceService;
     @Autowired
     private DecisionService decisionService;
     @Autowired
     private DecisionSafeService decisionSafeService;
+    @Autowired
+    private OperatorService operatorService;
 
 
     @Override
@@ -65,7 +74,7 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
     }
 
     @Override
-    public LawRecordEntity createLawRecord(String userId,Integer lawType) {
+    public LawRecordEntity createAgencyRecord(String userId,Integer lawType) {
         LawRecordEntity lawRecordEntity=new LawRecordEntity();
         lawRecordEntity.init(userId);
         lawRecordEntity.setLawType(lawType);
@@ -75,20 +84,47 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
     }
 
     @Override
+    public LawRecordEntity createLawRecord(String userId, Integer lawType) {
+        LawRecordEntity lawRecord = createAgencyRecord(userId, lawType);
+        AgencyVO agencyVO=new AgencyVO();
+        agencyVO.setId(lawRecord.getId());
+        agencyVO.setShortName(GwcConsts.shortName);
+        agencyVO.setLawCaseFineCode(LocalDate.now().getYear());
+        agencyVO.setLawCaseCode(agencyService.getLawCode(agencyVO.getLawCaseFineCode()));
+        agencyService.updateAgency(agencyVO);
+        return lawRecord;
+    }
+
+    @Override
     public BaseResultPage<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<LawRecordDTO> lawRecordDTOS = lawRecordMapper.listLawRecord(lawRecordVO);
         PageInfo pageInfo = new PageInfo<>(lawRecordDTOS);
-        if(Objects.nonNull(lawRecordDTOS) && !lawRecordDTOS.isEmpty()){
-            lawRecordDTOS.stream().forEach(dto ->{
-                        if(Objects.nonNull(dto.getLawCaseSource())){
-                            dto.setLawCaseSourceName(LawCaseSourceEnum.findByCode(dto.getLawCaseSource()).getMessage());
-                        } });
+        if (Objects.nonNull(lawRecordDTOS) && !lawRecordDTOS.isEmpty()) {
+            lawRecordDTOS.stream().forEach(dto -> {
+                if (Objects.nonNull(dto.getLawCaseSource())) {
+                    dto.setLawCaseSourceName(LawCaseSourceEnum.findByCode(dto.getLawCaseSource()).getMessage());
+                }
+                //数据美化
+                dto.setShipName(handleStr(dto.getShipName()));
+                dto.setInvestigateName(handleStr(dto.getInvestigateName()));
+                dto.setInvestigateTel(handleStr(dto.getInvestigateTel()));
+            });
         }
         return new BaseResultPage().createPage(pageInfo);
-
     }
+
+    private String handleStr(String str){
+          if(Objects.nonNull(str) && !str.trim().isEmpty()){
+              if(str.indexOf(file_2_file_sep)>-1){
+                  String[] arr = str.split(file_2_file_sep);
+                  return Stream.of(arr).map(String::trim).filter(s -> !s.isEmpty()).distinct().collect(Collectors.joining(","));
+              }
+          }
+          return str;
+    }
+
 
     @Override
     public BaseResult invalidRecord(String id) {
@@ -136,6 +172,26 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
             model.addAttribute("decision",decisionSafeDTO);
         }
     }
+
+    @Override
+    public void generateInstrument(String id) {
+
+    }
+
+    /**
+     * 获取所有录入数值
+     * @param id
+     * @return
+     */
+    private Map<String,String> getParams(String id){
+        Map<String, String> map = instrumentContrast.getMap();
+
+        return null;
+
+    }
+
+
+
 
 
 }

@@ -47,7 +47,11 @@
     .label_bg label{
         width: 110px;
     }
-
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
 
 </style>
 
@@ -60,7 +64,7 @@
                 <div class="layui-col-md12">
 <!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
 <!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->
-                    <div class="layui-card">
+                    <div class="layui-card" style="height: 110px">
                         <div class="container">
                             <div style="display:flex;">
                                 <div style="flex:1;display:flex">
@@ -133,31 +137,30 @@
                                     </div>
                                 </div>
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">性别</label>
-                                    <div class="layui-input-inline">
+                                    <label class="layui-form-label" style="width: 50px">性别</label>
+                                    <div class="layui-input-inline" style="width: 150px">
                                         <input type="radio" name="investigateSex" value="1" title="男" checked="">
                                         <input type="radio" name="investigateSex" value="2" title="女">
                                     </div>
 
                                 </div>
 
+
                                 <div class="layui-inline">
-                                    <label class="layui-form-label" style="width: 50px">年龄</label>
-                                    <div class="layui-input-inline" style="width: 73px">
-                                        <input type="text"  name="investigateAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
+                                    <label class="layui-form-label" style="width:60px">身份证</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="identityCase" value="1" title="携带">
+                                        <input type="radio" name="identityCase" value="0" title="未携带" checked>
                                     </div>
                                 </div>
 
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">职务</label>
-                                    <div class="layui-input-inline" style="width: 110px">
-                                        <select name="investigatePosition">
-                                            @for(position in investigatePosition){
-                                            <option value="${position.code}">${position.message}</option>
-                                            @}
-                                        </select>
+                                    <label class="layui-form-label">身份证号码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="identityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
+
 
                             </div>
                             <div class="layui-form-item">
@@ -169,6 +172,23 @@
                                     </div>
                                 </div>
 
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width: 50px">年龄</label>
+                                    <div class="layui-input-inline" style="width:73px">
+                                        <input type="text"  name="investigateAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:40px">职务</label>
+                                    <div class="layui-input-inline">
+                                        <select name="investigatePosition">
+                                            @for(position in investigatePosition){
+                                            <option value="${position.code}">${position.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
 
 
                                 <div class="layui-inline" id="investigate_addr">
@@ -187,13 +207,6 @@
                                     </div>
                                     <div class="layui-input-inline" style="width: 90px">
                                         <input type="text"  name="investigateAddrRegion"  autocomplete="off" class="layui-input addr_region">
-                                    </div>
-                                </div>
-
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">身份证号码</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" name="identityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -356,12 +369,12 @@
 
 
                 <div class="layui-col-md12 ">
-                    <div class="layui-card">
-                        <div class="layui-card-header" style="text-align: center;">
+                    <div class="layui-card" style="padding: 20px">
+                        <div style="text-align: center;">
                             <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
                             <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
                         </div>
-                        <div style="margin:5px;">&nbsp;</div>
+
 
                     </div>
 

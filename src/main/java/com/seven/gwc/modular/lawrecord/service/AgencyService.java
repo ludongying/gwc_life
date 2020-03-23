@@ -30,4 +30,15 @@ public interface AgencyService extends IService<AgencyEntity> {
      AgencyDTO detail(String id);
 
 
+     /**
+      * 获取案件编号
+      * @param fineCode
+      * @return
+      */
+     Integer getLawCode(Integer fineCode);
+
+
+
+
+
 }

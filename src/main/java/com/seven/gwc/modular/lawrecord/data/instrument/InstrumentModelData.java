@@ -1,15 +1,16 @@
-package com.seven.gwc.modular.lawrecord.data.word;
+package com.seven.gwc.modular.lawrecord.data.instrument;
 
-import com.seven.gwc.core.util.SpringContextUtil;
-import com.seven.gwc.modular.lawrecord.data.word.config.InstrumentContrast;
-import lombok.Data;
+import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -117,15 +118,21 @@ public class InstrumentModelData {
      * 替换表格里面的变量
      */
     private void replaceInTable(){
-        // 替换表格中的指定文字
-        Iterator<XWPFTable> itTable = xwpfDocument.getTablesIterator();//获得Word的表格
-        while (itTable.hasNext()) { //遍历表格
+        // 替换表格中的指定文字 获得Word的表格
+        Iterator<XWPFTable> itTable = xwpfDocument.getTablesIterator();
+        //遍历表格
+        while (itTable.hasNext()) {
             XWPFTable table =itTable.next();
-            int count = table.getNumberOfRows();//获得表格总行数
-            for (int i = 0; i < count; i++) { //遍历表格的每一行
-                XWPFTableRow row = table.getRow(i);//获得表格的行
-                List<XWPFTableCell> cells = row.getTableCells();//在行元素中，获得表格的单元格
-                for (XWPFTableCell cell : cells) {   //遍历单元格
+            //获得表格总行数
+            int count = table.getNumberOfRows();
+            //遍历表格的每一行
+            for (int i = 0; i < count; i++) {
+                //获得表格的行
+                XWPFTableRow row = table.getRow(i);
+                //在行元素中，获得表格的单元格
+                List<XWPFTableCell> cells = row.getTableCells();
+                //遍历单元格
+                for (XWPFTableCell cell : cells) {
                     String text = cell.getText();
                     Matcher matcher = this.matcher(text);
                     if (matcher.find()) {

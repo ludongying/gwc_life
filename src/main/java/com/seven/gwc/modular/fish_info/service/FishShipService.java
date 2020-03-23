@@ -24,11 +24,10 @@ public interface FishShipService extends IService<FishShipEntity> {
      * 渔船信息查询列表
      *
      * @param code 船编码
-     * @param phone 船主手机
      * @param shipType 船类型
      * @return List<渔船信息服务对象>
      */
-    List<FishShipEntity> selectFishShip(String code, String phone, String shipType);
+    List<FishShipEntity> selectFishShip(String code, String shipType);
 
     /**
      * 渔船信息新建

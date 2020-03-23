@@ -34,6 +34,14 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      */
     LawRecordEntity createLawRecord(String userId,Integer lawType);
 
+    /**
+     * 创建执法记录
+     * @param userId
+     * @param lawType
+     * @return
+     */
+    LawRecordEntity createAgencyRecord(String userId,Integer lawType);
+
 
     /**
      * 加载列表
@@ -62,6 +70,12 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      * @param model
      */
     void detail(String id,Model model);
+
+    /**
+     * 生成文书
+     * @param id
+     */
+    void generateInstrument(String id);
 
 
 

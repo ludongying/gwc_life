@@ -1,24 +1,18 @@
-package com.seven.gwc.modular.lawrecord.data.word;
+package com.seven.gwc.modular.lawrecord.data.instrument;
 
-import fr.opensagres.xdocreport.itext.extension.IPdfWriterConfiguration;
-import org.apache.commons.collections4.MapUtils;
+
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.util.IOUtils;
-import org.apache.poi.xwpf.converter.core.BasicURIResolver;
-import org.apache.poi.xwpf.converter.core.FileImageExtractor;
-import org.apache.poi.xwpf.converter.core.utils.StringUtils;
-import org.apache.poi.xwpf.converter.pdf.PdfConverter;
-import org.apache.poi.xwpf.converter.pdf.PdfOptions;
-import org.apache.poi.xwpf.converter.xhtml.XHTMLConverter;
-import org.apache.poi.xwpf.converter.xhtml.XHTMLOptions;
-import org.apache.poi.xwpf.usermodel.*;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class WordUtils {
 
@@ -113,61 +107,5 @@ public class WordUtils {
         src.set(makeBody);
     }
 
-    public static void main(String[] args) {
-//        String dir="D:\\ideawork\\GWC-WEB\\src\\main\\resources\\lawrecord\\安全\\";
-//        mergeDoc(new String[]{dir+"01封面_法人.docx",dir+"02目录.docx"},"D:\\word\\3.docx");
-        word2Pdf(4);
-
-    }
-
-
-    public static void toHtml(){
-        String src = "D:\\word\1.docx";
-        String des = "D:\\word\\1.html";
-        String htmlImagesPath="D:\\word\\";
-        InputStream is = null;
-        try {
-            is = new FileInputStream(src);
-            XWPFDocument document = new XWPFDocument(is);
-            XHTMLOptions options = XHTMLOptions.create().indent(4);
-
-            //img的src属性 后面会自动添加/word/media
-            //这里就是images/word/media/ + 图片名字
-            options.URIResolver(new BasicURIResolver("images"));
-            //>> 文件的保存路径 之后自动会添加 word\media子路径
-            FileImageExtractor extractor = new FileImageExtractor(new File(
-                    htmlImagesPath));
-            options.setExtractor(extractor);
-            XHTMLConverter.getInstance().convert(document,
-                    new FileOutputStream(des), options);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    public static void word2Pdf(int index){
-        String docPath = "D:\\word\\"+index+".docx";
-        String pdfPath = "D:\\word\\"+index+".pdf";
-
-        try{
-            XWPFDocument document;
-            InputStream doc = new FileInputStream(docPath);
-            document = new XWPFDocument(doc);
-            PdfOptions options = PdfOptions.create();
-            OutputStream out = new FileOutputStream(pdfPath);
-            PdfConverter.getInstance().convert(document, out, options);
-            doc.close();
-            out.close();
-        }catch (Exception e){
-
-        }
-
-
-    }
 
 }

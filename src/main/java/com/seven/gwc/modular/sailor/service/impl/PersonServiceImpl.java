@@ -8,23 +8,23 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.sailor.dao.CertificateMapper;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 import com.seven.gwc.modular.system.dao.PositionMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
-import com.seven.gwc.modular.system.entity.PositionEntity;
 import com.seven.gwc.modular.system.entity.UserEntity;
-import com.seven.gwc.modular.system.service.PositionService;
-import com.seven.gwc.modular.system.service.impl.PositionServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +46,8 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     private UserMapper userMapper;
     @Autowired
     private PositionMapper positionMapper;
+    @Autowired
+    private CertificateMapper certificateMapper;
 
     @Override
     public List<PersonEntity> selectPerson(PersonEntity personEntity) {
@@ -210,4 +212,35 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         }
         return jsonArray;
     }
+
+    @Override
+    public List<PersonVO> listLawPersons() {
+        List<PersonVO> listVo = new ArrayList<>();
+        List<PersonEntity> list = personMapper.PersonLawEntityList();
+        for(PersonEntity personEntity:list){
+            if(personEntity != null){
+                PersonVO personVO = new PersonVO();
+                personVO.setId(personEntity.getId());
+                personVO.setPersonName(personEntity.getPersonName());
+                CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+                personVO.setLawCode(certificateEntity.getCertificateId());
+                listVo.add(personVO);
+            }
+        }
+        return listVo;
+    }
+
+//    @Override
+//    public List<PersonEntity> listLawPersons() {
+//        List<PersonEntity> list = personMapper.PersonLawEntityList();
+//        for(PersonEntity personEntity:list){
+//            if(personEntity != null){
+//                CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+//                personEntity.setLawCode(certificateEntity.getCertificateId());
+//            }
+//        }
+//        return list;
+//    }
+
+
 }

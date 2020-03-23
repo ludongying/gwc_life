@@ -53,6 +53,26 @@ public class AgencyDTO extends AgencyEntity {
      */
     private String agencyAddrRegion;
 
+    /**
+     * 编号
+     */
+    private String lawCode;
+
+    /**
+     * 执法人员
+     */
+    private String id1;
+
+    private String personId1;
+
+    private String credentialCode1;
+
+    private String id2;
+
+    private String personId2;
+
+    private String credentialCode2;
+
     /****************全详情添加*********************/
 
     /**
@@ -85,6 +105,10 @@ public class AgencyDTO extends AgencyEntity {
         }
     }
 
+    public void setLawCodeStr(){
+        setLawCode(this.getLawCaseFineCode()+""+this.getLawCaseCode());
+    }
+
     public void setAddress(){
         AddrData addrData = AddrData.generateAddr(this.getAgencyAddr());
         if(Objects.nonNull(addrData)){
@@ -97,8 +121,8 @@ public class AgencyDTO extends AgencyEntity {
     public void setDetailContent(){
         LawCaseSourceEnum lawCaseSourceEnum = LawCaseSourceEnum.findByCode(this.getLawCaseSource());
         this.lawCaseSourceStr=Objects.isNull(lawCaseSourceEnum)?"":lawCaseSourceEnum.getMessage();
-        String lawCaseCode = this.getLawCaseCode();
-        String lawCaseFineCode = this.getLawCaseFineCode();
+        Integer lawCaseCode = this.getLawCaseCode();
+        Integer lawCaseFineCode = this.getLawCaseFineCode();
         this.lawCaseCodeStr="";
         if(Objects.nonNull(lawCaseFineCode)){
             lawCaseCodeStr+=lawCaseFineCode+"罚 ";
@@ -117,7 +141,20 @@ public class AgencyDTO extends AgencyEntity {
         }
     }
 
-
+    public void setPersons(){
+        if(Objects.nonNull(operators) && !operators.isEmpty()){
+            OperatorEntity person1= operators.get(0);
+            this.id1=person1.getId();
+            this.personId1=person1.getLawPersonId();
+            this.credentialCode1=person1.getLawCredentialCode();
+            if(operators.size() > 1){
+                OperatorEntity person2= operators.get(1);
+                this.id2=person2.getId();
+                this.personId2=person2.getLawPersonId();
+                this.credentialCode2=person2.getLawCredentialCode();
+            }
+        }
+    }
 
 
 

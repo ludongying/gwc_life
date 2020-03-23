@@ -82,10 +82,10 @@ public class FishShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<FishShipEntity> list(String code, String phone, String shipType) {
+    public BaseResultPage<FishShipEntity> list(String code, String shipType) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<FishShipEntity> fishShips = fishShipService.selectFishShip(code, phone, shipType);
+        List<FishShipEntity> fishShips = fishShipService.selectFishShip(code, shipType);
         PageInfo pageInfo = new PageInfo<>(fishShips);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -141,7 +141,7 @@ public class FishShipController extends BaseController {
     @RequestMapping("/exportExcel")
     @ResponseBody
     public void exportExcel(String code, String phone, String shipType) {
-        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(code, phone, shipType);
+        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(code, shipType);
         List<ExportFishShipVO> exportFishShipVOList = fishShipService.getExportData(shipEntityList);
         new ExcelData<>(exportFishShipVOList){}.exportExcel();
     }

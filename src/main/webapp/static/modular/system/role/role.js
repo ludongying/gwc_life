@@ -130,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     Role.onDeleteRole = function (data) {
-        Feng.confirm("是否删除角色《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/role/delete", function (data) {
                 if (data.success == true) {
                     Feng.success("删除成功!");

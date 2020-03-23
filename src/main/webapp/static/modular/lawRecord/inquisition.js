@@ -19,6 +19,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
          'func':func,
          'key':'law_inquisition'
     }
+
+    let unit_data = {
+        shipPowerUnit: $("#shipPowerUnit").val()
+    };
+    addUnitListen($,form,unit_data);
     loadVerify(form);
     //编辑
     if($("#id").val()){
@@ -41,6 +46,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     form.on('submit(preStep)', function (data) {
         submitData("inquire",data);
     });
+
+
 
     function submitData(des,data){
         //获取地址

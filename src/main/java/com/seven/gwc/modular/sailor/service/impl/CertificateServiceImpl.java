@@ -1,29 +1,25 @@
 package com.seven.gwc.modular.sailor.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.seven.gwc.modular.lawrecord.data.file.FileData;
-import com.seven.gwc.modular.lawrecord.data.file.FileManager;
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
-import com.seven.gwc.modular.sailor.dao.PersonMapper;
-import com.seven.gwc.modular.sailor.entity.PersonEntity;
-import com.seven.gwc.modular.ship_info.entity.ShipEntity;
-import com.seven.gwc.modular.system.dao.DictMapper;
-import com.seven.gwc.modular.system.entity.DictEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.sailor.dao.CertificateMapper;
+import com.seven.gwc.modular.sailor.dao.PersonMapper;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
+import com.seven.gwc.modular.sailor.entity.PersonEntity;
+import com.seven.gwc.modular.sailor.service.CertificateService;
+import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.entity.DictEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
-import com.seven.gwc.modular.sailor.dao.CertificateMapper;
-import com.seven.gwc.modular.sailor.service.CertificateService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.cert.Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -103,8 +99,12 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(CertificateEntity::getId, certificate.getId()).eq(CertificateEntity::getDeleteFlag, 1);
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
-        if (certificateEntity != null) {
-            return false;
+        //确定是否为船员证书
+        if(certificateEntity != null){
+            DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+            if (dictEntity.getName().equals("船员证书")){
+                return false;
+            }
         }
         certificate.setSynFlag(false);
         certificate.setDeleteFlag(true);
@@ -176,8 +176,12 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateEntity::getDeleteFlag, 1).ne(CertificateEntity::getId, certificate.getId());
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
-        if (certificateEntity != null) {
-            return false;
+        //确定是否为船员证书
+        if(certificateEntity != null){
+            DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
+            if (dictEntity.getName().equals("船员证书")){
+                return false;
+            }
         }
         certificate.setUpdateDate(new Date());
         certificate.setUpdatePerson(user.getId());
@@ -197,20 +201,6 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         }
         certificateMapper.updateById(certificate);
         return true;
-    }
-
-    @Override
-    public CertificateEntity getCertificateById(String id) {
-        CertificateEntity certificateEntity = certificateMapper.selectById(id);
-        if (ToolUtil.isNotEmpty(certificateEntity.getAttachFilePath())) {
-            List<FileData> files = fileManager.listFile(certificateEntity.getAttachFilePath());
-            String urls = "";
-            for (FileData fileData : files) {
-                urls += fileData.getUrl() + FileUtils.file_2_file_sep;
-            }
-            certificateEntity.setAttachFilePath(urls);
-        }
-        return certificateEntity;
     }
 
     @Override
@@ -240,9 +230,17 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         }
     }
 
-//    /** 判断单个证书状态并返回值*/
-//    public int warn(CertificateEntity certificateEntity) throws ParseException {
-//
+//    @Override
+//    public String getLawCode(String personId) {
+//        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
+//        lambdaQuery.eq(PersonEntity::getId, personId);
+//        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
+//        if(personEntity == null)
+//            return null;
+//        CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+//        if(certificateEntity == null)
+//            return  null;
+//        return certificateEntity.getCertificateId();
 //    }
 
     /**

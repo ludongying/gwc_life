@@ -43,6 +43,7 @@
             and p.id = #{id}
         </if>
     </select>
+
     <select id="PersonNamesEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
         select p.id,u.name as personName, p.person_id from ship_person p
         LEFT JOIN sys_user u on p.person_id = u.id
@@ -51,5 +52,15 @@
         <if test="id != null and id!= ''">
             and p.id = #{id}
         </if>
+    </select>
+
+    <select id="PersonLawEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+--         select  p.*,u.*,u.name as personName,d.simple_name
+        select  p.id,p.certificate_id,u.name as personName
+        from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN sys_dept d on u.dept_id = d.id
+        --         LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1 and d.simple_name like '%执法部%'
     </select>
 </mapper>

@@ -1,13 +1,12 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 /**
  * description : 询问笔录-生产实体
@@ -19,15 +18,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("law_record_inquire")
-public class InquireEntity extends GwcBaseEntity {
+public class InquireEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
     /** 记录id */
-    private String id;
-
-    /** 姓名 */
-    private String investigateName;
+    private String recordId;
 
     /** 性别(枚举) */
     private Integer investigateSex;
@@ -38,9 +34,6 @@ public class InquireEntity extends GwcBaseEntity {
     /** 职务 */
     private Integer investigatePosition;
 
-    /** 手机号码 */
-    private String investigateTel;
-
     /** 地址 */
     private String investigateAddr;
 
@@ -50,8 +43,7 @@ public class InquireEntity extends GwcBaseEntity {
     /** 身份证号 */
     private String identityCard;
 
-    /** 渔船名称 */
-    private String shipName;
+
 
     /** 船主姓名 */
     private String shipOwner;
@@ -67,10 +59,12 @@ public class InquireEntity extends GwcBaseEntity {
 
     /** 实际主机功率 */
     private Double shipRealPower;
-
+    /** 实际主机功率单位 */
+    private Integer shipRealPowerUnit;
     /** 核定主机功率 */
     private Double shipRatedPower;
-
+    /** 核定主机功率单位 */
+    private Integer shipRatedPowerUnit;
     /** 船上信息 */
     private String shipInfo;
     /** 渔船状态 */
@@ -97,8 +91,6 @@ public class InquireEntity extends GwcBaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date shipFishAreaDate;
-
-
 
 
 

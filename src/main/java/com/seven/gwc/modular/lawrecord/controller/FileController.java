@@ -24,6 +24,16 @@ public class FileController {
     @Autowired
     private FileManager fileManager;
 
+
+
+
+    @RequestMapping("toPdfFile")
+    public void toPdfFile(HttpServletResponse response) {
+
+    }
+
+
+
     /**
      * 上传文件
      * @param file

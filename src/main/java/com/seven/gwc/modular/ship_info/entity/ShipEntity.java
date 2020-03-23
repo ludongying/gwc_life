@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * description : 执法船信息管理实体
@@ -79,6 +79,10 @@ public class ShipEntity extends GwcBaseEntity implements Serializable {
 
     // 船舶图片
     private String imageFilePath;
+
+//    // 船舶图片url
+//    @TableField(exist = false)
+//    private String imageUrl;
 
     // 证书编码
     private String certificateId;

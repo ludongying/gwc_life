@@ -14,21 +14,25 @@ import java.util.Date;
 @FieldName(value = "渔船信息.xlsx")
 public class ExportFishShipVO {
 
-    /** 名称 */
-    @FieldName(value = "船名称")
-    private String name;
-
-    /** 管理类别-字典 */
-    @FieldName(value = "管理类别")
-    private String areaTypeName;
-
-    /** 编码 */
-    @FieldName(value = "编码")
+    /** 渔船编码 */
+    @FieldName(value = "渔船编码")
     private String code;
+
+    /** 船名 */
+    @FieldName(value = "船名")
+    private String name;
 
     /** 船籍 */
     @FieldName(value = "船籍")
     private String registry;
+
+    /** 水域分类 */
+    @FieldName(value = "水域分类")
+    private String watersTypeName;
+
+    /** 区域分类 */
+    @FieldName(value = "区域分类")
+    private String areaTypeName;
 
     /** 船舶类型-字典 */
     @FieldName(value = "船舶类型")
@@ -38,29 +42,33 @@ public class ExportFishShipVO {
     @FieldName(value = "船体材质")
     private String hullMaterial;
 
-    /** 作业类型-字典 */
-    @FieldName(value = "作业类型")
-    private String workTypeName;
-
-    /** 船长度 */
-    @FieldName(value = "船长度")
+    /** 船长 */
+    @FieldName(value = "船长")
     private Double shipLong;
 
-    /** 船宽度 */
-    @FieldName(value = "船宽度")
+    /** 船宽 */
+    @FieldName(value = "船宽")
     private Double shipWide;
 
     /** 船深 */
     @FieldName(value = "船深")
     private Double shipDeep;
 
-    /** 马力 */
-    @FieldName(value = "马力")
-    private Double totalPower;
-
-    /** 吨位 */
+    /** 总吨位 */
     @FieldName(value = "总吨位")
     private String tonnage;
+
+    /** 主机总功率 */
+    @FieldName(value = "主机总功率")
+    private Double totalPower;
+
+    /** 作业类型 */
+    @FieldName(value = "作业类型")
+    private String workTypeName;
+
+    /** 作业方式 */
+    @FieldName(value = "作业方式")
+    private String practiceName;
 
     /** 建成日期 */
     @FieldName(value = "建成日期")
@@ -78,20 +86,16 @@ public class ExportFishShipVO {
     @FieldName(value = "证件号码")
     private String identity;
 
-    /** 手机号码 */
-    @FieldName(value = "手机号码")
-    private String phone;
-
-    /** 地址 */
-    @FieldName(value = "地址")
+    /** 船主地址 */
+    @FieldName(value = "船主地址")
     private String address;
 
-    /** 出海状态 */
-    @FieldName(value = "出海状态")
-    private String seaStateName;
+    /** 核定航区 */
+    @FieldName(value = "核定航区")
+    private String approvedArea;
 
-    /** 是否重点 */
-    @FieldName(value = "是否重点")
-    private String keyPoints;
+    /** 核定成员 */
+    @FieldName(value = "核定成员")
+    private String authorizedMember;
 
 }

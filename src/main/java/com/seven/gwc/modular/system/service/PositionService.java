@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.system.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.system.entity.PositionEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -54,7 +55,7 @@ public interface PositionService extends IService<PositionEntity> {
      * @param position
      * @return
      */
-    boolean add(PositionEntity position);
+    BaseResult add(PositionEntity position);
 
     /**
      * 更新岗位，修改数据权限保存
@@ -63,5 +64,5 @@ public interface PositionService extends IService<PositionEntity> {
      * @param menuIds  数据权限(部门)ID
      * @return
      */
-    boolean update(PositionEntity position, String menuIds);
+    BaseResult update(PositionEntity position, String menuIds);
 }

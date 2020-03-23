@@ -10,6 +10,7 @@ layui.use(['layer', 'form', 'admin', 'ax','upload'], function () {
     var admin = layui.admin;
     var layer = layui.layer;
     var upload = layui.upload;
+    var fileName = "";
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
@@ -17,21 +18,21 @@ layui.use(['layer', 'form', 'admin', 'ax','upload'], function () {
     //初始化证书信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/certificateShip/detail/" + Feng.getUrlParam("certificateId"));
     var result = ajax.start();
-    form.val('certificateForm',result);
-
     //多图片回显
-    $().ready(function() {
-        var imgStr = result.attachFilePath;
-        if(imgStr != null) {
-            var imgStr1 = imgStr.substring(0, imgStr.lastIndexOf(","));
-            var imgStrArr = imgStr1.split(",")
-            // alert(imgStrArr.length);
-            for (var i = 0; i < imgStrArr.length; i++) {
-                if (imgStrArr[i] != '')
-                    $('#attachment').append('<img src="' + imgStrArr[i] + '" class="layui-upload-img" width="200px" height="150px">');
-            }
+    if(result.attachFilePath != null){
+        fileName = result.attachFilePath;
+        var files = fileName.split(",");
+        for (i = 0; i < files.length - 1; i++) {
+            $('#attachment').append(
+                '<div id="" class="file-iteme">' +
+                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src=' + files[i] + '>' +
+                '<div class="info">' + files[i] + '</div>' +
+                '</div>'
+            );
         }
-    });
+    }
+    form.val('certificateForm',result);
 
     //证书类型获取下拉框
     $.ajax({

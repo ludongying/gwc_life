@@ -10,8 +10,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
     var upload = layui.upload;
-    var ajax;
-    var formData;
+    var fileName = "";
 
     laydate.render({
         elem: '#productDate',
@@ -58,75 +57,78 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    //获取出海状态下拉框
+    //获取水域分类下拉框
     $.ajax({
-        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=SEA_STATE',
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=WATERS_TYPE',
         dataType: 'json',
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#seaState').append(new Option(item.name, item.id));// 下拉菜单里添加元素
+                $('#watersType').append(new Option(item.name, item.id));// 下拉菜单里添加元素
             });
             layui.form.render("select");
         }
     });
 
-    // 让当前iframe弹层高度适应
-    // admin.iframeAuto();
-
-    var uploadInst = upload.render({
-        elem: '#upload'
-        , url: '/system/uploadFile' //改成您自己的上传接口
-        , accept: 'file'
-        , exts: 'pdf'
-        , size: 1024
-        , auto: false
-        // , bindAction: '#btnSubmit'
-        , choose: function (obj) {
-            var files = obj.pushLastFile();
-            obj.preview(function (index, file, result) {
-                $('#choose').remove();
-                $('#fileName').val(file.name.substring(0, file.name.lastIndexOf(".")));
-                $('.layui-upload').append('<span id="choose" class="layui-inline layui-upload-choose">' + file.name + '</span>');
-                $('#fullName').val(file.name)
+    //获取作业方式下拉框
+    $.ajax({
+        url: Feng.ctxPath +'/dict/getDictListByDictTypeCode?dictTypeCode=PRACTICE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#practice').append(new Option(item.name, item.id));// 下拉菜单里添加元素
             });
-        }
-        , done: function (res) {
-            if (res.CODE === 200) {
-                formData.fullName = res.fileName;
-                ajax = new $ax(Feng.ctxPath + "/fishShip/add", function (data) {
-                    if (data.success) {
-                        Feng.success("增加成功!");
-                        admin.putTempData('formOk', true);//传给上个页面，刷新table用
-                        admin.closeThisDialog();//关掉对话框
-                    } else {
-                        Feng.error(data.message);
-                    }
-                }, function (data) {
-                    Feng.error("增加失败!" + data.message)
-                });
-                ajax.set(formData);
-                ajax.start();
-
-                return false;
-            }
+            layui.form.render("select");
         }
     });
 
-    // 表单提交事件
+    upload.render({
+        elem: '#test2'
+        ,url: '/system/uploadFile'
+        ,multiple: true
+        ,before: function(obj){
+            layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+        }
+        ,done: function(res){
+            layer.close(layer.msg());//关闭上传提示窗口
+            //上传完毕
+            $('#uploader-list').append(
+                '<div id="" class="file-iteme">' +
+                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
+                '<div class="info">' + res.fileName + '</div>' +
+                '</div>'
+            );
+            fileName = fileName + res.fileName + ","
+            $("#fileName").val(fileName);
+        }
+    });
+
+    $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            //$(this).children(".info").fadeIn("fast");    //文件名
+            $(this).children(".handle").fadeIn("fast");   //删除按钮
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            //$(this).children(".info").hide();
+            $(this).children(".handle").hide();
+        }
+    });
+
+    // 删除图片
+    $(document).on("click", ".file-iteme .handle", function(event){
+        $(this).parent().remove();
+        //$(this).parent()[0].textContent
+        deleteFIle(fileName, $(this).parent()[0].textContent)
+    });
+
     form.on('submit(btnSubmit)', function (data) {
-        if ($('#fileName').val() === "") {
-            Feng.error("附件不能为空");
-            return false
-        } else {
-            formData = data.field;
-            uploadInst.upload();
-            return false
-        }
-    });
-
-    /*form.on('submit(btnSubmit)', function (data) {
-        uploadInst.upload();
         var ajax = new $ax(Feng.ctxPath + "/fishShip/add", function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
@@ -141,7 +143,28 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         ajax.set(data.field);
         ajax.start();
         return false;
-    });*/
+    });
 
+    function deleteFIle(names, deleteFile) {
+        var name = "";
+        var files = names.split(",");
+        for (i = 0; i < files.length - 1; i++ ) {
+            if (files[i] !== deleteFile) {
+                name += files[i] + ",";
+            }
+        }
+        fileName = name;
+        $("#fileName").val(fileName);
+    }
+
+    //图片放大
+    $('#uploader-list img').on('click', function () {
+        layer.photos({
+            photos: '#uploader-list',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
 
 });

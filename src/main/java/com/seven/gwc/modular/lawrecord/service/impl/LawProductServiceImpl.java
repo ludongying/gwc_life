@@ -88,7 +88,7 @@ public class LawProductServiceImpl implements LawProductService {
             AgencyEntity agencyEntity = agencyMapper.selectById(lawRecordEntity.getId());
             if (ToolUtil.isNotEmpty(agencyEntity)) {
                 lawRecordVO.setId(lawRecordEntity.getId());
-                lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode());
+                lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode()+"" + agencyEntity.getLawCaseCode());
                 lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
                 lawRecordVO.setLawCaseLon(agencyEntity.getLawCaseLon());
                 lawRecordVO.setLawCaseLat(agencyEntity.getLawCaseLat());
@@ -109,10 +109,10 @@ public class LawProductServiceImpl implements LawProductService {
             for (LawRecordEntity lawRecordEntity : lawRecordEntityList) {
                 AgencyEntity agencyEntity = agencyMapper.selectById(lawRecordEntity.getId());
                 if (ToolUtil.isNotEmpty(agencyEntity)) {
-                    String code = agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode();
+                    String code = agencyEntity.getLawCaseFineCode() +""+ agencyEntity.getLawCaseCode();
                     if (code.contains(search)){
                         AppLawRecordVO lawRecordVO = new AppLawRecordVO();
-                        lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode());
+                        lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode() +""+ agencyEntity.getLawCaseCode());
                         lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
                         lawRecordVO.setLawCaseLon(agencyEntity.getLawCaseLon());
                         lawRecordVO.setLawCaseLat(agencyEntity.getLawCaseLat());
@@ -128,6 +128,7 @@ public class LawProductServiceImpl implements LawProductService {
         return list;
     }
 
+    @Override
     public List<EnumVO> getLawCaseSourceList() {
         List<EnumVO> list = new ArrayList<>();
         for (LawCaseSourceEnum vo : LawCaseSourceEnum.values()) {
@@ -455,7 +456,7 @@ public class LawProductServiceImpl implements LawProductService {
         agencyEntity.setId(id);
         agencyEntity.setLawShipCode(appAgencyVO.getLawShipCode());
         agencyEntity.setEnforcementAgency(appAgencyVO.getEnforcementAgency());
-        agencyEntity.setLawCaseFineCode(appAgencyVO.getLawCaseFineCode());
+        agencyEntity.setLawCaseFineCode(Integer.valueOf(appAgencyVO.getLawCaseFineCode()));
         agencyEntity.setLawCaseCode(appAgencyVO.getLawCaseCode());
         agencyEntity.setLawCaseSource(appAgencyVO.getLawCaseSource());
         agencyEntity.setLawCaseLon(appAgencyVO.getLawCaseLon());

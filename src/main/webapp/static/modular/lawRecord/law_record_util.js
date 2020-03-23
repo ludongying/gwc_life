@@ -112,6 +112,32 @@ function loadAddr($,form,stateCode,cityCode,region){
     });
 }
 
+function loadAddrIndex(param){
+     let $=param.$;
+     let form=param.form;
+     let stateCode=param.stateCode;
+     let cityCode=param.cityCode;
+     let region=param.region;
+     let index=param.index;
+    //初始化数据
+    $(".addr_state"+index).html(loc.getStateOptions(stateCode));
+    let code=$(".addr_state"+index).val();
+    $(".addr_city"+index).html(loc.getCityOptions(code,cityCode));
+    if(region){
+        $(".addr_region"+index).val(region);
+    }
+
+    //增加监听
+    form.on('select(addr_state'+index+')', function(data){
+        $(data.elem).parent().parent().find(".addr_city"+index).html(loc.getCityOptions(data.value));
+        if(!region){region=""}
+        $(data.elem).parent().parent().find(".addr_region"+index).val(region);
+        //清空数据3
+        form.render();
+    });
+}
+
+
 
 /**
  *获取地址
@@ -238,7 +264,7 @@ function clearListen(key){
 var submitFrom=function(param){
     var ajax = new param.lay.$ax(Feng.ctxPath + param.url, function (data) {
         if (data.success) {
-            Feng.success("提交成功!");
+            Feng.success("提交成功!"+data.message);
             if(param.next){
                 window.location.href=param.next+"&id="+data.content;
             }else{
@@ -308,14 +334,24 @@ Date.prototype.addMilliseconds=function (number) {
  * @param number
  */
 Date.prototype.addMonths=function (number) {
-    var month_total=this.getMonth()+1+number;
-    var year_add = month_total/12;
+    let month_total=this.getMonth()+1+number;
+    let year_add = month_total/12;
     if(year_add>0){
         this.setFullYear(this.getFullYear()+year_add);
     }
-    var month=month_total%12-1;
+    let month=month_total%12-1;
     this.setMonth(month);
 }
+
+Date.prototype.addYears=function(number){
+    let fullYear = this.getFullYear();
+    this.setFullYear(fullYear+number);
+}
+
+function getFloat(number){
+   return Math.round(number*100)/100;
+}
+
 
 /**
  * 时间格式化
@@ -367,3 +403,26 @@ function operate_table(param) {
         ajax.start();
     });
 };
+
+/********************************************************************/
+function addUnitListen($,form,unit_data){
+    form.on('select(powerUnit)', function(data){
+        let input_=$(data.elem).parent().prev().find("input");
+        let val=input_.val();
+        let unitValue=parseInt(data.value);
+        let name=$(data.elem).data("name");
+        if(unitValue===unit_data[name]){return;}
+        unit_data[name]=unitValue;
+        if(val && unitValue){
+            switch (unitValue) {
+                case 1:
+                    input_.val(getFloat(parseFloat(val)/1.36));
+                    break;
+                case 2:
+                    input_.val(getFloat(parseFloat(val)*1.36));
+                    break;
+                default:
+            }
+        }
+    });
+}

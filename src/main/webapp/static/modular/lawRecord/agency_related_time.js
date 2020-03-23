@@ -63,6 +63,13 @@ function relateTime($,laydate) {
         ,format: 'yyyy-MM-dd'
     });
 
+    //保存年限
+    laydate.render({
+        elem: '#saveDate'
+        ,type: 'date'
+        ,format: 'yyyy-MM-dd'
+    });
+
     /**
      * 点击关联时间
      */
@@ -94,7 +101,9 @@ function relateTime($,laydate) {
             //处理决定时间
             var decision=setDecisionDate(punish);
             //结案时间
-            setFinishDate(decision);
+            var finish=setFinishDate(decision);
+            // 保留年限
+            setSaveDate(finish)
         }else{
             //提示
             msg_tip($,"请输入案件信息-询问时间")
@@ -278,6 +287,29 @@ function relateTime($,laydate) {
         });
         return decision;
     }
+
+
+    /**
+     * 结案时间
+     * @param finish
+     * @returns {Date|*}
+     */
+    function setSaveDate(finish){
+        var saveDate=$("#saveDate").val();
+        if(saveDate){
+            return new Date(saveDate);
+        }
+        finish.addYears(10);
+        var time= finish.format("yyyy-MM-dd");
+        laydate.render({
+            elem: '#saveDate'
+            ,type: 'date'
+            ,format: 'yyyy-MM-dd'
+            ,value: time
+        });
+        return finish;
+    }
+
 
 }
 

@@ -1,7 +1,11 @@
 package com.seven.gwc.modular.lawrecord.data.local;
 
 import lombok.extern.slf4j.Slf4j;
-import org.w3c.dom.*;
+import org.springframework.util.ResourceUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +22,7 @@ public class LocData {
 
     private List<StateData> stateDataList;
 
-    private String uri="src/main/resources/LocList.xml";
+    private String uri= ResourceUtils.CLASSPATH_URL_PREFIX+"LocList.xml";
 
     public LocData(){
         this.stateDataList=new ArrayList<>();
@@ -50,8 +54,9 @@ public class LocData {
         }
     }
 
-
     public List<StateData> getStateDataList() {
         return stateDataList;
     }
+
+
 }

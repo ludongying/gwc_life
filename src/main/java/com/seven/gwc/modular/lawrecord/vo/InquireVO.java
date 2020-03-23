@@ -1,7 +1,12 @@
 package com.seven.gwc.modular.lawrecord.vo;
 
+import cn.hutool.core.lang.UUID;
+import com.alibaba.fastjson.JSON;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import lombok.Data;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author : zzl
@@ -21,6 +26,11 @@ public class InquireVO extends InquireEntity {
     private Integer lawType;
 
     /**
+     * 补录文书
+     */
+    private String inquireContent;
+
+    /**
      * 设置登录用户
      * @param userId
      */
@@ -28,6 +38,28 @@ public class InquireVO extends InquireEntity {
         this.userId=userId;
         this.init(this.getId(),userId);
     }
+
+    /**
+     * 获取补录信息
+     * @return
+     */
+    public List<InquireEntity> listInquire(){
+        if(Objects.nonNull(this.inquireContent) && !inquireContent.trim().isEmpty()){
+            List<InquireEntity> inquireEntities = JSON.parseArray(this.inquireContent, InquireEntity.class);
+            if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
+                inquireEntities.forEach(inquireEntity -> {
+                    inquireEntity.init(inquireEntity.getId(),userId);
+                    String id = inquireEntity.getId();
+                    if(Objects.isNull(id) || id.trim().isEmpty()){
+                       inquireEntity.setId(UUID.fastUUID().toString(Boolean.TRUE));
+                    }
+            });
+                return inquireEntities;
+            }
+        }
+        return null;
+    }
+
 
 
 }

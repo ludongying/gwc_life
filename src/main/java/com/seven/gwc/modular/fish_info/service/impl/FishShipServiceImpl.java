@@ -1,10 +1,16 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
-import cn.hutool.core.lang.Dict;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.CalculationDateUtil;
 import com.seven.gwc.core.util.ExcelUtil;
+import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
+import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
+import com.seven.gwc.modular.fish_info.service.FishShipService;
 import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
@@ -12,19 +18,11 @@ import com.seven.gwc.modular.system.service.DictService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
-import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
-import com.seven.gwc.modular.fish_info.service.FishShipService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -56,10 +54,9 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     private String uploadPathFile;
 
     @Override
-    public List<FishShipEntity> selectFishShip(String code, String phone, String shipType){
+    public List<FishShipEntity> selectFishShip(String code, String shipType){
         LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(code), FishShipEntity::getCode, code)
-                //.like(ToolUtil.isNotEmpty(phone), FishShipEntity::getPhone, phone)
                 .eq(ToolUtil.isNotEmpty(shipType), FishShipEntity::getShipType, shipType);
 
         List<FishShipEntity> list = fishShipMapper.selectList(lambdaQuery);
@@ -73,12 +70,14 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
                 DictEntity areaTypeDict = dictMapper.selectById(fishShip.getAreaType());
                 fishShip.setAreaTypeName(areaTypeDict.getName());
             }
-
-            if (ToolUtil.isNotEmpty(fishShip.getSeaState())) {
-                DictEntity seaStateDict = dictMapper.selectById(fishShip.getSeaState());
-                fishShip.setSeaStateName(seaStateDict.getName());
+            if (ToolUtil.isNotEmpty(fishShip.getWatersType())) {
+                DictEntity watersTypeDict = dictMapper.selectById(fishShip.getWatersType());
+                fishShip.setWatersTypeName(watersTypeDict.getName());
             }
-
+            if (ToolUtil.isNotEmpty(fishShip.getPractice())) {
+                DictEntity practiceDict = dictMapper.selectById(fishShip.getPractice());
+                fishShip.setPracticeName(practiceDict.getName());
+            }
             DictEntity workTypeDict = dictMapper.selectById(fishShip.getWorkType());
             fishShip.setWorkTypeName(workTypeDict.getName());
         }
@@ -87,7 +86,6 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void addFishShip(FishShipEntity fishShip, ShiroUser user) {
-        fishShip.setFilePath(uploadPathFile);
         fishShipMapper.insert(fishShip);
     }
 
@@ -98,12 +96,12 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void editFishShip(FishShipEntity fishShip, ShiroUser user) {
-        fishShip.setFilePath(uploadPathFile);
         fishShipMapper.updateById(fishShip);
     }
 
     @Override
     public FishShipEntity detailFishShip(String fishShipId) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         FishShipEntity fishShipEntity = fishShipMapper.selectById(fishShipId);
         if (ToolUtil.isNotEmpty(fishShipEntity.getShipType())) {
             DictEntity shipTypeDict = dictMapper.selectById(fishShipEntity.getShipType());
@@ -113,10 +111,17 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
             DictEntity areaTypeDict = dictMapper.selectById(fishShipEntity.getAreaType());
             fishShipEntity.setAreaTypeName(areaTypeDict.getName());
         }
-
-        if (ToolUtil.isNotEmpty(fishShipEntity.getSeaState())) {
-            DictEntity seaStateDict = dictMapper.selectById(fishShipEntity.getSeaState());
-            fishShipEntity.setSeaStateName(seaStateDict.getName());
+        if (ToolUtil.isNotEmpty(fishShipEntity.getWatersType())) {
+            DictEntity watersTypeDict = dictMapper.selectById(fishShipEntity.getWatersType());
+            fishShipEntity.setWatersTypeName(watersTypeDict.getName());
+        }
+        if (ToolUtil.isNotEmpty(fishShipEntity.getPractice())) {
+            DictEntity practiceDict = dictMapper.selectById(fishShipEntity.getPractice());
+            fishShipEntity.setPracticeName(practiceDict.getName());
+        }
+        if (ToolUtil.isNotEmpty(fishShipEntity.getProductDate())) {
+            Integer shipAge = CalculationDateUtil.getAge(fishShipEntity.getProductDate());
+            fishShipEntity.setShipAge(shipAge);
         }
 
         DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
@@ -130,46 +135,43 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
         List<ExportFishShipVO> exportDataList = new ArrayList<>();
         for (FishShipEntity fishShipEntity : shipEntityList) {
             ExportFishShipVO exportFishShipVO = new ExportFishShipVO();
+            exportFishShipVO.setCode(fishShipEntity.getCode());
             exportFishShipVO.setName(fishShipEntity.getName());
+            exportFishShipVO.setRegistry(fishShipEntity.getRegistry());
+            if (ToolUtil.isNotEmpty(fishShipEntity.getWatersType())) {
+                DictEntity watersTypeDict = dictMapper.selectById(fishShipEntity.getWatersType());
+                exportFishShipVO.setWatersTypeName(watersTypeDict.getName());
+            }
             if (ToolUtil.isNotEmpty(fishShipEntity.getAreaType())) {
                 DictEntity areaTypeDict = dictMapper.selectById(fishShipEntity.getAreaType());
                 exportFishShipVO.setAreaTypeName(areaTypeDict.getName());
             }
-            exportFishShipVO.setCode(fishShipEntity.getCode());
-            exportFishShipVO.setRegistry(fishShipEntity.getRegistry());
             if (ToolUtil.isNotEmpty(fishShipEntity.getShipType())) {
                 DictEntity shipTypeDict = dictMapper.selectById(fishShipEntity.getShipType());
                 exportFishShipVO.setShipTypeName(shipTypeDict.getName());
             }
             exportFishShipVO.setHullMaterial(fishShipEntity.getHullMaterial());
-            DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
-            exportFishShipVO.setWorkTypeName(workTypeDict.getName());
             exportFishShipVO.setShipLong(fishShipEntity.getShipLong());
             exportFishShipVO.setShipWide(fishShipEntity.getShipWide());
             exportFishShipVO.setShipDeep(fishShipEntity.getShipDeep());
-            exportFishShipVO.setTotalPower(fishShipEntity.getTotalPower());
             exportFishShipVO.setTonnage(fishShipEntity.getTonnage());
-            if (ToolUtil.isNotEmpty(fishShipEntity.getProductDate())) {
-                exportFishShipVO.setProductDate(sdf.format(fishShipEntity.getProductDate()));
+            exportFishShipVO.setTotalPower(fishShipEntity.getTotalPower());
+            DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
+            exportFishShipVO.setWorkTypeName(workTypeDict.getName());
+            if (ToolUtil.isNotEmpty(fishShipEntity.getPractice())) {
+                DictEntity practiceDict = dictMapper.selectById(fishShipEntity.getPractice());
+                exportFishShipVO.setPracticeName(practiceDict.getName());
             }
             if (ToolUtil.isNotEmpty(fishShipEntity.getProductDate())) {
+                exportFishShipVO.setProductDate(sdf.format(fishShipEntity.getProductDate()));
                 Integer shipAge = CalculationDateUtil.getAge(fishShipEntity.getProductDate());
                 exportFishShipVO.setShipAge(shipAge);
             }
-
             exportFishShipVO.setShipOwner(fishShipEntity.getShipOwner());
             exportFishShipVO.setIdentity(fishShipEntity.getIdentity());
-            //exportFishShipVO.setPhone(fishShipEntity.getPhone());
             exportFishShipVO.setAddress(fishShipEntity.getAddress());
-            if (ToolUtil.isNotEmpty(fishShipEntity.getSeaState())) {
-                DictEntity seaStateDict = dictMapper.selectById(fishShipEntity.getSeaState());
-                exportFishShipVO.setSeaStateName(seaStateDict.getName());
-            }
-            if (fishShipEntity.getKeyPoints()) {
-                exportFishShipVO.setKeyPoints("是");
-            } else {
-                exportFishShipVO.setKeyPoints("否");
-            }
+            exportFishShipVO.setApprovedArea(fishShipEntity.getApprovedArea());
+            exportFishShipVO.setAuthorizedMember(fishShipEntity.getAuthorizedMember());
             exportDataList.add(exportFishShipVO);
         }
         return exportDataList;
@@ -213,32 +215,32 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
             String[] head = heads.split(",");
             List<String> listHead = Arrays.asList(head);
 
-            if (listHead.get(0).equals("船名称") && listHead.get(2).equals("编码") && listHead.get(13).equals("船主名称")) {
+            if (listHead.get(0).equals("渔船编码") && listHead.get(1).equals("船名") && listHead.get(15).equals("船主名称")) {
                 for (int i = 1; i <= lastRowNum; i++) {
                     try {
                         FishShipEntity fishShipEntity = new FishShipEntity();
-                        fishShipEntity.setName(ToolUtil.getCellValue(sheet.getRow(i).getCell(0)));
-                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(1)))) {
-                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(1)), "AREA_TYPE");
+                        fishShipEntity.setCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(0)));
+                        fishShipEntity.setName(ToolUtil.getCellValue(sheet.getRow(i).getCell(1)));
+                        fishShipEntity.setRegistry(ToolUtil.getCellValue(sheet.getRow(i).getCell(2)));
+                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(3)))) {
+                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(3)), "WATERS_TYPE");
+                            if (ToolUtil.isNotEmpty(dictEntity)) {
+                                fishShipEntity.setWatersType(dictEntity.getId());
+                            }
+                        }
+                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(4)))) {
+                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(4)), "AREA_TYPE");
                             if (ToolUtil.isNotEmpty(dictEntity)) {
                                 fishShipEntity.setAreaType(dictEntity.getId());
                             }
                         }
-                        fishShipEntity.setCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(2)));
-                        fishShipEntity.setRegistry(ToolUtil.getCellValue(sheet.getRow(i).getCell(3)));
-                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(4)))) {
-                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(4)), "SHIP_TYPE");
+                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(5)))) {
+                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(5)), "SHIP_TYPE");
                             if (ToolUtil.isNotEmpty(dictEntity)) {
                                 fishShipEntity.setShipType(dictEntity.getId());
                             }
                         }
-                        fishShipEntity.setHullMaterial(ToolUtil.getCellValue(sheet.getRow(i).getCell(5)));
-                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(6)))) {
-                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(6)), "WORK_TYPE");
-                            if (ToolUtil.isNotEmpty(dictEntity)) {
-                                fishShipEntity.setWorkType(dictEntity.getId());
-                            }
-                        }
+                        fishShipEntity.setHullMaterial(ToolUtil.getCellValue(sheet.getRow(i).getCell(6)));
                         if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(7)))) {
                             fishShipEntity.setShipLong(Double.parseDouble(ToolUtil.getCellValue(sheet.getRow(i).getCell(7))));
                         }
@@ -253,23 +255,25 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
                         }
                         fishShipEntity.setTonnage(ToolUtil.getCellValue(sheet.getRow(i).getCell(11)));
                         if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(12)))) {
-                            fishShipEntity.setProductDate(sdf.parse(ToolUtil.getCellValue(sheet.getRow(i).getCell(12))));
-                        }
-                        fishShipEntity.setShipOwner(ToolUtil.getCellValue(sheet.getRow(i).getCell(13)));
-                        fishShipEntity.setIdentity(ToolUtil.getCellValue(sheet.getRow(i).getCell(14)));
-                        //fishShipEntity.setPhone(ToolUtil.getCellValue(sheet.getRow(i).getCell(15)));
-                        fishShipEntity.setAddress(ToolUtil.getCellValue(sheet.getRow(i).getCell(16)));
-                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(17)))) {
-                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(17)), "SEA_STATE");
+                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(12)), "WORK_TYPE");
                             if (ToolUtil.isNotEmpty(dictEntity)) {
-                                fishShipEntity.setSeaState(dictEntity.getId());
+                                fishShipEntity.setWorkType(dictEntity.getId());
                             }
                         }
-                        if (ToolUtil.getCellValue(sheet.getRow(i).getCell(18)).equals("是")) {
-                            fishShipEntity.setKeyPoints(true);
-                        } else {
-                            fishShipEntity.setKeyPoints(false);
+                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(13)))) {
+                            DictEntity dictEntity = dictService.findByNameAndTypeCode(ToolUtil.getCellValue(sheet.getRow(i).getCell(13)), "PRACTICE");
+                            if (ToolUtil.isNotEmpty(dictEntity)) {
+                                fishShipEntity.setPractice(dictEntity.getId());
+                            }
                         }
+                        if (ToolUtil.isNotEmpty(ToolUtil.getCellValue(sheet.getRow(i).getCell(14)))) {
+                            fishShipEntity.setProductDate(sdf.parse(ToolUtil.getCellValue(sheet.getRow(i).getCell(14))));
+                        }
+                        fishShipEntity.setShipOwner(ToolUtil.getCellValue(sheet.getRow(i).getCell(15)));
+                        fishShipEntity.setIdentity(ToolUtil.getCellValue(sheet.getRow(i).getCell(16)));
+                        fishShipEntity.setAddress(ToolUtil.getCellValue(sheet.getRow(i).getCell(17)));
+                        fishShipEntity.setApprovedArea(ToolUtil.getCellValue(sheet.getRow(i).getCell(18)));
+                        fishShipEntity.setAuthorizedMember(ToolUtil.getCellValue(sheet.getRow(i).getCell(19)));
                         fishShipMapper.insert(fishShipEntity);
                         addNum++;
                     } catch (Exception e) {

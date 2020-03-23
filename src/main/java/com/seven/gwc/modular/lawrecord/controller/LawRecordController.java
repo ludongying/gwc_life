@@ -48,6 +48,15 @@ public class LawRecordController extends BaseController {
     }
 
     /**
+     * 跳转到执法记录首页
+     */
+    @RequestMapping("instrument")
+    public String instrument( Model model) {
+        model.addAttribute("lawTypes", LawTypeEnum.values());
+        return PREFIX + "instrument";
+    }
+
+    /**
      * 获取执法记录列表
      */
     @RequestMapping("/list")

@@ -4,13 +4,22 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * @author : zzl
  * @Date: 2020-03-09
  * @description :渔政船 业务常量
  */
 public class GwcConsts {
+
+    /**
+     * 执法船船号
+     */
+    public static final String lawShipCode="中国渔政32511";
+
+    /**
+     * 执法单位简称
+     */
+    public static final String shortName="苏连渔执";
     /**
      * 执法单位
      */
@@ -44,8 +53,6 @@ public class GwcConsts {
     public static final String lawsuitAgency="连云港市连云区人民法院";
 
 
-
-
     /**
      * 所有常量
      */
@@ -68,5 +75,9 @@ public class GwcConsts {
          }
          return fileds;
      }
+
+
+
+
 
 }

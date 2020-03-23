@@ -12,6 +12,7 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,5 +152,25 @@ public class PersonController extends BaseController {
         JSONArray jsonArray = personService.listPersons(ids);
         return new BaseResult().content(jsonArray);
     }
+
+    /**
+     * 获取执法船员实体列表
+     * @return
+     */
+    @RequestMapping("/listLawPersons")
+    @ResponseBody
+    public List<PersonVO> listLawPersons(){
+        return personService.listLawPersons();
+    }
+
+//    /**
+//     * 获取执法船员实体列表
+//     * @return
+//     */
+//    @RequestMapping("/listLawPersons")
+//    @ResponseBody
+//    public List<PersonEntity> listLawPersons(){
+//        return personService.listLawPersons();
+//    }
 }
 

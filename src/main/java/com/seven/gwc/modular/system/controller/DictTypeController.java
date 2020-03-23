@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,10 +89,7 @@ public class DictTypeController extends BaseController {
         if (dictType.getSort() == null) {
             dictType.setSort(0);
         }
-        dictType.setCreateTime(new Date());
-        dictType.setCreateUser(user.getName());
-        dictTypeService.save(dictType);
-        return SUCCESS;
+        return dictTypeService.add(dictType, user);
     }
 
     /**
@@ -116,10 +112,7 @@ public class DictTypeController extends BaseController {
         if (dictType.getSort() == null) {
             dictType.setSort(0);
         }
-        dictType.setUpdateUser(user.getName());
-        dictType.setUpdateTime(new Date());
-        dictTypeService.updateById(dictType);
-        return SUCCESS;
+        return dictTypeService.update(dictType, user);
     }
 
     /**

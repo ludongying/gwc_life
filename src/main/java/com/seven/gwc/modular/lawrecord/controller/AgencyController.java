@@ -8,11 +8,16 @@ import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.service.AgencyService;
 import com.seven.gwc.modular.lawrecord.vo.AgencyVO;
+import com.seven.gwc.modular.sailor.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author : zzl
@@ -27,6 +32,9 @@ public class AgencyController extends BaseController {
 
     @Autowired
     private AgencyService agencyService;
+
+    @Autowired
+    private PersonService personService;
     /**
      * 办案机关
      */
@@ -34,10 +42,20 @@ public class AgencyController extends BaseController {
     public String agency(Integer lawType,String id, Model model) {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
+        Map<String, Object> value = GwcConsts.getFileds();
         //固定值设置
-        model.addAttribute("value", GwcConsts.getFileds());
+        if(Objects.isNull(id) || id.trim().isEmpty()){
+            //获取编号
+            Integer year=LocalDate.now().getYear();
+            value.put("lawCaseFineCode", year);
+            value.put("lawCaseCode",agencyService.getLawCode(year));
+        }
+        model.addAttribute("value", value);
         //案件来源
         model.addAttribute("lawCaseSource", LawCaseSourceEnum.values());
+
+        //设置办案人员
+        model.addAttribute("person",personService.listLawPersons());
 
         return PREFIX + "agency";
     }

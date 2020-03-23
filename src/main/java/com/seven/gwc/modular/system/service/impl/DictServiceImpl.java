@@ -35,9 +35,10 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
     private DictTypeMapper dictTypeMapper;
 
     @Override
-    public List<DictEntity> selectDict(String dictTypeId) {
+    public List<DictEntity> selectDict(String dictTypeId, String name) {
         LambdaQueryWrapper<DictEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(DictEntity::getDictTypeId, dictTypeId)
+                .like(ToolUtil.isNotEmpty(name), DictEntity::getName, name)
                 .orderByAsc(DictEntity::getSort)
                 .orderByDesc(DictEntity::getCreateTime);
         List<DictEntity> list = dictMapper.selectList(lambdaQuery);

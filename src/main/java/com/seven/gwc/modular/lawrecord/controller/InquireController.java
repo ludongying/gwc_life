@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("lawRecord/inquire")
 @Slf4j
-public class InquireController extends BaseController {
+public class  InquireController extends BaseController {
 
     @Autowired
     private InquireService inquireService;
@@ -38,6 +38,7 @@ public class InquireController extends BaseController {
         model.addAttribute("lawType", lawType);
         model.addAttribute("id", id);
         if(lawType.equals(LawTypeEnum.PRODUCE.getCode())){
+            model.addAttribute("powerUnit",PowerUnitEnum.values());
             //实际作业类型
             model.addAttribute("shipRealType", ShipRealTypeEnum.values());
             //核定作业类型

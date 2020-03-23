@@ -28,6 +28,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
             {field: 'createTime', title: '创建时间', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
             {field: 'createUser', title: '创建人', align: "center"},
             {field: 'sort', title: '排序', align: "center"},
+            {field: 'sort', title: '排序', align: "center"},
             {align: 'center', toolbar: '#tableBar', width: 200, title: '操作'}
         ]];
     };
@@ -89,8 +90,9 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
      */
     Dict.search = function () {
         var queryData = {};
-        queryData['menuName'] = $("#sysDictTypeName").val().trim();
-        Dict.initTable(Dict.tableId, queryData);
+        queryData['name'] = $("#name").val().trim();
+        table.reload(Dict.tableId, {where: queryData});
+        //Dict.initTable(Dict.tableId, queryData);
     };
 
     /**
@@ -143,7 +145,7 @@ layui.use(['layer', 'form', 'table', 'laydate', 'ax', 'func', 'treetable'], func
      * @param data 点击按钮时候的行数据
      */
     Dict.onDeleteSysDictType = function (data) {
-        Feng.confirm("是否删除字典《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/dict/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

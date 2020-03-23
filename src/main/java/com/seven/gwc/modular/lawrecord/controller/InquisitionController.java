@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.controller;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.modular.lawrecord.dto.InquisitionDTO;
+import com.seven.gwc.modular.lawrecord.enums.PowerUnitEnum;
 import com.seven.gwc.modular.lawrecord.enums.ShipCaseCardEnum;
 import com.seven.gwc.modular.lawrecord.enums.ShipCaseEnum;
 import com.seven.gwc.modular.lawrecord.service.InquisitionService;
@@ -42,6 +43,8 @@ public class InquisitionController extends BaseController {
         model.addAttribute("shipCase", ShipCaseEnum.values());
         //悬挂情况
         model.addAttribute("shipCaseCard", ShipCaseCardEnum.values());
+
+        model.addAttribute("powerUnit", PowerUnitEnum.values());
         return PREFIX + "inquisition";
     }
 

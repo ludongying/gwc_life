@@ -3,16 +3,16 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.modular.lawrecord.dao.OperatorMapper;
+import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
+import com.seven.gwc.modular.lawrecord.service.OperatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
-import com.seven.gwc.modular.lawrecord.dao.OperatorMapper;
-import com.seven.gwc.modular.lawrecord.service.OperatorService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 /**
@@ -31,23 +31,18 @@ public class OperatorServiceImpl extends ServiceImpl<OperatorMapper, OperatorEnt
     public boolean updateOperator(String userId,String operatorEntities,String recordId) {
         if(Objects.nonNull(operatorEntities) && !operatorEntities.trim().isEmpty()){
             List<OperatorEntity> operators = JSON.parseArray(operatorEntities, OperatorEntity.class);
-            if(Objects.nonNull(operators) && !operators.isEmpty()){
-                if(Objects.nonNull(recordId)){
-                    operators=operators.stream().filter(operatorEntity ->
-                          !operatorEntity.getId().trim().isEmpty() ||
-                          !operatorEntity.getLawPersonName().trim().isEmpty() ||
-                          !operatorEntity.getLawCredentialCode().isEmpty()
-                     ).collect(Collectors.toList());
-                    if(!operators.isEmpty()){
-                        operators.forEach(operatorEntity -> {
-                            operatorEntity.setRecordId(recordId);
-                            operatorEntity.init(userId);
-                        });
-                        this.saveOrUpdateBatch(operators);
+            if(Objects.nonNull(recordId)){
+                if(Objects.nonNull(operators) && !operators.isEmpty()){
+                            operators.forEach(operatorEntity -> {
+                                String id = operatorEntity.getId();
+                                if(Objects.nonNull(id) && id.trim().isEmpty()){operatorEntity.setId(null);}
+                                operatorEntity.setRecordId(recordId);
+                                operatorEntity.init(userId);
+                            });
+                            this.saveOrUpdateBatch(operators);
+                        }
                     }
-                }
             }
-        }
         return true;
     }
 

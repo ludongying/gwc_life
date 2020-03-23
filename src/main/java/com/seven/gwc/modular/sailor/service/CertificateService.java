@@ -1,9 +1,8 @@
 package com.seven.gwc.modular.sailor.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 
 import java.text.ParseException;
 import java.util.List;
@@ -61,16 +60,16 @@ public interface CertificateService extends IService<CertificateEntity> {
     boolean editCertificate(CertificateEntity certificate, ShiroUser user) throws ParseException;
 
     /**
-     * 获证书详细信息（图片url转换）
-     * @param id 表编码
-     * @return
-     */
-    CertificateEntity getCertificateById(String id);
-
-    /**
      * 证书到期判断，并更新证书状态
      * @return
      */
     void warn() throws ParseException;
+
+//    /**
+//     * 获取某人员执法证编码
+//     * @param personId 人员id
+//     * @return
+//     */
+//    String getLawCode(String personId);
 
 }

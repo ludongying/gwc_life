@@ -1,18 +1,14 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
-import com.seven.gwc.core.base.GwcIdBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * description : 办案机关实体
@@ -32,15 +28,19 @@ public class  AgencyEntity extends GwcBaseEntity {
     private String id;
     /** 执法船号 */
     private String lawShipCode;
+    /**
+     * 单位简称
+     */
+    private String shortName;
 
     /** 执法单位 */
     private String enforcementAgency;
 
-    /** 案件编号 罚*/
-    private String lawCaseFineCode;
+    /** 案件编号 罚 因该为年份 这是被设计坑了*/
+    private Integer lawCaseFineCode;
 
     /** 案件编号 */
-    private String lawCaseCode;
+    private Integer lawCaseCode;
 
     /** 案件来源 */
     private Integer lawCaseSource;
@@ -126,4 +126,10 @@ public class  AgencyEntity extends GwcBaseEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date finishDate;
+
+    /** 保管年限 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date saveDate;
+
 }

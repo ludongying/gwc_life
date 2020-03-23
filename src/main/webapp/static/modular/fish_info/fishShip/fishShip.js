@@ -29,7 +29,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
             {title: '船编号', field: 'code', align: "center"},
             {title: '船名称', field: 'name', align: "center"},
             {title: '船主名称', field: 'shipOwner', align: "center"},
-            {title: '船主电话', field: 'phone', align: "center"},
             {title: '船舶类型', field: 'shipTypeName', align: "center"},
             {title: '船马力', field: 'totalPower', align: "center"},
             {title: '建成日期', field: 'productDate', align: "center"},
@@ -111,7 +110,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
     FishShip.search = function () {
         var queryData = {};
         queryData['code'] = $("#code").val().trim();
-        queryData['phone'] = $("#phone").val().trim();
         queryData['shipType'] = $("#shipType").val();
         table.reload(FishShip.tableId, {where: queryData});
     };
@@ -121,7 +119,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
      */
     FishShip.btnReset = function () {
         $("#code").val("");
-        $("#phone").val("");
         $("#shipType").empty();
 
         $.ajax({
@@ -152,12 +149,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
 
     FishShip.openExportFishShip = function () {
         var code = $("#code").val().trim();
-        var phone = $("#phone").val().trim();
         var shipType = $("#shipType").val();
 
         var exportForm = $("<form action='/fishShip/exportExcel' method='post'></form>");
         exportForm.append("<input type='hidden' name='code' value='" + code + "'/>");
-        exportForm.append("<input type='hidden' name='phone' value='" + phone + "'/>");
         exportForm.append("<input type='hidden' name='shipType' value='" + shipType + "'/>");
         $(document.body).append(exportForm);
         exportForm.submit();
@@ -205,7 +200,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
      * @param data 点击按钮时候的行数据
      */
     FishShip.onDeleteFishShip = function (data) {
-        Feng.confirm("是否删除渔船信息《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/fishShip/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

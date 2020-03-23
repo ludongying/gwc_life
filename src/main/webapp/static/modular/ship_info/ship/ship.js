@@ -142,7 +142,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     Ship.onDeleteShip = function (data) {
-        Feng.confirm("是否删除执法船信息 " + data.name + "?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/ship/delete", function () {
                 Feng.success("删除成功!");
                 table.reload(Ship.tableId);

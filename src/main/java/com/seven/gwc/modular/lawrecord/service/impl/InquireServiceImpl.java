@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
@@ -18,7 +20,9 @@ import com.seven.gwc.modular.lawrecord.dao.InquireMapper;
 import com.seven.gwc.modular.lawrecord.service.InquireService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 /**
@@ -43,7 +47,39 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
                     lawRecordService.createLawRecord(vo.getUserId(),vo.getLawType());
             vo.setId(lawRecordEntity.getId());
         }
+        vo.setRecordId(vo.getId());
         this.saveOrUpdate(vo);
+        //补录信息新建修改
+        LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.ne(InquireEntity::getId,vo.getId()).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
+        List<InquireEntity> list = this.list(wrapper);
+        List<InquireEntity> inquireEntities = vo.listInquire();
+        if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
+            inquireEntities.forEach(inquireEntity -> inquireEntity.setRecordId(vo.getId()));
+        }
+        //原来有数据
+        if(Objects.nonNull(list) && !list.isEmpty()) {
+            if(Objects.nonNull(inquireEntities)){
+                List<String> ids = inquireEntities.stream().map(InquireEntity::getId).filter(Objects::nonNull).collect(Collectors.toList());
+                if(!ids.isEmpty()){
+                    List<InquireEntity> left = list.stream().filter(inquireEntity -> !ids.contains(inquireEntity.getId())).peek(inquireEntity -> inquireEntity.setDeleteFlag(Boolean.FALSE)).collect(Collectors.toList());
+                    if(!left.isEmpty()){ inquireEntities.addAll(left); }
+                    this.saveOrUpdateBatch(inquireEntities);
+                }else{
+                    list.forEach(inquireEntity -> inquireEntity.setDeleteFlag(Boolean.FALSE));
+                    inquireEntities.addAll(list);
+                    this.saveOrUpdateBatch(inquireEntities);
+                }
+            }else{
+                //全部删除
+                list.forEach(inquireEntity -> inquireEntity.setDeleteFlag(Boolean.FALSE));
+                this.saveOrUpdateBatch(list);
+            }
+        }else{
+            if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
+                this.saveOrUpdateBatch(inquireEntities);
+            }
+        }
         BaseResult baseResult = new BaseResult(true, "");
         baseResult.setContent(vo.getId());
         return baseResult;
@@ -56,6 +92,13 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
             InquireDTO inquireDTO=new InquireDTO();
             BeanUtils.copyProperties(inquireEntity,inquireDTO);
             inquireDTO.setAddress();
+            //补录信息
+            LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
+            wrapper.ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
+            List<InquireEntity> list = this.list(wrapper);
+            if(Objects.nonNull(list) && !list.isEmpty()){
+                inquireDTO.setInquireContent(list);
+            }
             return inquireDTO;
         }
         return null;

@@ -14,6 +14,7 @@ import com.seven.gwc.modular.sailor.dao.PersonMapper;
 import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 import com.seven.gwc.modular.system.dao.PositionMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.UserEntity;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -212,16 +214,33 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     }
 
     @Override
-    public List<PersonEntity> listLawPersons() {
+    public List<PersonVO> listLawPersons() {
+        List<PersonVO> listVo = new ArrayList<>();
         List<PersonEntity> list = personMapper.PersonLawEntityList();
         for(PersonEntity personEntity:list){
             if(personEntity != null){
+                PersonVO personVO = new PersonVO();
+                personVO.setId(personEntity.getId());
+                personVO.setName(personEntity.getPersonName());
                 CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
-                personEntity.setLawCode(certificateEntity.getCertificateId());
+                personVO.setLawCode(certificateEntity.getCertificateId());
+                listVo.add(personVO);
             }
         }
-        return list;
+        return listVo;
     }
+
+//    @Override
+//    public List<PersonEntity> listLawPersons() {
+//        List<PersonEntity> list = personMapper.PersonLawEntityList();
+//        for(PersonEntity personEntity:list){
+//            if(personEntity != null){
+//                CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+//                personEntity.setLawCode(certificateEntity.getCertificateId());
+//            }
+//        }
+//        return list;
+//    }
 
 
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 
 import java.util.List;
 
@@ -63,10 +64,16 @@ public interface PersonService extends IService<PersonEntity> {
      */
     JSONArray listPersons(String ids);
 
+//    /**
+//     * 获取拥有执法证的所有船员
+//     * @return
+//     */
+//    List<PersonEntity> listLawPersons();
+
     /**
      * 获取拥有执法证的所有船员
      * @return
      */
-    List<PersonEntity> listLawPersons();
+    List<PersonVO> listLawPersons();
 
 }

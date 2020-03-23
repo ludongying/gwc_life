@@ -143,16 +143,16 @@ public class CertificateController extends BaseController {
         return certificateService.getById(certificateId);
     }
 
-    /**
-     * 通过船员id获取其执法证编号
-     * @param personId 船员id
-     * @return
-     */
-    @RequestMapping("/getLawCode/{personId}")
-    @ResponseBody
-    public String  getLawCode(@PathVariable String personId){
-        return certificateService.getLawCode(personId);
-    }
+//    /**
+//     * 通过船员id获取其执法证编号
+//     * @param personId 船员id
+//     * @return
+//     */
+//    @RequestMapping("/getLawCode/{personId}")
+//    @ResponseBody
+//    public String  getLawCode(@PathVariable String personId){
+//        return certificateService.getLawCode(personId);
+//    }
 
 }
 

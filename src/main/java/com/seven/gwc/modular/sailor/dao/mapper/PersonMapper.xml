@@ -55,7 +55,8 @@
     </select>
 
     <select id="PersonLawEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
-        select  p.*,u.*,u.name as personName,d.simple_name
+--         select  p.*,u.*,u.name as personName,d.simple_name
+        select  p.id,p.certificate_id,u.name as personName
         from ship_person p
         LEFT JOIN sys_user u on p.person_id = u.id
         LEFT JOIN sys_dept d on u.dept_id = d.id

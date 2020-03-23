@@ -230,18 +230,18 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         }
     }
 
-    @Override
-    public String getLawCode(String personId) {
-        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(PersonEntity::getId, personId);
-        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
-        if(personEntity == null)
-            return null;
-        CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
-        if(certificateEntity == null)
-            return  null;
-        return certificateEntity.getCertificateId();
-    }
+//    @Override
+//    public String getLawCode(String personId) {
+//        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
+//        lambdaQuery.eq(PersonEntity::getId, personId);
+//        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
+//        if(personEntity == null)
+//            return null;
+//        CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+//        if(certificateEntity == null)
+//            return  null;
+//        return certificateEntity.getCertificateId();
+//    }
 
     /**
      * 日期格式的计算

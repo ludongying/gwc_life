@@ -9,7 +9,9 @@ import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.sailor.dao.CertificateMapper;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
 import com.seven.gwc.modular.system.dao.PositionMapper;
@@ -42,6 +44,8 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     private UserMapper userMapper;
     @Autowired
     private PositionMapper positionMapper;
+    @Autowired
+    private CertificateMapper certificateMapper;
 
     @Override
     public List<PersonEntity> selectPerson(PersonEntity personEntity) {
@@ -209,7 +213,14 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 
     @Override
     public List<PersonEntity> listLawPersons() {
-        return personMapper.PersonLawEntityList();
+        List<PersonEntity> list = personMapper.PersonLawEntityList();
+        for(PersonEntity personEntity:list){
+            if(personEntity != null){
+                CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
+                personEntity.setLawCode(certificateEntity.getCertificateId());
+            }
+        }
+        return list;
     }
 
 

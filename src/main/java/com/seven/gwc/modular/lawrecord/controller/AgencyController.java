@@ -8,7 +8,6 @@ import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import com.seven.gwc.modular.lawrecord.service.AgencyService;
 import com.seven.gwc.modular.lawrecord.vo.AgencyVO;
-import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +55,7 @@ public class AgencyController extends BaseController {
         model.addAttribute("lawCaseSource", LawCaseSourceEnum.values());
 
         //设置办案人员
-        PersonEntity personEntity = new PersonEntity();
-        personEntity.setDeleteFlag(true);
-        model.addAttribute("person",personService.selectPerson(personEntity));
+        model.addAttribute("person",personService.listLawPersons());
 
         return PREFIX + "agency";
     }

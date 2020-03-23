@@ -54,7 +54,9 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         wrapper.ne(InquireEntity::getId,vo.getId()).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
         List<InquireEntity> list = this.list(wrapper);
         List<InquireEntity> inquireEntities = vo.listInquire();
-        inquireEntities.forEach(inquireEntity -> inquireEntity.setRecordId(vo.getId()));
+        if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
+            inquireEntities.forEach(inquireEntity -> inquireEntity.setRecordId(vo.getId()));
+        }
         //原来有数据
         if(Objects.nonNull(list) && !list.isEmpty()) {
             if(Objects.nonNull(inquireEntities)){
@@ -74,7 +76,7 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
                 this.saveOrUpdateBatch(list);
             }
         }else{
-            if(Objects.nonNull(inquireEntities)){
+            if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
                 this.saveOrUpdateBatch(inquireEntities);
             }
         }

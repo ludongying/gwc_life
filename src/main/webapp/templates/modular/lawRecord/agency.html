@@ -328,7 +328,7 @@
                                         <select name="personId1" lay-filter="law_person" lay-search=""  id="law_person1">
                                             <option value="">请选择执法人员</option>
                                              @for(item in person){
-                                             <option value="${item.id}"  data-certificate="${item.personId}">${item.personName}</option>
+                                             <option value="${item.id}"  data-certificate="${item.lawCode}">${item.personName}</option>
                                              @}
                                         </select>
                                     </div>
@@ -349,7 +349,7 @@
                                         <select name="personId2" lay-filter="law_person" lay-search="" lay-verify="person2" id="law_person2">
                                             <option value="">请选择执法人员</option>
                                             @for(item in person){
-                                            <option value="${item.id}"  data-certificate="${item.personId}">${item.personName}</option>
+                                            <option value="${item.id}"  data-certificate="${item.lawCode}">${item.personName}</option>
                                             @}
                                         </select>
                                     </div>

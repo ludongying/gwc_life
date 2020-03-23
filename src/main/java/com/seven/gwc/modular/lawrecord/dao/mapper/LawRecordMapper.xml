@@ -9,15 +9,17 @@
         <result column="status" property="status" />
         <result column="law_case_code" property="lawCaseCode"/>
         <result column="law_case_source" property="lawCaseSource" />
-        <result column="ship_name" property="shipName" />
+<!--        <result column="ship_name" property="shipName" />-->
         <result column="punish_person_type" property="punishPersonType" />
         <result column="create_date" property="createDate" />
-        <collection property="inquires" ofType="com.seven.gwc.modular.lawrecord.entity.InquireBase">
-            <id column="inquire_id" property="id"/>
-            <result column="investigate_name" property="investigateName"/>
-            <result column="investigate_tel" property="investigateTel"/>
+        <collection property="inquires" ofType="com.seven.gwc.modular.lawrecord.entity.InquireBase" column="{id=id,investigateName=investigateName_}" select="getInquire">
+<!--            <id column="inquire_id" property="id"/>-->
+<!--            <result column="ship_name" property="shipName"/>-->
+<!--            <result column="investigate_name" property="investigateName"/>-->
+<!--            <result column="investigate_tel" property="investigateTel"/>-->
         </collection>
     </resultMap>
+
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -32,22 +34,29 @@
            )
     </sql>
 
-    <select id="listLawRecord2" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
+    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
         SELECT
             law_record.id,
             law_record.law_type,
             law_record.status,
             <include refid="law_case_code"/> law_case_code,
             law_record_agency.law_case_source,
-            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
-            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
-            (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire_.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire_.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
+            (CASE law_record.law_type WHEN 1 THEN law_record_inquire_.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
             (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,
             law_record.create_date
         FROM
             law_record
         LEFT JOIN law_record_agency ON law_record.id=law_record_agency.id
-        LEFT JOIN law_record_inquire ON law_record.id=law_record_inquire.id
+        LEFT JOIN
+                 (SELECT
+                         law_record_inquire.record_id record_id,
+                         GROUP_CONCAT(law_record_inquire.ship_name) ship_name,
+                         GROUP_CONCAT(law_record_inquire.investigate_name) investigate_name,
+                         GROUP_CONCAT(law_record_inquire.investigate_tel) investigate_tel
+                 FROM law_record_inquire  GROUP BY law_record_inquire.record_id)
+                 law_record_inquire_ ON  law_record.id = law_record_inquire_.record_id
         LEFT JOIN law_record_inquire_safe ON law_record.id=law_record_inquire_safe.id
         LEFT JOIN law_record_decision ON law_record.id=law_record_decision.id
         LEFT JOIN law_record_decision_safe ON law_record.id=law_record_decision_safe.id
@@ -61,17 +70,17 @@
             </if>
             <if test="shipName!=null and shipName!=''">
                 AND (
-                    law_record_inquire.ship_name like CONCAT("%",#{shipName},"%")
+                    law_record_inquire_.ship_name like CONCAT("%",#{shipName},"%")
                     or
                     law_record_inquire_safe.ship_name like CONCAT("%",#{shipName},"%")
                 )
             </if>
             <if test="investigateTel!=null and investigateTel!=''">
-                AND (law_record_inquire.investigate_tel=#{investigateTel} or law_record_inquire_safe.investigate_tel=#{investigateTel})
+                AND (law_record_inquire_.investigate_tel=#{investigateTel} or law_record_inquire_safe.investigate_tel=#{investigateTel})
             </if>
             <if test="investigateName!=null and investigateName!=''">
                 AND (
-                     law_record_inquire.investigate_name like CONCAT("%",#{investigateName},"%")
+                     law_record_inquire_.investigate_name like CONCAT("%",#{investigateName},"%")
                      or
                      law_record_inquire_safe.investigate_name like CONCAT("%",#{investigateName},"%")
                      )
@@ -90,24 +99,25 @@
 
     </select>
 
-    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultMap="BaseResultMap">
+    <select id="listLawRecord2" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultMap="BaseResultMap">
         SELECT
         law_record.id id,
         law_record.law_type,
         law_record.status,
         <include refid="law_case_code"/> law_case_code,
         law_record_agency.law_case_source,
-        (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
-        (CASE law_record.law_type WHEN 1 THEN law_record_inquire.id ELSE law_record_inquire_safe.id END) inquire_id,
-        (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
-        (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
+        @rownum:=#{investigateName} AS investigateName_,
+--         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.ship_name ELSE law_record_inquire_safe.ship_name END) ship_name,
+--         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.id ELSE law_record_inquire_safe.id END) inquire_id,
+--         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
+--         (CASE law_record.law_type WHEN 1 THEN law_record_inquire.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
         (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,
         law_record.create_date
         FROM
         law_record
         LEFT JOIN law_record_agency ON law_record.id=law_record_agency.id
-        LEFT JOIN law_record_inquire ON law_record.id=law_record_inquire.record_id
-        LEFT JOIN law_record_inquire_safe ON law_record.id=law_record_inquire_safe.id
+--         LEFT JOIN law_record_inquire ON law_record.id=law_record_inquire.record_id
+--         LEFT JOIN law_record_inquire_safe ON law_record.id=law_record_inquire_safe.id
         LEFT JOIN law_record_decision ON law_record.id=law_record_decision.id
         LEFT JOIN law_record_decision_safe ON law_record.id=law_record_decision_safe.id
         <where>
@@ -118,23 +128,23 @@
             <if test="lawCaseCode!=null and lawCaseCode!=''">
                 AND <include refid="law_case_code"/> like CONCAT("%",#{lawCaseCode},"%")
             </if>
-            <if test="shipName!=null and shipName!=''">
-                AND (
-                law_record_inquire.ship_name like CONCAT("%",#{shipName},"%")
-                or
-                law_record_inquire_safe.ship_name like CONCAT("%",#{shipName},"%")
-                )
-            </if>
-            <if test="investigateTel!=null and investigateTel!=''">
-                AND (law_record_inquire.investigate_tel=#{investigateTel} or law_record_inquire_safe.investigate_tel=#{investigateTel})
-            </if>
-            <if test="investigateName!=null and investigateName!=''">
-                AND (
-                law_record_inquire.investigate_name like CONCAT("%",#{investigateName},"%")
-                or
-                law_record_inquire_safe.investigate_name like CONCAT("%",#{investigateName},"%")
-                )
-            </if>
+<!--            <if test="shipName!=null and shipName!=''">-->
+<!--                AND (-->
+<!--                law_record_inquire.ship_name like CONCAT("%",#{shipName},"%")-->
+<!--                or-->
+<!--                law_record_inquire_safe.ship_name like CONCAT("%",#{shipName},"%")-->
+<!--                )-->
+<!--            </if>-->
+<!--            <if test="investigateTel!=null and investigateTel!=''">-->
+<!--                AND (law_record_inquire.investigate_tel=#{investigateTel} or law_record_inquire_safe.investigate_tel=#{investigateTel})-->
+<!--            </if>-->
+<!--            <if test="investigateName!=null and investigateName!=''">-->
+<!--                AND (-->
+<!--                law_record_inquire.investigate_name like CONCAT("%",#{investigateName},"%")-->
+<!--                or-->
+<!--                law_record_inquire_safe.investigate_name like CONCAT("%",#{investigateName},"%")-->
+<!--                )-->
+<!--            </if>-->
             <if test="status!=null">
                 AND law_record.status =#{status}
             </if>
@@ -146,6 +156,28 @@
             </if>
         </where>
         order by law_record.create_date desc
+    </select>
+
+    <select id="getInquire" parameterType="java.util.Map" resultType="com.seven.gwc.modular.lawrecord.entity.InquireBase">
+       select
+         id,
+         ship_name,
+         investigate_name,
+         investigate_tel
+       from
+         law_record_inquire
+       <where>
+             law_record_inquire.record_id=#{id}
+<!--         <if test="shipName!=null and shipName!=''">-->
+<!--           law_record_inquire.ship_name like CONCAT("%",#{shipName},"%")-->
+<!--         </if>-->
+<!--         <if test="investigateTel!=null and investigateTel!=''">-->
+<!--            AND law_record_inquire.investigate_tel=#{investigateTel}-->
+<!--         </if>-->
+         <if test="investigateName!=null and investigateName!=''">
+           AND law_record_inquire.investigate_name like CONCAT("%",#{investigateName},"%")
+         </if>
+       </where>
     </select>
 
     <sql id="agency_column">

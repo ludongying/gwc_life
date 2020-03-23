@@ -12,9 +12,10 @@ import lombok.Getter;
 @Getter
 public enum PowerUnitEnum implements IEnum<Integer> {
 
-    KILOWATT(1,"千瓦"),
+    HORSEPOWER(2,"马力"),
+    KILOWATT(1,"千瓦");
 
-    HORSEPOWER(2,"马力");
+
 
 
     Integer code;

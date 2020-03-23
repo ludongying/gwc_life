@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 /**
@@ -23,12 +22,8 @@ public class InquireEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
-
-
     /** 记录id */
     private String recordId;
-
-
 
     /** 性别(枚举) */
     private Integer investigateSex;
@@ -39,8 +34,6 @@ public class InquireEntity extends InquireBase {
     /** 职务 */
     private Integer investigatePosition;
 
-
-
     /** 地址 */
     private String investigateAddr;
 
@@ -50,8 +43,7 @@ public class InquireEntity extends InquireBase {
     /** 身份证号 */
     private String identityCard;
 
-    /** 渔船名称 */
-    private String shipName;
+
 
     /** 船主姓名 */
     private String shipOwner;

@@ -238,12 +238,26 @@
                                 </div>
 
 
-                                <div class="layui-inline">
+<!--                                <div class="layui-inline">
                                     <label class="layui-form-label">主机功率</label>
                                     <div class="layui-input-inline" style="width:152px">
                                         <input placeholder="" name="shipPower" autocomplete="off" class="layui-input">
                                     </div>
                                     <div class="layui-form-mid layui-word-aux">马力</div>
+                                </div>-->
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">实际主机功率</label>
+                                    <div class="layui-input-inline" style="width: 73px">
+                                        <input placeholder="" lay-verify="positiveFloatNumber" name="shipPower" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline" style="width:85px">
+                                        <select name="shipPowerUnit" data-name="shipPowerUnit" id="shipPowerUnit" lay-filter="powerUnit">
+                                            @for(item in powerUnit){
+                                            <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="layui-inline">

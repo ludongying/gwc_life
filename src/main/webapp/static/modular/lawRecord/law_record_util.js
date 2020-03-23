@@ -403,3 +403,26 @@ function operate_table(param) {
         ajax.start();
     });
 };
+
+/********************************************************************/
+function addUnitListen($,form,unit_data){
+    form.on('select(powerUnit)', function(data){
+        let input_=$(data.elem).parent().prev().find("input");
+        let val=input_.val();
+        let unitValue=parseInt(data.value);
+        let name=$(data.elem).data("name");
+        if(unitValue===unit_data[name]){return;}
+        unit_data[name]=unitValue;
+        if(val && unitValue){
+            switch (unitValue) {
+                case 1:
+                    input_.val(getFloat(parseFloat(val)/1.36));
+                    break;
+                case 2:
+                    input_.val(getFloat(parseFloat(val)*1.36));
+                    break;
+                default:
+            }
+        }
+    });
+}

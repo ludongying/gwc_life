@@ -112,7 +112,7 @@ public class  AgencyEntity extends GwcBaseEntity {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date dealDate;
 
-    /** 处罚时间 */
+    /** 处罚审批时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date punishDate;

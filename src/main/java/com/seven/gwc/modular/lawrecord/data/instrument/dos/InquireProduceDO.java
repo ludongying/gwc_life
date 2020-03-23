@@ -9,5 +9,8 @@ import lombok.Data;
 
 @Data
 public class InquireProduceDO extends InquireDO{
-
+    /**
+     *渔船船名号
+     */
+    protected String Boat_Id;
 }

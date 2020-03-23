@@ -65,11 +65,15 @@ public class AgencyDTO extends AgencyEntity {
 
     private String personId1;
 
+    private String personName1;
+
     private String credentialCode1;
 
     private String id2;
 
     private String personId2;
+
+    private String personName2;
 
     private String credentialCode2;
 
@@ -146,11 +150,13 @@ public class AgencyDTO extends AgencyEntity {
             OperatorEntity person1= operators.get(0);
             this.id1=person1.getId();
             this.personId1=person1.getLawPersonId();
+            this.personName1=person1.getLawPersonName();
             this.credentialCode1=person1.getLawCredentialCode();
             if(operators.size() > 1){
                 OperatorEntity person2= operators.get(1);
                 this.id2=person2.getId();
                 this.personId2=person2.getLawPersonId();
+                this.personName2=person2.getLawPersonName();
                 this.credentialCode2=person2.getLawCredentialCode();
             }
         }

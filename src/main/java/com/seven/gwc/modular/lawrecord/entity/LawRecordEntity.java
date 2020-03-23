@@ -23,23 +23,25 @@ public class LawRecordEntity extends GwcIdBaseEntity {
 
     /** 状态 */
     private Integer status;
-
     /** 案件类型（安全/生产--枚举） */
     private Integer lawType;
-
-    /** 文书地址 */
+    /** 文书地址 无需要手写*/
+    private String autoWritFilePath;
+    /** 文书地址 需要手写 模板*/
+    private String manualWritFilePath;
+    /** 用户上传文书地址 需要手写 模板*/
     private String writFilePath;
-
     /** 主案由 */
     private Integer mainReason;
-
     /** 副案由 */
     private String secondReason;
-
-
-    /** 文书名称
-     private String writFileName;
+    /**
+     * 是否已经生成文书
      */
+    private boolean writFlag;
+
+
+
 
 
 

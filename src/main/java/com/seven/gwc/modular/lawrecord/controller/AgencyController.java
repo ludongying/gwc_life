@@ -53,7 +53,6 @@ public class AgencyController extends BaseController {
         model.addAttribute("value", value);
         //案件来源
         model.addAttribute("lawCaseSource", LawCaseSourceEnum.values());
-
         //设置办案人员
         model.addAttribute("person",personService.listLawPersons());
 

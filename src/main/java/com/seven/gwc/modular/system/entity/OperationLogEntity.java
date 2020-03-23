@@ -9,13 +9,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * description : 操作日志实体
- *
  * @author : GD
  * @date: 2019-12-18
  */

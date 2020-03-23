@@ -367,10 +367,10 @@ function loadVerify(form){
                 }
             }
         },positiveFloatNumber:function (value) {
-            var reg=/^[1-9][0-9]*\.?[0-9]*$/i;
+            var reg=/^[0-9][1-9]*\.?[0-9]{0,2}$/i;
             if(value){
                 if(value.toString().search(reg)<0){
-                    return "请输入正确的数字";
+                    return "请输入正确的数字 可保留两位小数";
                 }
             }
         },positiveNumber:function(value){

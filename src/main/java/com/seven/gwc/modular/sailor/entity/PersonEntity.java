@@ -101,9 +101,9 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
     @TableField (exist = false)
     private String certificate;
 
-    //执法证书编码
-    @TableField (exist = false)
-    private String lawCode;
+//    //执法证书编码
+//    @TableField (exist = false)
+//    private String lawCode;
 
 
 }

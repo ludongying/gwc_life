@@ -6,7 +6,7 @@ import lombok.Data;
 public class PersonVO {
     private String id;
 
-    private String name;
+    private String personName;
 
     private String lawCode;
 

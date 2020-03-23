@@ -22,6 +22,12 @@ public interface LawRecordMapper extends BaseMapper<LawRecordEntity> {
      * @return
      */
     List<LawRecordDTO> listLawRecord(LawRecordVO lawRecordVO);
+
+    /**
+     * 这种查询会影响分页数据条数会出现问题
+     * @param lawRecordVO
+     * @return
+     */
     @Deprecated
     List<LawRecordDTO> listLawRecord2(LawRecordVO lawRecordVO);
 

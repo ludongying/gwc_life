@@ -17,4 +17,7 @@ public class InquireBase extends GwcBaseEntity {
 
     /** 手机号码 */
     protected String investigateTel;
+
+    /** 渔船名称 */
+    private String shipName;
 }

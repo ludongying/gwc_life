@@ -65,4 +65,11 @@ public interface CertificateService extends IService<CertificateEntity> {
      */
     void warn() throws ParseException;
 
+//    /**
+//     * 获取某人员执法证编码
+//     * @param personId 人员id
+//     * @return
+//     */
+//    String getLawCode(String personId);
+
 }

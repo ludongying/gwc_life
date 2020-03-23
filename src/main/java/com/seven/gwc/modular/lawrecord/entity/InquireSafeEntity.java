@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-
 /**
  * description : 询问笔录-安全
  *
@@ -20,10 +19,6 @@ public class InquireSafeEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
-
-
-
-
     /** 性别 */
     private Integer investigateSex;
 
@@ -33,8 +28,6 @@ public class InquireSafeEntity extends InquireBase {
     /** 职务 */
     private Integer investigatePosition;
 
-
-
     /** 地址 */
     private String investigateAddr;
 
@@ -42,9 +35,6 @@ public class InquireSafeEntity extends InquireBase {
     private Integer identityCase;
     /** 身份证号 */
     private String identityCard;
-
-    /** 渔船名称 */
-    private String shipName;
 
     /** 船主姓名 */
     private String shipOwner;
@@ -87,7 +77,6 @@ public class InquireSafeEntity extends InquireBase {
 
     /** 查获时候捕鱼状态 */
     private Integer shipStatus;
-
 
 
 }

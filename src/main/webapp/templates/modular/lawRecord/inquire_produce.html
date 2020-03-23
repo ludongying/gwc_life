@@ -189,7 +189,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">身份证号码</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="identityCard" layui-verify="identityNumber" autocomplete="off" class="layui-input">
+                                        <input name="identityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
@@ -471,7 +471,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">身份证号码</label>
                         <div class="layui-input-inline">
-                            <input type="text" data-name="identityCard{{d.index}}" value="{{d.content.identityCard?d.content.identityCard:''}}"  layui-verify="identityNumber" autocomplete="off" class="layui-input">
+                            <input type="text" data-name="identityCard{{d.index}}" value="{{d.content.identityCard?d.content.identityCard:''}}"  lay-verify="identityNumber" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 

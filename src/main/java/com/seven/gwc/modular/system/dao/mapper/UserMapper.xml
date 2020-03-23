@@ -44,7 +44,7 @@
         <if test="user.name != null and user.name != ''">
             and (u.account like CONCAT('%',#{user.name},'%') or u.name like CONCAT('%',#{user.name},'%'))
         </if>
-        <if test="user.deptId != null and user.deptId != 0">
+        <if test="user.deptId != null">
             and (u.dept_id = #{user.deptId} or u.dept_id in ( select id from sys_dept where pids like CONCAT('%$[', #{user.deptId}, '$]%') escape '$' ))
         </if>
         <!-- 数据范围过滤 -->

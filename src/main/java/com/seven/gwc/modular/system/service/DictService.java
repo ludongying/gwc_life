@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface DictService extends IService<DictEntity> {
 
-    List<DictEntity> selectDict(String dictTypeId);
+    List<DictEntity> selectDict(String dictTypeId, String name);
 
     /**
      * 添加字典

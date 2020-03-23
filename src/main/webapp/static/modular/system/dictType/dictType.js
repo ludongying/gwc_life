@@ -150,7 +150,7 @@ layui.use(['layer', 'form', 'table', 'ax', 'func'], function () {
      * @param data 点击按钮时候的行数据
      */
     DictType.onDeleteSysDictType = function (data) {
-        Feng.confirm("是否删除字典类型《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/dictType/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

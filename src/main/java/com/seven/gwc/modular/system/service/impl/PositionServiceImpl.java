@@ -7,8 +7,10 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.PositionDeptMapper;
@@ -82,30 +84,46 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
     }
 
     @Override
-    public boolean add(PositionEntity position) {
+    public BaseResult add(PositionEntity position) {
         LambdaQueryWrapper<PositionEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(PositionEntity::getName, position.getName());
         PositionEntity positionEntity = positionMapper.selectOne(lambdaQuery);
         if (positionEntity != null) {
-            return false;
+            return new BaseResult(ErrorEnum.ERROR_ONLY_NAME);
         }
+
+        LambdaQueryWrapper<PositionEntity> lambda = Wrappers.lambdaQuery();
+        lambda.eq(PositionEntity::getCode, position.getCode());
+        PositionEntity entity = positionMapper.selectOne(lambda);
+        if (entity != null) {
+            return new BaseResult(ErrorEnum.ERROR_ONLY_CODE);
+        }
+
         ShiroUser user = ShiroKit.getUser();
         position.setCreateId(user.getId());
         position.setCreateUser(user.getName());
         position.setCreateTime(new Date());
         positionMapper.insert(position);
-        return true;
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(PositionEntity position, String menuIds) {
+    public BaseResult update(PositionEntity position, String menuIds) {
         LambdaQueryWrapper<PositionEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(PositionEntity::getName, position.getName())
                 .ne(PositionEntity::getId, position.getId());
         PositionEntity positionEntity = positionMapper.selectOne(lambdaQuery);
         if (positionEntity != null) {
-            return false;
+            return new BaseResult(ErrorEnum.ERROR_ONLY_NAME);
+        }
+
+        LambdaQueryWrapper<PositionEntity> lambda = Wrappers.lambdaQuery();
+        lambda.eq(PositionEntity::getCode, position.getCode())
+                .ne(PositionEntity::getId, position.getId());
+        PositionEntity entity = positionMapper.selectOne(lambda);
+        if (entity != null) {
+            return new BaseResult(ErrorEnum.ERROR_ONLY_CODE);
         }
 
         //更改岗位
@@ -124,7 +142,7 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, PositionEnt
                 positionDeptMapper.insert(positionDeptEntity);
             }
         }
-        return true;
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override

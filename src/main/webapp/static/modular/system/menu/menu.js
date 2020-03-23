@@ -181,7 +181,7 @@ layui.use(['layer', 'form', 'table', 'admin', 'ax', 'treetable', 'func'], functi
      * @param data 点击按钮时候的行数据
      */
     Menu.onDeleteMenu = function (data) {
-        Feng.confirm("是否删除菜单《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/menu/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

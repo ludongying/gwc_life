@@ -176,7 +176,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, MenuEntity> impleme
                 LambdaQueryWrapper<RoleEntity> roleLambdaQuery = Wrappers.lambdaQuery();
                 roleLambdaQuery.eq(RoleEntity::getId, relation.getRoleId());
                 RoleEntity roleEntity = roleMapper.selectOne(roleLambdaQuery);
-                roleEntityList.add(roleEntity);
+                if (ToolUtil.isNotEmpty(roleEntity)) {
+                    roleEntityList.add(roleEntity);
+                }
             }
             jsonObject.put("data", roleEntityList);
         } else {

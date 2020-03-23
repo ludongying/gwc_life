@@ -130,7 +130,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'admin', 'ax', 'func'], function (
      * @param data 点击按钮时候的行数据
      */
     RegulationSafe.onDeleteRegulationSafe = function (data) {
-        Feng.confirm("是否删除法律法规《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             if (deleteFile(data.fileName)) {
                 var ajax = new $ax(Feng.ctxPath + "/regulationSafe/delete", function (data) {
                     if (data.success) {

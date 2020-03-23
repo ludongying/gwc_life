@@ -25,7 +25,7 @@ public enum ErrorEnum {
     /********************************✨    公用(1000 * 1999)   ✨*************************************/
     ERROR_ONLY_NAME(1000, "名称已存在"),
     ERROR_ONLY_STATUS(1001, "已存在有效"),
-    ERROR_ONLY_CODE(1002, "CODE已存在"),
+    ERROR_ONLY_CODE(1002, "编码已存在"),
     THE_DATA_USED(1003, "该数据已被使用"),
     NO_POWER_TO_RESOURCES(1004, "无权访问该资源"),
     ERROR_UPDATE(1005, "修改失败"),

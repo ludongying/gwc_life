@@ -1,6 +1,5 @@
 package com.seven.gwc.modular.system.service.impl;
 
-import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -42,8 +41,20 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     public List<RoleEntity> selectRole(String roleName) {
         LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(roleName), RoleEntity::getName, roleName)
-                .orderByAsc(RoleEntity::getSort);
-        return this.roleMapper.selectList(lambdaQuery);
+                .orderByAsc(RoleEntity::getSort)
+                .orderByDesc(RoleEntity::getCreateTime);
+        List<RoleEntity> list = roleMapper.selectList(lambdaQuery);
+        for (RoleEntity roleEntity : list) {
+            if (roleEntity.getPid().equals("0")) {
+                roleEntity.setPName("顶级");
+            } else {
+                RoleEntity entity = roleMapper.selectById(roleEntity.getPid());
+                if (ToolUtil.isNotEmpty(entity)) {
+                    roleEntity.setPName(entity.getName());
+                }
+            }
+        }
+        return list;
     }
 
     @Override

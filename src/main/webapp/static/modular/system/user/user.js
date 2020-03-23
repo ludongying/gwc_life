@@ -141,7 +141,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 点击删除用户
      */
     User.onDeleteUser = function (data) {
-        Feng.confirm("是否删除用户《" + data.name + "》吗?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/user/deleteLogic", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

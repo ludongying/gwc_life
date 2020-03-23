@@ -151,5 +151,15 @@ public class PersonController extends BaseController {
         JSONArray jsonArray = personService.listPersons(ids);
         return new BaseResult().content(jsonArray);
     }
+
+    /**
+     * 获取执法船员实体列表
+     * @return
+     */
+    @RequestMapping("/listLawPersons")
+    @ResponseBody
+    public List<PersonEntity> listLawPersons(){
+        return personService.listLawPersons();
+    }
 }
 

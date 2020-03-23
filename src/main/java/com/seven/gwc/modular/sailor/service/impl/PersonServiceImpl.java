@@ -207,5 +207,10 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         return jsonArray;
     }
 
+    @Override
+    public List<PersonEntity> listLawPersons() {
+        return personMapper.PersonLawEntityList();
+    }
+
 
 }

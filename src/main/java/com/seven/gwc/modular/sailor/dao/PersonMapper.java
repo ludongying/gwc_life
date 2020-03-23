@@ -24,4 +24,6 @@ public interface PersonMapper extends BaseMapper<PersonEntity> {
     PersonEntity PersonEntity(@Param("id") String id);
 
     List<PersonEntity> PersonNamesEntityList(@Param("id") String id);
+
+    List<PersonEntity> PersonLawEntityList();
 }

@@ -1,8 +1,7 @@
 package com.seven.gwc.modular.sailor.dao;
 
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.seven.gwc.modular.ship_info.entity.ShipEntity;
+import com.seven.gwc.modular.sailor.entity.CertificateEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +27,11 @@ public interface CertificateMapper extends BaseMapper<CertificateEntity> {
      * @return
      */
     List<CertificateEntity> CertificateEntityList(@Param("certificateName") String certificateName, @Param("ids") String ids);
+
+    /**
+     * 根据证书ids字符串查询执法证实体
+     * @param ids 证书ids
+     * @return
+     */
+    List<CertificateEntity> CertificateLawEntityList(@Param("ids") String ids);
 }

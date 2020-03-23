@@ -63,6 +63,10 @@ public interface PersonService extends IService<PersonEntity> {
      */
     JSONArray listPersons(String ids);
 
-
+    /**
+     * 获取拥有执法证的所有船员
+     * @return
+     */
+    List<PersonEntity> listLawPersons();
 
 }

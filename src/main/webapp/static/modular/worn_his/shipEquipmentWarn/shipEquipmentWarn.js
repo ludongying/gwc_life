@@ -24,10 +24,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     ShipEquipmentWarn.initColumn = function () {
         return [[
-            {title: 'ID', field: 'id', align: "center"},
-            {title: '设备id', field: 'equipId', align: "center"},
+            {title: '序号', field: 'id', maxWidth:50,align: "center"},
+            {title: '设备名称', field: 'equipId', align: "center"},
             {title: '告警类型', field: 'warnType', align: "center"},
-            {title: '报警内容', field: 'warnDescribe', align: "center"},
+            {title: '报警内容', field: 'warnDescribe', align: "center",minWidth: 280},
             {title: '创建时间', field: 'createDate', align: "center"},
             // {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         url: Feng.ctxPath + '/shipEquipmentWarn/list',
         page: true,
         height: "full-97",
-        cellMinWidth: 100,
+        cellMinWidth: 50,
         cols: ShipEquipmentWarn.initColumn()
     });
 

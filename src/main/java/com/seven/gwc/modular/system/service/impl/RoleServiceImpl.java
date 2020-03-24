@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.CacheConsts;
 import com.seven.gwc.config.constant.SysConsts;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.util.CacheUtil;
@@ -38,19 +39,20 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     private UserService userService;
 
     @Override
-    public List<RoleEntity> selectRole(String roleName) {
-        LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<RoleEntity> selectRole(RoleEntity roleEntity) {
+        /*LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.like(ToolUtil.isNotEmpty(roleName), RoleEntity::getName, roleName)
                 .orderByAsc(RoleEntity::getSort)
-                .orderByDesc(RoleEntity::getCreateTime);
-        List<RoleEntity> list = roleMapper.selectList(lambdaQuery);
-        for (RoleEntity roleEntity : list) {
-            if (roleEntity.getPid().equals("0")) {
-                roleEntity.setPName("顶级");
+                .orderByDesc(RoleEntity::getCreateTime);*/
+        List<RoleEntity> list = roleMapper.getRoleList(roleEntity);
+        for (RoleEntity role : list) {
+            if (role.getPid().equals("0")) {
+                role.setPName("顶级");
             } else {
-                RoleEntity entity = roleMapper.selectById(roleEntity.getPid());
+                RoleEntity entity = roleMapper.selectById(role.getPid());
                 if (ToolUtil.isNotEmpty(entity)) {
-                    roleEntity.setPName(entity.getName());
+                    role.setPName(entity.getName());
                 }
             }
         }

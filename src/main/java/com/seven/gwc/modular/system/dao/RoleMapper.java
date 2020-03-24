@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface RoleMapper extends BaseMapper<RoleEntity> {
 
+    List<RoleEntity> getRoleList(@Param("role") RoleEntity roleEntity);
+
     /**
      * 获取角色列表树
      */

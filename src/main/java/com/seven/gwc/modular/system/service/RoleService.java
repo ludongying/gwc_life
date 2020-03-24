@@ -18,10 +18,12 @@ public interface RoleService extends IService<RoleEntity> {
     /**
      * 角色查询列表
      *
-     * @param name 角色名称
+     * @param roleEntity 角色名称
      * @return
      */
-    List<RoleEntity> selectRole(String name);
+    List<RoleEntity> selectRole(RoleEntity roleEntity);
+
+
 
     /**
      * 获取角色列表树

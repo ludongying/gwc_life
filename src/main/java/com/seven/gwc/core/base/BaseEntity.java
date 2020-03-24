@@ -28,7 +28,7 @@ public class BaseEntity implements Serializable {
     protected boolean synFlag;
 
     public Map<String, Object> getParams() {
-        if (params == null) {
+            if (params == null) {
             params = new HashMap<>();
         }
 

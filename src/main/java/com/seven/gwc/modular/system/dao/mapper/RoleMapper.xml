@@ -51,4 +51,14 @@
         order by create_time desc
     </select>
 
+
+    <select id="getRoleList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
+        SELECT * FROM sys_role r
+        LEFT JOIN sys_user u ON r.create_user = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where 1=1
+        ${user.params.dataScope}
+        order by r.sort, r.create_time desc
+    </select>
+
 </mapper>

@@ -27,9 +27,6 @@
     <sql id="Base_Column_List">
         id, avatar, account, password, salt, name, birthday, sex, email, phone, role_id, dept_id, status, create_time, create_user, update_time, update_user, version
     </sql>
-    <update id="setStatus">
-        update sys_user set status = #{status} where id = #{userId}
-    </update>
     <select id="listBasicsEntity" resultType="com.seven.gwc.modular.system.vo.ListBasicsEntityVO">
         SELECT b.id AS id,b.`name` AS `name`,b.basics_type_id AS basicsTypeId,
             (CASE WHEN (b.id in (SELECT r.basics_id FROM user_basics_relation r WHERE r.user_id = #{userId}) ) THEN true ELSE false END) as state

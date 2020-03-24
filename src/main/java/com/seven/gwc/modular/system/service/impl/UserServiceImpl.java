@@ -61,7 +61,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Override
     public Integer getListSize(UserEntity userEntity) {
-        return userMapper.getListSize(userEntity);
+        List<UserEntity> list =  userMapper.getListSize(userEntity);
+        return list.size();
     }
 
 

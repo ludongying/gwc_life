@@ -58,8 +58,8 @@
         FROM sys_user ORDER BY id asc
 	</select>
 
-    <select id="getListSize" resultType="java.lang.Integer">
-        SELECT count(0)
+    <select id="getListSize" resultType="com.seven.gwc.modular.system.entity.UserEntity">
+        SELECT u.*
         FROM sys_user u
         LEFT JOIN sys_role r ON FIND_IN_SET(r.id,u.role_id)
         LEFT JOIN sys_dept d ON u.dept_id = d.id
@@ -72,6 +72,7 @@
         </if>
         <!-- 数据范围过滤 -->
         ${user.params.dataScope}
+        GROUP BY u.id
     </select>
 
 

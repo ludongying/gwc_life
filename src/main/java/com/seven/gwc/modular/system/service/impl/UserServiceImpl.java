@@ -60,6 +60,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
+    public Integer getListSize(UserEntity userEntity) {
+        return userMapper.getListSize(userEntity);
+    }
+
+
+    @Override
     public int setStatus(String userId, String status, String currentUserId) {
         LambdaUpdateWrapper<UserEntity> lambdaUpdate = Wrappers.<UserEntity>lambdaUpdate();
         //update sys_user set status = #{status} where id = #{userId}

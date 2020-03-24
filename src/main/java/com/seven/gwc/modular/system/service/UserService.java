@@ -30,6 +30,9 @@ public interface UserService extends IService<UserEntity> {
      */
     List<UserEntity> selectUser(UserEntity userEntity, Integer total, Integer size);
 
+
+    Integer getListSize(UserEntity userEntity);
+
     /**
      * 编辑用户状态
      *

@@ -1,17 +1,17 @@
 
 layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','laytpl'], function () {
-    var $ = layui.$;
-    var layer = layui.layer;
-    var form = layui.form;
-    var upload=layui.upload;
-    var table = layui.table;
-    var $ax = layui.ax;
-    var laydate = layui.laydate;
-    var admin = layui.admin;
-    var func = layui.func;
-    var laytpl=layui.laytpl;
+    let $ = layui.$;
+    let layer = layui.layer;
+    let form = layui.form;
+    let upload=layui.upload;
+    let table = layui.table;
+    let $ax = layui.ax;
+    let laydate = layui.laydate;
+    let admin = layui.admin;
+    let func = layui.func;
+    let laytpl=layui.laytpl;
 
-    var lay={
+    let lay={
          '$':$,
          'layer':layer,
          'form':form,
@@ -21,7 +21,7 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
          'func':func,
          'key':'law_evidence'
     }
-    var fileParam={
+    let fileParam={
         "delete":false,
         "down":true,
         "exts":'png|jpg|jpeg|avi|mp4',
@@ -30,11 +30,8 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         }
 
         initPage();
-        setTimeout(function () {
-            //开启表单内容监听 加载时序问题调整
-            $("#evidence_content").val(md5(JSON.stringify(getDatas())));
-            startListen($,lay.key);
-        },300)
+        startListen($,lay.key);
+
 
     //下一步
     form.on('submit(nextStep)', function (data) {
@@ -49,31 +46,34 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         }
 
     });
+
+
+
     //添加
     $("#addEvidence").click(function () {
-        initFiles($,upload,fileParam,initContent());
+
     });
 
     function initPage(){
         //编辑
         if($("#id").val()){
-            var ajax = new $ax(Feng.ctxPath + "/lawRecord/evidence/detail?id="+$("#id").val());
-            var result = ajax.start();
-            if(result.content){
-                if(setDatas(result)){
-                    return;
-                }
+            let ajax = new $ax(Feng.ctxPath + "/lawRecord/evidence/detail?id="+$("#id").val());
+            let result = ajax.start();
+            if(result){
+                return;
             }
+
         }
-        initFiles($,upload,fileParam,initContent());
+        initContent();
+
     }
     //初始化内容
     function initContent(){
-        var index=($('#evidence_box .layui-col-md12')).length+1;
-        var data = { //数据
+        let index=($('#evidence_box .layui-col-md12')).length+1;
+        let data = { //数据
             "index":index
         }
-        var getTpl = $('#evidenceTpl').html()
+        let getTpl = $('#evidenceTpl').html()
             ,view = $('#evidence_box');
         laytpl(getTpl).render(data, function(html){
             view.append(html);
@@ -88,71 +88,18 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
     }
     //设置数据
     function setDatas(res){
-        if(res.success){
-            var content=res.content;
-            if(content){
-                var data_length = content.length;
-                if(data_length>0){
-                    for(var i=0;i<data_length;i++){
-                        var index = initContent();
-                        var evidence=content[i];
-                        var param=Object.assign({},fileParam);;
-                        param.data=evidence.path;
-                        initFiles($,upload,param,index);
-                        var inputs = $("#evidence_box .content_"+index+" input");
-                        if(inputs){
-                            if(inputs.length>2){
-                                inputs.eq(0).val(evidence.evidenceContent);
-                                inputs.eq(1).val(evidence.evidenceTime);
-                                inputs.eq(2).val(evidence.id);
-                            }
-                        }
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
+
     }
     //获取数据
     function getDatas() {
-        var content=[];
-        var cards = $("#evidence_box .layui-card-body");
-        for(var i=0;i<cards.length;i++){
-            var card = cards.eq(i);
-            var index=card.data("index");
-            var inputs=card.find("input");
-            var data={
-                evidenceContent:inputs.eq(0).val(),
-                evidenceTime:inputs.eq(1).val(),
-                path:[]
-            }
-            var evidenceId=inputs.eq(2).val();
-            if(evidenceId){
-                data.id=evidenceId;
-            }
-            content.push(data);
-            var trs=$("#file_list"+index+" tr");
-            var trs_length=trs.length;
-            if(trs_length>0){
-                for(var j=0;j<trs_length;j++){
-                    var tds=trs.eq(j).find("td");
-                    var filePath=tds.eq(2).find("span").data("filePath");
-                    if(filePath){
-                        data.path.push({"path":filePath});
-                    }
-                }
-            }
-        }
-        return content;
+
     }
     //提交数据
     function submitData(des,data){
         //获取数据
-        var dataStr=JSON.stringify(getDatas());
-        data.field.content=dataStr;
-        //
-        $("#evidence_content").val(md5(dataStr));
+
+
+
         //开启监听后，下一步操作验证
         nextStep({
             "lay":lay,
@@ -161,6 +108,22 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
             "data":data
         });
     }
+
+    //多图片上传
+    upload.render({
+        elem: '#test2'
+        ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+        ,multiple: true
+        ,before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" style="width: 120px" class="layui-upload-img">')
+            });
+        }
+        ,done: function(res){
+            //上传完毕
+        }
+    });
 
 
 

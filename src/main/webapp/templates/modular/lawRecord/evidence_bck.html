@@ -166,6 +166,7 @@
                             <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
                         </div>
 
+
                     </div>
                 </div>
             </form>
@@ -200,15 +201,28 @@
                 </div>
 
                 <!--文件上传 -->
-                <div class="layui-upload">
-                    <button type="button" class="layui-btn" id="test2">选择证据</button>
-                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                        <div class="layui-upload-list" id="demo2"></div>
-                    </blockquote>
+                <div class="layui-form-item" style="margin:auto 50px;width: 575px">
+                    <label class="layui-form-label" style="padding-left: 0;text-align: left;" >证据</label>
+                    <div class="layui-upload">
+                        <div class="layui-upload-list">
+                            <table class="layui-table">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="file_list{{ d.index }}"></tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="layui-btn layui-btn-normal" id="select_list{{ d.index }}">选择多文件</button>
+                        <button type="button" class="layui-btn" id="start_upload{{ d.index }}">开始上传</button>
+                        <span class="inline-block" style="color: red">注：图片仅支持PNG、JPG格式！视频仅支持MP4、AVI格式</span>
+                    </div>
+
                 </div>
-
-
-            </div>
             </div>
         </div>
     </div>

@@ -1,21 +1,22 @@
 layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
-    var $ = layui.$;
-    var layer = layui.layer;
-    var form = layui.form;
-    var table = layui.table;
-    var $ax = layui.ax;
-    var laydate = layui.laydate;
-    var admin = layui.admin;
-    var func = layui.func;
+    let $ = layui.$;
+    let layer = layui.layer;
+    let form = layui.form;
+    let table = layui.table;
+    let $ax = layui.ax;
+    let laydate = layui.laydate;
+    let admin = layui.admin;
+    let func = layui.func;
 
     /**
      * 执法记录管理
      */
-    var LawRecord = {
+    let LawRecord = {
         tableId: "lawRecordTable",
         condition: {
             lawRecordName: ""
-        }
+        },
+        searchType:"commonSearch"
     };
     laydate.render({
         elem: '#createTime'
@@ -51,44 +52,84 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             cols: LawRecord.initColumn()
         });
     }
+
+    /**
+     * 更多 -返回
+     *
+     */
+    $('#moreSearch').click(function () {
+        $(this).parent().parent().addClass("layui-hide");
+        $(this).parent().parent().next().removeClass("layui-hide");
+        LawRecord.searchType="advancedSearch";
+    });
+
+    $('#backSearch').click(function () {
+        $(this).parent().parent().addClass("layui-hide");
+        $(this).parent().parent().prev().removeClass("layui-hide");
+        LawRecord.searchType="commonSearch";
+    });
+
     /**
      * 左侧搜索
      */
     $('#btnSearch').click(function () {
-        var queryData = {};
-        var lawCaseCode=$("#lawCaseCode").val().trim();
-        if(lawCaseCode.length>50){
-            msg_style($,"lawCaseCode","字符长度不能超过50")
-          return;
+        let queryData=getParam(LawRecord.searchType);
+        console.log(queryData);
+        table.reload(LawRecord.tableId, {where: queryData});
+    });
+
+    function getParam(id){
+        let queryData = {};
+        let id_="#"+id;
+        let lawCaseCode=$(id_+" .lawCaseCode").val();
+        if(lawCaseCode){
+            lawCaseCode=lawCaseCode.trim();
+            if(lawCaseCode.length>50){
+                msg_style($,"lawCaseCode","字符长度不能超过50")
+                return;
+            }
+            queryData['lawCaseCode'] = lawCaseCode;
         }
-        queryData['lawCaseCode'] = lawCaseCode;
-        var shipName=$("#shipName").val().trim();
-        if(shipName.length>50){
-            msg_style($,"shipName","字符长度不能超过50")
-            return;
+        let shipName=$(id_+" .shipName").val();
+        if(shipName){
+            shipName=shipName.trim();
+            if(shipName.length>50){
+                msg_style($,"shipName","字符长度不能超过50")
+                return;
+            }
+            queryData['shipName'] = shipName;
         }
-        queryData['shipName'] = shipName;
-        var investigateTel=$("#investigateTel").val().trim();
-        if(investigateTel.length>11){
-            msg_style($,"investigateTel","字符长度不能超过11")
-            return;
+        let investigateTel=$(id_+" .investigateTel").val();
+        if(investigateTel){
+            investigateTel=investigateTel.trim();
+            if(investigateTel.length>11){
+                msg_style($,"investigateTel","字符长度不能超过11")
+                return;
+            }
+            queryData['investigateTel'] = investigateTel;
         }
-        queryData['investigateTel'] = investigateTel;
-        queryData['lawType'] = $("#lawType").val().trim();
-        var investigateName=$("#investigateName").val().trim();
-        if(investigateName.length>20){
-            msg_style($,"investigateName","字符长度不能超过20")
-            return;
+        let lawType=$(id_+" .lawType").val();
+        if(lawType){
+            queryData['lawType'] =lawType;
         }
-        queryData['investigateName'] = investigateName
-        var createTime=$("#createTime").val().trim();
+
+        let investigateName=$(id_+" .investigateName").val();
+        if(investigateName){
+            investigateName=investigateName.trim();
+            if(investigateName.length>20){
+                msg_style($,"investigateName","字符长度不能超过20")
+                return;
+            }
+            queryData['investigateName'] = investigateName
+        }
+        let createTime=$(id_+" .createTime").val();
         if(createTime){
-            var times = createTime.split("~");
+            let times = createTime.split("~");
             queryData['createStartTime'] = times[0].trim();
             queryData['createEndTime'] = times[1].trim();
         }
-        table.reload(LawRecord.tableId, {where: queryData});
-    });
+        return queryData;
+    }
 
     /**
      * 重置按钮点击事件
@@ -122,9 +163,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 工具条点击事件
      */
     table.on('tool(' + LawRecord.tableId + ')', function (obj) {
-        var data = obj.data;
-        var layEvent = obj.event;
-        var name=data.lawCaseCode;
+        let data = obj.data;
+        let layEvent = obj.event;
+        let name=data.lawCaseCode;
         if(!name){
             name="此项记录";
         }else{

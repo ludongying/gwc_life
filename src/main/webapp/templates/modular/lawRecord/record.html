@@ -6,37 +6,72 @@
                 <div class="layui-card-body">
                     <div id="conditionInput" class="layui-form toolbar">
                               <div class="layui-form-item">
-                                  <div class="layui-inline">
-                                      <select id="lawType"  name="lawType" lay-verify="">
-                                          <option value="">请选择案件类型</option>
-                                          @for(lawType in lawTypes){
-                                          <option value="${lawType.code}">${lawType.message}</option>
-                                          @}
-                                      </select>
+                                  <div id="commonSearch" class="layui-inline">
+
+                                      <div class="layui-inline" style="width: 120px">
+                                          <select lay-verify="selectType">
+                                              <option value="lawType">案件类型</option>
+                                              <option value="lawCaseCode">案件编号</option>
+                                              <option value="shipName">被执法船</option>
+                                              <option value="investigateTel">被询问人电话</option>
+                                              <option value="investigateName">被询问人</option>
+                                              <option value="createTime">案件创建时间</option>
+                                          </select>
+                                      </div>
+
+
+                                      <div class="layui-inline" id="select_box">
+                                          <select class="lawType" name="lawType" lay-verify="">
+                                              <option value="">请选择案件类型</option>
+                                              @for(lawType in lawTypes){
+                                              <option value="${lawType.code}">${lawType.message}</option>
+                                              @}
+                                          </select>
+                                      </div>
+
+                                      <div class="layui-inline">
+                                          <button id="moreSearch" type="button" class="layui-btn layui-btn-primary">更多</button>
+                                      </div>
+
                                   </div>
-                                  <div class="layui-inline">
-                                      <input id="lawCaseCode"  class="layui-input" lay-verify="length50" type="text" placeholder="案件编号"/>
-                                  </div>
-                                  <div class="layui-inline">
-                                      <input id="shipName" class="layui-input" type="text" placeholder="被执法船"/>
-                                  </div>
-                                  <div class="layui-inline">
-                                      <input id="investigateTel" class="layui-input" type="text" placeholder="被询问人电话"/>
-                                  </div>
-                                  <div class="layui-inline">
-                                      <input id="investigateName" class="layui-input" type="text" placeholder="被询问人"/>
+                                  <div id="advancedSearch" class="layui-hide  layui-inline" >
+                                      <div class="layui-inline">
+                                          <select class="lawType"  name="lawType" lay-verify="">
+                                              <option value="">请选择案件类型</option>
+                                              @for(lawType in lawTypes){
+                                              <option value="${lawType.code}">${lawType.message}</option>
+                                              @}
+                                          </select>
+                                      </div>
+                                      <div class="layui-inline">
+                                          <input  class="layui-input lawCaseCode" lay-verify="length50" type="text" placeholder="案件编号"/>
+                                      </div>
+                                      <div class="layui-inline">
+                                          <input   class="layui-input shipName" type="text" placeholder="被执法船"/>
+                                      </div>
+                                      <div class="layui-inline">
+                                          <input   class="layui-input investigateTel" type="text" placeholder="被询问人电话"/>
+                                      </div>
+                                      <div class="layui-inline">
+                                          <input  class="layui-input investigateName" type="text" placeholder="被询问人"/>
+                                      </div>
+
+                                      <div class="layui-inline">
+                                          <input  class="layui-input createTime" type="text" placeholder="案件创建时间"/>
+                                      </div>
+
+                                      <div class="layui-inline">
+                                          <button id="backSearch" type="button" class="layui-btn layui-btn-primary">返回</button>
+                                      </div>
                                   </div>
 
                                   <div class="layui-inline">
-                                      <input id="createTime" class="layui-input" type="text" placeholder="案件创建时间"/>
-                                  </div>
-
-                                  <div class="layui-inline">
-                                      <button id="btnSearch" type="button" class="layui-btn layui-btn-normal">搜索</button>
-                                      <button id="btnReset" type="button" class="layui-btn layui-btn-primary">重置</button>
+                                      <div class="layui-inline">
+                                          <button id="btnSearch" type="button" class="layui-btn layui-btn-normal">搜索</button>
+                                          <button id="btnReset" type="button" class="layui-btn layui-btn-primary">重置</button>
+                                      </div>
                                   </div>
                               </div>
-
 
                         <div class="layui-form-item">
                             <div style="float:right">

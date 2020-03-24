@@ -12,35 +12,35 @@
                 return '字符长度不能超过50';
             }
         },floatNumber:function (value) {
-            var reg=/^-?[1-9][0-9]*\.?[0-9]*$/i;
+            let reg=/^-?[1-9][0-9]*\.?[0-9]*$/i;
             if(value){
                 if(value.toString().search(reg)<0){
                     return "请输入正确的数字";
                 }
             }
         },positiveFloatNumber:function (value) {
-            var reg=/^[1-9][0-9]*\.?[0-9]*$/i;
+            let reg=/^[1-9][0-9]*\.?[0-9]*$/i;
             if(value){
                 if(value.toString().search(reg)<0){
                     return "请输入正确的数字";
                 }
             }
         },positiveNumber:function(value){
-            var reg=/^[1-9][0-9]*$/i;
+            let reg=/^[1-9][0-9]*$/i;
             if(value){
                 if(value.toString().search(reg)<0){
                     return "请输入正整数";
                 }
             }
         },identityNumber:function(value){
-            var reg=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/i;
+            let reg=/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/i;
             if(value){
                 if(value.toString().search(reg)<0){
                     return "请输入正确的身份证号";
                 }
             }
         },phoneNumber:function(value){
-            var reg=/^1\d{10}$/i;
+            let reg=/^1\d{10}$/i;
             if(value){
                 if(value.toString().search(reg)<0){
                     return"请输入正确的手机号";
@@ -59,28 +59,34 @@
  * @param id
  */
 function money_verify(lay,id){
-     var $=lay.$;
+     let $=lay.$;
      $("#"+id).focus(function(){
         //修改规则 小写金额
         $("#"+id).attr("style","");
         lay.verify=false;
-        var val=$(this).val();
-        if(val){
-            $(this).val(chinese2Number(val));
-        }
+        // let val=$(this).val();
+        // if(val){
+        //     $(this).val(chinese2Number(val));
+        // }
     });
     $("#"+id).blur(function(){
-        var val=$(this).val();
+        let val=$(this).val();
         if(val){
-            var msg="请输入正确金额";
-            var rex=/^\d+\.?\d{0,2}$/i;
+            let msg="请输入正确金额";
+            let rex=/^\d+\.?\d{0,2}$/i;
             if(val.toString().search(rex)<0){
                 lay.verify=true;
                 msg_error($,msg)
                 $("#"+id).attr("style","border:1px solid red");
             }else{
-                var money = number2Chinese(val);
-                $(this).val(money);
+                let money = number2Chinese(val);
+                // $(this).val(money);
+                //修改到表述
+                 let content=$("#description").text();
+                 if(content){
+                     let cs = content.split(" ");
+                 }
+                 $("#description").append( $("#"+id).parent().prev().text()+money);
             }
         }
 

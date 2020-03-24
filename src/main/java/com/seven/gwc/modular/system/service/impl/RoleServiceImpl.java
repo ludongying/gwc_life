@@ -41,10 +41,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<RoleEntity> selectRole(RoleEntity roleEntity) {
-        /*LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(roleName), RoleEntity::getName, roleName)
-                .orderByAsc(RoleEntity::getSort)
-                .orderByDesc(RoleEntity::getCreateTime);*/
         List<RoleEntity> list = roleMapper.getRoleList(roleEntity);
         for (RoleEntity role : list) {
             if (role.getPid().equals("0")) {

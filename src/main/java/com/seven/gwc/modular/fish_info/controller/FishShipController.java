@@ -82,10 +82,10 @@ public class FishShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<FishShipEntity> list(String code, String shipType) {
+    public BaseResultPage<FishShipEntity> list(FishShipEntity fishShipEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<FishShipEntity> fishShips = fishShipService.selectFishShip(code, shipType);
+        List<FishShipEntity> fishShips = fishShipService.selectFishShip(fishShipEntity);
         PageInfo pageInfo = new PageInfo<>(fishShips);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -134,14 +134,12 @@ public class FishShipController extends BaseController {
 
     /**
      * 导出渔船信息
-     * @param code 船编号
-     * @param phone 联系方式
-     * @param shipType 船类型
+     * @param fishShipEntity 查询条件
      */
     @RequestMapping("/exportExcel")
     @ResponseBody
-    public void exportExcel(String code, String phone, String shipType) {
-        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(code, shipType);
+    public void exportExcel(FishShipEntity fishShipEntity) {
+        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(fishShipEntity);
         List<ExportFishShipVO> exportFishShipVOList = fishShipService.getExportData(shipEntityList);
         new ExcelData<>(exportFishShipVOList){}.exportExcel();
     }

@@ -1,8 +1,7 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.CalculationDateUtil;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,12 +54,10 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     private String uploadPathFile;
 
     @Override
-    public List<FishShipEntity> selectFishShip(String code, String shipType){
-        LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(code), FishShipEntity::getCode, code)
-                .eq(ToolUtil.isNotEmpty(shipType), FishShipEntity::getShipType, shipType);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<FishShipEntity> selectFishShip(FishShipEntity fishShipEntity){
 
-        List<FishShipEntity> list = fishShipMapper.selectList(lambdaQuery);
+        List<FishShipEntity> list = fishShipMapper.getFishShipList(fishShipEntity);
 
         for (FishShipEntity fishShip : list) {
             if (ToolUtil.isNotEmpty(fishShip.getShipType())) {
@@ -86,6 +84,8 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void addFishShip(FishShipEntity fishShip, ShiroUser user) {
+        fishShip.setCreateTime(new Date());
+        fishShip.setCreateUser(user.getId());
         fishShipMapper.insert(fishShip);
     }
 
@@ -96,6 +96,8 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public void editFishShip(FishShipEntity fishShip, ShiroUser user) {
+        fishShip.setUpdateTime(new Date());
+        fishShip.setUpdateUser(user.getId());
         fishShipMapper.updateById(fishShip);
     }
 

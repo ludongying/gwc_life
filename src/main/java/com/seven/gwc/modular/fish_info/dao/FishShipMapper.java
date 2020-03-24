@@ -2,6 +2,9 @@ package com.seven.gwc.modular.fish_info.dao;
 
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * description : 渔船信息Mapper 接口
@@ -11,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface FishShipMapper extends BaseMapper<FishShipEntity> {
 
+    List<FishShipEntity> getFishShipList(@Param("law") FishShipEntity fishShipEntity);
 }

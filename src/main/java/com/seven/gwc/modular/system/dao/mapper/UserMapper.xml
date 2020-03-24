@@ -32,6 +32,7 @@
             (CASE WHEN (b.id in (SELECT r.basics_id FROM user_basics_relation r WHERE r.user_id = #{userId}) ) THEN true ELSE false END) as state
         FROM basics b where state = 'ENABLE'
     </select>
+
     <select id="userEntityList" resultType="com.seven.gwc.modular.system.entity.UserEntity">
         SELECT u.*,d.full_name AS deptName,GROUP_CONCAT(r.`name`) AS roleName
         FROM sys_user u
@@ -48,6 +49,7 @@
         ${user.params.dataScope}
         GROUP BY u.id
         order by u.create_time desc
+        LIMIT #{total} , #{size}
     </select>
 
     <select id="tree" resultType="com.seven.gwc.core.node.ZTreeNode">

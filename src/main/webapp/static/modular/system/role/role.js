@@ -89,7 +89,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Role.search = function () {
         var queryData = {};
-        queryData['roleName'] = $("#roleName").val().trim();
+        queryData['name'] = $("#roleName").val().trim();
         table.reload(Role.tableId, {where: queryData});
     };
 

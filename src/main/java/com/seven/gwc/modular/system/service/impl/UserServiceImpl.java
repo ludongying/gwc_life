@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.jwt.JwtTokenUtil;
 import com.seven.gwc.core.node.FirstMenuNode;
 import com.seven.gwc.core.node.MenuNode;
 import com.seven.gwc.core.node.ZTreeNode;
@@ -16,7 +17,6 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.shiro.service.UserAuthService;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
-import com.seven.gwc.core.jwt.JwtTokenUtil;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.dto.UserDTO;
@@ -33,7 +33,10 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * description : 用户服务实现类
@@ -52,8 +55,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<UserEntity> selectUser(UserEntity userEntity) {
-        return userMapper.userEntityList(userEntity);
+    public List<UserEntity> selectUser(UserEntity userEntity, Integer total, Integer size) {
+        return userMapper.userEntityList(userEntity, total, size);
     }
 
     @Override

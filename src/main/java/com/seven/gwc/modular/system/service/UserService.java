@@ -28,7 +28,7 @@ public interface UserService extends IService<UserEntity> {
      * @param userEntity 用户实体
      * @return
      */
-    List<UserEntity> selectUser(UserEntity userEntity);
+    List<UserEntity> selectUser(UserEntity userEntity, Integer total, Integer size);
 
     /**
      * 编辑用户状态

@@ -26,7 +26,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var ajax = new $ax(Feng.ctxPath + "/fishShip/detail/" + Feng.getUrlParam("fishShipId"));
     var result = ajax.start();
     if (result.fileName != null) {
-        var files = result.fileName.split(",");
+        fileName = result.fileName;
+        var files = fileName.split(",");
         for (i = 0; i < files.length - 1; i++) {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +

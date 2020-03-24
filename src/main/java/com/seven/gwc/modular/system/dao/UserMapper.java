@@ -32,7 +32,7 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @param userEntity 用户实体
      * @return
      */
-    List<UserEntity> userEntityList(@Param("user") UserEntity userEntity);
+    List<UserEntity> userEntityList(@Param("user") UserEntity userEntity, @Param("total") Integer total, @Param("size") Integer size);
 
     /**
      * 用户列表树

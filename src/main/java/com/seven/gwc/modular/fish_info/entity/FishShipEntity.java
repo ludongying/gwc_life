@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.seven.gwc.core.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * description : 渔船信息实体
@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("law_fish_ship")
-public class FishShipEntity implements Serializable {
+public class FishShipEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -109,4 +109,18 @@ public class FishShipEntity implements Serializable {
 
     /** 文件名 */
     private String fileName;
+
+    /** 创建时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /** 修改时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
+    /** 创建用户 */
+    private String createUser;
+
+    /** 修改用户 */
+    private String updateUser;
 }

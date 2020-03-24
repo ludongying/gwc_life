@@ -87,6 +87,15 @@ public class EquipController extends BaseController {
     }
 
     /**
+     * 按类别获取设备信息列表
+     */
+    @RequestMapping("/listByTypeAndName")
+    @ResponseBody
+    public List<EquipEntity> listByTypeAndName(String equipName,String equipType) {
+        return equipService.selectEquip(equipName,equipType);
+    }
+
+    /**
      * 增加设备信息
      */
     @RequestMapping("/add")

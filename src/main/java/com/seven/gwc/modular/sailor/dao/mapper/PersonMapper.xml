@@ -30,6 +30,7 @@
         <if test="person.personName != null and person.personName != ''">
             and u.name like CONCAT('%',#{person.personName},'%')
         </if>
+        order by p.create_date desc
     </select>
 
     <select id="PersonEntity" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">

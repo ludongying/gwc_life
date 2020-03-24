@@ -28,9 +28,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '设备名称', field: 'equipId', align: "center"},
             {title: '设备型号', field: 'equipId', align: "center"},
             {title: '工作类型', field: 'problemType', align: "center"},
+            {title: '负责人员', field: 'maintain_person', align: "center"},
             {title: '开始时间', field: 'startTime', align: "center"},
             {title: '结束时间', field: 'endTime', align: "center"},
-            {title: '消耗物料备件', field: 'startTime', align: "center"},
+            {title: '消耗物料备件', field: 'startTime', align: "center", hide:true},
             {title: '工作内容', field: 'endTime', align: "center"},
             {title: '备注', field: 'remark', align: "center", hide:true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
@@ -108,7 +109,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     EquipMaintain.openAddEquipMaintain = function () {
         func.open({
             title: '增加设备维护',
-            area: ['1000px', '500px'],
+            area: ['1000px', '650px'],
             content: Feng.ctxPath + '/equipMaintain/equipMaintain_add',
             tableId: EquipMaintain.tableId
         });
@@ -120,7 +121,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     EquipMaintain.onEditEquipMaintain = function (data) {
         func.open({
             title: '编辑设备维护',
-            area: ['1000px', '500px'],
+            area: ['1000px', '650px'],
             content: Feng.ctxPath + '/equipMaintain/equipMaintain_edit?equipMaintainId=' + data.id,
             tableId: EquipMaintain.tableId
         });
@@ -132,7 +133,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     EquipMaintain.onDetailEquipMaintain = function (data) {
         func.open({
             title: '查看设备维护',
-            area: ['1000px', '500px'],
+            area: ['1000px', '650px'],
             content: Feng.ctxPath + '/equipMaintain/equipMaintain_detail?equipMaintainId=' + data.id,
             tableId: EquipMaintain.tableId
         });
@@ -145,7 +146,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     EquipMaintain.onDeleteEquipMaintain = function (data) {
-        Feng.confirm("您确定要删除所选数据吗？", function () {
+        Feng.confirm("是否删除设备维护《" + data.name + "》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/equipMaintain/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

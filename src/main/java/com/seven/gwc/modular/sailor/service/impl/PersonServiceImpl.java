@@ -90,6 +90,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userEntityInput.setId(person.getPersonId());
                 userEntityInput.setName(person.getPersonName());
                 userEntityInput.setBirthday(person.getBirthday());
+                userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
                 userEntityInput.setPositionId(person.getPositionId());
@@ -99,6 +100,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
             } else {
                 userEntityInput.setName(person.getPersonName());
                 userEntityInput.setBirthday(person.getBirthday());
+                userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
                 userEntityInput.setPositionId(person.getPositionId());
@@ -155,6 +157,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                     userEntityInput.setId(person.getPersonId());
                     userEntityInput.setName(person.getPersonName());
                     userEntityInput.setBirthday(person.getBirthday());
+                    userEntityInput.setSex(person.getSex());
                     userEntityInput.setPhone(person.getPhone());
                     userEntityInput.setEmail(person.getEmail());
                     userEntityInput.setPositionId(person.getPositionId());
@@ -164,6 +167,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 } else {
                     userEntityInput.setName(person.getPersonName());
                     userEntityInput.setBirthday(person.getBirthday());
+                    userEntityInput.setSex(person.getSex());
                     userEntityInput.setPhone(person.getPhone());
                     userEntityInput.setEmail(person.getEmail());
                     userEntityInput.setPositionId(person.getPositionId());

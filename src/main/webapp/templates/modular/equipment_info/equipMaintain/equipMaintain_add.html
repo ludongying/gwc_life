@@ -1,43 +1,90 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/modular/equipment_info/equipMaintain/equipMaintain_add.js"]}){
 <div class="layui-tab-content">
     <form id="equipMaintainForm" lay-filter="equipMaintainForm" class="layui-form">
+
         <div class="layui-row layui-col-space10">
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">设备编码<span style="color: red;">*</span></label>
+                <label class="layui-form-label">设备类型</label>
                 <div class="layui-input-block">
-                    <input id="equipId" name="equipId" placeholder="请输入设备编码" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="type" name="type" type="hidden">
+                    <input id="typeDesp" name="typeDesp" placeholder="分类名称" type="text" class="layui-input" autocomplete="off"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">问题类型<span style="color: red;">*</span></label>
+                <label class="layui-form-label">设备名称<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="problemType" name="problemType" placeholder="请输入问题类型" type="text" class="layui-input" lay-verify="required" required/>
+                    <select id="equipName" name="equipName" lay-search="" lay-filter="nameFilter" required>
+                        <option value="">请选择设备名称</option>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">开始时间<span style="color: red;">*</span></label>
+                <label class="layui-form-label">设备型号<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="startTime" name="startTime" placeholder="请输入开始时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                    <select id="specification" name="specification" required>
+                        <option value="">请选择设备型号</option>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">结束时间<span style="color: red;">*</span></label>
+                <label class="layui-form-label">工作类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="endTime" name="endTime" placeholder="请输入结束时间" readonly type="text" class="layui-input" lay-verify="required" required/>
+                    <select id="problemType" name="problemType" lay-search=""></select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                <label class="layui-form-label">开始时间</label>
                 <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="startTime" name="startTime" placeholder="请输入开始时间" readonly type="text"
+                           class="layui-input date-icon"/>
                 </div>
             </div>
 
+            <div class="layui-col-md6">
+                <label class="layui-form-label">结束时间</label>
+                <div class="layui-input-block">
+                    <input id="endTime" name="endTime" placeholder="请输入结束时间" readonly type="text"
+                           class="layui-input date-icon"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">负责人员</label>
+                <div class="layui-input-block">
+<!--                    <input id="maintainPerson" name="maintainPerson" placeholder="请输入负责人员" type="text"-->
+<!--                           class="layui-input"/>-->
+                    <select id="maintainPerson" name="maintainPerson">
+                        <option value="">请选择负责人员</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">工作内容<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <textarea id="content" name="content" placeholder="请输入工作内容" class="layui-textarea"
+                              lay-verify="required" required></textarea>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">耗损物资</label>
+                <div class="layui-input-block">
+                    <textarea id="munition" name="munition" placeholder="请输入耗损物资" class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea id="remark" name="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+                </div>
+            </div>
 
             <div class="layui-col-md12 text-right">
                 <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>

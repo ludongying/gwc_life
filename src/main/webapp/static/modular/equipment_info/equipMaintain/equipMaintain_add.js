@@ -2,6 +2,16 @@
  * 设备维护增加对话框
  */
 
+/**
+ * 设备类型对话框
+ */
+var MenuInfoDlg = {
+    data: {
+        pid: "",
+        pName: ""
+    }
+};
+
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
@@ -21,8 +31,104 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         trigger: 'click'
     });
 
+    //设备名称下拉框初始化
+    equipNameSels($("#type").val());
+
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+
+    // 点击父级菜单
+    $('#typeDesp').click(function () {
+        var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
+        var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
+        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode=EQUIPMENT_TYPE");
+        layer.open({
+            type: 2,
+            title: '设备类型',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                $("#type").val(MenuInfoDlg.data.pid);
+                $("#typeDesp").val(MenuInfoDlg.data.pcodeName);
+                //设备名称下拉框重新渲染
+                equipNameSels(MenuInfoDlg.data.pid);
+            }
+        });
+    });
+
+    //设备名称下拉框渲染
+    function equipNameSels(equipType) {
+        //设备名称下拉框
+        var params={
+            equipName:"",
+            equipType:equipType
+        }
+        $.ajax({
+            url: Feng.ctxPath + '/equip/listByTypeAndName',
+            data: params,
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#equipName').append(new Option(item.name, item.name));//往下拉菜单里添加元素
+                })
+                form.render('select');//表单渲染 把内容加载进去
+            }
+        });
+    }
+
+
+
+    // 设备名称与设备型号下拉框联动
+    layui.use('form', function() {
+        form.on('select(nameFilter)', function (data) {
+            var params = {
+                equipName:data.value,
+                equipType:$("#type").val()
+            }
+            //检查项目添加到下拉框中
+            $.ajax({
+                url: Feng.ctxPath + '/equip/listByTypeAndName',
+                dataType: 'json',
+                data: params,
+                type: 'post',
+                success: function (data) {
+                    $("#specification").empty();//清空下拉框的值
+                    $.each(data, function (index, item) {
+                        $('#specification').append(new Option(item.specification, item.specification));// 下拉菜单里添加元素
+                    });
+                    layui.form.render("select");//重新渲染
+                }
+            });
+        });
+    });
+
+    //工作类型下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=EQUIP_WORK_TYPE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#problemType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+            })
+            form.render('select');//表单渲染
+        }
+    });
+
+    //负责人员下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/person/list',
+        dataType: 'json',
+        type: 'post',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#maintainPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
+            })
+            form.render('select');//表单渲染
+        }
+    });
+
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

@@ -5,6 +5,10 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireProduceDO;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 
@@ -120,9 +124,23 @@ public class InstrumentUtil {
         System.out.println(toMap(inquireDO));
     }
 
-    public static  Map<String,String> toMap(Object object){
+    public static  Map<String,Object> toMap(Object object){
         if(Objects.nonNull(object)){
-            return JSON.parseObject(JSON.toJSONString(object, SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteMapNullValue), Map.class);
+            return JSON.parseObject(JSON.toJSONString(object, SerializerFeature.WriteNullStringAsEmpty,
+                    SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteMapNullValue), Map.class);
+        }
+        return null;
+    }
+
+    public static LocalDate toLocalDate(Date date){
+        if(Objects.nonNull(date)){
+            return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        }
+        return null;
+    }
+    public static LocalDateTime toLocalDateTime(Date date){
+        if(Objects.nonNull(date)){
+            return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         }
         return null;
     }

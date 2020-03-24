@@ -11,10 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class InquireDO implements Serializable {
-    /**
-     *渔船船名号
-     */
-    protected String Boat_Id;
+
     /**
      *被询问人姓名
      */

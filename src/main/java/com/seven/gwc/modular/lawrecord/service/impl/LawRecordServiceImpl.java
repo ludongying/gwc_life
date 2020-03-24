@@ -117,7 +117,7 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
 
     private String handleStr(String str){
           if(Objects.nonNull(str) && !str.trim().isEmpty()){
-              if(str.indexOf(file_2_file_sep)>-1){
+              if(str.contains(file_2_file_sep)){
                   String[] arr = str.split(file_2_file_sep);
                   return Stream.of(arr).map(String::trim).filter(s -> !s.isEmpty()).distinct().collect(Collectors.joining(","));
               }

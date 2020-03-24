@@ -69,9 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // }
         , eventClick: function (info) {
             openEditLayer(info);
+            calendar.refetchEvents();
         }
         , dateClick: function () {
-                openLayer();
+            openLayer();
+            calendar.refetchEvents();
         }
         , eventRender: function (info) {
             info.el.innerHTML = info.event.title;   //主要靠这个实现 显示html内容

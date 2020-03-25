@@ -77,7 +77,7 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
 
     //出生年月
     @TableField (exist = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 

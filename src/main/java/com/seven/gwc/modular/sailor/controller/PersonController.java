@@ -132,17 +132,6 @@ public class PersonController extends BaseController {
         return personService.getOneById(id);
     }
 
-//    /**
-//     * 获取用户姓名列表,ztree格式
-//     */
-//    @RequestMapping("/tree")
-//    @ResponseBody
-//    public List<ZTreeNode> tree(){
-//        List<ZTreeNode> tree = this.personService.tree();
-//        tree.add(ZTreeNode.createParent());
-//        return tree;
-//    }
-
     /**
      * 获取船员姓名列表
      */
@@ -155,7 +144,6 @@ public class PersonController extends BaseController {
 
     /**
      * 获取执法船员实体列表
-     * @return
      */
     @RequestMapping("/listLawPersons")
     @ResponseBody
@@ -163,14 +151,13 @@ public class PersonController extends BaseController {
         return personService.listLawPersons();
     }
 
-//    /**
-//     * 获取执法船员实体列表
-//     * @return
-//     */
-//    @RequestMapping("/listLawPersons")
-//    @ResponseBody
-//    public List<PersonEntity> listLawPersons(){
-//        return personService.listLawPersons();
-//    }
+    /**
+     * 按部门获取所属船员
+     */
+    @RequestMapping("/listPersonsByDept")
+    @ResponseBody
+    public List<PersonEntity> listPersonsByDept(String deptId){
+        return personService.listPersonsByDept(deptId);
+    }
 }
 

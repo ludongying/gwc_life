@@ -72,7 +72,7 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     public boolean addCertificate(CertificateShipEntity certificate, ShiroUser user, String shipId) throws ParseException {
         //判断证书编码是否存在
         LambdaQueryWrapper<CertificateShipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(CertificateShipEntity::getId, certificate.getId()).eq(CertificateShipEntity::getDeleteFlag, 1);
+        lambdaQuery.eq(CertificateShipEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateShipEntity::getDeleteFlag, 1);
         CertificateShipEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船舶证书
         if(certificateEntity != null){

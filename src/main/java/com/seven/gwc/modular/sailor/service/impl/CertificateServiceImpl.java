@@ -97,7 +97,7 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     public boolean addCertificate(CertificateEntity certificate, ShiroUser user, String personId) throws ParseException {
         //判断证书编码是否存在
         LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(CertificateEntity::getId, certificate.getId()).eq(CertificateEntity::getDeleteFlag, 1);
+        lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateEntity::getDeleteFlag, 1);
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船员证书
         if(certificateEntity != null){
@@ -230,19 +230,6 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         }
     }
 
-//    @Override
-//    public String getLawCode(String personId) {
-//        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
-//        lambdaQuery.eq(PersonEntity::getId, personId);
-//        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
-//        if(personEntity == null)
-//            return null;
-//        CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
-//        if(certificateEntity == null)
-//            return  null;
-//        return certificateEntity.getCertificateId();
-//    }
-
     /**
      * 日期格式的计算
      * @param smdate 较小的时间
@@ -259,7 +246,6 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         cal.setTime(bdate);
         long time2 = cal.getTimeInMillis();
         long between_days=(time2-time1)/(1000*3600*24);
-
         return (int)between_days;
     }
 }

@@ -30,8 +30,20 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '归属类型', field: 'ownerTypeName', align: "center", hide:true},
             {title: '证书类型', field: 'certificateTypeName', align: "center"},
             {title: '签发机构', field: 'issuer', align: "center"},
-            {title: '签发日期', field: 'issueDate', align: "center", templet: "<div>{{layui.util.toDateString(d.issueDate, 'yyyy-MM-dd')}}</div>"},
-            {title: '到期日期', field: 'outDate', align: "center", templet: "<div>{{layui.util.toDateString(d.outDate, 'yyyy-MM-dd')}}</div>"},
+            {title: '签发日期', field: 'issueDate', align: "center", templet: function(d){
+                    if(d.issueDate != null && d.issueDate != ''){
+                        return "<div>" + layui.util.toDateString(d.issueDate, 'yyyy-MM-dd') + "</div>";
+                    }else{
+                        return "<div></div>";
+                    }
+                }},
+            {title: '到期日期', field: 'outDate', align: "center", templet: function(d) {
+                    if (d.outDate != null && d.outDate != '') {
+                        return "<div>" + layui.util.toDateString(d.outDate, 'yyyy-MM-dd') + "</div>";
+                    } else {
+                        return "<div></div>";
+                    }
+                }},
             {title: '存放地点', field: 'storePlace', align: "center"},
             {title: '是否常用', field: 'isOften', align: "center", templet: function (d) {
                     if (d.isOften === 0)

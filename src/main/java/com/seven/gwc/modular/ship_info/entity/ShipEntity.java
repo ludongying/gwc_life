@@ -94,7 +94,7 @@ public class ShipEntity extends GwcBaseEntity implements Serializable {
     private String manufacturer;
 
     // 完成日期
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date finishDate;
 

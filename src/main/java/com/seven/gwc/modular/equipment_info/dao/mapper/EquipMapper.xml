@@ -28,7 +28,7 @@
         LEFT JOIN sys_dict d ON e.type = d.id
         where e.delete_flag = 1
         <if test="equipName != null and equipName != ''">
-            and e.name like CONCAT('%',#{equipName},'%')
+            and e.id like CONCAT('%',#{equipName},'%')
         </if>
         <if test="equipType != null and equipType != ''">
             and e.type = #{equipType}

@@ -21,9 +21,13 @@ public interface PersonMapper extends BaseMapper<PersonEntity> {
      */
     List<PersonEntity> PersonEntityList(@Param("person") PersonEntity personEntity);
 
-    PersonEntity PersonEntity(@Param("id") String id);
-
     List<PersonEntity> PersonNamesEntityList(@Param("id") String id);
 
+    /**
+     * 获取所有执法人员信息
+     * @return
+     */
     List<PersonEntity> PersonLawEntityList();
+
+    List<PersonEntity> PersonsByDeptList(@Param("deptId") String deptId);
 }

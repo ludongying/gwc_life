@@ -23,15 +23,32 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     laydate.render({
         elem: '#startTime',
         type: 'datetime',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date(value).getTime();
+            var endTime = new Date($('#endTime').val()).getTime();
+            if (endTime < startDate) {
+                layer.msg('结束时间不能小于开始时间');
+                $('#startTime').val($('#endTime').val());
+            }
+        }
     });
+
     laydate.render({
         elem: '#endTime',
         type: 'datetime',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date($('#startTime').val()).getTime();
+            var endTime = new Date(value).getTime();
+            if (endTime < startDate) {
+                $('#endTime').val($('#startTime').val());
+                layer.msg('结束时间不能小于开始时间');
+            }
+        }
     });
 
-    //设备名称下拉框初始化
+    //设备名称下拉框初始化(设备类型为空时，显示所有设备名称）
     equipNameSels($("#type").val());
 
     // 让当前iframe弹层高度适应
@@ -70,7 +87,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             type: 'post',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#equipName').append(new Option(item.name, item.name));//往下拉菜单里添加元素
+                    $('#equipId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
                 })
                 form.render('select');//表单渲染 把内容加载进去
             }
@@ -118,9 +135,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     //负责人员下拉框
     $.ajax({
-        url: Feng.ctxPath + '/person/list',
+        url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
         dataType: 'json',
-        type: 'post',
+        type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
                 $('#maintainPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素

@@ -16,6 +16,17 @@
     <sql id="Base_Column_List">
         id, equip_id, problem_type, start_time, end_time, remark
     </sql>
+    <select id="getMaintainList" resultType="com.seven.gwc.modular.equipment_info.entity.EquipMaintainEntity">
+         SELECT m.*,e.maintain_person as maintainPersonDetail,e.munition as munitionDetail, e.content as contentDetail
+         FROM ship_equip_maintain m
+         LEFT JOIN ship_equip_maintaindetail e on m.id = e.maintain_id
+         LEFT JOIN sys_user u ON m.create_person = u.id
+         LEFT JOIN sys_dept d ON u.dept_id = d.id
+         WHERE m.delete_flag = 1
+        <if test="maintain.name != null and maintain.name != ''">
+            and e.name like CONCAT('%',#{equipName},'%')
+        </if>
+    </select>
 
 
 </mapper>

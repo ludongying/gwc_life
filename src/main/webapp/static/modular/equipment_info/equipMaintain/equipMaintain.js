@@ -25,14 +25,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     EquipMaintain.initColumn = function () {
         return [[
             {title: '', field: 'id', align: "center", hide:true},
-            {title: '设备名称', field: 'equipId', align: "center"},
-            {title: '设备型号', field: 'equipId', align: "center"},
+            {title: '设备名称', field: 'equipName', align: "center"},
+            {title: '设备型号', field: 'specification', align: "center"},
             {title: '工作类型', field: 'problemType', align: "center"},
-            {title: '负责人员', field: 'maintain_person', align: "center"},
+            {title: '负责人员', field: 'maintainPerson', align: "center"},
             {title: '开始时间', field: 'startTime', align: "center"},
             {title: '结束时间', field: 'endTime', align: "center"},
-            {title: '消耗物料备件', field: 'startTime', align: "center", hide:true},
-            {title: '工作内容', field: 'endTime', align: "center"},
+            {title: '消耗物料备件', field: 'munition', align: "center", hide:true},
+            {title: '工作内容', field: 'content', align: "center"},
             {title: '备注', field: 'remark', align: "center", hide:true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];

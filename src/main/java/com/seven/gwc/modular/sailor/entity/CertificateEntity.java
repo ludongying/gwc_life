@@ -51,12 +51,12 @@ public class CertificateEntity extends GwcBaseEntity implements Serializable {
     private String issuer;
 
     /** 签发日期 */
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date issueDate;
 
     /** 到期日期 */
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date outDate;
 

@@ -40,8 +40,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<RoleEntity> selectRole(RoleEntity roleEntity) {
-        List<RoleEntity> list = roleMapper.getRoleList(roleEntity);
+    public List<RoleEntity> selectRole(RoleEntity roleEntity, Integer total, Integer size) {
+        List<RoleEntity> list = roleMapper.getRoleList(roleEntity, total, size);
         for (RoleEntity role : list) {
             if (role.getPid().equals("0")) {
                 role.setPName("顶级");
@@ -53,6 +53,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
             }
         }
         return list;
+    }
+
+    @Override
+    public Integer getListSize(RoleEntity roleEntity) {
+        return roleMapper.getListSize(roleEntity);
     }
 
     @Override

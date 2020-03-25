@@ -10,6 +10,7 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
     let admin = layui.admin;
     let func = layui.func;
     let laytpl=layui.laytpl;
+    var fileName = "";
 
     let lay={
          '$':$,
@@ -109,7 +110,72 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         });
     }
 
-    //多图片上传
+    upload.render({
+        elem: '#test2'
+        ,url: '/system/uploadFile'
+        ,multiple: true
+        ,before: function(obj){
+            layer.msg('图片上传中...', {
+                icon: 16,
+                shade: 0.01,
+                time: 0
+            })
+        }
+        ,done: function(res){
+            layer.close(layer.msg());//关闭上传提示窗口
+            //上传完毕
+            $('#uploader-list').append(
+                '<div id="" class="file-iteme">' +
+                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
+                '<div class="info">' + res.fileName + '</div>' +
+                '</div>'
+            );
+            fileName = fileName + res.fileName + ","
+            $("#fileName").val(fileName);
+
+            $('#uploader-list img').on('click', function () {
+                layer.photos({
+                    photos: '#uploader-list',
+                    shadeClose: false,
+                    closeBtn: 2,
+                    anim: 0
+                });
+            })
+        }
+    });
+
+    $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            //$(this).children(".info").fadeIn("fast");    //文件名
+            $(this).children(".handle").fadeIn("fast");   //删除按钮
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            //$(this).children(".info").hide();
+            $(this).children(".handle").hide();
+        }
+    });
+
+    // 删除图片
+    $(document).on("click", ".file-iteme .handle", function(event){
+        $(this).parent().remove();
+        //$(this).parent()[0].textContent
+        deleteFile(fileName, $(this).parent()[0].textContent)
+    });
+
+    function deleteFile(names, deleteFile) {
+        var name = "";
+        var files = names.split(",");
+        for (i = 0; i < files.length - 1; i++ ) {
+            if (files[i] !== deleteFile) {
+                name += files[i] + ",";
+            }
+        }
+        fileName = name;
+        $("#fileName").val(fileName);
+    }
+    /*//多图片上传
     upload.render({
         elem: '#test2'
         ,url: 'https://httpbin.org/post' //改成您自己的上传接口
@@ -123,9 +189,6 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         ,done: function(res){
             //上传完毕
         }
-    });
-
-
-
+    });*/
 
 });

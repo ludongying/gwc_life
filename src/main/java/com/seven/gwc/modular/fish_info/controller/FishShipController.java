@@ -85,8 +85,11 @@ public class FishShipController extends BaseController {
     public BaseResultPage<FishShipEntity> list(FishShipEntity fishShipEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<FishShipEntity> fishShips = fishShipService.selectFishShip(fishShipEntity);
+        List<FishShipEntity> fishShips = fishShipService.selectFishShip(fishShipEntity, (int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(fishShips);
+        Integer size = fishShipService.getListSize(fishShipEntity).size();
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
@@ -139,11 +142,18 @@ public class FishShipController extends BaseController {
     @RequestMapping("/exportExcel")
     @ResponseBody
     public void exportExcel(FishShipEntity fishShipEntity) {
-        List<FishShipEntity> shipEntityList = fishShipService.selectFishShip(fishShipEntity);
+        List<FishShipEntity> shipEntityList = fishShipService.getListSize(fishShipEntity);
         List<ExportFishShipVO> exportFishShipVOList = fishShipService.getExportData(shipEntityList);
         new ExcelData<>(exportFishShipVOList){}.exportExcel();
     }
 
+    /**
+     * 导入
+     * @param file
+     * @param resp
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/importExcel")
     @ResponseBody
     public BaseResult importExcel(@RequestParam(value = "file", required = true) MultipartFile file, HttpServletResponse resp) throws IOException {

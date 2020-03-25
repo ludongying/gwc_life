@@ -61,6 +61,18 @@
         </if>
         ${role.params.dataScope}
         order by r.sort, r.create_time desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_role r
+        LEFT JOIN sys_user u ON r.create_user = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        WHERE 1 = 1
+        <if test="role.name != null and role.name != ''">
+            and r.name like CONCAT('%',#{role.name},'%')
+        </if>
+        ${role.params.dataScope}
     </select>
 
 </mapper>

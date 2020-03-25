@@ -92,11 +92,14 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public BaseResultPage<RoleEntity> list(RoleEntity roleName) {
+    public BaseResultPage<RoleEntity> list(RoleEntity roleEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<RoleEntity> roleEntitys = roleService.selectRole(roleName);
-        PageInfo pageInfo = new PageInfo<>(roleEntitys);
+        List<RoleEntity> roleEntityList = roleService.selectRole(roleEntity, (int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
+        PageInfo pageInfo = new PageInfo<>(roleEntityList);
+        Integer size = roleService.getListSize(roleEntity);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 

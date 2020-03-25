@@ -55,9 +55,9 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<FishShipEntity> selectFishShip(FishShipEntity fishShipEntity){
+    public List<FishShipEntity> selectFishShip(FishShipEntity fishShipEntity, Integer total, Integer size){
 
-        List<FishShipEntity> list = fishShipMapper.getFishShipList(fishShipEntity);
+        List<FishShipEntity> list = fishShipMapper.getFishShipList(fishShipEntity, total, size);
 
         for (FishShipEntity fishShip : list) {
             if (ToolUtil.isNotEmpty(fishShip.getShipType())) {
@@ -80,6 +80,11 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
             fishShip.setWorkTypeName(workTypeDict.getName());
         }
         return list;
+    }
+
+    @Override
+    public List<FishShipEntity> getListSize(FishShipEntity fishShipEntity) {
+        return fishShipMapper.getListSize(fishShipEntity);
     }
 
     @Override
@@ -133,7 +138,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public List<ExportFishShipVO> getExportData(List<FishShipEntity> shipEntityList) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         List<ExportFishShipVO> exportDataList = new ArrayList<>();
         for (FishShipEntity fishShipEntity : shipEntityList) {
             ExportFishShipVO exportFishShipVO = new ExportFishShipVO();

@@ -14,5 +14,8 @@ import java.util.List;
  */
 public interface FishShipMapper extends BaseMapper<FishShipEntity> {
 
-    List<FishShipEntity> getFishShipList(@Param("law") FishShipEntity fishShipEntity);
+    List<FishShipEntity> getFishShipList(@Param("law") FishShipEntity fishShipEntity, @Param("total") Integer total, @Param("size") Integer size);
+
+    List<FishShipEntity> getListSize(@Param("law") FishShipEntity fishShipEntity);
+
 }

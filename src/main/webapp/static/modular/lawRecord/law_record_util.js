@@ -5,15 +5,15 @@
  * 2020-02-28
  */
 
-var loc=(function(){
-    var addr={};
+let loc=(function(){
+    let addr={};
     /**
      * 初始化省市
      */
     function initState() {
-        var states = window.localStorage.getItem("law_record_states");
+        let states = window.localStorage.getItem("law_record_states");
         if(!states) {
-            var xmlhttp;
+            let xmlhttp;
             if (window.XMLHttpRequest) {
                 // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
                 xmlhttp = new XMLHttpRequest();
@@ -23,7 +23,7 @@ var loc=(function(){
             }
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var data = xmlhttp.responseText;
+                    let data = xmlhttp.responseText;
                     console.log(">>>>缓存城市信息");
                     window.localStorage.setItem("law_record_states", data);
                 }
@@ -40,7 +40,7 @@ var loc=(function(){
     function getStates() {
         // window.localStorage.clear();
         initState();
-        var str=window.localStorage.getItem("law_record_states");
+        let str=window.localStorage.getItem("law_record_states");
         return JSON.parse(str);
     }
 
@@ -50,8 +50,8 @@ var loc=(function(){
      * @returns {*}
      */
     function getCities(stateCode){
-        var states = getStates();
-        for(var i=0;i<states.length;i++){
+        let states = getStates();
+        for(let i=0;i<states.length;i++){
             if(states[i].code==stateCode){
                 return states[i].cityDataList;
             }
@@ -63,8 +63,8 @@ var loc=(function(){
      * @param dataList
      */
     function generateOptions(dataList,stateCode){
-        var str="";
-        for (var i=0;i<dataList.length;i++){
+        let str="";
+        for (let i=0;i<dataList.length;i++){
             if(stateCode && stateCode===dataList[i].code){
                 str+="<option selected='selected' value='"+dataList[i].code+"'>"+dataList[i].name+"</option>";
             }else{
@@ -99,7 +99,7 @@ var loc=(function(){
 function loadAddr($,form,stateCode,cityCode,region){
     //初始化数据
     $(".addr_state").html(loc.getStateOptions(stateCode));
-    var code=$(".addr_state").val();
+    let code=$(".addr_state").val();
     $(".addr_city").html(loc.getCityOptions(code,cityCode));
     form.render();
     //增加监听
@@ -146,16 +146,16 @@ function loadAddrIndex(param){
  * @returns {city: *, state: *, addr: *}
  */
 function getLocAddr($,id){
-    var dds = $("#"+id).find(".layui-this");
-    var state={
+    let dds = $("#"+id).find(".layui-this");
+    let state={
         name:$(dds[0]).text(),
         code:$(dds[0]).attr("lay-value")
     }
-    var city={
+    let city={
         name:$(dds[1]).text(),
         code:$(dds[1]).attr("lay-value")
     }
-    var region=$($("#"+id).find("input")[2]).val();
+    let region=$($("#"+id).find("input")[2]).val();
     return{
         state:state,
         city:city,
@@ -164,16 +164,14 @@ function getLocAddr($,id){
 }
 /***************************************/
 
-var listen=(function listen(){
-    var lis={};
+let listen=(function listen(){
+    let lis={};
     function getContent($){
-        var inputs=$(".layui-form input");
-        var content="";
+        let inputs=$(".layui-form input");
+        let content="";
         if(inputs.length>0){
-            for (var i=0;i<inputs.length;i++){
-                // if($(inputs[i]).attr("type")==="hide"){
-                //     continue;
-                // }
+            for (let i=0;i<inputs.length;i++){
+
                 if($(inputs[i]).hasClass("layui-upload-file")){
                     continue;
                 }
@@ -192,9 +190,9 @@ var listen=(function listen(){
                 content+=$(inputs[i]).val();
             }
         }
-        var textarea=$(".layui-form textarea");
+        let textarea=$(".layui-form textarea");
         if(textarea.length>0){
-            for (var i=0;i<textarea.length;i++){
+            for (let i=0;i<textarea.length;i++){
                 content+=$(textarea[i]).val();
             }
         }
@@ -211,7 +209,7 @@ var listen=(function listen(){
     }
 
     lis.status=function ($,key){
-        var md = window.sessionStorage.getItem(key);
+        let md = window.sessionStorage.getItem(key);
         if(md){
             if(md!==getMd5($)){
                 return true;
@@ -261,8 +259,8 @@ function clearListen(key){
  * @param url
  * @param f
  */
-var submitFrom=function(param){
-    var ajax = new param.lay.$ax(Feng.ctxPath + param.url, function (data) {
+let submitFrom=function(param){
+    let ajax = new param.lay.$ax(Feng.ctxPath + param.url, function (data) {
         if (data.success) {
             Feng.success("提交成功!"+data.message);
             if(param.next){
@@ -292,10 +290,10 @@ function nextStep(param){
     if(param.lay.verify){
         return;
     }
-    var status = listenStatus(param.lay.$,param.lay.key);
+    let status = listenStatus(param.lay.$,param.lay.key);
     if(status||param.submit){
         //询问框
-        var index=param.lay.layer.confirm('内容已经修改,是否保存', {
+        let index=param.lay.layer.confirm('内容已经修改,是否保存', {
             btn: ['确认','取消'] //按钮
         }, function(){
             clearListen(param.lay.key);
@@ -366,7 +364,7 @@ function getFloat(number){
  *(new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
  */
 Date.prototype.format = function (fmt) {
-    var o = {
+    let o = {
         "M+": this.getMonth() + 1, //月份
         "d+": this.getDate(), //日
         "h+": this.getHours(), //小时
@@ -376,7 +374,7 @@ Date.prototype.format = function (fmt) {
         "S": this.getMilliseconds() //毫秒
     };
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    for (var k in o)
+    for (let k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
@@ -389,7 +387,7 @@ function msg_tip($,msg){
 /************************************************************/
 function operate_table(param) {
     Feng.confirm(param.title, function () {
-        var ajax = new param.$ax(Feng.ctxPath + param.url, function (data) {
+        let ajax = new param.$ax(Feng.ctxPath + param.url, function (data) {
             if (data.success) {
                 Feng.success("操作成功!");
                 param.table.reload(param.tableId);

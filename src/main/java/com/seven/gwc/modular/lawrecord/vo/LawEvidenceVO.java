@@ -42,7 +42,7 @@ public class LawEvidenceVO implements Serializable {
                   e.setUserId(userId);
                   e.setRecordId(id);
                   e.parseTime();
-                  e.parsePath();
+                  if(Objects.nonNull(e.getId()) && e.getId().trim().isEmpty()){ e.setId(null);}
               });
               return evidences;
           }

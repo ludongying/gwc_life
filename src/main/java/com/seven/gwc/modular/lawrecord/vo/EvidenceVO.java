@@ -1,14 +1,8 @@
 package com.seven.gwc.modular.lawrecord.vo;
 
-import com.alibaba.fastjson.JSON;
 import com.seven.gwc.core.util.DateTimeUtil;
-import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import lombok.Data;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author : zzl
@@ -50,7 +44,7 @@ public class EvidenceVO extends EvidenceEntity {
     /**
      * 路径设置
      */
-    public void parsePath(){
+/*    public void parsePath(){
         if(Objects.nonNull(path) && !path.trim().isEmpty()){
             List<FileBase> fileBases = JSON.parseArray(path, FileBase.class);
             if(Objects.nonNull(fileBases) && !fileBases.isEmpty()){
@@ -58,7 +52,7 @@ public class EvidenceVO extends EvidenceEntity {
                 this.setEvidenceFilePath(str);
             }
         }
-    }
+    }*/
 
 
 

@@ -1,18 +1,19 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
-import com.seven.gwc.modular.lawrecord.service.*;
+import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 /**

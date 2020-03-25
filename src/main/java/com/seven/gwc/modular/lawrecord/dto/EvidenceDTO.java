@@ -2,7 +2,6 @@ package com.seven.gwc.modular.lawrecord.dto;
 
 import com.seven.gwc.core.util.DateTimeUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileData;
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import lombok.Data;
 
@@ -21,6 +20,7 @@ public class EvidenceDTO implements Serializable {
     private String evidenceContent;
     private String evidenceTime;
     private List<FileData> path;
+
 
     public EvidenceDTO(EvidenceEntity entity){
         this.id=entity.getId();

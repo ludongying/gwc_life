@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/lawRecord/evidence.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js"]}){
+@layout("/common/_container.html",{js:["/modular/lawRecord/evidence.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/evidence_upload.js"]}){
 <style>
     .container {
         padding-top: 40px;
@@ -223,6 +223,7 @@
         <div class="layui-card">
             <div class="layui-card-header"> 上传证据</div>
             <div class="layui-card-body" data-index="{{d.index}}">
+
                 <div class="layui-form-item  content_{{d.index}}">
 
                     <div class="layui-inline">
@@ -238,27 +239,23 @@
                             <input type="text" id="time{{d.index}}" autocomplete="off" class="layui-input">
                         </div>
                     </div>
+
+                    <input type="hidden" id="name{{d.index}}">
                     <input type="hidden" value="">
+
                 </div>
 
+
+
                 <div class="layui-upload">
-                    <button type="button" class="layui-btn" id="test2">选择证据</button>
+                    <button type="button" class="layui-btn" id="uploadImg{{d.index}}">选择证据</button>
                     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
                         预览图：
-                        <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+                        <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list{{d.index}}">
 
                         </div>
                     </blockquote>
                 </div>
-
-                <!--文件上传 -->
-                <!--<div class="layui-upload">
-                    <button type="button" class="layui-btn" id="test1">选择证据</button>
-                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                        <div class="layui-upload-list" id="demo2"></div>
-                    </blockquote>
-                </div>-->
-
             </div>
         </div>
     </div>

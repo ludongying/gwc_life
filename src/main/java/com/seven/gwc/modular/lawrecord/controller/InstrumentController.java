@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.modular.lawrecord.service.InstrumentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InstrumentController {
 
     private static String PREFIX = "/modular/lawRecord/";
+
+
+    @Autowired
+    private InstrumentService instrumentService;
     /**
      * 跳转到文书
      */
     @RequestMapping("")
     public String instrument(String id) {
-
+        instrumentService.generateSystemInstrument(id);
         return PREFIX + "instrument";
     }
 

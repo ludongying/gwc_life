@@ -17,7 +17,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         'admin': admin,
         'func': func,
     }
-    initPage();
+    // initPage();
     function initPage(){
        var  initColumn = function () {
             return [[

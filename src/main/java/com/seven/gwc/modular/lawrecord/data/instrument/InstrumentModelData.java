@@ -1,16 +1,13 @@
 package com.seven.gwc.modular.lawrecord.data.instrument;
 
-import com.seven.gwc.modular.lawrecord.data.instrument.config.InstrumentContrast;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +26,7 @@ public class InstrumentModelData {
     /**
      * 对照表
      */
-    public Map<String,String> contentMap;
+    public Map<String,Object> contentMap;
     /**
      * 2003 doc
      */
@@ -43,11 +40,13 @@ public class InstrumentModelData {
     public static final String WORD_2007=".docx";
     public static final Pattern pattern = Pattern.compile("\\$\\{[0-9a-zA-Z_]{1,}\\}");
 
-    public InstrumentModelData(String path,Map<String,String> contentMap){
+    public InstrumentModelData(String path,Map<String,Object> contentMap){
         this.path=path;
         this.contentMap = contentMap;
+        read();
     }
-    public void read(){
+
+    private void read(){
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(new File(path));
@@ -67,12 +66,15 @@ public class InstrumentModelData {
             log.error("文件格式异常");
         }
     }
+
     private void replace2003(){
         // 读取文本内容
         Range bodyRange = hwpfDocument.getRange();
         // 替换内容
-        for (Map.Entry<String, String> entry : contentMap.entrySet()) {
-            bodyRange.replaceText(entry.getKey(), entry.getValue());
+        for (Map.Entry<String, Object> entry : contentMap.entrySet()) {
+            Object value = entry.getValue();
+            String val=Objects.nonNull(value)?value.toString():"";
+            bodyRange.replaceText(entry.getKey(), val);
         }
     }
     private void replace2007(){
@@ -146,7 +148,9 @@ public class InstrumentModelData {
             }
         }
     }
-    private void export(String exportPath){
+    public void export(String exportPath){
+        File file=new File(exportPath);
+        FileUtils.generateDir(file.getParent());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             if(path.endsWith(WORD_2003)){
@@ -158,14 +162,15 @@ public class InstrumentModelData {
             outputStream.write(byteArrayOutputStream.toByteArray());
             outputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("文书生成失败");
         }
     }
 
     public static void main(String[] args) {
-        InstrumentModelData instrumentModelData = new InstrumentModelData("D:\\word\\1.doc",new InstrumentContrast().getMap());
-        instrumentModelData.read();
-        instrumentModelData.export("D:\\word\\1.doc");
+       Map<String,Object> map=new HashMap<>(1);
+        map.put("${Punish_year}",2020);
+        InstrumentModelData instrumentModelData = new InstrumentModelData("D:\\ideawork\\GWC-WEB\\src\\main\\resources\\lawrecord\\instrument\\02目录.docx",map);
+        instrumentModelData.export("D:\\word\\1.docx");
 
     }
 

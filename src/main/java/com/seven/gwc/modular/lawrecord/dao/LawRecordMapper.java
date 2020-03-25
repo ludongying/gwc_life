@@ -2,11 +2,11 @@ package com.seven.gwc.modular.lawrecord.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
+import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : 执法记录Mapper 接口
@@ -32,10 +32,12 @@ public interface LawRecordMapper extends BaseMapper<LawRecordEntity> {
     List<LawRecordDTO> listLawRecord2(LawRecordVO lawRecordVO);
 
     /**
-     * 获取详情
+     * 根据记录id获取案件类型
      * @param id
      * @return
      */
-    Map<String,String> detail(String id);
+    LawTypeDTO findLawType(String id);
+
+    
 
 }

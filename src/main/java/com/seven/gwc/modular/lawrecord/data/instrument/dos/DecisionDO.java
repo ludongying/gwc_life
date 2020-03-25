@@ -14,79 +14,76 @@ public class DecisionDO implements Serializable {
   /**
    *当事人类型
    */
-   private String Litigant;
+   protected String Litigant;
    /**
    *当事人姓名
    */
-   private String Name_1;
+   protected String Name_1;
    /**
    *当事人性别
    */
-   private String Sex_1;
+   protected String Sex_1;
    /**
    *当事人年龄
    */
-   private String Age_1;
+   protected String Age_1;
    /**
    *当事人住址
    */
-   private String Address_1;
+   protected String Address_1;
    /**
    *当事人电话
    */
-   private String Phone_1;
+   protected String Phone_1;
    /**
    *当事人身份证号
    */
-   private String ID_1;
+   protected String ID_1;
    /**
    *单位名称（或船名号）
    */
-   private String Name_Unit;
+   protected String Name_Unit;
    /**
    *单位法定代表人（负责人）
    */
-   private String Legal;
+   protected String Legal;
    /**
    *单位联系电话
    */
-   private String Phone_Unit;
+   protected String Phone_Unit;
    /**
    *单位地址
    */
-   private String Address_Unit;
-   /**
-   *案由(违规类型)
-   */
-   private String Type_Violation;
+   protected String Address_Unit;
+
    /**
    *情节严重性
    */
-   private String Severity;
+   protected String Severity;
    /**
    *金额大写
    */
-   private String money;
+   protected String money;
    /**
    *金额小写
    */
-   private String money_low;
+   protected String money_low;
    /**
    *处罚依据
    */
-   private String Laws_Basis;
+   protected String Laws_Basis;
    /**
    *违反条款
    */
-   private String Laws_Violation;
+   protected String Laws_Violation;
    /**
    *违反条款处罚决定书
    */
-   private String Laws_Violation2;
+   protected String Laws_Violation2;
    /**
     *处罚依据处罚决定书
     */
-   private String Laws_Basis2;
+   protected String Laws_Basis2;
 
 
 }

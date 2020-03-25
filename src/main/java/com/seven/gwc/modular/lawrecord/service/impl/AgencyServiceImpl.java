@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dao.AgencyMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.AgencyDO;
 import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
 import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -85,6 +87,15 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     public Integer getLawCode(Integer fineCode) {
         Integer code = agencyMapper.maxCode(fineCode);
         return Objects.isNull(code) ? 1001 : ++code;
+    }
+
+    @Override
+    public Map<String, Object> getParams(String id) {
+        AgencyDTO detail = detail(id);
+        if(Objects.nonNull(detail)){
+            return  new AgencyDO(detail).toMap();
+        }
+        return null;
     }
 
     private boolean existLawCode(Integer fineCode, Integer code) {

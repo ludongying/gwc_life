@@ -19,29 +19,6 @@ public class InquireSafeEntity extends InquireBase {
 
     private static final long serialVersionUID = 1L;
 
-    /** 性别 */
-    private Integer investigateSex;
-
-    /** 年龄 */
-    private Integer investigateAge;
-
-    /** 职务 */
-    private Integer investigatePosition;
-
-    /** 地址 */
-    private String investigateAddr;
-
-    /** 是否携带身份证*/
-    private Integer identityCase;
-    /** 身份证号 */
-    private String identityCard;
-
-    /** 船主姓名 */
-    private String shipOwner;
-
-    /** 船上总人数 */
-    private Integer shipMember;
-
     /** 船名号书写情况 */
     private Integer shipCaseName;
 
@@ -74,9 +51,6 @@ public class InquireSafeEntity extends InquireBase {
 
     /** 船的长度 */
     private Double shipLength;
-
-    /** 查获时候捕鱼状态 */
-    private Integer shipStatus;
 
 
 }

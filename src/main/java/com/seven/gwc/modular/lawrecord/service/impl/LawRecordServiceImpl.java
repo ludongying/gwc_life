@@ -173,10 +173,6 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         }
     }
 
-    @Override
-    public void generateInstrument(String id) {
-
-    }
 
     /**
      * 获取所有录入数值

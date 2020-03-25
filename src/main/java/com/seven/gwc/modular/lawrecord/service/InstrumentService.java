@@ -1,15 +1,16 @@
 package com.seven.gwc.modular.lawrecord.service;
 
-
-import java.util.Map;
-
+/**
+ * description : 文书录服务类
+ *
+ * @author : ZZL
+ * @date : 2020-03-24
+ */
 public interface InstrumentService {
 
     /**
-     * 获取执法记录数据
-     * @param recordId
-     * @return
+     * 生成文书
+     * @param id
      */
-    Map<String,String> getData(String recordId);
-
+    void generateSystemInstrument(String id);
 }

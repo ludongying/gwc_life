@@ -24,39 +24,10 @@ public class InquireEntity extends InquireBase {
 
     /** 记录id */
     private String recordId;
-
-    /** 性别(枚举) */
-    private Integer investigateSex;
-
-    /** 年龄 */
-    private Integer investigateAge;
-
-    /** 职务 */
-    private Integer investigatePosition;
-
-    /** 地址 */
-    private String investigateAddr;
-
-    /** 是否携带身份证*/
-    private Integer identityCase;
-
-    /** 身份证号 */
-    private String identityCard;
-
-
-
-    /** 船主姓名 */
-    private String shipOwner;
-
-    /** 船上总人数 */
-    private Integer shipMember;
-
     /** 实际作业类型 */
     private Integer shipRealType;
-
     /** 核定作业类型 */
     private Integer shipRatedType;
-
     /** 实际主机功率 */
     private Double shipRealPower;
     /** 实际主机功率单位 */
@@ -67,31 +38,22 @@ public class InquireEntity extends InquireBase {
     private Integer shipRatedPowerUnit;
     /** 船上信息 */
     private String shipInfo;
-    /** 渔船状态 */
-    private Integer shipStatus;
-
     /** 出海时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date shipOutDate;
-
     /** 出港时间 */
     private String shipOutPort;
-
     /** 船上鱼货物数量 */
     private String shipGoodsCount;
-
     /** 市场价值 */
     private String shipGoodsValue;
-
     /** 本行次产生次数 */
     private Integer shipGenerateCount;
-
     /** 到达作业鱼区时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date shipFishAreaDate;
-
 
 
 }

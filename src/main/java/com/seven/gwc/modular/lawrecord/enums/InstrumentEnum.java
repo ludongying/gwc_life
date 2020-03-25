@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.enums;
 
+import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.*;
 import lombok.Getter;
 
@@ -15,11 +16,11 @@ import java.util.List;
 @Getter
 public enum InstrumentEnum {
 
-    INSTRUMENT_01(1,"01封面_法人.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
-    INSTRUMENT_02(2,"02封面_目录.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_01(1,"01封面_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_02(2,"02目录.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
     INSTRUMENT_03(3,"03行政处罚决定书_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1)),
-    INSTRUMENT_04(4,"06勘验笔录.docx.docx", 1,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
-    INSTRUMENT_05(5,"07询问笔录.docx.docx", 2,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_04(4,"06勘验笔录.docx.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_05(5,"07询问笔录.docx.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
     INSTRUMENT_06(6,"12查封（扣押）决定书和清单.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1));
 
     Integer code;
@@ -113,13 +114,12 @@ public enum InstrumentEnum {
     /**
      * 根据案件类型，和决定类型获取所有模板
      * @param law
-     * @param decision
      * @return
      */
-    public static List<InstrumentEnum> getList(Integer law,Integer decision){
+    public static List<InstrumentEnum> getList(LawTypeDTO law){
         List<InstrumentEnum> list=new ArrayList<>();
         for (InstrumentEnum ms : InstrumentEnum.values()) {
-             if(ms.getLaw().contains(law) && ms.getDecision().contains(decision)){
+             if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())){
                  list.add(ms);
              }
         }
@@ -129,13 +129,12 @@ public enum InstrumentEnum {
     /**
      * 根据案件类型，和决定类型获取需要系统生成的模板
      * @param law
-     * @param decision
      * @return
      */
-    public static List<InstrumentEnum> getSystem(Integer law,Integer decision){
+    public static List<InstrumentEnum> getSystem(LawTypeDTO law){
         List<InstrumentEnum> list=new ArrayList<>();
         for (InstrumentEnum ms : InstrumentEnum.values()) {
-            if(ms.getLaw().contains(law) && ms.getDecision().contains(decision)){
+            if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())){
                 if(ms.getGenerate()<3){
                     list.add(ms);
                 }

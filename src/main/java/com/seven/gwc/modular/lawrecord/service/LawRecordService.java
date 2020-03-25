@@ -71,11 +71,7 @@ public interface LawRecordService extends IService<LawRecordEntity> {
      */
     void detail(String id,Model model);
 
-    /**
-     * 生成文书
-     * @param id
-     */
-    void generateInstrument(String id);
+
 
 
 

@@ -1,8 +1,9 @@
 package com.seven.gwc.modular.lawrecord.data.file;
 
 import java.io.File;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author : zzl
@@ -113,6 +114,9 @@ public class FileUtils {
         return null;
     }
 
+    public static String getStaticPath(){
+        return Thread.currentThread().getContextClassLoader().getResource("").getPath()+FileUtils.file_sep+"static";
+    }
 
 
 }

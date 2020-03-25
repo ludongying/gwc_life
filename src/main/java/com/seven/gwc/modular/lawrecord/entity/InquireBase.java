@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class InquireBase extends GwcBaseEntity {
+
     /** 询问笔录id */
     private String id;
     /** 姓名 */
@@ -19,5 +20,30 @@ public class InquireBase extends GwcBaseEntity {
     protected String investigateTel;
 
     /** 渔船名称 */
-    private String shipName;
+    protected String shipName;
+
+    /** 性别(枚举) */
+    protected Integer investigateSex;
+
+    /** 年龄 */
+    protected Integer investigateAge;
+
+    /** 职务 */
+    protected Integer investigatePosition;
+
+    /** 地址 */
+    protected String investigateAddr;
+
+    /** 是否携带身份证*/
+    protected Integer identityCase;
+
+    /** 身份证号 */
+    protected String identityCard;
+    /** 船主姓名 */
+    private String shipOwner;
+    /** 船上总人数 */
+    private Integer shipMember;
+    /** 查获时候捕鱼状态 */
+    private Integer shipStatus;
+
 }

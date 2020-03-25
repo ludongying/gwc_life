@@ -27,10 +27,12 @@
     </sql>
 
     <sql id="law_case_code">
-     CONCAT(law_record_agency.law_case_fine_code,
-                  (CASE law_record_agency.law_case_fine_code WHEN '' THEN '' ELSE '罚'  END),
-                  law_record_agency.law_case_code,
-                  (CASE law_record_agency.law_case_code WHEN '' THEN '' ELSE '号'  END)
+     CONCAT(
+              law_record_agency.short_name,
+              '罚',
+              law_record_agency.law_case_fine_code,
+              law_record_agency.law_case_code,
+              '号'
            )
     </sql>
 
@@ -180,26 +182,20 @@
        </where>
     </select>
 
-    <sql id="agency_column">
-            law_record_agency.short_name as Short ,
-            law_record_agency.enforcement_agency as Enforcement_Agency,
-            law_record_agency.law_ship_code as Official_Boat,
-            law_record_agency.agency_addr as Official_Address,
-            law_record_agency.agency_person as Official_Contact,
-            law_record_agency.agency_tel as Official_Contact_Phone,
-            law_record_agency.bank as Bank,
-            law_record_agency.review_agency as Reconsideration,
-            law_record_agency.lawsuit_agency as Litigation,
-            law_record_agency.law_case_fine_code as YEAR,
-            law_record_agency.law_case_code as Number,
-            law_record_agency.law_case_source as From,
-            law_record_agency.law_case_lon, law_case_lat,law_case_addr, law_case_date,prospect_start_date,prospect_end_date, inquire_start_date,inquire_end_date, tel_apply_date, accept_date, deal_date, punish_date, decision_date, finish_date
-    </sql>
-
-   <select id="detail" resultType="java.util.Map">
-
-   </select>
-
+    <select id="findLawType" resultType="com.seven.gwc.modular.lawrecord.dto.LawTypeDTO">
+        SELECT
+        law_record.id,
+        law_record.law_type,
+        <include refid="law_case_code"/> law_case_code,
+        (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,
+        law_record.writ_flag
+        FROM
+        law_record
+        LEFT JOIN law_record_decision ON law_record.id=law_record_decision.id
+        LEFT JOIN law_record_decision_safe ON law_record.id=law_record_decision_safe.id
+        LEFT JOIN law_record_agency ON law_record.id=law_record_agency.id
+        WHERE law_record.id=#{id}
+    </select>
 
 
 </mapper>

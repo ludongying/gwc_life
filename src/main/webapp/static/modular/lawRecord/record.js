@@ -49,7 +49,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             page: true,
             height: "full-164",
             cellMinWidth: 100,
-            cols: LawRecord.initColumn()
+            cols: LawRecord.initColumn(),
+            done:function(){
+                this.where={};
+            }
         });
     }
 
@@ -136,7 +139,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     $('#btnReset').click(function () {
         $("#conditionInput input").val("");
+        let sel=$("#conditionInput select").eq(0);
+        let val=sel.find("option").eq(0).text();
+        sel.next().find("input").val(val);
     });
+
+
 
     /**
      * 新建生产案件

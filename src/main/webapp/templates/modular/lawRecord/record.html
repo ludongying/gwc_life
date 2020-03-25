@@ -9,7 +9,7 @@
                                   <div id="commonSearch" class="layui-inline">
 
                                       <div class="layui-inline" style="width: 120px">
-                                          <select lay-verify="selectType">
+                                          <select lay-filter="selectType">
                                               <option value="lawType">案件类型</option>
                                               <option value="lawCaseCode">案件编号</option>
                                               <option value="shipName">被执法船</option>
@@ -20,7 +20,7 @@
                                       </div>
 
 
-                                      <div class="layui-inline" id="select_box">
+                                      <div class="layui-inline" id="select_box" >
                                           <select class="lawType" name="lawType" lay-verify="">
                                               <option value="">请选择案件类型</option>
                                               @for(lawType in lawTypes){

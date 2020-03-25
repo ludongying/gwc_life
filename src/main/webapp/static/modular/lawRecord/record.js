@@ -72,12 +72,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         LawRecord.searchType="commonSearch";
     });
 
+    form.on('select(selectType)', function(data){
+        $("#select_box").html($("#advancedSearch ."+data.value).parent().html());
+        form.render();
+    });
+
+
     /**
      * 左侧搜索
      */
     $('#btnSearch').click(function () {
         let queryData=getParam(LawRecord.searchType);
-        console.log(queryData);
         table.reload(LawRecord.tableId, {where: queryData});
     });
 
@@ -102,6 +107,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             }
             queryData['shipName'] = shipName;
         }
+
         let investigateTel=$(id_+" .investigateTel").val();
         if(investigateTel){
             investigateTel=investigateTel.trim();
@@ -139,9 +145,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     $('#btnReset').click(function () {
         $("#conditionInput input").val("");
+        $("#conditionInput select").val("");
+        $("#select_box").html($("#advancedSearch .lawType").parent().html());
+        form.render();
         let sel=$("#conditionInput select").eq(0);
         let val=sel.find("option").eq(0).text();
         sel.next().find("input").val(val);
+
     });
 
 

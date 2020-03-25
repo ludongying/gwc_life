@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
+import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
 import lombok.Data;
 
 /**
@@ -18,4 +19,8 @@ public class DecisionProduceDO extends DecisionDO {
      * 证据是否有禁渔期通告（农业部）
      */
   protected String A007;
+
+  public DecisionProduceDO(DecisionBase decisionBase){
+      super(decisionBase);
+  }
 }

@@ -14,7 +14,7 @@ public enum PlotSeverityEnum implements IEnum<Integer> {
 
     GENERAL(1,"一般"),
     SERIOUS(2,"严重/较重"),
-    ESPECIALLY_SERIOUS(2,"特别严重");
+    ESPECIALLY_SERIOUS(3,"特别严重");
 
 
     Integer code;

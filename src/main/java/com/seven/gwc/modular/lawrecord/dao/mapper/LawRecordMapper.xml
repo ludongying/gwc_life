@@ -186,7 +186,9 @@
         SELECT
         law_record.id,
         law_record.law_type,
+        law_record_agency.law_case_fine_code year,
         <include refid="law_case_code"/> law_case_code,
+
         (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,
         law_record.writ_flag
         FROM

@@ -44,7 +44,7 @@ public interface AgencyService extends IService<AgencyEntity> {
       * @param id
       * @return
       */
-     Map<String,Object> getParams(String id);
+     Map<String,String> getParams(String id);
 
 
 

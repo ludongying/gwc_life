@@ -26,7 +26,7 @@ public class InstrumentModelData {
     /**
      * 对照表
      */
-    public Map<String,Object> contentMap;
+    public Map<String,String> contentMap;
     /**
      * 2003 doc
      */
@@ -40,7 +40,7 @@ public class InstrumentModelData {
     public static final String WORD_2007=".docx";
     public static final Pattern pattern = Pattern.compile("\\$\\{[0-9a-zA-Z_]{1,}\\}");
 
-    public InstrumentModelData(String path,Map<String,Object> contentMap){
+    public InstrumentModelData(String path,Map<String,String> contentMap){
         this.path=path;
         this.contentMap = contentMap;
         read();
@@ -71,10 +71,8 @@ public class InstrumentModelData {
         // 读取文本内容
         Range bodyRange = hwpfDocument.getRange();
         // 替换内容
-        for (Map.Entry<String, Object> entry : contentMap.entrySet()) {
-            Object value = entry.getValue();
-            String val=Objects.nonNull(value)?value.toString():"";
-            bodyRange.replaceText(entry.getKey(), val);
+        for (Map.Entry<String, String> entry : contentMap.entrySet()) {
+            bodyRange.replaceText(entry.getKey(), entry.getValue());
         }
     }
     private void replace2007(){
@@ -167,8 +165,8 @@ public class InstrumentModelData {
     }
 
     public static void main(String[] args) {
-       Map<String,Object> map=new HashMap<>(1);
-        map.put("${Punish_year}",2020);
+       Map<String,String> map=new HashMap<>(1);
+        map.put("${Punish_year}","2020");
         InstrumentModelData instrumentModelData = new InstrumentModelData("D:\\ideawork\\GWC-WEB\\src\\main\\resources\\lawrecord\\instrument\\02目录.docx",map);
         instrumentModelData.export("D:\\word\\1.docx");
 

@@ -1,5 +1,5 @@
 
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','laytpl'], function () {
+layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','laytpl','element'], function () {
     var $ = layui.$;
     var layer = layui.layer;
     var form = layui.form;
@@ -9,7 +9,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     var admin = layui.admin;
     var func = layui.func;
     var laytpl=layui.laytpl;
-
+    var element=layui.element;
     var lay={
          '$':$,
          'layer':layer,
@@ -19,7 +19,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
          'admin':admin,
          'func':func,
          'key':"law_decision",
-         'verify':false
+         'verify':false,
+         'element':element
     }
 
     //初始化显示内容
@@ -82,10 +83,23 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     });
 
     startListen($,lay.key);
+
+    function setMoney(data){
+        let fine=$("#fine").val();
+        if(fine){
+            data.field.fineUpper=number2Chinese(fine);
+        }
+        let resourceCompensation=$("resourceCompensation").val();
+        if(resourceCompensation){
+            data.field.resourceCompensationUpper=number2Chinese(resourceCompensation);
+        }
+    }
+
     //提交数据
     function submitData(des,data){
         //设置数据
         data.field.punishAddr= JSON.stringify(getLocAddr($,"punish_addr"));
+        setMoney(data);
         var url="decision/update";
         if($("#lawType").val()==2){
             url="decision_safe/update";

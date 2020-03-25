@@ -1,8 +1,13 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
+import com.seven.gwc.core.state.SexEnum;
+import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
+import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author : zzl
@@ -10,6 +15,7 @@ import java.io.Serializable;
  * @description : 执法决定模板数据
  */
 @Data
+@Accessors(chain = true)
 public class DecisionDO implements Serializable {
   /**
    *当事人类型
@@ -26,7 +32,7 @@ public class DecisionDO implements Serializable {
    /**
    *当事人年龄
    */
-   protected String Age_1;
+   protected Integer Age_1;
    /**
    *当事人住址
    */
@@ -69,21 +75,35 @@ public class DecisionDO implements Serializable {
    */
    protected String money_low;
    /**
-   *处罚依据
+   *处罚依据(预留)
    */
    protected String Laws_Basis;
    /**
-   *违反条款
+   *违反条款(预留)
    */
    protected String Laws_Violation;
    /**
-   *违反条款处罚决定书
+   *违反条款处罚决定书(预留)
    */
    protected String Laws_Violation2;
    /**
-    *处罚依据处罚决定书
+    *处罚依据处罚决定书(预留)
     */
    protected String Laws_Basis2;
+
+
+   public DecisionDO (DecisionBase decisionBase){
+     PunishmentTypeEnum punishmentTypeEnum = PunishmentTypeEnum.findByCode(decisionBase.getPunishPersonType());
+     SexEnum sexEnum = SexEnum.findByCode(decisionBase.getPunishSex());
+
+    this.setLitigant(Objects.nonNull(punishmentTypeEnum)?punishmentTypeEnum.getMessage():"")
+        .setName_1(decisionBase.getPunishPersonName()).setSex_1(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
+        .setAge_1(decisionBase.getPunishAge()).setAddress_1(decisionBase.getPunishAddr())
+            .setPhone_1(decisionBase.getPunishTel()).setID_1(decisionBase.getPunishIdentityCard())
+        .setName_Unit(decisionBase.getPunishCompanyName()).setLegal(decisionBase.getPunishPersonName())
+        .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(decisionBase.getPunishAddr());
+
+   }
 
 
 }

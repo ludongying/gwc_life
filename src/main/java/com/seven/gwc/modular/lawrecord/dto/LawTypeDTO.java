@@ -25,6 +25,10 @@ public class LawTypeDTO implements Serializable {
     private Integer punishPersonType;
 
     /**
+     * 年份
+     */
+    private Integer year;
+    /**
      * 案件编号
      */
     private String  lawCaseCode;

@@ -79,14 +79,26 @@ function money_verify(lay,id){
                 msg_error($,msg)
                 $("#"+id).attr("style","border:1px solid red");
             }else{
-                let money = number2Chinese(val);
+                // let money = number2Chinese(val);
                 // $(this).val(money);
                 //修改到表述
-                 let content=$("#description").text();
-                 if(content){
-                     let cs = content.split(" ");
-                 }
-                 $("#description").append( $("#"+id).parent().prev().text()+money);
+                  let fine=$("#fine").val();
+                  let resourceCompensation=$("#resourceCompensation").val();
+                  let arr=[];
+                  if(fine){
+                    arr.push($("#fine").parent().prev().text()+"人民币"+number2Chinese(fine))
+                  }
+                  if(resourceCompensation){
+                      arr.push($("#resourceCompensation").parent().prev().text()+"人民币"+number2Chinese(resourceCompensation))
+                  }
+                  if(arr){
+                      let str="";
+                      for (let i=0;i<arr.length;i++){
+                        str+=(i+1)+"、"+arr[i]+"。";
+                      }
+                      $("#description").val(str);
+                  }
+
             }
         }
 

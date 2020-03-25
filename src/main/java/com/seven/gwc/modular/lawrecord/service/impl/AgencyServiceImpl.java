@@ -90,10 +90,10 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     }
 
     @Override
-    public Map<String, Object> getParams(String id) {
+    public Map<String, String> getParams(String id) {
         AgencyDTO detail = detail(id);
         if(Objects.nonNull(detail)){
-            return  new AgencyDO(detail).toMap();
+           return new AgencyDO(detail).toMap();
         }
         return null;
     }

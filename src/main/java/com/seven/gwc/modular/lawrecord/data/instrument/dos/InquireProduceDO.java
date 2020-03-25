@@ -64,4 +64,8 @@ public class InquireProduceDO extends InquireDO{
     public InquireProduceDO(InquireBase inquireBase) {
         super(inquireBase);
     }
+
+
+
+
 }

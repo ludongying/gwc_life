@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.config;
 
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -26,7 +27,7 @@ public class InstrumentContrast {
 
    private Map<String,String> fixedValue;
 
-   private final String path="src/main/resources/lawrecord/config.xls";
+   private final String path= FileUtils.getStaticPath()+"/lawrecord/config.xls";
 
    public InstrumentContrast(){
       this.map=new HashMap<>();

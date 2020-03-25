@@ -10,13 +10,15 @@ import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * @Description 文书实现类
+ * @author zl
+ */
 @Service
 public class InstrumentServiceImpl implements InstrumentService {
 
@@ -29,21 +31,24 @@ public class InstrumentServiceImpl implements InstrumentService {
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String path;
 
-    private String modelPath=Thread.currentThread().getContextClassLoader().getResource("").getPath()+"\\static\\lawrecord\\instrument\\";
-
+    private String modelPath=FileUtils.getStaticPath()+"\\lawrecord\\instrument\\";
 
     /**
      * 获取所有参数
      * @param id
      * @return
      */
-    public Map<String, Object> getParam(String id) {
-        Map<String,Object> res=new HashMap<>();
-        Map<String, Object> agency = agencyService.getParams(id);
+    public Map<String, String> getParam(String id) {
+        Map<String,String> res=new HashMap<>();
+        Map<String,String> agency = agencyService.getParams(id);
         if(Objects.nonNull(agency)){
             res.putAll(agency);
         }
         return res;
+    }
+
+    public String getGeneratePath(){
+        return path+ FileUtils.file_sep+"lawrecord"+FileUtils.file_sep;
     }
 
     /**
@@ -54,13 +59,12 @@ public class InstrumentServiceImpl implements InstrumentService {
         LawTypeDTO lawType = lawRecordMapper.findLawType(id);
         Boolean writFlag = lawType.getWritFlag();
         if(Objects.isNull(writFlag) || !writFlag){
-            Map<String, Object> param = getParam(id);
+            Map<String, String> param = getParam(id);
             List<InstrumentEnum> instruments = InstrumentEnum.getSystem(lawType);
             for (InstrumentEnum instrument : instruments) {
-                System.out.println(modelPath+instrument.getMessage());
-                System.out.println(new File(modelPath+instrument.getMessage()).isFile());
                 new InstrumentModelData(modelPath+instrument.getMessage(),param)
-                        .export(path+ FileUtils.file_sep+lawType.getLawCaseCode()
+                        .export(getGeneratePath()+lawType.getYear()
+                                +FileUtils.file_sep+lawType.getLawCaseCode()
                                 +FileUtils.file_sep+instrument.getMessage());
             }
         }

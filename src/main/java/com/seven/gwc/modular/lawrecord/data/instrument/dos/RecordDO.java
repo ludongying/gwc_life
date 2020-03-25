@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @Date: 2020-03-19
  * @description : 模板数据-无存储固定值
  */
+@ToString
 public class RecordDO implements Serializable {
 
     /**

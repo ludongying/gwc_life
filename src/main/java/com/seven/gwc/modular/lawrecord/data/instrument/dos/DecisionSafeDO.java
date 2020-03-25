@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
+import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
 import lombok.Data;
 
 /**
@@ -10,5 +11,8 @@ import lombok.Data;
 @Data
 public class DecisionSafeDO extends DecisionDO{
 
+    public DecisionSafeDO(DecisionBase decisionBase){
+        super(decisionBase);
+    }
 
 }

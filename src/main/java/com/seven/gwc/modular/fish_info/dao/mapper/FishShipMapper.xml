@@ -17,6 +17,7 @@
         <result column="total_power" property="totalPower" />
         <result column="work_type" property="workType" />
     </resultMap>
+
     <select id="getFishShipList" resultType="com.seven.gwc.modular.fish_info.entity.FishShipEntity">
         SELECT l.* FROM law_fish_ship l
         LEFT JOIN sys_user u ON l.create_user = u.id
@@ -25,7 +26,23 @@
         <if test="law.shipType != null and law.shipType != ''">
             and l.ship_type = #{law.shipType}
         </if>
-        <if test="law.name != null and law.name != ''">
+        <if test="law.code != null and law.code != ''">
+            and l.code like CONCAT('%',#{law.code},'%')
+        </if>
+        ${law.params.dataScope}
+        order by l.create_time desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.fish_info.entity.FishShipEntity">
+        SELECT l.* FROM law_fish_ship l
+        LEFT JOIN sys_user u ON l.create_user = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        WHERE 1 = 1
+        <if test="law.shipType != null and law.shipType != ''">
+            and l.ship_type = #{law.shipType}
+        </if>
+        <if test="law.code != null and law.code != ''">
             and l.code like CONCAT('%',#{law.code},'%')
         </if>
         ${law.params.dataScope}

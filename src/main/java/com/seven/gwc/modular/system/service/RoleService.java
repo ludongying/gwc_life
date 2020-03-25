@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.system.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.modular.system.entity.RoleEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public interface RoleService extends IService<RoleEntity> {
      * @param roleEntity 角色名称
      * @return
      */
-    List<RoleEntity> selectRole(RoleEntity roleEntity);
+    List<RoleEntity> selectRole(RoleEntity roleEntity, Integer total, Integer size);
 
-
+    Integer getListSize(RoleEntity roleEntity);
 
     /**
      * 获取角色列表树

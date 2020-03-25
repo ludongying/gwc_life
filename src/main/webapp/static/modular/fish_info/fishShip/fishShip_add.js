@@ -106,6 +106,15 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             );
             fileName = fileName + res.fileName + ","
             $("#fileName").val(fileName);
+
+            $('#uploader-list img').on('click', function () {
+                layer.photos({
+                    photos: '#uploader-list',
+                    shadeClose: false,
+                    closeBtn: 2,
+                    anim: 0
+                });
+            })
         }
     });
 
@@ -125,7 +134,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     $(document).on("click", ".file-iteme .handle", function(event){
         $(this).parent().remove();
         //$(this).parent()[0].textContent
-        deleteFIle(fileName, $(this).parent()[0].textContent)
+        deleteFile(fileName, $(this).parent()[0].textContent)
     });
 
     form.on('submit(btnSubmit)', function (data) {
@@ -145,7 +154,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         return false;
     });
 
-    function deleteFIle(names, deleteFile) {
+    function deleteFile(names, deleteFile) {
         var name = "";
         var files = names.split(",");
         for (i = 0; i < files.length - 1; i++ ) {
@@ -158,13 +167,13 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     }
 
     //图片放大
-    $('#uploader-list img').on('click', function () {
+    /*$('#uploader-list img').on('click', function () {
         layer.photos({
             photos: '#uploader-list',
             shadeClose: false,
             closeBtn: 2,
             anim: 0
         });
-    })
+    })*/
 
 });

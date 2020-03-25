@@ -96,7 +96,7 @@ public class UserController extends BaseController {
     public BaseResultPage<UserEntity> list(UserEntity userEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<UserEntity> userEntities = userService.selectUser(userEntity, (int)(page.getCurrent() - 1) * 10, (int)page.getSize());
+        List<UserEntity> userEntities = userService.selectUser(userEntity, (int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(userEntities);
         Integer size = userService.getListSize(userEntity);
         pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));

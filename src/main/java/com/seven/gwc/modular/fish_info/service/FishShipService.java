@@ -1,9 +1,9 @@
 package com.seven.gwc.modular.fish_info.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +26,9 @@ public interface FishShipService extends IService<FishShipEntity> {
      * @param fishShipEntity 船类型
      * @return List<渔船信息服务对象>
      */
-    List<FishShipEntity> selectFishShip(FishShipEntity fishShipEntity);
+    List<FishShipEntity> selectFishShip(FishShipEntity fishShipEntity, Integer total, Integer size);
+
+    List<FishShipEntity> getListSize(FishShipEntity fishShipEntity);
 
     /**
      * 渔船信息新建

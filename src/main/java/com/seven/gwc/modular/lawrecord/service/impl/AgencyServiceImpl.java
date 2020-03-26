@@ -10,6 +10,7 @@ import com.seven.gwc.modular.lawrecord.dto.AgencyDTO;
 import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.seven.gwc.modular.lawrecord.service.AgencyService;
+import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.service.OperatorService;
 import com.seven.gwc.modular.lawrecord.vo.AgencyVO;
@@ -40,6 +41,9 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
     @Autowired
     private AgencyMapper agencyMapper;
 
+    @Autowired
+    private InstrumentService instrumentService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateAgency(AgencyVO agencyVO) {
@@ -64,6 +68,7 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
         }
          this.saveOrUpdate(agencyVO);
          baseResult.setContent(agencyVO.getId());
+         instrumentService.generateInstrument(agencyVO.getId(),AgencyEntity.class);
          return baseResult;
     }
 

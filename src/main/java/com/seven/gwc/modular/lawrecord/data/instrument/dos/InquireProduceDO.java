@@ -1,8 +1,15 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
-import com.seven.gwc.modular.lawrecord.entity.InquireBase;
+import cn.hutool.core.date.DateUtil;
+import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
+import com.seven.gwc.modular.lawrecord.enums.PowerUnitEnum;
+import com.seven.gwc.modular.lawrecord.enums.ShipRatedTypeEnum;
+import com.seven.gwc.modular.lawrecord.enums.ShipRealTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+import java.util.Objects;
 
 /**
  * @author : zzl
@@ -12,12 +19,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class InquireProduceDO extends InquireDO{
-    /**
-     *渔船船名号
-     */
-    protected String Boat_Id;
-
 
     /**
      *被询问人作业类型
@@ -35,7 +38,6 @@ public class InquireProduceDO extends InquireDO{
      *捕捞许可证核定作业类型
      */
     protected String Type_paperwork;
-
     /**
      *渔船出海时间
      */
@@ -51,7 +53,7 @@ public class InquireProduceDO extends InquireDO{
     /**
      *本航次生产了
      */
-    protected String Net_Number;
+    protected Integer Net_Number;
     /**
      *到达作业渔区的时间
      */
@@ -61,10 +63,27 @@ public class InquireProduceDO extends InquireDO{
      */
     protected String A005;
 
-    public InquireProduceDO(InquireBase inquireBase) {
-        super(inquireBase);
-    }
+    public InquireProduceDO(InquireEntity entity) {
+        super(entity);
+        ShipRealTypeEnum shipRealTypeEnum = ShipRealTypeEnum.findByCode(entity.getShipRealType());
+        ShipRatedTypeEnum shipRatedTypeEnum = ShipRatedTypeEnum.findByCode(entity.getShipRatedType());
+        this.setType(Objects.nonNull(shipRealTypeEnum)?shipRealTypeEnum.getMessage():"").setNet(entity.getShipInfo());
 
+        Double shipRatedPower = entity.getShipRatedPower();
+        PowerUnitEnum rated = PowerUnitEnum.findByCode(entity.getShipRatedPowerUnit());
+        String rateUnit=Objects.nonNull(rated)?rated.getMessage():"";
+        this.setBoat_Power(Objects.nonNull(shipRatedPower)?shipRatedPower+rateUnit:"")
+             .setType_paperwork(Objects.nonNull(shipRatedTypeEnum)?shipRatedTypeEnum.getMessage():"");
+
+        this.setSea_Time(DateUtil.format(entity.getShipOutDate(), "yyyy-MM-dd HH:mm"))
+                .setSea_Port(entity.getShipOutPort()).setProduct(entity.getShipGoodsValue())
+                .setNet_Number(entity.getShipGenerateCount())
+                .setNet_Time(DateUtil.format(entity.getShipFishAreaDate(), "yyyy-MM-dd HH:mm"))
+                .setA005(entity.getShipGoodsCount());
+
+
+
+    }
 
 
 

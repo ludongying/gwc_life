@@ -5,22 +5,22 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.dao.InquireMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireProduceDO;
 import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.service.InquireService;
+import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-import com.seven.gwc.modular.lawrecord.dao.InquireMapper;
-import com.seven.gwc.modular.lawrecord.service.InquireService;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -36,7 +36,8 @@ import java.util.stream.Collectors;
 public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity> implements InquireService {
     @Autowired
     private LawRecordService lawRecordService;
-
+    @Autowired
+    private InstrumentService instrumentService;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquire(InquireVO vo) {
@@ -104,5 +105,14 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         return null;
     }
 
+
+    @Override
+    public Map<String, String> getParams(String id) {
+        InquireEntity entity = this.getById(id);
+        if(Objects.nonNull(entity)){
+            return new InquireProduceDO(entity).toMap();
+        }
+        return null;
+    }
 
 }

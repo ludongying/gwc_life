@@ -1,12 +1,12 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
 import com.seven.gwc.modular.lawrecord.dto.DecisionSafeDTO;
 import com.seven.gwc.modular.lawrecord.entity.DecisionSafeEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.lawrecord.vo.DecisionSafeVO;
-import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
+
+import java.util.Map;
 
 
 /**
@@ -31,4 +31,12 @@ public interface DecisionSafeService extends IService<DecisionSafeEntity> {
      * @return
      */
     DecisionSafeDTO detail(String id);
+
+
+    /**
+     * 获取安全决定所有参数
+     * @param id
+     * @return
+     */
+    Map<String,String> getParams(String id);
 }

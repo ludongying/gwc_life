@@ -7,6 +7,8 @@ import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 
+import java.util.Map;
+
 /**
  * description : 询问笔录服务类
  *
@@ -29,5 +31,12 @@ public interface InquireService extends IService<InquireEntity> {
      * @return
      */
     InquireDTO detail(String id);
+
+    /**
+     * 获取生产询问笔录所有参数
+     * @param id
+     * @return
+     */
+    Map<String,String> getParams(String id);
 
 }

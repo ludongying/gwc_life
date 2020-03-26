@@ -3,12 +3,14 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dto.ReasonDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.service.ReasonService;
 import com.seven.gwc.modular.lawrecord.vo.ReasonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Objects;
 
 /**
@@ -21,7 +23,8 @@ public class ReasonServiceImpl implements ReasonService {
 
     @Autowired
     private LawRecordService lawRecordService;
-
+    @Autowired
+    private InstrumentService instrumentService;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateReason(ReasonVO vo) {
@@ -40,6 +43,7 @@ public class ReasonServiceImpl implements ReasonService {
         lawRecordService.saveOrUpdate(lawRecordEntity);
         BaseResult baseResult = new BaseResult(true, "");
         baseResult.setContent(vo.getId());
+        instrumentService.generateInstrument(vo.getId(), LawRecordEntity.class);
         return baseResult;
     }
 

@@ -1,14 +1,10 @@
 package com.seven.gwc.modular.lawrecord.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * description : 勘验笔录实体
@@ -39,7 +35,7 @@ public class InquisitionEntity extends GwcBaseEntity {
     /** 船名牌悬挂情况 */
     private Integer shipCaseCard;
 
-    /** 师傅携带证件 */
+    /** 是否携带证件 */
     private Integer shipCaseCredentials;
 
     /** 是否有残留渔获物 */

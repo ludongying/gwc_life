@@ -42,13 +42,13 @@ public class DecisionBase extends GwcBaseEntity {
     /** 罚款 */
     private String fine;
 
-    /** 罚款 */
+    /** 罚款 大写*/
     private String fineUpper;
 
     /** 资源补偿费 */
     private String resourceCompensation;
 
-    /** 罚款 */
+    /** 资源补偿费大写 */
     private String resourceCompensationUpper;
 
     /** 处罚文表述 */

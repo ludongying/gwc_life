@@ -3,15 +3,13 @@ package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /**
  * @author : zzl
  * @Date: 2020-03-19
  * @description : 模板数据-无存储固定值
  */
 @ToString
-public class RecordDO implements Serializable {
+public class RecordDO extends BaseDO {
 
     /**
      * 证件类型 身份证

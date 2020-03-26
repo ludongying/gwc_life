@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -20,7 +19,12 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class InquireDO implements Serializable {
+public class InquireDO extends BaseDO {
+
+    /**
+     *渔船船名号
+     */
+    protected String Boat_Id;
 
     /**
      *被询问人姓名
@@ -90,15 +94,14 @@ public class InquireDO implements Serializable {
         ShipStatusEnum shipStatusEnum = ShipStatusEnum.findByCode(inquireBase.getShipStatus());
         WhetherEnum whetherEnum = WhetherEnum.findByCode(inquireBase.getIdentityCase());
 
-        this.setAsk_Name(inquireBase.getInvestigateName()).setAsk_Sex(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
+        this.setBoat_Id(inquireBase.getShipName()).setAsk_Name(inquireBase.getInvestigateName())
+            .setAsk_Sex(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
             .setAsk_Age(inquireBase.getInvestigateAge()).setAsk_Address(inquireBase.getInvestigateAddr())
             .setAsk_Phone(inquireBase.getInvestigateTel()).setAsk_ID(inquireBase.getIdentityCard())
             .setAsk_Position(Objects.nonNull(investigatePositionEnum)?investigatePositionEnum.getMessage():"")
             .setHolder1(inquireBase.getShipOwner()).setSum(inquireBase.getShipMember())
             .setStatus(Objects.nonNull(shipStatusEnum)?shipStatusEnum.getMessage():"")
             .setA001(Objects.nonNull(whetherEnum)?whetherEnum.getMessage():"");
-
-
     }
 
 

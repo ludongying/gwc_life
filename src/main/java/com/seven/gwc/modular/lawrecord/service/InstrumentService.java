@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import java.util.List;
+
 /**
  * description : 文书录服务类
  *
@@ -21,4 +23,17 @@ public interface InstrumentService {
      * @param clazz
      */
     void generateInstrument(String id,Class<?> clazz);
+
+
+    /**
+     * 获取文书列表
+     * @param id
+     * @return
+     */
+    List getInstrument(String id);
+
+
+
+
+
 }

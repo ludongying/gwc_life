@@ -115,4 +115,13 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         return null;
     }
 
+
+    @Override
+    public List<InquireEntity> getSupplement(String id){
+        LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(InquireEntity::getDeleteFlag,Boolean.TRUE)
+                .ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id);
+        return this.list(wrapper);
+
+    }
 }

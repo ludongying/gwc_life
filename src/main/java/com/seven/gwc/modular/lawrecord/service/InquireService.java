@@ -7,6 +7,7 @@ import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,5 +39,8 @@ public interface InquireService extends IService<InquireEntity> {
      * @return
      */
     Map<String,String> getParams(String id);
+
+
+    List<InquireEntity> getSupplement(String id);
 
 }

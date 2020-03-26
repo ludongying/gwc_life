@@ -67,14 +67,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             end: function () {
                 $("#type").val(MenuInfoDlg.data.pid);
                 $("#typeDesp").val(MenuInfoDlg.data.pcodeName);
-                //设备名称下拉框重新渲染
-                equipNameSels(MenuInfoDlg.data.pid);
+                if(MenuInfoDlg.data.pid!=null && MenuInfoDlg.data.pid!=""){
+                    //设备名称下拉框重新渲染
+                    equipNameSels(MenuInfoDlg.data.pid);
+                    //设备型号下拉框重新渲染
+                    specSelEvent();
+                }
             }
         });
     });
 
+
     //设备名称下拉框渲染
     function equipNameSels(equipType) {
+        if(equipType!=null && equipType!="") {
+            $('#equipId').empty();
+        }
         //设备名称下拉框
         var params={
             equipName:"",
@@ -94,11 +102,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         });
     }
 
-
-
     // 设备名称与设备型号下拉框联动
     layui.use('form', function() {
         form.on('select(nameFilter)', function (data) {
+            $('#specification').empty();
             var params = {
                 equipName:data.value,
                 equipType:$("#type").val()
@@ -114,11 +121,34 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
                     $.each(data, function (index, item) {
                         $('#specification').append(new Option(item.specification, item.specification));// 下拉菜单里添加元素
                     });
-                    layui.form.render("select");//重新渲染
+                    form.render("select");//重新渲染
                 }
             });
         });
     });
+
+    //当设备名称赋值时，未启动select事件，则设备规格联动事件
+    function specSelEvent(){
+        $('#specification').empty();
+        var params = {
+            equipName:$("#equipId").val(),
+            equipType:$("#type").val()
+        }
+        //检查项目添加到下拉框中
+        $.ajax({
+            url: Feng.ctxPath + '/equip/listByTypeAndName',
+            dataType: 'json',
+            data: params,
+            type: 'post',
+            success: function (data) {
+                $("#specification").empty();//清空下拉框的值
+                $.each(data, function (index, item) {
+                    $('#specification').append(new Option(item.specification, item.specification));// 下拉菜单里添加元素
+                });
+                form.render("select");//重新渲染
+            }
+        });
+    }
 
     //工作类型下拉框
     $.ajax({
@@ -145,7 +175,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             form.render('select');//表单渲染
         }
     });
-
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

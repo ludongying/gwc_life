@@ -16,9 +16,9 @@ public interface EquipMaintainMapper extends BaseMapper<EquipMaintainEntity> {
 
     /**
      * 获取维保列表
-     * @param maintainEntity
+     * @param maintain
      * @return
      */
-    List<EquipMaintainEntity> getMaintainList(@Param("maintain") EquipMaintainEntity maintainEntity);
+    List<EquipMaintainEntity> getMaintainList(@Param("maintain") EquipMaintainEntity maintain);
 
 }

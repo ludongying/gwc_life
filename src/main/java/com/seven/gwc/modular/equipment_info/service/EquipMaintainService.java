@@ -18,10 +18,10 @@ public interface EquipMaintainService extends IService<EquipMaintainEntity> {
     /**
      * 设备维护查询列表
      *
-     * @param equipMaintainName 名称
+     * @param equipMaintain 实体对象
      * @return List<设备维护服务对象>
      */
-    List<EquipMaintainEntity> selectEquipMaintain(String equipMaintainName);
+    List<EquipMaintainEntity> selectEquipMaintain(EquipMaintainEntity equipMaintain);
 
     /**
      * 设备维护新建
@@ -46,5 +46,12 @@ public interface EquipMaintainService extends IService<EquipMaintainEntity> {
      * @param user 当前用户
      */
     void editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user);
+
+    /**
+     * 根据维保表id获取维保详情
+     * @param equipMaintainId 唯一标识
+     * @return
+     */
+    EquipMaintainEntity getOneById(String equipMaintainId);
 
 }

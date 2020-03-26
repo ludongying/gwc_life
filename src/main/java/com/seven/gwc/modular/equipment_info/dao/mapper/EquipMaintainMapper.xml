@@ -10,6 +10,7 @@
         <result column="start_time" property="startTime" />
         <result column="end_time" property="endTime" />
         <result column="remark" property="remark" />
+        <result column="detail_ids" property="detailIds" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -17,14 +18,18 @@
         id, equip_id, problem_type, start_time, end_time, remark
     </sql>
     <select id="getMaintainList" resultType="com.seven.gwc.modular.equipment_info.entity.EquipMaintainEntity">
-         SELECT m.*,e.maintain_person as maintainPersonDetail,e.munition as munitionDetail, e.content as contentDetail
+         SELECT m.*,e.maintain_person as maintainPerson,e.munition as munition, e.content as content,t.name as equipName, t.type as type, t.specification as specification
          FROM ship_equip_maintain m
-         LEFT JOIN ship_equip_maintaindetail e on m.id = e.maintain_id
+         LEFT JOIN ship_equip_maintaindetail e on m.detail_ids = e.id
+         LEFT JOIN ship_equip t on t.id = m.equip_id
          LEFT JOIN sys_user u ON m.create_person = u.id
          LEFT JOIN sys_dept d ON u.dept_id = d.id
          WHERE m.delete_flag = 1
-        <if test="maintain.name != null and maintain.name != ''">
-            and e.name like CONCAT('%',#{equipName},'%')
+        <if test="maintain.equipName != null and maintain.equipName != ''">
+            and t.name like CONCAT('%',#{maintain.equipName},'%')
+        </if>
+        <if test="maintain.id != null and maintain.id != ''">
+            and m.id = #{maintain.id}
         </if>
     </select>
 

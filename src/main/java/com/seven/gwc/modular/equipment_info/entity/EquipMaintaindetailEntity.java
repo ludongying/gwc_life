@@ -30,9 +30,6 @@ public class EquipMaintaindetailEntity extends GwcBaseEntity implements Serializ
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
-    /** 维修表单id */
-    private String maintainId;
-
     /** 维修人 */
     private String maintainPerson;
 

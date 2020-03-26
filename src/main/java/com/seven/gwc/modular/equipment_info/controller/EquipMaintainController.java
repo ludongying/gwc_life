@@ -77,10 +77,10 @@ public class EquipMaintainController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<EquipMaintainEntity> list(String equipMaintainName) {
+    public BaseResultPage<EquipMaintainEntity> list(EquipMaintainEntity equipMaintain) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<EquipMaintainEntity> equipMaintains = equipMaintainService.selectEquipMaintain(equipMaintainName);
+        List<EquipMaintainEntity> equipMaintains = equipMaintainService.selectEquipMaintain(equipMaintain);
         PageInfo pageInfo = new PageInfo<>(equipMaintains);
         return new BaseResultPage().createPage(pageInfo);
     }
@@ -124,7 +124,8 @@ public class EquipMaintainController extends BaseController {
     @RequestMapping("/detail/{equipMaintainId}")
     @ResponseBody
     public EquipMaintainEntity detail(@PathVariable String equipMaintainId) {
-        return equipMaintainService.getById(equipMaintainId);
+//        EquipMaintainEntity equipMaintainEntity = equipMaintainService.getOneById(equipMaintainId);
+        return equipMaintainService.getOneById(equipMaintainId);
     }
 
 }

@@ -9,7 +9,7 @@ spring:
       max-file-size: 50MB                                   #单个文件的大小
       max-request-size: 100MB                               #单次请求的文件的总大小
   profiles:
-    active: test                             #默认开发环境
+    active: dev                             #默认开发环境
   mvc:
     view:
       prefix: /templates                                    #指定视图的前缀路径
@@ -66,8 +66,8 @@ tonfun:
 
 ############################### start上传地址配置start ###############################
 
-FILE_UPLOAD_PATH_FILE: E:\myfile\file                       #文件上传物理路径
-FILE_UPLOAD_PATH_IMAGE: E:\myfile\file\images\portrait      #文件上传物理路径
+FILE_UPLOAD_PATH_FILE: D:\myfile\file                       #文件上传物理路径
+FILE_UPLOAD_PATH_IMAGE: D:\myfile\file\images\portrait      #文件上传物理路径
 #FILE_UPLOAD_PATH_FILE: /opt/files/integral/file             #文件上传物理路径
 #FILE_UPLOAD_PATH_IMAGE: /opt/files/integral/images/portrait #文件上传物理路径
 

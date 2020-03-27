@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.lawrecord.enums;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.seven.gwc.modular.lawrecord.vo.EnumVO;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -71,8 +71,8 @@ public enum ProduceReasonEnum implements IEnum<Integer> {
         }
     }
 
-    public static Map<String, List<ProduceReasonEnum>> getReasons(){
-       return Arrays.stream(ProduceReasonEnum.values()).collect(Collectors.groupingBy(ProduceReasonEnum::getType, LinkedHashMap::new, Collectors.toList()));
+    public static Map<String, List<EnumVO>> getReasons(){
+       return Arrays.stream(ProduceReasonEnum.values()).collect(Collectors.groupingBy(ProduceReasonEnum::getType, LinkedHashMap::new, Collectors.mapping(EnumVO::new,Collectors.toList())));
 
     }
 
@@ -83,8 +83,6 @@ public enum ProduceReasonEnum implements IEnum<Integer> {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(JSON.toJSONString(getReasons()));
-    }
+
 }
 

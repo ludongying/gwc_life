@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             ]];
         };
         table.render({
-            elem: '#'+Instrument.tableId ,
+            elem: '#'+Instrument.tableId,
             url: Feng.ctxPath + 'instrument/list?id='+Feng.getUrlParam("id"),
             height: "full-30",
             cellMinWidth: 100,
@@ -52,7 +52,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         let data = obj.data;
         let layEvent = obj.event;
         if (layEvent === 'downTemplate') {
-             console.log(data)
+            downFile($,data.path)
         } else if (layEvent === 'change') {
             msg_tip($,"change还未开发");
         } else if (layEvent === 'upload') {

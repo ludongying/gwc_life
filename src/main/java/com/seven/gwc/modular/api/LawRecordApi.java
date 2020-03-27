@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.api;
 
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.enums.ProduceReasonEnum;
+import com.seven.gwc.modular.lawrecord.enums.SafeReasonEnum;
 import com.seven.gwc.modular.lawrecord.service.LawProductService;
 import com.seven.gwc.modular.lawrecord.vo.*;
 import io.swagger.annotations.Api;
@@ -76,8 +78,8 @@ public class LawRecordApi {
 
     @GetMapping(value = "/getProduceReasonList")
     @ApiOperation(value = "生产获取生产案由列表")
-    public BaseResult<List<EnumVO>> getProduceReasonList() {
-        return new BaseResult().content(lawProductService.getProduceReasonList());
+    public BaseResult getProduceReasonList() {
+        return new BaseResult().content(ProduceReasonEnum.getReasons());
     }
 
     @GetMapping(value = "/getPunishmentTypeList")
@@ -95,7 +97,7 @@ public class LawRecordApi {
     @GetMapping(value = "/getSafeReasonList")
     @ApiOperation(value = "安全获取生产案由列表")
     public BaseResult<List<EnumVO>> getSafeReasonList() {
-        return new BaseResult().content(lawProductService.getSafeReasonList());
+        return new BaseResult().content(SafeReasonEnum.getReasons());
     }
 
     @GetMapping(value = "/getShipCaseCardList")

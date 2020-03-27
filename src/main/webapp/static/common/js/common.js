@@ -346,6 +346,41 @@ var initFiles=function ($,upload,fileParam,index){
 
 }
 
+/**
+ * 文件下载
+ * @param path 物理路径
+ */
+function downFile($,path){
+    let exportForm = $("<form action='/file/downFile' method='post'></form>")
+    exportForm.append("<input type='hidden' name='path' value='"+path+"'/>")
+    $(document.body).append(exportForm);
+    exportForm.submit();
+    exportForm.remove();
+}
+
+function uploadFile(lay){
+    let $=lay.$;
+    let upload=lay.upload;
+    upload.render({
+          elem: '#btnImport'
+        , url: '/file/uploadFile'
+        , accept: 'file' //普通文件
+        , exts: 'docx'
+        , done: function (res) {
+            if (res.success) {
+
+            } else {
+                layer.alert(res.message, {
+                    closeBtn: 0
+                });
+            }
+        }
+    });
+}
+
+
+
+
 
 function loadVerify(form){
     //自定义验证规则

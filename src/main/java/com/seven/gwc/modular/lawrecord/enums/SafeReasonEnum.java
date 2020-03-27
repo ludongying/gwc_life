@@ -2,6 +2,7 @@ package com.seven.gwc.modular.lawrecord.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.seven.gwc.modular.lawrecord.vo.EnumVO;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -56,8 +57,8 @@ public enum SafeReasonEnum implements IEnum<Integer> {
         }
     }
 
-    public static Map<String, List<SafeReasonEnum>> getReasons(){
-        return Arrays.stream(SafeReasonEnum.values()).collect(Collectors.groupingBy(SafeReasonEnum::getType, LinkedHashMap::new, Collectors.toList()));
+    public static Map<String, List<EnumVO>> getReasons(){
+        return Arrays.stream(SafeReasonEnum.values()).collect(Collectors.groupingBy(SafeReasonEnum::getType, LinkedHashMap::new, Collectors.mapping(EnumVO::new,Collectors.toList())));
 
     }
 

@@ -1,12 +1,12 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.dto.InquisitionDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquisitionEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 import com.seven.gwc.modular.lawrecord.vo.InquisitionVO;
+
+import java.util.Map;
 
 
 /**
@@ -31,5 +31,12 @@ public interface InquisitionService extends IService<InquisitionEntity> {
      * @return
      */
     InquisitionDTO detail(String id);
+
+    /**
+     * 获取生产勘验所有参数
+     * @param id
+     * @return
+     */
+    Map<String,String> getParams(String id);
 
 }

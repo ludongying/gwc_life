@@ -27,8 +27,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '', field: 'id', align: "center", hide:true},
             {title: '设备名称', field: 'equipName', align: "center"},
             {title: '设备型号', field: 'specification', align: "center"},
-            {title: '工作类型', field: 'problemType', align: "center"},
-            {title: '负责人员', field: 'maintainPerson', align: "center"},
+            {title: '工作类型', field: 'problemTypeDesp', align: "center"},
+            {title: '负责人员', field: 'maintainPersonName', align: "center"},
             {title: '开始时间', field: 'startTime', align: "center"},
             {title: '结束时间', field: 'endTime', align: "center"},
             {title: '消耗物料备件', field: 'munition', align: "center", hide:true},
@@ -92,7 +92,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     EquipMaintain.search = function () {
         var queryData = {};
-        queryData['equipMaintainName'] = $("#equipMaintainName").val().trim();
+        queryData['equipName'] = $("#equipName").val().trim();
         table.reload(EquipMaintain.tableId, {where: queryData});
     };
 
@@ -100,7 +100,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 重置查询条件
      */
     EquipMaintain.btnReset = function () {
-        $("#equipMaintainName").val("");
+        $("#equipName").val("");
     };
 
     /**

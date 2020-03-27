@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.enums;
 
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.*;
 import lombok.Getter;
@@ -16,12 +18,14 @@ import java.util.List;
 @Getter
 public enum InstrumentEnum {
 
-    INSTRUMENT_01(1,"01封面_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
-    INSTRUMENT_02(2,"02目录.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
-    INSTRUMENT_03(3,"03行政处罚决定书_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1)),
-    INSTRUMENT_04(4,"06勘验笔录.docx.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
-    INSTRUMENT_05(5,"07询问笔录.docx.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
+    //编号-- 文书生成方式--案件类型--决定类型--数据来源
+    INSTRUMENT_01(1,"01封面_法人.docx", 1,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,2,4,5,20,21)),
+    INSTRUMENT_02(2,"02目录.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_03(3,"03行政处罚决定书_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,2,4,5,20,21)),
+    INSTRUMENT_04(4,"06勘验笔录.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_INQUIRE(5,"07询问笔录.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
     INSTRUMENT_06(6,"12查封（扣押）决定书和清单.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1));
+
 
     Integer code;
     /**
@@ -49,6 +53,7 @@ public enum InstrumentEnum {
      *     询问笔录生产：2
      *     勘验笔录 3
      *     笔录安全 4
+     *     案由 5
      *     决定生产 20
      *     决定安全 21
      *     固定变量 99 //此项目前不可能出现 预留 录入时要录入 为今后扩展用
@@ -56,7 +61,14 @@ public enum InstrumentEnum {
     List<Integer> source;
 
 
-    public Integer getBusinessCode(Class<?> clazz){
+    public static String getPath(){
+        return FileUtils.getStaticPath()+"\\lawrecord\\instrument\\";
+    }
+
+
+
+
+    public static Integer getBusinessCode(Class<?> clazz){
         if (AgencyEntity.class.equals(clazz)) {
             return 1;
         } else if (InquireEntity.class.equals(clazz)) {
@@ -65,7 +77,9 @@ public enum InstrumentEnum {
             return 3;
         }else if(InquireSafeEntity.class.equals(clazz)){
             return 4;
-        }else if(DecisionEntity.class.equals(clazz)){
+        }else if(LawRecordEntity.class.equals(clazz)){
+            return 5;
+        } else if(DecisionEntity.class.equals(clazz)){
             return 20;
         }else if(DecisionSafeEntity.class.equals(clazz)){
             return 21;
@@ -73,20 +87,6 @@ public enum InstrumentEnum {
         return 99;
     }
 
-    /**
-     * 根据实体修改，修改文书
-     * @param clazz
-     * @return
-     */
-    public List<InstrumentEnum> getBusiness(Class<?> clazz){
-        List<InstrumentEnum> list=new ArrayList<>();
-        for (InstrumentEnum ms : InstrumentEnum.values()) {
-                if(ms.getSource().contains(getBusinessCode(clazz))){
-                    list.add(ms);
-                }
-        }
-        return list;
-    }
 
 
     InstrumentEnum(Integer code, String message,Integer generate,List<Integer> law,List<Integer> decision,List<Integer> source) {
@@ -111,17 +111,29 @@ public enum InstrumentEnum {
         }
     }
 
+
+
     /**
-     * 根据案件类型，和决定类型获取所有模板
-     * @param law
+     * 根据实体修改，修改文书
+     * @param clazz
      * @return
      */
-    public static List<InstrumentEnum> getList(LawTypeDTO law){
+    public static List<InstrumentEnum> getAutoByClass(LawTypeDTO law,Class<?> clazz){
+        return  getBusiness(law,clazz,1);
+    }
+    public static List<InstrumentEnum> getAutoManuallyByClass(LawTypeDTO law,Class<?> clazz){
+        return  getBusiness(law,clazz,2);
+    }
+
+    private static List<InstrumentEnum> getBusiness(LawTypeDTO law,Class<?> clazz,Integer generate){
         List<InstrumentEnum> list=new ArrayList<>();
+        Integer sour = getBusinessCode(clazz);
         for (InstrumentEnum ms : InstrumentEnum.values()) {
-             if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())){
-                 list.add(ms);
-             }
+            if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())) {
+                if (ms.getSource().contains(sour) && ms.getGenerate().equals(generate)) {
+                    list.add(ms);
+                }
+            }
         }
         return list;
     }
@@ -131,29 +143,46 @@ public enum InstrumentEnum {
      * @param law
      * @return
      */
-    public static List<InstrumentEnum> getSystem(LawTypeDTO law){
-        List<InstrumentEnum> list=new ArrayList<>();
-        for (InstrumentEnum ms : InstrumentEnum.values()) {
-            if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())){
-                if(ms.getGenerate()<3){
-                    list.add(ms);
-                }
-            }
-        }
-        return list;
+    public static List<InstrumentEnum> getAuto(LawTypeDTO law){
+        return getByGenerate(law.getLawType(),law.getPunishPersonType(),1);
     }
+
+
+    /**
+     * 根据案件类型，和决定类型获取需要系统生成的模板
+     * @param law
+     * @return
+     */
+    public static List<InstrumentEnum> getAutoManually(LawTypeDTO law){
+        return getByGenerate(law.getLawType(),law.getPunishPersonType(),2);
+    }
+
+
 
     /**
      * 根据案件类型，和决定类型获取需要手动填写的模板
      * @param law
-     * @param decision
      * @return
      */
-    public static List<InstrumentEnum> getManually(Integer law,Integer decision){
+    public static List<FilePathDO> getManually(LawTypeDTO law){
+        List<InstrumentEnum> list = getByGenerate(law.getLawType(), law.getPunishPersonType(), 3);
+        List<FilePathDO> res=new ArrayList<>(16);
+        if(!list.isEmpty()){
+            for (InstrumentEnum instrumentEnum : list) {
+                FilePathDO filePathDO = new FilePathDO(instrumentEnum.getCode(), getPath() + instrumentEnum.getMessage());
+                filePathDO.setName(instrumentEnum.getMessage());
+                res.add(filePathDO);
+            }
+        }
+        return res;
+    }
+
+
+    private static List<InstrumentEnum> getByGenerate(Integer law,Integer decision,Integer generate){
         List<InstrumentEnum> list=new ArrayList<>();
         for (InstrumentEnum ms : InstrumentEnum.values()) {
             if(ms.getLaw().contains(law) && ms.getDecision().contains(decision)){
-                if(ms.getGenerate()>1){
+                if(ms.getGenerate().equals(generate)){
                     list.add(ms);
                 }
             }
@@ -163,18 +192,15 @@ public enum InstrumentEnum {
 
 
     /**
-     * 根据案件类型，和决定类型获取纯手动填写的模板
+     * 根据案件类型，和决定类型获取所有模板
      * @param law
-     * @param decision
      * @return
      */
-    public static List<InstrumentEnum> getFile(Integer law,Integer decision){
+    public static List<InstrumentEnum> getList(LawTypeDTO law){
         List<InstrumentEnum> list=new ArrayList<>();
         for (InstrumentEnum ms : InstrumentEnum.values()) {
-            if(ms.getLaw().contains(law) && ms.getDecision().contains(decision)){
-                if(ms.getGenerate()==3){
-                    list.add(ms);
-                }
+            if(ms.getLaw().contains(law.getLawType()) && ms.getDecision().contains(law.getPunishPersonType())){
+                list.add(ms);
             }
         }
         return list;

@@ -1,9 +1,8 @@
 package com.seven.gwc.modular.lawrecord.service;
 
-import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dto.EvidenceDTO;
-import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import com.seven.gwc.modular.lawrecord.vo.LawEvidenceVO;
 
 /**
@@ -28,6 +27,8 @@ public interface EvidenceService extends IService<EvidenceEntity> {
      * @return
      */
   BaseResult detail(String id);
+
+
 
 
 

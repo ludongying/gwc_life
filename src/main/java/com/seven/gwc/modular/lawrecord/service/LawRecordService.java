@@ -4,6 +4,7 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
+import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.lawrecord.vo.LawRecordVO;
@@ -72,9 +73,12 @@ public interface LawRecordService extends IService<LawRecordEntity> {
     void detail(String id,Model model);
 
 
-
-
-
+    /**
+     *根据记录id获取案件类型
+     * @param id
+     * @return
+     */
+    LawTypeDTO findLawType(String id);
 
 
 

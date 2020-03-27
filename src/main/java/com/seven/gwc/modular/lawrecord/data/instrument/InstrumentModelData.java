@@ -38,7 +38,8 @@ public class InstrumentModelData {
 
     public static final String WORD_2003=".doc";
     public static final String WORD_2007=".docx";
-    public static final Pattern pattern = Pattern.compile("\\$\\{[0-9a-zA-Z_]{1,}\\}");
+    public static final Pattern pattern = Pattern.compile("\\$\\{[0-9a-zA-Z_]+\\}");
+
 
     public InstrumentModelData(String path,Map<String,String> contentMap){
         this.path=path;
@@ -100,15 +101,37 @@ public class InstrumentModelData {
                         XWPFRun run = runs.get(i);
                         String runText = run.toString();
                         Matcher matcher = this.matcher(runText);
-                        if (matcher.find()) {
-                            while ((matcher = this.matcher(runText)).find()) {
-                                runText = matcher.replaceFirst(String.valueOf(contentMap.get(matcher.group(0))));
+                        boolean flag=false;
+                        while(matcher.find()){
+                            flag=true;
+                            String key = matcher.group(0);
+                            String str = contentMap.get(key);
+                            if(Objects.nonNull(str) && !str.trim().isEmpty()){
+                                runText=runText.replace(key,str);
+                                System.out.println(">>>>>>>>>>>>text"+runText);
                             }
+
+                        }
+                        if(flag){
+                            para.removeRun(i);
+                            para.insertNewRun(i).setText(runText);
+                        }
+
+
+/*                        if (matcher.find()) {
+                                while ((matcher = this.matcher(runText)).find()) {
+                                    String str = contentMap.get(matcher.group(0));
+                                    if(Objects.nonNull(str) && !str.trim().isEmpty()){
+                                        runText = matcher.replaceFirst(str);
+                                        System.out.println(">>>>>>>>>>>>text"+runText);
+                                    }
+
+                                }
                             //直接调用XWPFRun的setText()方法设置文本时，在底层会重新创建一个XWPFRun，把文本附加在当前文本后面，
                             //所以我们不能直接设值，需要先删除当前run,然后再自己手动插入一个新的run。
                             para.removeRun(i);
                             para.insertNewRun(i).setText(runText);
-                        }
+                        }*/
                     }
                 }
             }
@@ -117,12 +140,12 @@ public class InstrumentModelData {
     /**
      * 替换表格里面的变量
      */
-    private void replaceInTable(){
+    private void replaceInTable() {
         // 替换表格中的指定文字 获得Word的表格
         Iterator<XWPFTable> itTable = xwpfDocument.getTablesIterator();
         //遍历表格
         while (itTable.hasNext()) {
-            XWPFTable table =itTable.next();
+            XWPFTable table = itTable.next();
             //获得表格总行数
             int count = table.getNumberOfRows();
             //遍历表格的每一行
@@ -135,18 +158,39 @@ public class InstrumentModelData {
                 for (XWPFTableCell cell : cells) {
                     String text = cell.getText();
                     Matcher matcher = this.matcher(text);
-                    if (matcher.find()) {
-                        while ((matcher = this.matcher(text)).find()) {
-                            text = matcher.replaceFirst(String.valueOf(contentMap.get(matcher.group(0))));
+                    boolean flag=false;
+                    while(matcher.find()){
+                        flag=true;
+                        String key = matcher.group(0);
+                        String str = contentMap.get(key);
+                        if(Objects.nonNull(str) && !str.trim().isEmpty()){
+                            text=text.replace(key,str);
+                            System.out.println(">>>>>>>>>>>>text"+text);
                         }
+
+                    }
+                    if(flag){
                         cell.removeParagraph(0);
                         cell.setText(text);
                     }
+
+/*                    if (matcher.find()) {
+                        while ((matcher = this.matcher(text)).find()) {
+                            String str = contentMap.get(matcher.group(0));
+                            if (Objects.nonNull(str) && !str.trim().isEmpty()) {
+                                text = matcher.replaceFirst(str);
+                                System.out.println(">>>>>>>>>>>>text" + text);
+                            }
+                        }
+                        cell.removeParagraph(0);
+                        cell.setText(text);
+                    }*/
                 }
             }
         }
     }
     public void export(String exportPath){
+        System.out.println(">>>>>>生成文书");
         File file=new File(exportPath);
         FileUtils.generateDir(file.getParent());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -164,12 +208,6 @@ public class InstrumentModelData {
         }
     }
 
-    public static void main(String[] args) {
-       Map<String,String> map=new HashMap<>(1);
-        map.put("${Punish_year}","2020");
-        InstrumentModelData instrumentModelData = new InstrumentModelData("D:\\ideawork\\GWC-WEB\\src\\main\\resources\\lawrecord\\instrument\\02目录.docx",map);
-        instrumentModelData.export("D:\\word\\1.docx");
 
-    }
 
 }

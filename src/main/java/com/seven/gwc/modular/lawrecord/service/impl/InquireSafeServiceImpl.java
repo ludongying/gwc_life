@@ -1,22 +1,22 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
+import com.seven.gwc.modular.lawrecord.dao.InquireSafeMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireSafeDO;
 import com.seven.gwc.modular.lawrecord.dto.InquireSafeDTO;
-import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
+import com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.service.InquireSafeService;
+import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.InquireSafeVO;
-import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity;
-import com.seven.gwc.modular.lawrecord.dao.InquireSafeMapper;
-import com.seven.gwc.modular.lawrecord.service.InquireSafeService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -30,7 +30,8 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
 
     @Autowired
     private LawRecordService lawRecordService;
-
+    @Autowired
+    private InstrumentService instrumentService;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquireSafe(InquireSafeVO vo) {
@@ -44,6 +45,7 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
         this.saveOrUpdate(vo);
         BaseResult baseResult = new BaseResult(true, "");
         baseResult.setContent(vo.getId());
+        instrumentService.generateInstrument(vo.getId(), InquireSafeEntity.class);
         return baseResult;
     }
 
@@ -58,6 +60,15 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
         }
         return null;
 
+    }
+
+    @Override
+    public Map<String, String> getParams(String id) {
+        InquireSafeEntity entity = this.getById(id);
+        if(Objects.nonNull(entity)){
+            return new InquireSafeDO(entity).toMap();
+        }
+        return null;
     }
 
 

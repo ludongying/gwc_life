@@ -36,7 +36,7 @@ public class InquireEntity extends InquireBase {
     private Double shipRatedPower;
     /** 核定主机功率单位 */
     private Integer shipRatedPowerUnit;
-    /** 船上信息 */
+    /** 船上信息 携带有哪些生产网具，各有多少*/
     private String shipInfo;
     /** 出海时间 */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -44,7 +44,7 @@ public class InquireEntity extends InquireBase {
     private Date shipOutDate;
     /** 出港时间 */
     private String shipOutPort;
-    /** 船上鱼货物数量 */
+    /** 船上鱼货物数量  渔获物*/
     private String shipGoodsCount;
     /** 市场价值 */
     private String shipGoodsValue;

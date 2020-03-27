@@ -2,13 +2,9 @@ package com.seven.gwc.modular.lawrecord.data.file;
 
 import com.seven.gwc.core.base.BaseResult;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
-import org.jodconverter.DocumentConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +26,6 @@ public class FileManager {
     private String dirPath;
     @Value("${server.ip}")
     private String ip;
-
 
 
     /**
@@ -154,7 +149,7 @@ public class FileManager {
     public List<FileData> listFile(String pathStr){
         if(Objects.nonNull(pathStr) && !pathStr.trim().isEmpty()){
             String[] list = pathStr.split(FileUtils.file_2_file_sep);
-            if(Objects.nonNull(list) && list.length>0){
+            if(list.length > 0){
                 return listFile(Arrays.asList(list));
             }
         }

@@ -31,6 +31,14 @@ public class EquipMaintainEntity extends GwcBaseEntity implements Serializable {
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
+    /** 设备类型 */
+    @TableField(exist = false)
+    private String type;
+
+    /** 设备类型名称 */
+    @TableField(exist = false)
+    private String typeDesp;
+
     /** 设备编码 */
     private String equipId;
 
@@ -45,6 +53,10 @@ public class EquipMaintainEntity extends GwcBaseEntity implements Serializable {
     /** 问题类型 */
     private String problemType;
 
+    /** 问题类型描述 */
+    @TableField(exist = false)
+    private String problemTypeDesp;
+
     /** 开始时间 */
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -58,9 +70,16 @@ public class EquipMaintainEntity extends GwcBaseEntity implements Serializable {
     /** 备注 */
     private String remark;
 
+    /** 详情表单编码 */
+    private String detailIds;
+
     /** 维修人 */
     @TableField(exist = false)
     private String maintainPerson;
+
+    /** 维修人姓名 */
+    @TableField(exist = false)
+    private String maintainPersonName;
 
     /** 耗损备品备件 */
     @TableField(exist = false)

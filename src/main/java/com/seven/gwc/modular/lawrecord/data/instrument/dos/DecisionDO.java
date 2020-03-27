@@ -2,11 +2,11 @@ package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import com.seven.gwc.core.state.SexEnum;
 import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
+import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
-public class DecisionDO implements Serializable {
+public class DecisionDO extends BaseDO {
   /**
    *当事人类型
    */
@@ -95,13 +95,16 @@ public class DecisionDO implements Serializable {
    public DecisionDO (DecisionBase decisionBase){
      PunishmentTypeEnum punishmentTypeEnum = PunishmentTypeEnum.findByCode(decisionBase.getPunishPersonType());
      SexEnum sexEnum = SexEnum.findByCode(decisionBase.getPunishSex());
+     PlotSeverityEnum plotSeverityEnum=PlotSeverityEnum.findByCode(decisionBase.getSeverity());
 
     this.setLitigant(Objects.nonNull(punishmentTypeEnum)?punishmentTypeEnum.getMessage():"")
         .setName_1(decisionBase.getPunishPersonName()).setSex_1(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
         .setAge_1(decisionBase.getPunishAge()).setAddress_1(decisionBase.getPunishAddr())
-            .setPhone_1(decisionBase.getPunishTel()).setID_1(decisionBase.getPunishIdentityCard())
+        .setPhone_1(decisionBase.getPunishTel()).setID_1(decisionBase.getPunishIdentityCard())
         .setName_Unit(decisionBase.getPunishCompanyName()).setLegal(decisionBase.getPunishPersonName())
-        .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(decisionBase.getPunishAddr());
+        .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(decisionBase.getPunishAddr())
+        .setSeverity(Objects.nonNull(plotSeverityEnum)?plotSeverityEnum.getMessage():"")
+        .setMoney(decisionBase.getResourceCompensationUpper()).setMoney_low(decisionBase.getResourceCompensation());
 
    }
 

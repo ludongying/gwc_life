@@ -7,6 +7,8 @@ import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
 import com.seven.gwc.modular.lawrecord.entity.DecisionEntity;
 import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
 
+import java.util.Map;
+
 /**
  * description : 决定服务类
  *
@@ -29,4 +31,12 @@ public interface DecisionService extends IService<DecisionEntity> {
      * @return
      */
     DecisionDTO detail(String id);
+
+    /**
+     * 获取生产决定所有参数
+     * @param id
+     * @return
+     */
+    Map<String,String> getParams(String id);
+
 }

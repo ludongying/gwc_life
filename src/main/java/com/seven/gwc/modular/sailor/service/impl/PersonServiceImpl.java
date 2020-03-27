@@ -227,8 +227,11 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 PersonVO personVO = new PersonVO();
                 personVO.setId(personEntity.getId());
                 personVO.setPersonName(personEntity.getPersonName());
-                CertificateEntity certificateEntity = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId()).get(0);
-                personVO.setLawCode(certificateEntity.getCertificateId());
+                List<CertificateEntity> listCertificate = certificateMapper.CertificateLawEntityList(personEntity.getCertificateId());
+                if(listCertificate.size()>0){
+                    CertificateEntity certificateEntity = listCertificate.get(0);
+                    personVO.setLawCode(certificateEntity.getCertificateId());
+                }
                 listVo.add(personVO);
             }
         }

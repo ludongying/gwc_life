@@ -1,12 +1,13 @@
 package com.seven.gwc.modular.lawrecord.service;
 
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.dto.InquireSafeDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.modular.lawrecord.vo.InquireSafeVO;
+
+import java.util.Map;
 
 
 /**
@@ -31,4 +32,11 @@ public interface InquireSafeService extends IService<InquireSafeEntity> {
      * @return
      */
     InquireSafeDTO detail(String id);
+
+    /**
+     * 获取安全笔录所有参数
+     * @param id
+     * @return
+     */
+    Map<String,String> getParams(String id);
 }

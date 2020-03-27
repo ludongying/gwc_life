@@ -5,7 +5,6 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.equipment_info.entity.EquipMaintaindetailEntity">
         <id column="id" property="id" />
-        <result column="maintain_id" property="maintainId" />
         <result column="maintain_person" property="maintainPerson" />
         <result column="start_time" property="startTime" />
         <result column="end_time" property="endTime" />

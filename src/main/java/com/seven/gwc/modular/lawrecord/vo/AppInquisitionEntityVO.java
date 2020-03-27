@@ -45,7 +45,7 @@ public class AppInquisitionEntityVO {
 
     /** 主机功率 */
     @ApiModelProperty(value = "主机功率")
-    private String shipPower;
+    private Double shipPower;
 
     /** 持证人姓名 */
     @ApiModelProperty(value = "持证人姓名")

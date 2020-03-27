@@ -48,7 +48,6 @@ public class DecisionController extends BaseController {
         }else{
             model.addAttribute("plotSeverity", PlotSeverityEnum.values());
         }
-
         //渔船状态
         model.addAttribute("status",decisionService.shipStatusIsEscape(id,lawType));
         return PREFIX + "decision_"+LawTypeEnum.findByCode(lawType).toString().toLowerCase();

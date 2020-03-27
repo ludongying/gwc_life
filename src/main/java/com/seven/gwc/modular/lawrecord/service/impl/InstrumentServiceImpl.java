@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
@@ -17,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -50,12 +53,21 @@ public class InstrumentServiceImpl implements InstrumentService {
     @Autowired
     private DecisionService decisionService;
 
+    @Autowired
+    private FileManager fileManager;
+
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String path;
 
+
+
+    private String getDir(LawTypeDTO lawType){
+        return FileUtils.file_sep+"lawrecord"+FileUtils.file_sep+lawType.getYear()
+                +FileUtils.file_sep+lawType.getLawCaseCode();
+    }
+
     private String getGeneratePath(LawTypeDTO lawType){
-        return path+ FileUtils.file_sep+"lawrecord"+FileUtils.file_sep+lawType.getYear()
-                +FileUtils.file_sep+lawType.getLawCaseCode() +FileUtils.file_sep;
+        return path+ getDir(lawType)+FileUtils.file_sep;
     }
 
     /**
@@ -253,6 +265,12 @@ public class InstrumentServiceImpl implements InstrumentService {
         return res;
     }
 
+    @Override
+    public BaseResult uploadInstrument(String id,MultipartFile file) {
+       LawTypeDTO lawType = lawRecordService.findLawType(id);
+       return fileManager.uploadOrgFile(file,getDir(lawType)+"file");
+
+    }
 
 
 }

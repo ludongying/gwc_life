@@ -1,6 +1,8 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,6 +41,14 @@ public interface InstrumentService {
      * @return
      */
     List<FilePathDTO>  getInstrument(String id);
+
+
+    /**
+     * 上传文书文件
+     * @param file
+     * @return
+     */
+    BaseResult uploadInstrument(String id,MultipartFile file);
 
 
 

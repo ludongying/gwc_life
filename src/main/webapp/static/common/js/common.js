@@ -358,25 +358,6 @@ function downFile($,path){
     exportForm.remove();
 }
 
-function uploadFile(lay){
-    let $=lay.$;
-    let upload=lay.upload;
-    upload.render({
-          elem: '#btnImport'
-        , url: '/file/uploadFile'
-        , accept: 'file' //普通文件
-        , exts: 'docx'
-        , done: function (res) {
-            if (res.success) {
-
-            } else {
-                layer.alert(res.message, {
-                    closeBtn: 0
-                });
-            }
-        }
-    });
-}
 
 
 

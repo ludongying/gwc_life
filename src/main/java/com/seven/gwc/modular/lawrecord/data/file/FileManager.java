@@ -34,19 +34,37 @@ public class FileManager {
      * @return
      */
     public BaseResult uploadFile(MultipartFile file){
+       return uploadFile(file,String.valueOf(System.currentTimeMillis()),null);
+    }
+
+    /**
+     * 上传单个文件
+     * @param file
+     * @return
+     */
+    public BaseResult uploadOrgFile(MultipartFile file,String dir){
+        return uploadFile(file,"",dir);
+    }
+
+    /**
+     * 上传单个文件
+     * @param file
+     * @return
+     */
+    private BaseResult uploadFile(MultipartFile file,String time,String dir){
         BaseResult result=new BaseResult();
         if (Objects.nonNull(file) && !file.isEmpty()) {
             try {
-                FileUtils.generateDir(dirPath);
+                FileUtils.generateDir(dirPath+dir);
                 byte[] bytes= file.getBytes();
-                String  fileName = System.currentTimeMillis() + file.getOriginalFilename().replaceAll(",", "");
-                String fileFullName = dirPath + FileUtils.file_sep+ fileName;
+                String  fileName =time+ file.getOriginalFilename().replaceAll(",", "");
+                String fileFullName = dirPath +dir+ FileUtils.file_sep+ fileName;
                 Path path = Paths.get(fileFullName);
                 try{
                     Files.write(path, bytes);
                     FileBase fileBase=new FileBase();
                     fileBase.setPath(fileFullName);
-                    fileBase.setUrl(ip+FileUtils.file_sep+ fileName);
+                    fileBase.setUrl(ip+dir+FileUtils.file_sep+ fileName);
                     fileBase.setType(FileUtils.getFileType(fileName).getCode());
                     result.setContent(fileBase);
                     result.setSuccess(true);
@@ -61,6 +79,8 @@ public class FileManager {
         }
         return result;
     }
+
+
     /**
      * 删除单个文件
      * @param realPath

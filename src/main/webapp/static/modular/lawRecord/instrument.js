@@ -1,14 +1,15 @@
-layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'], function () {
-    var $ = layui.$;
-    var layer = layui.layer;
-    var form = layui.form;
-    var table = layui.table;
-    var $ax = layui.ax;
-    var laydate = layui.laydate;
-    var admin = layui.admin;
-    var func = layui.func;
+layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func'], function () {
+    let $ = layui.$;
+    let layer = layui.layer;
+    let form = layui.form;
+    let table = layui.table;
+    let $ax = layui.ax;
+    let laydate = layui.laydate;
+    let admin = layui.admin;
+    let func = layui.func;
+    let upload = layui.upload;
 
-    var lay = {
+    let lay = {
         '$': $,
         'layer': layer,
         'form': form,
@@ -16,6 +17,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         '$ax': $ax,
         'admin': admin,
         'func': func,
+
     }
     /**
      * 执法记录管理
@@ -24,24 +26,30 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         tableId: "instrumentTable",
     };
 
-     initPage();
-    function initPage(){
-       var  initColumn = function () {
+    initPage();
+
+
+    function initPage() {
+        let initColumn = function () {
             return [[
-                {title: '序号', type: "numbers"},
+                {title: '序号', field: 'index', type: "numbers"},
                 {title: '文书模板名称', field: 'name', align: "center"},
                 {title: '文书模板地址', field: 'path', align: "center"},
                 {title: '文件地址', field: 'filePath', align: "center"},
-                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
+                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'},
             ]];
         };
         table.render({
-            elem: '#'+Instrument.tableId,
-            url: Feng.ctxPath + 'instrument/list?id='+Feng.getUrlParam("id"),
+            elem: '#' + Instrument.tableId,
+            url: Feng.ctxPath + 'instrument/list?id=' + Feng.getUrlParam("id"),
             height: "full-30",
             cellMinWidth: 100,
-            cols: initColumn()
+            cols: initColumn(),
+            done:function (res) {
+                uploadFile(res);
+            }
         });
+
     }
 
 
@@ -52,15 +60,46 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         let data = obj.data;
         let layEvent = obj.event;
         if (layEvent === 'downTemplate') {
-            downFile($,data.path)
-        } else if (layEvent === 'change') {
-            msg_tip($,"change还未开发");
-        } else if (layEvent === 'upload') {
-            msg_tip($,"upload还未开发");
-        }else if (layEvent === 'down') {
-            msg_tip($,"down还未开发");
+            downFile($, data.path)
+        }  else if (layEvent === 'down') {
+            downFile($, $(this).data("filePath"))
         }
     });
 
 
+    function uploadFile(res){
+        let data = res.data;
+        if(data){
+            for(let i=0;i<data.length;i++){
+                if(data.filePath){
+                    $("#down"+i).removeClass("layui-hide");
+                }
+                upload.render({
+                    elem: "#upload"+i
+                    , url: '/file/uploadFile'
+                    , accept: 'file' //普通文件
+                    , exts: 'docx'
+                    , done: function (res) {
+                        alert("ok");
+                        if (res.success) {
+                            $("#down"+i).data("filePath",res.content.path);
+                            if( $("#down"+i).hasClass("layui-hide")){
+                                $("#down"+i).removeClass("layui-hide");
+                                $("upload"+i).html("更换");
+                            }
+                        } else {
+                            layer.alert(res.message, {
+                                closeBtn: 0
+                            });
+                        }
+                    }
+                });
+
+            }
+        }
+    }
+
+
+
 })
+

@@ -4,12 +4,18 @@ package com.seven.gwc.core.util;
 import com.alibaba.fastjson.JSONObject;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.bytedeco.javacpp.opencv_core;
+import org.bytedeco.javacv.FFmpegFrameGrabber;
+import org.bytedeco.javacv.Frame;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -27,7 +33,7 @@ import java.util.Objects;
 public class FileUtil {
 
 
-    public static JSONObject uploadFile(String fileDown, @RequestParam("file") MultipartFile file, String ip) throws Exception {
+    public static JSONObject uploadFile(String fileDown, @RequestParam("file") MultipartFile file, String ip, String type) {
         String fileName = "";
         JSONObject jsonObject = new JSONObject();
         try {
@@ -45,8 +51,16 @@ public class FileUtil {
                 Path path = Paths.get(fileFullName);
                 Files.write(path, bytes);
 
+                if (type.equals("video")) {
+                    String pictureName = ip + FileUtils.file_sep + fileName.substring(0, fileName.lastIndexOf(".")) + ".jpg";
+                    FileUtil.fetchFrame(fileFullName, fileDown, fileName.substring(0, fileName.lastIndexOf(".")) + ".jpg");
+                    jsonObject.put("videoName", fileName);
+                    jsonObject.put("fileName", pictureName);
+                } else {
+                    jsonObject.put("fileName", ip + FileUtils.file_sep + fileName);
+                }
                 jsonObject.put("CODE", 200);
-                jsonObject.put("fileName", ip + FileUtils.file_sep + fileName);
+
                 return jsonObject;
             }
         } catch (Exception e) {
@@ -55,6 +69,41 @@ public class FileUtil {
             e.printStackTrace();
         }
         return jsonObject;
+    }
+
+    /**
+     * 截取视频帧数
+     * @param videoFile 视频路径
+     * @param frameFile 文件路径
+     * @param fileName 文件名
+     * @throws Exception
+     */
+    public static void fetchFrame(String videoFile, String frameFile, String fileName) throws Exception {
+        File targetFile = new File(frameFile + "/" + fileName);
+        FFmpegFrameGrabber ff = new FFmpegFrameGrabber(videoFile);
+        ff.start();
+        int lenght = ff.getLengthInFrames();
+        int i = 0;
+        Frame f = null;
+        while (i < lenght) {
+            f = ff.grabFrame();
+            if ((i > 3) && (f.image != null)) {
+                break;
+            }
+            i++;
+        }
+        opencv_core.IplImage img = f.image;
+        int owidth = img.width();
+        int oheight = img.height();
+        // 对截取的帧进行等比例缩放
+        int width = 800;
+        int height = (int) (((double) width / owidth) * oheight);
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        bi.getGraphics().drawImage(f.image.getBufferedImage().getScaledInstance(width, height, Image.SCALE_SMOOTH),
+                0, 0, null);
+        ImageIO.write(bi, "jpg", targetFile);
+        ff.flush();
+        ff.stop();
     }
 
     /**

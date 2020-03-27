@@ -23,7 +23,7 @@ public class PreviewFileApi {
     @ApiOperation(value = "预览文件")
     public String previewFile(@ApiParam(name = "filePath", value = "文件路径") String filePath, Model model) {
         model.addAttribute("name", filePath);
-        return "/modular/system/pdfPreview";
+        return "/common/pdfPreview";
     }
 
     @GetMapping("/previewFileDownLoad")

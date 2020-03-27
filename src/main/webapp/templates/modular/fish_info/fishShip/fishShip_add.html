@@ -48,6 +48,54 @@
     }
 </style>
 
+<style type="text/css">
+    .video-list {
+        margin-left: -15px;
+    }
+
+    .video-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .video-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .video-list .handle i {
+        margin-right: 5px;
+    }
+
+    .video-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .video-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
+
 <div class="layui-tab-content">
     <form id="fishShipForm" lay-filter="fishShipForm" class="layui-form">
         <div class="layui-row layui-col-space10">

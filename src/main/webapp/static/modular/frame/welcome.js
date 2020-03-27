@@ -15,7 +15,6 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
 
     element.on('tab(demo)', function(elem){});
 
-
     /**
      * 系统管理--首頁
      */
@@ -29,8 +28,8 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
     RchengIdnex.initColumn = function () {
         return [[
             {title: '用戶id', field: 'id', hide: true, sort: true, style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;'},
-            {title: '姓名', field: 'name', align: "center", style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;'},
-            {title: '创建时间', field: 'createTime', align: "center", width: 110, style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;', templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '标题', field: 'name', style:'border-width: 0 1px 1px 0; border-style: solid; border-color: #e6e6e6;'},
+            {title: '时间', field: 'createTime', align: "center", width: 110, style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;', templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
         ]];
     };
 
@@ -62,9 +61,9 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
     GongzuoTable.initColumn = function () {
         return [[
             {title: '用戶id', field: 'id', hide: true, sort: true, style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;'},
-            {title: '账号', field: 'account', align: "center", style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;'},
-            {title: '姓名', field: 'name', align: "center", style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;'},
-            {title: '创建时间', field: 'createTime', align: "center", style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;' , width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '工作内容', field: 'account', align: "center", style:'border-width: 0 1px 1px 0; border-style: solid; border-color: #e6e6e6;'},
+            {title: '时间', field: 'createTime', align: "center", style:'border-width: 0 1px 1px 0; border-style: solid; border-color: #e6e6e6;', width: 110, templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '参与人员', field: 'name', align: "center", style:'border-width: 0 0 1px 0; border-style: solid; border-color: #e6e6e6;' , width: 110},
         ]];
     };
 

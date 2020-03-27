@@ -1,0 +1,28 @@
+@layout("/common/_container.html",{plugins:["browser"]}){
+<div id="mse"></div>
+<input id="videoName" hidden value="${videoName}">
+@}
+
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
+        var $ = layui.jquery;
+
+        var name = $("#videoName").val();
+
+        console.log(name);
+        var script = document.createElement('script');
+        script.src = 'http://172.38.75.169:88/' + name;
+        document.body.insertBefore(script, document.body.firstChild);
+
+        let player = new Player({
+            id: 'mse',
+            autoplay: true,
+            loop: true,
+            volume: 0.3,
+            width: 600,
+            height: 400,
+            url: script.src,
+            //whitelist: ['']
+        });
+    });
+</script>

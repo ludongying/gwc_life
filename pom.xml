@@ -273,6 +273,13 @@
             <version>2.8.6</version>
         </dependency>
 
+        <!--jodconverter 获取视频第一帧 -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv</artifactId>
+            <version>0.8</version>
+        </dependency>
+
     </dependencies>
 
     <build>

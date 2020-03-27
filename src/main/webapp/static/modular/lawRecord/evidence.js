@@ -130,6 +130,30 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
     }
 
 
+    upload.render({
+        elem: '#video'
+        , url: '/system/uploadVideo'
+        , field: "file"
+        , accept: 'video' //视频
+        , done: function (res) {
+            layer.close(layer.msg());//关闭上传提示窗口
+            //上传完毕
+            $('#video-list').append(
+                '<div id="" class="file-iteme">' +
+                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
+                '<div class="info">' + res.videoName + '</div>' +
+                '</div>'
+            );
 
+            $('#video-list img').on('click', function () {
+                func.open({
+                    title: '视频',
+                    area: ['600px', '500px'],
+                    content: Feng.ctxPath + "system/videoPlayback?videoName="+$(this).parent()[0].textContent
+                })
+            })
+        }
+    });
 
 });

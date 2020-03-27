@@ -101,6 +101,55 @@
         float: left;
     }
 </style>
+
+<style type="text/css">
+    .video-list {
+        margin-left: -15px;
+    }
+
+    .video-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .video-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .video-list .handle i {
+        margin-right: 5px;
+    }
+
+    .video-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .video-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
+
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -245,16 +294,26 @@
 
                 </div>
 
-
-
                 <div class="layui-upload">
-                    <button type="button" class="layui-btn" id="uploadImg{{d.index}}">选择证据</button>
+                    <button type="button" class="layui-btn" id="uploadImg{{d.index}}">选择图片证据</button>
                     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
                         预览图：
                         <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list{{d.index}}">
 
                         </div>
                     </blockquote>
+                </div>
+
+                <div class="layui-col-md12">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="video">选择视频证据</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
+                            预览图：
+                            <div class="layui-upload-list uploader-list" style="overflow: auto;" id="video-list">
+
+                            </div>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>

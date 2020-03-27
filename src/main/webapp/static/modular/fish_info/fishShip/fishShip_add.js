@@ -2,7 +2,7 @@
  * 渔船信息增加对话框
  */
 
-layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
+layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload', 'func'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
@@ -10,6 +10,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
     var upload = layui.upload;
+    var func = layui.func;
     var fileName = "";
 
     laydate.render({
@@ -86,6 +87,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     upload.render({
         elem: '#test2'
         ,url: '/system/uploadFile'
+        ,accept: 'file'
         ,multiple: true
         ,before: function(obj){
             layer.msg('图片上传中...', {
@@ -166,14 +168,5 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         $("#fileName").val(fileName);
     }
 
-    //图片放大
-    /*$('#uploader-list img').on('click', function () {
-        layer.photos({
-            photos: '#uploader-list',
-            shadeClose: false,
-            closeBtn: 2,
-            anim: 0
-        });
-    })*/
 
 });

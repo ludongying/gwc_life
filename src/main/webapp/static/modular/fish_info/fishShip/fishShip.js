@@ -100,6 +100,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
             FishShip.onDetailFishShip(data);
         } else if (layEvent === 'preview') {
             FishShip.onPreviewFishShip(data);
+        } else if (layEvent === 'test') {
+            window.location.href=Feng.ctxPath+"fishShip/test";
         }
     });
 
@@ -141,7 +143,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
     FishShip.openAddFishShip = function () {
         func.open({
             title: '增加渔船信息',
-            area: ['1000px', '500px'],
+            area: ['1000px', '600px'],
             content: Feng.ctxPath + '/fishShip/fishShip_add',
             tableId: FishShip.tableId
         });

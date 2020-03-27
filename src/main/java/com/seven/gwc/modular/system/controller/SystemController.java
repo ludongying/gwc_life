@@ -52,11 +52,13 @@ public class SystemController extends BaseController {
     @Value("${server.ip}")
     private String ip;
 
+
     /**
      * 主页面
      */
     @RequestMapping("/welcome")
-    public String welcome() {
+    public String welcome(Model model) {
+        model.addAttribute("lawType", "10");
         return "modular/frame/welcome";
     }
 
@@ -186,12 +188,22 @@ public class SystemController extends BaseController {
      * 附件上传
      * @param file
      * @return
-     * @throws Exception
      */
     @RequestMapping(value = "/uploadFile")
     @ResponseBody
-    public JSONObject uploadFile(@RequestParam("file") MultipartFile file) throws Exception {
-        return FileUtil.uploadFile(uploadPathFile, file, ip);
+    public JSONObject uploadFile(@RequestParam("file") MultipartFile file) {
+        return FileUtil.uploadFile(uploadPathFile, file, ip, "picture");
+    }
+
+    /**
+     * 视频上传
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/uploadVideo")
+    @ResponseBody
+    public JSONObject uploadVideo(@RequestParam("file") MultipartFile file) {
+        return FileUtil.uploadFile(uploadPathFile, file, ip, "video");
     }
 
     /**
@@ -229,5 +241,14 @@ public class SystemController extends BaseController {
     public ResponseEntity<Resource> previewFile(HttpServletResponse response,
                                                 @ApiParam(name = "filePath", value = "文件路径") String filePath) {
         return FileUtil.previewFile(filePath, response);
+    }
+
+    /**
+     * 跳转到视频播放页面
+     */
+    @RequestMapping("/videoPlayback")
+    public String videoPlayback(String videoName, Model model) {
+        model.addAttribute("videoName", videoName);
+        return "/common/videoPlayback";
     }
 }

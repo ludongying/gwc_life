@@ -55,6 +55,13 @@ function loadUpload(lay,index,data){
     }
 
     function reviewImg(index){
+        /*layer.open({
+            type: 2,
+            title: '视频播放',
+            area: ['600px', '500px'],
+            content: Feng.ctxPath + '/fishShip/test',
+
+        });*/
         layer.photos({
             photos: '#uploader-list'+index,
             anim: 0,
@@ -76,7 +83,7 @@ function loadUpload(lay,index,data){
         }
     });
 
-// 删除图片
+    // 删除图片
     $(document).on("click", ".file-iteme .handle", function(event){
         $(this).parent().remove();
         deleteFile($(this).parent()[0].textContent)

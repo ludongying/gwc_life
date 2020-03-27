@@ -5,6 +5,7 @@ import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 public class DecisionDO extends BaseDO {
   /**
    *当事人类型

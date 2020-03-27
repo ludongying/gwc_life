@@ -19,7 +19,7 @@ public class GwcConsts {
     /**
      * 执法单位简称
      */
-    public static final String shortName="苏连渔执";
+    public static final String shortName="连海渔执";
     /**
      * 执法单位
      */

@@ -5,6 +5,7 @@ import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.ReasonDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.RecordDO;
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
@@ -12,6 +13,7 @@ import com.seven.gwc.modular.lawrecord.enums.InstrumentEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -163,7 +165,7 @@ public class InstrumentServiceImpl implements InstrumentService {
             List<FilePathDO> filePathDOS = saveFile(lawType, param, manually);
             filePathDOS = generateInquireSupplement(id, filePathDOS);
             lawRecordEntity.setManualWritFilePath(FilePathDO.getJson(filePathDOS));
-            lawRecordEntity.setWritFlag(true);
+//            lawRecordEntity.setWritFlag(true);
             lawRecordService.updateById(lawRecordEntity);
         }
     }
@@ -204,6 +206,11 @@ public class InstrumentServiceImpl implements InstrumentService {
         }
     }
 
+    @Override
+    public void generateInstrument(String id) {
+
+    }
+
     private boolean existFile(String original,String file){
         List<FilePathDO> originals = FilePathDO.getFiles(original);
         List<FilePathDO> files = FilePathDO.getFiles(file);
@@ -224,18 +231,26 @@ public class InstrumentServiceImpl implements InstrumentService {
 
 
     @Override
-    public List getInstrument(String id){
+    public List<FilePathDTO> getInstrument(String id){
         LawRecordEntity lawRecordEntity = lawRecordService.getById(id);
         LawTypeDTO lawType = lawRecordService.findLawType(id);
         String manualWritFilePath = lawRecordEntity.getManualWritFilePath();
         List<FilePathDO>  autoManually= FilePathDO.getFiles(manualWritFilePath);
-        for (FilePathDO filePathDO : autoManually) {
-            filePathDO.setName(InstrumentEnum.findByCode(filePathDO.getCode()).getMessage());
+        List<FilePathDTO> res=new ArrayList<>();
+        if(Objects.nonNull(autoManually)){
+            for (FilePathDO filePathDO : autoManually) {
+                FilePathDTO filePathDTO=new FilePathDTO();
+                BeanUtils.copyProperties(filePathDO,filePathDTO);
+                filePathDTO.setName(InstrumentEnum.findByCode(filePathDO.getCode()).getMessage());
+                res.add(filePathDTO);
+            }
+            res.addAll(InstrumentEnum.getManually(lawType));
+            //设置文件--用户上传的文件路径 todo
+
+            res.sort(FilePathDTO::compareTo);
         }
-        List<FilePathDO> manually = InstrumentEnum.getManually(lawType);
-        autoManually.addAll(manually);
-        autoManually.sort(FilePathDO::compareTo);
-        return autoManually;
+
+        return res;
     }
 
 

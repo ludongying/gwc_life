@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service;
 
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
+
 import java.util.List;
 
 /**
@@ -26,11 +28,17 @@ public interface InstrumentService {
 
 
     /**
+     * 根据修改内容修改部分文书
+     * @param id
+     */
+    void generateInstrument(String id);
+
+    /**
      * 获取文书列表
      * @param id
      * @return
      */
-    List getInstrument(String id);
+    List<FilePathDTO>  getInstrument(String id);
 
 
 

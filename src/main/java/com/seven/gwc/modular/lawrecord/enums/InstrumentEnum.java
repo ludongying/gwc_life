@@ -1,7 +1,7 @@
 package com.seven.gwc.modular.lawrecord.enums;
 
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
-import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
 import com.seven.gwc.modular.lawrecord.entity.*;
 import lombok.Getter;
@@ -19,8 +19,8 @@ import java.util.List;
 public enum InstrumentEnum {
 
     //编号-- 文书生成方式--案件类型--决定类型--数据来源
-    INSTRUMENT_01(1,"01封面_法人.docx", 1,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,2,4,5,20,21)),
-    INSTRUMENT_02(2,"02目录.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
+    INSTRUMENT_01(1,"01封面_法人.docx", 2,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,2,4,5,20,21)),
+    INSTRUMENT_02(2,"02目录.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
     INSTRUMENT_03(3,"03行政处罚决定书_法人.docx", 3,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,2,4,5,20,21)),
     INSTRUMENT_04(4,"06勘验笔录.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
     INSTRUMENT_INQUIRE(5,"07询问笔录.docx", 3,Arrays.asList(1),Arrays.asList(1,2),Arrays.asList(1)),
@@ -164,14 +164,14 @@ public enum InstrumentEnum {
      * @param law
      * @return
      */
-    public static List<FilePathDO> getManually(LawTypeDTO law){
+    public static List<FilePathDTO> getManually(LawTypeDTO law){
         List<InstrumentEnum> list = getByGenerate(law.getLawType(), law.getPunishPersonType(), 3);
-        List<FilePathDO> res=new ArrayList<>(16);
+        List<FilePathDTO> res=new ArrayList<>(16);
         if(!list.isEmpty()){
             for (InstrumentEnum instrumentEnum : list) {
-                FilePathDO filePathDO = new FilePathDO(instrumentEnum.getCode(), getPath() + instrumentEnum.getMessage());
-                filePathDO.setName(instrumentEnum.getMessage());
-                res.add(filePathDO);
+                FilePathDTO filePathDTO = new FilePathDTO(instrumentEnum.getCode(), getPath() + instrumentEnum.getMessage());
+                filePathDTO.setName(instrumentEnum.getMessage());
+                res.add(filePathDTO);
             }
         }
         return res;

@@ -12,10 +12,13 @@
 
 <script type="text/html" id="tableBar">
 
-    <a id="downTemplate" class="layui-btn layui-btn-xs" lay-event="downTemplate">下载模板</a>
-    <a id="change" class="layui-btn layui-btn-xs" lay-event="change">更换</a>
-    <a id="upload" class="layui-btn layui-btn-xs" lay-event="upload">上传</a>
-    <a id="down" class="layui-btn layui-btn-xs" lay-event="down">下载</a>
+    <a class="layui-btn layui-btn-xs" lay-event="downTemplate">下载模板</a>
+    {{# if(d.filePath){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="change">更换</a>
+    {{# }else{ }}
+    <a  class="layui-btn layui-btn-xs" lay-event="upload">上传</a>
+    {{# } }}
+    <a  class="layui-btn layui-btn-xs" lay-event="down">下载</a>
 
 </script>
 @}

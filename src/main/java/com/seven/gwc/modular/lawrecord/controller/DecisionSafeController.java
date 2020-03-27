@@ -1,20 +1,14 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
-import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
 import com.seven.gwc.modular.lawrecord.dto.DecisionSafeDTO;
-import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
-import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import com.seven.gwc.modular.lawrecord.service.DecisionSafeService;
-import com.seven.gwc.modular.lawrecord.service.DecisionService;
 import com.seven.gwc.modular.lawrecord.vo.DecisionSafeVO;
-import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -30,7 +24,6 @@ public class DecisionSafeController extends BaseController {
     @Autowired
     private DecisionSafeService decisionSafeService;
 
-
     /**
      * 创建 & 修改
      * @param decisionSafeVO
@@ -41,7 +34,6 @@ public class DecisionSafeController extends BaseController {
     public BaseResult update(DecisionSafeVO decisionSafeVO){
         decisionSafeVO.setUserId(ShiroKit.getUser().getId());
         return  decisionSafeService.updateDecisionSafe(decisionSafeVO);
-
     }
 
     /**

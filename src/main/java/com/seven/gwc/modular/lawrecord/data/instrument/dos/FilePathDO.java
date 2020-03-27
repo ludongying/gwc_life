@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Objects;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class FilePathDO implements Comparable<FilePathDO>,Serializable {
 
   private Integer code;
@@ -23,7 +25,6 @@ public class FilePathDO implements Comparable<FilePathDO>,Serializable {
 
   private Long timeStamp;
 
-  private String name;
 
   public FilePathDO(Integer code,String path){
       this.code=code;

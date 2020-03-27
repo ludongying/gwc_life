@@ -51,7 +51,9 @@ public class InquisitionEntity extends GwcBaseEntity {
     private Integer shipOperatePerson;
 
     /** 主机功率 */
-    private String shipPower;
+    private Double shipPower;
+    /** 主机功率单位 */
+    private Integer shipPowerUnit;
 
     /** 持证人姓名 */
     private String shipCredentialsOwner;

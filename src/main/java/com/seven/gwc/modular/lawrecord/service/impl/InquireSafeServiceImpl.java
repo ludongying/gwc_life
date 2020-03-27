@@ -7,6 +7,8 @@ import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireSafeDO;
 import com.seven.gwc.modular.lawrecord.dto.InquireSafeDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
+import com.seven.gwc.modular.lawrecord.service.DecisionSafeService;
 import com.seven.gwc.modular.lawrecord.service.InquireSafeService;
 import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
@@ -32,6 +34,8 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
     private LawRecordService lawRecordService;
     @Autowired
     private InstrumentService instrumentService;
+    @Autowired
+    private DecisionSafeService decisionSafeService;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquireSafe(InquireSafeVO vo) {
@@ -41,6 +45,9 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
             LawRecordEntity lawRecordEntity =
                     lawRecordService.createLawRecord(vo.getUserId(),vo.getLawType());
             vo.setId(lawRecordEntity.getId());
+        }
+        if(ShipStatusEnum.ESCAPE.getCode().equals(vo.getShipStatus())){
+             decisionSafeService.updateSeverity(vo.getId());
         }
         this.saveOrUpdate(vo);
         BaseResult baseResult = new BaseResult(true, "");

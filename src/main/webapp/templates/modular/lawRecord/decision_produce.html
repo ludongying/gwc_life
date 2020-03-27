@@ -188,9 +188,21 @@
 
                             <div class="layui-form-item">
                                 <div class="layui-inline">
+                                    <label class="layui-form-label">是否暴力抗法</label>
+                                    <div class="layui-input-inline">
+                                        <select name="caseViolenceLaw" lay-filter="caseViolenceLaw">
+                                            <option value="0">否</option>
+                                            <option value="1">是</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-inline">
                                     <label class="layui-form-label">情节严重性</label>
                                     <div class="layui-input-inline">
-                                        <select name="severity">
+                                        <select name="severity" id="severity" data-status="${status}">
                                             @for(item in plotSeverity){
                                               <option value="${item.code}">${item.message}</option>
                                             @}
@@ -231,15 +243,6 @@
                                         <input placeholder="金额小写,可保留两位小数" id="resourceCompensation" name="resourceCompensation" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
-
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">是否暴力抗法</label>
-                                    <div class="layui-input-inline">
-                                        <input type="radio" name="caseViolenceLaw" value="1" title="是">
-                                        <input type="radio" name="caseViolenceLaw" value="0" title="否" checked="">
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div class="layui-form-item ">
@@ -252,18 +255,24 @@
                                 </div>
                             </div>
 
+                            <div class="layui-form-item ">
+                                <div class="layui-inline label_bg">
+                                    <label class="layui-form-label" style="width:800px;color: red;text-align: left;font-size: 15px">注：处罚文书中表述</label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="layui-col-md12">
+<!--                <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body">
                                 1xxxxxxxxxxxxx<br>
                                 2xxxxxxxxxxxxxx <br>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
 
                 <div class="layui-col-md12 ">

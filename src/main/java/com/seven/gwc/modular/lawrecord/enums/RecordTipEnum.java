@@ -74,6 +74,8 @@ public enum RecordTipEnum implements IEnum<Integer> {
     }
 
 
+
+
     public static Integer calcPowerLevel(Double power,Integer unit){
          if(Objects.isNull(power)){
              return 4;

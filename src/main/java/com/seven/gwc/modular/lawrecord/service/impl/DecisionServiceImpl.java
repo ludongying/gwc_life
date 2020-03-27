@@ -6,11 +6,15 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dao.DecisionMapper;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.DecisionProduceDO;
 import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
+import com.seven.gwc.modular.lawrecord.dto.PlotSeverityDTO;
 import com.seven.gwc.modular.lawrecord.entity.DecisionEntity;
+import com.seven.gwc.modular.lawrecord.entity.InquisitionEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
-import com.seven.gwc.modular.lawrecord.service.DecisionService;
-import com.seven.gwc.modular.lawrecord.service.InstrumentService;
-import com.seven.gwc.modular.lawrecord.service.LawRecordService;
+import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
+import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
+import com.seven.gwc.modular.lawrecord.enums.RecordTipEnum;
+import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
+import com.seven.gwc.modular.lawrecord.service.*;
 import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -18,8 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 /**
@@ -37,6 +44,14 @@ public class DecisionServiceImpl extends ServiceImpl<DecisionMapper, DecisionEnt
     private LawRecordService lawRecordService;
     @Autowired
     private InstrumentService instrumentService;
+
+    @Autowired
+    private InquireService inquireService;
+    @Autowired
+    private InquireSafeService inquireSafeService;
+    @Autowired
+    private InquisitionService inquisitionService;
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -76,4 +91,40 @@ public class DecisionServiceImpl extends ServiceImpl<DecisionMapper, DecisionEnt
         }
         return null;
     }
+
+    @Override
+    public Boolean shipStatusIsEscape(String id, Integer lawType) {
+        Integer status;
+        if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
+            status =inquireService.getById(id).getShipStatus();
+        }else{
+            status =inquireSafeService.getById(id).getShipStatus();
+        }
+        return ShipStatusEnum.ESCAPE.getCode().equals(status);
+    }
+
+    @Override
+    public void updateSeverity(String id) {
+        DecisionEntity decisionEntity = this.getById(id);
+        if(Objects.nonNull(decisionEntity)){
+            Integer severity = decisionEntity.getSeverity();
+            if(PlotSeverityEnum.GENERAL.getCode().equals(severity)){
+                decisionEntity.setSeverity(PlotSeverityEnum.SERIOUS.getCode());
+                this.updateById(decisionEntity);
+            }
+        }
+    }
+
+    @Override
+    public List<PlotSeverityDTO> listSeverity(String id) {
+        InquisitionEntity inquisitionEntity = inquisitionService.getById(id);
+        return Arrays.stream(PlotSeverityEnum.values()).map(PlotSeverityDTO::new).peek(p->{
+            if(Objects.nonNull(inquisitionEntity)){
+                RecordTipEnum recordTipEnum = RecordTipEnum.findBySeverity(p.getCode(),
+                        inquisitionEntity.getShipPower(), inquisitionEntity.getShipPowerUnit());
+                p.setContent(recordTipEnum.getMessage());
+            }
+        }).collect(Collectors.toList());
+    }
+
 }

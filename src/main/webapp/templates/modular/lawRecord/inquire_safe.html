@@ -224,27 +224,27 @@
                             <div class="layui-form-item">
 
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">船主姓名</label>
+                                    <label class="layui-form-label">渔船名号</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="shipName" autocomplete="off" class="layui-input">
+                                        <input type="text" name="shipName" lay-verify="required"  autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">船籍港</label>
+                                    <label class="layui-form-label">船主姓名</label>
                                     <div class="layui-input-inline">
+                                        <input type="text" name="shipOwner" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" >船籍港</label>
+                                    <div class="layui-input-inline" >
                                         <input type="text" name="shipRegistry" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">船上总人数</label>
-                                    <div class="layui-input-inline">
-                                        <input placeholder="" name="shipMember" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
-                                    </div>
-                                    <div class="layui-form-mid layui-word-aux">人</div>
-                                </div>
 
                             </div>
 
@@ -280,7 +280,19 @@
                                                 @}
                                             </select>
                                         </div>
+                                </div>
+
+
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width: 80px">船上总人数</label>
+                                    <div class="layui-input-inline" style="width: 73px">
+                                        <input placeholder="" name="shipMember" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
                                     </div>
+                                    <div class="layui-form-mid layui-word-aux">人</div>
+                                </div>
+
+
                             </div>
 
                         </div>

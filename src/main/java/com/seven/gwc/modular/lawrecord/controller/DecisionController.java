@@ -43,7 +43,14 @@ public class DecisionController extends BaseController {
         //处罚人类型
         model.addAttribute("punishmentType", PunishmentTypeEnum.values());
         //情节严重性
-        model.addAttribute("plotSeverity", PlotSeverityEnum.values());
+        if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
+            model.addAttribute("plotSeverity", decisionService.listSeverity(id));
+        }else{
+            model.addAttribute("plotSeverity", PlotSeverityEnum.values());
+        }
+
+        //渔船状态
+        model.addAttribute("status",decisionService.shipStatusIsEscape(id,lawType));
         return PREFIX + "decision_"+LawTypeEnum.findByCode(lawType).toString().toLowerCase();
     }
 

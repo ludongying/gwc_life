@@ -57,6 +57,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
 
     addUnitListen($,form,unit_data);
 
+    $("#shipName").blur(function(){
+          $("#inquire_box .shipName").val($("#shipName").val());
+    })
 
     //开启表单内容监听
     startListen($,lay.key);
@@ -122,7 +125,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         loadAddrIndex({
             $:$,form:form,stateCode:"32",cityCode:"7",index:index
         });
-
+        $("#inquire_box .shipName").val($("#shipName").val());
         form.render();
     });
     //删除笔录

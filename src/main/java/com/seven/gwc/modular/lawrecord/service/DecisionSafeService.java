@@ -39,4 +39,10 @@ public interface DecisionSafeService extends IService<DecisionSafeEntity> {
      * @return
      */
     Map<String,String> getParams(String id);
+
+    /**
+     * 根据状态修改 严重性
+     * @param id
+     */
+    void updateSeverity(String id);
 }

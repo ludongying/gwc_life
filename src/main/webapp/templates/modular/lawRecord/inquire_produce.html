@@ -237,7 +237,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">渔船船名号</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="shipName" autocomplete="off" class="layui-input">
+                                        <input type="text" id="shipName" name="shipName" lay-verify="required" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
@@ -519,7 +519,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">渔船船名号</label>
                         <div class="layui-input-inline">
-                            <input type="text" data-name="shipName{{d.index}}" value="{{d.content.shipName?d.content.shipName:''}}"  autocomplete="off" class="layui-input">
+                            <input type="text" data-name="shipName{{d.index}}" value="{{d.content.shipName?d.content.shipName:''}}"  disabled autocomplete="off" class="layui-input shipName">
                         </div>
                     </div>
                     <div class="layui-inline">

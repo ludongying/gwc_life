@@ -1,16 +1,16 @@
 
 layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','laytpl','element'], function () {
-    var $ = layui.$;
-    var layer = layui.layer;
-    var form = layui.form;
-    var table = layui.table;
-    var $ax = layui.ax;
-    var laydate = layui.laydate;
-    var admin = layui.admin;
-    var func = layui.func;
-    var laytpl=layui.laytpl;
-    var element=layui.element;
-    var lay={
+    let $ = layui.$;
+    let layer = layui.layer;
+    let form = layui.form;
+    let table = layui.table;
+    let $ax = layui.ax;
+    let laydate = layui.laydate;
+    let admin = layui.admin;
+    let func = layui.func;
+    let laytpl=layui.laytpl;
+    let element=layui.element;
+    let lay={
          '$':$,
          'layer':layer,
          'form':form,
@@ -29,6 +29,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     money_verify(lay,"fine");
     money_verify(lay,"resourceCompensation");
     initPage();
+    loadStatus();
 
     function initPage() {
         //编辑
@@ -55,6 +56,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         initShowContent(data.value);
         form.render();
     });
+
     function initShowContent(val){
         if(parseInt(val)===1) {
             setTpl("tpl_legal_person","view");
@@ -67,7 +69,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         if(!data){
             data={};
         }
-        var tpl_ = $("#"+tpl).html(),view_ = $('#'+view);
+        let tpl_ = $("#"+tpl).html(),view_ = $('#'+view);
         laytpl(tpl_).render(data, function(html){
             view_.html(html);
         });
@@ -95,12 +97,41 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         }
     }
 
+    function loadStatus(){
+        if($("#severity").data("status")){
+            loadSeverity();
+        }
+    }
+
+    function loadSeverity(){
+        let next=$("#severity").next();
+        let severity=next.find("dd[lay-value='1']");
+        if( $("#severity").val()==1){
+            $("#severity").val(2);
+            next.find("input").val(next.find("dd[lay-value='2']").text());
+        }
+        if(!severity.hasClass("layui-disabled")){
+            severity.addClass("layui-disabled");
+        }
+    }
+
+    form.on('select(caseViolenceLaw)', function(data){
+        if(data.value==1){
+            loadSeverity();
+        }else{
+            if(!$("#severity").data("status")){
+                $("#severity").next().find("dd[lay-value='1']").removeClass("layui-disabled");
+            }
+        }
+
+    });
+
     //提交数据
     function submitData(des,data){
         //设置数据
         data.field.punishAddr= JSON.stringify(getLocAddr($,"punish_addr"));
         setMoney(data);
-        var url="decision/update";
+        let url="decision/update";
         if($("#lawType").val()==2){
             url="decision_safe/update";
         }

@@ -8,6 +8,7 @@ import com.seven.gwc.modular.lawrecord.data.instrument.dos.DecisionSafeDO;
 import com.seven.gwc.modular.lawrecord.dto.DecisionSafeDTO;
 import com.seven.gwc.modular.lawrecord.entity.DecisionSafeEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.service.DecisionSafeService;
 import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
@@ -71,5 +72,17 @@ public class DecisionSafeServiceImpl extends ServiceImpl<DecisionSafeMapper, Dec
             return new DecisionSafeDO(entity).toMap();
         }
         return null;
+    }
+
+    @Override
+    public void updateSeverity(String id) {
+        DecisionSafeEntity decisionSafeEntity = this.getById(id);
+        if(Objects.nonNull(decisionSafeEntity)){
+            Integer severity = decisionSafeEntity.getSeverity();
+            if(PlotSeverityEnum.GENERAL.getCode().equals(severity)){
+                decisionSafeEntity.setSeverity(PlotSeverityEnum.SERIOUS.getCode());
+                this.updateById(decisionSafeEntity);
+            }
+        }
     }
 }

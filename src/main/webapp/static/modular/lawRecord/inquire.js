@@ -113,6 +113,28 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 $('#shipFishAreaDate'+index).val(value);
             }
         });
+        laydate.render({
+            elem: '#inquireDate'+index
+            ,type: 'datetime'
+            ,range: '~'
+            ,format: 'yyyy-MM-dd HH:mm'
+            ,done:function(value){
+                if(value){
+                    let arr=value.toString().split("~");
+                    $('#inquireStartTime'+index).val(arr[0].trim());
+                    $('#inquireEndTime'+index).val(arr[1].trim());
+                }
+
+            }
+        });
+
+        form.on('select(law_person)', function(data){
+            let input= $(data.elem).parent().parent().next().find("input");
+            input.eq(0).val(data.elem[data.elem.selectedIndex].dataset.certificate);
+            input.eq(1).val(data.elem[data.elem.selectedIndex].dataset.personName);
+        });
+
+
         //单位换算初始化默认
         unit_data["hipRatedPowerUnit"+index]=$("#shipRatedPowerUnit"+index).val();
         unit_data["shipRealPowerUnit"+index]=$("#shipRealPowerUnit"+index).val();
@@ -198,7 +220,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                            $:$,form:form,stateCode:obj.state.code,cityCode:obj.city.code,region:obj.region,index:index
                        });
                    }
-
                }
                form.render();
            }

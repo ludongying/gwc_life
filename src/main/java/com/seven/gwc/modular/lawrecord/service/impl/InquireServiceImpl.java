@@ -8,22 +8,21 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dao.InquireMapper;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireProduceDO;
 import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
+import com.seven.gwc.modular.lawrecord.dto.InquireSupplementDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
 import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
-import com.seven.gwc.modular.lawrecord.service.DecisionService;
-import com.seven.gwc.modular.lawrecord.service.InquireService;
-import com.seven.gwc.modular.lawrecord.service.InstrumentService;
-import com.seven.gwc.modular.lawrecord.service.LawRecordService;
+import com.seven.gwc.modular.lawrecord.service.*;
+import com.seven.gwc.modular.lawrecord.vo.InquireSupplementVO;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -42,6 +41,8 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
     private InstrumentService instrumentService;
     @Autowired
     private DecisionService decisionService;
+    @Autowired
+    private OperatorService operatorService;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquire(InquireVO vo) {
@@ -61,9 +62,17 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
         wrapper.ne(InquireEntity::getId,vo.getId()).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
         List<InquireEntity> list = this.list(wrapper);
-        List<InquireEntity> inquireEntities = vo.listInquire();
-        if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
+        List<InquireSupplementVO> inquireSupplementVOS = vo.listInquire();
+        List<InquireEntity> inquireEntities=null;
+        if(Objects.nonNull(inquireSupplementVOS) && !inquireSupplementVOS.isEmpty()){
+            inquireEntities=new ArrayList<>(inquireSupplementVOS);
             inquireEntities.forEach(inquireEntity -> inquireEntity.setRecordId(vo.getId()));
+            //存储办案机关人员
+            List<OperatorEntity> operatorList = inquireSupplementVOS.stream().map(InquireSupplementVO::getOperators)
+                    .flatMap(Collection::stream).peek(i->i.init(i.getId(),vo.getUserId())).collect(Collectors.toList());
+            if(!operatorList.isEmpty()){
+               operatorService.saveOrUpdateBatch(operatorList);
+            }
         }
         //原来有数据
         if(Objects.nonNull(list) && !list.isEmpty()) {
@@ -105,13 +114,20 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
             wrapper.ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
             List<InquireEntity> list = this.list(wrapper);
             if(Objects.nonNull(list) && !list.isEmpty()){
-                inquireDTO.setInquireContent(list);
+                List<InquireSupplementDTO> inquireSupplementDTOS=new ArrayList<>();
+                for (InquireEntity entity : list) {
+                    InquireSupplementDTO dto=new InquireSupplementDTO();
+                    BeanUtils.copyProperties(entity,dto);
+                    dto.setTime();
+                    dto.setOperators(operatorService.getByRecord(dto.getId()));
+                    inquireSupplementDTOS.add(dto);
+                }
+                inquireDTO.setInquireContent(inquireSupplementDTOS);
             }
             return inquireDTO;
         }
         return null;
     }
-
 
     @Override
     public Map<String, String> getParams(String id) {
@@ -121,7 +137,6 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         }
         return null;
     }
-
 
     @Override
     public List<InquireEntity> getSupplement(String id){

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
+@Accessors(chain = true)
 public class GwcIdBaseEntity extends GwcBaseEntity {
 
     @TableId(type= IdType.UUID)

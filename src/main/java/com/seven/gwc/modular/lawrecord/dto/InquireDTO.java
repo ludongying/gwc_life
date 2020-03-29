@@ -37,7 +37,7 @@ public class InquireDTO extends InquireEntity {
     /**
      * 补录信息
      */
-    private List<InquireEntity> inquireContent;
+    private List<InquireSupplementDTO> inquireContent;
 
     /**************全详情*********************/
 

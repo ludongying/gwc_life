@@ -8,6 +8,7 @@ import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.enums.*;
 import com.seven.gwc.modular.lawrecord.service.InquireService;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
+import com.seven.gwc.modular.sailor.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class  InquireController extends BaseController {
 
     @Autowired
     private InquireService inquireService;
+
+    @Autowired
+    private PersonService personService;
 
     private static String PREFIX = "/modular/lawRecord/";
 
@@ -53,6 +57,8 @@ public class  InquireController extends BaseController {
         model.addAttribute("investigatePosition", InvestigatePositionEnum.values());
         //渔船状态
         model.addAttribute("shipStatus", ShipStatusEnum.values());
+        //设置办案人员
+        model.addAttribute("person",personService.listLawPersons());
         return PREFIX + "inquire_"+LawTypeEnum.findByCode(lawType).toString().toLowerCase();
     }
 
@@ -66,7 +72,6 @@ public class  InquireController extends BaseController {
     public BaseResult update(InquireVO inquireVO){
         inquireVO.setUserId(ShiroKit.getUser().getId());
         return  inquireService.updateInquire(inquireVO);
-
     }
 
     /**

@@ -43,9 +43,9 @@ public class InquireVO extends InquireEntity {
      * 获取补录信息
      * @return
      */
-    public List<InquireEntity> listInquire(){
+    public List<InquireSupplementVO> listInquire(){
         if(Objects.nonNull(this.inquireContent) && !inquireContent.trim().isEmpty()){
-            List<InquireEntity> inquireEntities = JSON.parseArray(this.inquireContent, InquireEntity.class);
+            List<InquireSupplementVO> inquireEntities = JSON.parseArray(this.inquireContent, InquireSupplementVO.class);
             if(Objects.nonNull(inquireEntities) && !inquireEntities.isEmpty()){
                 inquireEntities.forEach(inquireEntity -> {
                     inquireEntity.init(inquireEntity.getId(),userId);
@@ -53,6 +53,7 @@ public class InquireVO extends InquireEntity {
                     if(Objects.isNull(id) || id.trim().isEmpty()){
                        inquireEntity.setId(UUID.fastUUID().toString(Boolean.TRUE));
                     }
+                    inquireEntity.setContent(inquireEntity.getId());
             });
                 return inquireEntities;
             }

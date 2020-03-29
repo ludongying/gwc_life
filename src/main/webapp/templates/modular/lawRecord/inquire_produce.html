@@ -417,9 +417,77 @@
 <script id="inquireTpl" type="text/html">
 <div class="inquire_index">
     <input type="hidden" data-name="id{{d.index}}" value="{{d.content.id?d.content.id:''}}" autocomplete="off" class="layui-input">
+
     <div class="layui-col-md12 label_bg" style="padding-top: 8px">
         <div class="layui-card">
-            <div class="layui-card-header">被询问信息(补录)<span class="del_inquire" style="float: right;color:#1890FF;cursor:pointer;">删除</span></div>
+            <div class="layui-card-header">执法人员(补录)<span class="del_inquire" style="float: right;color:#1890FF;cursor:pointer;">删除</span></div>
+            <div class="layui-card-body" id="lawOperator{{d.index}}">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-inline">
+                            <select  data-name="personId1{{d.index}}"  lay-filter="law_person" lay-search=""  id="law_person1{{d.index}}">
+                                <option value="">请选择执法人员</option>
+                                @if(isNotEmpty(person)){
+                                    @for(item in person){
+                                    <option value="${item.id}"  data-person-name="${item.personName}"  data-certificate="${item.lawCode}">${item.personName}</option>
+                                    @}
+                                @}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">执法证号</label>
+                        <div class="layui-input-inline">
+                            <input type="text"  data-name="credentialCode1{{d.index}}" value="{{d.content.credentialCode1?d.content.credentialCode1:''}}"  autocomplete="off" class="layui-input" disabled>
+                            <input type="hidden" data-name="personName1{{d.index}}"  value="{{d.content.personName1?d.content.personName1:''}}">
+                            <input type="hidden" data-name="id1{{d.index}}"  value="{{d.content.id1?d.content.id1:''}}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">姓名</label>
+                        <div class="layui-input-inline">
+                            <select data-name="personId2{{d.index}}" lay-filter="law_person" lay-search="" lay-verify="person2" id="law_person2">
+                                <option value="">请选择执法人员</option>
+                                @if(isNotEmpty(person)){
+                                    @for(item in person){
+                                    <option value="${item.id}" data-person-name="${item.personName}" data-certificate="${item.lawCode}">${item.personName}</option>
+                                    @}
+                                @}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">执法证号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" data-name="credentialCode2{{d.index}}" value="{{d.content.credentialCode2?d.content.credentialCode2:''}}"  autocomplete="off" class="layui-input" disabled>
+                            <input type="hidden" data-name="personName2{{d.index}}"  value="{{d.content.personName2?d.content.personName2:''}}">
+                            <input type="hidden" data-name="id2{{d.index}}"  value="{{d.content.id2?d.content.id2:''}}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">询问时间</label>
+                        <div class="layui-input-inline" style="width: 255px">
+                            <input type="text" id="inquireDate{{d.index}}" value="{{d.content.inquireDateStr?d.content.inquireDateStr:''}}" autocomplete="off" class="layui-input">
+                            <input type="hidden" data-name="inquireStartTime{{d.index}}" id="inquireStartTime{{d.index}}" value="{{d.content.inquireStartTime?d.content.inquireStartTime:''}}">
+                            <input type="hidden" data-name="inquireEndTime{{d.index}}" id="inquireEndTime{{d.index}}" value="{{d.content.inquireEndTime?d.content.inquireEndTime:''}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md12 label_bg" >
+        <div class="layui-card">
+            <div class="layui-card-header">被询问信息(补录)</div>
             <div class="layui-card-body">
 
                 <div class="layui-form-item">

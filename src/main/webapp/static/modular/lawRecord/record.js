@@ -74,9 +74,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     form.on('select(selectType)', function(data){
         $("#select_box").html($("#advancedSearch ."+data.value).parent().html());
+        $("#select_box").find("input").eq(0).focus();
         form.render();
     });
-
 
     /**
      * 左侧搜索

@@ -108,17 +108,23 @@ public class InstrumentServiceImpl implements InstrumentService {
      * @param inquireEntity
      * @return
      */
-    private Map<String, String> getSupplementParam(String id,InquireEntity inquireEntity){
-
-       
-        return null;
+    private Map<String, String> getSupplementParam(String id, InquireEntity inquireEntity){
+        Map<String,String> res=new HashMap<>(32);
+        //办案机关
+        merge(res,agencyService.getParams(id));
+        //询问笔录-补录
+        merge(res,inquireService.getSupplementParams(inquireEntity));
+        //固定内容
+        merge(res,new RecordDO().toMap());
+        return res;
     }
 
     /**
      * 生成询问笔录补录内容
      * @param id
      */
-    public List<FilePathDO> generateInquireSupplement(String id,List<FilePathDO> files){
+    public List<FilePathDO> generateInquireSupplement(String id){
+        List<FilePathDO> files =new ArrayList<>();
         List<InquireEntity> supplement = inquireService.getSupplement(id);
         if(Objects.nonNull(supplement) && !supplement.isEmpty()){
             String fileName = InstrumentEnum.INSTRUMENT_INQUIRE.getMessage();
@@ -126,11 +132,11 @@ public class InstrumentServiceImpl implements InstrumentService {
             for (InquireEntity inquireEntity : supplement) {
                 //获取参数
                 Map<String, String> supplementParam = getSupplementParam(id, inquireEntity);
-                String exportPath=getGeneratePath(lawType)+fileName + inquireEntity.getInvestigatePosition();
+                String[] nameArr = fileName.split(FileUtils.regex_dot);
+                String exportPath=getGeneratePath(lawType)+nameArr[0] + inquireEntity.getInvestigateName()+nameArr[1];
                 new InstrumentModelData(InstrumentEnum.getPath()+fileName,supplementParam).export(exportPath);
                 files.add(new FilePathDO(InstrumentEnum.INSTRUMENT_INQUIRE.getCode(),exportPath));
             }
-
         }
         return files;
     }
@@ -153,8 +159,6 @@ public class InstrumentServiceImpl implements InstrumentService {
         return res;
     }
 
-
-
     private String saveFiles(LawTypeDTO lawType,Map<String,String> param,List<InstrumentEnum> list){
         List<FilePathDO> filePathDOS = saveFile(lawType, param, list);
         return FilePathDO.getJson(filePathDOS);
@@ -175,7 +179,8 @@ public class InstrumentServiceImpl implements InstrumentService {
             lawRecordEntity.setAutoWritFilePath(autoPath);
             List<InstrumentEnum> manually = InstrumentEnum.getAutoManually(lawType);
             List<FilePathDO> filePathDOS = saveFile(lawType, param, manually);
-            filePathDOS = generateInquireSupplement(id, filePathDOS);
+            List<FilePathDO> supplements = generateInquireSupplement(id);
+            if(!supplements.isEmpty()){ filePathDOS.addAll(supplements);}
             lawRecordEntity.setManualWritFilePath(FilePathDO.getJson(filePathDOS));
 //            lawRecordEntity.setWritFlag(true);
             lawRecordService.updateById(lawRecordEntity);
@@ -197,6 +202,18 @@ public class InstrumentServiceImpl implements InstrumentService {
             String autoWritFilePath = lawRecordEntity.getAutoWritFilePath();
             String manualWritFilePath = lawRecordEntity.getManualWritFilePath();
             Map<String, String> param = getParam(id);
+            //如果有询问笔录 补录 生成相应的文书
+            if(InquireEntity.class.equals(clazz)){
+                Integer supplementCount = inquireService.getSupplementCount(id);
+                if(supplementCount>0){
+                    List<FilePathDO> list = generateInquireSupplement(id);
+                    if(!existFile(manualWritFilePath,list)){
+                        log.info(">>存储文件硬盘路径有变更,重新生成");
+                        reGenerateManual(lawRecordEntity,lawType,param,list);
+                    }
+                }
+            }
+            //自动文书
             List<InstrumentEnum> as = InstrumentEnum.getAutoByClass(lawType,clazz);
             String aPath = saveFiles(lawType, param, as);
             if(!existFile(autoWritFilePath,aPath)){
@@ -206,26 +223,36 @@ public class InstrumentServiceImpl implements InstrumentService {
                 lawRecordEntity.setAutoWritFilePath(autoPath);
                 lawRecordService.updateById(lawRecordEntity);
             }
+
+            //需手录入文书
             List<InstrumentEnum> ms = InstrumentEnum.getAutoManuallyByClass(lawType,clazz);
             String mPath = saveFiles(lawType, param, ms);
             if(!existFile(manualWritFilePath,mPath)){
                 log.info(">>存储文件硬盘路径有变更，重新生成");
-                List<InstrumentEnum> manually = InstrumentEnum.getAutoManually(lawType);
-                String  manuallyPath= saveFiles(lawType, param, manually);
-                lawRecordEntity.setManualWritFilePath(manuallyPath);
-                lawRecordService.updateById(lawRecordEntity);
+                Integer supplementCount = inquireService.getSupplementCount(id);
+                List<FilePathDO> list=null;
+                if(supplementCount>0){
+                    list= generateInquireSupplement(id);
+                }
+                reGenerateManual(lawRecordEntity,lawType,param,list);
             }
         }
     }
 
-    @Override
-    public void generateInstrument(String id) {
 
+    private void reGenerateManual(LawRecordEntity lawRecordEntity,LawTypeDTO lawType,Map<String, String> param,List<FilePathDO> list){
+        List<InstrumentEnum> manually = InstrumentEnum.getAutoManually(lawType);
+        List<FilePathDO> filePathDOS = saveFile(lawType, param, manually);
+        if(Objects.nonNull(list) && !list.isEmpty()){
+            filePathDOS.addAll(list);
+        }
+        lawRecordEntity.setManualWritFilePath(FilePathDO.getJson(filePathDOS));
+        lawRecordService.updateById(lawRecordEntity);
     }
 
-    private boolean existFile(String original,String file){
+
+    private boolean existFile( String original,List<FilePathDO> files){
         List<FilePathDO> originals = FilePathDO.getFiles(original);
-        List<FilePathDO> files = FilePathDO.getFiles(file);
         if(Objects.nonNull(originals) && Objects.nonNull(files)){
             List<String> orgList = originals.stream().map(FilePathDO::getPath).collect(Collectors.toList());
             List<String> fList = originals.stream().map(FilePathDO::getPath).collect(Collectors.toList());
@@ -237,8 +264,11 @@ public class InstrumentServiceImpl implements InstrumentService {
             return true;
         }
         return false;
+    }
 
-
+    private boolean existFile(String original,String file){
+        List<FilePathDO> files = FilePathDO.getFiles(file);
+        return existFile(original,files);
     }
 
 
@@ -269,7 +299,6 @@ public class InstrumentServiceImpl implements InstrumentService {
     public BaseResult uploadInstrument(String id,MultipartFile file) {
        LawTypeDTO lawType = lawRecordService.findLawType(id);
        return fileManager.uploadOrgFile(file,getDir(lawType)+"file");
-
     }
 
 

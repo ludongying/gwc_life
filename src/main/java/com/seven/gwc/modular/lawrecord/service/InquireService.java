@@ -4,6 +4,7 @@ package com.seven.gwc.modular.lawrecord.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
+import com.seven.gwc.modular.lawrecord.dto.InquireSupplementDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
 import com.seven.gwc.modular.lawrecord.vo.InquireVO;
 
@@ -34,13 +35,39 @@ public interface InquireService extends IService<InquireEntity> {
     InquireDTO detail(String id);
 
     /**
+     * 获取询问笔录补录
+     * @param id
+     * @return
+     */
+    List<InquireSupplementDTO> getInquireSupplement(String id);
+
+    /**
      * 获取生产询问笔录所有参数
      * @param id
      * @return
      */
     Map<String,String> getParams(String id);
 
+    /**
+     * 获取生产询问笔录补录参数
+     * @param inquireEntity
+     * @return
+     */
+    Map<String, String> getSupplementParams(InquireEntity inquireEntity);
 
+
+    /**
+     * 获取询问笔录补录
+     * @param id
+     * @return
+     */
     List<InquireEntity> getSupplement(String id);
+    /**
+     * 获取询问笔录补录数量
+     * @param id
+     * @return
+     */
+    Integer getSupplementCount(String id);
+
 
 }

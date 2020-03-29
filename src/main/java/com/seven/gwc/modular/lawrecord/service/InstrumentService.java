@@ -29,11 +29,7 @@ public interface InstrumentService {
     void generateInstrument(String id,Class<?> clazz);
 
 
-    /**
-     * 根据修改内容修改部分文书
-     * @param id
-     */
-    void generateInstrument(String id);
+
 
     /**
      * 获取文书列表

@@ -88,6 +88,7 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
         return detail;
     }
 
+
     @Override
     public Integer getLawCode(Integer fineCode) {
         Integer code = agencyMapper.maxCode(fineCode);

@@ -30,7 +30,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     money_verify(lay,"resourceCompensation");
     initPage();
     loadStatus();
-
+    setTipContent();
     function initPage() {
         //编辑
         if($("#id").val()){
@@ -109,6 +109,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         if( $("#severity").val()==1){
             $("#severity").val(2);
             next.find("input").val(next.find("dd[lay-value='2']").text());
+            setTipContent();
         }
         if(!severity.hasClass("layui-disabled")){
             severity.addClass("layui-disabled");
@@ -123,8 +124,18 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 $("#severity").next().find("dd[lay-value='1']").removeClass("layui-disabled");
             }
         }
-
     });
+
+    form.on('select(severity)', function(data){
+        $("#tip_content").text("注："+data.elem[data.elem.selectedIndex].dataset.content);
+    });
+
+    function setTipContent(){
+        let val=$("#severity").val();
+        let content=$("#severity").find("option[value='"+val+"']").data("content");
+        $("#tip_content").text("注："+content);
+    }
+
 
     //提交数据
     function submitData(des,data){

@@ -202,9 +202,9 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">情节严重性</label>
                                     <div class="layui-input-inline">
-                                        <select name="severity" id="severity" data-status="${status}">
+                                        <select name="severity" id="severity" lay-filter="severity" data-status="${status}">
                                             @for(item in plotSeverity){
-                                              <option value="${item.code}">${item.message}</option>
+                                              <option value="${item.code}" data-content="${item.content}">${item.message}</option>
                                             @}
                                         </select>
                                     </div>
@@ -257,7 +257,7 @@
 
                             <div class="layui-form-item ">
                                 <div class="layui-inline label_bg">
-                                    <label class="layui-form-label" style="width:800px;color: red;text-align: left;font-size: 15px">注：处罚文书中表述</label>
+                                    <label id="tip_content" class="layui-form-label" style="width:800px;color: red;text-align: left;font-size: 15px">注：处罚文书中表述</label>
                                 </div>
                             </div>
 

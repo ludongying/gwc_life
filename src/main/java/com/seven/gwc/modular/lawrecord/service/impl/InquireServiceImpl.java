@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.dao.InquireMapper;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireProduceDO;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.InquireProduceSupplementDO;
 import com.seven.gwc.modular.lawrecord.dto.InquireDTO;
 import com.seven.gwc.modular.lawrecord.dto.InquireSupplementDTO;
 import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
@@ -110,21 +111,41 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
             BeanUtils.copyProperties(inquireEntity,inquireDTO);
             inquireDTO.setAddress();
             //补录信息
-            LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
-            wrapper.ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
-            List<InquireEntity> list = this.list(wrapper);
-            if(Objects.nonNull(list) && !list.isEmpty()){
-                List<InquireSupplementDTO> inquireSupplementDTOS=new ArrayList<>();
-                for (InquireEntity entity : list) {
-                    InquireSupplementDTO dto=new InquireSupplementDTO();
-                    BeanUtils.copyProperties(entity,dto);
-                    dto.setTime();
-                    dto.setOperators(operatorService.getByRecord(dto.getId()));
-                    inquireSupplementDTOS.add(dto);
-                }
-                inquireDTO.setInquireContent(inquireSupplementDTOS);
-            }
+            inquireDTO.setInquireContent(getInquireSupplement(id));
             return inquireDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public  List<InquireSupplementDTO> getInquireSupplement(String id){
+        LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id).eq(InquireEntity::getDeleteFlag,Boolean.TRUE);
+        List<InquireEntity> list = this.list(wrapper);
+        if(Objects.nonNull(list) && !list.isEmpty()){
+            List<InquireSupplementDTO> inquireSupplementDTOS=new ArrayList<>();
+            for (InquireEntity entity : list) {
+                inquireSupplementDTOS.add(parseInquireSupplementDTO(entity));
+            }
+            return inquireSupplementDTOS;
+        }
+        return null;
+    }
+
+    public InquireSupplementDTO parseInquireSupplementDTO(InquireEntity entity){
+        InquireSupplementDTO dto=new InquireSupplementDTO();
+        BeanUtils.copyProperties(entity,dto);
+        dto.setTime();
+        dto.setOperators(operatorService.getByRecord(dto.getId()));
+        return dto;
+    }
+
+
+    @Override
+    public Map<String, String> getSupplementParams(InquireEntity entity) {
+        InquireSupplementDTO inquireSupplementDTO = parseInquireSupplementDTO(entity);
+        if(Objects.nonNull(entity)){
+            return new InquireProduceSupplementDO(inquireSupplementDTO).toMap();
         }
         return null;
     }
@@ -144,6 +165,14 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         wrapper.eq(InquireEntity::getDeleteFlag,Boolean.TRUE)
                 .ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id);
         return this.list(wrapper);
+    }
+
+    @Override
+    public Integer getSupplementCount(String id){
+        LambdaQueryWrapper<InquireEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(InquireEntity::getDeleteFlag,Boolean.TRUE)
+                .ne(InquireEntity::getId,id).eq(InquireEntity::getRecordId,id);
+        return this.count(wrapper);
 
     }
 }

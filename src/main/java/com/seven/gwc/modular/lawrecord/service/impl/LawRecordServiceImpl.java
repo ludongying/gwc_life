@@ -85,6 +85,11 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         agencyVO.setShortName(GwcConsts.shortName);
         agencyVO.setLawCaseFineCode(LocalDate.now().getYear());
         agencyVO.setLawCaseCode(agencyService.getLawCode(agencyVO.getLawCaseFineCode()));
+        //设置默认值
+        agencyVO.setLawShipCode(GwcConsts.lawShipCode).setEnforcementAgency(GwcConsts.enforcementAgency)
+                .setAgencyPerson(GwcConsts.agencyPerson).setAgencyTel(GwcConsts.agencyTel)
+                .setAgencyAddr(GwcConsts.agencyAddr).setBank(GwcConsts.bank)
+                .setReviewAgency(GwcConsts.reviewAgency).setLawsuitAgency(GwcConsts.lawsuitAgency);
         agencyService.updateAgency(agencyVO);
         return lawRecord;
     }

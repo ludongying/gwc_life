@@ -63,6 +63,8 @@ public class InquireProduceDO extends InquireDO{
      */
     protected String A005;
 
+
+
     public InquireProduceDO(InquireEntity entity) {
         super(entity);
         ShipRealTypeEnum shipRealTypeEnum = ShipRealTypeEnum.findByCode(entity.getShipRealType());
@@ -80,7 +82,6 @@ public class InquireProduceDO extends InquireDO{
                 .setNet_Number(entity.getShipGenerateCount())
                 .setNet_Time(DateUtil.format(entity.getShipFishAreaDate(), "yyyy-MM-dd HH:mm"))
                 .setA005(entity.getShipGoodsCount());
-
 
 
     }

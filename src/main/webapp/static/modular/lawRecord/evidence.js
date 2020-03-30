@@ -24,7 +24,10 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
          'key':'law_evidence'
     }
         initPage();
-        startListen($,lay.key);
+        setTimeout(function () {
+            startListen($,lay.key);
+        },500);
+
 
     //下一步
     form.on('submit(nextStep)', function (data) {

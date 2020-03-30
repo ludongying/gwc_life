@@ -29,8 +29,6 @@ public interface InstrumentService {
     void generateInstrument(String id,Class<?> clazz);
 
 
-
-
     /**
      * 获取文书列表
      * @param id
@@ -44,7 +42,7 @@ public interface InstrumentService {
      * @param file
      * @return
      */
-    BaseResult uploadInstrument(String id,MultipartFile file);
+    BaseResult uploadInstrument(String id,Integer code,String generateName,MultipartFile file);
 
 
 

@@ -71,26 +71,26 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
         let data = res.data;
         if(data){
             for(let i=0;i<data.length;i++){
-                if(data.filePath){
+                if(data[i].filePath){
                     $("#down"+i).removeClass("layui-hide");
                 }
+                let code=$("#upload"+i).data("code");
+                let generateName=$("#upload"+i).data("generateName");
                 upload.render({
                     elem: "#upload"+i
-                    , url: '/file/uploadFile'
+                    , url: '/lawRecord/instrument/uploadInstrument?id=' + Feng.getUrlParam("id")+"&code="+code+"&generateName="+generateName
                     , accept: 'file' //普通文件
                     , exts: 'docx'
                     , done: function (res) {
-                        alert("ok");
                         if (res.success) {
+                            Feng.success("文件上传成功!");
                             $("#down"+i).data("filePath",res.content.path);
                             if( $("#down"+i).hasClass("layui-hide")){
                                 $("#down"+i).removeClass("layui-hide");
-                                $("upload"+i).html("更换");
+                                $("#upload"+i).html("更换");
                             }
                         } else {
-                            layer.alert(res.message, {
-                                closeBtn: 0
-                            });
+                            Feng.error("文件上传失败!"+data.message);
                         }
                     }
                 });

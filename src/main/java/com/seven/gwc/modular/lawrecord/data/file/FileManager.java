@@ -33,7 +33,7 @@ public class FileManager {
      * @param file
      * @return
      */
-    public BaseResult uploadFile(MultipartFile file){
+    public BaseResult<FileBase> uploadFile(MultipartFile file){
        return uploadFile(file,String.valueOf(System.currentTimeMillis()),null);
     }
 
@@ -42,7 +42,7 @@ public class FileManager {
      * @param file
      * @return
      */
-    public BaseResult uploadOrgFile(MultipartFile file,String dir){
+    public BaseResult<FileBase> uploadOrgFile(MultipartFile file,String dir){
         return uploadFile(file,"",dir);
     }
 
@@ -51,8 +51,8 @@ public class FileManager {
      * @param file
      * @return
      */
-    private BaseResult uploadFile(MultipartFile file,String time,String dir){
-        BaseResult result=new BaseResult();
+    private BaseResult<FileBase> uploadFile(MultipartFile file,String time,String dir){
+        BaseResult<FileBase> result=new BaseResult();
         if (Objects.nonNull(file) && !file.isEmpty()) {
             try {
                 FileUtils.generateDir(dirPath+dir);

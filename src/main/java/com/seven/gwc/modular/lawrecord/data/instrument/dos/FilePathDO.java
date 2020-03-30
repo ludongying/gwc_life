@@ -1,13 +1,15 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import com.alibaba.fastjson.JSON;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author : zzl
@@ -15,7 +17,6 @@ import java.util.Objects;
  * @description :
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class FilePathDO implements Comparable<FilePathDO>,Serializable {
 
@@ -23,14 +24,20 @@ public class FilePathDO implements Comparable<FilePathDO>,Serializable {
 
   private String path;
 
-  private Long timeStamp;
+  private String  generateName;
 
 
-  public FilePathDO(Integer code,String path){
+  public FilePathDO(Integer code,String path,String generateName){
       this.code=code;
       this.path=path;
-      this.timeStamp=System.currentTimeMillis();
+      this.generateName=generateName;
   }
+
+    public FilePathDO(Integer code,String path){
+        this.code=code;
+        this.path=path;
+        this.generateName="1";
+    }
 
   public static String  getJson(List<FilePathDO> list){
       return JSON.toJSONString(list);
@@ -42,15 +49,40 @@ public class FilePathDO implements Comparable<FilePathDO>,Serializable {
           filePathDOS.sort(FilePathDO::compareTo);
           return filePathDOS;
       }
-      return null;
+      return new ArrayList<>();
    }
+
+    public static List<FilePathDO>  addFilePath(List<FilePathDO> list, FilePathDO d){
+        Map<Integer, List<FilePathDO>> map = list.stream().collect(Collectors.groupingBy(FilePathDO::getCode));
+        Integer c = d.getCode();
+        List<FilePathDO> filePathDOS = map.get(c);
+        if(Objects.isNull(filePathDOS)||filePathDOS.isEmpty()){
+            list.add(d);
+        }else if(filePathDOS.size()==1){
+            list.remove(filePathDOS);
+            list.add(d);
+        }else{
+            String t = d.getGenerateName();
+            FilePathDO delDto=null;
+            for (FilePathDO filePathDO : filePathDOS) {
+                if(t.equals(filePathDO.getGenerateName())){
+                    delDto=filePathDO;
+                    break;
+                }
+            }
+            if(Objects.nonNull(delDto)){
+                list.remove(delDto);
+            }
+            list.add(d);
+        }
+        return list;
+    }
+
 
     @Override
     public int compareTo(FilePathDO o) {
         if(this.getCode()>o.getCode()){
             return 1;
-        }else if(this.getCode().equals(o.getCode())){
-            return  (int)(this.getTimeStamp()-o.getTimeStamp());
         }
         return -1;
     }

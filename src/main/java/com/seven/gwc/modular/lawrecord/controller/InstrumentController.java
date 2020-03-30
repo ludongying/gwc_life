@@ -1,11 +1,13 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author : zzl
@@ -39,5 +41,13 @@ public class InstrumentController {
         res.setData(instrumentService.getInstrument(id));
         return res;
     }
+
+
+    @RequestMapping("uploadInstrument")
+    @ResponseBody
+    public BaseResult uploadInstrument(String id,Integer code,String generateName,MultipartFile file){
+         return instrumentService.uploadInstrument(id, code,generateName,file);
+    }
+
 
 }

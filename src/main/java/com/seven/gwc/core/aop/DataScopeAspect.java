@@ -106,7 +106,7 @@ public class DataScopeAspect {
                 sqlString = new StringBuilder();
             } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
                 //自定义数据
-                sqlString.append(ToolUtil.format(" OR {}.id IN ( SELECT dept_id FROM sys_position_dept WHERE position_id IN ( {} ) ) ", deptAlias, positionEntity.getId()));
+                sqlString.append(ToolUtil.format(" OR {}.id IN ( SELECT dept_id FROM sys_position_dept WHERE position_id IN ( '{}' ) ) ", deptAlias, positionEntity.getId()));
             } else if (DATA_SCOPE_DEPT.equals(dataScope)) {
                 //部门数据
                 sqlString.append(ToolUtil.format(" OR {}.id = {}", deptAlias, user.getDeptId()));
@@ -117,7 +117,7 @@ public class DataScopeAspect {
             } else if (DATA_SCOPE_SELF.equals(dataScope)) {
                 //仅本人数据
                 if (ToolUtil.isNotEmpty(userAlias)) {
-                    sqlString.append(ToolUtil.format(" OR {}.id = {} ", userAlias, user.getId()));
+                    sqlString.append(ToolUtil.format(" OR {}.id = '{}' ", userAlias, user.getId()));
                 } else {
                     // 数据权限为仅本人且没有userAlias别名不查询任何数据
                     sqlString.append(" OR 1=0 ");

@@ -150,12 +150,27 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 点击编辑船员信息
      */
     Person.onEditPerson = function (data) {
-        func.open({
-            title: '编辑船员信息',
-            area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
-            tableId: Person.tableId
-        });
+        if($('#roleNames').val().includes('超级管理员') || $('#roleNames').val().includes('船长') || $('#roleNames').val().includes('船务管理员')){
+            func.open({
+                title: '编辑船员信息',
+                area: ['1000px', '500px'],
+                content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
+                tableId: Person.tableId
+            });
+        }else{
+            if($('#userId').val() === data.personId){
+                func.open({
+                    title: '编辑船员信息',
+                    area: ['1000px', '500px'],
+                    content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
+                    tableId: Person.tableId
+                });
+            }else {
+                Feng.error('无权限编辑！');
+            }
+        }
+
+
     };
 
     /**

@@ -152,6 +152,9 @@ public class ShipController extends BaseController {
     @ResponseBody
     public ShipEntity shipFirst(ShipEntity shipEntity) {
         List<ShipEntity> ships = shipService.selectShip(shipEntity);
+        if(ships.size() <= 0){
+            return null;
+        }
         return ships.get(0);
     }
 

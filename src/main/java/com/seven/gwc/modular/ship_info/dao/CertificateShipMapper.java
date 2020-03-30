@@ -16,8 +16,10 @@ public interface CertificateShipMapper extends BaseMapper<CertificateShipEntity>
 
     /**
      * 根据证书信息查询证书列表
-     * @param certificateName 证书名称或编码
+     * @param certificate 证书实体
      * @return
      */
-    List<CertificateShipEntity> CertificateEntityList(@Param("certificateName") String certificateName, @Param("ids") String ids);
+    List<CertificateShipEntity> CertificateEntityList(@Param("certificate") CertificateShipEntity certificate, @Param("ids") String ids, @Param("total") Integer total, @Param("size") Integer size);
+
+    List<CertificateShipEntity> getListSize(@Param("certificate") CertificateShipEntity certificate, @Param("ids") String ids);
 }

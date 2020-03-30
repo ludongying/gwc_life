@@ -27,11 +27,13 @@ public interface CertificateService extends IService<CertificateEntity> {
     /**
      * 证书信息查询列表
      *
-     * @param certificateName 名称;
+     * @param certificate 证书实体;
      * @param personId 船员表id
      * @return List<证书信息服务对象>
      */
-    List<CertificateEntity> selectCertificate(String certificateName, String personId);
+    List<CertificateEntity> selectCertificate(CertificateEntity certificate, String personId, Integer total, Integer size);
+
+    Integer getListSize(CertificateEntity certificate, String personId);
 
     /**
      * 证书信息新建

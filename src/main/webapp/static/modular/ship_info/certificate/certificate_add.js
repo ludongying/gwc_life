@@ -15,13 +15,31 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate','upload'], function () {
     laydate.render({
         elem: '#issueDate',
         type: 'date',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date(value).getTime();
+            var endTime = new Date($('#outDate').val()).getTime();
+            if (endTime < startDate) {
+                layer.msg('到期日期不能小于签发日期');
+                $('#issueDate').val($('#outDate').val());
+            }
+        }
     });
+
     laydate.render({
         elem: '#outDate',
         type: 'date',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date($('#issueDate').val()).getTime();
+            var endTime = new Date(value).getTime();
+            if (endTime < startDate) {
+                $('#outDate').val($('#issueDate').val());
+                layer.msg('到期日期不能小于签发日期');
+            }
+        }
     });
+
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();

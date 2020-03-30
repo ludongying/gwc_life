@@ -16,12 +16,29 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     laydate.render({
         elem: '#issueDate',
         type: 'date',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date(value).getTime();
+            var endTime = new Date($('#outDate').val()).getTime();
+            if (endTime < startDate) {
+                layer.msg('到期日期不能小于签发日期');
+                $('#issueDate').val($('#outDate').val());
+            }
+        }
     });
+
     laydate.render({
         elem: '#outDate',
         type: 'date',
-        trigger: 'click'
+        trigger: 'click',
+        done: function (value, date, endDate) {
+            var startDate = new Date($('#issueDate').val()).getTime();
+            var endTime = new Date(value).getTime();
+            if (endTime < startDate) {
+                $('#outDate').val($('#issueDate').val());
+                layer.msg('到期日期不能小于签发日期');
+            }
+        }
     });
 
     // 让当前iframe弹层高度适应
@@ -33,7 +50,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var ajax = new $ax(Feng.ctxPath + "/certificate/detail/" + Feng.getUrlParam("certificateId"));
     var result = ajax.start();
     //多图片回显
-    if(result.attachFilePath != null) {
+    if (result.attachFilePath != null) {
         fileName = result.attachFilePath;
         var files = fileName.split(",");
         for (i = 0; i < files.length - 1; i++) {
@@ -178,4 +195,53 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             anim: 0
         });
     })
+
+    // var issueDate = laydate.render({
+    //     elem: '#issueDate',
+    //     type: 'date',
+    //     trigger: 'click',
+    //     max: "2099-12-31",//设置一个默认最大值
+    //     done: function (value, date) {
+    //         outDate.config.min = {//限制日历范围
+    //             year: date.year,
+    //             month: date.month - 1,
+    //             date: date.date,
+    //             hours: 0,
+    //             minutes: 0,
+    //             seconds: 0
+    //         };
+    //         var startDate = new Date(value).getTime();
+    //         var endTime = new Date($('#outDate').val()).getTime();
+    //         if (endTime < startDate) {
+    //             layer.msg('签发日期不能小于到期日期,请重新选择');
+    //             $('#issueDate').val();
+    //         }
+    //
+    //     }
+    // });
+    //
+    // var outDate = laydate.render({
+    //     elem: '#outDate',
+    //     type: 'date',
+    //     trigger: 'click',
+    //     min: "1900-1-1",//设置min默认最小值
+    //     done: function (value, date) {
+    //         issueDate.config.max = {//限制日历范围
+    //             year: date.year,
+    //             month: date.month - 1,//注意是month-1，写在date上的话你后边的日期选择不了
+    //             date: date.date,
+    //             hours: 0,
+    //             minutes: 0,
+    //             seconds: 0
+    //         };
+    //         var startDate = new Date($('#issueDate').val()).getTime();
+    //         var endTime = new Date(value).getTime();
+    //         if (endTime < startDate) {
+    //             layer.msg('签发日期不能小于到期日期,请重新选择');
+    //             $('#outDate').val();
+    //             form.render();
+    //         }
+    //     }
+    //     });
+
 });

@@ -81,8 +81,11 @@ public class PersonController extends BaseController {
     public BaseResultPage<PersonEntity> list(PersonEntity personEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<PersonEntity> persons = personService.selectPerson(personEntity);
+        List<PersonEntity> persons = personService.selectPerson(personEntity,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(persons);
+        Integer size = personService.getListSize(personEntity);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 

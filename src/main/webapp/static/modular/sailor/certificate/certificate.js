@@ -15,7 +15,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var Certificate = {
         tableId: "certificateTable",
         condition: {
-            certificateName: ""
+            name: ""
         }
     };
 
@@ -131,7 +131,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     Certificate.search = function () {
         var queryData = {};
-        queryData['certificateName'] = $("#certificateName").val().trim();
+        queryData['name'] = $("#certificateName").val().trim();
         table.reload(Certificate.tableId, {where: queryData});
     };
 

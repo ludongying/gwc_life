@@ -16,6 +16,7 @@ public interface CertificateMapper extends BaseMapper<CertificateEntity> {
 
     /**
      * 根据证书信息查询证书列表
+     *
      * @param certificateName 证书名称或编码
      * @return
      */
@@ -23,13 +24,17 @@ public interface CertificateMapper extends BaseMapper<CertificateEntity> {
 
     /**
      * 根据证书信息查询证书列表
-     * @param certificateName 证书名称或编码
+     *
+     * @param certificate 证书实体
      * @return
      */
-    List<CertificateEntity> CertificateEntityList(@Param("certificateName") String certificateName, @Param("ids") String ids);
+    List<CertificateEntity> CertificateEntityList(@Param("certificate") CertificateEntity certificate, @Param("ids") String ids, @Param("total") Integer total, @Param("size") Integer size);
+
+    List<CertificateEntity> getListSize(@Param("certificate") CertificateEntity certificate, @Param("ids") String ids);
 
     /**
      * 根据证书ids字符串查询执法证实体
+     *
      * @param ids 证书ids
      * @return
      */

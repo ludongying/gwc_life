@@ -3,6 +3,7 @@ package com.seven.gwc.modular.sailor.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
@@ -70,11 +71,10 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     }
 
     @Override
-    public List<CertificateEntity> selectCertificate(String certificateName, String personId) {
-//        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
-//        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<CertificateEntity> selectCertificate(CertificateEntity certificate, String personId, Integer total, Integer size) {
         String idsNew = personMapper.selectById(personId).getCertificateId();
-        List<CertificateEntity> list = certificateMapper.CertificateEntityList(certificateName, idsNew);
+        List<CertificateEntity> list = certificateMapper.CertificateEntityList(certificate, idsNew, total, size);
         for (CertificateEntity certificateEntity : list) {
             if (ToolUtil.isNotEmpty(certificateEntity.getCertificateType())) {
                 DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());
@@ -93,6 +93,13 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
     }
 
     @Override
+    public Integer getListSize(CertificateEntity certificate,String personId) {
+        String idsNew = personMapper.selectById(personId).getCertificateId();
+        List<CertificateEntity> list =  certificateMapper.getListSize(certificate,idsNew);
+        return list.size();
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean addCertificate(CertificateEntity certificate, ShiroUser user, String personId) throws ParseException {
         //判断证书编码是否存在
@@ -100,9 +107,9 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateEntity::getDeleteFlag, 1);
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船员证书
-        if(certificateEntity != null){
+        if (certificateEntity != null) {
             DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
-            if (dictEntity.getName().equals("船员证书")){
+            if (dictEntity.getName().equals("船员证书")) {
                 return false;
             }
         }
@@ -113,13 +120,13 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         //计算证书是否过期
         Date date = new Date();
         if (ToolUtil.isNotEmpty(certificate.getOutDate())) {
-            int intervalDays = daysBetween(date,certificate.getOutDate());
-            if(intervalDays <0){//已过期
+            int intervalDays = daysBetween(date, certificate.getOutDate());
+            if (intervalDays < 0) {//已过期
                 certificate.setState(2);
-            }else{
-                if(intervalDays <= certificate.getWindowPhase()){//即将过期
+            } else {
+                if (intervalDays <= certificate.getWindowPhase()) {//即将过期
                     certificate.setState(1);
-                }else{//正常
+                } else {//正常
                     certificate.setState(0);
                 }
             }
@@ -177,9 +184,9 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         lambdaQuery.eq(CertificateEntity::getCertificateId, certificate.getCertificateId()).eq(CertificateEntity::getDeleteFlag, 1).ne(CertificateEntity::getId, certificate.getId());
         CertificateEntity certificateEntity = certificateMapper.selectOne(lambdaQuery);
         //确定是否为船员证书
-        if(certificateEntity != null){
+        if (certificateEntity != null) {
             DictEntity dictEntity = dictMapper.selectById(certificateEntity.getOwnerType());
-            if (dictEntity.getName().equals("船员证书")){
+            if (dictEntity.getName().equals("船员证书")) {
                 return false;
             }
         }
@@ -188,13 +195,13 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         //计算证书是否过期
         Date date = new Date();
         if (ToolUtil.isNotEmpty(certificate.getOutDate())) {
-            int intervalDays = daysBetween(date,certificate.getOutDate());
-            if(intervalDays <0){//已过期
+            int intervalDays = daysBetween(date, certificate.getOutDate());
+            if (intervalDays < 0) {//已过期
                 certificate.setState(2);
-            }else{
-                if(intervalDays <= certificate.getWindowPhase()){//即将过期
+            } else {
+                if (intervalDays <= certificate.getWindowPhase()) {//即将过期
                     certificate.setState(1);
-                }else{//正常
+                } else {//正常
                     certificate.setState(0);
                 }
             }
@@ -211,41 +218,41 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         for (CertificateEntity certificateEntity : list) {
             int stateCal;
             if (ToolUtil.isNotEmpty(certificateEntity.getOutDate())) {
-               int intervalDays = daysBetween(date,certificateEntity.getOutDate());
-               if(intervalDays <0){//已过期
+                int intervalDays = daysBetween(date, certificateEntity.getOutDate());
+                if (intervalDays < 0) {//已过期
                     stateCal = 2;
-               }else{
-                   if(intervalDays <= certificateEntity.getWindowPhase()){//即将过期
-                       stateCal = 1;
-                   }else{//正常
-                       stateCal = 0;
-                   }
-               }
-               if(stateCal != certificateEntity.getState())
-               {
-                   certificateEntity.setState(stateCal);
-                   certificateMapper.updateById(certificateEntity);
-               }
+                } else {
+                    if (intervalDays <= certificateEntity.getWindowPhase()) {//即将过期
+                        stateCal = 1;
+                    } else {//正常
+                        stateCal = 0;
+                    }
+                }
+                if (stateCal != certificateEntity.getState()) {
+                    certificateEntity.setState(stateCal);
+                    certificateMapper.updateById(certificateEntity);
+                }
             }
         }
     }
 
     /**
      * 日期格式的计算
+     *
      * @param smdate 较小的时间
      * @param bdate  较大的时间
      * @return 相差天数
      */
-    public static int daysBetween(Date smdate,Date bdate) throws ParseException {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        smdate=sdf.parse(sdf.format(smdate));
-        bdate=sdf.parse(sdf.format(bdate));
+    public static int daysBetween(Date smdate, Date bdate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        smdate = sdf.parse(sdf.format(smdate));
+        bdate = sdf.parse(sdf.format(bdate));
         Calendar cal = Calendar.getInstance();
         cal.setTime(smdate);
         long time1 = cal.getTimeInMillis();
         cal.setTime(bdate);
         long time2 = cal.getTimeInMillis();
-        long between_days=(time2-time1)/(1000*3600*24);
-        return (int)between_days;
+        long between_days = (time2 - time1) / (1000 * 3600 * 24);
+        return (int) between_days;
     }
 }

@@ -72,6 +72,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         submitData("agency",data);
     });
     function submitData(des,data){
+        if(!verifyOperators()){
+            console.log("no submit");
+            return;
+        }
         //获取地址
         data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
         //获取补录内容
@@ -85,6 +89,24 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         });
     }
     //补录笔录
+    //补录验证
+    function verifyOperators(){
+        let inquires=$("#inquire_box .inquire_index");
+        if(inquires.length>0){
+            for(let i=0;i<inquires.length;i++){
+              let p1=  inquires.eq(i).find("select.person1").val();
+              let inquire2= inquires.eq(i).find("select.person2");
+              let p2= inquire2.val();
+              if(p1 && p2 && (p1===p2)){
+                  inquire2.next().find("input").addClass("msg-error");
+                  msg_error($,"执法人员不能选择同一个人")
+                  return false;
+              }
+            }
+        }
+        return true;
+    }
+    
     //初始化内容
     function initContent(content){
         let index=($('#inquire_box .inquire_index')).length+1;
@@ -124,7 +146,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                     $('#inquireStartTime'+index).val(arr[0].trim());
                     $('#inquireEndTime'+index).val(arr[1].trim());
                 }
-
             }
         });
 
@@ -132,6 +153,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
             let input= $(data.elem).parent().parent().next().find("input");
             input.eq(0).val(data.elem[data.elem.selectedIndex].dataset.certificate);
             input.eq(1).val(data.elem[data.elem.selectedIndex].dataset.personName);
+            $(data.elem).parent().find("input").removeClass("msg-error")
         });
 
 

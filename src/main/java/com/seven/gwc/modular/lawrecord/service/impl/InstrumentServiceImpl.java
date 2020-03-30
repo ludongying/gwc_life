@@ -135,7 +135,7 @@ public class InstrumentServiceImpl implements InstrumentService {
                 //获取参数
                 Map<String, String> supplementParam = getSupplementParam(id, inquireEntity);
                 String[] nameArr = fileName.split(FileUtils.regex_dot);
-                String exportPath=getGeneratePath(lawType)+nameArr[0] + inquireEntity.getInvestigateName()+nameArr[1];
+                String exportPath=getGeneratePath(lawType)+nameArr[0] + inquireEntity.getInvestigateName()+"."+nameArr[1];
                 new InstrumentModelData(InstrumentEnum.getPath()+fileName,supplementParam).export(exportPath);
                 files.add(new FilePathDO(InstrumentEnum.INSTRUMENT_INQUIRE.getCode(),exportPath,inquireEntity.getId()));
             }
@@ -199,7 +199,7 @@ public class InstrumentServiceImpl implements InstrumentService {
         LawRecordEntity lawRecordEntity = lawRecordService.getById(id);
         LawTypeDTO lawType = lawRecordService.findLawType(id);
         Boolean writFlag = lawType.getWritFlag();
-        if(Objects.isNull(writFlag) || !writFlag){
+        if(Objects.nonNull(writFlag) && writFlag ){
             String autoWritFilePath = lawRecordEntity.getAutoWritFilePath();
             String manualWritFilePath = lawRecordEntity.getManualWritFilePath();
             Map<String, String> param = getParam(id);
@@ -289,7 +289,14 @@ public class InstrumentServiceImpl implements InstrumentService {
             for (FilePathDO filePathDO : autoManually) {
                 FilePathDTO filePathDTO=new FilePathDTO();
                 BeanUtils.copyProperties(filePathDO,filePathDTO);
-                filePathDTO.setName(InstrumentEnum.findByCode(filePathDO.getCode()).getMessage());
+                Integer code = filePathDO.getCode();
+                if(InstrumentEnum.INSTRUMENT_INQUIRE.getCode().equals(code)){
+                    String pathStr = filePathDTO.getPath();
+                    String name = pathStr.substring(pathStr.lastIndexOf(FileUtils.file_sep) + 1);
+                    filePathDTO.setName(name);
+                }else{
+                    filePathDTO.setName(InstrumentEnum.findByCode(code).getMessage());
+                }
                 res.add(filePathDTO);
             }
             res.addAll(InstrumentEnum.getManually(lawType));
@@ -328,12 +335,14 @@ public class InstrumentServiceImpl implements InstrumentService {
         List<FilePathDO> writs = FilePathDO.getFiles(lawRecordEntity.getWritFilePath());
         autos.addAll(writs);
         String exportPath=getGeneratePath(lawType)+lawType.getLawCaseCode()+".docx";
-        if(!writs.isEmpty()){
+        if(!autos.isEmpty()){
             autos.sort(FilePathDO::compareTo);
             List<String> paths=autos.stream().map(FilePathDO::getPath).collect(Collectors.toList());
             boolean success = WordUtils.mergeDoc(paths, exportPath);
             res.setSuccess(success);
             res.setContent(exportPath);
+        }else{
+            res.setMessage("无文书可生成");
         }
         return res;
     }

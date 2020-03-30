@@ -1,12 +1,13 @@
 package com.seven.gwc;
 
-import org.springframework.util.ResourceUtils;
+import java.io.File;
 
 public class test {
 
 
         public static void main(String[] args) {
-            System.out.println(ResourceUtils.CLASSPATH_URL_PREFIX);
+                File file = new File("E:/ideaws/gwc_work/GWC-WEB/target/classes/\\static\\lawrecord\\instrument\\12查封（扣押）决定书和清单.docx");
+                System.out.println(file.exists());
         }
 
 }

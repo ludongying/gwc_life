@@ -53,6 +53,10 @@
         background-color: #F2F2F2;
         margin-bottom: 0;
     }
+
+    .msg-error{
+      border:1px solid red
+    }
 </style>
 
 <div class="layui-fluid">
@@ -426,7 +430,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-inline">
-                            <select  data-name="personId1{{d.index}}"  lay-filter="law_person" lay-search=""  id="law_person1{{d.index}}">
+                            <select  data-name="personId1{{d.index}}" class="person1" lay-filter="law_person" lay-search=""  id="law_person1{{d.index}}">
                                 <option value="">请选择执法人员</option>
                                 @if(isNotEmpty(person)){
                                     @for(item in person){
@@ -451,7 +455,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-inline">
-                            <select data-name="personId2{{d.index}}" lay-filter="law_person" lay-search="" lay-verify="person2" id="law_person2">
+                            <select data-name="personId2{{d.index}}" class="person2"  lay-filter="law_person" lay-search="" lay-verify="person2" id="law_person2{{d.index}}">
                                 <option value="">请选择执法人员</option>
                                 @if(isNotEmpty(person)){
                                     @for(item in person){

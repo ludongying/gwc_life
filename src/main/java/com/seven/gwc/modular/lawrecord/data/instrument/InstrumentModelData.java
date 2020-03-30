@@ -52,7 +52,7 @@ public class InstrumentModelData {
         try {
             inputStream = new FileInputStream(new File(path));
         } catch (FileNotFoundException e) {
-            log.error(">>>>文书模板路径正确");
+            log.error(">>>>文书模板路径不正确:"+path);
         }
         try {
             if(path.endsWith(WORD_2003)){

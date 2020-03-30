@@ -100,6 +100,7 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         }
         BaseResult baseResult = new BaseResult(true, "");
         baseResult.setContent(vo.getId());
+        instrumentService.generateInstrument(vo.getId(), InquireEntity.class);
         return baseResult;
     }
 

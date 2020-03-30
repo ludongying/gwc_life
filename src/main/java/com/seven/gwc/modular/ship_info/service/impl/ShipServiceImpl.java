@@ -3,7 +3,6 @@ package com.seven.gwc.modular.ship_info.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
@@ -43,20 +42,20 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
      * 执法船信息管理查询列表
      */
     @Override
-    @DataScope(deptAlias = "d", userAlias = "u")
+//    @DataScope(deptAlias = "d", userAlias = "u")
     public List<ShipEntity> selectShip(ShipEntity shipEntity) {
 //        LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.<ShipEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(shipName),ShipEntity::getName,shipName);
 //        return shipMapper.selectList(lambdaQuery);
         List<ShipEntity> ships = shipMapper.ShipEntityList(shipEntity);
         for (ShipEntity ship : ships) {
-            if (ToolUtil.isNotEmpty(shipEntity.getNationality())) {
-                DictEntity nationDict = dictMapper.selectById(shipEntity.getNationality());
+            if (ToolUtil.isNotEmpty(ship.getNationality())) {
+                DictEntity nationDict = dictMapper.selectById(ship.getNationality());
                 if (nationDict != null) {
                    ship.setNationalityDesp(nationDict.getName());
                 }
             }
-            if (ToolUtil.isNotEmpty(shipEntity.getType())) {
+            if (ToolUtil.isNotEmpty(ship.getType())) {
                 DictEntity typeDict = dictMapper.selectById(ship.getType());
                 if (typeDict != null) {
                     ship.setTypeDesp(typeDict.getName());

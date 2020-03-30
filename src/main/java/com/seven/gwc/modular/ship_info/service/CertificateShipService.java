@@ -19,11 +19,13 @@ public interface CertificateShipService extends IService<CertificateShipEntity> 
     /**
      * 证书信息查询列表
      *
-     * @param certificateName 名称;
+     * @param certificate 船舶证书实体;
      * @param shipId 船员表id
      * @return List<证书信息服务对象>
      */
-    List<CertificateShipEntity> selectCertificate(String certificateName, String shipId);
+    List<CertificateShipEntity> selectCertificate(CertificateShipEntity certificate, String shipId, Integer total, Integer size);
+
+    Integer getListSize(CertificateShipEntity certificate, String shipId);
 
     /**
      * 证书信息新建

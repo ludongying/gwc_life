@@ -87,4 +87,5 @@ public class CertificateEntity extends GwcBaseEntity implements Serializable {
     /**证书状态*/
     private Integer state;
 
+
 }

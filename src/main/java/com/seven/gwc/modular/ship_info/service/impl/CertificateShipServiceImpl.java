@@ -3,6 +3,7 @@ package com.seven.gwc.modular.ship_info.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
@@ -46,11 +47,12 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
     private ShipMapper shipMapper;
 
     @Override
-    public List<CertificateShipEntity> selectCertificate(String certificateName, String shipId) {
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<CertificateShipEntity> selectCertificate(CertificateShipEntity certificate, String shipId, Integer total, Integer size) {
 //        LambdaQueryWrapper<CertificateEntity> lambdaQuery = Wrappers.<CertificateEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(certificateName),CertificateEntity::getName,certificateName);
         String idsNew = shipMapper.selectById(shipId).getCertificateId();
-        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificateName, idsNew);
+        List<CertificateShipEntity> list = certificateMapper.CertificateEntityList(certificate, idsNew, total, size);
         for (CertificateShipEntity certificateEntity : list) {
             if (ToolUtil.isNotEmpty(certificateEntity.getCertificateType())) {
                 DictEntity certificateTypeDict = dictMapper.selectById(certificateEntity.getCertificateType());
@@ -66,6 +68,13 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
             }
         }
         return list;
+    }
+
+    @Override
+    public Integer getListSize(CertificateShipEntity certificate, String shipId) {
+        String idsNew = shipMapper.selectById(shipId).getCertificateId();
+        List<CertificateShipEntity> list =  certificateMapper.getListSize(certificate,idsNew);
+        return list.size();
     }
 
     @Override

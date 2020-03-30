@@ -19,7 +19,9 @@ public interface PersonMapper extends BaseMapper<PersonEntity> {
      * @param personEntity 船员实体
      * @return
      */
-    List<PersonEntity> PersonEntityList(@Param("person") PersonEntity personEntity);
+    List<PersonEntity> PersonEntityList(@Param("person") PersonEntity personEntity, @Param("total") Integer total, @Param("size") Integer size);
+
+    List<PersonEntity> getListSize(@Param("person")  PersonEntity personEntity);
 
     List<PersonEntity> PersonNamesEntityList(@Param("id") String id);
 
@@ -30,4 +32,6 @@ public interface PersonMapper extends BaseMapper<PersonEntity> {
     List<PersonEntity> PersonLawEntityList();
 
     List<PersonEntity> PersonsByDeptList(@Param("deptId") String deptId);
+
+    PersonEntity getPerson(@Param("id") String id);
 }

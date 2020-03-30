@@ -87,11 +87,14 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<CertificateShipEntity> list(String certificateName, String shipId) {
+    public BaseResultPage<CertificateShipEntity> list(CertificateShipEntity certificate,String ids, String shipId) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificateName,shipId);
+        List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificate,shipId,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(certificates);
+        Integer size = certificateService.getListSize(certificate,shipId);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 

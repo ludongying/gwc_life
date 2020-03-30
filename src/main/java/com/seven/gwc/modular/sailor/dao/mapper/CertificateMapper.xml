@@ -32,28 +32,48 @@
         left join sys_dict d on d.id = c.owner_type
         where d.name = '船员证书' and c.delete_flag = 1
         <if test="certificateName != null and certificateName != ''">
-            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%')
+            and c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like
+            CONCAT('%',#{certificateName},'%')
         </if>
 
     </select>
 
     <select id="CertificateEntityList" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
         select c.* from ship_info_certificate c
-        left join sys_dict d on d.id = c.owner_type
-        where d.name = '船员证书' and #{ids} like CONCAT('%',c.id,'%')
-              and c.delete_flag = 1
-        <if test="certificateName != null and certificateName != ''">
-            and (c.name like CONCAT('%',#{certificateName},'%') or c.certificate_id like CONCAT('%',#{certificateName},'%'))
+        left join sys_dict t on t.id = c.owner_type
+        LEFT JOIN sys_user u ON c.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where t.name = '船员证书' and #{ids} like CONCAT('%',c.id,'%')
+        and c.delete_flag = 1
+        <if test="certificate.name != null and certificate.name != ''">
+            and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
+            CONCAT('%',#{certificate.name},'%'))
         </if>
-<!--        <if test="ids != null">-->
-
-<!--        </if>-->
+        <!-- 数据范围过滤 -->
+        ${certificate.params.dataScope}
+        order by c.create_date desc
+        LIMIT #{total} , #{size}
     </select>
 
     <select id="CertificateLawEntityList" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
         select c.* from ship_info_certificate c
         left join sys_dict d on d.id = c.certificate_type
         where c.delete_flag = 1 and d.name = '执法证' and #{ids} like CONCAT('%',c.id,'%')
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.sailor.entity.CertificateEntity">
+        select c.* from ship_info_certificate c
+        left join sys_dict t on t.id = c.owner_type
+        LEFT JOIN sys_user u ON c.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where t.name = '船员证书' and #{ids} like CONCAT('%',c.id,'%')
+        and c.delete_flag = 1
+        <if test="certificate.name != null and certificate.name != ''">
+            and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
+            CONCAT('%',#{certificate.name},'%'))
+        </if>
+        <!-- 数据范围过滤 -->
+        ${certificate.params.dataScope}
     </select>
 
 </mapper>

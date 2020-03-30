@@ -40,11 +40,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
     //初始化船员信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/person/detail/" + Feng.getUrlParam("id"));
     var result = ajax.start();
-    form.val('personForm',result);
+    form.val('personForm', result);
 
     //获取岗位下拉框分组多选
     $.ajax({
-        url: Feng.ctxPath + '/position/listPositions?ids='+result.positionId,
+        url: Feng.ctxPath + '/position/listPositions?ids=' + result.positionId,
         dataType: 'json',
         type: 'get',
         success: function (data) {
@@ -98,18 +98,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
             area: ['300px', '350px'],
             content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
             end: function () {
-                if (UserInfoDlg.data.personName.length != 0) {
+                if (UserInfoDlg.data.personId != null && UserInfoDlg.data.personId != "") {
                     $("#personId").val(UserInfoDlg.data.personId);
                     $("#personName").val(UserInfoDlg.data.personName);
-
                     //获取并自动填入的用户信息
                     var ajax = new $ax(Feng.ctxPath + "/user/detail/" + UserInfoDlg.data.personId);
                     var result = ajax.start();
-                    form.val('personForm',result);
+                    form.val('personForm', result);
 
                     //获取岗位下拉框分组多选
                     $.ajax({
-                        url: Feng.ctxPath + '/position/listPositions?ids='+result.positionId,
+                        url: Feng.ctxPath + '/position/listPositions?ids=' + result.positionId,
                         dataType: 'json',
                         type: 'get',
                         success: function (data) {
@@ -123,7 +122,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
             }
         });
     });
-
 
 
     // 表单提交事件

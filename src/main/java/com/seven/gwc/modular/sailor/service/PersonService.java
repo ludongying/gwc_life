@@ -23,7 +23,9 @@ public interface PersonService extends IService<PersonEntity> {
      * @param personEntity 人员实体
      * @return List<船员信息服务对象>
      */
-    List<PersonEntity> selectPerson(PersonEntity personEntity);
+    List<PersonEntity> selectPerson(PersonEntity personEntity, Integer total, Integer size);
+
+    Integer getListSize(PersonEntity personEntity);
 
     /**
      * 船员信息新建

@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.dao.CertificateMapper;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
@@ -50,25 +50,34 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     private CertificateMapper certificateMapper;
 
     @Override
-    public List<PersonEntity> selectPerson(PersonEntity personEntity) {
-        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.<PersonEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(personEntity), PersonEntity::getPersonName, personEntity);
-        List<PersonEntity> persons = personMapper.PersonEntityList(personEntity);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<PersonEntity> selectPerson(PersonEntity personEntity, Integer total, Integer size) {
+//        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.<PersonEntity>lambdaQuery();
+//        lambdaQuery.like(ToolUtil.isNotEmpty(personEntity), PersonEntity::getPersonName, personEntity);
+        List<PersonEntity> persons = personMapper.PersonEntityList(personEntity, total, size);
         for (PersonEntity person : persons) {
-            String[] positionIds = person.getPositionId().split(FileUtils.file_2_file_sep);
-            String positions = "";
-            for (int i = 0; i < positionIds.length; i++) {
-                if (positionIds[i] != null && !positionIds[i].isEmpty()) {
-                    if (positions.isEmpty()) {
-                        positions = positionMapper.selectById(positionIds[i]).getName();
-                    } else {
-                        positions += FileUtils.file_2_file_sep + positionMapper.selectById(positionIds[i]).getName();
+            if(person.getPositionId()!=null) {
+                String[] positionIds = person.getPositionId().split(FileUtils.file_2_file_sep);
+                String positions = "";
+                for (int i = 0; i < positionIds.length; i++) {
+                    if (positionIds[i] != null && !positionIds[i].isEmpty()) {
+                        if (positions.isEmpty()) {
+                            positions = positionMapper.selectById(positionIds[i]).getName();
+                        } else {
+                            positions += FileUtils.file_2_file_sep + positionMapper.selectById(positionIds[i]).getName();
+                        }
                     }
                 }
+                person.setPositionName(positions);
             }
-            person.setPositionName(positions);
         }
         return persons;
+    }
+
+    @Override
+    public Integer getListSize(PersonEntity personEntity) {
+        List<PersonEntity> list =  personMapper.getListSize(personEntity);
+        return list.size();
     }
 
     @Override
@@ -190,9 +199,14 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 
     @Override
     public PersonEntity getOneById(String id) {
-        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.<PersonEntity>lambdaQuery();
-        lambdaQuery.eq(PersonEntity::getId, id);
-        return personMapper.selectOne(lambdaQuery);
+//        PersonEntity personEntity = new PersonEntity();
+//        personEntity.setId(id);
+//        List<PersonEntity> list = personMapper.PersonEntityList(personEntity);
+//        if(list.size()<=0){
+//            return null;
+//        }
+//        return list.get(0);
+        return  personMapper.getPerson(id);
     }
 
     @Override

@@ -7,8 +7,10 @@
                 <label>基本信息</label>
             </div>
             <div class="layui-col-xs6 text-right">
+                @if(shiro.hasPermission("/ship/update")){
                 <button id="edit" name="edit" type="button" class="layui-btn layui-btn-normal layui-btn-sm"><i
                         class="layui-icon">&#xe642;</i></button>
+                @}
             </div>
         </div>
 

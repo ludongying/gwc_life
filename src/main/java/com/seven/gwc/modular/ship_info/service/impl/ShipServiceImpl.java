@@ -3,11 +3,15 @@ package com.seven.gwc.modular.ship_info.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.ship_info.dao.ShipMapper;
 import com.seven.gwc.modular.ship_info.entity.ShipEntity;
 import com.seven.gwc.modular.ship_info.service.ShipService;
+import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.entity.DictEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +36,33 @@ public class ShipServiceImpl extends ServiceImpl<ShipMapper, ShipEntity> impleme
     private ShipMapper shipMapper;
     @Autowired
     private FileManager fileManager;
+    @Autowired
+    private DictMapper dictMapper;
 
     /**
      * 执法船信息管理查询列表
      */
     @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
     public List<ShipEntity> selectShip(ShipEntity shipEntity) {
 //        LambdaQueryWrapper<ShipEntity> lambdaQuery = Wrappers.<ShipEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(shipName),ShipEntity::getName,shipName);
 //        return shipMapper.selectList(lambdaQuery);
         List<ShipEntity> ships = shipMapper.ShipEntityList(shipEntity);
+        for (ShipEntity ship : ships) {
+            if (ToolUtil.isNotEmpty(shipEntity.getNationality())) {
+                DictEntity nationDict = dictMapper.selectById(shipEntity.getNationality());
+                if (nationDict != null) {
+                   ship.setNationalityDesp(nationDict.getName());
+                }
+            }
+            if (ToolUtil.isNotEmpty(shipEntity.getType())) {
+                DictEntity typeDict = dictMapper.selectById(ship.getType());
+                if (typeDict != null) {
+                    ship.setTypeDesp(typeDict.getName());
+                }
+            }
+        }
         return ships;
     }
 

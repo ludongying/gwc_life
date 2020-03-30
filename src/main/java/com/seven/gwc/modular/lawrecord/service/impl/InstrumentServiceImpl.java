@@ -5,6 +5,7 @@ import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
+import com.seven.gwc.modular.lawrecord.data.instrument.WordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.ReasonDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.RecordDO;
@@ -315,6 +316,28 @@ public class InstrumentServiceImpl implements InstrumentService {
         lawRecordService.updateById(lawRecordEntity);
         return baseResult;
     }
+
+
+    @Override
+    public BaseResult<String> generateCase(String id){
+        BaseResult<String> res=new BaseResult();
+        res.setSuccess(false);
+        LawTypeDTO lawType = lawRecordService.findLawType(id);
+        LawRecordEntity lawRecordEntity = lawRecordService.getById(id);
+        List<FilePathDO> autos = FilePathDO.getFiles(lawRecordEntity.getAutoWritFilePath());
+        List<FilePathDO> writs = FilePathDO.getFiles(lawRecordEntity.getWritFilePath());
+        autos.addAll(writs);
+        String exportPath=getGeneratePath(lawType)+lawType.getLawCaseCode()+".docx";
+        if(!writs.isEmpty()){
+            autos.sort(FilePathDO::compareTo);
+            List<String> paths=autos.stream().map(FilePathDO::getPath).collect(Collectors.toList());
+            boolean success = WordUtils.mergeDoc(paths, exportPath);
+            res.setSuccess(success);
+            res.setContent(exportPath);
+        }
+        return res;
+    }
+
 
 
 }

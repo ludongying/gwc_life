@@ -45,6 +45,21 @@ public interface InstrumentService {
     BaseResult uploadInstrument(String id,Integer code,String generateName,MultipartFile file);
 
 
+    /**
+     * 生成文案
+     * @param id
+     * @return
+     */
+    BaseResult<String> generateCase(String id);
+
+
+
+
+
+
+
+
+
 
 
 

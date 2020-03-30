@@ -78,6 +78,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         form.render();
     });
 
+    //初始值设置
+    $("#select_box").html($("#advancedSearch .lawCaseCode").parent().html());
+
     /**
      * 左侧搜索
      */
@@ -149,12 +152,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         $("#select_box").html($("#advancedSearch .lawType").parent().html());
         form.render();
         let sel=$("#conditionInput select").eq(0);
+        sel.val("lawCaseCode");
         let val=sel.find("option").eq(0).text();
         sel.next().find("input").val(val);
-
     });
-
-
 
     /**
      * 新建生产案件
@@ -214,7 +215,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         } else if(layEvent === 'detail'){
             window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
         } else if(layEvent === 'export'){
-            msg_tip($,"导出还未开发");
+            LawRecord.export(data);
         } else if(layEvent === 'print'){
             msg_tip($,"打印还未开发");
         }
@@ -233,7 +234,21 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
 
+    /**
+     * 导出文件
+     */
+    LawRecord.export = function (data) {
+        let ajax = new $ax(Feng.ctxPath + "/lawRecord/instrument/generate?id=" +data.id);
+        let result = ajax.start();
+        console.log(result);
+        if(result.success){
+            Feng.success("案件文书已生成，正在导出文件...")
+            downFile($,result.content);
+        }else{
+            Feng.error("案件文书生成失败")
+        }
 
+    };
 
 
 

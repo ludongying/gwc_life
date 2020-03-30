@@ -10,7 +10,7 @@
 
                                       <div class="layui-inline" style="width: 120px">
                                           <select lay-filter="selectType">
-                                              <option value="lawCaseCode">案件编号</option>
+                                              <option value="lawCaseCode" selected>案件编号</option>
                                               <option value="lawType">案件类型</option>
                                               <option value="shipName">被执法船</option>
                                               <option value="investigateTel">被询问人电话</option>
@@ -21,9 +21,7 @@
 
 
                                       <div class="layui-inline" id="select_box" >
-                                          <div class="layui-inline" style="margin-top: 7px">
-                                              <input  class="layui-input lawCaseCode" lay-verify="length50" type="text" placeholder="案件编号"/>
-                                          </div>
+
                                       </div>
 
                                       <div class="layui-inline">
@@ -72,8 +70,8 @@
 
                         <div class="layui-form-item">
                             <div style="float:right">
-                                <button id="createSafe" class="layui-btn icon-btn">新建安全案件</button>
-                                <button id="createProduce" class="layui-btn icon-btn">新建生产案件</button>
+                                <button id="createSafe" class="layui-btn icon-btn"><i class="layui-icon layui-icon-addition" style="font-size: 13px"></i>安全</button>
+                                <button id="createProduce" class="layui-btn icon-btn"><i class="layui-icon layui-icon-addition" style="font-size: 13px"></i>生产</button>
 <!--                                <button id="clericalTemplate" class="layui-btn icon-btn">文书模板</button>-->
                             </div>
                         </div>

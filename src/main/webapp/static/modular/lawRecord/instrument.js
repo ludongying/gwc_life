@@ -34,8 +34,8 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
             return [[
                 {title: '序号', field: 'index', type: "numbers"},
                 {title: '文书模板名称', field: 'name', align: "center"},
-                {title: '文书模板地址', field: 'path', align: "center"},
-                {title: '文件地址', field: 'filePath', align: "center"},
+/*                {title: '文书模板地址', field: 'path', align: "center"},
+                {title: '文件地址', field: 'filePath', align: "center"},*/
                 {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'},
             ]];
         };
@@ -65,6 +65,7 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
             downFile($, $(this).data("filePath"))
         }
     });
+
 
 
     function uploadFile(res){
@@ -98,6 +99,8 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
             }
         }
     }
+
+
 
 
 

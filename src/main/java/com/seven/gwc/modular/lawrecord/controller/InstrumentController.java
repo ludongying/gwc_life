@@ -20,7 +20,6 @@ public class InstrumentController {
 
     private static String PREFIX = "/modular/lawRecord/";
 
-
     @Autowired
     private InstrumentService instrumentService;
     /**
@@ -32,7 +31,6 @@ public class InstrumentController {
         return PREFIX + "instrument";
     }
 
-
     @RequestMapping("list")
     @ResponseBody
     public BaseResultPage getInstrument(String id){
@@ -42,12 +40,21 @@ public class InstrumentController {
         return res;
     }
 
-
     @RequestMapping("uploadInstrument")
     @ResponseBody
     public BaseResult uploadInstrument(String id,Integer code,String generateName,MultipartFile file){
          return instrumentService.uploadInstrument(id, code,generateName,file);
     }
+
+    @RequestMapping("generate")
+    @ResponseBody
+    public BaseResult generateCase(String id){
+      return  instrumentService.generateCase(id);
+    }
+
+
+
+
 
 
 }

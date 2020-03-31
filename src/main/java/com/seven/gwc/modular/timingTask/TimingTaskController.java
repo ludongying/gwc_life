@@ -1,6 +1,6 @@
 package com.seven.gwc.modular.timingTask;
 
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
+import com.seven.gwc.modular.equipment_info.service.EquipService;
 import com.seven.gwc.modular.sailor.service.CertificateService;
 import com.seven.gwc.modular.ship_info.service.CertificateShipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 import java.text.ParseException;
-import java.util.List;
 
 @Controller
 @EnableScheduling
@@ -19,11 +18,15 @@ public class TimingTaskController {
     private CertificateService certificateService; //船员证书
     @Autowired
     private CertificateShipService certificateShipService; //船舶证书
+    @Autowired
+    private EquipService equipService;//设备维保
 
-    @Scheduled(cron = "0 */5 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void timingTask() throws ParseException {
        certificateService.warn();
-        certificateShipService.warn();
+       certificateShipService.warn();
+        equipService.warn();
+
     }
 
     //每隔5秒执行一次：*/5 * * * * ?

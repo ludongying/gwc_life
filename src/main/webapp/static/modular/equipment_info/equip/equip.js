@@ -33,8 +33,18 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
             {title: '出厂编码', field: 'serialNumber', align: "center"},
             {title: '图纸编码', field: 'drawingNumber', align: "center", hide:true},
             {title: '出厂日期', field: 'produceDate', align: "center"},
-            {title: '保养周期', field: 'maintainCycle', align: "center"},
+            {title: '保养周期/天', field: 'maintainCycle', align: "center"},
             {title: '设备状态', field: 'stateDesp', align: "center"},
+            {title: '保养提醒', field: 'state', align: "center", templet: function (d) {
+                    if (d.stateWarn === 0)
+                        return "<span class='layui-badge layui-bg-blue'>正常</span></b>";
+                    else if(d.stateWarn === 1)
+                        return "<span class='layui-badge layui-bg-orange'>即将到期</span></b>";
+                    else if(d.stateWarn === 2)
+                        return "<span class='layui-badge layui-bg-red'>已过期</span></b>";
+                    else
+                        return "</b>";
+                }},
             {title: '备注', field: 'remark', align: "center", hide:true},
             {title: '最近保养时间', field: 'lastMaintenanceDate', align: "center", hide:true},
             {title: '设备信息', field: 'info', align: "center", hide:true},

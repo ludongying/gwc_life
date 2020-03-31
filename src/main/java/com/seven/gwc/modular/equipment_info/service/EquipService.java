@@ -4,6 +4,7 @@ import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -54,5 +55,11 @@ public interface EquipService extends IService<EquipEntity> {
      * @param user 当前用户
      */
     boolean editEquip(EquipEntity equip, ShiroUser user);
+
+    /**
+     * 设备维保到期判断，并更新设备维保状态
+     * @return
+     */
+    void warn() throws ParseException;
 
 }

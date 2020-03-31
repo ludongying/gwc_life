@@ -228,7 +228,7 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
                         stateCal = 0;
                     }
                 }
-                if (stateCal != certificateEntity.getState()) {
+                if (ToolUtil.isEmpty(certificateEntity.getState()) || stateCal != certificateEntity.getState()) {
                     certificateEntity.setState(stateCal);
                     certificateMapper.updateById(certificateEntity);
                 }

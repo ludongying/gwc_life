@@ -146,7 +146,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     EquipMaintain.onDeleteEquipMaintain = function (data) {
-        Feng.confirm("是否删除设备维护《" + data.name + "》吗?", function () {
+        Feng.confirm("是否删除设备维护《" + data.equipName + "》吗?", function () {
             var ajax = new $ax(Feng.ctxPath + "/equipMaintain/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");

@@ -4,15 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Date;
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.GwcBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * description : 设备信息实体
@@ -73,9 +73,17 @@ public class EquipEntity extends GwcBaseEntity implements Serializable {
     private String remark;
 
     /** 最近保养时间 */
-    private String lastMaintenanceDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date lastMaintenanceDate;
 
     /** 设备信息 */
     private String info;
+
+    /** 维保提前提醒天数*/
+    private Integer windowPhase;
+
+    /** 维保提醒类型*/
+    private Integer stateWarn;
 
 }

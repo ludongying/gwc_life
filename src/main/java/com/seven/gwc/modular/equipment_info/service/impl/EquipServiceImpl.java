@@ -1,25 +1,24 @@
 package com.seven.gwc.modular.equipment_info.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.seven.gwc.modular.electronic_data.entity.RegulationSafeEntity;
-import com.seven.gwc.modular.sailor.entity.CertificateEntity;
-import com.seven.gwc.modular.ship_info.entity.ShipEntity;
-import com.seven.gwc.modular.system.dao.DictMapper;
-import com.seven.gwc.modular.system.entity.DictEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.equipment_info.dao.EquipMapper;
+import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
+import com.seven.gwc.modular.equipment_info.service.EquipService;
+import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.entity.DictEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
-import com.seven.gwc.modular.equipment_info.dao.EquipMapper;
-import com.seven.gwc.modular.equipment_info.service.EquipService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -108,6 +107,57 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
         equipMapper.updateById(equip);
         return true;
 
+    }
+
+    @Override
+    public void warn() throws ParseException {
+        LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.<EquipEntity>lambdaQuery();
+        List<EquipEntity> list = equipMapper.selectList(lambdaQuery);
+        Date date = new Date();
+        for (EquipEntity equipEntity : list) {
+            int stateCal;
+            if (ToolUtil.isNotEmpty(equipEntity.getLastMaintenanceDate())) {
+                //计算维保到期时间
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(equipEntity.getLastMaintenanceDate());
+                cal.add(Calendar.DATE, equipEntity.getMaintainCycle());
+                //计算维保到期时间与当前时间的差值
+                int intervalDays = daysBetween(date, cal.getTime());
+                if (intervalDays < 0) {//已过期
+                    stateCal = 2;
+                } else {
+                    if (intervalDays <= equipEntity.getWindowPhase()) {//即将过期
+                        stateCal = 1;
+                    } else {//正常
+                        stateCal = 0;
+                    }
+                }
+                if (ToolUtil.isEmpty(equipEntity.getStateWarn()) || stateCal != equipEntity.getStateWarn()) {
+                    equipEntity.setStateWarn(stateCal);
+                    equipMapper.updateById(equipEntity);
+                }
+            }
+        }
+    }
+
+    /**
+     * 日期格式的计算
+     *
+     * @param smdate 较小的时间
+     * @param bdate  较大的时间
+     * @return 相差天数
+     */
+    public static int daysBetween(Date smdate, Date bdate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        smdate = sdf.parse(sdf.format(smdate));
+        bdate = sdf.parse(sdf.format(bdate));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(smdate);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(bdate);
+        long time2 = cal.getTimeInMillis();
+        long between_days = (time2 - time1) / (1000 * 3600 * 24);
+        return (int) between_days;
     }
 
 }

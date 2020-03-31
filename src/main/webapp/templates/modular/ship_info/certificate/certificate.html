@@ -7,10 +7,10 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <button id="btnBack" class="layui-btn layui-btn-primary icon-btn"><i class="layui-icon">&#xe65c;</i></button>
+                                <button id="btnBack" class="layui-btn layui-btn-primary icon-btn"><i class="layui-icon">&#xe65c;</i>
+                                </button>
                             </div>
                             <div class="layui-inline">
-                                <input type="hidden" id="ids" value="${ids}"/>
                                 <input type="hidden" id="shipId" value="${shipId}"/>
                                 <input id="certificateName" class="layui-input" type="text" placeholder="证书名称/证书编码"/>
                             </div>
@@ -19,7 +19,10 @@
                                 <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
                             </div>
                             <div style="float: right">
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
+                                @if(shiro.hasPermission("/certificateShip/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加
+                                </button>
+                                @}
                             </div>
                         </div>
                     </div>
@@ -31,8 +34,14 @@
 </div>
 
 <script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/certificateShip/detail")){
     <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    @}
+    @if(shiro.hasPermission("/certificateShip/update")){
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    @}
+    @if(shiro.hasPermission("/certificateShip/delete")){
     <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
 </script>
 @}

@@ -81,6 +81,14 @@
             </div>
 
             <div class="layui-col-md6">
+                <label class="layui-form-label">部门<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="deptId" name="deptId" type="hidden">
+                    <input id="deptName" name="deptName" type="text" class="layui-input" readonly lay-verify="required" required autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
                 <label class="layui-form-label">职务</label>
                 <div class="layui-input-block">
                     <input id="duty" name="duty" type="text" class="layui-input" disabled="disabled"/>
@@ -112,6 +120,13 @@
                     <input type="text" style="display: none;"/>
                     <input id="email" name="email" type="text" value="" class="layui-input" lay-verify="email"
                            disabled="disabled" autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">联系地址</label>
+                <div class="layui-input-block">
+                    <input id="adress" name="adress" type="text" class="layui-input" lay-verify="notlength50" readonly/>
                 </div>
             </div>
 

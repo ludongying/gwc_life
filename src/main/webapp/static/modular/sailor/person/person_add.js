@@ -35,14 +35,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+    //表单校验
     loadVerify(form);
-
-    // form.verify({
-    //     ip: [
-    //         /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
-    //         ,'IP地址不符合规则'
-    //     ]
-    // });
 
     // 点击弹出用户列表
     $('#selUsers').click(function () {
@@ -125,6 +119,26 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
             })
             form.render('select');//表单渲染 把内容加载进去
         }
+    });
+
+    // 点击部门时
+    $('#deptName').click(function () {
+        var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");
+        var formId = encodeURIComponent("parent.UserInfoDlg.data.deptId");
+        var treeUrl = encodeURIComponent("/dept/tree");
+
+        layer.open({
+            type: 2,
+            title: '部门选择',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                if (UserInfoDlg.data.deptName.length != 0 ) {
+                    $("#deptId").val(UserInfoDlg.data.deptId);
+                    $("#deptName").val(UserInfoDlg.data.deptName);
+                }
+            }
+        });
     });
 
     // 表单提交事件

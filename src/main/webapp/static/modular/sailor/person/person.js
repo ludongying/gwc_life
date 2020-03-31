@@ -31,11 +31,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 title: '出生年月', field: 'birthday', sort: true, align: "center", templet: function (d) {
                     if (d.birthday != null && d.birthday != '') {
                         return "<div>" + layui.util.toDateString(d.birthday, 'yyyy-MM-dd') + "</div>";
-                    }else{
+                    } else {
                         return "<div></div>";
                     }
                 }
             },
+            {title: '年龄', field: 'age', sort: false, align: "center"},
             {
                 title: '性别', field: 'sex', sort: false, align: "center", templet: function (d) {
                     if (d.sex === 'M')
@@ -55,23 +56,32 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '联系方式', field: 'phone', sort: false, align: "center", hide: true},
             {
                 title: '证书', field: 'certificateId', sort: false, align: "center", templet: function (d) {
-                    // var url = Feng.ctxPath + '/certificate?id=' + d.certificateId + 'htmltype=person';
-                    var url = Feng.ctxPath + '/certificate?ids=' + d.certificateId + '&personId=' + d.id;
+                    // var url = Feng.ctxPath + '/certificate?ids=' + d.certificateId + '&personId=' + d.id;
+                    var url = Feng.ctxPath + '/certificate?personId=' + d.id;
                     if (d.certificateId === null || d.certificateId === '') {
-                        return '<a style="color: #01AAED;" href="' + url + '">共0张</a>';
+                        if ($('#roleNames').val().includes('超级管理员') || $('#roleNames').val().includes('船长') || $('#roleNames').val().includes('船务管理员') || $('#userId').val() === d.personId) {
+                            return '<a style="color: #01AAED;" href="' + url + '">共0张</a>';
+                        }
+                        else{
+                            return '<a style="color: #01AAED;" href="#">共0张</a>';
+                        }
                     } else {
                         var certificateStrs = d.certificateId.split(",");
-                        //alert(certificateStrs);
-                        return '<a style="color: #01AAED;" href="' + url + '">共' + certificateStrs.length + '张</a>';
+                        if ($('#roleNames').val().includes('超级管理员') || $('#roleNames').val().includes('船长') || $('#roleNames').val().includes('船务管理员') || $('#userId').val() === d.personId) {
+                            return '<a style="color: #01AAED;" href="' + url + '">共' + certificateStrs.length + '张</a>';
+                        } else {
+                            return '<a style="color: #01AAED;" href="#">共' + certificateStrs.length + '张</a>';
+                        }
                     }
                 }
             },
             {title: '政治面貌（枚举）', field: 'political', sort: true, align: "center", hide: true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
-        ]];
+        ]]
+            ;
     };
 
-    // 渲染表格
+// 渲染表格
     var tableResult = table.render({
         elem: '#' + Person.tableId,
         url: Feng.ctxPath + '/person/list',
@@ -84,11 +94,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 左侧搜索
      */
-    // 搜索按钮点击事件
+// 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Person.search();
     });
-    // 重置按钮点击事件
+// 重置按钮点击事件
     $('#btnReset').click(function () {
         Person.btnReset();
     });
@@ -97,13 +107,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 右侧操作
      */
-    // 添加按钮点击事件
+// 添加按钮点击事件
     $('#btnAdd').click(function () {
         Person.openAddPerson();
     });
 
 
-    // 工具条点击事件
+// 工具条点击事件
     table.on('tool(' + Person.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
@@ -150,25 +160,17 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 点击编辑船员信息
      */
     Person.onEditPerson = function (data) {
-        if($('#roleNames').val().includes('超级管理员') || $('#roleNames').val().includes('船长') || $('#roleNames').val().includes('船务管理员')){
-            func.open({
-                title: '编辑船员信息',
-                area: ['1000px', '500px'],
-                content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
-                tableId: Person.tableId
-            });
-        }else{
-            if($('#userId').val() === data.personId){
-                func.open({
-                    title: '编辑船员信息',
-                    area: ['1000px', '500px'],
-                    content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
-                    tableId: Person.tableId
-                });
-            }else {
-                Feng.error('无权限编辑！');
-            }
-        }
+        // if($('#roleNames').val().includes('超级管理员') || $('#roleNames').val().includes('船长') || $('#roleNames').val().includes('船务管理员') ||
+        //     $('#userId').val() === data.personId){
+        func.open({
+            title: '编辑船员信息',
+            area: ['1000px', '500px'],
+            content: Feng.ctxPath + '/person/person_edit?id=' + data.id,
+            tableId: Person.tableId
+        });
+        // }else{
+        //         Feng.error('无权限编辑！');
+        // }
 
 
     };
@@ -208,4 +210,5 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         });
     };
 
-});
+})
+;

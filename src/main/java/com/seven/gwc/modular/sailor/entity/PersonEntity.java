@@ -58,6 +58,9 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
 
     /** 政治面貌（枚举） */
     private String political;
+
+    /** 地址 */
+    private String adress;
 //
 //    //用户编码
 //    @TableField(exist = false)
@@ -81,6 +84,10 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
+    //年龄
+    @TableField (exist = false)
+    private Integer age;
+
     //岗位
     @TableField (exist = false)
     private String positionId;
@@ -101,9 +108,12 @@ public class PersonEntity extends GwcBaseEntity implements Serializable {
     @TableField (exist = false)
     private String certificate;
 
-//    //执法证书编码
-//    @TableField (exist = false)
-//    private String lawCode;
+    //部门编码
+    @TableField (exist = false)
+    private String deptId;
 
+    //部门名称
+    @TableField (exist = false)
+    private String deptName;
 
 }

@@ -45,8 +45,7 @@ public class CertificateShipController extends BaseController {
      * 跳转到证书信息首页
      */
     @RequestMapping("")
-    public String index(@RequestParam("ids") String ids,@RequestParam("shipId") String shipId, Model model) {
-        model.addAttribute("ids",ids);
+    public String index(@RequestParam("shipId") String shipId, Model model) {
         model.addAttribute("shipId",shipId);
         return PREFIX + "certificate";
     }
@@ -87,7 +86,7 @@ public class CertificateShipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<CertificateShipEntity> list(CertificateShipEntity certificate,String ids, String shipId) {
+    public BaseResultPage<CertificateShipEntity> list(CertificateShipEntity certificate, String shipId) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<CertificateShipEntity> certificates = certificateService.selectCertificate(certificate,shipId,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());

@@ -76,7 +76,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + Certificate.tableId,
-        url: Feng.ctxPath + '/certificate/list?ids='+ $('#ids').val() + '&personId=' + $('#personId').val().trim(),
+        url: Feng.ctxPath + '/certificate/list?personId=' + $('#personId').val().trim(),
         page: true,
         height: "full-97",
         cellMinWidth: 100,
@@ -146,12 +146,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 弹出增加证书信息
      */
     Certificate.openAddCertificate = function () {
-        func.open({
-            title: '增加证书信息',
-            area: ['1000px', '660px'],
-            content: Feng.ctxPath + '/certificate/certificate_add?personId='+$('#personId').val().trim(),
-            tableId: Certificate.tableId
-        });
+            func.open({
+                title: '增加证书信息',
+                area: ['1000px', '660px'],
+                content: Feng.ctxPath + '/certificate/certificate_add?personId=' + $('#personId').val().trim(),
+                tableId: Certificate.tableId
+            });
     };
 
     /**

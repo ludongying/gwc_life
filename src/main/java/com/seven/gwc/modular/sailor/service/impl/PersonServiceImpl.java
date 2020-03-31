@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.SysConsts;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.CalculationDateUtil;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.sailor.dao.CertificateMapper;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
@@ -56,7 +58,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 //        lambdaQuery.like(ToolUtil.isNotEmpty(personEntity), PersonEntity::getPersonName, personEntity);
         List<PersonEntity> persons = personMapper.PersonEntityList(personEntity, total, size);
         for (PersonEntity person : persons) {
-            if(person.getPositionId()!=null) {
+            if(ToolUtil.isNotEmpty(person.getPositionId())) {
                 String[] positionIds = person.getPositionId().split(FileUtils.file_2_file_sep);
                 String positions = "";
                 for (int i = 0; i < positionIds.length; i++) {
@@ -69,6 +71,9 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                     }
                 }
                 person.setPositionName(positions);
+            }
+            if(ToolUtil.isNotEmpty(person.getBirthday())) {
+                person.setAge(CalculationDateUtil.getAge(person.getBirthday()));
             }
         }
         return persons;
@@ -102,6 +107,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setDeptId(person.getDeptId());
                 userEntityInput.setPositionId(person.getPositionId());
                 userEntityInput.setUpdateTime(new Date());
                 userEntityInput.setUpdateUser(user.getId());
@@ -112,6 +118,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setDeptId(person.getDeptId());
                 userEntityInput.setPositionId(person.getPositionId());
                 userEntityInput.setSynFlag(false);
                 userEntityInput.setStatus("ENABLE");
@@ -168,6 +175,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setDeptId(person.getDeptId());
                 userEntityInput.setPositionId(person.getPositionId());
                 userEntityInput.setUpdateTime(new Date());
                 userEntityInput.setUpdateUser(user.getId());
@@ -178,6 +186,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 userEntityInput.setSex(person.getSex());
                 userEntityInput.setPhone(person.getPhone());
                 userEntityInput.setEmail(person.getEmail());
+                userEntityInput.setDeptId(person.getDeptId());
                 userEntityInput.setPositionId(person.getPositionId());
                 userEntityInput.setSynFlag(false);
                 userEntityInput.setStatus("ENABLE");
@@ -199,13 +208,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
 
     @Override
     public PersonEntity getOneById(String id) {
-//        PersonEntity personEntity = new PersonEntity();
-//        personEntity.setId(id);
-//        List<PersonEntity> list = personMapper.PersonEntityList(personEntity);
-//        if(list.size()<=0){
-//            return null;
-//        }
-//        return list.get(0);
+        PersonEntity personEntity = personMapper.getPerson(id);
         return  personMapper.getPerson(id);
     }
 

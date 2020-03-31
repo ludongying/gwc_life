@@ -37,8 +37,8 @@
             and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
             CONCAT('%',#{certificate.name},'%'))
         </if>
-        <!-- 数据范围过滤 -->
-        ${certificate.params.dataScope}
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${certificate.params.dataScope}-->
         order by c.create_date desc
         LIMIT #{total} , #{size}
     </select>
@@ -53,8 +53,8 @@
             and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
             CONCAT('%',#{certificate.name},'%'))
         </if>
-        <!-- 数据范围过滤 -->
-        ${certificate.params.dataScope}
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${certificate.params.dataScope}-->
     </select>
 
 

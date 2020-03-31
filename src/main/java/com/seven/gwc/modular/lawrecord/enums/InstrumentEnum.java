@@ -78,6 +78,7 @@ INSTRUMENT_56(56,"31遵守伏季休渔制度保证书.docx", 2,Arrays.asList(1,2
 //INSTRUMENT_57(57,"32渔船安全检查记录表.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(2,4,5,20,21));
 
 
+
     Integer code;
     /**
      * 模板名称

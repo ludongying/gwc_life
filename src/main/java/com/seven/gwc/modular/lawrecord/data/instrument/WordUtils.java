@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.usermodel.Document;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
@@ -38,11 +39,14 @@ public class WordUtils {
             for (int i = 0; i < documentList.size(); i++) {
                 doc = documentList.get(0);
                 if(i != 0){
-                    documentList.get(i).createParagraph().setPageBreak(true);
+                    XWPFParagraph paragraph = documentList.get(i).createParagraph();
+                    if(i!=documentList.size()-1){
+                        paragraph.setPageBreak(true);
+                    }
                     appendBody(doc,documentList.get(i));
                 }
             }
-            doc.createParagraph().setPageBreak(true);
+            doc.createParagraph().setPageBreak(false);
             doc.write(dest);
         } catch (Exception e) {
             log.error("案件文书合并失败");
@@ -90,6 +94,19 @@ public class WordUtils {
         CTBody makeBody = CTBody.Factory.parse(prefix+mainPart+addPart+sufix);
 
         src.set(makeBody);
+    }
+
+
+    public static void main(String[] args) {
+        String p1="D:\\myfile\\file\\lawrecord\\2020\\苏连渔执罚20201014号\\26行政处罚决定审批表_法人.docx";
+        String p2="D:\\myfile\\file\\lawrecord\\2020\\苏连渔执罚20201014号\\28限时返港承诺书.docx";
+        String p3="D:\\myfile\\file\\lawrecord\\2020\\苏连渔执罚20201014号\\29责令整改通知书_法人_安.docx";
+        ArrayList<String> list = new ArrayList<>();
+        list.add(p1);
+        list.add(p2);
+        list.add(p3);
+
+        mergeDoc(list,"D:\\1.docx");
     }
 
 

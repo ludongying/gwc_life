@@ -4,6 +4,7 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -53,8 +54,20 @@ public interface InstrumentService {
     BaseResult<String> generateCase(String id);
 
 
+    /**
+     * 生成pdf
+     * @param path
+     * @return
+     */
+    BaseResult<String> generatePdf(String path);
 
 
+    /**
+     * 生成pdf
+     * @param path
+     * @return
+     */
+    void previewPdf(String path, HttpServletResponse response);
 
 
 

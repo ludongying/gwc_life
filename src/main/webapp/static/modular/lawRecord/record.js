@@ -217,7 +217,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         } else if(layEvent === 'export'){
             LawRecord.export(data);
         } else if(layEvent === 'print'){
-            msg_tip($,"打印还未开发");
+            LawRecord.preview(data);
         }
     });
 
@@ -240,7 +240,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     LawRecord.export = function (data) {
         let ajax = new $ax(Feng.ctxPath + "/lawRecord/instrument/generate?id=" +data.id);
         let result = ajax.start();
-        console.log(result);
         if(result.success){
             Feng.success("案件文书已生成，正在导出文件...")
             downFile($,result.content);
@@ -250,6 +249,49 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     };
 
+
+    /**
+     * 预览文件
+     */
+    LawRecord.preview = function (data) {
+        let ajax = new $ax(Feng.ctxPath + "/lawRecord/instrument/generate?id=" +data.id);
+        let result = ajax.start();
+        if(result.success){
+            Feng.success("案件文书已生成，正在生成预览文件...")
+            $.ajax({
+                url:Feng.ctxPath + "/lawRecord/instrument/generatePdf",
+                dataType: 'json',
+                type: 'post',
+                data:{path:result.content},
+                success: function (result_pdf) {
+                    console.log(result_pdf);
+                    Feng.success("案件文书已生成，正在跳转打印预览...")
+                    preview($,Feng.ctxPath + "/lawRecord/instrument/preview",result_pdf.content);
+                },
+                error:function(data){
+                    Feng.error("预览文件生成失败...")
+                }
+            });
+        }else{
+            Feng.error("案件文书生成失败")
+        }
+
+    };
+
+
+    /**
+     * 跳转预览页面
+     * @param $
+     * @param url
+     * @param path
+     */
+    function preview($,url,path){
+        let exportForm = $("<form action='"+url+"' method='post' target='_blank'></form>")
+        exportForm.append("<input type='hidden' name='path' value='"+path+"'/>")
+        $(document.body).append(exportForm);
+        exportForm.submit();
+        exportForm.remove();
+    }
 
 
 });

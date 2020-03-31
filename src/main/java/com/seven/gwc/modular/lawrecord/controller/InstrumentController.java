@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author : zzl
  * @Date: 2020-03-23
@@ -51,6 +53,21 @@ public class InstrumentController {
     public BaseResult generateCase(String id){
       return  instrumentService.generateCase(id);
     }
+
+
+
+    @RequestMapping("generatePdf")
+    @ResponseBody
+    public BaseResult generateCasePdf(String path){
+        return  instrumentService.generatePdf(path);
+    }
+
+
+    @RequestMapping("preview")
+    public void previewPdf(String path, HttpServletResponse response){
+         instrumentService.previewPdf(path,response);
+    }
+
 
 
 

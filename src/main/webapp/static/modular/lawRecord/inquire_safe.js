@@ -17,7 +17,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
          '$ax':$ax,
          'admin':admin,
          'func':func,
-         'key':"law_inquire_safe"
+         'key':"law_inquire_safe",
+         'cancel':false,
     }
 
 
@@ -33,6 +34,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 return;
             }
         }
+        lay.cancel=true;
+        lay.content=$("#shipName").val();
+        lay.message="请先保存渔船船名号,然后进入下一步";
         loadAddr($,form,"32","7");
     }
 

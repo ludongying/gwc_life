@@ -301,6 +301,12 @@ function nextStep(param){
             param.lay.layer.close(index);
         }, function(){
             // startListen(param.lay.$,param.key)
+            if(param.lay.cancel){
+                if(param.lay.content||param.lay.content.trim()===''){
+                   msg_tip(param.$,param.lay.message);
+                   return;
+                }
+            }
             if(param.next){
                 clearListen(param.lay.key);
                 window.location.href=param.next+"&id="+param.lay.$("#id").val();

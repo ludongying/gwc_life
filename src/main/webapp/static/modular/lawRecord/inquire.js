@@ -17,7 +17,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
          '$ax':$ax,
          'admin':admin,
          'func':func,
-         'key':"law_inquire"
+         'key':"law_inquire",
+         'cancel':false,
     }
     let unit_data = {
         shipRatedPowerUnit: $("#shipRatedPowerUnit").val()
@@ -51,10 +52,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 return;
             }
         }
+        lay.cancel=true;
+        lay.content=$("#shipName").val();
+        lay.message="请先保存渔船船名号,然后进入下一步";
         //初始化地址
         loadAddr($,form,"32","7");
     }
-
     addUnitListen($,form,unit_data);
 
     $("#shipName").blur(function(){
@@ -72,8 +75,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         submitData("agency",data);
     });
     function submitData(des,data){
+        //验证办案人员
         if(!verifyOperators()){
-            console.log("no submit");
             return;
         }
         //获取地址

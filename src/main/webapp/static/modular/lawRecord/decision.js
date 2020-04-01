@@ -127,13 +127,20 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     });
 
     form.on('select(severity)', function(data){
-        $("#tip_content").text("注："+data.elem[data.elem.selectedIndex].dataset.content);
+        let content=data.elem[data.elem.selectedIndex].dataset.content;
+        if(content){
+            $("#tip_content").text("注："+content);
+        }
+
     });
 
     function setTipContent(){
         let val=$("#severity").val();
         let content=$("#severity").find("option[value='"+val+"']").data("content");
-        $("#tip_content").text("注："+content);
+        if(content){
+            $("#tip_content").text("注："+content);
+        }
+
     }
 
 

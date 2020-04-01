@@ -53,6 +53,53 @@
 
 </style>
 
+<style type="text/css">
+    .uploader-list {
+        margin-left: -15px;
+    }
+
+    .uploader-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .uploader-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .uploader-list .handle i {
+        margin-right: 5px;
+    }
+
+    .uploader-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .uploader-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
 
 <div id="anchor_id" style="display: none">
     <ul class="site-dir layui-layer-wrap" style="display: block; margin:5px 8px">
@@ -1017,45 +1064,17 @@
                                         </div>
                                     </div>
                                     <!--文件上传 -->
-                                    <div class="layui-form-item" style="margin:auto 50px;width: 575px">
-                                        <label class="layui-form-label"
-                                               style="padding-left: 0;text-align: left;">证据</label>
-                                        <div class="layui-upload">
-                                            <div class="layui-upload-list">
-                                                <table class="layui-table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>文件名</th>
-                                                        <th>大小</th>
-                                                        <th>状态</th>
-                                                        <th>操作</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @for(p in item.path){
-                                                    <tr>
-                                                        <td>${p.name}</td>
-                                                        <td>${p.size}</td>
-                                                        <td><span style="color: #5FB878;">已上传</span></td>
-                                                        <td>
-                                                            <button type="button"
-                                                                    class="layui-btn layui-btn-xs layui-btn-normal demo-down-1"
-                                                                    data-file-path="${p.path}">下载
-                                                            </button>
-                                                            @if(p.type==1){
-                                                            <button type="button"
-                                                                    class="layui-btn layui-btn-xs layui-btn-normal demo-preview-1"
-                                                                    data-file-path="${p.url}">预览
-                                                            </button>
-                                                            @}
-                                                        </td>
-                                                    </tr>
-                                                    @}
-                                                    </tbody>
-                                                </table>
+                                    <div class="layui-upload">
+                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
+                                            预览图：
+                                            <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list">
+                                                @for(p in item.path){
+                                                <div id="" class="file-iteme">
+                                                <img style="width: 100px;height: 100px;" src='${p.url}'>
+                                                </div>
+                                                @}
                                             </div>
-                                        </div>
-
+                                        </blockquote>
                                     </div>
                                 </div>
                             </div>

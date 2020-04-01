@@ -16,6 +16,15 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     //     fileManager.preview_img($(this).data("filePath"));
     // });
 
+    $('#uploader-list img').on('click', function () {
+        layer.photos({
+            photos: '#uploader-list',
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    });
+
     layer.open({
         title:'目录',
         type: 1,

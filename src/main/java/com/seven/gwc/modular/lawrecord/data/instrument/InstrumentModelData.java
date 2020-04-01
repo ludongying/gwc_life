@@ -109,6 +109,7 @@ public class InstrumentModelData {
                         int fontSize = run.getFontSize();
                         String fontFamily = run.getFontFamily();
                         String color = run.getColor();
+                        UnderlinePatterns underline = run.getUnderline();
                         Matcher matcher = this.matcher(runText);
                         boolean flag=false;
                         while(matcher.find()){
@@ -128,6 +129,7 @@ public class InstrumentModelData {
                             }
                             xwpfRun.setFontFamily(fontFamily);
                             xwpfRun.setColor(color);
+                            xwpfRun.setUnderline(underline);
                             xwpfRun.setText(runText);
                         }
                     }

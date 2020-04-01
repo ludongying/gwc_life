@@ -1,6 +1,5 @@
 
 function loadUpload(lay,index,data){
-    let fileName="";
     let $=lay.$;
 
     if(!index){
@@ -10,13 +9,16 @@ function loadUpload(lay,index,data){
     //加载数据
     if(data){
        let len= data.length;
+       let fileName="";
        for(let i=0;i<len;i++){
            $('#uploader-list'+index).append(getImgHtml(data[i].url));
            $('#uploader-list'+index+' img').on('click', function () {
                reviewImg(index)
            })
+
            fileName+=data[i].path+",";
        }
+       $("#name"+index).val(fileName);
 
     }
 
@@ -36,6 +38,7 @@ function loadUpload(lay,index,data){
             //上传完毕
             if(res.success){
                 $('#uploader-list'+index).append(getImgHtml(res.content.url));
+                let fileName=$("#name"+index).val();
                 fileName = fileName + res.content.path + ","
                 $("#name"+index).val(fileName);
                 $('#uploader-list'+index+' img').on('click', function () {
@@ -48,7 +51,7 @@ function loadUpload(lay,index,data){
 
     function getImgHtml(path){
         return '<div id="" class="file-iteme">'+
-               '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>'+
+               '<div class="handle del'+index+'"><i class="layui-icon layui-icon-delete"></i></div>'+
                '<img style="width: 100px;height: 100px;" src='+path+'>'+
                '<div class="info">' + path+ '</div>'+
                '</div>' ;
@@ -84,13 +87,14 @@ function loadUpload(lay,index,data){
     });
 
     // 删除图片
-    $(document).on("click", ".file-iteme .handle", function(event){
+    $(document).on("click", ".file-iteme .del"+index, function(event){
         $(this).parent().remove();
         deleteFile($(this).parent()[0].textContent)
     });
 
     function deleteFile(deleteFile) {
         let name = "";
+        let fileName=$("#name"+index)
         let files = fileName.split(",");
         for (let i = 0; i < files.length - 1; i++ ) {
             if (files[i] !== deleteFile) {

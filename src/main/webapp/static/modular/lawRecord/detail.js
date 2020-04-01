@@ -43,4 +43,16 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     });
 
 
+    $('#evidence img').on('click', function () {
+        layer.photos({
+            photos: '.uploader-list',
+            anim: 0,
+            type: 1,
+            title:false,
+            shade:0.1,
+            closeBtn:false,
+            shadeClose:true
+        });
+    })
+
 });

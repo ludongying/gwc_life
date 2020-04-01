@@ -216,7 +216,7 @@ public class InstrumentServiceImpl implements InstrumentService {
                     List<FilePathDO> list = generateInquireSupplement(id);
                     if(!existFile(manualWritFilePath,list)){
                         log.info(">>存储文件硬盘路径有变更,重新生成");
-                        reGenerateManual(lawRecordEntity,lawType,param,list);
+                        reGenerateAuto(lawRecordEntity,lawType,param,list);
                     }
                 }
             }
@@ -226,10 +226,12 @@ public class InstrumentServiceImpl implements InstrumentService {
                 String aPath = saveFiles(lawType, param, as);
                 if(!existFile(autoWritFilePath,aPath)){
                     log.info(">>存储文件硬盘路径有变更,重新生成");
-                    List<InstrumentEnum> autos = InstrumentEnum.getAuto(lawType);
-                    String autoPath = saveFiles(lawType, param, autos);
-                    lawRecordEntity.setAutoWritFilePath(autoPath);
-                    lawRecordService.updateById(lawRecordEntity);
+                    Integer supplementCount = inquireService.getSupplementCount(id);
+                    List<FilePathDO> list=null;
+                    if(supplementCount>0){
+                        list= generateInquireSupplement(id);
+                    }
+                    reGenerateAuto(lawRecordEntity,lawType,param,list);
                 }
             }
 
@@ -239,18 +241,29 @@ public class InstrumentServiceImpl implements InstrumentService {
                 String mPath = saveFiles(lawType, param, ms);
                 if(!existFile(manualWritFilePath,mPath)){
                     log.info(">>存储文件硬盘路径有变更，重新生成");
-                    Integer supplementCount = inquireService.getSupplementCount(id);
-                    List<FilePathDO> list=null;
-                    if(supplementCount>0){
-                        list= generateInquireSupplement(id);
-                    }
-                    reGenerateManual(lawRecordEntity,lawType,param,list);
+                    reGenerateManual(lawRecordEntity,lawType,param,null);
                 }
             }
 
         }
     }
 
+    /**
+     * 重新生成 自动文书
+     * @param lawRecordEntity
+     * @param lawType
+     * @param param
+     * @param list
+     */
+    private void reGenerateAuto(LawRecordEntity lawRecordEntity,LawTypeDTO lawType,Map<String, String> param,List<FilePathDO> list){
+        List<InstrumentEnum> autos = InstrumentEnum.getAuto(lawType);
+        List<FilePathDO> filePathDOS = saveFile(lawType, param, autos);
+        if(Objects.nonNull(list) && !list.isEmpty()){
+            filePathDOS.addAll(list);
+        }
+        lawRecordEntity.setAutoWritFilePath(FilePathDO.getJson(filePathDOS));
+        lawRecordService.updateById(lawRecordEntity);
+    }
 
     private void reGenerateManual(LawRecordEntity lawRecordEntity,LawTypeDTO lawType,Map<String, String> param,List<FilePathDO> list){
         List<InstrumentEnum> manually = InstrumentEnum.getAutoManually(lawType);
@@ -261,7 +274,6 @@ public class InstrumentServiceImpl implements InstrumentService {
         lawRecordEntity.setManualWritFilePath(FilePathDO.getJson(filePathDOS));
         lawRecordService.updateById(lawRecordEntity);
     }
-
 
     private boolean existFile( String original,List<FilePathDO> files){
         List<FilePathDO> originals = FilePathDO.getFiles(original);
@@ -282,7 +294,6 @@ public class InstrumentServiceImpl implements InstrumentService {
         List<FilePathDO> files = FilePathDO.getFiles(file);
         return existFile(original,files);
     }
-
 
     @Override
     public List<FilePathDTO> getInstrument(String id){

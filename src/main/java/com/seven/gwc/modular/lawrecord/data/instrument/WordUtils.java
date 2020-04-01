@@ -9,7 +9,6 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.apache.xmlbeans.XmlOptions;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;

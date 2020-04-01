@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.jodconverter.DocumentConverter;
 import org.jodconverter.office.OfficeException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletOutputStream;
@@ -24,7 +23,7 @@ import java.io.InputStream;
 public class OfficeManager {
 
 
-    @Autowired
+//    @Autowired
     private DocumentConverter converter;
 
 

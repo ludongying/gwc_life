@@ -22,8 +22,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FileManager {
 
+    /**
+     * D:\myfile\file
+     */
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String dirPath;
+    /**
+     * http://192.168.18.73:88/
+     */
     @Value("${server.ip}")
     private String ip;
 
@@ -40,7 +46,7 @@ public class FileManager {
     /**
      * 上传单个文件
      * @param file
-     * @return
+     * @return dir  /dir
      */
     public BaseResult<FileBase> uploadOrgFile(MultipartFile file,String dir){
         return uploadFile(file,"",dir);
@@ -55,16 +61,30 @@ public class FileManager {
         BaseResult<FileBase> result=new BaseResult();
         if (Objects.nonNull(file) && !file.isEmpty()) {
             try {
-                FileUtils.generateDir(dirPath+dir);
+                if(Objects.nonNull(dir)){
+                    FileUtils.generateDir(dirPath+dir);
+                }else{
+                    FileUtils.generateDir(dirPath);
+                }
                 byte[] bytes= file.getBytes();
                 String  fileName =time+ file.getOriginalFilename().replaceAll(",", "");
-                String fileFullName = dirPath +dir+ FileUtils.file_sep+ fileName;
+                String fileFullName;
+                if(Objects.nonNull(dir)){
+                    fileFullName = dirPath +dir+ FileUtils.file_sep+ fileName;
+                }else{
+                    fileFullName = dirPath + FileUtils.file_sep+ fileName;
+                }
+
                 Path path = Paths.get(fileFullName);
                 try{
                     Files.write(path, bytes);
                     FileBase fileBase=new FileBase();
                     fileBase.setPath(fileFullName);
-                    fileBase.setUrl(ip+dir+FileUtils.file_sep+ fileName);
+                    if(Objects.nonNull(dir)){
+                        fileBase.setUrl(ip+dir+FileUtils.file_sep+ fileName);
+                    }else{
+                        fileBase.setUrl(ip+ fileName);
+                    }
                     fileBase.setType(FileUtils.getFileType(fileName).getCode());
                     result.setContent(fileBase);
                     result.setSuccess(true);

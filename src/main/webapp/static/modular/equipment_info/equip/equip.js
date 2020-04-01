@@ -1,7 +1,7 @@
 layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
     var $ = layui.$;
     // var layer = layui.layer;
-    // var form = layui.form;
+    var form = layui.form;
     var table = layui.table;
     var $ZTree = layui.ztree;
     var $ax = layui.ax;
@@ -34,8 +34,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
             {title: '图纸编码', field: 'drawingNumber', align: "center", hide:true},
             {title: '出厂日期', field: 'produceDate', align: "center"},
             {title: '保养周期/天', field: 'maintainCycle', align: "center"},
-            {title: '设备状态', field: 'stateDesp', align: "center"},
-            {title: '保养提醒', field: 'state', align: "center", templet: function (d) {
+            {title: '设备状态', field: 'state', align: "center", templet: '#statusTpl'},
+            {title: '最近保养日期', field: 'lastMaintenanceDate', align: "center"},
+            {title: '保养提醒', field: 'stateWarn', align: "center", templet: function (d) {
                     if (d.stateWarn === 0)
                         return "<span class='layui-badge layui-bg-blue'>正常</span></b>";
                     else if(d.stateWarn === 1)
@@ -45,8 +46,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
                     else
                         return "</b>";
                 }},
-            {title: '备注', field: 'remark', align: "center", hide:true},
-            {title: '最近保养时间', field: 'lastMaintenanceDate', align: "center", hide:true},
+            {title: '备注', field: 'remark', align: "center"},
             {title: '设备信息', field: 'info', align: "center", hide:true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
@@ -106,8 +106,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
      */
     Equip.search = function () {
         var queryData = {};
-        queryData['equipName'] = $("#equipName").val().trim();
-        queryData['equipType'] = Equip.condition.treeId;
+        queryData['name'] = $("#equipName").val().trim();
+        queryData['type'] = Equip.condition.treeId;
         table.reload(Equip.tableId, {where: queryData});
     };
 
@@ -185,5 +185,45 @@ layui.use(['layer', 'form', 'table', 'ztree', 'ax', 'func'], function () {
     var ztree = new $ZTree("equipTypeTree", "/dict/getDictTreeByDictTypeCode?dictTypeCode=EQUIPMENT_TYPE");
     ztree.bindOnClick(Equip.onClickTree);
     ztree.init();
+
+    /**
+     * 修改设备状态
+     */
+    form.on('switch(state)', function (data) {
+        var id = data.elem.value;
+        var checked = data.elem.checked ? true : false;
+        Equip.changeStatus(id, checked);
+    });
+
+    /**
+     * 修改设备状态
+     */
+    Equip.changeStatus = function (id, checked) {
+        if (checked) {
+            var ajax = new $ax(Feng.ctxPath + "/equip/unfreeze", function (data) {
+                if (data.success) {
+                    Feng.success("启用成功!");
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("启用失败!" + data.message + "!");
+            });
+            ajax.set("id", id);
+            ajax.start();
+        } else {
+            var ajax = new $ax(Feng.ctxPath + "/equip/freeze", function (data) {
+                if (data.success) {
+                    Feng.success("停用成功!");
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("停用失败!" + data.message + "!");
+            });
+            ajax.set("id", id);
+            ajax.start();
+        }
+    };
 
 });

@@ -80,8 +80,11 @@ public class EquipMaintainController extends BaseController {
     public BaseResultPage<EquipMaintainEntity> list(EquipMaintainEntity equipMaintain) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<EquipMaintainEntity> equipMaintains = equipMaintainService.selectEquipMaintain(equipMaintain);
+        List<EquipMaintainEntity> equipMaintains = equipMaintainService.selectEquipMaintain(equipMaintain,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(equipMaintains);
+        Integer size = equipMaintainService.getListSize(equipMaintain);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 

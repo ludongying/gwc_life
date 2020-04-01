@@ -21,7 +21,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             var startDate = new Date(value).getTime();
             var endTime = new Date($('#outDate').val()).getTime();
             if (endTime < startDate) {
-                layer.msg('到期日期不能小于签发日期');
+                Feng.error('到期日期不能早于签发日期');
                 $('#issueDate').val($('#outDate').val());
             }
         }
@@ -36,7 +36,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             var endTime = new Date(value).getTime();
             if (endTime < startDate) {
                 $('#outDate').val($('#issueDate').val());
-                layer.msg('到期日期不能小于签发日期');
+                Feng.error('到期日期不能早于签发日期');
             }
         }
     });

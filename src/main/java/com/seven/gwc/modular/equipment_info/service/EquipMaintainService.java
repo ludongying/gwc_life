@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.equipment_info.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.equipment_info.entity.EquipMaintainEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -21,7 +21,9 @@ public interface EquipMaintainService extends IService<EquipMaintainEntity> {
      * @param equipMaintain 实体对象
      * @return List<设备维护服务对象>
      */
-    List<EquipMaintainEntity> selectEquipMaintain(EquipMaintainEntity equipMaintain);
+    List<EquipMaintainEntity> selectEquipMaintain(EquipMaintainEntity equipMaintain, Integer total, Integer size);
+
+    Integer getListSize(EquipMaintainEntity equipMaintain);
 
     /**
      * 设备维护新建

@@ -1,8 +1,10 @@
 package com.seven.gwc.modular.equipment_info.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.equipment_info.dao.EquipMapper;
@@ -39,10 +41,11 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
     private DictMapper dictMapper;
 
     @Override
-    public List<EquipEntity> selectEquip(String equipName, String equipType){
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<EquipEntity> selectEquip(EquipEntity equip, Integer total, Integer size){
 //        LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.<EquipEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(equipName),EquipEntity::getName,equipName);
-        List<EquipEntity> list = equipMapper.selectEquipList(equipName, equipType);
+        List<EquipEntity> list = equipMapper.selectEquipList(equip, total, size);
         for(EquipEntity equipEntity : list){
             if(ToolUtil.isNotEmpty(equipEntity.getState())){
                 DictEntity certificateTypeDict = dictMapper.selectById(equipEntity.getState());
@@ -53,6 +56,29 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
         }
         return list;
     }
+
+    @Override
+    public Integer getListSize(EquipEntity equip) {
+        List<EquipEntity> list =  equipMapper.getListSize(equip);
+        return list.size();
+    }
+
+    @Override
+    public List<EquipEntity> getListByType(String equipType) {
+        LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.lambdaQuery();
+        if(!equipType.isEmpty()){
+            lambdaQuery.eq(EquipEntity::getType,equipType).eq(EquipEntity::getDeleteFlag,1);
+        }else {
+            lambdaQuery.eq(EquipEntity::getDeleteFlag,1);
+        }
+        return equipMapper.selectList(lambdaQuery);
+    }
+
+    @Override
+    public List<EquipEntity> getListByTypeName(String equipName, String equipType) {
+        return equipMapper.getListByTypeName(equipName,equipType);
+    }
+
 
     @Override
     public EquipEntity selectEquipById(String id) {
@@ -138,6 +164,13 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
                 }
             }
         }
+    }
+
+    @Override
+    public int setStatus(String equipId, String state) {
+        LambdaUpdateWrapper<EquipEntity> lambdaUpdate = Wrappers.<EquipEntity>lambdaUpdate();
+        lambdaUpdate.set(EquipEntity::getState, state).eq(EquipEntity::getId, equipId);
+        return this.equipMapper.update(null, lambdaUpdate);
     }
 
     /**

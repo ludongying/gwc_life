@@ -60,23 +60,23 @@
                 </div>
             </div>
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">设备状态</label>
-                <div class="layui-input-block">
-                    <select id="state" name="state" lay-search="" disabled>
-                    </select>
-                </div>
-            </div>
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">设备状态</label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <select id="state" name="state" lay-search="" disabled>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="layui-col-md6">
-                <div class="layui-form-item">
+<!--                <div class="layui-form-item">-->
                     <label class="layui-form-label">保养周期<span style="color: red;">*</span></label>
                     <div class="layui-input-inline" style="width: 340px">
                         <input id="maintainCycle" name="maintainCycle" type="text"
                                class="layui-input" lay-verify="required|number" required readonly/>
                     </div>
-                    <div class="layui-form-mid layui-word-aux">天</div>
-                </div>
+                    <div class="layui-input-inline layui-word-aux">天</div>
+<!--                </div>-->
             </div>
 
             <div class="layui-col-md6">
@@ -88,12 +88,12 @@
                 <div class="layui-input-inline layui-word-aux">天</div>
             </div>
 
-            <!--            <div class="layui-col-md6">-->
-            <!--                <label class="layui-form-label">备注<span style="color: red;">*</span></label>-->
-            <!--                <div class="layui-input-block">-->
-            <!--                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>-->
-            <!--                </div>-->
-            <!--            </div>-->
+            <div class="layui-col-md6">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="notlength50" readonly/>
+                </div>
+            </div>
 
             <!--            <div class="layui-col-md6">-->
             <!--                <label class="layui-form-label">最近保养时间<span style="color: red;">*</span></label>-->

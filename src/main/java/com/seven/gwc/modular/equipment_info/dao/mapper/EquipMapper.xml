@@ -24,8 +24,41 @@
         id, name, type, specification, producer, serial_number, drawing_number, produce_date, maintain_cycle, state, remark, last_maintenance_date, info
     </sql>
     <select id="selectEquipList" resultType="com.seven.gwc.modular.equipment_info.entity.EquipEntity">
-        SELECT e.*, d.name as typeDesp FROM ship_equip e
-        LEFT JOIN sys_dict d ON e.type = d.id
+        SELECT e.*, t.name as typeDesp FROM ship_equip e
+        LEFT JOIN sys_dict t ON e.type = t.id
+        LEFT JOIN sys_user u ON e.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where e.delete_flag = 1
+        <if test="equip.name != null and equip.name != ''">
+            and e.name like CONCAT('%',#{equip.name},'%')
+        </if>
+        <if test="equip.type != null and equip.type != ''">
+            and e.type = #{equip.type}
+        </if>
+        <!-- 数据范围过滤 -->
+        ${equip.params.dataScope}
+        order by e.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.equipment_info.entity.EquipEntity">
+        SELECT e.* FROM ship_equip e
+        LEFT JOIN sys_dict t ON e.type = t.id
+        LEFT JOIN sys_user u ON e.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where e.delete_flag = 1
+        <if test="equip.name != null and equip.name != ''">
+            and e.name like CONCAT('%',#{equip.name},'%')
+        </if>
+        <if test="equip.type != null and equip.type != ''">
+            and e.type = #{equip.type}
+        </if>
+        <!-- 数据范围过滤 -->
+        ${equip.params.dataScope}
+    </select>
+    <select id="getListByTypeName" resultType="com.seven.gwc.modular.equipment_info.entity.EquipEntity">
+        SELECT e.*, t.name as typeDesp FROM ship_equip e
+        LEFT JOIN sys_dict t ON e.type = t.id
         where e.delete_flag = 1
         <if test="equipName != null and equipName != ''">
             and e.id like CONCAT('%',#{equipName},'%')

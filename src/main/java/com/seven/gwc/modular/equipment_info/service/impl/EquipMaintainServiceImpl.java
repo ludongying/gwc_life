@@ -10,6 +10,7 @@ import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.equipment_info.dao.EquipMaintainMapper;
 import com.seven.gwc.modular.equipment_info.dao.EquipMaintaindetailMapper;
 import com.seven.gwc.modular.equipment_info.dao.EquipMapper;
+import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.seven.gwc.modular.equipment_info.entity.EquipMaintainEntity;
 import com.seven.gwc.modular.equipment_info.entity.EquipMaintaindetailEntity;
 import com.seven.gwc.modular.equipment_info.service.EquipMaintainService;
@@ -103,27 +104,40 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
         equipMaintain.setSynFlag(false);
         equipMaintain.setDeleteFlag(true);
         equipMaintainMapper.insert(equipMaintain);
+        //更新设备信息表最近保养时间
+        EquipEntity equipEntity = equipMapper.selectById(equipMaintain.getEquipId());
+        equipEntity.setLastMaintenanceDate(equipMaintain.getEndTime());
+        equipMapper.updateById(equipEntity);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteEquipMaintain(String equipMaintainId, ShiroUser user) {
-        //先删除子表
+
         EquipMaintainEntity equipMaintainEntity = equipMaintainMapper.selectById(equipMaintainId);
-        equipMaintaindetailMapper.deleteById(equipMaintainEntity.getDetailIds());
-        //再删除主表
-        equipMaintainMapper.deleteById(equipMaintainId);
+        if (equipMaintainEntity!=null){
+            //先删除子表
+            EquipMaintaindetailEntity equipMaintaindetailEntity = equipMaintaindetailMapper.selectById(equipMaintainEntity.getDetailIds());
+            if(equipMaintaindetailEntity != null){
+                equipMaintaindetailEntity.setDeleteFlag(false);
+                equipMaintaindetailEntity.setSynFlag(false);
+                equipMaintaindetailEntity.setUpdateDate(new Date());
+                equipMaintaindetailEntity.setUpdatePerson(user.getId());
+                equipMaintaindetailMapper.updateById(equipMaintaindetailEntity);
+            }
+            equipMaintainEntity.setDeleteFlag(false);
+            equipMaintainEntity.setSynFlag(false);
+            equipMaintainEntity.setUpdateDate(new Date());
+            equipMaintainEntity.setUpdatePerson(user.getId());
+            //再删除主表
+            equipMaintainMapper.updateById(equipMaintainEntity);
+        }
+
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user) {
-//        LambdaQueryWrapper<EquipMaintainEntity> lambdaQuery = Wrappers.lambdaQuery();
-//        lambdaQuery.eq(EquipMaintainEntity::,equip.getSerialNumber()).ne(EquipEntity::getId,equip.getId());
-//        EquipEntity equipEntity = equipMapper.selectOne(lambdaQuery);
-//        if(equipEntity != null){
-//            return false;
-//        }
         //维保详情表更新
         EquipMaintaindetailEntity equipMaintaindetailEntity = new EquipMaintaindetailEntity();
         equipMaintaindetailEntity.setId(equipMaintain.getDetailIds());
@@ -139,6 +153,10 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
         equipMaintain.setUpdateDate(new Date());
         equipMaintain.setUpdatePerson(user.getId());
         equipMaintainMapper.updateById(equipMaintain);
+        //更新设备信息表最近保养时间
+        EquipEntity equipEntity = equipMapper.selectById(equipMaintain.getEquipId());
+        equipEntity.setLastMaintenanceDate(equipMaintain.getEndTime());
+        equipMapper.updateById(equipEntity);
     }
 
     @Override

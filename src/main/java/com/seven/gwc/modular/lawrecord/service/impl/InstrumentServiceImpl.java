@@ -5,6 +5,7 @@ import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
+import com.seven.gwc.modular.lawrecord.data.instrument.OfficeManager;
 import com.seven.gwc.modular.lawrecord.data.instrument.WordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.ReasonDO;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,9 @@ public class InstrumentServiceImpl implements InstrumentService {
 
     @Autowired
     private FileManager fileManager;
+
+    @Autowired
+    private OfficeManager officeManager;
 
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String path;
@@ -324,7 +329,6 @@ public class InstrumentServiceImpl implements InstrumentService {
         return baseResult;
     }
 
-
     @Override
     public BaseResult<String> generateCase(String id){
         BaseResult<String> res=new BaseResult();
@@ -347,6 +351,18 @@ public class InstrumentServiceImpl implements InstrumentService {
         return res;
     }
 
+    @Override
+    public BaseResult<String> generatePdf(String path){
+        String p = officeManager.generatePdf(path);
+        BaseResult<String> result = new BaseResult<>();
+        return result.content(p);
+
+    }
+
+    @Override
+    public void previewPdf(String path, HttpServletResponse response) {
+        officeManager.preview(path,response);
+    }
 
 
 }

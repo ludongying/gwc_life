@@ -203,7 +203,7 @@ public class CertificateShipServiceImpl extends ServiceImpl<CertificateShipMappe
                         stateCal = 0;
                     }
                 }
-                if(stateCal != certificateShipEntity.getState())
+                if(ToolUtil.isEmpty(certificateShipEntity.getState()) || stateCal != certificateShipEntity.getState())
                 {
                     certificateShipEntity.setState(stateCal);
                     certificateMapper.updateById(certificateShipEntity);

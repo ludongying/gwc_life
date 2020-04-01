@@ -45,9 +45,13 @@ public class CertificateController extends BaseController {
      * 跳转到证书信息首页
      */
     @RequestMapping("")
-    public String index(@RequestParam("ids") String ids,@RequestParam("personId") String personId, Model model) {
-        model.addAttribute("ids",ids);
+//    public String index(@RequestParam("ids") String ids,@RequestParam("personId") String personId, Model model) {
+    public String index(@RequestParam("personId") String personId, Model model) {
+//        model.addAttribute("ids",ids);
         model.addAttribute("personId",personId);
+//        ShiroUser user = ShiroKit.getUser();
+//        model.addAttribute("userId",user.getId());
+//        model.addAttribute("roleNames", user.getRoleNames());
         return PREFIX + "certificate";
     }
 

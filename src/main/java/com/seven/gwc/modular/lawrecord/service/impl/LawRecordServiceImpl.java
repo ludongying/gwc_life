@@ -124,7 +124,6 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
           return str;
     }
 
-
     @Override
     public BaseResult invalidRecord(String id) {
         LawRecordEntity lawRecordEntity = this.getById(id);
@@ -171,7 +170,6 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
             model.addAttribute("decision",decisionSafeDTO);
         }
     }
-
 
     @Override
     public LawTypeDTO findLawType(String id){

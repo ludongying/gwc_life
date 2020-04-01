@@ -123,6 +123,26 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'formSelects'], function (
         });
     });
 
+    // 点击部门时
+    $('#deptName').click(function () {
+        var formName = encodeURIComponent("parent.UserInfoDlg.data.deptName");
+        var formId = encodeURIComponent("parent.UserInfoDlg.data.deptId");
+        var treeUrl = encodeURIComponent("/dept/tree");
+
+        layer.open({
+            type: 2,
+            title: '部门选择',
+            area: ['300px', '400px'],
+            content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
+            end: function () {
+                if (UserInfoDlg.data.deptName.length != 0 ) {
+                    $("#deptId").val(UserInfoDlg.data.deptId);
+                    $("#deptName").val(UserInfoDlg.data.deptName);
+                }
+            }
+        });
+    });
+
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

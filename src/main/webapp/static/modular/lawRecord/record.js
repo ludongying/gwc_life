@@ -264,9 +264,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 type: 'post',
                 data:{path:result.content},
                 success: function (result_pdf) {
-                    console.log(result_pdf);
                     Feng.success("案件文书已生成，正在跳转打印预览...")
                     preview($,Feng.ctxPath + "/lawRecord/instrument/preview",result_pdf.content);
+
                 },
                 error:function(data){
                     Feng.error("预览文件生成失败...")
@@ -292,6 +292,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         exportForm.submit();
         exportForm.remove();
     }
+
 
 
 });

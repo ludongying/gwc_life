@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -26,10 +27,10 @@ public class LawRecordApi {
 
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
-    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO,
-                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO){
+    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException {
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO);
     }
 
     @PostMapping(value = "/addLawSafe")

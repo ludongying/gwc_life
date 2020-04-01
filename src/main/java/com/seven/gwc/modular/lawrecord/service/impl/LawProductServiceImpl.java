@@ -1,5 +1,7 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.seven.gwc.core.base.BaseResult;
@@ -13,6 +15,8 @@ import com.seven.gwc.modular.lawrecord.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,19 +44,21 @@ public class LawProductServiceImpl implements LawProductService {
 
 
     @Override
-    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) {
+    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.PRODUCE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
-        InquireEntity inquireEntity = this.inquireVOToInquire(personalId, lawRecordEntity.getId(), appInquireVO);
+        List<InquireEntity> inquireEntityList = this.inquireEntityList(personalId, lawRecordEntity.getId(), "");
         InquisitionEntity inquisitionEntity = this.inquisitionVOToInquisition(personalId, lawRecordEntity.getId(), appInquisitionEntityVO);
         DecisionEntity decisionEntity = this.decisionVOToDecisionEntity(personalId, lawRecordEntity.getId(), appDecisionVO);
         LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
+        for (InquireEntity inquireEntity : inquireEntityList) {
+            inquireMapper.insert(inquireEntity);
+        }
         agencyMapper.insert(agencyEntity);
         operatorMapper.insert(operatorEntity1);
         operatorMapper.insert(operatorEntity2);
-        inquireMapper.insert(inquireEntity);
         inquisitionMapper.insert(inquisitionEntity);
         decisionMapper.insert(decisionEntity);
         lawRecordMapper.updateById(lawRecord);
@@ -306,6 +312,8 @@ public class LawProductServiceImpl implements LawProductService {
         decisionSafeEntity.setResourceCompensation(appDecisionSafeVO.getResourceCompensation());
         decisionSafeEntity.setDescription(appDecisionSafeVO.getDescription());
         decisionSafeEntity.setCaseViolenceLaw(appDecisionSafeVO.getCaseViolenceLaw());
+        decisionSafeEntity.setFineUpper(appDecisionSafeVO.getFineUpper());
+        decisionSafeEntity.setResourceCompensationUpper(appDecisionSafeVO.getResourceCompensationUpper());
         decisionSafeEntity.setDeleteFlag(true);
         decisionSafeEntity.setCreateDate(new Date());
         decisionSafeEntity.setCreatePerson(personalId);
@@ -317,6 +325,7 @@ public class LawProductServiceImpl implements LawProductService {
         InquireSafeEntity inquireSafeEntity = new InquireSafeEntity();
         inquireSafeEntity.setId(id);
         inquireSafeEntity.setInvestigateName(appInquireSafeVO.getInvestigateName());
+        inquireSafeEntity.setIdentityCase(appInquireSafeVO.getIdentityCase());
         inquireSafeEntity.setInvestigateSex(appInquireSafeVO.getInvestigateSex());
         inquireSafeEntity.setInvestigateAge(appInquireSafeVO.getInvestigateAge());
         inquireSafeEntity.setInvestigatePosition(appInquireSafeVO.getInvestigatePosition());
@@ -393,37 +402,46 @@ public class LawProductServiceImpl implements LawProductService {
         return inquisitionEntity;
     }
 
-    //询问笔录VO转对象 --生产
-    private InquireEntity inquireVOToInquire(String personalId, String id, AppInquireVO appInquireVO) {
-        InquireEntity inquireEntity = new InquireEntity();
-        inquireEntity.setId(id);
-        inquireEntity.setInvestigateName(appInquireVO.getInvestigateName());
-        inquireEntity.setInvestigateSex(appInquireVO.getInvestigateSex());
-        inquireEntity.setInvestigateAge(appInquireVO.getInvestigateAge());
-        inquireEntity.setInvestigatePosition(appInquireVO.getInvestigatePosition());
-        inquireEntity.setInvestigateTel(appInquireVO.getInvestigateTel());
-        inquireEntity.setInvestigateAddr(appInquireVO.getInvestigateAddr());
-        inquireEntity.setIdentityCase(appInquireVO.getIdentityCase());
-        inquireEntity.setIdentityCard(appInquireVO.getIdentityCard());
-        inquireEntity.setShipName(appInquireVO.getShipName());
-        inquireEntity.setShipOwner(appInquireVO.getShipOwner());
-        inquireEntity.setShipMember(appInquireVO.getShipMember());
-        inquireEntity.setShipRealType(appInquireVO.getShipRealType());
-        inquireEntity.setShipRatedType(appInquireVO.getShipRatedType());
-        inquireEntity.setShipRealPower(appInquireVO.getShipRealPower());
-        inquireEntity.setShipRatedPower(appInquireVO.getShipRatedPower());
-        inquireEntity.setShipInfo(appInquireVO.getShipInfo());
-        inquireEntity.setShipStatus(appInquireVO.getShipStatus());
-        inquireEntity.setShipOutDate(appInquireVO.getShipOutDate());
-        inquireEntity.setShipOutPort(appInquireVO.getShipOutPort());
-        inquireEntity.setShipGoodsCount(appInquireVO.getShipGoodsCount());
-        inquireEntity.setShipGoodsValue(appInquireVO.getShipGoodsValue());
-        inquireEntity.setShipGenerateCount(appInquireVO.getShipGenerateCount());
-        inquireEntity.setShipFishAreaDate(appInquireVO.getShipFishAreaDate());
-        inquireEntity.setCreateDate(new Date());
-        inquireEntity.setCreatePerson(personalId);
-        inquireEntity.setDeleteFlag(true);
-        return inquireEntity;
+    private List<InquireEntity> inquireEntityList(String personalId, String id, String data) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<InquireEntity> list = new ArrayList<>();
+        JSONArray jsonArray = JSONArray.parseArray("data");
+        for(int i=0; i<jsonArray.size(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            InquireEntity inquireEntity = new InquireEntity();
+            inquireEntity.setId(id);
+            inquireEntity.setInvestigateName(jsonObject.getString("investigateName"));
+            inquireEntity.setInvestigateSex(Integer.parseInt(jsonObject.getString("investigateSex")));
+            inquireEntity.setInvestigateAge(Integer.parseInt(jsonObject.getString("investigateAge")));
+            inquireEntity.setInvestigatePosition(Integer.parseInt(jsonObject.getString("investigatePosition")));
+            inquireEntity.setInvestigateTel(jsonObject.getString("investigateTel"));
+            inquireEntity.setInvestigateAddr(jsonObject.getString("investigateAddr"));
+            inquireEntity.setIdentityCase(Integer.parseInt(jsonObject.getString("identityCase")));
+            inquireEntity.setIdentityCard(jsonObject.getString("identityCard"));
+            inquireEntity.setShipName(jsonObject.getString("shipName"));
+            inquireEntity.setShipOwner(jsonObject.getString("shipOwner"));
+            inquireEntity.setShipMember(Integer.parseInt(jsonObject.getString("shipMember")));
+            inquireEntity.setShipRealType(Integer.parseInt(jsonObject.getString("shipRealType")));
+            inquireEntity.setShipRatedType(Integer.parseInt(jsonObject.getString("shipRatedType")));
+            inquireEntity.setShipRealPower(Double.parseDouble(jsonObject.getString("shipRealPower")));
+            inquireEntity.setShipRatedPower(Double.parseDouble(jsonObject.getString("shipRatedPower")));
+            inquireEntity.setShipRealPowerUnit(Integer.parseInt(jsonObject.getString("shipRealPowerUnit")));
+            inquireEntity.setShipRatedPowerUnit(Integer.parseInt(jsonObject.getString("shipRatedPowerUnit")));
+            inquireEntity.setShipInfo(jsonObject.getString("shipInfo"));
+            inquireEntity.setShipStatus(Integer.parseInt(jsonObject.getString("shipStatus")));
+            inquireEntity.setShipOutDate(formatter.parse(jsonObject.getString("shipOutDate")));
+            inquireEntity.setShipOutPort(jsonObject.getString("shipOutPort"));
+            inquireEntity.setShipGoodsCount(jsonObject.getString("shipGoodsCount"));
+            inquireEntity.setShipGoodsValue(jsonObject.getString("shipGoodsValue"));
+            inquireEntity.setShipGenerateCount(Integer.parseInt(jsonObject.getString("shipGenerateCount")));
+            inquireEntity.setShipFishAreaDate(formatter.parse(jsonObject.getString("shipFishAreaDate")));
+
+            inquireEntity.setCreateDate(new Date());
+            inquireEntity.setCreatePerson(personalId);
+            inquireEntity.setDeleteFlag(true);
+            list.add(inquireEntity);
+        }
+        return list;
     }
 
     //执法人员VO转对象
@@ -454,9 +472,10 @@ public class LawProductServiceImpl implements LawProductService {
     private AgencyEntity agencyVOToAgency(String personalId, String id, AppAgencyVO appAgencyVO) {
         AgencyEntity agencyEntity = new AgencyEntity();
         agencyEntity.setId(id);
+        agencyEntity.setShortName(appAgencyVO.getShortName());
         agencyEntity.setLawShipCode(appAgencyVO.getLawShipCode());
         agencyEntity.setEnforcementAgency(appAgencyVO.getEnforcementAgency());
-        agencyEntity.setLawCaseFineCode(Integer.valueOf(appAgencyVO.getLawCaseFineCode()));
+        agencyEntity.setLawCaseFineCode(appAgencyVO.getLawCaseFineCode());
         agencyEntity.setLawCaseCode(appAgencyVO.getLawCaseCode());
         agencyEntity.setLawCaseSource(appAgencyVO.getLawCaseSource());
         agencyEntity.setLawCaseLon(appAgencyVO.getLawCaseLon());
@@ -482,6 +501,7 @@ public class LawProductServiceImpl implements LawProductService {
         agencyEntity.setCreatePerson(personalId);
         agencyEntity.setCreateDate(new Date());
         agencyEntity.setDeleteFlag(true);
+        agencyEntity.setSaveDate(appAgencyVO.getSaveDate());
         return agencyEntity;
     }
 }

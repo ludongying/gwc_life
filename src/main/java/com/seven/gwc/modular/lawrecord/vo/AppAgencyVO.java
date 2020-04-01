@@ -15,13 +15,17 @@ public class AppAgencyVO {
     @ApiModelProperty(value = "执法船号")
     private String lawShipCode;
 
+    /** 单位简称 */
+    @ApiModelProperty(value = "单位简称")
+    private String shortName;
+
     /** 执法单位 */
     @ApiModelProperty(value = "执法单位")
     private String enforcementAgency;
 
     /** 案件编号 罚*/
     @ApiModelProperty(value = "案件编号 罚")
-    private String lawCaseFineCode;
+    private Integer lawCaseFineCode;
 
     /** 案件编号 */
     @ApiModelProperty(value = "案件编号")
@@ -112,5 +116,9 @@ public class AppAgencyVO {
     /** 结案时间 */
     @ApiModelProperty(value = "结案时间")
     private Date finishDate;
+
+    /** 保管年限 */
+    @ApiModelProperty(value = "保管年限")
+    private Date saveDate;
 
 }

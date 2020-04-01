@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.service;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.vo.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface LawProductService {
@@ -47,7 +48,7 @@ public interface LawProductService {
     List<EnumVO> getShipStatusList();
 
     //案件生产新增
-    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireVO appInquireVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO);
+    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException;
 
     //案件安全新增
     BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO);

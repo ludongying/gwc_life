@@ -161,7 +161,12 @@ public class UserController extends BaseController {
     @ResponseBody
     public UserEntity detail(@PathVariable String id) {
         UserEntity userEntity = userService.getById(id);
-        userEntity.setDeptName(CacheFactory.me().getDeptName(userEntity.getDeptId()));
+        if (ToolUtil.isNotEmpty(userEntity.getDeptId())) {
+            userEntity.setDeptName(CacheFactory.me().getDeptName(userEntity.getDeptId()));
+        } else {
+            userEntity.setDeptName("顶级");
+        }
+
         return userEntity;
     }
 

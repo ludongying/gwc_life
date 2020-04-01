@@ -109,10 +109,10 @@ public class DataScopeAspect {
                 sqlString.append(ToolUtil.format(" OR {}.id IN ( SELECT dept_id FROM sys_position_dept WHERE position_id IN ( '{}' ) ) ", deptAlias, positionEntity.getId()));
             } else if (DATA_SCOPE_DEPT.equals(dataScope)) {
                 //部门数据
-                sqlString.append(ToolUtil.format(" OR {}.id = {}", deptAlias, user.getDeptId()));
+                sqlString.append(ToolUtil.format(" OR {}.id = '{}'", deptAlias, user.getDeptId()));
             } else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope)) {
                 //部门及以下数据
-                sqlString.append(ToolUtil.format(" OR {}.id IN (SELECT id FROM sys_dept WHERE id = {} OR pids LIKE '%[ {} ]%')",
+                sqlString.append(ToolUtil.format(" OR {}.id IN (SELECT id FROM sys_dept WHERE id = '{}' OR pids LIKE '%[ '{}' ]%')",
                         deptAlias, user.getDeptId(), user.getDeptId()));
             } else if (DATA_SCOPE_SELF.equals(dataScope)) {
                 //仅本人数据

@@ -26,14 +26,14 @@
     </sql>
     <select id="tree" resultType="com.seven.gwc.core.node.ZTreeNode">
 		SELECT id AS id, pid AS "pId", full_name AS name,
-        (CASE WHEN (pid = 0 OR pid IS NULL) THEN 'true' ELSE 'false' END) AS "open"
+        (CASE WHEN (pid = '0' OR pid IS NULL) THEN 'true' ELSE 'false' END) AS "open"
         FROM sys_dept ORDER BY sort
 	</select>
     <select id="liseTree" resultType="com.seven.gwc.modular.system.entity.DeptEntity">
         SELECT
         <choose>
             <when test="(deptName != null and deptName != '')">
-                0 AS "pid",
+                '0' AS "pid",
             </when>
             <otherwise>
                 pid AS "pid",

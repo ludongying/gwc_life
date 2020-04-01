@@ -29,8 +29,8 @@
     <select id="roleTreeListByRoleId" resultType="com.seven.gwc.core.node.ZTreeNode">
         SELECT
         r.id as id,pid as "pId",name AS "name",
-        (CASE WHEN (pid = 0 OR pid IS NULL) THEN 'true' ELSE 'false' END) as "open",
-        (CASE WHEN (r1.id = 0 OR r1.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
+        (CASE WHEN (pid = '0' OR pid IS NULL) THEN 'true' ELSE 'false' END) as "open",
+        (CASE WHEN (r1.id = '0' OR r1.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
         FROM sys_role r
         LEFT JOIN (SELECT id FROM sys_role WHERE id IN
             <foreach collection="array" index="index" item="i" open="(" separator="," close=")">

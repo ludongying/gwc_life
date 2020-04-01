@@ -35,6 +35,10 @@ public class AppInquireSafeVO {
     @ApiModelProperty(value = "身份证号")
     private String identityCard;
 
+    /** 是否携带身份证 */
+    @ApiModelProperty(value = "是否携带身份证")
+    protected Integer identityCase;
+
     /** 渔船名称 */
     @ApiModelProperty(value = "渔船名称")
     private String shipName;

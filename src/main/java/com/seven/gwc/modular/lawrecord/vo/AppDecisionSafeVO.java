@@ -47,9 +47,17 @@ public class AppDecisionSafeVO {
     @ApiModelProperty(value = "罚款")
     private String fine;
 
+    /** 罚款 大写 */
+    @ApiModelProperty(value = "罚款 大写")
+    private String fineUpper;
+
     /** 资源补偿费 */
     @ApiModelProperty(value = "资源补偿费")
     private String resourceCompensation;
+
+    /** 资源补偿费大写 */
+    @ApiModelProperty(value = "资源补偿费大写")
+    private String resourceCompensationUpper;
 
     /** 处罚文表述 */
     @ApiModelProperty(value = "处罚文表述")

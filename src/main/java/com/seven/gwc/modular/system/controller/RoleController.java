@@ -184,10 +184,10 @@ public class RoleController extends BaseController {
     @ResponseBody
     public RoleEntity detail(@PathVariable String id) {
         RoleEntity roleEntity = roleService.getById(id);
-        if (roleEntity.getPid().equals(0L)) {
+        if (roleEntity.getPid().equals("0")) {
             roleEntity.setPName("顶级");
         } else {
-            roleEntity.setPName(CacheFactory.me().getRoleName(roleEntity.getPid().toString()));
+            roleEntity.setPName(CacheFactory.me().getRoleName(roleEntity.getPid()));
         }
         return roleEntity;
     }

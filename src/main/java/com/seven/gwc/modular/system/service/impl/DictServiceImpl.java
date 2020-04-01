@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.exception.ServiceException;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
@@ -64,7 +63,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
                 .eq(DictEntity::getName, dict.getName());
         DictEntity dictEntity = dictMapper.selectOne(lambdaQuery);
         if (ToolUtil.isNotEmpty(dictEntity)) {
-            throw new ServiceException(ErrorEnum.ERROR_ONLY_NAME);
+            return new BaseResult(false, ErrorEnum.ERROR_ONLY_NAME.getMessage());
         }
         if (dict.getSort() == null) {
             dict.setSort(0);
@@ -90,7 +89,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, DictEntity> impleme
         DictEntity dictEntity = dictMapper.selectOne(lambdaQuery);
 
         if (ToolUtil.isNotEmpty(dictEntity)) {
-            throw new ServiceException(ErrorEnum.ERROR_ONLY_NAME);
+            return new BaseResult(false, ErrorEnum.ERROR_ONLY_NAME.getMessage());
         }
         if (dict.getSort() == null) {
             dict.setSort(0);

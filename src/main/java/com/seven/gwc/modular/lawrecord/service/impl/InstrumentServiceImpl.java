@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -353,9 +354,13 @@ public class InstrumentServiceImpl implements InstrumentService {
 
     @Override
     public BaseResult<String> generatePdf(String path){
-        String p = officeManager.generatePdf(path);
+        File file = new File(path);
+        int position = path.lastIndexOf(".");
+        String exprotPath=path.substring(0,position)+".pdf";
+        FileUtils.generateDir(file.getParent());
+        FileUtils.wordToPdf(path, exprotPath);
         BaseResult<String> result = new BaseResult<>();
-        return result.content(p);
+        return result.content(exprotPath);
 
     }
 

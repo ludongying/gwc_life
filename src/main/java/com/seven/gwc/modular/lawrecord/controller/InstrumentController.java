@@ -5,6 +5,7 @@ import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.service.InstrumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,7 +69,11 @@ public class InstrumentController {
          instrumentService.previewPdf(path,response);
     }
 
-
+    @RequestMapping("previewPage")
+    public String previewPage(String path, Model model){
+        model.addAttribute("path",path);
+        return PREFIX + "pdfPreview";
+    }
 
 
 

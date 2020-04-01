@@ -18,11 +18,9 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var result = ajax.start();
     form.val('equipMaintainForm',result);
 
-
-
     //设备名称下拉框
     $.ajax({
-        url: Feng.ctxPath + '/equip/listByTypeAndName',
+        url: Feng.ctxPath + '/equip/listByType',
         dataType: 'json',
         type: 'post',
         success: function (data) {
@@ -40,7 +38,6 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
         dataType: 'json',
         type: 'post',
         success: function (data) {
-            $("#specification").empty();//清空下拉框的值
             $.each(data, function (index, item) {
                 $('#specification').append(new Option(item.specification, item.specification));// 下拉菜单里添加元素
             });

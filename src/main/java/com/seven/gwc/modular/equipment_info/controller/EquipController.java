@@ -1,26 +1,25 @@
 package com.seven.gwc.modular.equipment_info.controller;
 
-import com.seven.gwc.core.state.ErrorEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.seven.gwc.modular.equipment_info.service.EquipService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -78,12 +77,16 @@ public class EquipController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<EquipEntity> list(String equipName,String equipType) {
+    public BaseResultPage<EquipEntity> list(EquipEntity equipEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<EquipEntity> equips = equipService.selectEquip(equipName,equipType);
+        List<EquipEntity> equips = equipService.selectEquip(equipEntity,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(equips);
+        Integer size = equipService.getListSize(equipEntity);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
+
     }
 
     /**
@@ -92,7 +95,16 @@ public class EquipController extends BaseController {
     @RequestMapping("/listByTypeAndName")
     @ResponseBody
     public List<EquipEntity> listByTypeAndName(String equipName,String equipType) {
-        return equipService.selectEquip(equipName,equipType);
+        return equipService.getListByTypeName(equipName,equipType);
+    }
+
+    /**
+     * 按类别获取设备信息列表
+     */
+    @RequestMapping("/listByType")
+    @ResponseBody
+    public List<EquipEntity> listByTypeAndName(String equipType) {
+        return equipService.getListByType(equipType);
     }
 
     /**
@@ -139,6 +151,26 @@ public class EquipController extends BaseController {
     @ResponseBody
     public EquipEntity detail(@PathVariable String equipId) {
         return equipService.selectEquipById(equipId);
+    }
+
+    /**
+     * 启动
+     */
+    @RequestMapping("/unfreeze")
+    @ResponseBody
+    public BaseResult unfreeze(@RequestParam String id) {
+        this.equipService.setStatus(id, TypeStatesEnum.OK.getCode());
+        return SUCCESS;
+    }
+
+    /**
+     * 禁用
+     */
+    @RequestMapping("/freeze")
+    @ResponseBody
+    public BaseResult freeze(@RequestParam String id) {
+        this.equipService.setStatus(id, TypeStatesEnum.PROHIBIT.getCode());
+        return SUCCESS;
     }
 
 }

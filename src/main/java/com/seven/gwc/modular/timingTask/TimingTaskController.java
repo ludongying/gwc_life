@@ -25,7 +25,7 @@ public class TimingTaskController {
     public void timingTask() throws ParseException {
        certificateService.warn();
        certificateShipService.warn();
-        equipService.warn();
+       equipService.warn();
 
     }
 

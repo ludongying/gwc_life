@@ -1,6 +1,13 @@
 package com.seven.gwc.modular.lawrecord.data.file;
 
+import com.aspose.words.License;
+import com.aspose.words.SaveFormat;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +17,7 @@ import java.util.Objects;
  * @Date: 2020-03-04
  * @description :
  */
+@Slf4j
 public class FileUtils {
 
     public static final String regex_dot          =  "\\.";
@@ -118,5 +126,44 @@ public class FileUtils {
         return Thread.currentThread().getContextClassLoader().getResource("").getPath()+FileUtils.file_sep+"static";
     }
 
+
+    public static boolean getLicense() {
+        boolean result = false;
+        try {
+            InputStream is = FileUtils.class.getClassLoader().getResourceAsStream("\\license.xml");
+            License aposeLic = new License();
+            aposeLic.setLicense(is);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * doc || docx 转 pdf
+     *
+     * @param doc 需要转换doc的文件地址
+     * @param pdf 转换后pdf的输出地址
+     */
+    public static boolean wordToPdf(String doc, String pdf){
+        long old = System.currentTimeMillis();
+        if (!getLicense()) {
+            return false;
+        }
+        try{
+            InputStream inputStream = new FileInputStream(doc);
+            com.aspose.words.Document document = new com.aspose.words.Document(inputStream);
+            document.save(new FileOutputStream(new File(pdf)), SaveFormat.PDF);
+            inputStream.close();
+        }catch (Exception e){
+             log.error("word转pdf失败");
+             return false;
+        }
+        long now = System.currentTimeMillis();
+        System.out.println("共耗时：" + ((now - old) / 1000.0) + "秒");
+        return true;
+
+    }
 
 }

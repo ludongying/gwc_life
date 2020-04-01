@@ -3,6 +3,7 @@ package com.seven.gwc.modular.equipment_info.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
@@ -50,8 +51,9 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
     private PersonMapper personMapper;
 
     @Override
-    public List<EquipMaintainEntity> selectEquipMaintain(EquipMaintainEntity equipMaintain){
-        List<EquipMaintainEntity> equipMaintainEntityList = equipMaintainMapper.getMaintainList(equipMaintain);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<EquipMaintainEntity> selectEquipMaintain(EquipMaintainEntity equipMaintain, Integer total, Integer size){
+        List<EquipMaintainEntity> equipMaintainEntityList = equipMaintainMapper.getMaintainList(equipMaintain, total, size);
         for(EquipMaintainEntity equipMaintainEntity: equipMaintainEntityList){
             if (ToolUtil.isNotEmpty(equipMaintainEntity.getType())) {//设备类型名称
                 DictEntity dict = dictMapper.selectById(equipMaintainEntity.getType());
@@ -73,6 +75,12 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
             }
         }
         return equipMaintainEntityList;
+    }
+
+    @Override
+    public Integer getListSize(EquipMaintainEntity equipMaintain) {
+        List<EquipMaintainEntity> list =  equipMaintainMapper.getListSize(equipMaintain);
+        return list.size();
     }
 
     @Override
@@ -161,9 +169,7 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
 
     @Override
     public EquipMaintainEntity getOneById(String equipMaintainId) {
-        EquipMaintainEntity equipMaintainEntity = new EquipMaintainEntity();
-        equipMaintainEntity.setId(equipMaintainId);
-        return this.selectEquipMaintain(equipMaintainEntity).get(0);
+        return equipMaintainMapper.getMaintainById(equipMaintainId);
     }
 
 }

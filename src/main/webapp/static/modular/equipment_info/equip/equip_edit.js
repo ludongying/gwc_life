@@ -56,19 +56,19 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         });
     });
 
-    //设备状态下拉框
-    $.ajax({
-        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=EQUIPMENT_STATE',
-        dataType: 'json',
-        type: 'get',
-        success: function (data) {
-            $.each(data, function (index, item) {
-                $('#state').append(new Option(item.name, item.id));//往下拉菜单里添加元素
-            })
-            $('#state').val(result.state);
-            form.render('select');//表单渲染 把内容加载进去
-        }
-    });
+    // //设备状态下拉框
+    // $.ajax({
+    //     url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=EQUIPMENT_STATE',
+    //     dataType: 'json',
+    //     type: 'get',
+    //     success: function (data) {
+    //         $.each(data, function (index, item) {
+    //             $('#state').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+    //         })
+    //         $('#state').val(result.state);
+    //         form.render('select');//表单渲染 把内容加载进去
+    //     }
+    // });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

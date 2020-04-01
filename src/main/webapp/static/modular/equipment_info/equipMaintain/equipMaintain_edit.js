@@ -13,28 +13,28 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#startTime',
-        type: 'datetime',
+        type: 'date',
         trigger: 'click',
         done: function (value, date, endDate) {
             var startDate = new Date(value).getTime();
             var endTime = new Date($('#endTime').val()).getTime();
             if (endTime < startDate) {
-                layer.msg('结束时间不能小于开始时间');
                 $('#startTime').val($('#endTime').val());
+                Feng.error('结束日期不能晚于开始日期');
             }
         }
     });
 
     laydate.render({
         elem: '#endTime',
-        type: 'datetime',
+        type: 'date',
         trigger: 'click',
         done: function (value, date, endDate) {
             var startDate = new Date($('#startTime').val()).getTime();
             var endTime = new Date(value).getTime();
             if (endTime < startDate) {
                 $('#endTime').val($('#startTime').val());
-                layer.msg('结束时间不能小于开始时间');
+                Feng.error('结束日期不能晚于开始日期');
             }
         }
     });
@@ -79,12 +79,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             $('#equipId').empty();
         }
         //设备名称下拉框
-        var params={
-            equipName:"",
-            equipType:equipType
-        }
+        var params={equipType:equipType}
         $.ajax({
-            url: Feng.ctxPath + '/equip/listByTypeAndName',
+            url: Feng.ctxPath + '/equip/listByType',
             data: params,
             dataType: 'json',
             type: 'post',

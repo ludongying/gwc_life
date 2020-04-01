@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.equipment_info.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.text.ParseException;
 import java.util.List;
@@ -19,11 +19,29 @@ public interface EquipService extends IService<EquipEntity> {
     /**
      * 设备信息查询列表
      *
-     * @param equipName 名称
-     * @param equipType 设备类型
+     * @param equip 设备实体
      * @return List<设备信息服务对象>
      */
-    List<EquipEntity> selectEquip(String equipName, String equipType);
+    List<EquipEntity> selectEquip(EquipEntity equip, Integer total, Integer size);
+
+    Integer getListSize(EquipEntity equip);
+
+    /**
+     * 设备信息查询列表
+     *
+     * @param equipType 设备类别
+     * @return List<设备信息服务对象>
+     */
+    List<EquipEntity> getListByType(String equipType);
+
+    /**
+     * 设备信息查询列表
+     *
+     * @param equipName 设备名称
+     * @param equipType 设备类别
+     * @return List<设备信息服务对象>
+     */
+    List<EquipEntity> getListByTypeName(String equipName,String equipType);
 
     /**
      *通过id获取设备信息（连接dict)
@@ -61,5 +79,14 @@ public interface EquipService extends IService<EquipEntity> {
      * @return
      */
     void warn() throws ParseException;
+
+    /**
+     * 编辑设备冻结状态
+     *
+     * @param equipId 设备id
+     * @param state      状态 "ENABLE"非冻结状态
+     * @return
+     */
+    int setStatus(String equipId, String state);
 
 }

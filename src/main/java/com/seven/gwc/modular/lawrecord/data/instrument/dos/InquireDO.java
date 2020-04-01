@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import com.seven.gwc.core.state.SexEnum;
+import com.seven.gwc.modular.lawrecord.data.local.AddrData;
 import com.seven.gwc.modular.lawrecord.entity.InquireBase;
 import com.seven.gwc.modular.lawrecord.enums.InvestigatePositionEnum;
 import com.seven.gwc.modular.lawrecord.enums.ShipStatusEnum;
@@ -96,7 +97,9 @@ public class InquireDO extends BaseDO {
 
         this.setBoat_Id(inquireBase.getShipName()).setAsk_Name(inquireBase.getInvestigateName())
             .setAsk_Sex(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
-            .setAsk_Age(inquireBase.getInvestigateAge()).setAsk_Address(inquireBase.getInvestigateAddr())
+            .setAsk_Age(inquireBase.getInvestigateAge());
+
+        this.setAsk_Address(AddrData.getAddrFromJson(inquireBase.getInvestigateAddr()))
             .setAsk_Phone(inquireBase.getInvestigateTel()).setAsk_ID(inquireBase.getIdentityCard())
             .setAsk_Position(Objects.nonNull(investigatePositionEnum)?investigatePositionEnum.getMessage():"")
             .setHolder1(inquireBase.getShipOwner()).setSum(inquireBase.getShipMember())

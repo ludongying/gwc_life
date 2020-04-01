@@ -41,5 +41,14 @@ public class AddrData{
         return null;
     }
 
+    public static String getAddrFromJson(String str){
+        AddrData addrData = generateAddr(str);
+        if(Objects.nonNull(addrData)){
+            String region=Objects.nonNull(addrData.getRegion())?addrData.getRegion():"";
+            return  addrData.getState().getName()+addrData.getCity().getName()+region;
+        }
+        return null;
+    }
+
 
 }

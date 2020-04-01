@@ -1,13 +1,13 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import com.seven.gwc.core.state.SexEnum;
+import com.seven.gwc.modular.lawrecord.data.local.AddrData;
 import com.seven.gwc.modular.lawrecord.entity.DecisionBase;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
 import java.util.Objects;
 
 /**
@@ -101,14 +101,15 @@ public class DecisionDO extends BaseDO {
 
     this.setLitigant(Objects.nonNull(punishmentTypeEnum)?punishmentTypeEnum.getMessage():"")
         .setName_1(decisionBase.getPunishPersonName()).setSex_1(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
-        .setAge_1(decisionBase.getPunishAge()).setAddress_1(decisionBase.getPunishAddr())
-        .setPhone_1(decisionBase.getPunishTel()).setID_1(decisionBase.getPunishIdentityCard())
+        .setAge_1(decisionBase.getPunishAge());
+    String addrFromJson = AddrData.getAddrFromJson(decisionBase.getPunishAddr());
+    this.setAddress_1(addrFromJson).setID_1(decisionBase.getPunishIdentityCard())
         .setName_Unit(decisionBase.getPunishCompanyName()).setLegal(decisionBase.getPunishPersonName())
-        .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(decisionBase.getPunishAddr())
+        .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(addrFromJson)
         .setSeverity(Objects.nonNull(plotSeverityEnum)?plotSeverityEnum.getMessage():"")
         .setMoney(decisionBase.getResourceCompensationUpper()).setMoney_low(decisionBase.getResourceCompensation());
-
    }
+
 
 
 }

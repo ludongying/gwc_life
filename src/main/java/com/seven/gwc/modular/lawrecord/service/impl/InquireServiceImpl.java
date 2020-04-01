@@ -44,6 +44,8 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
     private DecisionService decisionService;
     @Autowired
     private OperatorService operatorService;
+    @Autowired
+    private InquireMapper inquireMapper;
     @Override
     @Transactional(rollbackFor = Exception.class)
     public BaseResult updateInquire(InquireVO vo) {
@@ -107,6 +109,38 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
     @Override
     public InquireDTO detail(String id) {
         InquireEntity inquireEntity = this.getById(id);
+        if(Objects.nonNull(inquireEntity)){
+            InquireDTO inquireDTO=new InquireDTO();
+            BeanUtils.copyProperties(inquireEntity,inquireDTO);
+            inquireDTO.setAddress();
+            //补录信息
+            inquireDTO.setInquireContent(getInquireSupplement(id));
+            return inquireDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public BaseResult detailList(String id) {
+        BaseResult result = new BaseResult();
+        result.setSuccess(true);
+        LambdaQueryWrapper<InquireEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(InquireEntity::getRecordId, id);
+        List<InquireEntity> inquireEntityList = inquireMapper.selectList(lambdaQuery);
+        List<InquireDTO> datas = new ArrayList<>();
+        for (InquireEntity inquireEntity : inquireEntityList) {
+            InquireDTO inquireDTO = this.getInquireDTO(inquireEntity.getId());
+            inquireDTO.setDetailContent();
+            datas.add(inquireDTO);
+        }
+        result.setContent(datas);
+        return result;
+    }
+
+    private InquireDTO getInquireDTO(String id) {
+        LambdaQueryWrapper<InquireEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(InquireEntity::getId, id);
+        InquireEntity inquireEntity = inquireMapper.selectOne(lambdaQuery);
         if(Objects.nonNull(inquireEntity)){
             InquireDTO inquireDTO=new InquireDTO();
             BeanUtils.copyProperties(inquireEntity,inquireDTO);

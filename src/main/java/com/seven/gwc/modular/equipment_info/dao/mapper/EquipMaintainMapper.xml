@@ -56,8 +56,8 @@
         LEFT JOIN ship_equip_maintaindetail e on m.detail_ids = e.id
         LEFT JOIN ship_equip t on t.id = m.equip_id
         WHERE m.delete_flag = 1
-        <if test="id != null and id != ''">
-            and m.id = #{id}
+        <if test="maintain.id != null and maintain.id != ''">
+            and m.id = #{maintain.id}
         </if>
     </select>
 

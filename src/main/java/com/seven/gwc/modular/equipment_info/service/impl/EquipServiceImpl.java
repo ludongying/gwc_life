@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.equipment_info.dao.EquipMapper;
 import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
@@ -43,14 +42,14 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<EquipEntity> selectEquip(EquipEntity equip, Integer total, Integer size) {
+    public List<EquipEntity> selectEquip(EquipEntity equip, Integer total, Integer size){
 //        LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.<EquipEntity>lambdaQuery();
 //        lambdaQuery.like(ToolUtil.isNotEmpty(equipName),EquipEntity::getName,equipName);
         List<EquipEntity> list = equipMapper.selectEquipList(equip, total, size);
-        for (EquipEntity equipEntity : list) {
-            if (ToolUtil.isNotEmpty(equipEntity.getState())) {
+        for(EquipEntity equipEntity : list){
+            if(ToolUtil.isNotEmpty(equipEntity.getState())){
                 DictEntity certificateTypeDict = dictMapper.selectById(equipEntity.getState());
-                if (certificateTypeDict != null) {
+                if(certificateTypeDict!= null){
                     equipEntity.setStateDesp(certificateTypeDict.getName());
                 }
             }
@@ -60,24 +59,24 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
 
     @Override
     public Integer getListSize(EquipEntity equip) {
-        List<EquipEntity> list = equipMapper.getListSize(equip);
+        List<EquipEntity> list =  equipMapper.getListSize(equip);
         return list.size();
     }
 
     @Override
     public List<EquipEntity> getListByType(String equipType) {
         LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        if (!equipType.isEmpty()) {
-            lambdaQuery.eq(EquipEntity::getType, equipType).eq(EquipEntity::getDeleteFlag, 1);
-        } else {
-            lambdaQuery.eq(EquipEntity::getDeleteFlag, 1);
+        if(!equipType.isEmpty()){
+            lambdaQuery.eq(EquipEntity::getType,equipType).eq(EquipEntity::getDeleteFlag,1);
+        }else {
+            lambdaQuery.eq(EquipEntity::getDeleteFlag,1);
         }
         return equipMapper.selectList(lambdaQuery);
     }
 
     @Override
     public List<EquipEntity> getListByTypeName(String equipName, String equipType) {
-        return equipMapper.getListByTypeName(equipName, equipType);
+        return equipMapper.getListByTypeName(equipName,equipType);
     }
 
 
@@ -93,12 +92,12 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
     @Transactional(rollbackFor = Exception.class)
     public boolean addEquip(EquipEntity equip, ShiroUser user) {
         LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(EquipEntity::getSerialNumber, equip.getSerialNumber());
+        lambdaQuery.eq(EquipEntity::getSerialNumber,equip.getSerialNumber());
         EquipEntity equipEntity = equipMapper.selectOne(lambdaQuery);
-        if (equipEntity != null) {
+        if(equipEntity != null)
+        {
             return false;
         }
-        equip.setState(TypeStatesEnum.OK.getCode());
         equip.setCreateDate(new Date());
         equip.setCreatePerson(user.getId());
         equip.setSynFlag(false);
@@ -111,7 +110,7 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
     @Transactional(rollbackFor = Exception.class)
     public void deleteEquip(String equipId, ShiroUser user) {
         EquipEntity equip = equipMapper.selectById(equipId);
-        if (equip != null) {
+        if (equip!=null){
             equip.setDeleteFlag(false);
             equip.setSynFlag(false);
             equip.setUpdateDate(new Date());
@@ -124,9 +123,9 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
     @Transactional(rollbackFor = Exception.class)
     public boolean editEquip(EquipEntity equip, ShiroUser user) {
         LambdaQueryWrapper<EquipEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(EquipEntity::getSerialNumber, equip.getSerialNumber()).ne(EquipEntity::getId, equip.getId());
+        lambdaQuery.eq(EquipEntity::getSerialNumber,equip.getSerialNumber()).ne(EquipEntity::getId,equip.getId());
         EquipEntity equipEntity = equipMapper.selectOne(lambdaQuery);
-        if (equipEntity != null) {
+        if(equipEntity != null){
             return false;
         }
         equip.setUpdateDate(new Date());
@@ -142,29 +141,27 @@ public class EquipServiceImpl extends ServiceImpl<EquipMapper, EquipEntity> impl
         List<EquipEntity> list = equipMapper.selectList(lambdaQuery);
         Date date = new Date();
         for (EquipEntity equipEntity : list) {
-            int stateCal;//设备状态
-            Calendar cal = Calendar.getInstance();//计算维保到期时间
-            if (ToolUtil.isNotEmpty(equipEntity.getLastMaintenanceDate())) {//最近保养时间不为空
+            int stateCal;
+            if (ToolUtil.isNotEmpty(equipEntity.getLastMaintenanceDate())) {
+                //计算维保到期时间
+                Calendar cal = Calendar.getInstance();
                 cal.setTime(equipEntity.getLastMaintenanceDate());
-            } else if (ToolUtil.isNotEmpty(equipEntity.getProduceDate()))//最近保养时间为空，则为新设备，根据出厂日期判断
-            {
-                cal.setTime(equipEntity.getProduceDate());
-            }
-            cal.add(Calendar.DATE, equipEntity.getMaintainCycle());
-            //计算维保到期时间与当前时间的差值
-            int intervalDays = daysBetween(date, cal.getTime());
-            if (intervalDays < 0) {//已过期
-                stateCal = 2;
-            } else {
-                if (intervalDays <= equipEntity.getWindowPhase()) {//即将过期
-                    stateCal = 1;
-                } else {//正常
-                    stateCal = 0;
+                cal.add(Calendar.DATE, equipEntity.getMaintainCycle());
+                //计算维保到期时间与当前时间的差值
+                int intervalDays = daysBetween(date, cal.getTime());
+                if (intervalDays < 0) {//已过期
+                    stateCal = 2;
+                } else {
+                    if (intervalDays <= equipEntity.getWindowPhase()) {//即将过期
+                        stateCal = 1;
+                    } else {//正常
+                        stateCal = 0;
+                    }
                 }
-            }
-            if (ToolUtil.isEmpty(equipEntity.getStateWarn()) || stateCal != equipEntity.getStateWarn()) {
-                equipEntity.setStateWarn(stateCal);
-                equipMapper.updateById(equipEntity);
+                if (ToolUtil.isEmpty(equipEntity.getStateWarn()) || stateCal != equipEntity.getStateWarn()) {
+                    equipEntity.setStateWarn(stateCal);
+                    equipMapper.updateById(equipEntity);
+                }
             }
         }
     }

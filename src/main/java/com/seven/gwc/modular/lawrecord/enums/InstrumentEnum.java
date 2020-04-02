@@ -259,5 +259,14 @@ INSTRUMENT_56(56,"31遵守伏季休渔制度保证书.docx", 2,Arrays.asList(1,2
     }
 
 
+    /**
+     * 获取不需要加分隔符号的code值
+     * @return
+     */
+    public static List<Integer> getNoBreakCode(){
+        return Arrays.asList(21,24,25);
+    }
+
+
 }
 

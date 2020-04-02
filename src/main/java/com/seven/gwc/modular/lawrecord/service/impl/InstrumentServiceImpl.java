@@ -353,7 +353,7 @@ public class InstrumentServiceImpl implements InstrumentService {
         String exportPath=getGeneratePath(lawType)+lawType.getLawCaseCode()+".docx";
         if(!autos.isEmpty()){
             autos.sort(FilePathDO::compareTo);
-            List<String> paths=autos.stream().map(FilePathDO::getPath).collect(Collectors.toList());
+            List<FilePathDO> paths=autos.stream().collect(Collectors.toList());
             boolean success = WordUtils.mergeDoc(paths, exportPath);
             res.setSuccess(success);
             res.setContent(exportPath);

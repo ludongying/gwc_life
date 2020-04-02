@@ -169,7 +169,14 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
 
     @Override
     public EquipMaintainEntity getOneById(String equipMaintainId) {
-        return equipMaintainMapper.getMaintainById(equipMaintainId);
+        EquipMaintainEntity maintainEntity = equipMaintainMapper.getMaintainById(equipMaintainId);
+        if(ToolUtil.isNotEmpty(maintainEntity.getType())){
+            DictEntity dict = dictMapper.selectById(maintainEntity.getType());
+            if (dict != null) {
+                maintainEntity.setTypeDesp(dict.getName());
+            }
+        }
+        return maintainEntity;
     }
 
 }

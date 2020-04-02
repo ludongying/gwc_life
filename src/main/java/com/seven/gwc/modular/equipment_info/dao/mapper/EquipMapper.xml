@@ -33,7 +33,7 @@
             and e.name like CONCAT('%',#{equip.name},'%')
         </if>
         <if test="equip.type != null and equip.type != ''">
-            and e.type = #{equip.type}
+            and e.type = #{equip.type} or e.type in ( SELECT c.id FROM sys_dict c WHERE c.pid = #{equip.type} )
         </if>
         <!-- 数据范围过滤 -->
         ${equip.params.dataScope}
@@ -51,7 +51,7 @@
             and e.name like CONCAT('%',#{equip.name},'%')
         </if>
         <if test="equip.type != null and equip.type != ''">
-            and e.type = #{equip.type}
+            and e.type = #{equip.type} or e.type in ( SELECT c.id FROM sys_dict c WHERE c.pid = #{equip.type} )
         </if>
         <!-- 数据范围过滤 -->
         ${equip.params.dataScope}

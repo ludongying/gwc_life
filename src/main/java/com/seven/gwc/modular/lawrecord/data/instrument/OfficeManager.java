@@ -1,10 +1,9 @@
 package com.seven.gwc.modular.lawrecord.data.instrument;
 
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.jodconverter.DocumentConverter;
-import org.jodconverter.office.OfficeException;
+
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletOutputStream;
@@ -24,22 +23,22 @@ public class OfficeManager {
 
 
 //    @Autowired
-    private DocumentConverter converter;
-
-
-    public String  generatePdf(String src){
-        File file = new File(src);
-        int position = src.lastIndexOf(".");
-        String exprotPath=src.substring(0,position)+".pdf";
-        FileUtils.generateDir(file.getParent());
-        try {
-            converter.convert(file).to(new File(exprotPath)).execute();
-        } catch (OfficeException e) {
-            log.error("文书word转pdf失败");
-            return null;
-        }
-        return exprotPath;
-    }
+//    private DocumentConverter converter;
+//
+//
+//    public String  generatePdf(String src){
+//        File file = new File(src);
+//        int position = src.lastIndexOf(".");
+//        String exprotPath=src.substring(0,position)+".pdf";
+//        FileUtils.generateDir(file.getParent());
+//        try {
+//            converter.convert(file).to(new File(exprotPath)).execute();
+//        } catch (OfficeException e) {
+//            log.error("文书word转pdf失败");
+//            return null;
+//        }
+//        return exprotPath;
+//    }
 
     public void preview(String src, HttpServletResponse response){
         //需要转换的文件

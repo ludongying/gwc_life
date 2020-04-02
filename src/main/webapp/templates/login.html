@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" href="${ctxPath}/common/images/favicon.ico" >
     <link rel="stylesheet" href="${ctxPath}/common/plugins/layui/css/layui.css"/>
+    <!-- <link rel="stylesheet" href="layui.css"/> -->
+
     <link rel="stylesheet" href="${ctxPath}/common/css/login.css" media="all">
+    <!-- <link rel="stylesheet" href="login.css" media="all"> -->
+
     <script>
         if (window != top)
             top.location.replace(location.href);
@@ -18,10 +22,10 @@
 <body>
     <div class="layui-row">
         <div class="layui-col-sm7">
-            <img src="${ctxPath}/common/images/bg_login1.png" width="650px" height="650px" >
+            <img src="${ctxPath}/common/images/bg_login1.png">
         </div>
         <div class="layui-col-sm5" >
-            <form class="layui-form" style="height: 550px; background-color: #FFFFFF; padding: 50px 58px 50px 58px" action="${ctxPath}/login" method="post">
+            <form class="layui-form"  action="${ctxPath}/login" method="post">
                 <div class="deng">
                     登录</br>
                     <strong>信息化综合管理系统</strong>
@@ -44,12 +48,13 @@
                 </div>
             </form>
         </div>
-        <div style="height: 50px; line-height: 50px; text-align:center; color: #ffffff">
+        <!-- <div style="height: 50px; line-height: 50px; text-align:center; color: #ffffff"> -->
+        <div class="bottominfo">
             Copyright © 2020 中国船舶重工集团公司第七〇七研究所 All rights reserved.
         </div>
     </div>
 
-@/* 加入contextPath属性和session超时的配置 */
+<!-- @/* 加入contextPath属性和session超时的配置 */ -->
 <script type="text/javascript">
     var Feng = {
         ctxPath: "",

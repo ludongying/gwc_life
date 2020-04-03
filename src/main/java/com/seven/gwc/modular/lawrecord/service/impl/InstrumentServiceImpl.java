@@ -4,6 +4,7 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.lawrecord.data.instrument.AsopseWordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
 import com.seven.gwc.modular.lawrecord.data.instrument.OfficeManager;
 import com.seven.gwc.modular.lawrecord.data.instrument.WordUtils;
@@ -354,7 +355,7 @@ public class InstrumentServiceImpl implements InstrumentService {
         if(!autos.isEmpty()){
             autos.sort(FilePathDO::compareTo);
             List<FilePathDO> paths=autos.stream().collect(Collectors.toList());
-            boolean success = WordUtils.mergeDoc(paths, exportPath);
+            boolean success = AsopseWordUtils.mergeDoc(paths, exportPath);
             res.setSuccess(success);
             res.setContent(exportPath);
         }else{

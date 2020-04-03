@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.seven.gwc.core.base.BaseController;
 
-
 /**
  * description : 决定控制器
  *
@@ -63,7 +62,6 @@ public class DecisionController extends BaseController {
     public BaseResult update(DecisionVO decisionVO){
         decisionVO.setUserId(ShiroKit.getUser().getId());
         return  decisionService.updateDecision(decisionVO);
-
     }
 
     /**

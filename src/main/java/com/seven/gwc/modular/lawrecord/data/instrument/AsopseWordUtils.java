@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.data.instrument;
 import com.aspose.words.*;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,41 +12,44 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PdfUtils {
+@Slf4j
+public class AsopseWordUtils {
 
+    public static final String BOOK_MARK="no1";
 
-
-    public static void mergeDoc(List<FilePathDO> srcfile, String newFile){
+    public static boolean mergeDoc(List<FilePathDO> srcfile, String newFile){
         if (!FileUtils.getLicense()) {
-            return;
+            return false;
         }
+        String indexPath = FileUtils.getStaticPath() + FileUtils.file_sep + "lawrecord" + FileUtils.file_sep + "instrument" + FileUtils.file_sep + "index.docx";
         try {
-            FileInputStream mainStream = new FileInputStream(new File(srcfile.get(0).getPath()));
+            FileInputStream mainStream = new FileInputStream(new File(indexPath));
             Document mainDoc=new Document(mainStream);
             List<Document> documents=new ArrayList<>();
-            for (int i = 1; i < srcfile.size(); i++) {
+            for (int i = 0; i < srcfile.size(); i++) {
                 FileInputStream fileInputStream = new FileInputStream(new File(srcfile.get(i).getPath()));
                 documents.add(new Document(fileInputStream));
                 fileInputStream.close();
             }
-            for (int i =1; i < documents.size(); i++) {
-                appendDocument(mainDoc, documents.get(i), true, i<srcfile.size()-2);
+            for (int i =0; i < documents.size(); i++) {
+                appendDocument(mainDoc, documents.get(i), true, i<documents.size()-1);
             }
-//            BookmarkCollection bookmarks = mainDoc.getRange().getBookmarks();
-//            bookmarks.remove("no1");
+            BookmarkCollection bookmarks = mainDoc.getRange().getBookmarks();
+            bookmarks.remove(BOOK_MARK);
             mainDoc.save(new FileOutputStream(new File(newFile)), SaveFormat.DOCX);
             mainStream.close();
-            System.out.println("over");
+           log.info("文档合并成功");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("文档合并失败");
         }
+        return true;
 
     }
 
 
     public static Document appendDocument(Document mainDoc, Document addDoc, boolean isPortrait,boolean breakPage) {
        //设置书签，指定文档拼接的位置
-        String bookmark = "no1";
+        String bookmark = BOOK_MARK;
         DocumentBuilder builder = null;
         try {
             builder = new DocumentBuilder(mainDoc);
@@ -65,7 +69,6 @@ public class PdfUtils {
                 if(breakPage){
                     builder.insertBreak(BreakType.SECTION_BREAK_NEW_PAGE);
                 }
-
             } else {
                 //横向
                 builder.getPageSetup().setOrientation(Orientation.LANDSCAPE);
@@ -195,7 +198,6 @@ public class PdfUtils {
         String p12="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\24行政处罚结案报告_法人.docx";
         String p13="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\25备考表.docx";
         String p14="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\26行政处罚决定审批表_法人.docx";
-
         String p15="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\27责令返港通知书_法人_安.docx";
         String p16="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\28限时返港承诺书.docx";
         String p17="D:\\myfile\\file\\lawrecord\\2020\\连海渔执罚20201005号\\29责令整改通知书_法人_安.docx";
@@ -213,18 +215,17 @@ public class PdfUtils {
             Document n15 = new Document(new FileInputStream(new File(p15)));
             Document n16 = new Document(new FileInputStream(new File(p16)));
             Document n17 = new Document(new FileInputStream(new File(p17)));
-              appendDocument(n,n10, true,true);
-              appendDocument(n,n11, true,true);
-              appendDocument(n,n12, true,true);
-              appendDocument(n,n13, true,true);
-              appendDocument(n,n14, true,true);
-              appendDocument(n,n15, true,true);
-              appendDocument(n,n16, true,true);
+            appendDocument(n,n10, true,true);
+            appendDocument(n,n11, true,true);
+            appendDocument(n,n12, true,true);
+            appendDocument(n,n13, true,true);
+            appendDocument(n,n14, true,true);
+            appendDocument(n,n15, true,true);
+            appendDocument(n,n16, true,true);
               appendDocument(n,n17,true,true);
 //            DocumentBuilder documentBuilder = new DocumentBuilder(n);
 //            BookmarkCollection bookmarks = n.getRange().getBookmarks();
 //            bookmarks.remove("no1");
-
 
 
             // 根据表格找到所在段落
@@ -241,7 +242,6 @@ public class PdfUtils {
 //                if (run.getText().contains(ControlChar.PAGE_BREAK))
 //                    run.setText(run.getText().replace(ControlChar.PAGE_BREAK, null));
 //            }
-
 
             n.save(new FileOutputStream(new File("D://20.docx")), SaveFormat.DOCX);
             main.close();

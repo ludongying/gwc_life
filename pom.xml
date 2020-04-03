@@ -242,31 +242,6 @@
         </dependency>
 
 
-        <!--jodconverter 核心包 -->
-        <!-- https://mvnrepository.com/artifact/org.jodconverter/jodconverter-core -->
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-core</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-
-        <!--springboot支持包，里面包括了自动配置类 -->
-        <!-- https://mvnrepository.com/artifact/org.jodconverter/jodconverter-spring-boot-starter -->
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-spring-boot-starter</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-
-
-        <!--jodconverter 本地支持包 -->
-        <!-- https://mvnrepository.com/artifact/org.jodconverter/jodconverter-local -->
-        <dependency>
-            <groupId>org.jodconverter</groupId>
-            <artifactId>jodconverter-local</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -279,6 +254,8 @@
             <artifactId>javacv</artifactId>
             <version>0.8</version>
         </dependency>
+
+
 
     </dependencies>
 
@@ -302,6 +279,20 @@
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArguments>
+                        <extdirs>${project.basedir}/src/main/resources/lib</extdirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
         </plugins>
         <resources>
             <resource>

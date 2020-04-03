@@ -361,9 +361,10 @@ function downFile($,path){
 /**
  * 图片下载
  * @param imgSrc  文件路径
- * @param name  文件名
  */
-function downloadImage(imgSrc, name) {
+function downloadImage(imgSrc) {
+    var number = imgSrc.lastIndexOf('/');
+    var fileName = imgSrc.substring(number + 14);
     let image = new Image();
     // 解决跨域 Canvas 污染问题
     image.setAttribute("crossOrigin", "anonymous");
@@ -376,7 +377,7 @@ function downloadImage(imgSrc, name) {
         let url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
         let a = document.createElement("a"); // 生成一个a元素
         let event = new MouseEvent("click"); // 创建一个单击事件
-        a.download = name || "photo"; // 设置图片名称
+        a.download = fileName || "photo"; // 设置图片名称
         a.href = url; // 将生成的URL设置为a.href属性
         a.dispatchEvent(event); // 触发a的单击事件
     };

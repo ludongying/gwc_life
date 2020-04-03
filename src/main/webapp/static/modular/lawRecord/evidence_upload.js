@@ -11,7 +11,7 @@ function loadUpload(lay,index,data){
        let len= data.length;
        let fileName="";
        for(let i=0;i<len;i++){
-           $('#uploader-list'+index).append(getImgHtml(data[i].url));
+           $('#uploader-list'+index).append(getImgHtml(data[i]));
            $('#uploader-list'+index+' img').on('click', function () {
                reviewImg(index)
            })
@@ -35,7 +35,7 @@ function loadUpload(lay,index,data){
             layer.close(layer.msg());//关闭上传提示窗口
             //上传完毕
             if(res.success){
-                $('#uploader-list'+index).append(getImgHtml(res.content.url));
+                $('#uploader-list'+index).append(getImgHtml(res.content));
                 let fileName=$("#name"+index).val();
                 fileName = fileName + res.content.path + ",";
                 $("#name"+index).val(fileName);
@@ -47,11 +47,11 @@ function loadUpload(lay,index,data){
         }
     });
 
-    function getImgHtml(path){
+    function getImgHtml(data){
         return '<div id="" class="file-iteme">'+
-               '<div class="handle del'+index+'"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
-               '<img style="width: 100px;height: 100px;" src='+path+'>'+
-               '<div class="info">' + path+ '</div>'+
+               '<div class="handle del'+index+'"><i data-path="'+data.url+'" class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
+               '<img style="width: 100px;height: 100px;" src='+data.url+'>'+
+               '<div class="info">' + data.path+ '</div>'+
                '</div>' ;
     }
 
@@ -81,13 +81,12 @@ function loadUpload(lay,index,data){
     $(document).on("click", ".file-iteme .del"+index + " .layui-icon-delete", function(event){
         $(this).parent().parent().remove();
         deleteFile($(this).parent().parent()[0].textContent)
-        //$(this).parent().remove();
-        //deleteFile($(this).parent()[0].textContent)
     });
 
     //下载点击方法
     $(document).on("click", ".file-iteme .del"+index + " .layui-icon-download-circle", function(event){
-        // 文件路径  $(this).parent().parent()[0].textContent
+        alert($(this).data("path"));
+        downloadImage( $(this).data("path"));
     });
 
     function deleteFile(deleteFile) {

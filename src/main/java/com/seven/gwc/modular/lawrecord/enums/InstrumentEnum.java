@@ -54,8 +54,8 @@ INSTRUMENT_32(32,"17听证笔录.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),
 INSTRUMENT_33(33,"18行政处罚听证会报告书.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(100)),
 INSTRUMENT_34(34,"19解除查封（扣押）通知书.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1,5,20,21)),
 INSTRUMENT_35(35,"20罚没物品处理记录.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(100)),
-INSTRUMENT_36(36,"21送达回证二.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1,5,20,21)),
-INSTRUMENT_37(37,"21送达回证一.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1,5,20,21)),
+INSTRUMENT_36(36,"21送达回证一.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1,5,20,21)),
+INSTRUMENT_37(37,"21送达回证二.docx", 1,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1,5,20,21)),
 INSTRUMENT_38(38,"22要求当场缴纳罚款的申请书.docx", 2,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(1)),
 INSTRUMENT_39(39,"23执行的票据.docx", 3,Arrays.asList(1,2),Arrays.asList(1,2),Arrays.asList(100)),
 INSTRUMENT_40(40,"24行政处罚结案报告_法人.docx", 1,Arrays.asList(1,2),Arrays.asList(1),Arrays.asList(1,5,20,21)),
@@ -256,6 +256,15 @@ INSTRUMENT_56(56,"31遵守伏季休渔制度保证书.docx", 2,Arrays.asList(1,2
             }
         }
         return list;
+    }
+
+
+    /**
+     * 获取不需要加分隔符号的code值
+     * @return
+     */
+    public static List<Integer> getNoBreakCode(){
+        return Arrays.asList(21,24,25);
     }
 
 

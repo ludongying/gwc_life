@@ -18,9 +18,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
          'admin':admin,
          'func':func,
          'key':"law_inquire_safe",
-         'cancel':false,
     }
-
 
     initPage();
     loadVerify(form);
@@ -34,7 +32,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 return;
             }
         }
-        lay.cancel=true;
         lay.content=$("#shipName").val();
         lay.message="请先保存渔船船名号,然后进入下一步";
         loadAddr($,form,"32","7");
@@ -46,11 +43,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     //下一步
     form.on('submit(nextStep)', function (data) {
+        lay.cancel=true;
         submitData("evidence",data);
     });
 
     //上一步
     form.on('submit(preStep)', function (data) {
+        lay.cancel=false;
         submitData("agency",data);
     });
 

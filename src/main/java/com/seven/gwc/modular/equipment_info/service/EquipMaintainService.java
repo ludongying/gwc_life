@@ -31,7 +31,7 @@ public interface EquipMaintainService extends IService<EquipMaintainEntity> {
      * @param equipMaintain 实体对象
      * @param user 当前用户
      */
-    void addEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user);
+    boolean addEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user);
 
     /**
      * 设备维护删除
@@ -47,7 +47,7 @@ public interface EquipMaintainService extends IService<EquipMaintainEntity> {
      * @param equipMaintain 实体对象
      * @param user 当前用户
      */
-    void editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user);
+    boolean editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user);
 
     /**
      * 根据维保表id获取维保详情

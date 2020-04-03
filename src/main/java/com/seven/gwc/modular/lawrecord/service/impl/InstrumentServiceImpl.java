@@ -4,6 +4,7 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.lawrecord.data.instrument.AsopseWordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
 import com.seven.gwc.modular.lawrecord.data.instrument.OfficeManager;
 import com.seven.gwc.modular.lawrecord.data.instrument.WordUtils;
@@ -353,8 +354,8 @@ public class InstrumentServiceImpl implements InstrumentService {
         String exportPath=getGeneratePath(lawType)+lawType.getLawCaseCode()+".docx";
         if(!autos.isEmpty()){
             autos.sort(FilePathDO::compareTo);
-            List<String> paths=autos.stream().map(FilePathDO::getPath).collect(Collectors.toList());
-            boolean success = WordUtils.mergeDoc(paths, exportPath);
+            List<FilePathDO> paths=autos.stream().collect(Collectors.toList());
+            boolean success = AsopseWordUtils.mergeDoc(paths, exportPath);
             res.setSuccess(success);
             res.setContent(exportPath);
         }else{

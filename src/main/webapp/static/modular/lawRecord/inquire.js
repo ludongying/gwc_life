@@ -17,8 +17,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
          '$ax':$ax,
          'admin':admin,
          'func':func,
-         'key':"law_inquire",
-         'cancel':false,
+         'key':"law_inquire"
+
     }
     let unit_data = {
         shipRatedPowerUnit: $("#shipRatedPowerUnit").val()
@@ -52,7 +52,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 return;
             }
         }
-        lay.cancel=true;
         lay.content=$("#shipName").val();
         lay.message="请先保存渔船船名号,然后进入下一步";
         //初始化地址
@@ -68,10 +67,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     startListen($,lay.key);
     //下一步
     form.on('submit(nextStep)', function (data) {
+        lay.cancel=true;
         submitData("inquisition",data);
     });
     //上一步
     form.on('submit(preStep)', function (data) {
+        lay.cancel=false;
         submitData("agency",data);
     });
     function submitData(des,data){

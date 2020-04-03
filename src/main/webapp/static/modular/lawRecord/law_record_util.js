@@ -302,7 +302,7 @@ function nextStep(param){
         }, function(){
             // startListen(param.lay.$,param.key)
             if(param.lay.cancel){
-                if(param.lay.content||param.lay.content.trim()===''){
+                if(!param.lay.content||param.lay.content===''){
                    msg_tip(param.$,param.lay.message);
                    return;
                 }

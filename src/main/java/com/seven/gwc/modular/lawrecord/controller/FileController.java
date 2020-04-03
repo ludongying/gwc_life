@@ -56,6 +56,13 @@ public class FileController {
         fileManager.download(path,response);
     }
 
-
+    /**
+     * 下载模板
+     * @param name
+     */
+    @RequestMapping("downTemplate")
+    public void downTemplate(String name, HttpServletResponse response){
+        fileManager.downloadTemplate(name,response);
+    }
 
 }

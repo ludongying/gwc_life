@@ -49,6 +49,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 form.val('inquireForm',result);
                 loadAddr($,form,result.investigateAddrStateCode,result.investigateAddrCityCode);
                 setInquireContent(result.inquireContent);
+                lay.content=$("#shipName").val();
                 return;
             }
         }

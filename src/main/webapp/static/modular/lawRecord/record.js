@@ -26,7 +26,6 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     initPage();
     loadVerify(form)
-
     function initPage(){
         LawRecord.initColumn = function () {
             return [[
@@ -55,6 +54,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             }
         });
     }
+
+
 
     /**
      * 更多 -返回
@@ -171,12 +172,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         window.location.href=Feng.ctxPath+"lawRecord/agency?lawType=2";
     });
 
-    /**
-     *文书模板
-     */
-    $('#clericalTemplate').click(function () {
-        msg_tip($,"文书模板功能尚未开发");
-    });
+
 
     /**
      * 工具条点击事件
@@ -211,7 +207,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 url:"/lawRecord/finish"
             })
         } else if(layEvent === 'instrument'){
-            LawRecord.onInstrument(data);
+            let result=LawRecord.onInstrument(data);
+            if(result){
+                $(this).next().removeClass("layui-hide")
+                $(this).next().next().removeClass("layui-hide")
+            }
         } else if(layEvent === 'detail'){
             window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
         } else if(layEvent === 'export'){
@@ -226,11 +226,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * 点击查看渔船信息
      */
     LawRecord.onInstrument = function (data) {
-        func.open({
+       return  func.open({
             title: '文书',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/lawRecord/instrument?id=' + data.id,
+            content: Feng.ctxPath + '/lawRecord/instrument?id=' + data.id
         });
+
     };
 
 

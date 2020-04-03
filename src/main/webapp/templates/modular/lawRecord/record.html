@@ -85,21 +85,31 @@
     </div>
 </div>
 
+
+<style>
+
+</style>
 <script type="text/html" id="tableBar">
     {{# if(d.status < 80){ }}
         @if(shiro.hasPermission("/lawRecord/update")){
-        <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         @}
     {{# } }}
-    <a id="export" class="layui-btn layui-btn-xs" lay-event="export">导出</a>
-    <a id="print" class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+
     {{# if(d.punishPersonType){ }}
-    <a id="instrument" class="layui-btn layui-btn-xs" lay-event="instrument">文书</a>
+    <a class="layui-btn layui-btn-xs" lay-event="instrument">文书</a>
     {{# } }}
-    <a id="detail" class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
+    {{# if(d.writFlag){ }}
+    <a  class="layui-btn layui-btn-xs" lay-event="export">导出</a>
+    <a  class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+    {{# }else{ }}
+    <a  class="layui-btn layui-btn-xs export layui-hide" lay-event="export">导出</a>
+    <a  class="layui-btn layui-btn-xs layui-hide" lay-event="print">打印</a>
+    {{#} }}
+    <a  class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
     {{# if(d.status < 80){ }}
-    <a id="finish" class="layui-btn layui-btn-xs" lay-event="finish">结案</a>
-    <a id="invalid" class="layui-btn layui-btn-xs" lay-event="invalid">作废</a>
+    <a class="layui-btn layui-btn-xs" lay-event="finish">结案</a>
+    <a class="layui-btn layui-btn-xs" lay-event="invalid">作废</a>
     {{# } }}
 
 </script>

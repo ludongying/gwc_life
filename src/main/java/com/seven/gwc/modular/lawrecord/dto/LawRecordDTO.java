@@ -75,6 +75,11 @@ public class LawRecordDTO {
     private Integer punishPersonType;
 
     /**
+     * 文书标记
+     */
+    private Boolean writFlag;
+
+    /**
      * 被询问人信息
      */
     @JsonIgnore

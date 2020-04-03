@@ -18,5 +18,18 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var result = ajax.start();
     form.val('munitionInfoForm',result);
 
+    //初始化物资类型下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/dict/getDictListByDictTypeCode?dictTypeCode=MUNITION_TYPE',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#typeId').append(new Option(item.name, item.id));//往下拉菜单里添加元素
+            })
+            $('#typeId').val(result.typeId);
+            form.render('select');//表单渲染 把内容加载进去
+        }
+    });
 
 });

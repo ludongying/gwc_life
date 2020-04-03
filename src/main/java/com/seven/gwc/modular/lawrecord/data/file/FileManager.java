@@ -161,6 +161,13 @@ public class FileManager {
         }
     }
 
+    /**
+     * 下载文件
+     * @param name 文件路径
+     */
+    public void downloadTemplate(String name,HttpServletResponse resp) {
+           download(FileUtils.getStaticPath()+FileUtils.file_sep+name,resp);
+    }
 
     /**
      * 加载文件列表

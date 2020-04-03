@@ -36,8 +36,7 @@
            )
     </sql>
 
-    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO"
-            resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
+    <select id="listLawRecord" parameterType="com.seven.gwc.modular.lawrecord.vo.LawRecordVO" resultType="com.seven.gwc.modular.lawrecord.dto.LawRecordDTO">
         SELECT
         law_record.id,
         law_record.law_type,
@@ -49,7 +48,8 @@
         (CASE law_record.law_type WHEN 1 THEN law_record_inquire_.investigate_name ELSE law_record_inquire_safe.investigate_name END) investigate_name,
         (CASE law_record.law_type WHEN 1 THEN law_record_inquire_.investigate_tel ELSE law_record_inquire_safe.investigate_tel END) investigate_tel,
         (CASE law_record.law_type WHEN 1 THEN law_record_decision.punish_person_type ELSE law_record_decision_safe.punish_person_type END) punish_person_type,
-        law_record.create_date
+        law_record.create_date,
+        law_record.writ_flag
         FROM
         law_record
         LEFT JOIN law_record_agency ON law_record.id=law_record_agency.id

@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.munition.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.munition.entity.MunitionInfoEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -18,10 +18,12 @@ public interface MunitionInfoService extends IService<MunitionInfoEntity> {
     /**
      * 物资信息查询列表
      *
-     * @param munitionInfoName 名称
+     * @param munition 物资实体
      * @return List<物资信息服务对象>
      */
-    List<MunitionInfoEntity> selectMunitionInfo(String munitionInfoName);
+    List<MunitionInfoEntity> selectMunitionInfo(MunitionInfoEntity munition, Integer total, Integer size);
+
+    Integer getListSize(MunitionInfoEntity munition);
 
     /**
      * 物资信息新建

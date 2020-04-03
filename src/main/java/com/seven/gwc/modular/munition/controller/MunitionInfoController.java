@@ -78,11 +78,14 @@ public class MunitionInfoController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<MunitionInfoEntity> list(String munitionInfoName) {
+    public BaseResultPage<MunitionInfoEntity> list(MunitionInfoEntity munition) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<MunitionInfoEntity> munitionInfos = munitionInfoService.selectMunitionInfo(munitionInfoName);
+        List<MunitionInfoEntity> munitionInfos = munitionInfoService.selectMunitionInfo(munition,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(munitionInfos);
+        Integer size = munitionInfoService.getListSize(munition);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
@@ -117,7 +120,9 @@ public class MunitionInfoController extends BaseController {
     @ResponseBody
     public BaseResult update(MunitionInfoEntity munitionInfo) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInfoService.editMunitionInfo(munitionInfo, user);
+        if(!munitionInfoService.editMunitionInfo(munitionInfo, user)){
+            return new BaseResultPage().failure(ErrorEnum.ERROR_ONLY_MUNITION_CODE);
+        }
         return SUCCESS;
     }
 

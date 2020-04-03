@@ -31,7 +31,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         for (i = 0; i < files.length - 1; i++) {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
-                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>' +
                 '<img style="width: 100px;height: 100px;" src=' + files[i] + '>' +
                 '<div class="info">' + files[i] + '</div>' +
                 '</div>'
@@ -142,7 +142,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             //上传完毕
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
-                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>' +
                 '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
                 '<div class="info">' + res.fileName + '</div>' +
                 '</div>'
@@ -175,10 +175,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     });
 
     // 删除图片
-    $(document).on("click", ".file-iteme .handle", function(event){
+    /*$(document).on("click", ".file-iteme .handle", function(event){
         $(this).parent().remove();
         //$(this).parent()[0].textContent
         deleteFIle(fileName, $(this).parent()[0].textContent)
+    });*/
+    $(document).on("click", ".file-iteme .handle .layui-icon-download-circle", function(event){
+        var url = $(this).parent().parent()[0].textContent;
+        var number = $(this).parent().parent()[0].textContent.lastIndexOf('\\');
+        var fileName = $(this).parent().parent()[0].textContent.substring(number + 14);
+        downloadImage(url, fileName);
+    });
+
+    $(document).on("click", ".file-iteme .handle .layui-icon-delete", function(event){
+        $(this).parent().parent().remove();
+        //$(this).parent()[0].textContent
+        deleteFile(fileName, $(this).parent().parent()[0].textContent)
     });
 
     // 表单提交事件
@@ -199,7 +211,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         return false;
     });
 
-    function deleteFIle(names, deleteFile) {
+    function deleteFile(names, deleteFile) {
         var name = "";
         var files = names.split(",");
         for (i = 0; i < files.length - 1; i++ ) {

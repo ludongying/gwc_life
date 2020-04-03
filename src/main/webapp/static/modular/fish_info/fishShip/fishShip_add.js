@@ -140,34 +140,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload', 'func'], functio
     });*/
 
     $(document).on("click", ".file-iteme .handle .layui-icon-download-circle", function(event){
-        downloadIamge($(this).parent().parent()[0].textContent, "测试");
-        /*var exportForm = $("<form method='get'></form>");
-        exportForm.append("action", $(this).parent().parent()[0].textContent);
-        $(document.body).append(exportForm);
-        exportForm.submit();
-        exportForm.remove();*/
-
+        var url = $(this).parent().parent()[0].textContent;
+        var number = $(this).parent().parent()[0].textContent.lastIndexOf('\\');
+        var fileName = $(this).parent().parent()[0].textContent.substring(number + 14);
+        downloadImage(url, fileName);
     });
-
-    function downloadIamge(imgsrc, name) {//下载图片地址和图片名
-        let image = new Image();
-        // 解决跨域 Canvas 污染问题
-        image.setAttribute("crossOrigin", "anonymous");
-        image.onload = function() {
-            let canvas = document.createElement("canvas");
-            canvas.width = image.width;
-            canvas.height = image.height;
-            let context = canvas.getContext("2d");
-            context.drawImage(image, 0, 0, image.width, image.height);
-            let url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
-            let a = document.createElement("a"); // 生成一个a元素
-            let event = new MouseEvent("click"); // 创建一个单击事件
-            a.download = name || "photo"; // 设置图片名称
-            a.href = url; // 将生成的URL设置为a.href属性
-            a.dispatchEvent(event); // 触发a的单击事件
-        };
-        image.src = imgsrc;
-    }
 
     // 删除图片
     $(document).on("click", ".file-iteme .handle .layui-icon-delete", function(event){

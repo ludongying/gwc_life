@@ -15,11 +15,9 @@ function loadUpload(lay,index,data){
            $('#uploader-list'+index+' img').on('click', function () {
                reviewImg(index)
            })
-
            fileName+=data[i].path+",";
        }
        $("#name"+index).val(fileName);
-
     }
 
     lay.upload.render({
@@ -39,7 +37,7 @@ function loadUpload(lay,index,data){
             if(res.success){
                 $('#uploader-list'+index).append(getImgHtml(res.content.url));
                 let fileName=$("#name"+index).val();
-                fileName = fileName + res.content.path + ","
+                fileName = fileName + res.content.path + ",";
                 $("#name"+index).val(fileName);
                 $('#uploader-list'+index+' img').on('click', function () {
                     reviewImg(index)
@@ -51,20 +49,13 @@ function loadUpload(lay,index,data){
 
     function getImgHtml(path){
         return '<div id="" class="file-iteme">'+
-               '<div class="handle del'+index+'"><i class="layui-icon layui-icon-delete"></i></div>'+
+               '<div class="handle del'+index+'"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
                '<img style="width: 100px;height: 100px;" src='+path+'>'+
                '<div class="info">' + path+ '</div>'+
                '</div>' ;
     }
 
     function reviewImg(index){
-        /*layer.open({
-            type: 2,
-            title: '视频播放',
-            area: ['600px', '500px'],
-            content: Feng.ctxPath + '/fishShip/test',
-
-        });*/
         layer.photos({
             photos: '#uploader-list'+index,
             anim: 0,
@@ -87,9 +78,16 @@ function loadUpload(lay,index,data){
     });
 
     // 删除图片
-    $(document).on("click", ".file-iteme .del"+index, function(event){
-        $(this).parent().remove();
-        deleteFile($(this).parent()[0].textContent)
+    $(document).on("click", ".file-iteme .del"+index + " .layui-icon-delete", function(event){
+        $(this).parent().parent().remove();
+        deleteFile($(this).parent().parent()[0].textContent)
+        //$(this).parent().remove();
+        //deleteFile($(this).parent()[0].textContent)
+    });
+
+    //下载点击方法
+    $(document).on("click", ".file-iteme .del"+index + " .layui-icon-download-circle", function(event){
+        // 文件路径  $(this).parent().parent()[0].textContent
     });
 
     function deleteFile(deleteFile) {

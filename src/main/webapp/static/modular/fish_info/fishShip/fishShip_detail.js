@@ -19,13 +19,31 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
         for (i = 0; i < files.length - 1; i++) {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
-                '<div class="handle"><i class="layui-icon layui-icon-delete"></i></div>' +
+                '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i></i></div>' +
                 '<img style="width: 100px;height: 100px;" src=' + files[i] + '>' +
                 '<div class="info">' + files[i] + '</div>' +
                 '</div>'
             );
         }
     }
+
+    $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            $(this).children(".handle").fadeIn("fast");   //删除按钮
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            $(this).children(".handle").hide();
+        }
+    });
+
+    $(document).on("click", ".file-iteme .handle", function(event){
+        var url = $(this).parent().parent()[0].textContent;
+        var number = $(this).parent().parent()[0].textContent.lastIndexOf('\\');
+        var fileName = $(this).parent().parent()[0].textContent.substring(number + 14);
+        downloadImage(url, fileName);
+    });
+
     form.val('fishShipForm',result);
 
     $('#uploader-list img').on('click', function () {

@@ -20,10 +20,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
 
-
-
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
+
+    //表单校验
+    loadVerify(form);
 
     //初始化设备信息的详情数据
     var ajax = new $ax(Feng.ctxPath + "/equip/detail/" + Feng.getUrlParam("equipId"));

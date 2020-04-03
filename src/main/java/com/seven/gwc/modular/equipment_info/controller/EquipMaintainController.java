@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.equipment_info.controller;
 
+import com.seven.gwc.core.state.ErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -95,7 +96,9 @@ public class EquipMaintainController extends BaseController {
     @ResponseBody
     public BaseResult add(EquipMaintainEntity equipMaintain) {
         ShiroUser user = ShiroKit.getUser();
-        equipMaintainService.addEquipMaintain(equipMaintain, user);
+        if(!equipMaintainService.addEquipMaintain(equipMaintain, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_MAINTAIN_CODE);
+        }
         return SUCCESS;
     }
 
@@ -117,7 +120,9 @@ public class EquipMaintainController extends BaseController {
     @ResponseBody
     public BaseResult update(EquipMaintainEntity equipMaintain) {
         ShiroUser user = ShiroKit.getUser();
-        equipMaintainService.editEquipMaintain(equipMaintain, user);
+        if(!equipMaintainService.editEquipMaintain(equipMaintain, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_MAINTAIN_CODE);
+        }
         return SUCCESS;
     }
 

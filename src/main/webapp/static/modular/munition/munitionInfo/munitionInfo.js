@@ -15,7 +15,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var MunitionInfo = {
         tableId: "munitionInfoTable",
         condition: {
-            munitionInfoName: ""
+           name: ""
         }
     };
 
@@ -91,7 +91,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     MunitionInfo.search = function () {
         var queryData = {};
-        queryData['munitionInfoName'] = $("#munitionInfoName").val().trim();
+        queryData['name'] = $("#munitionInfoName").val().trim();
         table.reload(MunitionInfo.tableId, {where: queryData});
     };
 

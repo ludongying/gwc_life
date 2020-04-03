@@ -3,6 +3,7 @@ package com.seven.gwc.modular.munition.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.munition.dao.MunitionInfoMapper;
@@ -35,10 +36,11 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
     DictMapper dictMapper;
 
     @Override
-    public List<MunitionInfoEntity> selectMunitionInfo(String munitionInfoName){
-        LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.<MunitionInfoEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(munitionInfoName),MunitionInfoEntity::getName,munitionInfoName);
-        List<MunitionInfoEntity> lists = munitionInfoMapper.selectList(lambdaQuery);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<MunitionInfoEntity> selectMunitionInfo(MunitionInfoEntity munition, Integer total, Integer size){
+//        LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.<MunitionInfoEntity>lambdaQuery();
+//        lambdaQuery.like(ToolUtil.isNotEmpty(munitionInfoName),MunitionInfoEntity::getName,munitionInfoName);
+        List<MunitionInfoEntity> lists = munitionInfoMapper.selectMunitionList(munition,total,size);
         for(MunitionInfoEntity munitionInfoEntity: lists){
             if(ToolUtil.isNotEmpty(munitionInfoEntity.getTypeId())){
                 DictEntity dictEntity = dictMapper.selectById(munitionInfoEntity.getTypeId());
@@ -48,6 +50,12 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
             }
         }
         return lists;
+    }
+
+    @Override
+    public Integer getListSize(MunitionInfoEntity munition) {
+        List<MunitionInfoEntity> list = munitionInfoMapper.getListSize(munition);
+        return list.size();
     }
 
     @Override
@@ -73,8 +81,16 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
 
     @Override
     public boolean editMunitionInfo(MunitionInfoEntity munitionInfo, ShiroUser user) {
+        LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(MunitionInfoEntity::getCode, munitionInfo.getCode()).ne(MunitionInfoEntity::getId, munitionInfo.getId());
+        MunitionInfoEntity munitionInfoEntity = munitionInfoMapper.selectOne(lambdaQuery);
+        if (munitionInfoEntity != null) {
+            return false;
+        }
+        munitionInfo.setUpdateDate(new Date());
+        munitionInfo.setUpdatePerson(user.getId());
         munitionInfoMapper.updateById(munitionInfo);
-        return false;
+        return true;
     }
 
 }

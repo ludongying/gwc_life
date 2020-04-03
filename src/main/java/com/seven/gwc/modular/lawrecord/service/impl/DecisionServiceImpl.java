@@ -76,7 +76,7 @@ public class DecisionServiceImpl extends ServiceImpl<DecisionMapper, DecisionEnt
         if(Objects.nonNull(decisionEntity)){
             DecisionDTO decisionDTO=new DecisionDTO();
             BeanUtils.copyProperties(decisionEntity,decisionDTO);
-            decisionDTO.setAddress();
+      /*      decisionDTO.setAddress(); */
             return decisionDTO;
         }
         return null;

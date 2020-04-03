@@ -19,15 +19,18 @@ public class InquireSafeDTO extends InquireSafeEntity {
     /**
      * 省
      */
+    @Deprecated
     private String investigateAddrStateCode;
 
     /**
      * 市
      */
+    @Deprecated
     private String investigateAddrCityCode;
     /**
      * 区
      */
+    @Deprecated
     private String investigateAddrRegion;
 
     /***********************************************/
@@ -35,6 +38,7 @@ public class InquireSafeDTO extends InquireSafeEntity {
 
     private String investigatePositionStr;
 
+    @Deprecated
     private String investigateAddrStr;
 
     private String shipStatusStr;
@@ -59,16 +63,22 @@ public class InquireSafeDTO extends InquireSafeEntity {
     }
 
 
+    /**
+     *
+     *        this.investigateAddrStr="";
+     *         AddrData addrData = AddrData.generateAddr(this.getInvestigateAddr());
+     *         if(Objects.nonNull(addrData)){
+     *             this.investigateAddrStr=addrData.getState().getName()+addrData.getCity().getName()+addrData.getRegion();
+     *         }
+     *
+     */
+
     public void setDetailContent(){
         SexEnum sexEnum = SexEnum.findByCode(this.getInvestigateSex());
         this.investigateSexStr=Objects.isNull(sexEnum)?"":sexEnum.getMessage();
         InvestigatePositionEnum investigatePositionEnum = InvestigatePositionEnum.findByCode(this.getInvestigatePosition());
         this.investigatePositionStr= Objects.isNull(investigatePositionEnum)?"":investigatePositionEnum.getMessage();
-        this.investigateAddrStr="";
-        AddrData addrData = AddrData.generateAddr(this.getInvestigateAddr());
-        if(Objects.nonNull(addrData)){
-            this.investigateAddrStr=addrData.getState().getName()+addrData.getCity().getName()+addrData.getRegion();
-        }
+
         ShipStatusEnum shipStatusEnum = ShipStatusEnum.findByCode(this.getShipStatus());
         this.shipStatusStr= Objects.isNull(shipStatusEnum)?"":shipStatusEnum.getMessage();
         ShipCaseEnum shipCaseEnum = ShipCaseEnum.findByCode(this.getShipCaseName());

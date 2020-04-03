@@ -2,12 +2,10 @@ package com.seven.gwc.modular.lawrecord.dto;
 
 import com.seven.gwc.core.state.SexEnum;
 import com.seven.gwc.modular.lawrecord.data.local.AddrData;
-import com.seven.gwc.modular.lawrecord.entity.DecisionEntity;
 import com.seven.gwc.modular.lawrecord.entity.DecisionSafeEntity;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.WhetherEnum;
-import com.seven.gwc.modular.lawrecord.enums.WithOutEnum;
 import lombok.Data;
 
 import java.util.Objects;
@@ -22,20 +20,24 @@ public class DecisionSafeDTO extends DecisionSafeEntity {
     /**
      * 省
      */
+    @Deprecated
     private String punishAddrStateCode;
     /**
      * 市
      */
+    @Deprecated
     private String punishAddrCityCode;
     /**
      * 区
      */
+    @Deprecated
     private String punishAddrRegion;
 
     /************************************/
     /** 当事人类型（枚举） */
     private String punishPersonTypeStr;
     /** 地址 */
+    @Deprecated
     private String punishAddrStr;
     /** 情节严重性 */
     private String severityStr;
@@ -54,14 +56,19 @@ public class DecisionSafeDTO extends DecisionSafeEntity {
         }
     }
 
+    /**
+     *
+     *         this.punishAddrStr="";
+     *         AddrData addrData = AddrData.generateAddr(this.getPunishAddr());
+     *         if(Objects.nonNull(addrData)){
+     *             this.punishAddrStr=addrData.getState().getName()+addrData.getCity().getName()+addrData.getRegion();
+     *         }
+     *
+     */
     public void setDetailContent(){
         PunishmentTypeEnum punishmentTypeEnum = PunishmentTypeEnum.findByCode(this.getPunishPersonType());
         this.punishPersonTypeStr=Objects.isNull(punishmentTypeEnum)?"":punishmentTypeEnum.getMessage();
-        this.punishAddrStr="";
-        AddrData addrData = AddrData.generateAddr(this.getPunishAddr());
-        if(Objects.nonNull(addrData)){
-            this.punishAddrStr=addrData.getState().getName()+addrData.getCity().getName()+addrData.getRegion();
-        }
+
         PlotSeverityEnum plotSeverityEnum = PlotSeverityEnum.findByCode(this.getSeverity());
         this.severityStr= Objects.isNull(plotSeverityEnum)?"":plotSeverityEnum.getMessage();
 

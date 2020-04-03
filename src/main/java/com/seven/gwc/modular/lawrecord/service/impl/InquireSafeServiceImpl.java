@@ -62,7 +62,7 @@ public class InquireSafeServiceImpl extends ServiceImpl<InquireSafeMapper, Inqui
         if(Objects.nonNull(inquireSafeEntity)){
             InquireSafeDTO inquireSafeDTO=new InquireSafeDTO();
             BeanUtils.copyProperties(inquireSafeEntity,inquireSafeDTO);
-            inquireSafeDTO.setAddress();
+/*            inquireSafeDTO.setAddress();*/
             return inquireSafeDTO;
         }
         return null;

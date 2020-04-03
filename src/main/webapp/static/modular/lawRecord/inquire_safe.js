@@ -28,14 +28,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             var result = ajax.start();
             if(result){
                 form.val('inquireForm',result);
-                loadAddr($,form,result.investigateAddrStateCode,result.investigateAddrCityCode);
+                // loadAddr($,form,result.investigateAddrStateCode,result.investigateAddrCityCode);
                 lay.content=$("#shipName").val();
                 return;
             }
         }
         lay.content=$("#shipName").val();
         lay.message="请先保存渔船船名号,然后进入下一步";
-        loadAddr($,form,"32","7");
+        // loadAddr($,form,"32","7");
     }
 
 
@@ -56,7 +56,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     function submitData(des,data){
         //获取地址
-        data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
+        // data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
         //开启监听后，下一步操作验证
         nextStep({
             "lay":lay,

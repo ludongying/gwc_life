@@ -59,7 +59,7 @@ public class DecisionSafeServiceImpl extends ServiceImpl<DecisionSafeMapper, Dec
         if(Objects.nonNull(decisionSafeEntity)){
             DecisionSafeDTO decisionSafeDTO=new DecisionSafeDTO();
             BeanUtils.copyProperties(decisionSafeEntity,decisionSafeDTO);
-            decisionSafeDTO.setAddress();
+           /* decisionSafeDTO.setAddress();*/
             return decisionSafeDTO;
         }
         return null;

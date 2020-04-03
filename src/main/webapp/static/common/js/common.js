@@ -363,8 +363,10 @@ function downFile($,path){
  * @param imgSrc  文件路径
  */
 function downloadImage(imgSrc) {
-    var number = imgSrc.lastIndexOf('/');
-    var fileName = imgSrc.substring(number + 14);
+    let number1 = imgSrc.lastIndexOf('/');
+    let number2 = imgSrc.lastIndexOf("\\");
+    let number=number1>number2?number1:number2;
+    let fileName = imgSrc.substring(number + 14);
     let image = new Image();
     // 解决跨域 Canvas 污染问题
     image.setAttribute("crossOrigin", "anonymous");

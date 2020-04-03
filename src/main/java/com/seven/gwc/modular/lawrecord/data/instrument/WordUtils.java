@@ -43,7 +43,6 @@ public class WordUtils {
                     XWPFParagraph paragraph = documentList.get(i).createParagraph();
                     if(i!=documentList.size()-1){
                         if(!noBreaks.contains(code)){
-                            System.out.println(">>>>>>>>code"+code);
                             paragraph.setPageBreak(true);
                         }
                     }

@@ -117,7 +117,6 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
             }
             content.push(data);
         }
-        // console.log(JSON.stringify(content));
         return content;
     }
     //提交数据

@@ -43,13 +43,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
             let result = ajax.start();
             if(result){
                 form.val('decisionForm',result);
-                loadAddr($,form,result.punishAddrStateCode,result.punishAddrCityCode);
+                // loadAddr($,form,result.punishAddrStateCode,result.punishAddrCityCode);
                 $("#punishPersonType").attr("disabled","disabled");
                 form.render();
                 return;
             }
         }
-            loadAddr($,form);
+            // loadAddr($,form);
     }
 
     form.on('select(punishPersonType)', function(data){
@@ -147,7 +147,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     //提交数据
     function submitData(des,data){
         //设置数据
-        data.field.punishAddr= JSON.stringify(getLocAddr($,"punish_addr"));
+        // data.field.punishAddr= JSON.stringify(getLocAddr($,"punish_addr"));
         setMoney(data);
         let url="decision/update";
         if($("#lawType").val()==2){

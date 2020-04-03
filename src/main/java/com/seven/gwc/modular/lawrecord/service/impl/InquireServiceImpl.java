@@ -112,7 +112,7 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         if(Objects.nonNull(inquireEntity)){
             InquireDTO inquireDTO=new InquireDTO();
             BeanUtils.copyProperties(inquireEntity,inquireDTO);
-            inquireDTO.setAddress();
+           /* inquireDTO.setAddress();*/
             //补录信息
             inquireDTO.setInquireContent(getInquireSupplement(id));
             return inquireDTO;
@@ -144,7 +144,7 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         if(Objects.nonNull(inquireEntity)){
             InquireDTO inquireDTO=new InquireDTO();
             BeanUtils.copyProperties(inquireEntity,inquireDTO);
-            inquireDTO.setAddress();
+   /*         inquireDTO.setAddress();*/
             //补录信息
             inquireDTO.setInquireContent(getInquireSupplement(id));
             return inquireDTO;

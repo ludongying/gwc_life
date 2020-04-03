@@ -47,7 +47,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
             let result = ajax.start();
             if(result){
                 form.val('inquireForm',result);
-                loadAddr($,form,result.investigateAddrStateCode,result.investigateAddrCityCode);
+                // loadAddr($,form,result.investigateAddrStateCode,result.investigateAddrCityCode);
                 setInquireContent(result.inquireContent);
                 lay.content=$("#shipName").val();
                 return;
@@ -56,7 +56,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         lay.content=$("#shipName").val();
         lay.message="请先保存渔船船名号,然后进入下一步";
         //初始化地址
-        loadAddr($,form,"32","7");
+        // loadAddr($,form,"32","7");
     }
     addUnitListen($,form,unit_data);
 
@@ -82,7 +82,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
             return;
         }
         //获取地址
-        data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
+        // data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
         //获取补录内容
         data.field.inquireContent=JSON.stringify(getInquireContent());
         //开启监听后，下一步操作验证
@@ -171,9 +171,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     $("#addInquire").click(function () {
         let index=initContent({});
         //地址初始化
-        loadAddrIndex({
-            $:$,form:form,stateCode:"32",cityCode:"7",index:index
-        });
+        // loadAddrIndex({
+        //     $:$,form:form,stateCode:"32",cityCode:"7",index:index
+        // });
         $("#inquire_box .shipName").val($("#shipName").val());
         form.render();
     });
@@ -228,7 +228,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 obj[name]=val;
             }
         }
-        obj["investigateAddr"]=getLocAddr($,"investigate_addr"+index);
+        // obj["investigateAddr"]=getLocAddr($,"investigate_addr"+index);
         return obj;
     }
 
@@ -240,13 +240,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                    let index=initContent(data[i]);
                    let block=$("#inquire_box .inquire_index").eq(i);
                    setBlockCon(index,data[i],block);
-                   let addr = data[i].investigateAddr;
-                   if(addr){
-                       let obj=JSON.parse(addr);
-                       loadAddrIndex({
-                           $:$,form:form,stateCode:obj.state.code,cityCode:obj.city.code,region:obj.region,index:index
-                       });
-                   }
+                   // let addr = data[i].investigateAddr;
+                   // if(addr){
+                   //     let obj=JSON.parse(addr);
+                   //     loadAddrIndex({
+                   //         $:$,form:form,stateCode:obj.state.code,cityCode:obj.city.code,region:obj.region,index:index
+                   //     });
+                   // }
                }
                form.render();
            }

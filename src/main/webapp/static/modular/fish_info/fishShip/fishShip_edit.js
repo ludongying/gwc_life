@@ -27,13 +27,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var result = ajax.start();
     if (result.fileName != null) {
         fileName = result.fileName;
-        var files = fileName.split(",");
-        for (i = 0; i < files.length - 1; i++) {
+        for(let i=0; i<result.filePath.length; i++){
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
                 '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>' +
-                '<img style="width: 100px;height: 100px;" src=' + files[i] + '>' +
-                '<div class="info">' + files[i] + '</div>' +
+                '<img style="width: 100px;height: 100px;" src=' + result.filePath[i].url + '>' +
+                '<div class="info">' + result.filePath[i].path + '</div>' +
                 '</div>'
             );
         }
@@ -128,7 +127,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
 
     upload.render({
         elem: '#test2'
-        ,url: '/system/uploadFile'
+        ,url: '/file/uploadFile'
         ,multiple: true
         ,before: function(obj){
             layer.msg('图片上传中...', {
@@ -143,12 +142,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
                 '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>' +
-                '<img style="width: 100px;height: 100px;" src='+ res.fileName +'>' +
-                '<div class="info">' + res.fileName + '</div>' +
+                '<img style="width: 100px;height: 100px;" src='+ res.content.url +'>' +
+                '<div class="info">' + res.content.path + '</div>' +
                 '</div>'
             );
 
-            fileName = fileName + res.fileName + ",";
+            fileName = fileName + res.content.path + ",";
             $("#fileName").val(fileName);
 
             $('#uploader-list img').on('click', function () {
@@ -174,17 +173,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
         }
     });
 
-    // 删除图片
-    /*$(document).on("click", ".file-iteme .handle", function(event){
-        $(this).parent().remove();
-        //$(this).parent()[0].textContent
-        deleteFIle(fileName, $(this).parent()[0].textContent)
-    });*/
+
     $(document).on("click", ".file-iteme .handle .layui-icon-download-circle", function(event){
-        var url = $(this).parent().parent()[0].textContent;
-        var number = $(this).parent().parent()[0].textContent.lastIndexOf('\\');
-        var fileName = $(this).parent().parent()[0].textContent.substring(number + 14);
-        downloadImage(url, fileName);
+        downloadImage($(this).parent().parent().eq(0).find("img").attr("src"));
     });
 
     $(document).on("click", ".file-iteme .handle .layui-icon-delete", function(event){

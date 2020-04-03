@@ -15,13 +15,13 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var ajax = new $ax(Feng.ctxPath + "/fishShip/detail/" + Feng.getUrlParam("fishShipId"));
     var result = ajax.start();
     if (result.fileName != null) {
-        var files = result.fileName.split(",");
-        for (i = 0; i < files.length - 1; i++) {
+        fileName = result.fileName;
+        for(let i=0; i<result.filePath.length; i++){
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
-                '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i></i></div>' +
-                '<img style="width: 100px;height: 100px;" src=' + files[i] + '>' +
-                '<div class="info">' + files[i] + '</div>' +
+                '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i></div>' +
+                '<img style="width: 100px;height: 100px;" src=' + result.filePath[i].url + '>' +
+                '<div class="info">' + result.filePath[i].path + '</div>' +
                 '</div>'
             );
         }
@@ -38,10 +38,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     });
 
     $(document).on("click", ".file-iteme .handle", function(event){
-        var url = $(this).parent().parent()[0].textContent;
-        var number = $(this).parent().parent()[0].textContent.lastIndexOf('\\');
-        var fileName = $(this).parent().parent()[0].textContent.substring(number + 14);
-        downloadImage(url, fileName);
+        downloadImage($(this).parent().eq(0).find("img").attr("src"));
     });
 
     form.val('fishShipForm',result);

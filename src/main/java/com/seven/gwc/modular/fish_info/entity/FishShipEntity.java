@@ -6,12 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seven.gwc.core.base.BaseEntity;
+import com.seven.gwc.modular.lawrecord.data.file.FileData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * description : 渔船信息实体
@@ -123,4 +125,7 @@ public class FishShipEntity extends BaseEntity {
 
     /** 修改用户 */
     private String updateUser;
+
+    @TableField(exist=false)
+    private List<FileData> filePath;
 }

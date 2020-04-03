@@ -11,6 +11,7 @@ import com.seven.gwc.modular.fish_info.dao.FishShipMapper;
 import com.seven.gwc.modular.fish_info.entity.FishShipEntity;
 import com.seven.gwc.modular.fish_info.service.FishShipService;
 import com.seven.gwc.modular.fish_info.vo.ExportFishShipVO;
+import com.seven.gwc.modular.lawrecord.data.file.FileManager;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
 import com.seven.gwc.modular.system.service.DictService;
@@ -50,6 +51,8 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     private DictMapper dictMapper;
     @Autowired
     private DictService dictService;
+    @Autowired
+    private FileManager fileManager;
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String uploadPathFile;
 
@@ -133,6 +136,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
         DictEntity workTypeDict = dictMapper.selectById(fishShipEntity.getWorkType());
         fishShipEntity.setWorkTypeName(workTypeDict.getName());
+        fishShipEntity.setFilePath(fileManager.listFile(fishShipEntity.getFileName()));
         return fishShipEntity;
     }
 

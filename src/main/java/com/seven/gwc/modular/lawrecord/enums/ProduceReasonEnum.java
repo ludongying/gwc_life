@@ -2,15 +2,8 @@ package com.seven.gwc.modular.lawrecord.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.seven.gwc.modular.lawrecord.vo.EnumVO;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author : zzl
@@ -71,10 +64,10 @@ public enum ProduceReasonEnum implements IEnum<Integer> {
         }
     }
 
-    public static Map<String, List<EnumVO>> getReasons(){
+    /*public static Map<String, List<EnumVO>> getReasons(){
        return Arrays.stream(ProduceReasonEnum.values()).collect(Collectors.groupingBy(ProduceReasonEnum::getType, LinkedHashMap::new, Collectors.mapping(EnumVO::new,Collectors.toList())));
 
-    }
+    }*/
 
 
     @Override

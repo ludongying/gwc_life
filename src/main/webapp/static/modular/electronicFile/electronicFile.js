@@ -69,7 +69,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         var data = obj.data;
         var layEvent = obj.event;
         if (layEvent === 'detail') {
-            window.location.href=Feng.ctxPath+"electronic/detail?id="+data.id;
+            window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
         }
     });
 

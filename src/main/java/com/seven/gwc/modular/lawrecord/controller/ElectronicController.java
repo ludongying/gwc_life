@@ -40,7 +40,7 @@ public class ElectronicController {
     @RequestMapping("/list")
     @ResponseBody
     public BaseResultPage<LawRecordDTO> list(LawRecordVO lawRecordVO) {
-        return electronicFileService.getElectronicFileList(lawRecordVO);
+        return lawRecordService.listLawRecord(lawRecordVO);
     }
 
 }

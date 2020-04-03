@@ -1,7 +1,6 @@
 package com.seven.gwc.modular.api;
 
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.modular.lawrecord.enums.ProduceReasonEnum;
 import com.seven.gwc.modular.lawrecord.enums.SafeReasonEnum;
 import com.seven.gwc.modular.lawrecord.service.LawProductService;
 import com.seven.gwc.modular.lawrecord.vo.*;
@@ -80,7 +79,7 @@ public class LawRecordApi {
     @GetMapping(value = "/getProduceReasonList")
     @ApiOperation(value = "生产获取生产案由列表")
     public BaseResult getProduceReasonList() {
-        return new BaseResult().content(ProduceReasonEnum.getReasons());
+        return new BaseResult().content(lawProductService.getProduceReasonList());
     }
 
     @GetMapping(value = "/getPunishmentTypeList")

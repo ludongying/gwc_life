@@ -109,6 +109,7 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
                 dto.setShipName(handleStr(dto.getShipName()));
                 dto.setInvestigateName(handleStr(dto.getInvestigateName()));
                 dto.setInvestigateTel(handleStr(dto.getInvestigateTel()));
+                dto.setLawTypeName(LawTypeEnum.findByCode(dto.getLawType()).getMessage());
             });
         }
         return new BaseResultPage().createPage(pageInfo);

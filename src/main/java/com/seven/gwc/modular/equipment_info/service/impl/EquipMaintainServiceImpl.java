@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
-import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.equipment_info.dao.EquipMaintainMapper;
 import com.seven.gwc.modular.equipment_info.dao.EquipMaintaindetailMapper;
@@ -85,7 +83,7 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user) {
+    public boolean addEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user) {
         //维保详情表插入
         EquipMaintaindetailEntity equipMaintaindetail = new EquipMaintaindetailEntity();
         equipMaintaindetail.setStartTime(equipMaintain.getStartTime());
@@ -104,7 +102,7 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
         EquipMaintainEntity equipMaintainEntity = equipMaintainMapper.selectOne(lambdaQuery);
         if(equipMaintainEntity != null)
         {
-            throw new BusinessException(ErrorEnum.ERROR_ONLY_MAINTAIN_CODE);
+            return false;
         }
         equipMaintain.setDetailIds(equipMaintaindetail.getId());//当前只有一个详情表，未来可以扩展为多个详情表,用，分隔
         equipMaintain.setCreateDate(new Date());
@@ -116,6 +114,7 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
         EquipEntity equipEntity = equipMapper.selectById(equipMaintain.getEquipId());
         equipEntity.setLastMaintenanceDate(equipMaintain.getEndTime());
         equipMapper.updateById(equipEntity);
+        return true;
     }
 
     @Override
@@ -145,7 +144,7 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user) {
+    public boolean editEquipMaintain(EquipMaintainEntity equipMaintain, ShiroUser user) {
         //维保详情表更新
         EquipMaintaindetailEntity equipMaintaindetailEntity = new EquipMaintaindetailEntity();
         equipMaintaindetailEntity.setId(equipMaintain.getDetailIds());
@@ -165,11 +164,19 @@ public class EquipMaintainServiceImpl extends ServiceImpl<EquipMaintainMapper, E
         EquipEntity equipEntity = equipMapper.selectById(equipMaintain.getEquipId());
         equipEntity.setLastMaintenanceDate(equipMaintain.getEndTime());
         equipMapper.updateById(equipEntity);
+        return true;
     }
 
     @Override
     public EquipMaintainEntity getOneById(String equipMaintainId) {
-        return equipMaintainMapper.getMaintainById(equipMaintainId);
+        EquipMaintainEntity maintainEntity = equipMaintainMapper.getMaintainById(equipMaintainId);
+        if(ToolUtil.isNotEmpty(maintainEntity.getType())){
+            DictEntity dict = dictMapper.selectById(maintainEntity.getType());
+            if (dict != null) {
+                maintainEntity.setTypeDesp(dict.getName());
+            }
+        }
+        return maintainEntity;
     }
 
 }

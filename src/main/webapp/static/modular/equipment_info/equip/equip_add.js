@@ -29,6 +29,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
 
+    //表单校验
+    loadVerify(form);
+
     if (Feng.getUrlParam("treeId") !== "") {
         $.ajax({
             url: Feng.ctxPath + "/dict/detail/" + Feng.getUrlParam("treeId"),

@@ -1,20 +1,22 @@
 package com.seven.gwc.modular.lawrecord.controller;
 
+import com.seven.gwc.core.base.BaseController;
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
+import com.seven.gwc.modular.lawrecord.service.DecisionService;
+import com.seven.gwc.modular.lawrecord.service.InquireSafeService;
+import com.seven.gwc.modular.lawrecord.service.InquireService;
 import com.seven.gwc.modular.lawrecord.vo.DecisionVO;
 import lombok.extern.slf4j.Slf4j;
-import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.shiro.ShiroKit;
-import com.seven.gwc.modular.lawrecord.service.DecisionService;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * description : 决定控制器
@@ -32,6 +34,11 @@ public class DecisionController extends BaseController {
     @Autowired
     private DecisionService decisionService;
 
+    @Autowired
+    private InquireService inquireService;
+    @Autowired
+    private InquireSafeService inquireSafeService;
+
     /**
      * 跳转到决定首页
      */
@@ -44,8 +51,10 @@ public class DecisionController extends BaseController {
         //情节严重性
         if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
             model.addAttribute("plotSeverity", decisionService.listSeverity(id));
+            model.addAttribute("inquire", inquireService.getById(id));
         }else{
             model.addAttribute("plotSeverity", PlotSeverityEnum.values());
+            model.addAttribute("inquire", inquireSafeService.getById(id));
         }
         //渔船状态
         model.addAttribute("status",decisionService.shipStatusIsEscape(id,lawType));

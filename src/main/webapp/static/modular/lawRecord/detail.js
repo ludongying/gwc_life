@@ -43,6 +43,8 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     });
 
 
+
+
     $('#evidence img').on('click', function () {
         layer.photos({
             photos: '.uploader-list',
@@ -54,5 +56,21 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
             shadeClose:true
         });
     })
+
+    $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
+        if(event.type === "mouseenter"){
+            //鼠标悬浮
+            $(this).children(".handle").fadeIn("fast");   //删除按钮
+        }else if(event.type === "mouseleave") {
+            //鼠标离开
+            $(this).children(".handle").hide();
+        }
+    });
+
+    //下载点击方法
+    $(document).on("click", ".file-iteme .layui-icon-download-circle", function(event){
+        downFile($,$(this).data("path"));
+    });
+
 
 });

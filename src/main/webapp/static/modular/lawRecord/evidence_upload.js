@@ -49,7 +49,7 @@ function loadUpload(lay,index,data){
 
     function getImgHtml(data){
         return '<div id="" class="file-iteme">'+
-               '<div class="handle del'+index+'"><i data-path="'+data.url+'" class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
+               '<div class="handle del'+index+'"><i data-path="'+data.path+'" class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
                '<img style="width: 100px;height: 100px;" src='+data.url+'>'+
                '<div class="info">' + data.path+ '</div>'+
                '</div>' ;
@@ -85,8 +85,9 @@ function loadUpload(lay,index,data){
 
     //下载点击方法
     $(document).on("click", ".file-iteme .del"+index + " .layui-icon-download-circle", function(event){
-        alert($(this).data("path"));
-        downloadImage( $(this).data("path"));
+        // alert($(this).data("path"));
+        // downloadImage( $(this).data("path"));
+        downFile($,$(this).data("path"));
     });
 
     function deleteFile(deleteFile) {

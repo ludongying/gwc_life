@@ -493,7 +493,7 @@
                                             <label class="layui-form-label">住址</label>
                                             <div class="layui-input-inline">
                                                 <input type="text" name="investigateAddr"
-                                                       value="${item.investigateAddrStr!''}" autocomplete="off"
+                                                       value="${item.investigateAddr!''}" autocomplete="off"
                                                        class="layui-input">
                                             </div>
                                         </div>
@@ -763,7 +763,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="layui-inline">
                                             <label class="layui-form-label">主机功率(马力)</label>
                                             <div class="layui-input-inline">
@@ -851,7 +850,7 @@
                                         <div class="layui-inline">
                                             <label class="layui-form-label">住址</label>
                                             <div class="layui-input-inline">
-                                                <input name="investigateAddr" value="${inquire.investigateAddrStr!''}"
+                                                <input name="investigateAddr" value="${inquire.investigateAddr!''}"
                                                        autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
@@ -901,8 +900,6 @@
                                                        class="layui-input">
                                             </div>
                                         </div>
-
-
 
                                     </div>
 
@@ -1071,6 +1068,7 @@
                                             <div class="layui-upload-list uploader-list" style="overflow: auto;">
                                                 @for(p in item.path){
                                                 <div  class="file-iteme">
+                                                <div class="handle"><i data-path="${p.path}" class="layui-icon layui-icon-download-circle"></i></div>
                                                 <img style="width: 100px;height: 100px;" src='${p.url}'>
                                                 </div>
                                                 @}

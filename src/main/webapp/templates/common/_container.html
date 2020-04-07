@@ -33,6 +33,26 @@
         <link href="${ctxPath}/common/plugins/packages/daygrid/main.css" rel="stylesheet" type="text/css" />
         <link href="${ctxPath}/common/plugins/packages/timegrid/main.css" rel="stylesheet" type="text/css" />
         @}
+        @/* 电子海图css */
+        @if(array.contain(plugins,"leaflet")){
+        <link href="${ctxPath}/common/plugins/map/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/mouseposition/L.Control.MousePosition.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/betterscale/L.Control.BetterScale.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/panControl/L.Control.Pan.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/zoomslider/L.Control.Zoomslider.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/NavBar/Leaflet.NavBar.css" rel="stylesheet" type="text/css" />
+        <link href="${ctxPath}/common/plugins/map/minimap/Control.MiniMap.css" rel="stylesheet" type="text/css" />
+        @/* 图层要素编辑css */
+        <link href="${ctxPath}/common/plugins/map/draw/leaflet.draw.css" rel="stylesheet" type="text/css" />
+        @/* 测量css */
+        <link href="${ctxPath}/common/plugins/map/areas/leaflet-measure.css" rel="stylesheet" type="text/css"  />
+        @/* 打印 */
+        <link href="${ctxPath}/common/plugins/map/print/leaflet.browser.print.css" rel="stylesheet" type="text/css"  />
+        @/* 按钮 */
+        <link href="${ctxPath}/common/plugins/map/easybutton/easy-button.css" rel="stylesheet" type="text/css"  />
+        @/* 鹰眼图 */
+        <link href="${ctxPath}/common/plugins/map/MagnifyingGlass/leaflet.magnifyingglass.css" rel="stylesheet" type="text/css"  />
+        @}
     @}
 
     @/* 其他业务用的css */
@@ -93,6 +113,61 @@
         <script src="${ctxPath}/common/plugins/packages/timegrid/main.js"></script>
         <script src="${ctxPath}/common/plugins/packages/core/locales/zh-cn.js"></script>
         <script src="${ctxPath}/common/plugins/jquery/jquery-3.2.1.min.js"></script>
+        @}
+        @/* 电子海图js */
+        @if(array.contain(plugins,"leaflet")){
+        <script src="${ctxPath}/common/plugins/map/leaflet/leaflet.js"></script>
+        <script src="${ctxPath}/common/plugins/map/leaflet/leaflet-src.js"></script>
+
+        <script src="${ctxPath}/modular/map/navi.js"></script>
+
+        <script src="${ctxPath}/common/plugins/map/rotate/leaflet.rotatedMarker.js"></script>
+        <script src="${ctxPath}/common/plugins/map/mouseposition/L.Control.MousePosition.js"></script>
+        <script src="${ctxPath}/common/plugins/map/betterscale/L.Control.BetterScale.js"></script>
+        <script src="${ctxPath}/common/plugins/map/panControl/L.Control.Pan.js"></script>
+        <script src="${ctxPath}/common/plugins/map/zoomslider/L.Control.Zoomslider.js"></script>
+        <script src="${ctxPath}/common/plugins/map/NavBar/Leaflet.NavBar.js"></script>
+        <script src="${ctxPath}/common/plugins/map/minimap/Control.MiniMap.js"></script>
+        @/* 图层要素编辑 */
+        <script src="${ctxPath}/common/plugins/map/draw/Leaflet.draw.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/Leaflet.Draw.Event.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/Toolbar.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/Tooltip.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/GeometryUtil.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/LatLngUtil.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/LineUtil.Intersect.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/Polygon.Intersect.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/Polyline.Intersect.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/ext/TouchEvents.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/DrawToolbar.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Feature.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.SimpleShape.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Polyline.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Marker.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Circle.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.CircleMarker.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Polygon.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/draw/handler/Draw.Rectangle.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/EditToolbar.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/EditToolbar.Edit.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/EditToolbar.Delete.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/Control.Draw.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.Poly.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.SimpleShape.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.Rectangle.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.Marker.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.CircleMarker.js"></script>
+        <script src="${ctxPath}/common/plugins/map/draw/edit/handler/Edit.Circle.js"></script>
+        @/* 测量 */
+        <script src="${ctxPath}/common/plugins/map/areas/leaflet-measure.js"></script>
+        @/* 打印 */
+        <script src="${ctxPath}/common/plugins/map/print/leaflet.browser.print.js"></script>
+        @/* 按钮 */
+        <script src="${ctxPath}/common/plugins/map/easybutton/easy-button.js"></script>
+        @/* 鹰眼图 */
+        <script src="${ctxPath}/common/plugins/map/MagnifyingGlass/leaflet.magnifyingglass.js"></script>
+        @/* 图形上添加文本 */
+        <script src="${ctxPath}/common/plugins/map/text/leaflet.textpath.js"></script>
         @}
     @}
 

@@ -160,7 +160,7 @@
     var c2=null;
     var print=null;
     //小地图
-    var mini_map = L.tileLayer.wms("http://127.0.0.1:8080/wms?", {
+    var mini_map = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
         layers: 'ENC', //必须是ENC
         format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
     });
@@ -174,7 +174,7 @@
     var miniMap = new L.Control.MiniMap(mini_map, { toggleDisplay: true });
     miniMap.addTo(map);
     function refreshChart() {
-        c2= L.tileLayer.wms("http://127.0.0.1:8080/wms?", {
+        c2= L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
             format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
         });
@@ -246,7 +246,7 @@
     $('#DisplayCategory').change(function () {
         refreshChart();
         //小地图
-        var mini_map1 = L.tileLayer.wms("http://127.0.0.1:8080/wms?", {
+        var mini_map1 = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
             format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
         });
@@ -260,7 +260,7 @@
         miniMap.changeLayer(mini_map1);
     });
     //鹰眼图
-    var c2_glass = L.tileLayer.wms("http://127.0.0.1:8080/wms?", {
+    var c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
         layers: 'ENC', //必须是ENC
         format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
     });

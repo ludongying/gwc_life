@@ -112,8 +112,8 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         /** 默认的登陆访问url */
-        //shiroFilter.setLoginUrl("/login");
-        shiroFilter.setLoginUrl("/map");
+        shiroFilter.setLoginUrl("/login");
+//        shiroFilter.setLoginUrl("/map");
         /** 登陆成功后跳转的url */
         shiroFilter.setSuccessUrl("/");
         /** 没有权限跳转的url */

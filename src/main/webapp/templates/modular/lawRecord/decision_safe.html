@@ -154,25 +154,25 @@
                                     </div>
                                 </div>
 
- <!--                               <div class="layui-inline" id="punish_addr">
-                                    <label class="layui-form-label">住址</label>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <select class="addr_state" lay-filter="addr_state">
-                                            <option value="">选择省</option>
-                                            <option value="11" selected="">北京</option>
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <select class="addr_city">
-                                            <option value="">选择市</option>
-                                            <option value="1">东城</option>
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 90px">
-                                        <input type="text"  name="punishAddrRegion"  autocomplete="off" class="layui-input addr_region">
-                                    </div>
-                                </div>
-                            </div>-->
+                                <!--                               <div class="layui-inline" id="punish_addr">
+                                                                   <label class="layui-form-label">住址</label>
+                                                                   <div class="layui-input-inline" style="width: 90px">
+                                                                       <select class="addr_state" lay-filter="addr_state">
+                                                                           <option value="">选择省</option>
+                                                                           <option value="11" selected="">北京</option>
+                                                                       </select>
+                                                                   </div>
+                                                                   <div class="layui-input-inline" style="width: 90px">
+                                                                       <select class="addr_city">
+                                                                           <option value="">选择市</option>
+                                                                           <option value="1">东城</option>
+                                                                       </select>
+                                                                   </div>
+                                                                   <div class="layui-input-inline" style="width: 90px">
+                                                                       <input type="text"  name="punishAddrRegion"  autocomplete="off" class="layui-input addr_region">
+                                                                   </div>
+                                                               </div>
+                                                           </div>-->
 
                                 <div class="layui-inline">
                                     <label class="layui-form-label">住址</label>
@@ -182,68 +182,69 @@
                                 </div>
 
 
-                            <div class="layui-form-item">
+                                <div class="layui-form-item">
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">是否暴力抗法</label>
-                                    <div class="layui-input-inline">
-                                        <select name="caseViolenceLaw" lay-filter="caseViolenceLaw">
-                                            <option value="0">否</option>
-                                            <option value="1">是</option>
-                                        </select>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">是否暴力抗法</label>
+                                        <div class="layui-input-inline">
+                                            <select name="caseViolenceLaw" lay-filter="caseViolenceLaw">
+                                                <option value="0">否</option>
+                                                <option value="1">是</option>
+                                            </select>
 
+                                        </div>
                                     </div>
+
+
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">情节严重性</label>
+                                        <div class="layui-input-inline">
+                                            <select name="severity" id="severity" lay-filter="severity" data-status="${status}">
+                                                @for(item in plotSeverity){
+                                                <option value="${item.code}">${item.message}</option>
+                                                @}
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
 
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">情节严重性</label>
-                                    <div class="layui-input-inline">
-                                        <select name="severity" id="severity" lay-filter="severity" data-status="${status}">
-                                            @for(item in plotSeverity){
-                                            <option value="${item.code}">${item.message}</option>
-                                            @}
-                                        </select>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label" >罚款</label>
+                                        <div class="layui-input-inline">
+                                            <input placeholder="金额小写,可保留两位小数" id="fine" name="fine" autocomplete="off" class="layui-input">
+                                        </div>
                                     </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="layui-form-item">
-                                <div class="layui-inline">
-                                    <label class="layui-form-label" >罚款</label>
-                                    <div class="layui-input-inline">
-                                        <input placeholder="金额小写,可保留两位小数" id="fine" name="fine" autocomplete="off" class="layui-input">
+                                    <div class="layui-inline label_bg">
+                                        <label class="layui-form-label">资源补偿费</label>
+                                        <div class="layui-input-inline">
+                                            <input placeholder="金额小写,可保留两位小数" id="resourceCompensation" name="resourceCompensation" autocomplete="off" class="layui-input">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="layui-inline label_bg">
-                                    <label class="layui-form-label">资源补偿费</label>
-                                    <div class="layui-input-inline">
-                                        <input placeholder="金额小写,可保留两位小数" id="resourceCompensation" name="resourceCompensation" autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="layui-form-item ">
-                                <div class="layui-inline label_bg">
-                                    <label class="layui-form-label">处罚文书中表述</label>
-                                    <div class="layui-input-inline">
-                                        <textarea id="description" name="description" style="width:500px;" autocomplete="off" class="layui-textarea"></textarea>
+                                </div>
+                                <div class="layui-form-item ">
+                                    <div class="layui-inline label_bg">
+                                        <label class="layui-form-label">处罚文书中表述</label>
+                                        <div class="layui-input-inline">
+                                            <textarea id="description" name="description" style="width:500px;" autocomplete="off" class="layui-textarea"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-col-md12 ">
-                    <div class="layui-card" style="padding: 20px">
-                        <div style="text-align: center;">
-                            <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
-                            <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">&nbsp;保&nbsp;&nbsp;存&nbsp;</button>
+                    <div class="layui-col-md12 ">
+                        <div class="layui-card" style="padding: 20px">
+                            <div style="text-align: center;">
+                                <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
+                                <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">&nbsp;保&nbsp;&nbsp;存&nbsp;</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+
                 </div>
             </form>
         </div>
@@ -256,14 +257,14 @@
         <div class="layui-inline">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-inline">
-                <input name="punishPersonName" autocomplete="off" class="layui-input">
+                <input name="punishPersonName" value="${inquire.investigateName!''}" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-inline">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-inline">
-                <input type="text" name="punishAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
+                <input type="text" name="punishAge" value="${inquire.investigateAge!''}" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -274,14 +275,19 @@
         <div class="layui-inline">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-inline">
+                @if(inquire.investigateSex==1){
                 <input type="radio" name="punishSex" value="1" title="男" checked="">
                 <input type="radio" name="punishSex" value="2" title="女">
+                @}else{
+                <input type="radio" name="punishSex" value="1" title="男">
+                <input type="radio" name="punishSex" value="2" title="女"  checked="">
+                @}
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">身份证号码</label>
             <div class="layui-input-inline" style="width: 290px">
-                <input type="text" name="punishIdentityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
+                <input type="text" name="punishIdentityCard" value="${inquire.identityCard!''}" lay-verify="identityNumber" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -294,7 +300,7 @@
         <div class="layui-inline">
             <label class="layui-form-label " style="width: 120px;">单位名称/船名号</label>
             <div class="layui-input-inline">
-                <input name="punishCompanyName" autocomplete="off" class="layui-input">
+                <input name="punishCompanyName" value="${inquire.shipName!''}"  autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -302,7 +308,7 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="width: 120px;">法定代表人/负责人</label>
             <div class="layui-input-inline">
-                <input type="text" name="punishPersonName" autocomplete="off" class="layui-input">
+                <input type="text" name="punishPersonName" value="${inquire.investigateName!''}" autocomplete="off" class="layui-input">
             </div>
         </div>
 

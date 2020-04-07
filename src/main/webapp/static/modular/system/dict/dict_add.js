@@ -1,20 +1,10 @@
 /**
- * 字典添加对话框
+ * 字典增加对话框
  */
-
-var DictInfoDlg = {
+var MenuInfoDlg = {
     data: {
-        dictTypeId: "",
-        code: "",
-        name: "",
-        parentId: "",
-        parentName: "",
-        status: "",
-        description: "",
-        createTime: "",
-        updateTime: "",
-        createUser: "",
-        updateUser: ""
+        pid: "",
+        pName: ""
     }
 };
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
@@ -26,21 +16,22 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var laydate = layui.laydate;
 
 
+
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/dict/add", function (data) {
-            Feng.success("添加成功！");
-
-            //传给上个页面，刷新table用
-            admin.putTempData('formOk', true);
-
-            //关掉对话框
-            admin.closeThisDialog();
+            if (data.success) {
+                Feng.success("增加成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                admin.closeThisDialog();//关掉对话框
+            } else {
+                Feng.error(data.message);
+            }
         }, function (data) {
-            Feng.error("添加失败！" + data.responseJSON.message)
+            Feng.error("增加失败!" + data.message + "!");
         });
         ajax.set(data.field);
         ajax.start();
@@ -48,20 +39,20 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         return false;
     });
 
-    //父级字典时
-    $('#parentName').click(function () {
-        var formName = encodeURIComponent("parent.DictInfoDlg.data.parentName");
-        var formId = encodeURIComponent("parent.DictInfoDlg.data.parentId");
-        var treeUrl = encodeURIComponent("/dict/ztree?dictTypeId=" + $("#dictTypeId").val());
+    // 点击父级菜单
+    $('#pName').click(function () {
+        var formName = encodeURIComponent("parent.MenuInfoDlg.data.pcodeName");
+        var formId = encodeURIComponent("parent.MenuInfoDlg.data.pid");
+        var treeUrl = encodeURIComponent("/dict/getDictTreeByDictTypeCode?dictTypeCode="+Feng.getUrlParam('code'));
 
         layer.open({
             type: 2,
-            title: '父级字典',
+            title: '上级字典',
             area: ['300px', '400px'],
             content: Feng.ctxPath + '/system/commonTree?formName=' + formName + "&formId=" + formId + "&treeUrl=" + treeUrl,
             end: function () {
-                $("#parentId").val(DictInfoDlg.data.parentId);
-                $("#parentName").val(DictInfoDlg.data.parentName);
+                $("#pid").val(MenuInfoDlg.data.pid);
+                $("#pName").val(MenuInfoDlg.data.pcodeName);
             }
         });
     });

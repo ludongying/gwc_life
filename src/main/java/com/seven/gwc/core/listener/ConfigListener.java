@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: GD
- * @Description: ServletContext监听器
- * @Date: 2019/10/23 9:46
+ * @author : GD
+ * description : ServletContext监听器
+ * @date : 2019/10/23 9:46
  */
 public class ConfigListener implements ServletContextListener {
 

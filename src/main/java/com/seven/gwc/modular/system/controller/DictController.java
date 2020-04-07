@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * description : 字典控制器
@@ -37,11 +36,12 @@ public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
 
-    private String PREFIX = "/modular/system/dict/";
+    private static String PREFIX = "/modular/system/dict/";
 
     @RequestMapping("")
-    public String index(@RequestParam("id") Long id, Model model) {
+    public String index(@RequestParam("id") String id,@RequestParam("code") String code, Model model) {
         model.addAttribute("dictTypeId", id);
+        model.addAttribute("dictTypeCode", code);
         return PREFIX + "dict";
     }
 
@@ -49,7 +49,7 @@ public class DictController extends BaseController {
      * 跳转到添加字典类型
      */
     @RequestMapping("/dict_add")
-    public String dictAdd(@RequestParam("dictTypeId") Long dictTypeId, Model model) {
+    public String dictAdd(@RequestParam("dictTypeId") String dictTypeId, Model model) {
         model.addAttribute("dictTypeId", dictTypeId);
         //获取type的名称
         DictTypeEntity dictType = dictTypeService.getById(dictTypeId);
@@ -61,7 +61,7 @@ public class DictController extends BaseController {
      * 跳转到添加字典类型
      */
     @RequestMapping("/dict_edit")
-    public String dictEdit(@RequestParam("dictId") Long dictId, Model model) {
+    public String dictEdit(@RequestParam("dictId") String dictId, Model model) {
         //获取type的id
         DictEntity dict = dictService.getById(dictId);
         //获取type的名称
@@ -74,22 +74,23 @@ public class DictController extends BaseController {
 
     @RequestMapping("/list")
     @ResponseBody
+    public BaseResultPage<DictEntity> list(String dictTypeId, String name) {
+        List<DictEntity> list = dictService.selectDict(dictTypeId, name);
+        return new BaseResultPage().treeData(list);
+    }
+
+    /*@RequestMapping("/list")
+    @ResponseBody
     public Object list(String menuName, Long dictTypeId) {
         List<Map<String, Object>> menus = this.dictService.selectDictTree(menuName, dictTypeId);
         return new BaseResultPage().treeData(menus);
-    }
+    }*/
 
     @RequestMapping("/add")
     @ResponseBody
     public BaseResult add(DictEntity dict) {
         ShiroUser user = ShiroKit.getUser();
-
-        if (dict.getSort() == null) {
-            dict.setSort(0);
-        }
-        dict.setCreateUser(user.getName());
-        this.dictService.add(dict);
-        return SUCCESS;
+        return dictService.add(dict, user);
     }
 
     /**
@@ -97,21 +98,18 @@ public class DictController extends BaseController {
      */
     @RequestMapping("/detail/{dictId}")
     @ResponseBody
-    public DictEntity detail(@PathVariable Long dictId) {
+    public DictEntity detail(@PathVariable String dictId) {
         return this.dictService.dictDetail(dictId);
     }
 
     /**
-     * 修改字典
+     * 编辑字典
      */
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DictEntity dict) {
-        if (dict.getSort() == null) {
-            dict.setSort(0);
-        }
-        dictService.update(dict);
-        return SUCCESS;
+        ShiroUser user = ShiroKit.getUser();
+        return dictService.update(dict, user);
     }
 
     /**
@@ -119,18 +117,29 @@ public class DictController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long dictTypeId) {
+    public BaseResult delete(@RequestParam String dictTypeId) {
         dictService.removeById(dictTypeId);
         return SUCCESS;
     }
 
     /**
-     * 获取某个类型下字典树的列表，ztree格式
+     * 通过字典类型CODE获取树的列表，ztree格式
      */
-    @RequestMapping(value = "/ztree")
+    @RequestMapping(value = "/getDictTreeByDictTypeCode")
     @ResponseBody
-    public List<ZTreeNode> ztree(@RequestParam("dictTypeId") Long dictTypeId, @RequestParam(value = "dictId", required = false) Long dictId) {
-        return this.dictService.dictTreeList(dictTypeId, dictId);
+    public List<ZTreeNode> getDictTreeByDictTypeCode(String dictTypeCode) {
+        return this.dictService.getDictTreeByDictTypeCode(dictTypeCode);
+    }
+
+    /**
+     * 通过字典类型CODE获取字典列表
+     * @param dictTypeCode
+     * @return
+     */
+    @RequestMapping(value = "/getDictListByDictTypeCode")
+    @ResponseBody
+    public List<DictEntity> getDictListByDictTypeCode(String dictTypeCode) {
+        return dictService.getDictListByDictTypeCode(dictTypeCode);
     }
 
 }

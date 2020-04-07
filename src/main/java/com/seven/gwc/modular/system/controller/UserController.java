@@ -1,20 +1,27 @@
 package com.seven.gwc.modular.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.seven.gwc.config.constant.ConfigConsts;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.annotation.Permission;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
-import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.core.dictmap.DeleteDict;
+import com.seven.gwc.core.dictmap.UserDict;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
+import com.seven.gwc.core.log.LogObjectHolder;
+import com.seven.gwc.core.node.ZTreeNode;
+import com.seven.gwc.core.shiro.ShiroKit;
+import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.state.TypeStatesEnum;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +44,7 @@ import java.util.List;
 @RequestMapping("user")
 public class UserController extends BaseController {
 
-    private String PREFIX = "/modular/system/user/";
+    private static String PREFIX = "/modular/system/user/";
 
     @Autowired
     private UserService userService;
@@ -64,7 +71,12 @@ public class UserController extends BaseController {
      * 跳转到修改用户
      */
     @RequestMapping("/user_edit")
-    public String userEdit(Long id) {
+    public String userEdit(String id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        UserEntity user = userService.getById(id);
+        LogObjectHolder.me().set(user);
         return PREFIX + "user_edit";
     }
 
@@ -72,7 +84,7 @@ public class UserController extends BaseController {
      * 跳转到查看用户
      */
     @RequestMapping("/user_detail")
-    public String userDetail(Long id) {
+    public String userDetail(String id) {
         return PREFIX + "user_detail";
     }
 
@@ -84,19 +96,26 @@ public class UserController extends BaseController {
     public BaseResultPage<UserEntity> list(UserEntity userEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<UserEntity> userEntities = userService.selectUser(userEntity);
+        List<UserEntity> userEntities = userService.selectUser(userEntity, (int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(userEntities);
+        Integer size = userService.getListSize(userEntity);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
     /**
-     * 新增用户
+     * 增加用户
      */
+    @BussinessLog(value = "增加用户", key = "account", dict = UserDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
     public BaseResult add(@Valid UserEntity user) {
-        user.setCreateTime(new Date());
+        ShiroUser currentUser = ShiroKit.getUser();
         user.setStatus(TypeStatesEnum.FREEZED.getCode());
+        user.setCreateUser(currentUser.getId());
+        user.setCreateTime(new Date());
+
         userService.addUser(user);
         return SUCCESS;
     }
@@ -104,10 +123,11 @@ public class UserController extends BaseController {
     /**
      * 删除用户（物理删除）
      */
+    @BussinessLog(value = "删除用户", key = "id", dict = DeleteDict.class)
     @Permission({ConfigConsts.ADMIN_NAME})
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         if (id.equals(ConfigConsts.ADMIN_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
         }
@@ -116,16 +136,21 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 修改用户
+     * 编辑用户
      */
+    @BussinessLog(value = "编辑用户", key = "account", dict = UserDict.class)
     @RequestMapping(value = "/update")
     @ResponseBody
     public BaseResult update(UserEntity user) {
+        ShiroUser currentUser = ShiroKit.getUser();
         if (user.getId().equals(ConfigConsts.ADMIN_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
         }
-        userService.updateById(user);
+
+        user.setUpdateUser(currentUser.getId());
         user.setUpdateTime(new Date());
+
+        userService.updateById(user);
         return SUCCESS;
     }
 
@@ -134,61 +159,75 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public UserEntity detail(@PathVariable Long id) {
+    public UserEntity detail(@PathVariable String id) {
         UserEntity userEntity = userService.getById(id);
-        userEntity.setDeptName(CacheFactory.me().getDeptName(userEntity.getDeptId()));
+        if (ToolUtil.isNotEmpty(userEntity.getDeptId())) {
+            userEntity.setDeptName(CacheFactory.me().getDeptName(userEntity.getDeptId()));
+        } else {
+            userEntity.setDeptName("顶级");
+        }
+
         return userEntity;
     }
 
 
     /**
-     * 冻结用户
+     * 解除冻结用户
      */
+    @BussinessLog(value = "冻结用户", key = "id", dict = UserDict.class)
     @RequestMapping("/freeze")
     @ResponseBody
-    public BaseResult freeze(@RequestParam Long id) {
-        //不能冻结超级管理员
-        if (id.equals(ConfigConsts.ADMIN_ID)) {
-            return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
-        }
-        this.userService.setStatus(id, TypeStatesEnum.FREEZED.getCode());
+    public BaseResult freeze(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
+        this.userService.setStatus(id, TypeStatesEnum.FREEZED.getCode(), currentUser.getId());
         return SUCCESS;
     }
 
     /**
      * 解除冻结用户
      */
+    @BussinessLog(value = "解除冻结用户", key = "id", dict = UserDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
-    public BaseResult unfreeze(@RequestParam Long id) {
-        this.userService.setStatus(id, TypeStatesEnum.OK.getCode());
+    public BaseResult unfreeze(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
+        this.userService.setStatus(id, TypeStatesEnum.OK.getCode(), currentUser.getId());
         return SUCCESS;
     }
 
     /**
      * 删除用户（逻辑删除）
      */
+    @BussinessLog(value = "删除用户", key = "id", dict = UserDict.class)
     @Permission(ConfigConsts.ADMIN_NAME)
     @RequestMapping("/deleteLogic")
     @ResponseBody
-    public BaseResult deleteLogic(@RequestParam Long id) {
+    public BaseResult deleteLogic(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
         //不能冻结超级管理员
         if (id.equals(ConfigConsts.ADMIN_ID)) {
             throw new BusinessException(ErrorEnum.CANT_OPERATION_ADMIN);
         }
-        this.userService.setStatus(id, TypeStatesEnum.DELETED.getCode());
+        this.userService.setStatus(id, TypeStatesEnum.DELETED.getCode(), currentUser.getId());
         return SUCCESS;
     }
 
     /**
      * 重置用户密码
      */
+    @BussinessLog(value = "重置用户密码", key = "id", dict = UserDict.class)
     @RequestMapping("/reset")
     @ResponseBody
-    public BaseResult reset(@RequestParam Long id) {
+    public BaseResult reset(@RequestParam String id) {
+        ShiroUser currentUser = ShiroKit.getUser();
+
         UserEntity user = this.userService.getById(id);
         user.setSalt(ToolUtil.getRandomString(5));
         user.setPassword(ToolUtil.md5("888888", user.getSalt()));
+
+        user.setUpdateUser(currentUser.getId());
+        user.setUpdateTime(new Date());
+
         this.userService.updateById(user);
         return SUCCESS;
     }
@@ -197,7 +236,7 @@ public class UserController extends BaseController {
      * 跳转到角色分配页面
      */
     @RequestMapping("/user_role_assign/{id}")
-    public String roleRoleAssign(@PathVariable Long id, Model model) {
+    public String roleRoleAssign(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         return PREFIX + "user_role_assign";
     }
@@ -205,31 +244,47 @@ public class UserController extends BaseController {
     /**
      * 分配角色
      */
+    @BussinessLog(value = "分配角色", key = "id,roleIds", dict = UserDict.class)
     @RequestMapping("/setRole")
     @ResponseBody
-    public BaseResult setRole(@RequestParam("id") Long id, @RequestParam("roleIds") String roleIds) {
-        if (ToolUtil.isOneEmpty(id)) {
-            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+    public BaseResult setRole(@RequestParam("id") String id, @RequestParam("roleIds") String roleIds) {
+        ShiroUser currentUser = ShiroKit.getUser();
+        if (ToolUtil.isOneEmpty(id, roleIds)) {
+            return new BaseResult<>(500,"角色不能为空");
         }
         if (id.equals(ConfigConsts.ADMIN_ROLE_ID)) {
             //不能修改超级管理员
             throw new BusinessException(ErrorEnum.CANT_OPERATION_ADMIN);
         }
-        this.userService.setRoles(id, roleIds);
+        this.userService.setRoles(id, roleIds, currentUser.getId());
         return SUCCESS;
     }
 
     /**
-     * 修改当前用户的密码
+     * 编辑当前用户的密码
      */
     @RequestMapping("/changePwd")
     @ResponseBody
     public Object changePwd(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+        String userId = ShiroKit.getUserNotNull().getId();
         if (ToolUtil.isOneEmpty(oldPassword, newPassword)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
-        this.userService.changePwd(oldPassword, newPassword);
+        if (!userService.changePwd(oldPassword, newPassword, userId)){
+            throw new BusinessException(ErrorEnum.OLD_PWD_NOT_RIGHT);
+        }
         return SUCCESS;
+    }
+
+    /**
+     * 获取用户姓名列表,ztree格式
+     */
+    @RequestMapping("/tree")
+    @ResponseBody
+    public List<ZTreeNode> tree(){
+        List<ZTreeNode> tree = this.userService.tree();
+//        tree.add(ZTreeNode.createParent());
+        return tree;
     }
 
 }

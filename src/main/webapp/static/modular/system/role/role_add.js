@@ -6,7 +6,7 @@ var RoleInfoDlg = {
 };
 
 /**
- * 角色添加对话框
+ * 角色增加对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
@@ -18,15 +18,17 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     laydate.render({
         elem: '#createTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
     laydate.render({
         elem: '#updateTime',
-        type: 'datetime'
+        type: 'datetime',
+        trigger: 'click'
     });
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     // 点击上级角色时
     $('#pName').click(function () {
@@ -49,19 +51,15 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/role/add", function (data) {
-            if (data.success != true) {
-                Feng.error(data.message);
+            if (data.success) {
+                Feng.success("增加成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                admin.closeThisDialog();//关掉对话框
             } else {
-                Feng.success("添加成功！");
-
-                //传给上个页面，刷新table用
-                admin.putTempData('formOk', true);
-
-                //关掉对话框
-                admin.closeThisDialog();
-
-                //parent.location.reload();
+                Feng.error(data.message);
             }
+        }, function (data) {
+            Feng.error("增加失败!" + data.message)
         });
         ajax.set(data.field);
         ajax.start();

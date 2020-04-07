@@ -15,9 +15,9 @@ import javax.naming.NoPermissionException;
 import java.lang.reflect.Method;
 
 /**
- * @Author: GD
- * @Description: 权限检查的aop
- * @Date: 2019/10/23 9:38
+ * @author : GD
+ * description : 权限检查的aop
+ * @date : 2019/10/23 9:38
  */
 @Aspect
 @Component

@@ -1,9 +1,9 @@
 package com.seven.gwc.core.shiro.service;
 
 /**
- * @Author: GD
- * @Description: 检查用接口
- * @Date: 2019/10/23 9:42
+ * @author : GD
+ * description : 检查用接口
+ * @date : 2019/10/23 9:42
  */
 public interface PermissionCheckService {
 

@@ -16,7 +16,7 @@ public class ShiroUser implements Serializable {
     /**
      * 用户主键ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 账号
@@ -41,7 +41,7 @@ public class ShiroUser implements Serializable {
     /**
      * 角色集
      */
-    private List<Long> roleList;
+    private List<String> roleList;
 
     /**
      * 角色名称集
@@ -51,7 +51,7 @@ public class ShiroUser implements Serializable {
     /**
      * 部门id
      */
-    private Long deptId;
+    private String deptId;
 
     /**
      * 部门名称
@@ -61,7 +61,7 @@ public class ShiroUser implements Serializable {
     /**
      * 岗位集
      */
-    private List<Long> positionList;
+    private List<String> positionList;
 
     /**
      * 岗位名称集

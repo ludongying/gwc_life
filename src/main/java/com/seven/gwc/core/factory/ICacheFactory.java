@@ -12,12 +12,12 @@ public interface ICacheFactory {
     /**
      * 根据用户id获取用户名称
      */
-    String getUserNameById(Long userId);
+    String getUserNameById(String userId);
 
     /**
      * 根据用户id获取用户账号
      */
-    String getUserAccountById(Long userId);
+    String getUserAccountById(String userId);
 
     /**
      * 通过角色ids获取角色名称
@@ -27,12 +27,12 @@ public interface ICacheFactory {
     /**
      * 通过角色id获取角色名称
      */
-    String getSingleRoleName(Long roleId);
+    String getSingleRoleName(String roleId);
 
     /**
      * 通过角色id获取角色英文名称
      */
-    String getSingleRoleTip(Long roleId);
+    String getSingleRoleTip(String roleId);
 
     /**
      * 通过岗位ids获取岗位名称
@@ -42,12 +42,12 @@ public interface ICacheFactory {
     /**
      * 通过岗位id获取岗位名称
      */
-    String getSinglePositionName(Long positionId);
+    String getSinglePositionName(String positionId);
 
     /**
      * 获取部门名称
      */
-    String getDeptName(Long deptId);
+    String getDeptName(String deptId);
 
     /**
      * 获取菜单的名称们(多个)
@@ -57,12 +57,12 @@ public interface ICacheFactory {
     /**
      * 获取菜单名称
      */
-    String getMenuName(Long menuId);
+    String getMenuName(String menuId);
 
     /**
      * 获取所有父部门id
      */
-    List<Long> getParentDeptIds(Long deptId);
+    List<Long> getParentDeptIds(String deptId);
 
     /**
      * 获取菜单名称通过编号
@@ -72,6 +72,6 @@ public interface ICacheFactory {
     /**
      * 获取菜单名称通过编号
      */
-    Long getMenuIdByCode(String code);
+    String getMenuIdByCode(String code);
 
 }

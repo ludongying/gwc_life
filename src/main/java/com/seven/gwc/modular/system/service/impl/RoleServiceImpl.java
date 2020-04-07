@@ -1,12 +1,12 @@
 package com.seven.gwc.modular.system.service.impl;
 
-import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.config.constant.CacheConsts;
 import com.seven.gwc.config.constant.SysConsts;
+import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.util.CacheUtil;
@@ -39,11 +39,25 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     private UserService userService;
 
     @Override
-    public List<RoleEntity> selectRole(String roleName) {
-        LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
-        lambdaQuery.like(ToolUtil.isNotEmpty(roleName), RoleEntity::getName, roleName)
-                .orderByAsc(RoleEntity::getSort);
-        return this.roleMapper.selectList(lambdaQuery);
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<RoleEntity> selectRole(RoleEntity roleEntity, Integer total, Integer size) {
+        List<RoleEntity> list = roleMapper.getRoleList(roleEntity, total, size);
+        for (RoleEntity role : list) {
+            if (role.getPid().equals("0")) {
+                role.setPName("顶级");
+            } else {
+                RoleEntity entity = roleMapper.selectById(role.getPid());
+                if (ToolUtil.isNotEmpty(entity)) {
+                    role.setPName(entity.getName());
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Integer getListSize(RoleEntity roleEntity) {
+        return roleMapper.getListSize(roleEntity);
     }
 
     @Override
@@ -52,13 +66,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public List<ZTreeNode> roleTreeListByRoleId(Long[] roleId) {
+    public List<ZTreeNode> roleTreeListByRoleId(String[] roleId) {
         return this.roleMapper.roleTreeListByRoleId(roleId);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void setAuthority(Long roleId, String menuIds) {
+    public void setAuthority(String roleId, String menuIds) {
 
         // 删除该角色所有的权限
         LambdaQueryWrapper<RelationEntity> lambdaQuery = Wrappers.<RelationEntity>lambdaQuery();
@@ -66,7 +80,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
         relationMapper.delete(lambdaQuery);
 
         // 添加新的权限
-        for (Long menuId : Convert.toLongArray(menuIds.split(SysConsts.STR_COMMA))) {
+        for (String menuId : menuIds.split(SysConsts.STR_COMMA)) {
             RelationEntity relation = new RelationEntity();
             relation.setRoleId(roleId);
             relation.setMenuId(menuId);
@@ -77,7 +91,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public RoleEntity getOneById(Long id) {
+    public RoleEntity getOneById(String id) {
         LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.eq(RoleEntity::getPid, id);
         return roleMapper.selectOne(lambdaQuery);
@@ -91,7 +105,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
     }
 
     @Override
-    public RoleEntity getOneByIdAndRoleName(Long id, String roleName) {
+    public RoleEntity getOneByIdAndRoleName(String id, String roleName) {
         LambdaQueryWrapper<RoleEntity> lambdaQuery = Wrappers.<RoleEntity>lambdaQuery();
         lambdaQuery.eq(RoleEntity::getName, roleName).ne(RoleEntity::getId, id);
         return roleMapper.selectOne(lambdaQuery);
@@ -100,7 +114,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delRoleById(Long roleId) {
+    public void delRoleById(String roleId) {
         //缓存被删除的角色名称
         CacheFactory.me().getSingleRoleName(roleId);
         //删除角色

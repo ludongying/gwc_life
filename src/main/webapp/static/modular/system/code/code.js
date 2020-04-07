@@ -25,8 +25,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Code.initColumn = function () {
         return [[
             {type: 'checkbox'},
-            {title: '表名称', field: 'tableName', sort: true, align: "center"},
-            {title: '表名称注释', field: 'tableComment', sort: true, align: "center"}
+            {title: '表名称', field: 'tableName', align: "center"},
+            {title: '表名称注释', field: 'tableComment', align: "center"}
         ]];
     };
 
@@ -35,7 +35,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Code.tableId,
         url: Feng.ctxPath + '/code/list',
         page: true,
-        height: "full-158",
+        height: "full-97",
         cellMinWidth: 100,
         cols: Code.initColumn()
     });
@@ -89,7 +89,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.success(data.message);
                 }
             }, function (data) {
-                Feng.error("生成失败！" + data.responseJSON.message)
+                Feng.error("生成失败！" + data.message)
             });
             ajax.set(data.field);
             ajax.set("tableNames", tableNames);

@@ -1,9 +1,9 @@
-layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
+layui.use(['table', 'ztree', 'ax', 'func', 'treetable','admin'], function () {
     var $ = layui.$;
     var table = layui.table;
     var $ax = layui.ax;
-    var func = layui.func;
     var treetable = layui.treetable;
+    var admin = layui.admin;
 
     /**
      * 系统管理--部门管理
@@ -39,7 +39,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
             url: Feng.ctxPath + '/dept/listTree',
             where: data,
             page: false,
-            height: "full-158",
+            height: "full-97",
             cellMinWidth: 100,
             cols: Dept.initColumn(),
             treeColIndex: 2,
@@ -52,11 +52,22 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     };
     Dept.initTable(Dept.tableId);  //初始化加载
 
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Dept.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        Dept.btnReset();
+    });
 
+
+    /**
+     * 右侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         Dept.openAddDept();
@@ -75,7 +86,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     });
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Dept.search = function () {
         var queryData = {};
@@ -84,13 +95,25 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
     };
 
     /**
-     * 弹出添加部门
+     * 重置查询条件
+     */
+    Dept.btnReset = function () {
+        $("#deptName").val("");
+    };
+
+    /**
+     * 弹出增加部门
      */
     Dept.openAddDept = function () {
-        func.open({
+        admin.putTempData('formOk', false);
+        top.layui.admin.open({
+            type: 2,
             title: '添加部门',
+            area: ["800px", "450px"],
             content: Feng.ctxPath + '/dept/dept_add',
-            tableId: Dept.initTable(Dept.tableId)
+            end: function () {
+                admin.getTempData('formOk') && Dept.initTable(Dept.tableId);
+            }
         });
     };
 
@@ -98,10 +121,15 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
      * 点击编辑部门
      */
     Dept.onEditDept = function (data) {
-        func.open({
+        admin.putTempData('formOk', false);
+        top.layui.admin.open({
+            type: 2,
             title: '编辑部门',
+            area: ["800px", "450px"],
             content: Feng.ctxPath + '/dept/dept_edit?id=' + data.id,
-            tableId: Dept.initTable(Dept.tableId)
+            end: function () {
+                admin.getTempData('formOk') && Dept.initTable(Dept.tableId);
+            }
         });
     };
 
@@ -111,10 +139,8 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
      * @param data 点击按钮时候的行数据
      */
     Dept.onDeleteDept = function (data) {
-        Feng.confirm("是否删除部门 " + data.fullName + "?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/dept/delete", function (data) {
-                /*Feng.success("删除成功!");
-                table.reload(Dept.tableId);*/
                 if (data.success == true) {
                     Feng.success("删除成功!");
                     Dept.initTable(Dept.tableId);
@@ -122,7 +148,7 @@ layui.use(['table', 'ztree', 'ax', 'func', 'treetable'], function () {
                     Feng.success(data.message);
                 }
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("id", data.id);
             ajax.start();

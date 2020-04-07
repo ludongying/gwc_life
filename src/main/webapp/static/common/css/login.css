@@ -1,160 +1,188 @@
 /** 登录页面样式 */
+html{
+    height: 100%;
+}
 
 body {
-    background-image: url("../images/bg_login2.svg");
-    background-position: center 110px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-color: #f0f2f5;
+    background-color: #158CFA;
+    height: 100%;
 }
 
-.login-wrapper, body, html {
-    height: 100%
+.deng {
+    font-size: 30px;
+    line-height: 48px;
+    color: #999999;
+    padding-top: 86px;
+    margin-bottom: 68px;
 }
 
-.login-wrapper {
-    overflow: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.deng strong {
+    font-size: 33px;
+    line-height: 49px;
+    color: #666666;
 }
 
-.login-body {
-    padding: 10px 10px 40px 10px;
-}
-
-.login-body > .layui-card {
-    max-width: 360px;
-    margin: 0 auto;
-}
-
-.login-body .layui-card-header {
-    font-weight: 700;
-    font-size: 15px;
-}
-
-.login-body .layui-form-pane .layui-form-label {
-    width: 78px;
-}
-
-.login-body .layui-form-pane .layui-input-block {
-    margin-left: 78px;
-}
-
-.login-body .login-captcha {
-    width: 100%;
-    cursor: pointer;
-}
-
-.login-body .login-other > * {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-    font-size: 14px;
-}
-
-.login-body .login-other .layui-icon {
+body .layui-row {
+    width: 1680px;
+    height: 930px;
+    margin: 0 auto ;
+    overflow: hidden;
     position: relative;
-    top: 2px;
-    font-size: 26px;
 }
 
-.login-body .login-other a:hover {
-    opacity: .8;
+.layui-col-sm7 {
+    width: 630px;
+    height: 630px;
+    margin-left: 130px;
+    margin-top: 155px;
 }
 
-.layui-icon-login-qq {
-    color: #3492ED
+.layui-col-sm7 img {
+    width: 100%;
+    height: 100%;
 }
 
-.layui-icon-login-wechat {
-    color: #4DAF29
+.layui-col-sm5 {
+    width: 606px;
+    height: 622px;
+    margin-left: 115px;
+    margin-top: 183px;
+    overflow: hidden;
 }
 
-.layui-icon-login-weibo {
-    color: #CF1900
+body .layui-form {
+    width: 504px;
+    height: 622px;
+    background-color: #FFFFFF;
+    padding-left:102px;
 }
 
-/** 底部样式 */
-.login-footer {
-    text-align: center;
-    line-height: 30px;
-    color: rgba(255, 255, 255, 0.7) !important;
-    padding-bottom: 20px;
+.item {
+    width: 402px;
+    height: 44px;
+    border-bottom: 1px solid #dae1e6;
+    margin-bottom: 29px;
 }
 
-.login-footer span {
-    padding: 0 5px
-}
-
-.login-footer a {
-    padding: 0 5px;
-    color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.login-footer a:hover {
-    color: rgba(255, 255, 255, 0.4) !important;
-}
-
-/** 头部样式 */
-.login-header {
-    font-family: Myriad Pro, Helvetica Neue, Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85) !important;
-    padding: 10px;
-}
-
-.login-header img {
-    height: 35px;
-}
-
-/** 移动设备样式 */
-@media screen and (min-height: 590px) {
-    .login-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-}
-
-@media screen and (min-height: 670px) {
-    .login-body {
-        padding: 110px 10px 40px 10px;
-    }
-}
-
-/** 辅助样式 */
-.layui-link {
-    color: #029789 !important;
-}
-
-.layui-link:hover {
-    opacity: .8;
-}
-
-.pull-right {
-    float: right;
-}
-
-.inline-block {
+.inputcss {
+    margin-left: 29px;
     display: inline-block;
+    width: 264px;
+    height: 22px;
+    padding: 0;
+    position: absolute;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    letter-spacing: 0;
 }
 
-.login-header {
-    color: rgba(0, 0, 0, .85) !important;
+.icon {
+    display: inline-block;
+    margin-left: 4px;
+    width: 17px;
+    height: 22px;
 }
 
-.login-footer {
-    color: rgba(0, 0, 0, 0.7) !important;
+.icon-1 {
+    background: url("../images/username.png") no-repeat center;
 }
 
-.login-footer a {
-    color: rgba(0, 0, 0, 0.7) !important;
+.icon-2 {
+    background: url("../images/password.png") no-repeat center;
 }
 
-.login-footer a:hover {
-    color: rgba(0, 0, 0, 0.4) !important;
+.zicheckbox {
+    height: 19px;
+}
+
+.submitbutton {
+    margin-top: 30px;
+    width: 402px;
+    height: 63px;
+    background-color: #1890FF;
+}
+
+.bottominfo {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    left:0;
+    bottom:49px;
+}
+
+/* 视口低于此分辨率(1680*930)后,适应1366*768屏幕,视口为1110*624 */
+@media screen and (max-width: 1680px){
+.deng{
+    font-size: 20px;
+    line-height: 32px;
+    padding-top: 57px;
+    margin-bottom: 48px;
+}
+
+.deng strong {
+    font-size: 22px;
+    line-height: 32px;
+}
+
+body .layui-row {
+    width: 1110px;
+    height: 624px;
+}
+
+.layui-col-sm7 {
+    width: 420px;
+    height: 420px;
+    margin-left: 87px;
+    margin-top: 103px;
+}
+
+.layui-col-sm5 {
+    width: 405px;
+    height: 415px;
+    margin-left: 76px;
+    margin-top: 122px;
+}
+
+body .layui-form {
+    width: 337px;
+    height: 415px;
+    padding-left:67px;
+}
+
+.item {
+    width: 268px;
+    height: 29px;
+    margin-bottom: 23px;
+}
+
+.inputcss {
+    margin-left: 19px;
+    width: 176px;
+    height: 15px;
+    font-size: 11px;
+}
+
+.icon {
+    margin-left: 3px;
+    width: 11px;
+    height: 15px;
+}
+
+
+.zicheckbox {
+    height: 13px;
+}
+
+.submitbutton {
+    margin-top: 20px;
+    width: 268px;
+    height: 41px;
+}
+
+.bottominfo {
+    bottom:33px;
+}
+
 }

@@ -1,0 +1,319 @@
+@layout("/common/_container.html",{js:["/modular/lawRecord/decision.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_money.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/law_form_verify.js"]}){
+<style>
+    .container {
+        padding-top: 40px;
+        height: 40px;
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 20px;
+        margin: auto auto -7px;
+    }
+
+    .dot_blue {
+        border: 1px solid #1890FF;
+        background-color: #1890FF;
+    }
+
+    .dot_gray {
+        border: 1px solid #C1C1C1;
+        background-color: #C1C1C1;
+    }
+
+    .dot_content {
+        margin: auto auto -27px;
+    }
+
+    .item {
+        flex: 1;
+        border-bottom: 2px solid #F1F1F1
+    }
+
+    .item_blue{
+        flex: 1;
+        border-bottom: 2px solid #4E89E9
+    }
+
+    .item_content {
+        flex: 1;
+    }
+
+    .layui-card-header {
+        font-size: 16px;
+    }
+
+    .label_bg label{
+        width: 120px;
+    }
+
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
+
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <form class="layui-form" lay-filter="decisionForm">
+                <input type="hidden" id="id" name="id" value="${id}">
+                <input type="hidden" id="lawType" name="lawType" value="${lawType}">
+                <div class="layui-col-md12">
+                    <!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
+                    <!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->
+                    <div class="layui-card" style="height: 110px">
+                        <div class="container">
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div style="flex:1;"></div>
+                                </div>
+                            </div>
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot_content">办案机关</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">询问笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">勘验笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">证据</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">案由</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">处罚决定</div>
+                                    <div class="item_content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12 label_bg">
+                    <div class="layui-card">
+                        <div class="layui-card-header">处罚决定</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">当事人类型</label>
+                                    <div class="layui-input-inline">
+                                        <select id="punishPersonType" lay-filter="punishPersonType" name="punishPersonType">
+                                            @for(item in punishmentType){
+                                            <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="view"></div>
+                            <!--   公用部分   -->
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">联系电话</label>
+                                    <div class="layui-input-inline">
+                                        <input name="punishTel" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+ <!--                               <div class="layui-inline" id="punish_addr">
+                                    <label class="layui-form-label">住址</label>
+                                    <div class="layui-input-inline" style="width: 90px">
+                                        <select class="addr_state" lay-filter="addr_state">
+                                            <option value="">选择省</option>
+                                            <option value="11" selected="">北京</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 90px">
+                                        <select class="addr_city">
+                                            <option value="">选择市</option>
+                                            <option value="1">东城</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 90px">
+                                        <input type="text"  name="punishAddrRegion"  autocomplete="off" class="layui-input addr_region">
+                                    </div>
+                                </div>
+                            </div>-->
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">住址</label>
+                                    <div class="layui-input-inline">
+                                        <input name="punishAddr" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否暴力抗法</label>
+                                    <div class="layui-input-inline">
+                                        <select name="caseViolenceLaw" lay-filter="caseViolenceLaw">
+                                            <option value="0">否</option>
+                                            <option value="1">是</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">情节严重性</label>
+                                    <div class="layui-input-inline">
+                                        <select name="severity" id="severity" lay-filter="severity" data-status="${status}">
+                                            @for(item in plotSeverity){
+                                            <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" >罚款</label>
+                                    <div class="layui-input-inline">
+                                        <input placeholder="金额小写,可保留两位小数" id="fine" name="fine" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline label_bg">
+                                    <label class="layui-form-label">资源补偿费</label>
+                                    <div class="layui-input-inline">
+                                        <input placeholder="金额小写,可保留两位小数" id="resourceCompensation" name="resourceCompensation" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item ">
+                                <div class="layui-inline label_bg">
+                                    <label class="layui-form-label">处罚文书中表述</label>
+                                    <div class="layui-input-inline">
+                                        <textarea id="description" name="description" style="width:500px;" autocomplete="off" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 ">
+                    <div class="layui-card" style="padding: 20px">
+                        <div style="text-align: center;">
+                            <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
+                            <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">&nbsp;保&nbsp;&nbsp;存&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script id="tpl_citizen" type="text/html">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-inline">
+                <input name="punishPersonName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline">
+                <input type="text" name="punishAge" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+    </div>
+    <div class="layui-form-item">
+
+        <div class="layui-inline">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="punishSex" value="1" title="男" checked="">
+                <input type="radio" name="punishSex" value="2" title="女">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">身份证号码</label>
+            <div class="layui-input-inline" style="width: 290px">
+                <input type="text" name="punishIdentityCard" lay-verify="identityNumber" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script id="tpl_legal_person" type="text/html">
+    <!--法人-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label " style="width: 120px;">单位名称/船名号</label>
+            <div class="layui-input-inline">
+                <input name="punishCompanyName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 120px;">法定代表人/负责人</label>
+            <div class="layui-input-inline">
+                <input type="text" name="punishPersonName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+    </div>
+</script>
+@}

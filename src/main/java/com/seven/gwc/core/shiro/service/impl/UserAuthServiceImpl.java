@@ -61,15 +61,15 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
         ShiroUser shiroUser = ShiroKit.createShiroUser(userEntity);
 
         //用户角色数组
-        Long[] roleArray = Convert.toLongArray(userEntity.getRoleId());
+        String[] roleArray = Convert.toStrArray(userEntity.getRoleId());
 
         //获取用户角色列表
-        List<Long> roleList = new ArrayList<>();
+        List<String> roleList = new ArrayList<>();
         List<String> roleNameList = new ArrayList<>();
         if (roleArray != null) {
-            for (Long roleId : roleArray) {
+            for (String roleId : roleArray) {
                 roleList.add(roleId);
-                roleNameList.add(CacheFactory.me().getSingleRoleName(roleId));
+                roleNameList.add(CacheFactory.me().getSingleRoleName(roleId.toString()));
             }
         }
         shiroUser.setRoleList(roleList);
@@ -77,15 +77,15 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
 
 
         //用户岗位数组
-        Long[] positionArray = Convert.toLongArray(userEntity.getPositionId());
+        String[] positionArray = Convert.toStrArray(userEntity.getPositionId());
 
         //获取用户岗位列表
-        List<Long> positionList = new ArrayList<>();
+        List<String> positionList = new ArrayList<>();
         List<String> positionNameList = new ArrayList<>();
         if (positionArray != null) {
-            for (Long positionId : positionArray) {
+            for (String positionId : positionArray) {
                 positionList.add(positionId);
-                positionNameList.add(CacheFactory.me().getSinglePositionName(positionId));
+                positionNameList.add(CacheFactory.me().getSinglePositionName(positionId.toString()));
             }
         }
         shiroUser.setPositionList(positionList);
@@ -96,12 +96,12 @@ public class UserAuthServiceImpl extends BaseController implements UserAuthServi
     }
 
     @Override
-    public List<String> findPermissionsByRoleId(Long roleId) {
+    public List<String> findPermissionsByRoleId(String roleId) {
         return menuMapper.getResUrlsByRoleId(roleId);
     }
 
     @Override
-    public String findRoleNameByRoleId(Long roleId) {
+    public String findRoleNameByRoleId(String roleId) {
         return CacheFactory.me().getSingleRoleTip(roleId);
     }
 

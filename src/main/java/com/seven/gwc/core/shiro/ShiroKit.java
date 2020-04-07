@@ -1,18 +1,3 @@
-/**
- * Copyright (c) 2015-2017, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.seven.gwc.core.shiro;
 
 import com.seven.gwc.config.constant.ConfigConsts;
@@ -256,7 +241,7 @@ public class ShiroKit {
     }
 
     /**
-     * 输出当前用户信息，通常为登录帐号信息。
+     * 输出当前用户信息，通常为shiro帐号信息。
      *
      * @return 当前用户信息
      */
@@ -282,8 +267,8 @@ public class ShiroKit {
      * 判断当前用户是否是超级管理员
      */
     public static boolean isAdmin() {
-        List<Long> roleList = ShiroKit.getUser().getRoleList();
-        for (Long integer : roleList) {
+        List<String> roleList = ShiroKit.getUser().getRoleList();
+        for (String integer : roleList) {
             String singleRoleTip = CacheFactory.me().getSingleRoleTip(integer);
             if (singleRoleTip.equals(ConfigConsts.ADMIN_NAME)) {
                 return true;

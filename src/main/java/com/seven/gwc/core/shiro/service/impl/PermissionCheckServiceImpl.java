@@ -5,7 +5,7 @@ import com.seven.gwc.core.listener.ConfigListener;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.shiro.service.PermissionCheckService;
-import com.seven.gwc.core.util.HttpContext;
+import com.seven.gwc.core.util.HttpContextUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**
- * @Author: GD
- * @Description: 权限自定义检查
- * @Date: 2019/10/23 9:39
+ * @author : GD
+ * description : 权限自定义检查
+ * @date : 2019/10/23 9:39
  */
 @Service
 @Transactional(readOnly = true)
@@ -37,7 +37,7 @@ public class PermissionCheckServiceImpl implements PermissionCheckService {
 
     @Override
     public boolean checkAll() {
-        HttpServletRequest request = HttpContext.getRequest();
+        HttpServletRequest request = HttpContextUtil.getRequest();
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
             return false;

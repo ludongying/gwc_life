@@ -97,7 +97,7 @@ public class DataScopeAspect {
     public void dataScopeFilter(JoinPoint joinPoint, ShiroUser user, String deptAlias, String userAlias) {
         StringBuilder sqlString = new StringBuilder();
 
-        for (Long positionId : user.getPositionList()) {
+        for (String positionId : user.getPositionList()) {
             PositionEntity positionEntity = positionService.getById(positionId);
             String dataScope = positionEntity.getDataScope();
 
@@ -106,18 +106,18 @@ public class DataScopeAspect {
                 sqlString = new StringBuilder();
             } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
                 //自定义数据
-                sqlString.append(ToolUtil.format(" OR {}.id IN ( SELECT dept_id FROM sys_position_dept WHERE position_id IN ( {} ) ) ", deptAlias, positionEntity.getId()));
+                sqlString.append(ToolUtil.format(" OR {}.id IN ( SELECT dept_id FROM sys_position_dept WHERE position_id IN ( '{}' ) ) ", deptAlias, positionEntity.getId()));
             } else if (DATA_SCOPE_DEPT.equals(dataScope)) {
                 //部门数据
-                sqlString.append(ToolUtil.format(" OR {}.id = {}", deptAlias, user.getDeptId()));
+                sqlString.append(ToolUtil.format(" OR {}.id = '{}'", deptAlias, user.getDeptId()));
             } else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope)) {
                 //部门及以下数据
-                sqlString.append(ToolUtil.format(" OR {}.id IN (SELECT id FROM sys_dept WHERE id = {} OR pids LIKE '%[ {} ]%')",
+                sqlString.append(ToolUtil.format(" OR {}.id IN (SELECT id FROM sys_dept WHERE id = '{}' OR pids LIKE '%[ '{}' ]%')",
                         deptAlias, user.getDeptId(), user.getDeptId()));
             } else if (DATA_SCOPE_SELF.equals(dataScope)) {
                 //仅本人数据
                 if (ToolUtil.isNotEmpty(userAlias)) {
-                    sqlString.append(ToolUtil.format(" OR {}.id = {} ", userAlias, user.getId()));
+                    sqlString.append(ToolUtil.format(" OR {}.id = '{}' ", userAlias, user.getId()));
                 } else {
                     // 数据权限为仅本人且没有userAlias别名不查询任何数据
                     sqlString.append(" OR 1=0 ");

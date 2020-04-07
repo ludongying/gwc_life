@@ -1,0 +1,199 @@
+@layout("/common/_container.html",{js:["/modular/lawRecord/reason.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js"]}){
+<style>
+    .container {
+        padding-top: 40px;
+        height: 40px;
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 20px;
+        margin: auto auto -7px;
+    }
+
+    .dot_blue {
+        border: 1px solid #1890FF;
+        background-color: #1890FF;
+    }
+
+    .dot_gray {
+        border: 1px solid #C1C1C1;
+        background-color: #C1C1C1;
+    }
+
+    .dot_content {
+        margin: auto auto -27px;
+    }
+
+    .item {
+        flex: 1;
+        border-bottom: 2px solid #F1F1F1
+    }
+
+    .item_blue{
+        flex: 1;
+        border-bottom: 2px solid #4E89E9
+    }
+
+    .item_content {
+        flex: 1;
+    }
+
+    .layui-card-header {
+        font-size: 16px;
+    }
+
+    .label_bg label{
+        width: 200px;
+    }
+
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <form class="layui-form" lay-filter="reasonForm">
+                <input type="hidden" id="id" name="id" value="${id}">
+                <input type="hidden" id="lawType" name="lawType" value="${lawType}">
+                <input type="hidden" id="con" name="con" value="">
+                <div class="layui-col-md12">
+<!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
+<!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->
+                    <div class="layui-card" style="height: 110px">
+                        <div class="container">
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div style="flex:1;"></div>
+                                </div>
+                            </div>
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot_content">办案机关</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">证据</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">案由</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">处罚决定</div>
+                                    <div class="item_content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12" id="mainReason">
+                    <div class="layui-card" >
+                        <div class="layui-card-header">主案由(单选)</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">未按规定</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[0].code}" title="${reasons[0].message}" checked="">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[1].code}" title="${reasons[1].message}">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[2].code}" title="${reasons[2].message}">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[3].code}" title="${reasons[3].message}">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[4].code}" title="${reasons[4].message}">
+                                </div>
+                            </div>
+
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">其他</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" lay-filter="mainReason" name="mainReason" value="${reasons[5].code}" title="${reasons[5].message}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12" id="secondReason">
+                    <div class="layui-card">
+                        <div class="layui-card-header">副案由(多选)</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">未按规定</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="secondReason" lay-skin="primary" value="${reasons[0].code}" title="${reasons[0].message}" checked="">
+                                    <input type="checkbox" name="secondReason" lay-skin="primary" value="${reasons[1].code}" title="${reasons[1].message}">
+                                    <input type="checkbox" name="secondReason" lay-skin="primary" value="${reasons[2].code}" title="${reasons[2].message}">
+                                    <input type="checkbox" name="secondReason" lay-skin="primary" value="${reasons[3].code}" title="${reasons[3].message}">
+                                    <input type="checkbox" name="secondReason" lay-skin="primary" value="${reasons[4].code}" title="${reasons[4].message}">
+                                </div>
+                            </div>
+
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">其他</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" lay-skin="primary" value="${reasons[5].code}" title="${reasons[5].message}">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                <div class="layui-col-md12 ">
+                    <div class="layui-card" style="padding: 20px">
+                        <div style="text-align: center;">
+                            <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
+                            <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+@}

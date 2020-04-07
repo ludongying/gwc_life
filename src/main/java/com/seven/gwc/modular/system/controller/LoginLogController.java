@@ -1,23 +1,23 @@
 package com.seven.gwc.modular.system.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
 import com.seven.gwc.modular.system.entity.LoginLogEntity;
 import com.seven.gwc.modular.system.service.LoginLogService;
-
-import com.seven.gwc.core.base.BaseController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ import java.util.List;
 @RequestMapping("loginLog")
 public class LoginLogController extends BaseController {
 
-    private String PREFIX = "/modular/system/loginLog/";
+    private static String PREFIX = "/modular/system/loginLog/";
 
     @Autowired
     private LoginLogService loginLogService;
@@ -56,7 +56,7 @@ public class LoginLogController extends BaseController {
      * 跳转到修改登录历史
      */
     @RequestMapping("/loginLog_edit")
-    public String loginLogUpdate(Long loginLogId) {
+    public String loginLogUpdate(String loginLogId) {
         return PREFIX + "loginLog_edit";
     }
 
@@ -64,7 +64,7 @@ public class LoginLogController extends BaseController {
      * 跳转到查看登录历史
      */
     @RequestMapping("/loginLog_detail")
-    public String loginLogDetail(Long loginLogId) {
+    public String loginLogDetail(String loginLogId) {
         return PREFIX + "loginLog_detail";
     }
 
@@ -73,16 +73,16 @@ public class LoginLogController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<LoginLogEntity> list(String loginLogName) {
+    public BaseResultPage<LoginLogEntity> list(String loginLogName, String message, String beginTime, String endTime) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<LoginLogEntity> loginLogs = loginLogService.selectLoginLog(loginLogName);
+        List<LoginLogEntity> loginLogs = loginLogService.selectLoginLog(loginLogName, message, beginTime, endTime);
         PageInfo pageInfo = new PageInfo<>(loginLogs);
         return new BaseResultPage().createPage(pageInfo);
     }
 
     /**
-     * 新增登录历史
+     * 增加登录历史
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -97,13 +97,24 @@ public class LoginLogController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long loginLogId) {
+    public BaseResult delete(@RequestParam String loginLogId) {
         loginLogService.removeById(loginLogId);
         return SUCCESS;
     }
 
     /**
-     * 修改登录历史
+     * 清空所有登录历史
+     */
+    @RequestMapping("/deleteAll")
+    @ResponseBody
+    public BaseResult deleteAll() {
+        LambdaUpdateWrapper<LoginLogEntity> updateWrapper = Wrappers.<LoginLogEntity>lambdaUpdate();
+        loginLogService.remove(updateWrapper);
+        return SUCCESS;
+    }
+
+    /**
+     * 编辑登录历史
      */
     @RequestMapping("/update")
     @ResponseBody
@@ -118,7 +129,7 @@ public class LoginLogController extends BaseController {
      */
     @RequestMapping("/detail/{loginLogId}")
     @ResponseBody
-    public LoginLogEntity detail(@PathVariable Long loginLogId) {
+    public LoginLogEntity detail(@PathVariable String loginLogId) {
         return loginLogService.getById(loginLogId);
     }
 

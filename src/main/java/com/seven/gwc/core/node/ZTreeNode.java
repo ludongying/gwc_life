@@ -12,13 +12,13 @@ public class ZTreeNode {
     /**
      * 节点id
      */
-    private Long id;
+    private String id;
 
     /**
      * 父节点id
      */
     @JsonProperty("pId")
-    private Long pId;
+    private String pId;
 
     /**
      * 节点名称
@@ -46,10 +46,10 @@ public class ZTreeNode {
     public static ZTreeNode createParent() {
         ZTreeNode zTreeNode = new ZTreeNode();
         zTreeNode.setChecked(true);
-        zTreeNode.setId(0L);
+        zTreeNode.setId("0");
         zTreeNode.setName("顶级");
         zTreeNode.setOpen(true);
-        zTreeNode.setPId(0L);
+        zTreeNode.setPId("0");
         return zTreeNode;
     }
 }

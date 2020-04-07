@@ -8,9 +8,10 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @Description: 岗位与部门关联实体
- * @author: GD
- * @since: 2019-10-21
+ * description : 岗位与部门关联实体
+ *
+ * @author : GD
+ * @date : 2019-10-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -20,10 +21,10 @@ public class PositionDeptEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 岗位ID
-    private Long positionId;
+    /** 岗位ID */
+    private String positionId;
 
-    // 部门ID
-    private Long deptId;
+    /** 部门ID */
+    private String deptId;
 
 }

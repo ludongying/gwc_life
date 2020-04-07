@@ -25,11 +25,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Position.initColumn = function () {
         return [[
             {title: 'id', field: 'id', hide: true},
-            {title: '岗位名称', field: 'name', sort: true, align: "center"},
-            {title: '岗位编码', field: 'code', sort: true, align: "center"},
-            {title: '创建时间', field: 'createTime', sort: true, align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
-            {title: '排序', field: 'sort', sort: true, align: "center"},
-            {title: '状态', field: 'state', sort: true, align: "center", templet: '#statusTpl'},
+            {title: '岗位名称', field: 'name', align: "center"},
+            {title: '岗位编码', field: 'code', align: "center"},
+            {title: '创建时间', field: 'createTime', align: "center", templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
+            {title: '排序', field: 'sort', align: "center"},
+            {title: '状态', field: 'state', align: "center", templet: '#statusTpl'},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -39,27 +39,35 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         elem: '#' + Position.tableId,
         url: Feng.ctxPath + '/position/list',
         page: true,
-        height: "full-158",
+        height: "full-97",
         cellMinWidth: 100,
         cols: Position.initColumn()
     });
 
+    /**
+     * 左侧搜索
+     */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
         Position.search();
     });
+    // 重置按钮点击事件
+    $('#btnReset').click(function () {
+        Position.btnReset();
+    });
 
+
+    /**
+     * 右侧操作
+     */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
         Position.openAddPosition();
     });
 
-    // 导出excel
-    $('#btnExp').click(function () {
-        Position.exportExcel();
-    });
-
-    // 工具条点击事件
+    /**
+     * 工具条点击事件
+     */
     table.on('tool(' + Position.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
@@ -78,7 +86,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
 
     /**
-     * 点击查询按钮
+     * 点击搜索按钮
      */
     Position.search = function () {
         var queryData = {};
@@ -87,11 +95,19 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     };
 
     /**
-     * 弹出添加岗位
+     * 重置查询条件
+     */
+    Position.btnReset = function () {
+        $("#positionName").val("");
+    };
+
+    /**
+     * 弹出增加岗位
      */
     Position.openAddPosition = function () {
         func.open({
-            title: '添加岗位',
+            title: '增加岗位',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_add',
             tableId: Position.tableId
         });
@@ -103,6 +119,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Position.onEditPosition = function (data) {
         func.open({
             title: '编辑岗位',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_edit?positionId=' + data.id,
             tableId: Position.tableId
         });
@@ -114,6 +131,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Position.onDetailPosition = function (data) {
         func.open({
             title: '查看岗位',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_detail?positionId=' + data.id,
             tableId: Position.tableId
         });
@@ -125,6 +143,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Position.onDataAuthority = function (data) {
         func.open({
             title: '数据权限',
+            area: ['500px','500px'],
             content: Feng.ctxPath + '/position/position_dataAuthority?positionId=' + data.id,
             tableId: Position.tableId
         });
@@ -138,7 +157,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      * @param data 点击按钮时候的行数据
      */
     Position.onDeletePosition = function (data) {
-        Feng.confirm("是否删除岗位 " + data.name + "?", function () {
+        Feng.confirm("您确定要删除所选数据吗？", function () {
             var ajax = new $ax(Feng.ctxPath + "/position/delete", function (data) {
                 if (data.success == true) {
                     Feng.success("删除成功!");
@@ -146,26 +165,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 } else {
                     Feng.error(data.message);
                 }
-                /*Feng.success("删除成功!");
-                table.reload(Position.tableId);*/
             }, function (data) {
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("positionId", data.id);
             ajax.start();
         });
-    };
-
-    /**
-     * 导出excel按钮
-     */
-    Position.exportExcel = function () {
-        var checkRows = table.checkStatus(Position.tableId);
-        if (checkRows.data.length === 0) {
-            Feng.error("请选择要导出的数据");
-        } else {
-            table.exportFile(tableResult.config.id, checkRows.data, 'xls');
-        }
     };
 
     /**
@@ -183,25 +188,28 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     Position.changeUserStatus = function (id, checked) {
         if (checked) {
             var ajax = new $ax(Feng.ctxPath + "/position/unfreeze", function (data) {
-                Feng.success("启用成功!");
+                if (data.success) {
+                    Feng.success("启用成功!");
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
-                Feng.error("启用失败!");
-                table.reload(Position.tableId);
+                Feng.error("启用失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
         } else {
             var ajax = new $ax(Feng.ctxPath + "/position/freeze", function (data) {
-                Feng.success("禁用成功!");
+                if (data.success) {
+                    Feng.success("禁用成功!");
+                } else {
+                    Feng.error(data.message);
+                }
             }, function (data) {
-                Feng.error("禁用失败!" + data.responseJSON.message + "!");
-                table.reload(Position.tableId);
+                Feng.error("禁用失败!" + data.message + "!");
             });
             ajax.set("id", id);
             ajax.start();
         }
     };
 });
-function test() {
-    
-}

@@ -19,7 +19,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         elem: '#' + LookUser.tableId,
         url: Feng.ctxPath + '/menu/getUserListById?id='+Feng.getUrlParam("id"),
         page: false,
-        height: "full-158",
+        height: "full-75",
         cellMinWidth: 100,
         cols: LookUser.initColumn()
     });

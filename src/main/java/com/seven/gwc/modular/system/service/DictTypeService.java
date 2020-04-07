@@ -1,7 +1,9 @@
 package com.seven.gwc.modular.system.service;
 
-import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.modular.system.entity.DictTypeEntity;
 
 import java.util.List;
 
@@ -19,4 +21,8 @@ public interface DictTypeService extends IService<DictTypeEntity> {
      * @return 字典类型列表
      */
     List<DictTypeEntity> selectSysDictType(String sysDictTypeName);
+
+    BaseResult add(DictTypeEntity dictTypeEntity, ShiroUser user);
+
+    BaseResult update(DictTypeEntity dictTypeEntity, ShiroUser user);
 }

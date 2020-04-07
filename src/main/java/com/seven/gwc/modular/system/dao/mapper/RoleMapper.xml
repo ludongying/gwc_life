@@ -29,8 +29,8 @@
     <select id="roleTreeListByRoleId" resultType="com.seven.gwc.core.node.ZTreeNode">
         SELECT
         r.id as id,pid as "pId",name AS "name",
-        (CASE WHEN (pid = 0 OR pid IS NULL) THEN 'true' ELSE 'false' END) as "open",
-        (CASE WHEN (r1.id = 0 OR r1.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
+        (CASE WHEN (pid = '0' OR pid IS NULL) THEN 'true' ELSE 'false' END) as "open",
+        (CASE WHEN (r1.id = '0' OR r1.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
         FROM sys_role r
         LEFT JOIN (SELECT id FROM sys_role WHERE id IN
             <foreach collection="array" index="index" item="i" open="(" separator="," close=")">
@@ -39,7 +39,7 @@
         ) r1 ON r.id = r1.id
         ORDER BY pid,sort ASC
     </select>
-    <select id="RoleEntityList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
+    <select id="roleEntityList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
         SELECT r.id,r.pid,r.name,r.description,r.sort,r.version,r.create_time,r.update_time,r.create_user,r.update_user,
         (SELECT name FROM sys_role sr WHERE r.pid = sr.id) AS pName
         FROM sys_role r
@@ -49,6 +49,30 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+
+    <select id="getRoleList" resultType="com.seven.gwc.modular.system.entity.RoleEntity">
+        SELECT r.* FROM sys_role r
+        LEFT JOIN sys_user u ON r.create_user = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        WHERE 1 = 1
+        <if test="role.name != null and role.name != ''">
+             and r.name like CONCAT('%',#{role.name},'%')
+        </if>
+        ${role.params.dataScope}
+        order by r.sort, r.create_time desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_role r
+        LEFT JOIN sys_user u ON r.create_user = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        WHERE 1 = 1
+        <if test="role.name != null and role.name != ''">
+            and r.name like CONCAT('%',#{role.name},'%')
+        </if>
+        ${role.params.dataScope}
     </select>
 
 </mapper>

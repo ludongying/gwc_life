@@ -39,7 +39,7 @@ public interface MenuService extends IService<MenuEntity> {
      * @param roleIds 多角色Id
      * @return 角色获取菜单
      */
-    List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds);
+    List<MenuNode> getMenusByRoleIds(Collection<String> roleIds);
 
 
     /**
@@ -48,20 +48,20 @@ public interface MenuService extends IService<MenuEntity> {
      * @param roleIds
      * @return
      */
-    List<FirstMenuNode> getFirstMenus(Collection<Long> roleIds);
+    List<FirstMenuNode> getFirstMenus(Collection<String> roleIds);
 
     /**
      * @param roleIds 多角色Id
      * @return 角色获取菜单
      * @Param pcode  父级菜单的code
      */
-    List<MenuNode> getMenusByRoleIds(Collection<Long> roleIds, String pcode);
+    List<MenuNode> getMenusByRoleIds(Collection<String> roleIds, String pcode);
 
     /**
      * @param roleId 角色Id
      * @return 根据条件查询菜单
      */
-    List<Object> getMenuIdsByRoleId(Long roleId);
+    List<Object> getMenuIdsByRoleId(String roleId);
 
     /**
      * 获取菜单列表树
@@ -79,7 +79,7 @@ public interface MenuService extends IService<MenuEntity> {
      * @param status 菜单状态
      * @return 修改菜单状态
      */
-    int setStatus(Long menuId, String status);
+    int setStatus(String menuId, String status);
 
     /**
      * 添加菜单
@@ -91,5 +91,5 @@ public interface MenuService extends IService<MenuEntity> {
      */
     void updateMenu(MenuEntityDTO menuDto, ShiroUser user);
 
-    JSONObject getUserListById(Long id);
+    JSONObject getUserListById(String id);
 }

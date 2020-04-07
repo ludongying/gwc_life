@@ -37,7 +37,7 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.USER_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_USER_NAME + "'+#userId")
-    public String getUserNameById(Long userId) {
+    public String getUserNameById(String userId) {
         UserEntity user = userMapper.selectById(userId);
         if (user != null) {
             return user.getName();
@@ -48,7 +48,7 @@ public class CacheFactory implements ICacheFactory {
 
 
     @Override
-    public String getUserAccountById(Long userId) {
+    public String getUserAccountById(String userId) {
         UserEntity user = userMapper.selectById(userId);
         if (user != null) {
             return user.getAccount();
@@ -76,8 +76,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.ROLE_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_ROLE_NAME + "'+#roleId")
-    public String getSingleRoleName(Long roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleName(String roleId) {
+        if ("0".equals(roleId)) {
             return "--";
         }
         RoleEntity roleObj = roleMapper.selectById(roleId);
@@ -89,8 +89,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.ROLE_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_ROLE_TIP + "'+#roleId")
-    public String getSingleRoleTip(Long roleId) {
-        if (0 == roleId) {
+    public String getSingleRoleTip(String roleId) {
+        if ("0" == roleId) {
             return "--";
         }
         RoleEntity roleObj = roleMapper.selectById(roleId);
@@ -120,8 +120,8 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.POSITION_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_POSITION_NAME + "'+#positionId")
-    public String getSinglePositionName(Long positionId) {
-        if (0 == positionId) {
+    public String getSinglePositionName(String positionId) {
+        if ("0".equals(positionId)) {
             return "--";
         }
         PositionEntity positionObj = positionMapper.selectById(positionId);
@@ -134,10 +134,10 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.DEPT_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_DEPT_NAME + "'+#deptId")
-    public String getDeptName(Long deptId) {
+    public String getDeptName(String deptId) {
         if (deptId == null) {
             return "";
-        } else if (deptId == 0L) {
+        } else if (deptId == "0") {
             return "顶级";
         } else {
             DeptEntity dept = deptMapper.selectById(deptId);
@@ -163,7 +163,7 @@ public class CacheFactory implements ICacheFactory {
 
     @Override
     @Cacheable(value = CacheConsts.MENT_CONSTANT, key = "'" + CacheKeyConsts.SINGLE_MENU_NAME + "'+#menuId")
-    public String getMenuName(Long menuId) {
+    public String getMenuName(String menuId) {
         if (ToolUtil.isEmpty(menuId)) {
             return "";
         } else {
@@ -178,7 +178,7 @@ public class CacheFactory implements ICacheFactory {
 
 
     @Override
-    public List<Long> getParentDeptIds(Long deptId) {
+    public List<Long> getParentDeptIds(String deptId) {
         DeptEntity dept = deptMapper.selectById(deptId);
         String pids = dept.getPids();
         String[] split = pids.split(",");
@@ -209,11 +209,11 @@ public class CacheFactory implements ICacheFactory {
     }
 
     @Override
-    public Long getMenuIdByCode(String code) {
+    public String getMenuIdByCode(String code) {
         if (ToolUtil.isEmpty(code)) {
-            return 0L;
+            return "0";
         } else if ("0".equals(code)) {
-            return 0L;
+            return "0";
         } else {
             MenuEntity menu = new MenuEntity();
             menu.setCode(code);

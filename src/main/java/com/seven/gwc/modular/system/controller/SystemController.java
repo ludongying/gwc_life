@@ -6,25 +6,26 @@ import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.seven.gwc.core.util.DateTimeUtil;
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.core.util.ToolUtil;
-import com.seven.gwc.modular.system.dto.FileEntityDTO;
 import com.seven.gwc.modular.system.entity.UserEntity;
 import com.seven.gwc.modular.system.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -44,16 +45,20 @@ import java.util.UUID;
 public class SystemController extends BaseController {
     @Autowired
     private UserService userService;
-    @Value("${FILE_UPLOAD_PATH}")
-    private String uploadPath;
+    @Value("${FILE_UPLOAD_PATH_FILE}")
+    private String uploadPathFile;
     @Value("${FILE_UPLOAD_PATH_IMAGE}")
     private String uploadPathImage;
+    @Value("${server.ip}")
+    private String ip;
+
 
     /**
      * 主页面
      */
     @RequestMapping("/welcome")
-    public String welcome() {
+    public String welcome(Model model) {
+        model.addAttribute("lawType", "10");
         return "modular/frame/welcome";
     }
 
@@ -167,25 +172,83 @@ public class SystemController extends BaseController {
     @ResponseBody
     public BaseResult layuiUpload(@RequestPart("file") MultipartFile picture) {
         String pictureName = UUID.randomUUID().toString() + "." + ToolUtil.getFileSuffix(picture.getOriginalFilename());
+        FileUtil.fileIsExist(uploadPathImage);
         try {
-            picture.transferTo(new File(System.getProperty("user.dir") + uploadPathImage + pictureName));
+            picture.transferTo(new File(uploadPathImage + File.separator + pictureName));
         } catch (Exception e) {
             throw new BusinessException(ErrorEnum.UPLOAD_ERROR);
         }
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("pictureName", pictureName);
         return new BaseResult().content("上传生成", map);
     }
 
 
-
-
-
-    @RequestMapping(value = "downloadFile")
-    public void downloadFile(HttpServletResponse response, @RequestParam String file) {
-        FileUtil.download(uploadPath, file, response);
+    /**
+     * 附件上传
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/uploadFile")
+    @ResponseBody
+    public JSONObject uploadFile(@RequestParam("file") MultipartFile file) {
+        return FileUtil.uploadFile(uploadPathFile, file, ip, "picture");
     }
 
+    /**
+     * 视频上传
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/uploadVideo")
+    @ResponseBody
+    public JSONObject uploadVideo(@RequestParam("file") MultipartFile file) {
+        return FileUtil.uploadFile(uploadPathFile, file, ip, "video");
+    }
 
+    /**
+     * 文件下载
+     * @param response
+     * @param fileName
+     */
+    @RequestMapping(value = "downloadFile")
+    public void downloadFile(HttpServletResponse response, @RequestParam String fileName) {
+        FileUtil.download(uploadPathFile, fileName, response);
+    }
+
+    /**
+     * 删除文件
+     * @param fileName 文件名
+     * @return
+     */
+    @RequestMapping(value = "deleteFile")
+    @ResponseBody
+    public JSONObject deleteFile(String fileName) {
+        return FileUtil.deleteFile(uploadPathFile + "/" + fileName, fileName);
+    }
+
+    @RequestMapping(value = "previewPdf")
+    public String previewPdf(@RequestParam String fileName, Model model) {
+        String file = ToolUtil.getFileName(fileName);
+        model.addAttribute("file", file);
+        model.addAttribute("fileName", fileName);
+        return "/common/previewPdf";
+    }
+
+    @GetMapping("/previewFile")
+    @ResponseBody
+    @ApiOperation(value = "预览文件")
+    public ResponseEntity<Resource> previewFile(HttpServletResponse response,
+                                                @ApiParam(name = "filePath", value = "文件路径") String filePath) {
+        return FileUtil.previewFile(filePath, response);
+    }
+
+    /**
+     * 跳转到视频播放页面
+     */
+    @RequestMapping("/videoPlayback")
+    public String videoPlayback(String videoName, Model model) {
+        model.addAttribute("videoName", videoName);
+        return "/common/videoPlayback";
+    }
 }

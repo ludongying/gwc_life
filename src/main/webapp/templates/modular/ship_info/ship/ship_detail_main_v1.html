@@ -1,0 +1,215 @@
+@layout("/common/_container.html",{js:["/modular/ship_info/ship/ship_detail_main.js"],css:["/modular/ship_info/ship/ship.css"]}){
+<div class="layui-tab-content">
+
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <div class="layui-col-xs6">
+                <label>基本信息</label>
+            </div>
+            <div class="layui-col-xs6 text-right">
+                <button id="edit" name="edit" type="button" class="layui-btn layui-btn-normal layui-btn-sm"><i
+                        class="layui-icon">&#xe642;</i></button>
+            </div>
+        </div>
+
+        <div class="layui-card-body">
+            <div class="layui-row layui-col-space10">
+
+                <input id="id" name="id" type="hidden"/>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">船舶名称：</label>
+                    <div class="layui-input-block">
+                        <label id="name" name="name" class="label-long-text" style="font-size: 18px"></label>
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">船舶编码：</label>
+                    <div class="layui-input-block">
+                        <label id="shipCode" name="shipCode" class="label-long-text"></label>
+                        <!--                            <input id="shipCode" name="shipCode" type="text" class="layui-input"-->
+                        <!--                                   disabled="disabled"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">船舶所有人：</label>
+                    <div class="layui-input-block ">
+                        <label id="owner" name="owner" class="label-long-text"></label>
+                        <!--                            <input id="owner" name="owner" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">船籍港：</label>
+                    <div class="layui-input-block">
+                        <label id="nationality" name="nationality" class="label-long-text"></label>
+                    </div>
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">船舶类型：</label>
+                    <div class="layui-input-block">
+                        <label id="type" name="type" class="label-long-text"></label>
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">证书信息：</label>
+                    <div class="layui-input-block">
+                        <label id="certificateId" name="certificateId" class="label-long-text"></label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-card">
+        <div class="layui-card-header">船体信息</div>
+        <div class="layui-card-body">
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">船长：</label>
+                    <div class="layui-input-block">
+                        <label id="length" name="length" class="label-long-text"></label>
+                    </div>
+                    <!--        <div class="my-form-mid layui-word-aux">m</div>-->
+                </div>
+
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">船宽：</label>
+                    <div class="layui-input-block">
+                        <label id="width" name="width" class="label-long-text"></label>
+                        <!--                            <input id="width" name="width" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                    <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">船深：</label>
+                    <div class="layui-input-block">
+                        <label id="deep" name="deep" class="label-long-text"></label>
+                        <!--                            <input id="deep" name="deep" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                    <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
+                </div>
+
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">船体材质：</label>
+                    <div class="layui-input-block">
+                        <label id="material" name="material" class="label-long-text"></label>
+                        <!--                            <input id="material" name="material" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">吨位数：</label>
+                    <div class="layui-input-block">
+                        <label id="tonnage" name="tonnage" class="label-long-text"></label>
+                        <!--                            <input id="tonnage" name="tonnage" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">主功率：</label>
+                    <div class="layui-input-block">
+                        <label id="mainPower" name="mainPower" class="label-long-text"></label>
+                        <!--                            <input id="mainPower" name="mainPower" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                    <!--        <div class="layui-form-mid layui-word-aux">kw</div>-->
+                </div>
+
+            </div>
+
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">核定航区：</label>
+                    <div class="layui-input-block">
+                        <label id="area" name="area" class="label-long-text"></label>
+                        <!--                            <input id="area" name="area" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">核定干舷：</label>
+                    <div class="layui-input-block">
+                        <label id="gunwaleCount" name="gunwaleCount" class="label-long-text"></label>
+                        <!--                            <input id="gunwaleCount" name="gunwaleCount" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                    <!--        <div class="layui-form-mid layui-word-aux">m</div>-->
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs6">
+                    <label class="my-form-label">核载人数：</label>
+                    <div class="layui-input-block">
+                        <label id="peopleNum" name="peopleNum" class="label-long-text"></label>
+                        <!--                            <input id="peopleNum" name="peopleNum" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+                <div class="layui-col-xs5">
+                    <label class="my-form-label">完工日期：</label>
+                    <div class="layui-input-block">
+                        <!--            <input id="finishDate" name="finishDate" placeholder="请输入完成日期" type="text" class="layui-input"/>-->
+                        <label id="finishDate" name="finishDate" class="label-long-text"></label>
+                        <!--                            <input id="finishDate" name="finishDate" type="text" class="layui-input date-icon"-->
+                        <!--                                   autocomplete="off" disabled="disabled"/>-->
+                    </div>
+                </div>
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs11">
+                    <label class="my-form-label">船舶制造厂：</label>
+                    <div class="layui-input-block">
+                        <label id="manufacturer" name="manufacturer" class="label-long-text"></label>
+                        <!--                            <input id="manufacturer" name="manufacturer" type="text" class="layui-input" disabled="disabled"/>-->
+                    </div>
+                </div>
+<!--                <div class="layui-col-xs5">-->
+<!--                    <label class="my-form-label">备注：</label>-->
+<!--                    <div class="layui-input-block">-->
+<!--                        <label id="remark" name="remark" class="label-long-text"></label>-->
+<!--                        &lt;!&ndash;            <input id="remark" name="remark" type="text" class="layui-input" disabled="disabled"/>&ndash;&gt;-->
+<!--                        &lt;!&ndash;                            <textarea id="remark" name="remark" placeholder="请输入备注" class="layui-textarea"&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                      readonly></textarea>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="layui-col-xs1"></div>
+                <div class="layui-col-xs8">
+                    <label class="my-form-label">船舶图片：</label>
+                    <!--        <div class="layui-input-block">-->
+                    <!--            <input id="image" name="image" placeholder="请输入船舶图片" type="text" class="layui-input"/>-->
+                    <!--        </div>-->
+                    <div class="layui-input-block">
+                        <div class="layui-carousel" id="imgBoat">
+                            <div carousel-item="" id="image" name="image">
+                                <!--                                <div style="text-align :center"><img style="border:5px solid #999;margin:10px;" src="/common/images/portrait/boat.jpg"></div>-->
+                                <!--                                <div style="text-align :center"><img src="/common/images/portrait/boattwo.jpg"></div>-->
+                                <!--                                <div style="text-align :center"><img src="/common/images/portrait/boatthree.jpg"></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-xs3"></div>
+
+                <!--                <div class="layui-col-md12 text-right">-->
+                <!--                    &lt;!&ndash;        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>&ndash;&gt;-->
+                <!--                    <button id="edit" name="edit"  class="layui-btn" lay-event="edit">&emsp;编辑&emsp;</button>-->
+                <!--                </div>-->
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@}
+

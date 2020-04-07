@@ -9,7 +9,7 @@ var DeptInfoDlg = {
 };
 
 /**
- * 部门修改对话框
+ * 部门编辑对话框
  */
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
@@ -19,18 +19,8 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var layer = layui.layer;
     var laydate = layui.laydate;
 
-    laydate.render({
-        elem: '#createTime',
-        type: 'datetime'
-    });
-    laydate.render({
-        elem: '#updateTime',
-        type: 'datetime'
-    });
-
-
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化部门的详情数据
     var ajax = new $ax(Feng.ctxPath + "/dept/detail/" + Feng.getUrlParam("id"));
@@ -57,24 +47,18 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         });
     });
 
-
-
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
         var ajax = new $ax(Feng.ctxPath + "/dept/update", function (data) {
-            if (data.success==true) {
-                Feng.success("修改成功!");
-
-                //传给上个页面，刷新table用
-                admin.putTempData('formOk', true);
-
-                //关掉对话框
-                admin.closeThisDialog();
+            if (data.success) {
+                Feng.success("编辑成功!");
+                admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                admin.closeThisDialog();//关掉对话框
             } else {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("修改失败!" + data.responseJSON.message + "!");
+            Feng.error("编辑失败!" + data.message + "!");
         });
         ajax.set(data.field);
         ajax.start();

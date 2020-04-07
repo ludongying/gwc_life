@@ -3,7 +3,7 @@ package com.seven.gwc.modular.system.dto;
 import lombok.Data;
 
 /**
- * description:
+ * description :
  *
  * @author : GD
  * @date : 2019-9-30 10:11

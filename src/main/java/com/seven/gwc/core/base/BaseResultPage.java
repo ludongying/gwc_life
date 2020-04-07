@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @Author: GD
- * @Description:
- * @Date: 2019/9/12 11:34
+ * @author : GD
+ * description :
+ * @date : 2019/9/12 11:34
  */
 @Data
 public class BaseResultPage<T extends Object> extends BaseResult {
@@ -23,10 +23,8 @@ public class BaseResultPage<T extends Object> extends BaseResult {
     public static Page defaultPage() {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
-
         int limit = Integer.valueOf(request.getParameter("limit"));//每页多少条数据
         int page = Integer.valueOf(request.getParameter("page"));//第几页
-
         return new Page(page, limit);
     }
 
@@ -39,6 +37,7 @@ public class BaseResultPage<T extends Object> extends BaseResult {
 
     public BaseResultPage<T> treeData(List data) {
         this.setData(data);
+        this.setCode(0);
         return this;
     }
 }

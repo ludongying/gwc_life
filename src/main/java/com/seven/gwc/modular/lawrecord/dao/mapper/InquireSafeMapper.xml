@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.lawrecord.dao.InquireSafeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity">
+        <id column="id" property="id" />
+        <result column="investigate_name" property="investigateName" />
+        <result column="investigate_sex" property="investigateSex" />
+        <result column="investigate_age" property="investigateAge" />
+        <result column="investigate_position" property="investigatePosition" />
+        <result column="investigate_tel" property="investigateTel" />
+        <result column="investigate_addr" property="investigateAddr" />
+        <result column="identity_card" property="identityCard" />
+        <result column="ship_name" property="shipName" />
+        <result column="ship_owner" property="shipOwner" />
+        <result column="ship_member" property="shipMember" />
+        <result column="ship_case_name" property="shipCaseName" />
+        <result column="ship_case_registry" property="shipCaseRegistry" />
+        <result column="ship_registry" property="shipRegistry" />
+        <result column="ship_case_card" property="shipCaseCard" />
+        <result column="lifebuoy_count" property="lifebuoyCount" />
+        <result column="extinguisher_count" property="extinguisherCount" />
+        <result column="life_vest_count" property="lifeVestCount" />
+        <result column="life_raft_count" property="lifeRaftCount" />
+        <result column="ship_certificate_count" property="shipCertificateCount" />
+        <result column="ship_common_certificate_count" property="shipCommonCertificateCount" />
+        <result column="ship_length" property="shipLength" />
+        <result column="ship_status" property="shipStatus" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_person" property="updatePerson" />
+        <result column="delete_flag" property="deleteFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, investigate_name, investigate_sex, investigate_age, investigate_position, investigate_tel, investigate_addr, identity_card, ship_name, ship_owner, ship_member, ship_case_name, ship_case_registry, ship_registry, ship_case_card, lifebuoy_count, extinguisher_count, life_vest_count, life_raft_count, ship_certificate_count, ship_common_certificate_count, ship_length, ship_status, create_date, update_date, create_person, update_person, delete_flag
+    </sql>
+
+
+</mapper>

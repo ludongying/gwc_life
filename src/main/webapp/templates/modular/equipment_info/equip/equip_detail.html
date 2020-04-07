@@ -1,0 +1,116 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/equipment_info/equip/equip_detail.js"]}){
+<div class="layui-tab-content">
+    <form id="equipForm" lay-filter="equipForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">设备名称<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="name" name="name" type="text" class="layui-input"
+                           lay-verify="required" required readonly/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">设备类型<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="type" name="type" type="hidden">
+                    <input id="typeDesp" name="typeDesp" type="text" class="layui-input" lay-verify="required" autocomplete="off" readonly/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">设备型号<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="specification" name="specification" type="text" class="layui-input"
+                           lay-verify="required" required readonly/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">出厂编码<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="serialNumber" name="serialNumber" type="text" class="layui-input"
+                           lay-verify="required" required readonly/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">出厂日期</label>
+                <div class="layui-input-block">
+                    <input id="produceDate" name="produceDate" type="text"
+                           class="layui-input date-icon" disabled/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">图纸编码</label>
+                <div class="layui-input-block">
+                    <input id="drawingNumber" name="drawingNumber" type="text"
+                           class="layui-input" readonly/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">生产厂商</label>
+                <div class="layui-input-block">
+                    <input id="producer" name="producer" type="text" class="layui-input" readonly/>
+                </div>
+            </div>
+
+<!--            <div class="layui-col-md6">-->
+<!--                <label class="layui-form-label">设备状态</label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <select id="state" name="state" lay-search="" disabled>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="layui-col-md6">
+<!--                <div class="layui-form-item">-->
+                    <label class="layui-form-label">保养周期<span style="color: red;">*</span></label>
+                    <div class="layui-input-inline" style="width: 340px">
+                        <input id="maintainCycle" name="maintainCycle" type="text"
+                               class="layui-input" lay-verify="required|number" required readonly/>
+                    </div>
+                    <div class="layui-input-inline layui-word-aux">天</div>
+<!--                </div>-->
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">提前预警<span style="color: red;">*</span></label>
+                <div class="layui-input-inline" style="width: 340px">
+                    <input id="windowPhase" name="windowPhase" type="text" class="layui-input"
+                           lay-verify="required|positiveNumber" value="15" required/>
+                </div>
+                <div class="layui-input-inline layui-word-aux">天</div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="notlength50" readonly/>
+                </div>
+            </div>
+
+            <!--            <div class="layui-col-md6">-->
+            <!--                <label class="layui-form-label">最近保养时间<span style="color: red;">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input id="lastMaintenanceDate" name="lastMaintenanceDate" placeholder="请输入最近保养时间" type="text" class="layui-input" lay-verify="required" required/>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <!--            <div class="layui-col-md6">-->
+            <!--                <label class="layui-form-label">设备信息<span style="color: red;">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input id="info" name="info" placeholder="请输入设备信息" type="text" class="layui-input" lay-verify="required" required/>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+        </div>
+    </form>
+</div>
+@}
+

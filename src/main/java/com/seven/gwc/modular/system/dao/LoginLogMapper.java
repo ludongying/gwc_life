@@ -1,7 +1,7 @@
 package com.seven.gwc.modular.system.dao;
 
-import com.seven.gwc.modular.system.entity.LoginLogEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.seven.gwc.modular.system.entity.LoginLogEntity;
 
 /**
  * description : 登录历史Mapper 接口

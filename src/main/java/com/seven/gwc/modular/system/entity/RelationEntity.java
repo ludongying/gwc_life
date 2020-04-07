@@ -10,9 +10,10 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @Description: 角色和菜单关联实体
- * @author: GD
- * @since: 2019-08-09
+ * description : 角色和菜单关联实体
+ *
+ * @author : GD
+ * @date : 2019-08-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -22,14 +23,14 @@ public class RelationEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // 主键
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    /** 主键 */
+    @TableId(value = "id", type = IdType.UUID)
+    private String id;
 
-    // 菜单id
-    private Long menuId;
+    /** 菜单id */
+    private String menuId;
 
-    // 角色id
-    private Long roleId;
+    /** 角色id */
+    private String roleId;
 
 }

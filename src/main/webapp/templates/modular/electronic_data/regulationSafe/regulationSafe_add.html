@@ -1,0 +1,37 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/electronic_data/regulationSafe/regulationSafe_add.js"]}){
+<div class="layui-tab-content">
+    <form id="regulationSafeForm" lay-filter="regulationSafeForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12">
+                <label class="layui-form-label">分类名称<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="lawRegularId" name="lawRegularId" type="hidden">
+                    <input id="lawRegularName" name="lawRegularName" placeholder="分类名称" type="text" class="layui-input"
+                           lay-verify="required"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">文档名称<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="name" name="name" placeholder="文档名称" type="text" class="layui-input"
+                           lay-verify="required"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <div class="layui-upload" style="padding-left: 10px">
+                    <button type="button" class="layui-btn layui-btn-normal" id="upload">选择文件</button>
+                    <input id="fileName" name="fileName" type="text" hidden/>
+                </div>
+            </div>
+
+            <div class="layui-col-md12 text-right">
+                <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>
+                <button class="layui-btn" lay-filter="btnSubmit" lay-submit="" id="btnSubmit">&emsp;保存&emsp;</button>
+            </div>
+            <div style="height: 20px"></div>
+        </div>
+    </form>
+</div>
+@}

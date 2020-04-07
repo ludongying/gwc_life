@@ -1,0 +1,323 @@
+@layout("/common/_container.html",{js:["/modular/lawRecord/evidence.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/evidence_upload.js"]}){
+<style>
+    .container {
+        padding-top: 40px;
+        height: 40px;
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 20px;
+        margin: auto auto -7px;
+    }
+
+    .dot_blue {
+        border: 1px solid #1890FF;
+        background-color: #1890FF;
+    }
+
+    .dot_gray {
+        border: 1px solid #C1C1C1;
+        background-color: #C1C1C1;
+    }
+
+    .dot_content {
+        margin: auto auto -27px;
+    }
+
+    .item {
+        flex: 1;
+        border-bottom: 2px solid #F1F1F1
+    }
+
+    .item_blue{
+        flex: 1;
+        border-bottom: 2px solid #4E89E9
+    }
+
+    .item_content {
+        flex: 1;
+    }
+
+    .layui-card-header {
+        font-size: 16px;
+    }
+
+    .label_bg label{
+        width: 120px;
+    }
+
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
+</style>
+<style type="text/css">
+    .uploader-list {
+        margin-left: -15px;
+    }
+
+    .uploader-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .uploader-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .uploader-list .handle i {
+        margin-right: 5px;
+    }
+
+    .uploader-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .uploader-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
+
+<style type="text/css">
+    .video-list {
+        margin-left: -15px;
+    }
+
+    .video-list .info {
+        position: relative;
+        margin-top: -25px;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        height: 25px;
+        text-align: center;
+        display: none;
+    }
+
+    .video-list .handle {
+        position: relative;
+        background-color: black;
+        color: white;
+        filter: alpha(Opacity=80);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        width: 100px;
+        text-align: right;
+        height: 18px;
+        margin-bottom: -18px;
+        display: none;
+    }
+
+    .video-list .handle i {
+        margin-right: 5px;
+    }
+
+    .video-list .handle i:hover {
+        cursor: pointer;
+    }
+
+    .video-list .file-iteme {
+        margin: 12px 0 0 15px;
+        padding: 1px;
+        float: left;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <form class="layui-form">
+                <input type="hidden" id="id" name="id" value="${id}">
+                <input type="hidden" id="lawType" name="lawType" value="${lawType}">
+                <input type="hidden" id="evidence_content" name="content" value="">
+                <div class="layui-col-md12">
+<!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
+<!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->^
+                    <div class="layui-card" style="height: 110px">
+                        <div class="container">
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                @if(lawType==1){
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                @}
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div style="flex:1;"></div>
+                                </div>
+                            </div>
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot_content">办案机关</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                @if(lawType==1){
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">询问笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">勘验笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                @}else{
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                @}
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">证据</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">案由</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">处罚决定</div>
+                                    <div class="item_content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="evidence_box">
+
+                </div>
+
+                <div class="layui-col-md12" >
+                    <div class="layui-card" style="border:1px dotted;width: 100%; text-align: center">
+                        <div class="layui-card-header" >
+                            <button id="addEvidence" type="button" class="layui-btn layui-btn-primary" style="border:0; width: 100%;">+&nbsp;&nbsp;添加内容</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12 ">
+                    <div class="layui-card" style="padding: 20px">
+                        <div  style="text-align: center;">
+                            <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
+                            <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script id="evidenceTpl" type="text/html">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-header"> 上传证据</div>
+            <div class="layui-card-body" data-index="{{d.index}}">
+
+                <div class="layui-form-item  content_{{d.index}}">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">内容</label>
+                        <div class="layui-input-inline">
+                            <input type="text" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="time{{d.index}}" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="name{{d.index}}">
+                    <input type="hidden" value="">
+
+                </div>
+
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="uploadImg{{d.index}}">选择图片证据</button>
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
+                        预览图：
+                        <div class="layui-upload-list uploader-list" style="overflow: auto;" id="uploader-list{{d.index}}">
+
+                        </div>
+                    </blockquote>
+                </div>
+
+<!--                <div class="layui-col-md12">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="video">选择视频证据</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;width: 96%">
+                            预览图：
+                            <div class="layui-upload-list uploader-list" style="overflow: auto;" id="video-list">
+
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</script>
+
+@}

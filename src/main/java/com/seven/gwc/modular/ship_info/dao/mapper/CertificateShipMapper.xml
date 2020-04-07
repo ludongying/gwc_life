@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.ship_info.dao.CertificateShipMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
+        <id column="id" property="id"/>
+        <result column="certificate_id" property="certificateId"/>
+        <result column="name" property="name"/>
+        <result column="owner_type" property="ownerType"/>
+        <result column="certificate_type" property="certificateType"/>
+        <result column="issuer" property="issuer"/>
+        <result column="issue_date" property="issueDate"/>
+        <result column="out_date" property="outDate"/>
+        <result column="store_place" property="storePlace"/>
+        <result column="is_often" property="isOften"/>
+        <result column="window_phase" property="windowPhase"/>
+        <result column="response_dept" property="responseDept"/>
+        <result column="certificate_place" property="certificatePlace"/>
+        <result column="contact" property="contact"/>
+        <result column="attach_file_path" property="attachFilePath"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, certificate_id, name, owner_type, certificate_type, issuer, issue_date, out_date, store_place, is_often, window_phase, response_dept, certificate_place, contact, attach_file_path, remark, state
+    </sql>
+    <select id="CertificateEntityList" resultType="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
+        select c.* from ship_info_certificate c
+        left join sys_dict t on t.id = c.owner_type
+        LEFT JOIN sys_user u ON c.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where t.name = '船舶证书' and #{ids} like CONCAT('%',c.id,'%')
+        and c.delete_flag = 1
+        <if test="certificate.name != null and certificate.name != ''">
+            and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
+            CONCAT('%',#{certificate.name},'%'))
+        </if>
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${certificate.params.dataScope}-->
+        order by c.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+    <select id="getListSize" resultType="com.seven.gwc.modular.ship_info.entity.CertificateShipEntity">
+        select c.* from ship_info_certificate c
+        left join sys_dict t on t.id = c.owner_type
+        LEFT JOIN sys_user u ON c.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where t.name = '船舶证书' and #{ids} like CONCAT('%',c.id,'%')
+        and c.delete_flag = 1
+        <if test="certificate.name != null and certificate.name != ''">
+            and (c.name like CONCAT('%',#{certificate.name},'%') or c.certificate_id like
+            CONCAT('%',#{certificate.name},'%'))
+        </if>
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${certificate.params.dataScope}-->
+    </select>
+
+
+</mapper>

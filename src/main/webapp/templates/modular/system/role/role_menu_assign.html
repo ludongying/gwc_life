@@ -18,8 +18,8 @@
     </div>
     <div class="layui-row" style="background: #CFD4D5;padding: 10px;">
         <div style="text-align: center;">
-            <button id="saveButton" class="layui-btn layui-btn-sm" id="saveButton">保存</button>
             <button id="cancelDept" class="layui-btn layui-btn-sm layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+            <button id="saveButton" class="layui-btn layui-btn-sm" id="saveButton">保存</button>
         </div>
     </div>
 </div>
@@ -59,7 +59,7 @@
                 Feng.success("分配角色成功!");
                 parent.layer.close(ZTreeDlg.index);
             }, function (data) {
-                Feng.error("分配角色失败!" + data.responseJSON.message + "!");
+                Feng.error("分配角色失败!" + data.message + "!");
             });
             ajax.set("menuIds", menuIds);
             ajax.set("id", "${id}");

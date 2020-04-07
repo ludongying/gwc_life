@@ -1,7 +1,7 @@
 package com.seven.gwc.modular.system.dao;
 
-import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.seven.gwc.modular.system.entity.DictTypeEntity;
 
 /**
  * description : dictionaryMapper 接口

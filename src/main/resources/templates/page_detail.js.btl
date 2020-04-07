@@ -1,5 +1,5 @@
 /**
- * ${genQo.bizChName}查看对话框
+ * ${genQo.bizChName}详情对话框
  */
 
 
@@ -11,7 +11,7 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     var layer = layui.layer;
 
     // 让当前iframe弹层高度适应
-    admin.iframeAuto();
+    // admin.iframeAuto();
 
     //初始化${genQo.bizChName}的详情数据
     var ajax = new $ax(Feng.ctxPath + "/${genQo.bizEnName}/detail/" + Feng.getUrlParam("${genQo.bizEnName}Id"));

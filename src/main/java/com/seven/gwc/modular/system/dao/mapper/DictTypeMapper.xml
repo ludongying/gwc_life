@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.seven.gwc.modular.system.entity.DictTypeEntity">
-        <id column="dict_type_id" property="dictTypeId" />
+        <id column="id" property="id" />
         <result column="code" property="code" />
         <result column="name" property="name" />
         <result column="description" property="description" />

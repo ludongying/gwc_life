@@ -15,6 +15,10 @@ import java.util.List;
  */
 public interface RoleMapper extends BaseMapper<RoleEntity> {
 
+    List<RoleEntity> getRoleList(@Param("role") RoleEntity roleEntity, @Param("total") Integer total, @Param("size") Integer size);
+
+    Integer getListSize(@Param("role") RoleEntity roleEntity);
+
     /**
      * 获取角色列表树
      */
@@ -26,7 +30,7 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
      * @param roleId 角色id集合
      * @return
      */
-    List<ZTreeNode> roleTreeListByRoleId(Long[] roleId);
+    List<ZTreeNode> roleTreeListByRoleId(String[] roleId);
 
 
     /**
@@ -35,6 +39,6 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
      * @param roleName 角色名称
      * @return
      */
-    List<RoleEntity> RoleEntityList(@Param("roleName") String roleName);
+    List<RoleEntity> roleEntityList(@Param("roleName") String roleName);
 
 }

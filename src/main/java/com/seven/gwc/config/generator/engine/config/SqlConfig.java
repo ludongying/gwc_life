@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 全局配置
@@ -22,6 +23,12 @@ public class SqlConfig {
     private GenQo genQo;
 
     private Connection connection;
+
+
+    private static String generateUUID(){
+        return UUID.randomUUID().toString().replace("-","");
+    }
+
 
     public void init() {
         List<MenuEntity> menus = new ArrayList<>(6);
@@ -39,6 +46,7 @@ public class SqlConfig {
 
         //业务菜单
         MenuEntity menu = new MenuEntity();
+        menu.setId(generateUUID());
         menu.setCode(genQo.getBizEnName());
         menu.setPcode(pcodeAndPcodes[0]);
         menu.setPcodes(pcodeAndPcodes[1] + "[" + pcodeAndPcodes[0] + "],");
@@ -96,7 +104,7 @@ public class SqlConfig {
         for (MenuEntity menuEntity : menus) {
             PreparedStatement pstmt = null;
             try {
-                pstmt = connection.prepareStatement("INSERT INTO `gwc`.`sys_menu` (`code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `sort`, `levels`, `menu_flag`, `description`, `status`, `open_flag`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                pstmt = connection.prepareStatement("INSERT INTO `gwc`.`sys_menu` (`code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `sort`, `levels`, `menu_flag`, `description`, `status`, `open_flag`,`id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);");
                 pstmt.setString(1, menuEntity.getCode());
                 pstmt.setString(2, menuEntity.getPcode());
                 pstmt.setString(3, menuEntity.getPcodes());
@@ -109,6 +117,7 @@ public class SqlConfig {
                 pstmt.setString(10, null);
                 pstmt.setString(11, menuEntity.getStatus());
                 pstmt.setString(12, menuEntity.getOpenFlag());
+                pstmt.setString(13,menuEntity.getId());
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -135,6 +144,7 @@ public class SqlConfig {
 
     private MenuEntity createSubMenu(MenuEntity parentMenu) {
         MenuEntity menu = new MenuEntity();
+        menu.setId(generateUUID());
         menu.setPcode(parentMenu.getCode());
         menu.setPcodes(parentMenu.getPcodes() + "[" + parentMenu.getCode() + "],");
         menu.setIcon("");

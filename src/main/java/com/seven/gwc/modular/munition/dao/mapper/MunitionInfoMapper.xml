@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.munition.dao.MunitionInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.munition.entity.MunitionInfoEntity">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="unit" property="unit" />
+        <result column="remark" property="remark" />
+        <result column="warn_min_count" property="warnMinCount" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type_id, code, name, description, unit, remark, warn_min_count
+    </sql>
+    <select id="selectMunitionList" resultType="com.seven.gwc.modular.munition.entity.MunitionInfoEntity">
+        SELECT m.* FROM ship_munition_info m
+        LEFT JOIN sys_user u ON m.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where m.delete_flag = 1
+        <if test="munition.name != null and munition.name != ''">
+            and m.name like CONCAT('%',#{munition.name},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munition.params.dataScope}
+        order by m.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+    <select id="getListSize" resultType="com.seven.gwc.modular.munition.entity.MunitionInfoEntity">
+        SELECT m.* FROM ship_munition_info m
+        LEFT JOIN sys_user u ON m.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where m.delete_flag = 1
+        <if test="munition.name != null and munition.name != ''">
+            and m.name like CONCAT('%',#{munition.name},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munition.params.dataScope}
+    </select>
+
+
+</mapper>

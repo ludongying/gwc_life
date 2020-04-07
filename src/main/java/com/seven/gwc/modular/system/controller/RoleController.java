@@ -2,11 +2,15 @@ package com.seven.gwc.modular.system.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.seven.gwc.config.constant.ConfigConsts;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.DeleteDict;
+import com.seven.gwc.core.dictmap.RoleDict;
 import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
@@ -39,7 +43,7 @@ import java.util.List;
 @RequestMapping("role")
 public class RoleController extends BaseController {
 
-    private String PREFIX = "/modular/system/role/";
+    private static String PREFIX = "/modular/system/role/";
 
     @Autowired
     private RoleService roleService;
@@ -66,7 +70,12 @@ public class RoleController extends BaseController {
      * 跳转到修改角色
      */
     @RequestMapping("/role_edit")
-    public String roleEdit(Long id) {
+    public String roleEdit(String id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        RoleEntity role = this.roleService.getById(id);
+        LogObjectHolder.me().set(role);
         return PREFIX + "role_edit";
     }
 
@@ -74,7 +83,7 @@ public class RoleController extends BaseController {
      * 跳转到查看角色
      */
     @RequestMapping("/role_detail")
-    public String roleDetail(Long id) {
+    public String roleDetail(String id) {
         return PREFIX + "role_detail";
     }
 
@@ -83,17 +92,21 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public BaseResultPage<RoleEntity> list(String roleName) {
+    public BaseResultPage<RoleEntity> list(RoleEntity roleEntity) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<RoleEntity> roleEntitys = roleService.selectRole(roleName);
-        PageInfo pageInfo = new PageInfo<>(roleEntitys);
+        List<RoleEntity> roleEntityList = roleService.selectRole(roleEntity, (int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
+        PageInfo pageInfo = new PageInfo<>(roleEntityList);
+        Integer size = roleService.getListSize(roleEntity);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
     /**
-     * 新增角色
+     * 增加角色
      */
+    @BussinessLog(value = "增加角色", key = "name", dict = RoleDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
     public BaseResult add(RoleEntity role) {
@@ -115,9 +128,10 @@ public class RoleController extends BaseController {
     /**
      * 删除角色
      */
+    @BussinessLog(value = "删除角色", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         if (ToolUtil.isEmpty(id)) {
             return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -133,8 +147,9 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 修改角色
+     * 编辑角色
      */
+    @BussinessLog(value = "编辑角色", key = "name", dict = RoleDict.class)
     @RequestMapping(value = "/update")
     @ResponseBody
     public BaseResult update(RoleEntity role) {
@@ -163,30 +178,16 @@ public class RoleController extends BaseController {
     }
 
     /**
-     * 修改角色阈值
-     */
-    @RequestMapping(value = "/updateThreshold")
-    @ResponseBody
-    public BaseResult updateThreshold(RoleEntity role) {
-        if (ToolUtil.isOneEmpty(role, role.getId())) {
-            return new BaseResult().failure(ErrorEnum.ERROR_ILLEGAL_PARAMS);
-        }
-        roleService.editRole(role);
-        return SUCCESS;
-    }
-
-
-    /**
      * 角色详情
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public RoleEntity detail(@PathVariable Long id) {
+    public RoleEntity detail(@PathVariable String id) {
         RoleEntity roleEntity = roleService.getById(id);
-        if (roleEntity.getPid().equals(0L)) {
+        if (roleEntity.getPid().equals("0")) {
             roleEntity.setPName("顶级");
         } else {
-            roleEntity.setPName(CacheFactory.me().getRoleName(roleEntity.getPid().toString()));
+            roleEntity.setPName(CacheFactory.me().getRoleName(roleEntity.getPid()));
         }
         return roleEntity;
     }
@@ -195,25 +196,18 @@ public class RoleController extends BaseController {
      * 跳转到权限分配
      */
     @RequestMapping(value = "/role_menu_assign/{id}")
-    public String roleMenuAssign(@PathVariable Long id, Model model) {
+    public String roleMenuAssign(@PathVariable String id, Model model) {
         model.addAttribute("id", id);
         return PREFIX + "role_menu_assign";
     }
 
     /**
-     * 跳转到阈值配置
-     */
-    @RequestMapping(value = "/role_threshold")
-    public String roleThreshold(Long id) {
-        return PREFIX + "role_threshold";
-    }
-
-    /**
      * 配置权限
      */
+    @BussinessLog(value = "配置权限", key = "id,ids", dict = RoleDict.class)
     @RequestMapping("/setAuthority")
     @ResponseBody
-    public BaseResult setAuthority(@RequestParam("id") Long id, @RequestParam("menuIds") String menuIds) {
+    public BaseResult setAuthority(@RequestParam("id") String id, @RequestParam("menuIds") String menuIds) {
         if (ToolUtil.isOneEmpty(id)) {
             throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
         }
@@ -226,7 +220,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/roleTreeListByUserId/{id}")
     @ResponseBody
-    public List<ZTreeNode> roleTreeListByUserId(@PathVariable Long id) {
+    public List<ZTreeNode> roleTreeListByUserId(@PathVariable String id) {
         UserEntity theUser = this.userService.getById(id);
         String roleId = theUser.getRoleId();
         if (ToolUtil.isEmpty(roleId)) {
@@ -234,9 +228,9 @@ public class RoleController extends BaseController {
         } else {
             String[] strArray = roleId.split(",");
             //转化成Long[]
-            Long[] longArray = new Long[strArray.length];
+            String[] longArray = new String[strArray.length];
             for (int i = 0; i < strArray.length; i++) {
-                longArray[i] = Long.valueOf(strArray[i]);
+                longArray[i] = strArray[i];
             }
             return this.roleService.roleTreeListByRoleId(longArray);
         }
@@ -252,6 +246,5 @@ public class RoleController extends BaseController {
         roleTreeList.add(ZTreeNode.createParent());
         return roleTreeList;
     }
-
 }
 

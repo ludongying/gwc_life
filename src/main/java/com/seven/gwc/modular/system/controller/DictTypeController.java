@@ -1,27 +1,26 @@
 package com.seven.gwc.modular.system.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.seven.gwc.modular.system.service.DictTypeService;
-import com.seven.gwc.core.base.BaseController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 import java.util.List;
 
 /**
- * description: 字典类型控制器
+ * description : 字典类型控制器
  *
  * @author : LM
  * @date : 2019-10-10
@@ -30,7 +29,7 @@ import java.util.List;
 @RequestMapping("dictType")
 public class DictTypeController extends BaseController {
 
-    private String PREFIX = "/modular/system/dictType/";
+    private static String PREFIX = "/modular/system/dictType/";
 
     @Autowired
     private DictTypeService dictTypeService;
@@ -55,7 +54,7 @@ public class DictTypeController extends BaseController {
      * 跳转到修改字典类型
      */
     @RequestMapping("/dictType_edit")
-    public String dictTypeUpdate(Long dictTypeId) {
+    public String dictTypeUpdate(String dictTypeId) {
         return PREFIX + "dictType_edit";
     }
 
@@ -63,7 +62,7 @@ public class DictTypeController extends BaseController {
      * 跳转到查看字典类型
      */
     @RequestMapping("/dictType_detail")
-    public String dictTypeDetail(Long dictTypeId) {
+    public String dictTypeDetail(String dictTypeId) {
         return PREFIX + "dictType_detail";
     }
 
@@ -81,7 +80,7 @@ public class DictTypeController extends BaseController {
     }
 
     /**
-     * 新增字典类型
+     * 增加字典类型
      */
     @RequestMapping("/add")
     @ResponseBody
@@ -90,10 +89,7 @@ public class DictTypeController extends BaseController {
         if (dictType.getSort() == null) {
             dictType.setSort(0);
         }
-        dictType.setCreateTime(new Date());
-        dictType.setCreateUser(user.getName());
-        dictTypeService.save(dictType);
-        return SUCCESS;
+        return dictTypeService.add(dictType, user);
     }
 
     /**
@@ -101,13 +97,13 @@ public class DictTypeController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long sysDictTypeId) {
+    public BaseResult delete(@RequestParam String sysDictTypeId) {
         dictTypeService.removeById(sysDictTypeId);
         return SUCCESS;
     }
 
     /**
-     * 修改字典类型
+     * 编辑字典类型
      */
     @RequestMapping("/update")
     @ResponseBody
@@ -116,10 +112,7 @@ public class DictTypeController extends BaseController {
         if (dictType.getSort() == null) {
             dictType.setSort(0);
         }
-        dictType.setUpdateUser(user.getName());
-        dictType.setUpdateTime(new Date());
-        dictTypeService.updateById(dictType);
-        return SUCCESS;
+        return dictTypeService.update(dictType, user);
     }
 
     /**
@@ -127,7 +120,7 @@ public class DictTypeController extends BaseController {
      */
     @RequestMapping("/detail/{sysDictTypeId}")
     @ResponseBody
-    public DictTypeEntity detail(@PathVariable Long sysDictTypeId) {
+    public DictTypeEntity detail(@PathVariable String sysDictTypeId) {
         return dictTypeService.getById(sysDictTypeId);
     }
 }

@@ -4,14 +4,19 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.DeptDict;
+import com.seven.gwc.core.exception.BusinessException;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.system.dao.DeptMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.DeptEntity;
@@ -39,7 +44,7 @@ import java.util.List;
 @RequestMapping("dept")
 public class DeptController extends BaseController {
 
-    private String PREFIX = "/modular/system/dept/";
+    private static String PREFIX = "/modular/system/dept/";
 
     @Autowired
     private DeptService deptService;
@@ -68,7 +73,12 @@ public class DeptController extends BaseController {
      * 跳转到修改部门
      */
     @RequestMapping("/dept_edit")
-    public String deptEdit(Long id) {
+    public String deptEdit(String id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        DeptEntity dept = deptService.getById(id);
+        LogObjectHolder.me().set(dept);
         return PREFIX + "dept_edit";
     }
 
@@ -76,7 +86,7 @@ public class DeptController extends BaseController {
      * 跳转到查看部门
      */
     @RequestMapping("/dept_detail")
-    public String deptDetail(Long id) {
+    public String deptDetail(String id) {
         return PREFIX + "dept_detail";
     }
 
@@ -85,7 +95,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<DeptEntity> list(String deptName, Long id) {
+    public BaseResultPage<DeptEntity> list(String deptName, String id) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
         List<DeptEntity> depts = deptService.selectDept(deptName, id);
@@ -104,8 +114,9 @@ public class DeptController extends BaseController {
     }
 
     /**
-     * 新增部门
+     * 增加部门
      */
+    @BussinessLog(value = "增加部门", key = "simpleName", dict = DeptDict.class)
     @RequestMapping("/add")
     @ResponseBody
     public BaseResult add(DeptEntity dept) {
@@ -134,9 +145,10 @@ public class DeptController extends BaseController {
     /**
      * 删除部门
      */
+    @BussinessLog(value = "删除部门", key = "id", dict = DeptDict.class)
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         LambdaQueryWrapper<UserEntity> userEntityQueryWrapper = Wrappers.lambdaQuery();
         userEntityQueryWrapper.eq(UserEntity::getDeptId, id);
         List<UserEntity> userEntityList = userMapper.selectList(userEntityQueryWrapper);
@@ -156,8 +168,9 @@ public class DeptController extends BaseController {
     }
 
     /**
-     * 修改部门
+     * 编辑部门
      */
+    @BussinessLog(value = "编辑部门", key = "simpleName", dict = DeptDict.class)
     @RequestMapping("/update")
     @ResponseBody
     public BaseResult update(DeptEntity dept) {
@@ -192,7 +205,7 @@ public class DeptController extends BaseController {
      */
     @RequestMapping("/detail/{id}")
     @ResponseBody
-    public DeptEntity detail(@PathVariable Long id) {
+    public DeptEntity detail(@PathVariable String id) {
         DeptEntity deptEntity = deptService.getById(id);
         deptEntity.setPName(CacheFactory.me().getDeptName(deptEntity.getPid()));
         return deptEntity;
@@ -221,7 +234,7 @@ public class DeptController extends BaseController {
 
     @RequestMapping("/getDeptById")
     @ResponseBody
-    public DeptEntity getDeptById(Long deptId) {
+    public DeptEntity getDeptById(String deptId) {
         return deptService.getDeptById(deptId);
     }
 }

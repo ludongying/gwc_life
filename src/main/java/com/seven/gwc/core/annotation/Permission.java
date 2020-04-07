@@ -3,9 +3,9 @@ package com.seven.gwc.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * @Author: GD
- * @Description: 权限注解 用于检查权限 规定访问权限
- * @Date: 2019/10/23 9:36
+ * @author : GD
+ * description : 权限注解 用于检查权限 规定访问权限
+ * @date : 2019/10/23 9:36
  * @example @Permission({role1,role2})
  * @example @Permission
  */

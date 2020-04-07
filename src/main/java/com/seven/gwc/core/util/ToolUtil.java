@@ -1,9 +1,19 @@
 package com.seven.gwc.core.util;
 
+import com.seven.gwc.config.constant.SysConsts;
+//import org.apache.poi.ss.usermodel.Cell;
+//import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -327,13 +337,13 @@ public class ToolUtil {
      * <p>
      * 例如：例如：12345678901234567890123456789012张三.xml -> 12345678901234567890123456789012张三
      */
-    public static String getFileName(String FileUrl) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileName(String fileUrl) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf1 = FileUrl.lastIndexOf("/");
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(lastIndexOf1 + 1, lastIndexOf2);
+            int lastIndexOf1 = fileUrl.lastIndexOf("/");
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(lastIndexOf1 + 1, lastIndexOf2);
         }
     }
 
@@ -345,12 +355,12 @@ public class ToolUtil {
      * <p>
      * 例如：例如：12345678901234567890123456789012张三.xml -> 12345678901234567890123456789012张三.pdf
      */
-    public static String getFileUpSuffix(String FileUrl, String suffix) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileUpSuffix(String fileUrl, String suffix) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(0, lastIndexOf2) + suffix;
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(0, lastIndexOf2) + suffix;
         }
     }
 
@@ -362,13 +372,13 @@ public class ToolUtil {
      * <p>
      * 例如：12345678901234567890123456789012张三.xml -> 张三
      */
-    public static String getFileNameNoUUID(String FileUrl) {
-        if (isEmpty(FileUrl)) {
+    public static String getFileNameNoUUID(String fileUrl) {
+        if (isEmpty(fileUrl)) {
             return "none";
         } else {
-            int lastIndexOf1 = FileUrl.lastIndexOf("/");
-            int lastIndexOf2 = FileUrl.lastIndexOf(".");
-            return FileUrl.substring(lastIndexOf1 + 33, lastIndexOf2);
+            int lastIndexOf1 = fileUrl.lastIndexOf("/");
+            int lastIndexOf2 = fileUrl.lastIndexOf(".");
+            return fileUrl.substring(lastIndexOf1 + 33, lastIndexOf2);
         }
     }
 
@@ -387,14 +397,138 @@ public class ToolUtil {
 
 
     /**
-     * UUID清楚横杠方法
+     * 随即UUID移除横杠方法
      *
      * @return
      */
-    public static String RemoveBars() {
+    public static String getUUIDremoveBars() {
         String id = UUID.randomUUID().toString();
         id = id.replace("-", "");
         return id;
+    }
+
+    public static String getPostfix(String path) {
+        if (path == null || SysConsts.EMPTY.equals(path.trim())) {
+            return SysConsts.EMPTY;
+        }
+        if (path.contains(SysConsts.POINT)) {
+            return path.substring(path.lastIndexOf(SysConsts.POINT) + 1);
+        }
+        return SysConsts.EMPTY;
+    }
+
+
+    //处理数据格式，最后输出全是String类型
+//    public static String getCellValue(Cell cell) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Object result = "";
+//        if (cell != null) {
+//            switch (cell.getCellType()) {
+//                case Cell.CELL_TYPE_STRING:
+//                    result = cell.getStringCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_NUMERIC:
+//                    if (DateUtil.isCellDateFormatted(cell)) {
+//                        result = sdf.format(cell.getDateCellValue());
+//                    } else {
+//                        BigDecimal db = new BigDecimal(cell.getNumericCellValue());
+//                        result = db.toPlainString();
+//                    }
+//                    break;
+//                case Cell.CELL_TYPE_BOOLEAN:
+//                    result = cell.getBooleanCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_FORMULA:
+//                    try {
+//                        result = String.valueOf(cell.getNumericCellValue());
+//                    } catch (IllegalStateException e) {
+//                        result = String.valueOf(cell.getRichStringCellValue());
+//                    }
+//                    break;
+//                case Cell.CELL_TYPE_ERROR:
+//                    result = cell.getErrorCellValue();
+//                    break;
+//                case Cell.CELL_TYPE_BLANK:
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        return result.toString();
+//    }
+
+    /**
+     * 计算天数
+     * @param start
+     * @param end
+     * @return
+     */
+    public static double getBiDays(Date start,Date end){
+        Long time=end.getTime()-start.getTime();
+        return time/(24.0*60*60*1000);
+    }
+
+    public static String getExceptionMsg(Throwable e) {
+        StringWriter sw = new StringWriter();
+        try {
+            e.printStackTrace(new PrintWriter(sw));
+        } finally {
+            try {
+                sw.close();
+            } catch (IOException var8) {
+                var8.printStackTrace();
+            }
+        }
+        return sw.getBuffer().toString().replaceAll("\\$", "T");
+    }
+
+    /**
+     * 判断是否是Ajax请求
+     * @param request
+     * @return
+     */
+    public static boolean isAjax(HttpServletRequest request){
+        return  (request.getHeader("X-Requested-With") != null
+                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With").toString())) ;
+    }
+
+    //处理数据格式，最后输出全是String类型
+    public static String getCellValue(Cell cell) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Object result = "";
+        if (cell != null) {
+            switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_STRING:
+                    result = cell.getStringCellValue();
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    if (DateUtil.isCellDateFormatted(cell)) {
+                        result = sdf.format(cell.getDateCellValue());
+                    } else {
+                        BigDecimal db = new BigDecimal(cell.getNumericCellValue());
+                        result = db.toPlainString();
+                    }
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    result = cell.getBooleanCellValue();
+                    break;
+                case Cell.CELL_TYPE_FORMULA:
+                    try {
+                        result = String.valueOf(cell.getNumericCellValue());
+                    } catch (IllegalStateException e) {
+                        result = String.valueOf(cell.getRichStringCellValue());
+                    }
+                    break;
+                case Cell.CELL_TYPE_ERROR:
+                    result = cell.getErrorCellValue();
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                    break;
+                default:
+                    break;
+            }
+        }
+        return result.toString();
     }
 
 }

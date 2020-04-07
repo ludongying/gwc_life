@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.ship_info.dao.ShipMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.ship_info.entity.ShipEntity">
+        <id column="id" property="id"/>
+        <result column="ship_code" property="shipCode"/>
+        <result column="name" property="name"/>
+        <result column="owner" property="owner"/>
+        <result column="nationality" property="nationality"/>
+        <result column="type" property="type"/>
+        <result column="length_total" property="lengthTotal"/>
+        <result column="length" property="length"/>
+        <result column="width" property="width"/>
+        <result column="material" property="material"/>
+        <result column="deep" property="deep"/>
+        <result column="tonnage" property="tonnage"/>
+        <result column="tonnage_net" property="tonnageNet"/>
+        <result column="area" property="area"/>
+        <result column="people_num" property="peopleNum"/>
+        <result column="main_power" property="mainPower"/>
+        <result column="image_file_path" property="imageFilePath"/>
+        <result column="certificate_id" property="certificateId"/>
+        <result column="remark" property="remark"/>
+        <result column="manufacturer" property="manufacturer"/>
+        <result column="finish_date" property="finishDate"/>
+        <result column="gunwale_count" property="gunwaleCount"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ship_code, name, owner, nationality, type, length,length_total, width, material, deep, tonnage,tonnage_net, area, people_num, main_power, image_file_path, certificate_id, remark, manufacturer, finish_date, gunwale_count
+    </sql>
+    <select id="ShipEntityList" resultType="com.seven.gwc.modular.ship_info.entity.ShipEntity">
+        select s.*
+        from ship_info_ship s
+--         LEFT JOIN sys_user u ON s.create_person = u.id
+--         LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where s.delete_flag = 1
+        <if test="ship.name != null and ship.name != ''">
+            and s.name like CONCAT('%',#{ship.name},'%') or s.ship_code like CONCAT('%',#{ship.name},'%')
+        </if>
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${ship.params.dataScope}-->
+    </select>
+
+</mapper>

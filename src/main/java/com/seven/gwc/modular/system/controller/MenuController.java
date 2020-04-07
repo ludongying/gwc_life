@@ -3,10 +3,15 @@ package com.seven.gwc.modular.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.seven.gwc.config.constant.ConfigConsts;
+import com.seven.gwc.core.annotation.BussinessLog;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.dictmap.DeleteDict;
+import com.seven.gwc.core.dictmap.MenuDict;
+import com.seven.gwc.core.exception.BusinessException;
 import com.seven.gwc.core.factory.CacheFactory;
+import com.seven.gwc.core.log.LogObjectHolder;
 import com.seven.gwc.core.node.ZTreeNode;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
@@ -66,12 +71,17 @@ public class MenuController extends BaseController {
      * 跳转到修改菜单
      */
     @RequestMapping("/menu_edit")
-    public String menuEdit(Long id) {
+    public String menuEdit(String id) {
+        if (ToolUtil.isEmpty(id)) {
+            throw new BusinessException(ErrorEnum.ERROR_ILLEGAL_PARAMS);
+        }
+        MenuEntity menu = this.menuService.getById(id);
+        LogObjectHolder.me().set(menu);
         return PREFIX + "menu_edit";
     }
 
     @RequestMapping("/menu_look")
-    public String menuLook(Long id) {
+    public String menuLook(String id) {
         return PREFIX + "menu_look";
     }
 
@@ -79,7 +89,7 @@ public class MenuController extends BaseController {
      * 跳转到查看菜单
      */
     @RequestMapping("/menu_detail")
-    public String menuDetail(Long id) {
+    public String menuDetail(String id) {
         return PREFIX + "menu_detail";
     }
 
@@ -108,8 +118,9 @@ public class MenuController extends BaseController {
 
 
     /**
-     * 新增菜单
+     * 增加菜单
      */
+    @BussinessLog(value = "增加菜单", key = "name", dict = MenuDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
     public BaseResult add(MenuEntityDTO menu) {
@@ -125,16 +136,18 @@ public class MenuController extends BaseController {
     /**
      * 删除菜单
      */
+    @BussinessLog(value = "删除菜单", key = "id", dict = DeleteDict.class)
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam Long id) {
+    public BaseResult delete(@RequestParam String id) {
         menuService.removeById(id);
         return SUCCESS;
     }
 
     /**
-     * 修改菜单
+     * 编辑菜单
      */
+    @BussinessLog(value = "编辑菜单", key = "name", dict = MenuDict.class)
     @RequestMapping(value = "/update")
     @ResponseBody
     public BaseResult update(MenuEntityDTO menu) {
@@ -154,7 +167,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/detail/{id}")
     @ResponseBody
-    public MenuEntity detail(@PathVariable Long id) {
+    public MenuEntity detail(@PathVariable String id) {
         MenuEntity menuEntity = menuService.getById(id);
         //设置pid和父级名称
         menuEntity.setPId(CacheFactory.me().getMenuIdByCode(menuEntity.getPcode()));
@@ -167,7 +180,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/menuTreeListByRoleId/{id}")
     @ResponseBody
-    public List<ZTreeNode> menuTreeListByRoleId(@PathVariable Long id) {
+    public List<ZTreeNode> menuTreeListByRoleId(@PathVariable String id) {
         List<Object> menuIds = this.menuService.getMenuIdsByRoleId(id);
         if (ToolUtil.isEmpty(menuIds)) {
             return this.menuService.menuTreeList();
@@ -178,16 +191,17 @@ public class MenuController extends BaseController {
 
     @RequestMapping(value = "/getUserListById")
     @ResponseBody
-    public JSONObject getUserListById(Long id) {
+    public JSONObject getUserListById(String id) {
         return menuService.getUserListById(id);
     }
 
     /**
-     * 冻结用户
+     * 禁用菜单
      */
+    @BussinessLog(value = "禁用菜单", key = "id", dict = MenuDict.class)
     @RequestMapping("/freeze")
     @ResponseBody
-    public BaseResult freeze(@RequestParam Long id) {
+    public BaseResult freeze(@RequestParam String id) {
         //不能冻结系统管理
         if (id.equals(ConfigConsts.SYSTEM_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
@@ -197,11 +211,12 @@ public class MenuController extends BaseController {
     }
 
     /**
-     * 解除冻结用户
+     * 启动菜单
      */
+    @BussinessLog(value = "启动菜单", key = "id", dict = MenuDict.class)
     @RequestMapping("/unfreeze")
     @ResponseBody
-    public BaseResult unfreeze(@RequestParam Long id) {
+    public BaseResult unfreeze(@RequestParam String id) {
         this.menuService.setStatus(id, TypeStatesEnum.OK.getCode());
         return SUCCESS;
     }

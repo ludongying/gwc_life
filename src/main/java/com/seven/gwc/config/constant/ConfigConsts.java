@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 系统常量
+ *
  * @author : GD
  */
 public interface ConfigConsts {
@@ -13,12 +14,12 @@ public interface ConfigConsts {
     /**
      * 默认管理系统的名称
      */
-    String DEFAULT_SYSTEM_NAME = "TonFun管理系统";
+    String DEFAULT_SYSTEM_NAME = "GWC管理系统";
 
     /**
      * 默认欢迎界面的提示
      */
-    String DEFAULT_WELCOME_TIP = "欢迎使用TonFun管理系统!";
+    String DEFAULT_WELCOME_TIP = "欢迎使用GWC管理系统!";
 
     /**
      * 管理员角色的名字
@@ -43,5 +44,6 @@ public interface ConfigConsts {
     /**
      * 不需要权限验证的资源表达式
      */
-    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/modular/**","/common/**", "/login", "/error", "/global/error","/path/**");
+    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/gwcApi/**", "/modular/**", "/common/**", "/login", "/error", "/sessionError", "/**.png", "/**.jpeg", "/**.jpg", "/**.pdf");
+
 }

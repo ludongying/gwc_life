@@ -82,6 +82,10 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
                     , url: '/lawRecord/instrument/uploadInstrument?id=' + Feng.getUrlParam("id")+"&code="+code+"&generateName="+generateName
                     , accept: 'file' //普通文件
                     , exts: 'docx'
+                    ,before:function (obj) {
+                       
+                        return false;
+                    }
                     , done: function (res) {
                         if (res.success) {
                             Feng.success("文件上传成功!");
@@ -91,7 +95,7 @@ layui.use(['layer', 'form', 'table', 'upload', 'laydate', 'admin', 'ax', 'func']
                                 $("#upload"+i).html("更换");
                             }
                         } else {
-                            Feng.error("文件上传失败!"+data.message);
+                            Feng.error("文件上传失败!"+res.message);
                         }
                     }
                 });

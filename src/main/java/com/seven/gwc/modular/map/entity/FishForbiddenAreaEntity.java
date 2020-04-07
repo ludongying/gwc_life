@@ -1,11 +1,11 @@
-package com.seven.gwc.modular.path.entity;
+package com.seven.gwc.modular.map.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 
 /**
  * description : 禁渔区实体

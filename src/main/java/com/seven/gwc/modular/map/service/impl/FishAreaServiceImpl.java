@@ -1,4 +1,4 @@
-package com.seven.gwc.modular.path.service.impl;
+package com.seven.gwc.modular.map.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,9 @@ import com.seven.gwc.core.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.seven.gwc.modular.path.entity.FishAreaEntity;
-import com.seven.gwc.modular.path.dao.FishAreaMapper;
-import com.seven.gwc.modular.path.service.FishAreaService;
+import com.seven.gwc.modular.map.entity.FishAreaEntity;
+import com.seven.gwc.modular.map.dao.FishAreaMapper;
+import com.seven.gwc.modular.map.service.FishAreaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.util.List;

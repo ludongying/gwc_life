@@ -1,6 +1,6 @@
-package com.seven.gwc.modular.path.dao;
+package com.seven.gwc.modular.map.dao;
 
-import com.seven.gwc.modular.path.entity.FishAreaEntity;
+import com.seven.gwc.modular.map.entity.FishAreaEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

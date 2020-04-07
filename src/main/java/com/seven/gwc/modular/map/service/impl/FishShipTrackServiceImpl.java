@@ -1,11 +1,10 @@
-package com.seven.gwc.modular.path.service.impl;
+package com.seven.gwc.modular.map.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.system.entity.DeptEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -14,12 +13,11 @@ import com.seven.gwc.core.util.ToolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.seven.gwc.modular.path.entity.FishShipTrackEntity;
-import com.seven.gwc.modular.path.dao.FishShipTrackMapper;
-import com.seven.gwc.modular.path.service.FishShipTrackService;
+import com.seven.gwc.modular.map.entity.FishShipTrackEntity;
+import com.seven.gwc.modular.map.dao.FishShipTrackMapper;
+import com.seven.gwc.modular.map.service.FishShipTrackService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.seven.gwc.modular.path.service;
+package com.seven.gwc.modular.map.service;
 
-import com.seven.gwc.modular.path.entity.FishShipTrackEntity;
+import com.seven.gwc.modular.map.entity.FishShipTrackEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Date;

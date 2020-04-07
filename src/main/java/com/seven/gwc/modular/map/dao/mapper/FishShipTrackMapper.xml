@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.seven.gwc.modular.path.dao.FishShipTrackMapper">
+<mapper namespace="com.seven.gwc.modular.map.dao.FishShipTrackMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.path.entity.FishShipTrackEntity">
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.map.entity.FishShipTrackEntity">
         <result column="id" property="id" />
         <result column="fish_ship_id" property="fishShipId" />
         <result column="ship_code" property="shipCode" />

@@ -30,6 +30,7 @@ function loadUpload(lay,index,data){
                 shade: 0.01,
                 time: 0
             })
+
         }
         ,done: function(res){
             layer.close(layer.msg());//关闭上传提示窗口

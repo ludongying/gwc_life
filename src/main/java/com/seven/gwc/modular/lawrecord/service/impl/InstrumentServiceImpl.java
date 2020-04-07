@@ -7,7 +7,6 @@ import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.AsopseWordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData;
 import com.seven.gwc.modular.lawrecord.data.instrument.OfficeManager;
-import com.seven.gwc.modular.lawrecord.data.instrument.WordUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.ReasonDO;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.RecordDO;
@@ -327,6 +326,9 @@ public class InstrumentServiceImpl implements InstrumentService {
 
     @Override
     public BaseResult uploadInstrument(String id,Integer code,String generateName,MultipartFile file) {
+        if(!file.getOriginalFilename().startsWith(InstrumentEnum.findByCode(code).getMessage())){
+            return new BaseResult(false,"名称不一致，请确认文件是否正确");
+        }
         LawTypeDTO lawType = lawRecordService.findLawType(id);
         BaseResult<FileBase> baseResult = fileManager.uploadOrgFile(file, getDir(lawType) + FileUtils.file_sep + "file");
         FileBase content = baseResult.getContent();

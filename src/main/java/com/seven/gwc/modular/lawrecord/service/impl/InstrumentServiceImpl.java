@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.lawrecord.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.data.file.FileBase;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
@@ -182,6 +183,7 @@ public class InstrumentServiceImpl implements InstrumentService {
         Boolean writFlag = lawType.getWritFlag();
         if(Objects.isNull(writFlag) || !writFlag){
             Map<String, String> param = getParam(id);
+            System.out.println(JSON.toJSONString(param));
             List<InstrumentEnum> autos = InstrumentEnum.getAuto(lawType);
             String autoPath = saveFiles(lawType, param, autos);
             lawRecordEntity.setAutoWritFilePath(autoPath);

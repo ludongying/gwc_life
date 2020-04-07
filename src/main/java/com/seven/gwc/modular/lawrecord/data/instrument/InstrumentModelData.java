@@ -102,7 +102,8 @@ public class InstrumentModelData {
                     List<XWPFRun>  runs = para.getRuns();
                     for (int i=0; i<runs.size(); i++) {
                         XWPFRun run = runs.get(i);
-                        String runText = run.toString();
+                        String runText =run.toString();
+
                         if(runText.trim().isEmpty()|| !runText.contains("${")){
                             continue;
                         }
@@ -110,6 +111,21 @@ public class InstrumentModelData {
                         String fontFamily = run.getFontFamily();
                         String color = run.getColor();
                         UnderlinePatterns underline = run.getUnderline();
+
+                        para.removeRun(i);
+                        run = para.insertNewRun(i);
+                        run.setText("");
+                        if(!runText.contains("}")){
+                            for(i=i+1;i<runs.size();i++){
+                                runText+=runs.get(i).toString();
+                                para.removeRun(i);
+                                run = para.insertNewRun(i);
+                                run.setText("");
+                                if(runText.contains("}")){
+                                    break;
+                                }
+                            }
+                        }
                         Matcher matcher = this.matcher(runText);
                         boolean flag=false;
                         while(matcher.find()){
@@ -118,19 +134,19 @@ public class InstrumentModelData {
                             String str = contentMap.get(key);
                             if(Objects.nonNull(str) && !str.trim().isEmpty()){
                                 runText=runText.replace(key,str);
-                                System.out.println(">>>>>>>>>>>>text"+runText);
+                                System.out.println(">>>>>>>>>>>>text--"+runText);
                             }
                         }
                         if(flag){
-                            para.removeRun(i);
-                            XWPFRun xwpfRun = para.insertNewRun(i);
-                            if(fontSize>0){
-                                xwpfRun.setFontSize(fontSize);
-                            }
-                            xwpfRun.setFontFamily(fontFamily);
-                            xwpfRun.setColor(color);
-                            xwpfRun.setUnderline(underline);
-                            xwpfRun.setText(runText);
+                                para.removeRun(i);
+                                XWPFRun xwpfRun = para.insertNewRun(i);
+                                if(fontSize>0){
+                                    xwpfRun.setFontSize(fontSize);
+                                }
+                                xwpfRun.setFontFamily(fontFamily);
+                                xwpfRun.setColor(color);
+                                xwpfRun.setUnderline(underline);
+                                xwpfRun.setText(runText);
                         }
                     }
                 }

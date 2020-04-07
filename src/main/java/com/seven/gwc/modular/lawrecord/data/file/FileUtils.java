@@ -123,7 +123,8 @@ public class FileUtils {
     }
 
     public static String getStaticPath(){
-        return Thread.currentThread().getContextClassLoader().getResource("").getPath()+FileUtils.file_sep+"static";
+        String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+FileUtils.file_sep+"static";
+        return path;
     }
 
 

@@ -24,7 +24,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     }
 
     //初始化显示内容
-    initShowContent($("#punishPersonType").val());
+
     loadVerify(form);
     money_verify(lay,"fine");
     money_verify(lay,"resourceCompensation");
@@ -45,11 +45,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                 form.val('decisionForm',result);
                 // loadAddr($,form,result.punishAddrStateCode,result.punishAddrCityCode);
                 $("#punishPersonType").attr("disabled","disabled");
+                initShowContent(result.punishPersonType);
                 form.render();
                 return;
             }
         }
             // loadAddr($,form);
+        initShowContent(1);
     }
 
     form.on('select(punishPersonType)', function(data){

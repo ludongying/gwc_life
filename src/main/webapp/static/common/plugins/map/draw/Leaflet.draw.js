@@ -176,7 +176,7 @@ L.drawLocal = {
 			edit: {
 				tooltip: {
 					text: '拖动进行编辑',
-					subtext: '取消'
+					// subtext: '编辑'
 				}
 			},
 			remove: {

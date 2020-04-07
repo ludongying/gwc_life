@@ -32,11 +32,11 @@ public class GlobalController {
         //return "/map";
     }
 
-    /**
-     * 跳转到map页面
-     */
-    @RequestMapping(path = "/mymap")
-    public String mapPage() {
-        return "/map";
-    }
+//    /**
+//     * 跳转到map页面
+//     */
+//    @RequestMapping(path = "/mymap")
+//    public String mapPage() {
+//        return "/map";
+//    }
 }

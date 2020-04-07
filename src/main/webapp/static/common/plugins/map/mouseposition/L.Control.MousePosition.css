@@ -1,0 +1,22 @@
+﻿.leaflet-container .leaflet-control-mouseposition {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 5px #bbb;
+  padding: 7px 10px;
+   margin:0;
+  /*margin: -37px 0 0 382px;*/
+  /*  color: #333;
+    font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif; */
+
+
+  /* width:155px; */
+  /* height:17px; */
+  font-size:12px;
+  font-family:PingFang SC;
+  font-weight:400;
+  /* line-height:59px; */
+  color:rgba(113,120,129,1);
+  opacity:1;
+
+    left:382px;
+    top:20px;
+}

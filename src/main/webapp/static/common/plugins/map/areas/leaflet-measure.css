@@ -1,0 +1,318 @@
+/* 测量时弹出框标题 */
+.leaflet-control-measure h3{
+
+	font-family:Helvetica Neue;
+	margin-top: 10px;
+	padding-left: 19px;
+	padding-bottom: 10px;
+	border-bottom:1px solid rgba(233,233,233,1);
+	text-align: left;
+}
+.leaflet-measure-resultpopup h3 {
+	font-family:Helvetica Neue;
+	padding-bottom: 10px;
+	border-bottom:1px solid rgba(233,233,233,1);
+	text-align: left;
+
+}
+
+/* 测量时内容的名称:开始 当前点 距离 面积 */
+.leaflet-control-measure p{
+	line-height: 1.5em;
+
+	font-family:Helvetica Neue;
+
+	margin-top: 10px;
+	padding-left: 19px;
+	text-align: left;
+}
+.leaflet-measure-resultpopup p{
+	line-height: 1.5em;
+
+	font-family:Helvetica Neue;
+
+	margin-top: 10px;
+	text-align: left;
+}
+.leaflet-control-measure p:first-child,.leaflet-measure-resultpopup p:first-child {
+	margin-top: 0
+}
+/*测量时的 完成 取消 */
+.leaflet-control-measure .tasks{
+	margin: 10px 0 0;
+	padding: 10px 19px 10px 0;
+	border-top: 1px solid #ddd;
+	text-align: right;
+	list-style: none;
+	list-style-image: none
+}
+.leaflet-measure-resultpopup .tasks{
+	margin: 10px 0 0;
+	padding: 10px 0px 0px 0;
+	border-top: 1px solid #ddd;
+	text-align: right;
+	list-style: none;
+	list-style-image: none
+}
+.leaflet-control-measure .tasks li,.leaflet-measure-resultpopup .tasks li {
+	display: inline;
+	margin: 0 10px 0 0
+}
+
+.leaflet-control-measure .tasks li:last-child,.leaflet-measure-resultpopup .tasks li:last-child {
+	margin-right: 0
+}
+
+.leaflet-control-measure .coorddivider,.leaflet-measure-resultpopup .coorddivider {
+	color: #999
+}
+/* 测量菜单设置 */
+.leaflet-control-measure {
+	max-width: 280px;
+	background: #fff;
+
+	position:fixed;
+	top:50px;
+	right:316px;
+	z-index:100;
+	_position:absolute;
+}
+
+.leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-control-measure .leaflet-control-measure-toggle:hover {
+
+	background-image: url(assets/measures.png);
+	border: 0;
+	border-radius: 4px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	z-index:100;
+}
+/* 测量图标 */
+.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle:hover {
+	border-radius: 0px;
+	list-style-type: none;
+	padding: 0;
+	overflow: hidden;
+	width:59px;
+	height:31px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 2px 6px rgba(0,0,0,0.15);
+	opacity:1;
+	float: right;
+}
+/* 测量图标 */
+.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle:hover {
+
+	background-image: url(assets/measures.png);
+	background-repeat:no-repeat;
+	background-position: left;
+
+}
+
+.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle:hover {
+	background-size: 16px 16px
+}
+/* 标题 */
+.leaflet-control-measure .startprompt h3 {
+
+	font-size:14px;
+	font-family:Helvetica Neue;
+
+	margin-top: 10px;
+	padding-left: 19px;
+	padding-bottom: 10px;
+
+	text-align: left;
+}
+/* 开始新建 */
+.leaflet-control-measure .startprompt .tasks {
+
+	padding-top: 0;
+	border-top: 0;
+
+	font-family:Helvetica Neue;
+
+	padding-left: 19px;
+	padding-bottom: 10px;
+	text-align: left;
+}
+
+.leaflet-control-measure .leaflet-control-measure-interaction {
+
+	width:356px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 2px 6px rgba(0,0,0,0.15);
+	opacity:1;
+	border-radius:2px;
+	position: fixed;
+	top:60px;
+	right:1.3125rem;
+}
+
+.leaflet-control-measure .results .group {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px dotted #eaeaea
+}
+/* 测量时的当前点 */
+.leaflet-control-measure .results .group:first-child {
+	padding-top: 0;
+	border-top: 0;
+	margin-top: 10px;
+}
+
+.leaflet-control-measure .results .heading {
+	margin-right: 5px;
+	color: #999
+}
+
+.leaflet-control-measure a.start {
+	display: inline;
+	width: auto;
+	height: auto;
+	padding-left: 20px;
+	margin-right: 4px;
+	line-height: 1em;
+	border: 0;
+	text-align: left;
+	background-image: url("assets/start.png");
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 12px 12px;
+	color: #5e66cc;
+	text-decoration: none
+}
+
+.leaflet-control-measure a.start,.leaflet-control-measure a.start:hover {
+	background-color: transparent
+}
+
+.leaflet-retina .leaflet-control-measure a.start {
+	background-image: url("assets/start_@2X.png")
+}
+
+.leaflet-control-measure a.start:hover {
+	opacity: .5;
+	text-decoration: none
+}
+
+.leaflet-control-measure a.cancel {
+	display: inline;
+	width: auto;
+	height: auto;
+	padding-left: 20px;
+	margin-right: 4px;
+	line-height: 1em;
+	border: 0;
+	text-align: left;
+	background-image: url("assets/cancel.png");
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 12px 12px;
+	color: #5e66cc;
+	text-decoration: none
+}
+
+.leaflet-control-measure a.cancel,.leaflet-control-measure a.cancel:hover {
+	background-color: transparent
+}
+
+.leaflet-retina .leaflet-control-measure a.cancel {
+	background-image: url("assets/cancel_@2X.png")
+}
+
+.leaflet-control-measure a.cancel:hover {
+	opacity: .5;
+	text-decoration: none
+}
+
+.leaflet-control-measure a.finish {
+	display: inline;
+	width: auto;
+	height: auto;
+	padding-left: 20px;
+	margin-right: 4px;
+	line-height: 1em;
+	border: 0;
+	text-align: left;
+	background-image: url("assets/check.png");
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 12px 12px;
+	color: #5e66cc;
+	text-decoration: none
+}
+
+.leaflet-control-measure a.finish,.leaflet-control-measure a.finish:hover {
+	background-color: transparent
+}
+
+.leaflet-retina .leaflet-control-measure a.finish {
+	background-image: url("assets/check_@2X.png")
+}
+
+.leaflet-control-measure a.finish:hover {
+	opacity: .5;
+	text-decoration: none
+}
+
+.leaflet-measure-resultpopup a.zoomto {
+	display: inline;
+	width: auto;
+	height: auto;
+	padding-left: 20px;
+	margin-right: 4px;
+	line-height: 1em;
+	border: 0;
+	text-align: left;
+	background-image: url("assets/focus.png");
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 12px 12px;
+	color: #5e66cc;
+	text-decoration: none
+}
+
+.leaflet-measure-resultpopup a.zoomto,.leaflet-measure-resultpopup a.zoomto:hover {
+	background-color: transparent
+}
+
+.leaflet-retina .leaflet-measure-resultpopup a.zoomto {
+	background-image: url("assets/focus_@2X.png")
+}
+
+.leaflet-measure-resultpopup a.zoomto:hover {
+	opacity: .5;
+	text-decoration: none
+}
+
+.leaflet-measure-resultpopup a.deletemarkup {
+	display: inline;
+	width: auto;
+	height: auto;
+	padding-left: 20px;
+	margin-right: 4px;
+	line-height: 1em;
+	border: 0;
+	text-align: left;
+	background-image: url("assets/trash.png");
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 12px 12px;
+	color: #5e66cc;
+	text-decoration: none
+}
+
+.leaflet-measure-resultpopup a.deletemarkup,.leaflet-measure-resultpopup a.deletemarkup:hover {
+	background-color: transparent
+}
+
+.leaflet-retina .leaflet-measure-resultpopup a.deletemarkup {
+	background-image: url("assets/trash_@2X.png")
+}
+
+.leaflet-measure-resultpopup a.deletemarkup:hover {
+	opacity: .5;
+	text-decoration: none
+}

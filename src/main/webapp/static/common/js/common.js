@@ -99,6 +99,8 @@ layui.config({
     ax: 'ax/ax',
     ztree: 'ztree/ztree-object',
     func: 'func/func',
+    path: 'map/path',
+    navi: 'map/navi',
     admin: 'admin',
     iconPicker: 'iconPicker/iconPicker',
     webuploader: 'webuploader/webuploader.min'

@@ -68,6 +68,9 @@ layui.define(['jquery'], function (exports) {
         clear: function () {
             this.data = {};
             return this;
+        },
+        getMyUrl: function () {
+            return this.url;
         }
     };
 

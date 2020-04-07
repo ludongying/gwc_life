@@ -1,0 +1,529 @@
+/* ================================================================== */
+/* Toolbars
+/* ================================================================== */
+.leaflet-draw{
+	width:356px;
+	height:140px;
+	background:rgba(255,255,255,1);
+	box-shadow:0px 2px 6px rgba(0,0,0,0.15);
+	opacity:1;
+	border-radius:2px;
+	position:fixed;
+	top:55px;
+	right:1.3125rem;
+}
+.diaplayid{
+	position:fixed;
+	top:125px;
+	right: 60px;
+
+}
+.diaplayid a{
+	font-size:14px;
+	font-family:Helvetica Neue;
+	font-weight:400;
+	line-height:16px;
+	color:rgba(91,91,91,1);
+	opacity:1;
+}
+.leaflet-draw h3{
+	font-size:14px;
+	font-family:Helvetica Neue;
+	font-weight:400;
+	line-height:16px;
+	color:rgba(51,51,51,1);
+	opacity:1;
+
+	margin-top: 10px;
+	padding-left: 19px;
+	padding-bottom: 10px;
+	border-bottom:1px solid rgba(233,233,233,1);
+	text-align: left;
+}
+.leaflet-draw-section {
+	position: relative;
+	float:left;
+	width:170px;
+
+}
+.leaflet-draw-toolbar {
+	margin-left: 40px;
+	margin-top: 20px;
+
+}
+
+.leaflet-draw-toolbar-top {
+	/* margin-top: 0; */
+	margin-left: 40px;
+	margin-top: 20px;
+}
+
+.leaflet-draw-toolbar-notop a:first-child {
+	border-top-right-radius: 0;
+}
+
+.leaflet-draw-toolbar-nobottom a:last-child {
+	border-bottom-right-radius: 0;
+}
+
+.leaflet-draw-toolbar a {
+	/* background-image: url('images/spritesheet.png'); */
+	/* background-image: linear-gradient(transparent, transparent), url('images/spritesheet.svg'); */
+	background-repeat: no-repeat;
+	/* background-size: 300px 30px; */
+	/* background-clip: padding-box; */
+}
+
+.leaflet-retina .leaflet-draw-toolbar a {
+	/* background-image: url('images/polyline.png'); */
+	/* background-image: linear-gradient(transparent, transparent), url('images/spritesheet.svg'); */
+}
+
+.leaflet-draw a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+.leaflet-draw a .sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+/* ================================================================== */
+/* Toolbar actions menu
+/* ================================================================== */
+
+.leaflet-draw-actions {
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 26px; /* leaflet-draw-toolbar.left + leaflet-draw-toolbar.width */
+	top: 0;
+	white-space: nowrap;
+	background: white;
+}
+
+.leaflet-touch .leaflet-draw-actions {
+	/* left: 32px; */
+}
+
+.leaflet-right .leaflet-draw-actions {
+	right: 26px;
+	left: auto;
+}
+
+.leaflet-touch .leaflet-right .leaflet-draw-actions {
+	right: 32px;
+	left: auto;
+}
+
+.leaflet-draw-actions li {
+	display: inline-block;
+}
+
+.leaflet-draw-actions li:first-child a {
+	border-left: none;
+}
+
+.leaflet-draw-actions li:last-child a {
+	-webkit-border-radius: 0 4px 4px 0;
+	/* border-radius: 0 4px 4px 0; */
+}
+
+.leaflet-right .leaflet-draw-actions li:last-child a {
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+.leaflet-right .leaflet-draw-actions li:first-child a {
+	-webkit-border-radius: 4px 0 0 4px;
+	/* border-radius: 4px 0 0 4px; */
+}
+
+.leaflet-draw-actions a {
+	/* 	background-color: #919187;
+        border-left: 1px solid #AAA;
+        color: #FFF;
+        font: 11px/19px "Helvetica Neue", Arial, Helvetica, sans-serif;
+        line-height: 28px;
+        text-decoration: none;
+        padding-left: 10px;
+        padding-right: 10px; */
+	height: 23px;
+	width:23px;
+	line-height: 23px;
+	text-align: center;
+}
+.leaflet-draw-actions a.finish {
+	background-image: url('images/finishclose.png');
+	background-repeat:no-repeat;
+	position:fixed;
+	top:166px;
+	right:204px;
+}
+.leaflet-draw-actions a.finish:hover{
+	background-image: url('images/finish.png');
+}
+.leaflet-draw-actions a.cancel {
+	background-image: url('images/cancelclose.png');
+	background-repeat:no-repeat;
+	position:fixed;
+	top:166px;
+	right:240px;
+}
+.leaflet-draw-actions a.cancel:hover{
+	background-image: url('images/cancel.png');
+}
+.leaflet-draw-actions a.deletenew {
+	background-image: url('images/deletenewclose.png');
+	background-repeat:no-repeat;
+	position:fixed;
+	top:166px;
+	right:166px;
+}
+.leaflet-draw-actions a.deletenew:hover{
+	background-image: url('images/deletenew.png');
+}
+.leaflet-draw-actions a.clearall {
+	background-image: url('images/deletenewclose.png');
+	background-repeat:no-repeat;
+	position:fixed;
+	top:166px;
+	right:166px;
+}
+.leaflet-draw-actions a.clearall:hover{
+	background-image: url('images/deletenew.png');
+}
+.leaflet-touch .leaflet-draw-actions a {
+	font-size: 12px;
+	/* line-height: 30px; */
+	/* height: 30px; */
+}
+
+.leaflet-draw-actions-bottom {
+	/* margin-top: 0; */
+}
+
+.leaflet-draw-actions-top {
+	/* margin-top: 1px; */
+}
+
+.leaflet-draw-actions-top a,
+.leaflet-draw-actions-bottom a {
+	/* height: 27px; */
+	/* line-height: 27px; */
+	/* z-index: 1100; */
+}
+
+.leaflet-draw-actions a:hover {
+	/* background-color: #A0A098; */
+}
+
+.leaflet-draw-actions-top.leaflet-draw-actions-bottom a {
+	/* height: 26px; */
+	/* line-height: 26px; */
+}
+
+/* ================================================================== */
+/* Draw toolbar
+/* ================================================================== */
+
+.leaflet-draw-toolbar .leaflet-draw-draw-polyline {
+
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polyline {
+	background-image: url('images/polylineclose.png');
+	position:fixed;
+	top:123px;
+	right:332px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polyline:hover{
+	background-image: url('images/polylineopen.png');
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polyline-enable {
+	background-image: url('images/polylineopen.png');
+	position:fixed;
+	top:123px;
+	right:332px;
+}
+.leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+	background-image: url('images/polygonclose.png');
+	position:fixed;
+	top:123px;
+	right:171px;
+	padding-right:29px;
+	border-right:1px solid rgba(233,233,233,1);
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon:hover {
+
+	background-image: url('images/polygonopen.png');
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon-enable {
+	background-image: url('images/polygonopen.png');
+	position:fixed;
+	top:123px;
+	right:171px;
+	padding-right:29px;
+	border-right:1px solid rgba(233,233,233,1);
+}
+.leaflet-draw-toolbar .leaflet-draw-draw-rectangle {
+	/* background-position: -62px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-rectangle {
+	/* background-position: -60px -1px; */
+	background-image: url('images/rectangleclose.png');
+	position:fixed;
+	top:123px;
+	right:296px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-rectangle:hover {
+	/* background-position: -60px -1px; */
+	background-image: url('images/rectangleopen.png');
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-rectangle-enable {
+	/* background-position: -60px -1px; */
+	background-image: url('images/rectangleopen.png');
+	position:fixed;
+	top:123px;
+	right:296px;
+}
+.leaflet-draw-toolbar .leaflet-draw-draw-circle {
+	/* background-position: -92px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circle {
+	/* background-position: -90px -1px; */
+	background-image: url('images/circleclose.png');
+	position:fixed;
+	top:123px;
+	right:260px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circle:hover {
+	/* background-position: -90px -1px; */
+	background-image: url('images/circleopen.png');
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circle-enable {
+	background-image: url('images/circleopen.png');
+	position:fixed;
+	top:123px;
+	right:260px;
+}
+.leaflet-draw-toolbar .leaflet-draw-draw-marker {
+	/* background-position: -122px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-marker {
+	/* background-position: -120px -1px; */
+	background-image: url('images/markerclose.png');
+	position:fixed;
+	top:123px;
+	right:224px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-marker:hover {
+	/* background-position: -120px -1px; */
+	background-image: url('images/markero.png');
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-marker-enable {
+	/* background-position: -120px -1px; */
+	background-image: url('images/markero.png');
+	position:fixed;
+	top:123px;
+	right:224px;
+}
+.leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+	/* background-position: -273px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+	/* background-position: -271px -1px; */
+	/* background-image: url('images/circlec.png'); */
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker:hover {
+	/* background-position: -271px -1px; */
+	/* background-image: url('images/circleo.png'); */
+}
+/* ================================================================== */
+/* Edit toolbar
+/* ================================================================== */
+
+.leaflet-draw-toolbar .leaflet-draw-edit-edit {
+	/* background-position: -152px -2px; */
+	/* background-image: url('images/editc.png'); */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
+	/* background-position: -150px -1px; */
+	background-image: url('images/editclose.png');
+	position:fixed;
+	top:162px;
+	right:332px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit-enable {
+	/* background-position: -150px -1px; */
+	background-image: url('images/editopen.png');
+	position:fixed;
+	top:162px;
+	right:332px;
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit:hover {
+	background-image: url('images/editopen.png');
+}
+.leaflet-draw-toolbar .leaflet-draw-edit-remove {
+	/* background-position: -182px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
+	/* background-position: -180px -1px; */
+	background-image: url('images/deleteclose.png');
+	position:fixed;
+	top:162px;
+	right:280px;
+	padding-right:29px;
+	border-right:1px solid rgba(233,233,233,1);
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove-enable {
+	/* background-position: -180px -1px; */
+	background-image: url('images/deleteopen.png');
+	position:fixed;
+	top:162px;
+	right:280px;
+	padding-right:29px;
+	border-right:1px solid rgba(233,233,233,1);
+}
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove:hover {
+	background-image: url('images/deleteopen.png');
+}
+.leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
+	/* background-position: -212px -2px; */
+	/* background-image: url('images/editc.png'); */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
+	/* background-position: -210px -1px; */
+	background-image: url('images/editclose.png');
+	position:fixed;
+	top:162px;
+	right:332px;
+	/* padding-left:29px; */
+	/* border-left:1px solid rgba(233,233,233,1); */
+}
+
+.leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
+	/* background-position: -242px -2px; */
+}
+
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
+	/* background-position: -240px -2px; */
+	background-image: url('images/deleteclose.png');
+	position:fixed;
+	top:162px;
+	right:280px;
+	padding-right:29px;
+	border-right:1px solid rgba(233,233,233,1);
+}
+
+/* ================================================================== */
+/* Drawing styles
+/* ================================================================== */
+
+.leaflet-mouse-marker {
+	background-color: #fff;
+	cursor: crosshair;
+}
+
+.leaflet-draw-tooltip {
+	background: rgb(54, 54, 54);
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid transparent;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+	font: 12px/18px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	margin-left: 20px;
+	margin-top: -21px;
+	padding: 4px 8px;
+	position: absolute;
+	visibility: hidden;
+	white-space: nowrap;
+	z-index: 6;
+}
+
+.leaflet-draw-tooltip:before {
+	border-right: 6px solid black;
+	border-right-color: rgba(0, 0, 0, 0.5);
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	content: "";
+	position: absolute;
+	top: 7px;
+	left: -7px;
+}
+
+.leaflet-error-draw-tooltip {
+	background-color: #F2DEDE;
+	border: 1px solid #E6B6BD;
+	color: #B94A48;
+}
+
+.leaflet-error-draw-tooltip:before {
+	border-right-color: #E6B6BD;
+}
+
+.leaflet-draw-tooltip-single {
+	margin-top: -12px
+}
+
+.leaflet-draw-tooltip-subtext {
+	color: #f8d5e4;
+}
+
+.leaflet-draw-guide-dash {
+	font-size: 1%;
+	opacity: 0.6;
+	position: absolute;
+	width: 5px;
+	height: 5px;
+}
+
+/* ================================================================== */
+/* Edit styles
+/* ================================================================== */
+
+.leaflet-edit-marker-selected {
+	background-color: rgba(254, 87, 161, 0.1);
+	border: 4px dashed rgba(254, 87, 161, 0.6);
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	box-sizing: content-box;
+}
+
+.leaflet-edit-move {
+	cursor: move;
+}
+
+.leaflet-edit-resize {
+	cursor: pointer;
+}
+
+/* ================================================================== */
+/* Old IE styles
+/* ================================================================== */
+
+.leaflet-oldie .leaflet-draw-toolbar {
+	border: 1px solid #999;
+}

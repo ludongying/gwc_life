@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.path.dao.FishAreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.path.entity.FishAreaEntity">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="point1_lon" property="point1Lon" />
+        <result column="point1_lat" property="point1Lat" />
+        <result column="point2_lon" property="point2Lon" />
+        <result column="point2_lat" property="point2Lat" />
+        <result column="point3_lon" property="point3Lon" />
+        <result column="point3_lat" property="point3Lat" />
+        <result column="point4_lon" property="point4Lon" />
+        <result column="point4_lat" property="point4Lat" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, point1_lon, point1_lat, point2_lon, point2_lat, point3_lon, point3_lat, point4_lon, point4_lat
+    </sql>
+
+
+</mapper>

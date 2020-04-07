@@ -1,0 +1,96 @@
+/* Icons from Font-Awesome  | Font Awesome by Dave Gandy - http://fontawesome.io*/
+/* Thanks to http://fa2png.io/ for icon png generation */
+/* .leaflet-control-navbar-fwd-wrap {
+	position:absolute;
+	top:26px;
+}
+.leaflet-control-navbar-back-wrap {
+	position:absolute;
+	left:52px;
+	top:26px;
+}	 */
+.leaflet-control-pan1  {
+    /*
+      .leaflet-control-pan-right-wrap: right
+    + .leaflet-control-pan a: width
+    = 52 + 24 = 76
+    */
+    /* width: 76px; */
+    /*
+      .leaflet-control-pan-down-wrap: top
+    + .leaflet-control-pan a: height
+    = 52 + 24 = 76
+    */
+    /* height: 76px; */
+
+    width:26px;
+    height:26px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 2px 6px rgba(0,0,0,0.15);
+    opacity:1;
+    position:fixed;
+    right:72px;
+    bottom:10px;
+
+}
+.leaflet-control-pan1 > div {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.leaflet-control-pan1 > div {
+    /* box-shadow: 0 1px 7px rgba(0,0,0,0.65); */
+    /* box-shadow:0px 2px 6px rgba(0,0,0,0.15); */
+}
+
+.leaflet-control-pan1 a{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: block;
+}
+.leaflet-control-pan1 a {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    /* border-radius: 4px; */
+    width: 26px;
+    height: 26px;
+}
+.leaflet-control-pan1 a:hover {
+    /* background-color: #f4f4f4; */
+    background-color: transport;
+}
+
+.leaflet-control-navbar-fwd {
+    background-image: url("images/arrow-right_0.png");
+    position:fixed;
+    right:67px;
+    bottom:10px;
+
+}
+
+.leaflet-control-navbar-back {
+    background-image: url("images/arrow-left_0.png");
+    position:fixed;
+    right:79px;
+    bottom:10px;
+
+}
+.leaflet-control-navbar-setsize{
+    width:14px;
+    height:14px;
+}
+.leaflet-control-navbar-home {
+    background-image: url("images/homec.png");
+}
+
+
+.leaflet-control-navbar-fwd-disabled {
+    background-image: url("images/arrow-right_b.png");
+}
+
+.leaflet-control-navbar-back-disabled {
+    background-image: url("images/arrow-left_b.png");
+}
+.leaflet-control-navbar-home:hover{
+    background-image: url("images/homeopen.png");
+}

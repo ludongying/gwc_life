@@ -9,10 +9,11 @@ import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 
-import BaseResult;
-import BaseResultPage;
-import ShiroKit;
-import ShiroUser;
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.shiro.ShiroKit;
+import com.seven.gwc.core.shiro.ShiroUser;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import ${package.Entity}.${entity};

@@ -44,6 +44,6 @@ public interface ConfigConsts {
     /**
      * 不需要权限验证的资源表达式
      */
-    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/gwcApi/**", "/modular/**", "/common/**", "/login", "/error", "/sessionError", "/**.png", "/**.jpeg", "/**.jpg", "/**.pdf");
+    List<String> NONE_PERMISSION_RES = CollectionUtil.newLinkedList("/gwcApi/**", "/modular/**", "/common/**", "/login", "/error", "/sessionError", "/**.png", "/**.jpeg", "/**.jpg", "/**.pdf", "/map/**");
 
 }

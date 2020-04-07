@@ -443,7 +443,7 @@
         // let ajax1 = new $ax(Feng.ctxPath + "/path/setfishShipTrackdata");
         // ajax1.set("startTime", startTime);
         // let data1 = ajax1.start();
-        let ajax = new $ax(Feng.ctxPath + "/path/fishShipTrack");
+        let ajax = new $ax(Feng.ctxPath + "/map/fishShipTrack");
         let data = ajax.start();
         // alert(result1.content);
         if(data)
@@ -494,7 +494,7 @@
     function getForbiddenFishPoint() {
         var AreaId = "1";//约定禁渔区编号为1
         //初始化轨迹的详情数据
-        var ajax1 = new $ax(Feng.ctxPath + "/path/fishForbiddenArea");
+        var ajax1 = new $ax(Feng.ctxPath + "/map/fishForbiddenArea");
         ajax1.set("AreaId", AreaId);
         var data = ajax1.start();
         if(data)
@@ -554,7 +554,7 @@
     function getFishPoint() {
 
         //初始化轨迹的详情数据
-        var ajax = new $ax(Feng.ctxPath + "/path/fishArea");
+        var ajax = new $ax(Feng.ctxPath + "/map/fishArea");
         var data = ajax.start();
         if(data)
         {

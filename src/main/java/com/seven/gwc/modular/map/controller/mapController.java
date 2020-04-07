@@ -27,9 +27,13 @@ import java.util.List;
  * @date : 2020-01-06
  */
 @Controller
-@RequestMapping("path")
-public class pathController extends BaseController{
-
+@RequestMapping("map")
+public class mapController extends BaseController{
+    private static String PREFIX = "/modular/map/";
+    @RequestMapping("")
+    public String index(){
+        return PREFIX + "map";
+    }
     @Autowired
     private FishForbiddenAreaService fishForbiddenAreaService;
     @Autowired

@@ -93,6 +93,11 @@ public class DecisionDO extends BaseDO {
     */
    protected String Laws_Basis2;
 
+ /**
+  * 缴纳资源赔偿费人民币
+  */
+ protected String money2;
+
 
    public DecisionDO (DecisionBase decisionBase){
      PunishmentTypeEnum punishmentTypeEnum = PunishmentTypeEnum.findByCode(decisionBase.getPunishPersonType());
@@ -107,7 +112,16 @@ public class DecisionDO extends BaseDO {
         .setName_Unit(decisionBase.getPunishCompanyName()).setLegal(decisionBase.getPunishPersonName())
         .setPhone_Unit(decisionBase.getPunishTel()).setAddress_Unit(decisionBase.getPunishAddr())
         .setSeverity(Objects.nonNull(plotSeverityEnum)?plotSeverityEnum.getMessage():"")
-        .setMoney(decisionBase.getResourceCompensationUpper()).setMoney_low(decisionBase.getResourceCompensation());
+        .setMoney_low(decisionBase.getFine());
+    String fine = decisionBase.getFineUpper();
+    String resourceCompensation = decisionBase.getResourceCompensationUpper();
+
+    if(Objects.nonNull(fine)){
+     this.setMoney("1、罚款人民币"+fine);
+    }
+    if(Objects.nonNull(resourceCompensation)){
+     this.setMoney2("2、缴纳资源赔偿费人民币"+resourceCompensation);
+    }
    }
 
 

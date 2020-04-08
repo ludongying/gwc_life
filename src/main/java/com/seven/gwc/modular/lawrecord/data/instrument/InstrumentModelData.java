@@ -112,10 +112,10 @@ public class InstrumentModelData {
                         String color = run.getColor();
                         UnderlinePatterns underline = run.getUnderline();
 
-                        para.removeRun(i);
-                        run = para.insertNewRun(i);
-                        run.setText("");
                         if(!runText.contains("}")){
+                            para.removeRun(i);
+                            run = para.insertNewRun(i);
+                            run.setText("");
                             for(i=i+1;i<runs.size();i++){
                                 runText+=runs.get(i).toString();
                                 para.removeRun(i);
@@ -271,8 +271,10 @@ public class InstrumentModelData {
     }
 
     public static void main(String[] args) {
-        String path="D:\\ideawork\\GWC-WEB\\src\\main\\webapp\\static\\lawrecord\\instrument\\27责令返港通知书_法人_安.docx";
-        InstrumentModelData instrumentModelData = new InstrumentModelData(path, new HashMap<>());
+        String path="D:\\ideawork\\GWC-WEB\\src\\main\\webapp\\static\\lawrecord\\instrument\\06勘验笔录.docx";
+        HashMap<String, String> map = new HashMap<>();
+        map.put("A003","对的");
+        InstrumentModelData instrumentModelData = new InstrumentModelData(path,map);
         instrumentModelData.export("D:\\1.docx");
 
 

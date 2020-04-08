@@ -71,7 +71,7 @@ public class InstrumentServiceImpl implements InstrumentService {
 
 
     private String getDir(LawTypeDTO lawType){
-        return FileUtils.file_sep+"lawrecord"+FileUtils.file_sep+lawType.getYear()
+        return "lawrecord"+FileUtils.file_sep+lawType.getYear()
                 +FileUtils.file_sep+lawType.getLawCaseCode();
     }
 

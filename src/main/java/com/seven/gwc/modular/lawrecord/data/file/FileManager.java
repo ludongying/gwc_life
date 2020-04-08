@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class FileManager {
 
     /**
-     * D:\myfile\file
+     * D:\myfile\file\
      */
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String dirPath;
@@ -72,7 +72,7 @@ public class FileManager {
                 if(Objects.nonNull(dir)){
                     fileFullName = dirPath +dir+ FileUtils.file_sep+ fileName;
                 }else{
-                    fileFullName = dirPath + FileUtils.file_sep+ fileName;
+                    fileFullName = dirPath + fileName;
                 }
 
                 Path path = Paths.get(fileFullName);
@@ -166,8 +166,8 @@ public class FileManager {
      * @param name 文件路径
      */
     public void downloadTemplate(String name,HttpServletResponse resp) {
-           download(FileUtils.getStaticPath()+FileUtils.file_sep+name,resp);
-    }
+           download(FileUtils.getStaticPath()+name,resp);
+}
 
     /**
      * 加载文件列表
@@ -181,7 +181,7 @@ public class FileManager {
             if(!paths.isEmpty()){
                 for (String path : paths) {
                     FileData data = FileUtils.getByPath(path);
-                    data.setUrl(ip+FileUtils.file_sep+data.getRealName());
+                    data.setUrl(ip+data.getRealName());
                     list.add(data);
                 }
             }

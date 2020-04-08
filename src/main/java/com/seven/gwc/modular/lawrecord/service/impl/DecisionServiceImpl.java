@@ -21,7 +21,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -44,14 +43,12 @@ public class DecisionServiceImpl extends ServiceImpl<DecisionMapper, DecisionEnt
     private LawRecordService lawRecordService;
     @Autowired
     private InstrumentService instrumentService;
-
     @Autowired
     private InquireService inquireService;
     @Autowired
     private InquireSafeService inquireSafeService;
     @Autowired
     private InquisitionService inquisitionService;
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)

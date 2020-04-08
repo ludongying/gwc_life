@@ -63,6 +63,26 @@ public class InquireProduceDO extends InquireDO{
      */
     protected String A005;
 
+    /**
+     * 造成渔业损失
+     */
+    protected String Lost;
+
+    /**
+     * 渔船出海海口
+     */
+    protected String FISHING_AREAS;
+
+    /**
+     * 核定主机功率
+     */
+    protected String c32;
+
+    /**
+     * 渔获物价值
+     */
+    protected String A017;
+
 
 
     public InquireProduceDO(InquireEntity entity) {
@@ -82,6 +102,19 @@ public class InquireProduceDO extends InquireDO{
                 .setNet_Number(entity.getShipGenerateCount())
                 .setNet_Time(DateUtil.format(entity.getShipFishAreaDate(), "yyyy-MM-dd HH:mm"))
                 .setA005(entity.getShipGoodsCount());
+
+        if(Objects.nonNull(this.Product)){
+            this.setLost("造成约"+this.Product+"的渔业损失，");
+        }
+
+        this.setFISHING_AREAS(this.getSea_Port());
+
+        this.setC32(this.getBoat_Power());
+
+        this.A017="";
+        if(Objects.nonNull(this.getProduct()) && !this.getProduct().trim().isEmpty()){
+            this.setA017("据连云港物价局民生价格公示最新一期指导价格，该批渔获物价值约"+this.getProduct()+"，");
+        }
 
 
     }

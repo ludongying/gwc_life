@@ -93,7 +93,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         if(fine){
             data.field.fineUpper=number2Chinese(fine);
         }
-        let resourceCompensation=$("resourceCompensation").val();
+        let resourceCompensation=$("#resourceCompensation").val();
         if(resourceCompensation){
             data.field.resourceCompensationUpper=number2Chinese(resourceCompensation);
         }

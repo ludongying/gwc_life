@@ -22,7 +22,7 @@ public class FileUtils {
 
     public static final String regex_dot          =  "\\.";
 
-    public static final String file_sep           =  "\\";
+    public static final String file_sep           =  "/";
 
     public static final String file_2_file_sep    =   ",";
 
@@ -124,6 +124,10 @@ public class FileUtils {
 
     public static String getStaticPath(){
         String path = Thread.currentThread().getContextClassLoader().getResource("").getPath()+FileUtils.file_sep+"static";
+        File file=new File(path);
+        if(!file.exists()){
+            path=System.getProperty("user.dir");
+        }
         return path;
     }
 

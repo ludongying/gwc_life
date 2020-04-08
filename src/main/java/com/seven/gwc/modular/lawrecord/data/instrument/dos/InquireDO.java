@@ -74,10 +74,7 @@ public class InquireDO extends BaseDO {
      *渔船上网具是否湿润（预留）
      */
     protected String flag1;
-    /**
-     *网具中是否有残留的渔获物（预留）
-     */
-    protected String flag2;
+
     /**
      *甲板是否刚冲洗过（预留）
      */

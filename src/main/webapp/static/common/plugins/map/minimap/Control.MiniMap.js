@@ -129,7 +129,12 @@
 			this._layer = layer;
 			this._miniMap.addLayer(this._layer);
 		},
-
+		addLayer: function (layer) {
+			this._miniMap.addLayer(layer);
+		},
+		removeLayer: function (layer) {
+			this._miniMap.removeLayer(layer);
+		},
 		_addToggleButton: function () {
 			this._toggleDisplayButton = this.options.toggleDisplay ? this._createButton(
 				'', this._toggleButtonInitialTitleText(), ('leaflet-control-minimap-toggle-display leaflet-control-minimap-toggle-display-' +

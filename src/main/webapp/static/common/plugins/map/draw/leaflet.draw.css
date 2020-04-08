@@ -194,14 +194,14 @@
 	background-image: url('images/deletenew.png');
 }
 .leaflet-draw-actions a.clearall {
-	background-image: url('images/deletenewclose.png');
+	background-image: url('images/deleteallclose.png');
 	background-repeat:no-repeat;
 	position:fixed;
 	top:166px;
 	right:166px;
 }
 .leaflet-draw-actions a.clearall:hover{
-	background-image: url('images/deletenew.png');
+	background-image: url('images/deleteall.png');
 }
 .leaflet-touch .leaflet-draw-actions a {
 	font-size: 12px;

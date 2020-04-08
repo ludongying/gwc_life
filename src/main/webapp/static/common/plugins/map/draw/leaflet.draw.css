@@ -3,14 +3,18 @@
 /* ================================================================== */
 .leaflet-draw{
 	width:356px;
-	height:140px;
+	margin-left:20px;
+	_position:absolute;
 	background:rgba(255,255,255,1);
 	box-shadow:0px 2px 6px rgba(0,0,0,0.15);
 	opacity:1;
 	border-radius:2px;
-	position:fixed;
-	top:55px;
+	position: fixed;
+	top:50px;
 	right:1.3125rem;
+	display: none;
+	z-index:1000;
+	height: 140px;
 }
 .diaplayid{
 	position:fixed;
@@ -80,7 +84,7 @@
 }
 
 .leaflet-draw a {
-	display: block;
+	/*display: block;*/
 	text-align: center;
 	text-decoration: none;
 }

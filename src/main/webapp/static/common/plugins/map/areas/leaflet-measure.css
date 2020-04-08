@@ -15,7 +15,6 @@
 	text-align: left;
 
 }
-
 /* 测量时内容的名称:开始 当前点 距离 面积 */
 .leaflet-control-measure p{
 	line-height: 1.5em;
@@ -80,7 +79,7 @@
 
 .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-control-measure .leaflet-control-measure-toggle:hover {
 
-	background-image: url(assets/measures.png);
+	background-image: url(assets/measure.png);
 	border: 0;
 	border-radius: 4px;
 	text-indent: 100%;
@@ -104,7 +103,7 @@
 /* 测量图标 */
 .leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle:hover {
 
-	background-image: url(assets/measures.png);
+	background-image: url(assets/measure.png);
 	background-repeat:no-repeat;
 	background-position: left;
 

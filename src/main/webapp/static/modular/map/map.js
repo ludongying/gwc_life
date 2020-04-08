@@ -24,6 +24,7 @@
         menuid.style.display = "block";
         drawmenu.style.display = "none";
         AISmenu.style.display = "none";
+        measureControl._collapse();
     }
     CloseHide.onclick = function(){
         menuid.style.display = "none";
@@ -100,7 +101,7 @@
         drawmenu.style.display = "block";
         menuid.style.display = "none";
         AISmenu.style.display = "none";
-        // alert(1);
+        measureControl._collapse();
     }
     menuClose.onclick = function(){
         drawmenu.style.display = "none";
@@ -139,6 +140,7 @@
         AISmenu.style.display = "block";
         drawmenu.style.display = "none";
         menuid.style.display = "none";
+        measureControl._collapse();
     }
     AISClose.onclick=function(){
         AISmenu.style.display = "none";

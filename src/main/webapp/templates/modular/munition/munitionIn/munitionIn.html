@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{js:["/modular/munition/munitionInfo/munitionInfo.js"]}){
+@layout("/common/_container.html",{js:["/modular/munition/munitionIn/munitionIn.js"]}){
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
@@ -7,21 +7,20 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="munitionInfoName" class="layui-input" type="text" placeholder="物资信息名称"/>
+                                <input id="munitionInandoutName" class="layui-input" type="text" placeholder="物资入库名称"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn">搜索</button>
                                 <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
                             </div>
                             <div style="float: right">
-                                @if(shiro.hasPermission("/munitionInfo/add")){
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加
-                                </button>
+                                @if(shiro.hasPermission("/munitionIn/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
                                 @}
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="munitionInfoTable" lay-filter="munitionInfoTable"></table>
+                    <table class="layui-table" id="munitionInandoutTable" lay-filter="munitionInandoutTable"></table>
                 </div>
             </div>
         </div>
@@ -29,13 +28,13 @@
 </div>
 
 <script type="text/html" id="tableBar">
-    @if(shiro.hasPermission("/munitionInfo/detail")){
-    <a id="detail" class="layui-btn layui-btn-xs" lay-event="detail">预警设置</a>
+    @if(shiro.hasPermission("/munitionIn/detail")){
+    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     @}
-    @if(shiro.hasPermission("/munitionInfo/update")){
+    @if(shiro.hasPermission("/munitionIn/update")){
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     @}
-    @if(shiro.hasPermission("/munitionInfo/delete")){
+    @if(shiro.hasPermission("/munitionIn/delete")){
     <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
     @}
 </script>

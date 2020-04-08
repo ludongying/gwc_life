@@ -740,6 +740,7 @@
                 f.show(this.$interaction);
                 document.getElementById('drawmenu').style.display = "none";
                 document.getElementById('menuid').style.display = "none";
+                document.getElementById('AISmenu').style.display = "none";
             },
             _collapse: function() {
                 this._locked || (f.hide(this.$interaction), f.show(this.$toggle))

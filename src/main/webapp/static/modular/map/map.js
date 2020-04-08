@@ -10,7 +10,12 @@
     var func = layui.func;
     var path = layui.path;
     var navi = layui.navi;
-
+    //图层定义
+    let measureControl;//测距和面积
+    let drawnItems;//标绘
+    let pointsGroup = L.layerGroup();//执法船
+    let ForbiddenFishLine = L.layerGroup();//禁渔区
+    let FishLine = L.layerGroup();//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
     var hide = document.getElementById('hide');
@@ -19,6 +24,7 @@
         menuid.style.display = "block";
         drawmenu.style.display = "none";
         AISmenu.style.display = "none";
+        measureControl._collapse();
     }
     CloseHide.onclick = function(){
         menuid.style.display = "none";
@@ -44,7 +50,7 @@
     L.control.navbar().addTo(map);
 
     //测距和面积
-    var measureControl = new L.Control.Measure({measureid:"measureid",});
+    measureControl = new L.Control.Measure({measureid:"measureid",});
     measureControl.addTo(map);
     $('#measureid').mouseenter(function(){
         $('#measureimg').attr("src","/common/plugins/map/areas/assets/measureopen.png");
@@ -95,7 +101,7 @@
         drawmenu.style.display = "block";
         menuid.style.display = "none";
         AISmenu.style.display = "none";
-        // alert(1);
+        measureControl._collapse();
     }
     menuClose.onclick = function(){
         drawmenu.style.display = "none";
@@ -134,6 +140,7 @@
         AISmenu.style.display = "block";
         drawmenu.style.display = "none";
         menuid.style.display = "none";
+        measureControl._collapse();
     }
     AISClose.onclick=function(){
         AISmenu.style.display = "none";
@@ -173,6 +180,7 @@
     });
     var miniMap = new L.Control.MiniMap(mini_map, { toggleDisplay: true });
     miniMap.addTo(map);
+    // miniMap.addLayer(ForbiddenFishLine);
     function refreshChart() {
         c2= L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
@@ -242,7 +250,6 @@
         refreshChart();
     });
     //显示模式
-
     $('#DisplayCategory').change(function () {
         refreshChart();
         //小地图
@@ -293,7 +300,6 @@
     });
     ////////////////////////////////绘制轨迹开始////////////////////////////////////////////////////////////////////
     //执法船
-    let pointsGroup = L.layerGroup();
     function getDate(mydate,time) {
         //var t = new Date().getTime() - time;
         var t = mydate - time;
@@ -490,7 +496,6 @@
     }).addTo(map);
     ////////////////////////////////绘制轨迹结束////////////////////////////////////////////////////////////////
     //禁渔区
-    var ForbiddenFishLine = L.layerGroup();
     function getForbiddenFishPoint() {
         var AreaId = "1";//约定禁渔区编号为1
         //初始化轨迹的详情数据
@@ -541,16 +546,18 @@
             $(this).attr("src","/common/plugins/map/images/open.png");
             $(this).attr("alt","open");
             getForbiddenFishPoint();
+            // miniMap.addLayer(ForbiddenFishLine);
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
             $(this).attr("alt","close");
             //清空之前绘制的点
+            // miniMap.removeLayer(ForbiddenFishLine);
             ForbiddenFishLine.clearLayers();
+
         }
     });
     //渔区
-    var FishLine = L.layerGroup();
     function getFishPoint() {
 
         //初始化轨迹的详情数据

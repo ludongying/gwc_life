@@ -1,0 +1,47 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/munition/munitionIn/munitionIn_detail.js"]}){
+<div class="layui-tab-content">
+    <form id="munitionInandoutForm" lay-filter="munitionInandoutForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">出入库表单编码</label>
+                <div class="layui-input-block">
+                    <input id="id" name="id" placeholder="请输入出入库表单编码" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">仓库操作类型：入库为0，出库为1（枚举）</label>
+                <div class="layui-input-block">
+                    <input id="actionType" name="actionType" placeholder="请输入仓库操作类型：入库为0，出库为1（枚举）" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">出入库物资列表详情id</label>
+                <div class="layui-input-block">
+                    <input id="detailId" name="detailId" placeholder="请输入出入库物资列表详情id" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">审核状态</label>
+                <div class="layui-input-block">
+                    <input id="status" name="status" placeholder="请输入审核状态" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+@}
+

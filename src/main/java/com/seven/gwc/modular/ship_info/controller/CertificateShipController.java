@@ -50,6 +50,11 @@ public class CertificateShipController extends BaseController {
         return PREFIX + "certificate";
     }
 
+    @RequestMapping("")
+    public String index() {
+        return PREFIX + "certificate";
+    }
+
     /**
      * 跳转到添加证书信息
      */

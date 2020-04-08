@@ -70,7 +70,7 @@ public class MunitionInfoController extends BaseController {
      */
     @RequestMapping("/munitionInfo_detail")
     public String munitionInfoDetail(String munitionInfoId) {
-        return PREFIX + "munitionInfo_detail";
+        return PREFIX + "munitionInfo_warnSet";
     }
 
     /**

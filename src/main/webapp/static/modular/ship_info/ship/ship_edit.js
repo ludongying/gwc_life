@@ -28,7 +28,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload'], function () {
     var ajax = new $ax(Feng.ctxPath + "/ship/detail/" + Feng.getUrlParam("shipId"));
     var result = ajax.start();
     //多图片回显
-    if(result.attachFilePath != null){
+    if(result.imageFilePath != null){
         fileName = result.imageFilePath;
         var files = fileName.split(",");
         for (i = 0; i < files.length - 1; i++) {

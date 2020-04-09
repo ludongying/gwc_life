@@ -60,6 +60,20 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     }
     addUnitListen($,form,unit_data);
 
+    form.verify({
+        shipFishAreaDate: function (value) {
+             let shipOutDate=$("#shipOutDate").val();
+             let shipFishAreaDate=$("#shipFishAreaDate").val();
+             if(shipOutDate && shipFishAreaDate){
+                 if(Date.parse(shipOutDate)>=Date.parse(shipFishAreaDate)){
+                     return "到作业渔区时间不能大于等于出海时间";
+                 }
+             }
+
+        }
+    })
+
+
     $("#shipName").blur(function(){
           $("#inquire_box .shipName").val($("#shipName").val());
     })
@@ -99,6 +113,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         let inquires=$("#inquire_box .inquire_index");
         if(inquires.length>0){
             for(let i=0;i<inquires.length;i++){
+              //执法人员
               let p1=  inquires.eq(i).find("select.person1").val();
               let inquire2= inquires.eq(i).find("select.person2");
               let p2= inquire2.val();
@@ -107,6 +122,23 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
                   msg_error($,"执法人员不能选择同一个人")
                   return false;
               }
+              //出海时间
+                let s1=  inquires.eq(i).find("input.shipOutDate").val();
+                let s2_= inquires.eq(i).find("input.shipFishAreaDate");
+                let s2= s2_.val();
+                if(s1 && s2){
+                    let d1=Date.parse(s1);
+                    let d2=Date.parse(s2);
+                    if(d1>=d2){
+                        s2_.addClass("msg-error");
+                        s2_.blur(function () {
+                            s2_.removeClass("msg-error");
+                        });
+                        msg_error($,"到作业渔区时间不能大于等于出海时间")
+                        return false;
+                    }
+                }
+
             }
         }
         return true;

@@ -387,7 +387,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">到作业渔区时间</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" id="shipFishAreaDate" name="shipFishAreaDate" autocomplete="off" class="layui-input">
+                                        <input type="text" id="shipFishAreaDate" name="shipFishAreaDate" lay-verify="shipFishAreaDate" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                             </div>
@@ -712,7 +712,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">出海时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="shipOutDate{{d.index}}" data-name="shipOutDate{{d.index}}" value="{{d.content.shipOutDate?d.content.shipOutDate:''}}" autocomplete="off" class="layui-input">
+                            <input type="text" id="shipOutDate{{d.index}}" data-name="shipOutDate{{d.index}}" value="{{d.content.shipOutDate?d.content.shipOutDate:''}}" autocomplete="off" class="layui-input shipOutDate">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -745,8 +745,8 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">到作业渔区时间</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="shipFishAreaDate{{d.index}}" data-name="shipFishAreaDate{{d.index}}" value="{{d.content.shipFishAreaDate?d.content.shipFishAreaDate:''}}" autocomplete="off" class="layui-input">
-                        </div>
+                            <input type="text" id="shipFishAreaDate{{d.index}}" data-name="shipFishAreaDate{{d.index}}" value="{{d.content.shipFishAreaDate?d.content.shipFishAreaDate:''}}" autocomplete="off" class="layui-input shipFishAreaDate">
+                    </div>
                     </div>
                 </div>
             </div>

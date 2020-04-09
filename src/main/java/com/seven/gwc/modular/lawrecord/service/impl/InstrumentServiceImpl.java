@@ -123,6 +123,8 @@ public class InstrumentServiceImpl implements InstrumentService {
         merge(res,agencyService.getParams(id));
         //询问笔录-补录
         merge(res,inquireService.getSupplementParams(inquireEntity));
+        //勘验笔录
+        merge(res,inquisitionService.getParams(id));
         //固定内容
         merge(res,new RecordDO().toMap());
         return res;
@@ -184,14 +186,17 @@ public class InstrumentServiceImpl implements InstrumentService {
         if(Objects.isNull(writFlag) || !writFlag){
             Map<String, String> param = getParam(id);
             System.out.println(JSON.toJSONString(param));
+            //自动文书
             List<InstrumentEnum> autos = InstrumentEnum.getAuto(lawType);
-            String autoPath = saveFiles(lawType, param, autos);
-            lawRecordEntity.setAutoWritFilePath(autoPath);
+            List<FilePathDO> autosDos = saveFile(lawType, param, autos);
+            List<FilePathDO> supplements = generateInquireSupplement(id);
+            if(!supplements.isEmpty()){ autosDos.addAll(supplements);}
+            lawRecordEntity.setAutoWritFilePath(FilePathDO.getJson(autosDos));
+            //半自动文书
             List<InstrumentEnum> manually = InstrumentEnum.getAutoManually(lawType);
             List<FilePathDO> filePathDOS = saveFile(lawType, param, manually);
-            List<FilePathDO> supplements = generateInquireSupplement(id);
-            if(!supplements.isEmpty()){ filePathDOS.addAll(supplements);}
             lawRecordEntity.setManualWritFilePath(FilePathDO.getJson(filePathDOS));
+            //设置标记
             lawRecordEntity.setWritFlag(true);
             lawRecordService.updateById(lawRecordEntity);
         }
@@ -216,7 +221,7 @@ public class InstrumentServiceImpl implements InstrumentService {
                 Integer supplementCount = inquireService.getSupplementCount(id);
                 if(supplementCount>0){
                     List<FilePathDO> list = generateInquireSupplement(id);
-                    if(!existFile(manualWritFilePath,list)){
+                    if(!existFile(autoWritFilePath,list)){
                         log.info(">>存储文件硬盘路径有变更,重新生成");
                         reGenerateAuto(lawRecordEntity,lawType,param,list);
                     }

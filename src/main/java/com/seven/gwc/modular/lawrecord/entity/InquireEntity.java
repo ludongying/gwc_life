@@ -53,7 +53,7 @@ public class InquireEntity extends InquireBase {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date shipOutDate;
-    /** 出港时间 */
+    /** 港口 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String shipOutPort;
     /** 船上鱼货物数量  渔获物*/

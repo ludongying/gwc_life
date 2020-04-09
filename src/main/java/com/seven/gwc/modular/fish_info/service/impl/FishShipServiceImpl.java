@@ -111,11 +111,6 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
 
     @Override
     public FishShipEntity detailFishShip(String fishShipId) throws Exception {
-
-        File file = new File("D:\\myfile\\file\\微信图片_20200409173726.jpg");
-        FileManager.printImageTags(file);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         FishShipEntity fishShipEntity = fishShipMapper.selectById(fishShipId);
         if (ToolUtil.isNotEmpty(fishShipEntity.getShipType())) {
             DictEntity shipTypeDict = dictMapper.selectById(fishShipEntity.getShipType());

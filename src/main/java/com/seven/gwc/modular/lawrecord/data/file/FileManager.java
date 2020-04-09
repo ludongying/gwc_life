@@ -107,11 +107,7 @@ public class FileManager {
     public static void printImageTags(File file) throws Exception {
         Metadata metadata = ImageMetadataReader.readMetadata(file);
         for (Directory directory : metadata.getDirectories()) {
-            System.out.println(">>>>>>>" + directory.getName());
             for (Tag tag : directory.getTags()) {
-                System.out.println("-------" + tag);
-                System.out.println("++++++++++++++" + tag.getTagName() + ":" + tag.getDescription());
-
                 String tagName = tag.getTagName();  //标签名
                 String desc = tag.getDescription(); //标签信息
                 if (tagName.equals("Image Height")) {

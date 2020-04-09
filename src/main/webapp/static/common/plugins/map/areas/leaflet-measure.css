@@ -102,11 +102,9 @@
 }
 /* 测量图标 */
 .leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-retina .leaflet-control-measure .leaflet-control-measure-toggle:hover {
-
 	background-image: url(assets/measure.png);
 	background-repeat:no-repeat;
 	background-position: left;
-
 }
 
 .leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle,.leaflet-touch .leaflet-control-measure .leaflet-control-measure-toggle:hover {
@@ -136,7 +134,6 @@
 	padding-bottom: 10px;
 	text-align: left;
 }
-
 .leaflet-control-measure .leaflet-control-measure-interaction {
 
 	width:356px;

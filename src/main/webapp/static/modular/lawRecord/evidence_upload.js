@@ -12,9 +12,6 @@ function loadUpload(lay,index,data){
        let fileName="";
        for(let i=0;i<len;i++){
            $('#uploader-list'+index).append(getImgHtml(data[i]));
-           $('#uploader-list'+index+' img').on('click', function () {
-               reviewImg(index)
-           })
            fileName+=data[i].path+",";
        }
        $("#name"+index).val(fileName);
@@ -40,13 +37,12 @@ function loadUpload(lay,index,data){
                 let fileName=$("#name"+index).val();
                 fileName = fileName + res.content.path + ",";
                 $("#name"+index).val(fileName);
-                $('#uploader-list'+index+' img').on('click', function () {
-                    reviewImg(index)
-                })
+
             }
 
         }
     });
+
 
     function getImgHtml(data){
         return '<div id="" class="file-iteme">'+
@@ -56,17 +52,28 @@ function loadUpload(lay,index,data){
                '</div>' ;
     }
 
-    function reviewImg(index){
+    function reviewImg(){
         layer.photos({
-            photos: '#uploader-list'+index,
+            photos:'#uploader-list'+index,
             anim: 0,
             type: 1,
             title:false,
             shade:0.1,
-            closeBtn:false,
+            closeBtn:true,
             shadeClose:true
         });
     }
+
+
+
+    //预览
+    $(document).on('click','#uploader-list'+index+' img',function () {
+        $(".layui-layer-shade").remove();
+        $(".layui-layer").remove();
+        reviewImg(this);
+
+
+    });
 
     $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
         if(event.type === "mouseenter"){
@@ -87,8 +94,6 @@ function loadUpload(lay,index,data){
 
     //下载点击方法
     $(document).on("click", ".file-iteme .del"+index + " .layui-icon-download-circle", function(event){
-        // alert($(this).data("path"));
-        // downloadImage( $(this).data("path"));
         downFile($,$(this).data("path"));
     });
 

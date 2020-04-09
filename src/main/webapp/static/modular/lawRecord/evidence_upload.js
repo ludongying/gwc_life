@@ -50,7 +50,7 @@ function loadUpload(lay,index,data){
 
     function getImgHtml(data){
         return '<div id="" class="file-iteme">'+
-               '<div class="handle del'+index+'"><i data-path="'+data.path+'" class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>'+
+               '<div class="handle del'+index+'"><i data-path="'+data.path+'" class="layui-icon layui-icon-download-circle"></i><i data-path="'+data.path+'" class="layui-icon layui-icon-delete"></i></div>'+
                '<img style="width: 100px;height: 100px;" src='+data.url+'>'+
                '<div class="info">' + data.path+ '</div>'+
                '</div>' ;
@@ -80,8 +80,9 @@ function loadUpload(lay,index,data){
 
     // 删除图片
     $(document).on("click", ".file-iteme .del"+index + " .layui-icon-delete", function(event){
+        deleteFile($(this).data("path"));
         $(this).parent().parent().remove();
-        deleteFile($(this).parent().parent()[0].textContent)
+
     });
 
     //下载点击方法
@@ -94,7 +95,7 @@ function loadUpload(lay,index,data){
     function deleteFile(deleteFile) {
         let name = "";
         let fileName=$("#name"+index)
-        let files = fileName.split(",");
+        let files = fileName.toString().split(",");
         for (let i = 0; i < files.length - 1; i++ ) {
             if (files[i] !== deleteFile) {
                 name += files[i] + ",";

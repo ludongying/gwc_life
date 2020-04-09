@@ -61,7 +61,7 @@ public class InquireDO extends BaseDO {
     /**
      *渔船船长姓名（预留）
      */
-    protected String Captain;
+//    protected String Captain;
     /**
      *船上总人数
      */
@@ -84,6 +84,11 @@ public class InquireDO extends BaseDO {
      */
     protected  String A001;
 
+    /**
+     * 船主姓名
+     */
+    protected String Holder2;
+
     public InquireDO(InquireBase inquireBase){
 
         SexEnum sexEnum = SexEnum.findByCode(inquireBase.getInvestigateSex());
@@ -99,8 +104,15 @@ public class InquireDO extends BaseDO {
             .setAsk_Phone(inquireBase.getInvestigateTel()).setAsk_ID(inquireBase.getIdentityCard())
             .setAsk_Position(Objects.nonNull(investigatePositionEnum)?investigatePositionEnum.getMessage():"")
             .setHolder1(inquireBase.getShipOwner()).setSum(inquireBase.getShipMember())
-            .setStatus(Objects.nonNull(shipStatusEnum)?shipStatusEnum.getMessage():"")
-            .setA001(Objects.nonNull(whetherEnum)?whetherEnum.getMessage():"");
+            .setStatus(Objects.nonNull(shipStatusEnum)?shipStatusEnum.getMessage():"");
+
+        if(WhetherEnum.YES.equals(whetherEnum)){
+            this.setA001("这是我的身份证，");
+        }else{
+            this.setA001("我的身份证没带，");
+        }
+
+        this.setHolder2(this.getHolder1());
     }
 
 

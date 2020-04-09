@@ -87,34 +87,36 @@ public class InquireProduceDO extends InquireDO{
 
     public InquireProduceDO(InquireEntity entity) {
         super(entity);
+        String shipGoodsValue = entity.getShipGoodsValue();
         ShipRealTypeEnum shipRealTypeEnum = ShipRealTypeEnum.findByCode(entity.getShipRealType());
         ShipRatedTypeEnum shipRatedTypeEnum = ShipRatedTypeEnum.findByCode(entity.getShipRatedType());
         this.setType(Objects.nonNull(shipRealTypeEnum)?shipRealTypeEnum.getMessage():"").setNet(entity.getShipInfo());
 
-        Double shipRatedPower = entity.getShipRatedPower();
-        PowerUnitEnum rated = PowerUnitEnum.findByCode(entity.getShipRatedPowerUnit());
-        String rateUnit=Objects.nonNull(rated)?rated.getMessage():"";
-        this.setBoat_Power(Objects.nonNull(shipRatedPower)?shipRatedPower+rateUnit:"")
+        Double shipRealPower = entity.getShipRealPower();
+        PowerUnitEnum real = PowerUnitEnum.findByCode(entity.getShipRealPowerUnit());
+        String realUnit=Objects.nonNull(real)?real.getMessage():"";
+        this.setBoat_Power(Objects.nonNull(shipRealPower)?shipRealPower+realUnit:"")
              .setType_paperwork(Objects.nonNull(shipRatedTypeEnum)?shipRatedTypeEnum.getMessage():"");
 
         this.setSea_Time(DateUtil.format(entity.getShipOutDate(), "yyyy-MM-dd HH:mm"))
-                .setSea_Port(entity.getShipOutPort()).setProduct(entity.getShipGoodsValue())
+                .setSea_Port(entity.getShipOutPort())
                 .setNet_Number(entity.getShipGenerateCount())
                 .setNet_Time(DateUtil.format(entity.getShipFishAreaDate(), "yyyy-MM-dd HH:mm"))
                 .setA005(entity.getShipGoodsCount());
-
-        if(Objects.nonNull(this.Product)){
-            this.setLost("造成约"+this.Product+"的渔业损失，");
-        }
 
         this.setFISHING_AREAS(this.getSea_Port());
 
         this.setC32(this.getBoat_Power());
 
         this.A017="";
-        if(Objects.nonNull(this.getProduct()) && !this.getProduct().trim().isEmpty()){
-            this.setA017("据连云港物价局民生价格公示最新一期指导价格，该批渔获物价值约"+this.getProduct()+"，");
+        this.Lost="";
+        this.Product="";
+        if(Objects.nonNull(shipGoodsValue) && !shipGoodsValue.trim().isEmpty()){
+            this.setLost("造成约"+shipGoodsValue+"的渔业损失，");
+            this.setA017("据连云港物价局民生价格公示最新一期指导价格，该批渔获物价值约"+shipGoodsValue+"，");
+            this.setProduct("到被查获时为止已经生产"+this.getA005()+"网，共捕获渔获物"+shipGoodsValue+"。");
         }
+
 
 
     }

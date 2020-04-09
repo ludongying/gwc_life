@@ -92,11 +92,14 @@ public class DecisionDO extends BaseDO {
     *处罚依据处罚决定书(预留)
     */
    protected String Laws_Basis2;
-
- /**
-  * 缴纳资源赔偿费人民币
-  */
- protected String money2;
+   /**
+    * 缴纳资源赔偿费人民币
+    */
+   protected String money2;
+   /**
+    * 船长
+    */
+   protected String Captain;
 
 
    public DecisionDO (DecisionBase decisionBase){
@@ -117,11 +120,12 @@ public class DecisionDO extends BaseDO {
     String resourceCompensation = decisionBase.getResourceCompensationUpper();
 
     if(Objects.nonNull(fine)){
-     this.setMoney("1、罚款人民币"+fine);
+     this.setMoney("1、罚款人民币"+fine+"。");
     }
     if(Objects.nonNull(resourceCompensation)){
-     this.setMoney2("2、缴纳资源赔偿费人民币"+resourceCompensation);
+     this.setMoney2("2、缴纳资源赔偿费人民币"+resourceCompensation+"。");
     }
+    this.setCaptain(this.getLegal());
    }
 
 

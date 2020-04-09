@@ -26,18 +26,31 @@ public class LawRecordApi {
 
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
-    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
-                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException {
+    public BaseResult addLawProduct(HttpServletRequest request,AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, evidenceList);
     }
 
     @PostMapping(value = "/addLawSafe")
     @ApiOperation(value = "新增新案件-安全")
     public BaseResult addLawSafe(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
-                                 AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO) {
+                                 AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawSafe(userId, appAgencyVO, appOperatorVO, appInquireSafeVO, appDecisionSafeVO, appReasonVO);
+        return lawProductService.addLawSafe(userId, appAgencyVO, appOperatorVO, appInquireSafeVO, appDecisionSafeVO, appReasonVO, evidenceList);
+    }
+
+    @GetMapping(value = "/getRecordDetail")
+    @ApiOperation(value = "获取笔录详情")
+    public BaseResult<AppRecordDetailVO> getRecordDetail(String id) {
+        return new BaseResult().content(lawProductService.getRecordDetail(id));
+    }
+
+    @PostMapping(value = "/addEvidence")
+    @ApiOperation(value = "证据补充")
+    public BaseResult addEvidence(HttpServletRequest request, String id, String evidenceList) throws ParseException {
+        String userId = request.getAttribute("userId").toString();
+        return lawProductService.addEvidence(userId, id, evidenceList);
     }
 
     @GetMapping(value = "/getLawRecordList")

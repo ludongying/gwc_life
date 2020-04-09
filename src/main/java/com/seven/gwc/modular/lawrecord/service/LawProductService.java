@@ -48,13 +48,19 @@ public interface LawProductService {
     List<EnumVO> getShipStatusList();
 
     //案件生产新增
-    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException;
+    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException;
 
     //案件安全新增
-    BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO);
+    BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException;
 
+    //获取案件列表
     List<AppLawRecordVO> getLawRecordList();
 
+    //案件查询列表
     List<AppLawRecordVO> searchLawRecordList(String search);
 
+    //案件详情
+    AppRecordDetailVO getRecordDetail(String id);
+
+    BaseResult addEvidence(String personalId, String id, String evidenceList) throws ParseException;
 }

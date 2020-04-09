@@ -5,14 +5,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.dao.*;
+import com.seven.gwc.modular.lawrecord.dto.*;
 import com.seven.gwc.modular.lawrecord.entity.*;
 import com.seven.gwc.modular.lawrecord.enums.*;
-import com.seven.gwc.modular.lawrecord.service.LawProductService;
-import com.seven.gwc.modular.lawrecord.service.LawRecordService;
+import com.seven.gwc.modular.lawrecord.service.*;
 import com.seven.gwc.modular.lawrecord.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -20,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class LawProductServiceImpl implements LawProductService {
@@ -41,18 +44,42 @@ public class LawProductServiceImpl implements LawProductService {
     private InquireSafeMapper inquireSafeMapper;
     @Autowired
     private DecisionSafeMapper decisionSafeMapper;
+    @Autowired
+    private EvidenceMapper evidenceMapper;
+
+    @Autowired
+    private AgencyService agencyService;
+    @Autowired
+    private EvidenceService evidenceService;
+    @Autowired
+    private InquireService inquireService;
+    @Autowired
+    private InquisitionService inquisitionService;
+    @Autowired
+    private DecisionService decisionService;
+    @Autowired
+    private InquireSafeService inquireSafeService;
+    @Autowired
+    private DecisionSafeService decisionSafeService;
+    @Value("${FILE_UPLOAD_PATH_FILE}")
+    private String uploadPathFile;
 
 
     @Override
-    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO) throws ParseException {
+    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.PRODUCE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
+        List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
-        List<InquireEntity> inquireEntityList = this.inquireEntityList(personalId, lawRecordEntity.getId(), "");
+        List<InquireEntity> inquireEntityList = this.inquireEntityList(personalId, lawRecordEntity.getId(), null);
         InquisitionEntity inquisitionEntity = this.inquisitionVOToInquisition(personalId, lawRecordEntity.getId(), appInquisitionEntityVO);
         DecisionEntity decisionEntity = this.decisionVOToDecisionEntity(personalId, lawRecordEntity.getId(), appDecisionVO);
         LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
+
+        for (EvidenceEntity evidenceEntity : evidenceEntityList) {
+            evidenceMapper.insert(evidenceEntity);
+        }
         for (InquireEntity inquireEntity : inquireEntityList) {
             inquireMapper.insert(inquireEntity);
         }
@@ -66,14 +93,18 @@ public class LawProductServiceImpl implements LawProductService {
     }
 
     @Override
-    public BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO) {
+    public BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.SAFE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
+        List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
         InquireSafeEntity inquireSafeEntity = this.inquireSafeVOToInquireSafe(personalId, lawRecordEntity.getId(), appInquireSafeVO);
         DecisionSafeEntity decisionSafeEntity = this.decisionSafeVOToDecisionSafe(personalId, lawRecordEntity.getId(), appDecisionSafeVO);
         LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
+        for (EvidenceEntity evidenceEntity : evidenceEntityList) {
+            evidenceMapper.insert(evidenceEntity);
+        }
         lawRecordMapper.updateById(lawRecord);
         agencyMapper.insert(agencyEntity);
         operatorMapper.insert(operatorEntity1);
@@ -132,6 +163,63 @@ public class LawProductServiceImpl implements LawProductService {
             list = this.getLawRecordList();
         }
         return list;
+    }
+
+    @Override
+    public AppRecordDetailVO getRecordDetail(String id) {
+        AppRecordDetailVO appRecordDetailVO = new AppRecordDetailVO();
+
+        LawRecordEntity lawRecordEntity = lawRecordMapper.selectById(id);
+        Integer lawType = lawRecordEntity.getLawType();
+        appRecordDetailVO.setLawType(lawType);
+
+        AgencyDTO agencyDTO = agencyService.detail(id);
+        if(Objects.nonNull(agencyDTO)){
+            agencyDTO.setDetailContent();
+        }
+        appRecordDetailVO.setAgencyDTO(agencyDTO);
+
+        List<EvidenceDTO> evidenceDTOList = evidenceService.evidenceDTODetail(id);
+        appRecordDetailVO.setEvidenceDTOList(evidenceDTOList);
+        if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
+            List<InquireDTO> inquireDTOList = inquireService.inquireDTODetail(id);
+            appRecordDetailVO.setInquireDTOList(inquireDTOList);
+            InquisitionDTO inquisitionDTO = inquisitionService.detail(id);
+            if(Objects.nonNull(inquisitionDTO)){
+                inquisitionDTO.setDetailContent();
+            }
+            appRecordDetailVO.setInquisitionDTO(inquisitionDTO);
+            ReasonProduceDTO reasonProduceDTO = new ReasonProduceDTO(lawRecordEntity);
+            appRecordDetailVO.setReasonProduceDTO(reasonProduceDTO);
+            DecisionDTO decisionDTO = decisionService.detail(id);
+            if(Objects.nonNull(decisionDTO)){
+                decisionDTO.setDetailContent();
+            }
+            appRecordDetailVO.setDecisionDTO(decisionDTO);
+        } else {
+            InquireSafeDTO inquire = inquireSafeService.detail(id);
+            if(Objects.nonNull(inquire)){
+                inquire.setDetailContent();
+            }
+            appRecordDetailVO.setInquireSafeDTO(inquire);
+            ReasonSafeDTO reasonSafeDTO = new ReasonSafeDTO(lawRecordEntity);
+            appRecordDetailVO.setReasonSafeDTO(reasonSafeDTO);
+            DecisionSafeDTO decisionSafeDTO = decisionSafeService.detail(id);
+            if(Objects.nonNull(decisionSafeDTO)){
+                decisionSafeDTO.setDetailContent();
+            }
+            appRecordDetailVO.setDecisionSafeDTO(decisionSafeDTO);
+        }
+        return appRecordDetailVO;
+    }
+
+    @Override
+    public BaseResult addEvidence(String personalId, String id, String evidenceList) throws ParseException {
+        List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, id, evidenceList);
+        for (EvidenceEntity evidenceEntity : evidenceEntityList) {
+            evidenceMapper.insert(evidenceEntity);
+        }
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override
@@ -402,6 +490,33 @@ public class LawProductServiceImpl implements LawProductService {
         return inquisitionEntity;
     }
 
+    private List<EvidenceEntity> getEvidenceEntityList(String personalId, String id, String data) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<EvidenceEntity> list = new ArrayList<>();
+        JSONArray jsonArray = JSONArray.parseArray(data);
+        for(int i=0; i<jsonArray.size(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            String files = jsonObject.getString("files");
+            JSONArray fileArray = JSONArray.parseArray(files);
+
+            String fileName = "";
+            EvidenceEntity evidenceEntity = new EvidenceEntity();
+            evidenceEntity.setCreateDate(new Date());
+            evidenceEntity.setCreatePerson(personalId);
+            evidenceEntity.setRecordId(id);
+            evidenceEntity.setEvidenceContent(jsonObject.getString("evidenceContent"));
+            evidenceEntity.setEvidenceDate(formatter.parse(jsonObject.getString("evidenceDate")));
+
+            for(int j=0; j<fileArray.size(); j++){
+                JSONObject fileObject = fileArray.getJSONObject(j);
+                fileName = FileUtil.base64ToFile(uploadPathFile, fileObject.getString("fileName"));
+            }
+            evidenceEntity.setEvidenceFilePath(fileName);
+            list.add(evidenceEntity);
+        }
+        return list;
+    }
+
     private List<InquireEntity> inquireEntityList(String personalId, String id, String data) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<InquireEntity> list = new ArrayList<>();
@@ -409,7 +524,7 @@ public class LawProductServiceImpl implements LawProductService {
         for(int i=0; i<jsonArray.size(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             InquireEntity inquireEntity = new InquireEntity();
-            inquireEntity.setId(id);
+            inquireEntity.setRecordId(id);
             inquireEntity.setInvestigateName(jsonObject.getString("investigateName"));
             inquireEntity.setInvestigateSex(Integer.parseInt(jsonObject.getString("investigateSex")));
             inquireEntity.setInvestigateAge(Integer.parseInt(jsonObject.getString("investigateAge")));
@@ -447,7 +562,7 @@ public class LawProductServiceImpl implements LawProductService {
     //执法人员VO转对象
     private OperatorEntity operatorVOToOperator1(String personalId, String id, AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
-        operatorEntity.setId(id);
+        operatorEntity.setRecordId(id);
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName1());
         operatorEntity.setLawCredentialCode(appOperatorVO.getLawCredentialCode1());
         operatorEntity.setCreateDate(new Date());
@@ -459,7 +574,7 @@ public class LawProductServiceImpl implements LawProductService {
     //执法人员VO转对象
     private OperatorEntity operatorVOToOperator2(String personalId, String id, AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
-        operatorEntity.setId(id);
+        operatorEntity.setRecordId(id);
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName2());
         operatorEntity.setLawCredentialCode(appOperatorVO.getLawCredentialCode2());
         operatorEntity.setCreateDate(new Date());

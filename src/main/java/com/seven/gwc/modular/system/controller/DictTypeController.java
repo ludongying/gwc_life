@@ -8,15 +8,17 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.modular.lawrecord.service.LawProductService;
+import com.seven.gwc.modular.lawrecord.vo.*;
 import com.seven.gwc.modular.system.entity.DictTypeEntity;
 import com.seven.gwc.modular.system.service.DictTypeService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -33,6 +35,18 @@ public class DictTypeController extends BaseController {
 
     @Autowired
     private DictTypeService dictTypeService;
+
+
+    @Autowired
+    private LawProductService lawProductService;
+
+    @PostMapping(value = "/addLawProduct")
+    @ApiOperation(value = "新增新案件-生产")
+    public BaseResult addLawProduct(HttpServletRequest request, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
+        ShiroUser user = ShiroKit.getUser();
+        return lawProductService.addLawProduct(user.getId(), appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, evidenceList);
+    }
 
     /**
      * 跳转到字典类型首页

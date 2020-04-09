@@ -137,6 +137,20 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
         return result;
     }
 
+    @Override
+    public List<InquireDTO> inquireDTODetail(String id) {
+        LambdaQueryWrapper<InquireEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(InquireEntity::getRecordId, id);
+        List<InquireEntity> inquireEntityList = inquireMapper.selectList(lambdaQuery);
+        List<InquireDTO> inquireDTOList = new ArrayList<>();
+        for (InquireEntity inquireEntity : inquireEntityList) {
+            InquireDTO inquireDTO = this.getInquireDTO(inquireEntity.getId());
+            inquireDTO.setDetailContent();
+            inquireDTOList.add(inquireDTO);
+        }
+        return inquireDTOList;
+    }
+
     private InquireDTO getInquireDTO(String id) {
         LambdaQueryWrapper<InquireEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(InquireEntity::getId, id);

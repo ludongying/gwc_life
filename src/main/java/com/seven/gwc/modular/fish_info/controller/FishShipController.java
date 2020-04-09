@@ -129,7 +129,7 @@ public class FishShipController extends BaseController {
      */
     @RequestMapping("/detail/{fishShipId}")
     @ResponseBody
-    public FishShipEntity detail(@PathVariable String fishShipId) {
+    public FishShipEntity detail(@PathVariable String fishShipId) throws Exception {
         return fishShipService.detailFishShip(fishShipId);
     }
 

@@ -14,7 +14,7 @@
     let measureControl;//测距和面积
     let drawnItems;//标绘
     let pointsGroup = L.layerGroup();//执法船
-    let ForbiddenFishLine = L.layerGroup();//禁渔区
+    let ForbiddenFishLine = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
@@ -265,6 +265,7 @@
             'TRANSPARENT': 'false'
         });
         miniMap.changeLayer(mini_map1);
+        // miniMap.addLayer(ForbiddenFishLine);
     });
     //鹰眼图
     var c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
@@ -506,7 +507,7 @@
         {
             let result=data.content;
             //清空之前绘制的点
-            ForbiddenFishLine.clearLayers();
+            ForbiddenFishLine=null;
             var ForbiddenFishPoint = [];
             for (var i = 0; i < result.length; i++) {
                 var point = [result[i].lon,result[i].lat];
@@ -528,7 +529,7 @@
             ]
         };
 
-        L.geoJson(flightsEW, {
+        ForbiddenFishLine = L.geoJson(flightsEW, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: -5});
                 },
@@ -536,8 +537,9 @@
                     weight: 2,
                     color:"#666666",
                 }
-            }).addTo(ForbiddenFishLine);
+            });
         map.addLayer(ForbiddenFishLine);
+        // miniMap.addLayer(ForbiddenFishLine);
         }
     }
 
@@ -545,7 +547,12 @@
         if ($(this).attr("alt")=="close"){
             $(this).attr("src","/common/plugins/map/images/open.png");
             $(this).attr("alt","open");
-            getForbiddenFishPoint();
+            if(ForbiddenFishLine==null)
+            {
+                getForbiddenFishPoint();
+            }
+            else
+                map.addLayer(ForbiddenFishLine);
             // miniMap.addLayer(ForbiddenFishLine);
         }
         else {
@@ -553,8 +560,8 @@
             $(this).attr("alt","close");
             //清空之前绘制的点
             // miniMap.removeLayer(ForbiddenFishLine);
-            ForbiddenFishLine.clearLayers();
-
+            // ForbiddenFishLine.clearLayers();
+            map.removeLayer(ForbiddenFishLine);
         }
     });
     //渔区
@@ -641,7 +648,7 @@
                     Opacity: 0.3,
                 }
             }).addTo(FishLine);
-            L.geoJson(FishAreaPolygonN, {
+            let lineGeo = L.geoJson(FishAreaPolygonN, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
                 },
@@ -658,13 +665,18 @@
         if ($(this).attr("alt")=="close"){
             $(this).attr("src","/common/plugins/map/images/open.png");
             $(this).attr("alt","open");
-            getFishPoint();
+            let flag = FishLine.getLayers();
+            if(flag.length==0)
+                getFishPoint();
+            else
+                map.addLayer(FishLine);
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
             $(this).attr("alt","close");
             //清空之前绘制的点
-            FishLine.clearLayers();
+            // FishLine.clearLayers();
+            map.removeLayer(FishLine);
         }
     });
 });

@@ -1,7 +1,6 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dos;
 
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
-import com.seven.gwc.modular.lawrecord.enums.InstrumentEnum;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.ProduceReasonEnum;
 import com.seven.gwc.modular.lawrecord.enums.SafeReasonEnum;
@@ -9,7 +8,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,7 +52,9 @@ public class ReasonDO extends BaseDO {
         this.Laws_Violation="";
         this.Laws_Basis="";
          if(Objects.nonNull(main)){
-            this.Laws_Basis2+=ReasonLawDO.getByLaw(ProduceReasonEnum.findByCode(main).getLaw()).getLaws_Basis2();
+             ReasonLawDO mainReason= ReasonLawDO.getByLaw(ProduceReasonEnum.findByCode(main).getLaw());
+             this.Laws_Basis2+=mainReason.getLaws_Basis2();
+             this.Laws_Basis+=mainReason.getLaws_Basis();
             List<Integer> res=new ArrayList<>();
             res.add(main);
             if(Objects.nonNull(second)){
@@ -80,7 +80,7 @@ public class ReasonDO extends BaseDO {
                      this.Laws_Violation2+=symbol+reasonLawDO.getLaws_Violation2();
 //                     this.Laws_Basis2+=symbol+reasonLawDO.getLaws_Basis2();
                      this.Laws_Violation+=symbol+reasonLawDO.getLaws_Violation();
-                     this.Laws_Basis+=symbol+reasonLawDO.getLaws_Basis();
+//                     this.Laws_Basis+=symbol+reasonLawDO.getLaws_Basis();
                  }
              });
          }

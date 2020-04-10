@@ -83,8 +83,6 @@ public class InquireProduceDO extends InquireDO{
      */
     protected String A017;
 
-
-
     public InquireProduceDO(InquireEntity entity) {
         super(entity);
         String shipGoodsValue = entity.getShipGoodsValue();
@@ -105,8 +103,11 @@ public class InquireProduceDO extends InquireDO{
                 .setA005(entity.getShipGoodsCount());
 
         this.setFISHING_AREAS(this.getSea_Port());
-
-        this.setC32(this.getBoat_Power());
+        Double shipRatedPower = entity.getShipRatedPower();
+        PowerUnitEnum powerUnitEnum = PowerUnitEnum.findByCode(entity.getShipRatedPowerUnit());
+        if(Objects.nonNull(shipRatedPower)){
+            this.setC32(shipRatedPower+powerUnitEnum.getMessage());
+        }
 
         this.A017="";
         this.Lost="";

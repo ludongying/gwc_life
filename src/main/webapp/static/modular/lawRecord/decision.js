@@ -42,10 +42,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
             let ajax= new $ax(Feng.ctxPath + "/lawRecord/"+url+"/detail?id="+$("#id").val());
             let result = ajax.start();
             if(result){
+                initShowContent(result.punishPersonType);
                 form.val('decisionForm',result);
                 // loadAddr($,form,result.punishAddrStateCode,result.punishAddrCityCode);
                 $("#punishPersonType").attr("disabled","disabled");
-                initShowContent(result.punishPersonType);
                 form.render();
                 return;
             }

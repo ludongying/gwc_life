@@ -54,6 +54,7 @@ public class ReasonDO extends BaseDO {
         this.Laws_Violation="";
         this.Laws_Basis="";
          if(Objects.nonNull(main)){
+            this.Laws_Basis2+=ReasonLawDO.getByLaw(ProduceReasonEnum.findByCode(main).getLaw()).getLaws_Basis2();
             List<Integer> res=new ArrayList<>();
             res.add(main);
             if(Objects.nonNull(second)){
@@ -61,6 +62,14 @@ public class ReasonDO extends BaseDO {
                 res.addAll(list);
             }
              LinkedHashMap<Integer, List<ProduceReasonEnum>> map = res.stream().filter(Objects::nonNull).sorted().map(ProduceReasonEnum::findByCode).collect(Collectors.groupingBy(ProduceReasonEnum::getLaw, LinkedHashMap::new, Collectors.toList()));
+
+            if(map.size()==1){
+                 ArrayList<Integer> list = new ArrayList<>(map.keySet());
+                 if(ProduceReasonEnum.OTHER.getCode().equals(list.get(0))){
+                     map = new LinkedHashMap<>();
+                     map.put(ProduceReasonEnum.FINE.getCode(),new ArrayList<>());
+                 }
+             }
              map.forEach((k,v)->{
                  ReasonLawDO reasonLawDO = ReasonLawDO.getByLaw(k);
                  if(Objects.nonNull(reasonLawDO)){
@@ -69,7 +78,7 @@ public class ReasonDO extends BaseDO {
                          symbol="、";
                      }
                      this.Laws_Violation2+=symbol+reasonLawDO.getLaws_Violation2();
-                     this.Laws_Basis2+=symbol+reasonLawDO.getLaws_Basis2();
+//                     this.Laws_Basis2+=symbol+reasonLawDO.getLaws_Basis2();
                      this.Laws_Violation+=symbol+reasonLawDO.getLaws_Violation();
                      this.Laws_Basis+=symbol+reasonLawDO.getLaws_Basis();
                  }

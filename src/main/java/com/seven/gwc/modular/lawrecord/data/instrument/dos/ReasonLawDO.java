@@ -37,6 +37,7 @@ public class ReasonLawDO implements Serializable {
                 dto.setLaws_Basis2("《中华人民共和国渔业法》第四十一条，“未依法取得捕捞许可证擅自进行捕捞的，没收渔获物和违法所得，并处十万元以下的罚款；情节严重的，并可以没收渔具和渔船。”");
                 dto.setLaws_Violation("《中华人民共和国渔业法》第二十三条第一款、《渔业捕捞许可管理规定》第十六条第二款、第三十五条第三款");
                 dto.setLaws_Basis("《中华人民共和国渔业法》第四十一条");
+                return dto;
             case 42:
                 dto.setType_Violation( "未依法取得捕捞许可证进行捕捞");
                 dto.setLaws_Violation2("《江苏省渔业管理条例》第十八条，“从事捕捞业的单位和个人，应当向县级以上地方人民政府渔业行政主管部门申领由国务院渔业行政主管部门统一监制的捕捞许可证。”");
@@ -51,7 +52,13 @@ public class ReasonLawDO implements Serializable {
                 dto.setLaws_Violation( "《中华人民共和国渔业法》第二十三条第一款、《渔业捕捞许可管理规定》第十六条第二款、第三十五条第三款及《江苏省渔业管理条例》第十八条");
                 dto.setLaws_Basis("《中华人民共和国渔业法》第四十一条及《江苏省渔业管理条例》第四十条");
                 return dto;
+            default:
+                dto.setLaws_Violation2("");
+                dto.setLaws_Basis2("");
+                dto.setLaws_Violation("");
+                dto.setLaws_Basis("");
+                return dto;
         }
-        return null;
+
     }
 }

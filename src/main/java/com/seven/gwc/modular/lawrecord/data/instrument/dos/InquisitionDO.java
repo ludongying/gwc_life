@@ -88,32 +88,32 @@ public class InquisitionDO extends BaseDO {
              if(a002.equals(ShipCaseEnum.CORRECT)){
                   this.setA002("正确涂写，是渔船船名号");
              }else if(a002.equals(ShipCaseEnum.ERROR)){
-                 this.setA002("正确涂写，是船港籍");
+                 this.setA002("未正确涂写");
              }else{
-                 this.setA002("正确悬挂，是渔船船名号");
+                 this.setA002("未涂写");
              }
         }
         if(Objects.nonNull(a003)){
             if(a003.equals(ShipCaseEnum.CORRECT)){
-                this.setA003("未正确涂写，不是渔船船名号");
+                this.setA003("正确涂写，是船港籍");
             }else if(a003.equals(ShipCaseEnum.ERROR)){
-                this.setA003("未正确涂写，不是船港籍");
+                this.setA003("未正确涂写");
             }else{
-                this.setA003("未正确悬挂，不是渔船船名号");
+                this.setA003("未涂写");
             }
         }
 
         if(Objects.nonNull(a004)){
             if(a004.equals(ShipCaseEnum.CORRECT)){
-                this.setA004("未涂写");
+                this.setA004("正确悬挂，是渔船船名号");
             }else if(a004.equals(ShipCaseEnum.ERROR)){
-                this.setA004("未涂写");
+                this.setA004("未正确悬挂");
             }else{
                 this.setA004("未悬挂");
             }
         }
-
         this.setA0021("，").setA0031("，").setA0041("。");
+
         this.setLicense1("").setLicense2("").setLicense3("").setLicense4("").setLicense5("");
         if(Objects.nonNull(carry)){
             Double shipPower = entity.getShipPower();

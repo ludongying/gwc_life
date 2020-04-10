@@ -114,7 +114,7 @@ public class InquireProduceDO extends InquireDO{
         if(Objects.nonNull(shipGoodsValue) && !shipGoodsValue.trim().isEmpty()){
             this.setLost("造成约"+shipGoodsValue+"的渔业损失，");
             this.setA017("据连云港物价局民生价格公示最新一期指导价格，该批渔获物价值约"+shipGoodsValue+"，");
-            this.setProduct("到被查获时为止已经生产"+this.getA005()+"网，共捕获渔获物"+shipGoodsValue+"。");
+            this.setProduct(this.getA005()+"，市场价值约"+shipGoodsValue);
         }
 
 

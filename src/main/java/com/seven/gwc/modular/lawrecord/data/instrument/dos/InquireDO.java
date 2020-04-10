@@ -59,9 +59,9 @@ public class InquireDO extends BaseDO {
      */
     protected String Holder1;
     /**
-     *渔船船长姓名（预留）
+     *渔船船长姓名
      */
-//    protected String Captain;
+    protected String Captain;
     /**
      *船上总人数
      */
@@ -113,6 +113,10 @@ public class InquireDO extends BaseDO {
         }
 
         this.setHolder2(this.getHolder1());
+
+        if(InvestigatePositionEnum.CAPTAIN.getCode().equals(inquireBase.getInvestigatePosition())){
+            this.setCaptain(this.getAsk_Name());
+        }
     }
 
 

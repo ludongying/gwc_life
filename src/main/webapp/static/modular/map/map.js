@@ -15,6 +15,7 @@
     let drawnItems;//标绘
     let pointsGroup = L.layerGroup();//执法船
     let ForbiddenFishLine = null;//禁渔区
+    let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
@@ -279,9 +280,11 @@
         'CRS': 'EPSG:3395',
         'TRANSPARENT': 'false'
     });
+    var magnifyingGlassLayer=[];
+    magnifyingGlassLayer.push(c2_glass);
     var magnifyingGlass = L.magnifyingGlass({
         zoomOffset: 3,
-        layers: [c2_glass]
+        layers: magnifyingGlassLayer
     });
     $('#eyeid').click(function () {
         if ($(this).attr("alt")=="close"){
@@ -289,6 +292,10 @@
             $(this).attr("alt","open");
             if(map.hasLayer(magnifyingGlass)) {
                 return;
+            }
+            if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0&&map.hasLayer(ForbiddenFishLine)&&ForbiddenFishLine_NoName!=null)
+            {
+                magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
             }
             map.addLayer(magnifyingGlass);
         }
@@ -508,6 +515,7 @@
             let result=data.content;
             //清空之前绘制的点
             ForbiddenFishLine=null;
+            ForbiddenFishLine_NoName=null;
             var ForbiddenFishPoint = [];
             for (var i = 0; i < result.length; i++) {
                 var point = [result[i].lon,result[i].lat];
@@ -538,6 +546,12 @@
                     color:"#666666",
                 }
             });
+        ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
+            style: {
+                weight: 2,
+                color:"#666666",
+            }
+        });
         map.addLayer(ForbiddenFishLine);
         // miniMap.addLayer(ForbiddenFishLine);
         }
@@ -553,7 +567,13 @@
             }
             else
                 map.addLayer(ForbiddenFishLine);
-            // miniMap.addLayer(ForbiddenFishLine);
+            if(map.hasLayer(magnifyingGlass)){
+                if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0){
+                    map.removeLayer(magnifyingGlass);
+                    magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
+                    map.addLayer(magnifyingGlass);
+                }
+            }
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
@@ -562,6 +582,13 @@
             // miniMap.removeLayer(ForbiddenFishLine);
             // ForbiddenFishLine.clearLayers();
             map.removeLayer(ForbiddenFishLine);
+            let index = magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName);
+            if(index>=0&&map.hasLayer(magnifyingGlass))
+            {
+                map.removeLayer(magnifyingGlass);
+                magnifyingGlassLayer.splice(index,1);
+                map.addLayer(magnifyingGlass);
+            }
         }
     });
     //渔区

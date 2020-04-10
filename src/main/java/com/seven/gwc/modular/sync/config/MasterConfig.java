@@ -1,6 +1,6 @@
 package com.seven.gwc.modular.sync.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,12 +30,12 @@ public class MasterConfig {
     private String driverClass;
 
     public DataSource masterDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
+//        DruidDataSource dataSource = new DruidDataSource();
 //        dataSource.setDriver(driverClass);
-        dataSource.setUrl(url);
-        dataSource.setUsername(user);
-        dataSource.setPassword(password);
-        return dataSource;
+//        dataSource.setUrl(url);
+//        dataSource.setUsername(user);
+//        dataSource.setPassword(password);
+        return null;
 
     }
 

@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.sync.config;
 
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,12 +31,12 @@ public class MasterConfig {
 
     public DataSource masterDataSource() {
 //        DruidDataSource dataSource = new DruidDataSource();
-//        dataSource.setDriverClassName(driverClass);
+//        dataSource.setDriver(driverClass);
 //        dataSource.setUrl(url);
 //        dataSource.setUsername(user);
 //        dataSource.setPassword(password);
-//        return data
         return null;
+
     }
 
     public SqlSessionFactory masterSqlSessionFactory() throws Exception {

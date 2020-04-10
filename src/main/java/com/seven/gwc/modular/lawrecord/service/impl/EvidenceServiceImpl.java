@@ -2,20 +2,19 @@ package com.seven.gwc.modular.lawrecord.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.dao.EvidenceMapper;
 import com.seven.gwc.modular.lawrecord.data.file.FileManager;
-import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.dto.EvidenceDTO;
+import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import com.seven.gwc.modular.lawrecord.entity.LawRecordEntity;
+import com.seven.gwc.modular.lawrecord.service.EvidenceService;
 import com.seven.gwc.modular.lawrecord.service.LawRecordService;
 import com.seven.gwc.modular.lawrecord.vo.EvidenceVO;
 import com.seven.gwc.modular.lawrecord.vo.LawEvidenceVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
-import com.seven.gwc.modular.lawrecord.dao.EvidenceMapper;
-import com.seven.gwc.modular.lawrecord.service.EvidenceService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -72,5 +71,21 @@ public class EvidenceServiceImpl extends ServiceImpl<EvidenceMapper, EvidenceEnt
             result.setContent(datas);
         }
         return result;
+    }
+
+    @Override
+    public List<EvidenceDTO> evidenceDTODetail(String id) {
+        List<EvidenceDTO> evidenceDTOList = new ArrayList<>();
+        LambdaQueryWrapper<EvidenceEntity> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(EvidenceEntity::getDeleteFlag, Boolean.TRUE).eq(EvidenceEntity::getRecordId, id);
+        List<EvidenceEntity> list = this.list(wrapper);
+        if (Objects.nonNull(list) && !list.isEmpty()) {
+            for (EvidenceEntity evidenceEntity : list) {
+                EvidenceDTO evidenceDTO = new EvidenceDTO(evidenceEntity);
+                evidenceDTO.setPath(fileManager.listFile(evidenceEntity.getEvidenceFilePath()));
+                evidenceDTOList.add(evidenceDTO);
+            }
+        }
+        return evidenceDTOList;
     }
 }

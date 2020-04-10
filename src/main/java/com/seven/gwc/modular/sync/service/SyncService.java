@@ -3,6 +3,8 @@ package com.seven.gwc.modular.sync.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.seven.gwc.core.util.SpringContextUtil;
+import com.seven.gwc.modular.sync.config.MasterConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.List;
  * @description :
  */
 public class SyncService {
+
+    @Autowired
+    private MasterConfig masterConfig;
 
     public void readData(){
         ApplicationContext context = SpringContextUtil.getApplicationContext();

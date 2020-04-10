@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.data.file;
 import com.aspose.words.License;
 import com.aspose.words.SaveFormat;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +30,8 @@ public class FileUtils {
     private static final List<String> file_units  =  Arrays.asList("b","kb","M","G","T");
 
     private static final int base_num             =  1024;
+
+    private static String license_path            =  ResourceUtils.CLASSPATH_URL_PREFIX+"license.xml";
 
     private static double mathLog(int basement, Long n){
         return Math.log(n) / Math.log(basement);
@@ -135,7 +138,7 @@ public class FileUtils {
     public static boolean getLicense() {
         boolean result = false;
         try {
-            InputStream is = FileUtils.class.getClassLoader().getResourceAsStream("\\license.xml");
+            InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(license_path);
             License aposeLic = new License();
             aposeLic.setLicense(is);
             result = true;

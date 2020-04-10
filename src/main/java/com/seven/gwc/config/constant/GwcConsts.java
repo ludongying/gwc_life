@@ -42,7 +42,7 @@ public class GwcConsts {
     /**
      * 指定银行
      */
-    public static final String bank="中国农业银行连云港分行营业部（账户名称：连云港市海洋与渔业综合行政执法支队 账号431101012014549）";
+    public static final String bank="中国农业银行连云港分行营业部（账户名称：连云港市海洋与渔业综合行政执法支队 账号：431101012014549）";
     /**
      * 复议机关
      */

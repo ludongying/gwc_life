@@ -110,8 +110,7 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     }
 
     @Override
-    public FishShipEntity detailFishShip(String fishShipId) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public FishShipEntity detailFishShip(String fishShipId) throws Exception {
         FishShipEntity fishShipEntity = fishShipMapper.selectById(fishShipId);
         if (ToolUtil.isNotEmpty(fishShipEntity.getShipType())) {
             DictEntity shipTypeDict = dictMapper.selectById(fishShipEntity.getShipType());

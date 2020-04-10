@@ -33,6 +33,8 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
         ]];
     };
 
+
+
     // 渲染表格
     var rchengIdnexResult = table.render({
         elem: '#' + RchengIdnex.tableId,
@@ -81,4 +83,6 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
         cellMinWidth: 100,
         cols: GongzuoTable.initColumn()
     });
+
+    //$("#map").load('../system/map');
 });

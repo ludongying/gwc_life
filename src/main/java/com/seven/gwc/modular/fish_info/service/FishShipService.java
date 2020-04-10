@@ -59,7 +59,7 @@ public interface FishShipService extends IService<FishShipEntity> {
      *
      * @param fishShipId 实体ID
      */
-    FishShipEntity detailFishShip(String fishShipId);
+    FishShipEntity detailFishShip(String fishShipId) throws Exception;
 
     /**
      * 需导出的List转成需要的VO

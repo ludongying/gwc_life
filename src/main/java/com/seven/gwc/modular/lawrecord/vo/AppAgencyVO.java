@@ -9,8 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
-@ApiModel(value = "办案机关")
+@ApiModel(value="办案机关")
 public class AppAgencyVO {
+    private static final long serialVersionUID = 1L;
+
     /** 执法船号 */
     @ApiModelProperty(value = "执法船号")
     private String lawShipCode;
@@ -81,43 +83,43 @@ public class AppAgencyVO {
     @ApiModelProperty(value = "勘探开始时间")
     private Date prospectStartDate;
 
-    /** 勘探结束时间 */
+    /** 勘探结束时间  */
     @ApiModelProperty(value = "勘探结束时间")
     private Date prospectEndDate;
 
-    /** 询问开始时间 */
+    /** 询问开始时间  */
     @ApiModelProperty(value = "询问开始时间")
     private Date inquireStartDate;
 
-    /** 询问结束时间 */
+    /** 询问结束时间  */
     @ApiModelProperty(value = "询问结束时间")
     private Date inquireEndDate;
 
-    /** 电话请示时间 */
+    /** 电话请示时间  */
     @ApiModelProperty(value = "电话请示时间")
     private Date telApplyDate;
 
-    /** 受案时间 */
+    /** 受案时间  */
     @ApiModelProperty(value = "受案时间")
     private Date acceptDate;
 
-    /** 处理时间 */
+    /** 处理时间  */
     @ApiModelProperty(value = "处理时间")
     private Date dealDate;
 
-    /** 处罚时间 */
+    /** 处罚时间  */
     @ApiModelProperty(value = "处罚时间")
     private Date punishDate;
 
-    /** 处决时间 */
+    /** 处决时间  */
     @ApiModelProperty(value = "处决时间")
     private Date decisionDate;
 
-    /** 结案时间 */
+    /** 结案时间  */
     @ApiModelProperty(value = "结案时间")
     private Date finishDate;
 
-    /** 保管年限 */
+    /** 保管年限  */
     @ApiModelProperty(value = "保管年限")
     private Date saveDate;
 

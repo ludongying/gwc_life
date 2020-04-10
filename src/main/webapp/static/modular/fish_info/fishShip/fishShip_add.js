@@ -102,7 +102,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate', 'upload', 'func'], functio
             $('#uploader-list').append(
                 '<div id="" class="file-iteme">' +
                 '<div class="handle"><i class="layui-icon layui-icon-download-circle"></i><i class="layui-icon layui-icon-delete"></i></div>' +
-                '<img style="width: 100px;height: 100px;" src='+ res.content.url +'>' +
+                '<img style="width: 100px; height: 100px;" alt="天津市滨海新区精度:88.8，维度88.5，时间2020-20-20" src='+ res.content.url +'>' +
                 '<div class="info">' + res.content.path + '</div>' +
                 '</div>'
             );

@@ -243,10 +243,8 @@ public class FileUtil {
      * base64解密部分乱码问题（“+” 号，在urlecode编码中会被解码成空格）
      */
     public static String base64ToFile(String destPath, String base64) {
-        File file = null;
         //创建文件目录
-        String filePath = destPath;
-        File dir = new File(filePath);
+        File dir = new File(destPath);
         if (!dir.exists() && !dir.isDirectory()) {
             dir.mkdirs();
         }
@@ -298,7 +296,7 @@ public class FileUtil {
         File file = null;
         //创建文件目录
         String filePath = destPath;
-        File dir = new File(filePath);
+        File dir = new File(destPath);
         if (!dir.exists() && !dir.isDirectory()) {
             dir.mkdirs();
         }

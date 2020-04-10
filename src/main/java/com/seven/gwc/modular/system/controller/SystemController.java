@@ -62,6 +62,11 @@ public class SystemController extends BaseController {
         return "modular/frame/welcome";
     }
 
+    @RequestMapping("/map")
+    public String map() {
+        return "modular/map/map";
+    }
+
     /**
      * 主题页面
      */

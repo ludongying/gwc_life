@@ -2,8 +2,11 @@ package com.seven.gwc.modular.lawrecord.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.modular.lawrecord.dto.EvidenceDTO;
 import com.seven.gwc.modular.lawrecord.entity.EvidenceEntity;
 import com.seven.gwc.modular.lawrecord.vo.LawEvidenceVO;
+
+import java.util.List;
 
 /**
  * description : 证据服务类
@@ -16,20 +19,20 @@ public interface EvidenceService extends IService<EvidenceEntity> {
 
     /**
      * 更新证据
+     *
      * @param lawEvidenceVO
      * @return
      */
-  BaseResult updateEvidence(LawEvidenceVO lawEvidenceVO);
+    BaseResult updateEvidence(LawEvidenceVO lawEvidenceVO);
 
     /**
      * 获取详情
+     *
      * @param id
      * @return
      */
-  BaseResult detail(String id);
+    BaseResult detail(String id);
 
-
-
-
+    List<EvidenceDTO> evidenceDTODetail(String id);
 
 }

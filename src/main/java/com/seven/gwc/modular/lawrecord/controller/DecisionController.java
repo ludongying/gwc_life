@@ -4,9 +4,12 @@ import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.modular.lawrecord.dto.DecisionDTO;
+import com.seven.gwc.modular.lawrecord.entity.InquireEntity;
+import com.seven.gwc.modular.lawrecord.entity.InquireSafeEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
 import com.seven.gwc.modular.lawrecord.enums.PlotSeverityEnum;
 import com.seven.gwc.modular.lawrecord.enums.PunishmentTypeEnum;
+import com.seven.gwc.modular.lawrecord.service.DecisionSafeService;
 import com.seven.gwc.modular.lawrecord.service.DecisionService;
 import com.seven.gwc.modular.lawrecord.service.InquireSafeService;
 import com.seven.gwc.modular.lawrecord.service.InquireService;
@@ -17,6 +20,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Objects;
 
 /**
  * description : 决定控制器
@@ -33,7 +38,8 @@ public class DecisionController extends BaseController {
 
     @Autowired
     private DecisionService decisionService;
-
+    @Autowired
+    private DecisionSafeService decisionSafeService;
     @Autowired
     private InquireService inquireService;
     @Autowired
@@ -51,10 +57,18 @@ public class DecisionController extends BaseController {
         //情节严重性
         if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
             model.addAttribute("plotSeverity", decisionService.listSeverity(id));
-            model.addAttribute("inquire", inquireService.getById(id));
+            if(Objects.isNull(decisionService.getById(id))){
+                model.addAttribute("inquire", inquireService.getById(id));
+            }else{
+                model.addAttribute("inquire", new InquireEntity());
+            }
         }else{
             model.addAttribute("plotSeverity", PlotSeverityEnum.values());
-            model.addAttribute("inquire", inquireSafeService.getById(id));
+            if(Objects.isNull(decisionSafeService.getById(id))){
+                model.addAttribute("inquire", inquireSafeService.getById(id));
+            }else{
+                model.addAttribute("inquire", new InquireSafeEntity());
+            }
         }
         //渔船状态
         model.addAttribute("status",decisionService.shipStatusIsEscape(id,lawType));

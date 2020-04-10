@@ -16,8 +16,6 @@ public enum PowerUnitEnum implements IEnum<Integer> {
     KILOWATT(1,"千瓦");
 
 
-
-
     Integer code;
     @JsonValue
     String message;
@@ -44,6 +42,10 @@ public enum PowerUnitEnum implements IEnum<Integer> {
     public Integer getValue() {
         return this.code;
     }
+
+
+
+
 
 }
 

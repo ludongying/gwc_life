@@ -31,12 +31,12 @@ public DecisionProduceDO(DecisionEntity entity){
         WhetherEnum a007=WhetherEnum.findByCode(entity.getCaseNotification());
         this.setA006("").setA007("");
         if(Objects.nonNull(a006) && a006.getCode().equals(WhetherEnum.YES.getCode())){
-            this.setA006(" 5、物价局价格指导");
+            this.setA006("5、物价局价格指导");
             if(Objects.nonNull(a007) && a007.getCode().equals(WhetherEnum.YES.getCode())){
-                this.setA007(" 6、禁渔期通告（农业部）");
+                this.setA007("6、禁渔期通告（农业部）");
             }
         }else if(Objects.nonNull(a007) && a007.getCode().equals(WhetherEnum.YES.getCode())){
-            this.setA006(" 5、禁渔期通告（农业部）");
+            this.setA006("5、禁渔期通告（农业部）");
         }
    }
 }

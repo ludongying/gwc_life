@@ -18,6 +18,7 @@
     let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
     let FishLine_NoName = null;//渔区
+    let FishLine_Name = null;//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
     var hide = document.getElementById('hide');
@@ -284,7 +285,7 @@
     var magnifyingGlassLayer=[];
     magnifyingGlassLayer.push(c2_glass);
     var magnifyingGlass = L.magnifyingGlass({
-        zoomOffset: 3,
+        zoomOffset: 1,
         layers: magnifyingGlassLayer
     });
     $('#eyeid').click(function () {
@@ -301,6 +302,7 @@
             if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0&&map.hasLayer(FishLine)&&FishLine_NoName!=null)
             {
                 magnifyingGlassLayer.push(FishLine_NoName);
+                magnifyingGlassLayer.push(FishLine_Name);
             }
             map.addLayer(magnifyingGlass);
         }
@@ -551,12 +553,21 @@
                     color:"#666666",
                 }
             });
-        ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
-            style: {
-                weight: 2,
-                color:"#666666",
-            }
-        });
+        // ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
+        //     style: {
+        //         weight: 2,
+        //         color:"#666666",
+        //     }
+        // });
+            ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
+                onEachFeature: function (feature, layer) {
+                    layer.setText(feature.properties.name, {center: true,offset: -5});
+                },
+                style: {
+                    weight: 2,
+                    color:"#666666",
+                }
+            });
         map.addLayer(ForbiddenFishLine);
         // miniMap.addLayer(ForbiddenFishLine);
         }
@@ -610,6 +621,7 @@
             //清空之前绘制的点
             FishLine.clearLayers();
             FishLine_NoName = null;
+            FishLine_Name = null;
             var FishArea = [];
             var FishAreaName = [];
             for (var i = 0; i < result.length; i++) {
@@ -689,6 +701,15 @@
                     Opacity: 0.3,
                 }
             });
+            FishLine_Name = L.geoJson(FishAreaPolygonN, {
+                onEachFeature: function (feature, layer) {
+                    layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                },
+                style: {
+                    weight: 1,
+                    color: 'transport'
+                }
+            });
             let lineGeo = L.geoJson(FishAreaPolygonN, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
@@ -715,6 +736,7 @@
                 if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0){
                     map.removeLayer(magnifyingGlass);
                     magnifyingGlassLayer.push(FishLine_NoName);
+                    magnifyingGlassLayer.push(FishLine_Name);
                     map.addLayer(magnifyingGlass);
                 }
             }
@@ -726,10 +748,12 @@
             // FishLine.clearLayers();
             map.removeLayer(FishLine);
             let index = magnifyingGlassLayer.indexOf(FishLine_NoName);
+            let index1 = magnifyingGlassLayer.indexOf(FishLine_Name);
             if(index>=0&&map.hasLayer(magnifyingGlass))
             {
                 map.removeLayer(magnifyingGlass);
                 magnifyingGlassLayer.splice(index,1);
+                magnifyingGlassLayer.splice(index1,1);
                 map.addLayer(magnifyingGlass);
             }
         }

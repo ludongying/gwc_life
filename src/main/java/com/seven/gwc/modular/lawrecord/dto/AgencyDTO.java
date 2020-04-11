@@ -1,11 +1,13 @@
 package com.seven.gwc.modular.lawrecord.dto;
 
 import com.seven.gwc.core.util.DateTimeUtil;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.local.AddrData;
 import com.seven.gwc.modular.lawrecord.entity.AgencyEntity;
 import com.seven.gwc.modular.lawrecord.entity.OperatorEntity;
 import com.seven.gwc.modular.lawrecord.enums.LawCaseSourceEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * @description :
  */
 @Data
+@Accessors(chain = true)
 public class AgencyDTO extends AgencyEntity {
 
     /**
@@ -76,6 +79,14 @@ public class AgencyDTO extends AgencyEntity {
     private String personName2;
 
     private String credentialCode2;
+
+    /** 案发经度 */
+    private String lawCaseLon1;
+    private String lawCaseLon2;
+
+    /** 案发纬度 */
+    private String lawCaseLat1;
+    private String lawCaseLat2;
 
     /****************全详情添加*********************/
 
@@ -163,5 +174,29 @@ public class AgencyDTO extends AgencyEntity {
     }
 
 
+    public void setLonLat(){
+        this.setLawCaseLon1("").setLawCaseLon2("").setLawCaseLat1("").setLawCaseLat2("");
+        if(Objects.nonNull(this.getLawCaseLon()) && !this.getLawCaseLon().trim().isEmpty()){
+            String[] split = this.getLawCaseLon().split(FileUtils.file_2_file_sep);
+            int length = split.length;
+            switch (length){
+                case 2:
+                    this.setLawCaseLat1(split[1]);
+                case 1:
+                    this.setLawCaseLon1(split[0]);
+            }
+        }
+        if(Objects.nonNull(this.getLawCaseLat()) && !this.getLawCaseLat().trim().isEmpty()){
+            String[] split = this.getLawCaseLat().split(FileUtils.file_2_file_sep);
+            int length = split.length;
+            switch (length){
+                case 2:
+                    this.setLawCaseLat2(split[1]);
+                case 1:
+                    this.setLawCaseLon2(split[0]);
+            }
+        }
+
+    }
 
 }

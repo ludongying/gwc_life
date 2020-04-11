@@ -105,6 +105,6 @@ spring:
   profiles: pro                                             #正式环境
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.18.37:3306/gwctest?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT&testOnBorrow=true&validationQuery=select 1
+    url: jdbc:mysql://192.168.18.37:3306/gwc?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT&testOnBorrow=true&validationQuery=select 1
     username: gwcTest
     password: 123456

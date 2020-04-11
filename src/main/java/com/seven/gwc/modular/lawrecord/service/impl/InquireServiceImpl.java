@@ -176,6 +176,7 @@ public class InquireServiceImpl extends ServiceImpl<InquireMapper, InquireEntity
             for (InquireEntity entity : list) {
                 inquireSupplementDTOS.add(parseInquireSupplementDTO(entity));
             }
+            inquireSupplementDTOS=inquireSupplementDTOS.stream().sorted(Comparator.comparing(InquireSupplementDTO::getCreateDate)).collect(Collectors.toList());
             return inquireSupplementDTOS;
         }
         return null;

@@ -19,7 +19,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         searchType:"commonSearch"
     };
     laydate.render({
-        elem: '#createTime'
+         elem: '.createTime'
         ,type: 'date'
         ,range: '~'
     });

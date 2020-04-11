@@ -62,7 +62,7 @@
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-sm12 layui-col-md12 layui-col-lg12 def-card">
-            <form class="layui-form" lay-filter="inquireForm">
+            <form class="layui-form" id="inquireForm" lay-filter="inquireForm">
                 <input type="hidden" id="id" name="id" value="${id}">
                 <input type="hidden" id="lawType" name="lawType" value="${lawType}">
                 <div class="layui-col-md12 def-card">
@@ -148,7 +148,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">姓名</label>
                                     <div class="layui-input-inline">
-                                        <input name="investigateName" autocomplete="off" class="layui-input">
+                                        <input name="investigateName" id="investigateName" autocomplete="off" class="layui-input investigateName">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
@@ -506,7 +506,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-inline">
-                            <input data-name="investigateName{{d.index}}" value="{{d.content.investigateName?d.content.investigateName:''}}" autocomplete="off" class="layui-input">
+                            <input data-name="investigateName{{d.index}}" value="{{d.content.investigateName?d.content.investigateName:''}}" autocomplete="off" class="layui-input investigateName">
                         </div>
                     </div>
                     <div class="layui-inline">

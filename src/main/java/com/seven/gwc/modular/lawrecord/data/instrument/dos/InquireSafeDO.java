@@ -73,6 +73,27 @@ public class InquireSafeDO extends InquireDO{
      */
     protected String A017;
 
+    /**
+     * 船名号正确涂写内容-符号
+     */
+    private  String A0021;
+    /**
+     * 船籍港正确涂写内容-符号
+     */
+    private  String A0031;
+    /**
+     * 船名牌正确悬挂内容-符号
+     */
+    private  String A0041;
+
+    /**
+     * 渔船船长
+     */
+    private String c201;
+
+
+
+
     public InquireSafeDO(InquireSafeEntity entity) {
         super(entity);
         ShipCaseEnum a002 = ShipCaseEnum.findByCode(entity.getShipCaseName());
@@ -84,5 +105,46 @@ public class InquireSafeDO extends InquireDO{
                 .setA010(entity.getLifeVestCount()).setA011(entity.getLifeRaftCount())
                 .setA013(entity.getShipCertificateCount()).setA014(entity.getShipCommonCertificateCount());
 
+        if(Objects.nonNull(a002)){
+            if(a002.equals(ShipCaseEnum.CORRECT)){
+                this.setA002("正确涂写，是渔船船名号");
+            }else if(a002.equals(ShipCaseEnum.ERROR)){
+                this.setA002("未正确涂写");
+            }else{
+                this.setA002("未涂写");
+            }
+        }
+        if(Objects.nonNull(a003)){
+            if(a003.equals(ShipCaseEnum.CORRECT)){
+                this.setA003("正确涂写，是船港籍");
+            }else if(a003.equals(ShipCaseEnum.ERROR)){
+                this.setA003("未正确涂写");
+            }else{
+                this.setA003("未涂写");
+            }
+        }
+
+        if(Objects.nonNull(a004)){
+            if(a004.equals(ShipCaseEnum.CORRECT)){
+                this.setA004("正确悬挂，是渔船船名号");
+            }else if(a004.equals(ShipCaseEnum.ERROR)){
+                this.setA004("未正确悬挂");
+            }else{
+                this.setA004("未悬挂");
+            }
+        }
+        this.setA0021("，").setA0031("，").setA0041("。");
+
+        if(Objects.nonNull(entity.getShipLength())){
+            this.c201=entity.getShipLength()+"米";
+        }
+
+
+
+
     }
+
+
+
+
 }

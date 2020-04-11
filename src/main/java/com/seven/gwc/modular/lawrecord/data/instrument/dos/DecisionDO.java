@@ -96,10 +96,7 @@ public class DecisionDO extends BaseDO {
     * 缴纳资源赔偿费人民币
     */
    protected String money2;
-   /**
-    * 船长
-    */
-   protected String Captain;
+
 
 
    public DecisionDO (DecisionBase decisionBase){
@@ -109,7 +106,7 @@ public class DecisionDO extends BaseDO {
 
     this.setLitigant(Objects.nonNull(punishmentTypeEnum)?punishmentTypeEnum.getMessage():"")
         .setName_1(decisionBase.getPunishPersonName()).setSex_1(Objects.nonNull(sexEnum)?sexEnum.getMessage():"")
-        .setAge_1(decisionBase.getPunishAge());
+        .setAge_1(decisionBase.getPunishAge()).setPhone_1(decisionBase.getPunishTel());
    /* String addrFromJson = AddrData.getAddrFromJson(decisionBase.getPunishAddr());*/
     this.setAddress_1(decisionBase.getPunishAddr()).setID_1(decisionBase.getPunishIdentityCard())
         .setName_Unit(decisionBase.getPunishCompanyName()).setLegal(decisionBase.getPunishPersonName())
@@ -125,7 +122,7 @@ public class DecisionDO extends BaseDO {
     if(Objects.nonNull(resourceCompensation)){
      this.setMoney2("2、缴纳资源赔偿费人民币"+resourceCompensation+"。");
     }
-    this.setCaptain(this.getLegal());
+
    }
 
 

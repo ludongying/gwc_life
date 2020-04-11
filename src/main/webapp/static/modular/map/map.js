@@ -529,22 +529,22 @@
                 ForbiddenFishPoint.push(point);
             }
             var flightsEW = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "name": "机轮拖网渔业禁渔区线"
-                    },
-                    "geometry": {
-                        "type": "LineString",
-                        "coordinates": ForbiddenFishPoint
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": "机轮拖网渔业禁渔区线"
+                        },
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": ForbiddenFishPoint
+                        }
                     }
-                }
-            ]
-        };
+                ]
+            };
 
-        ForbiddenFishLine = L.geoJson(flightsEW, {
+            ForbiddenFishLine = L.geoJson(flightsEW, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: -5});
                 },
@@ -553,12 +553,12 @@
                     color:"#666666",
                 }
             });
-        // ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
-        //     style: {
-        //         weight: 2,
-        //         color:"#666666",
-        //     }
-        // });
+            // ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
+            //     style: {
+            //         weight: 2,
+            //         color:"#666666",
+            //     }
+            // });
             ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: -5});
@@ -568,8 +568,8 @@
                     color:"#666666",
                 }
             });
-        map.addLayer(ForbiddenFishLine);
-        // miniMap.addLayer(ForbiddenFishLine);
+            map.addLayer(ForbiddenFishLine);
+            // miniMap.addLayer(ForbiddenFishLine);
         }
     }
 

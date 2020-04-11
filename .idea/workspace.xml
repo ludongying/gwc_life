@@ -1,51 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="GROUP_BY_SEVERITY" value="true" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="历史报警信息">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/dao/SailLogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/dao/mapper/SailLogMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/entity/SailLogEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/SailLogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/impl/SailLogServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_add.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_detail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_3_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_4_01.xml" beforeDir="false" />
+    <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="基本类型-物料类型测试">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan_add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/data/file/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/data/file/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/dto/AgencyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/dto/AgencyDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/service/impl/AgencyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/service/impl/AgencyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/15陈述和申辩笔录.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/15陈述和申辩笔录.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/16行政处罚听证会通知书.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/16行政处罚听证会通知书.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/18行政处罚听证会报告书.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/18行政处罚听证会报告书.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/25备考表.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/25备考表.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人_安.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/lawRecord/agency.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/lawRecord/agency.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/lawRecord/agency.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/lawRecord/agency.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/seven/gwc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/seven/gwc/test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="74" />
-  </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="false" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
     <option name="GROUP_SCHEMA" value="true" />
     <option name="GROUP_CONTENTS" value="false" />
     <option name="SORT_POSITIONED" value="false" />
@@ -56,12 +62,6 @@
     </option>
     <expand />
     <select />
-  </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
-  <component name="EndpointsView">
-    <option name="showEmptyGroups" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="gwc" />
@@ -94,13 +94,10 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
-        <option name="jdkForImporter" value="11" />
-        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenRunner">
-    <option name="jreName" value="11" />
     <option name="skipTests" value="true" />
   </component>
   <component name="ProjectId" id="1VNHz3bpLbQOFuq86kA6GgsleQH" />
@@ -114,56 +111,78 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.51724136" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/gwc.iml" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.seven.gwc.config.web" />
-      <recent name="com.seven.gwc.core.util" />
-      <recent name="com.seven.gwc.config.constant" />
-      <recent name="com.seven.gwc.core.aop" />
-      <recent name="com.seven.gwc.core.annotation" />
+      <recent name="com.example.tonfun" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\webapp\templates\modular\system" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\webapp\static\modular\system" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\dao\mapper" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\dao" />
-      <recent name="F:\workspace\IntelliJ IDEA\GWC-WEB\src\main\java\com\seven\gwc\modular\system\service\impl" />
+      <recent name="D:\ideawork\GWC-WEB\src\main\webapp\static\lawrecord\instrument" />
+      <recent name="D:\ideawork\GWC-WEB\target\classes\static\lawrecord\instrument" />
+      <recent name="D:\ideawork\GWC-WEB\src\main\webapp\static\lawrecord\instrument_file" />
+      <recent name="D:\idea\workspace\gwc" />
+      <recent name="D:\idea\workspace\gwc\src\main" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="GwcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <component name="RunManager" selected="Spring Boot.GwcApplication">
+    <configuration name="InstrumentModelData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData" />
       <module name="GWC-WEB" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.seven.gwc.GwcApplication" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seven.gwc.modular.lawrecord.data.instrument.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.seven.gwc.test" />
+      <module name="GWC-WEB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seven.gwc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GwcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="GWC-WEB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seven.gwc.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.seven.gwc.GwcApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.GwcApplication" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.InstrumentModelData" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -213,92 +232,72 @@
       <workItem from="1578877956584" duration="4894000" />
       <workItem from="1578965397934" duration="2795000" />
       <workItem from="1579049675665" duration="2978000" />
-      <workItem from="1582008643525" duration="12050000" />
-      <workItem from="1582074452141" duration="15809000" />
-      <workItem from="1582158751810" duration="28542000" />
-      <workItem from="1582251414356" duration="16087000" />
-      <workItem from="1583287732125" duration="2057000" />
-      <workItem from="1583289864523" duration="369000" />
-      <workItem from="1583290254646" duration="8918000" />
-      <workItem from="1583304713118" duration="13811000" />
-      <workItem from="1583376676881" duration="7895000" />
-      <workItem from="1583390114438" duration="712000" />
-      <workItem from="1583390902672" duration="19269000" />
-      <workItem from="1583473710357" duration="9680000" />
-      <workItem from="1583484081953" duration="592000" />
-      <workItem from="1583484828254" duration="1147000" />
-      <workItem from="1583715653362" duration="3440000" />
-      <workItem from="1583719390698" duration="20912000" />
-      <workItem from="1583805391500" duration="6503000" />
-      <workItem from="1583822798821" duration="128000" />
-      <workItem from="1583822943218" duration="34000" />
-      <workItem from="1583822990251" duration="86000" />
-      <workItem from="1583826017489" duration="1080000" />
-      <workItem from="1583827214753" duration="5503000" />
-      <workItem from="1583833583962" duration="37850000" />
-      <workItem from="1583995951248" duration="42000" />
-      <workItem from="1583996008912" duration="43000" />
-      <workItem from="1583996160569" duration="7128000" />
-      <workItem from="1584067740204" duration="29440000" />
-      <workItem from="1584406120443" duration="9807000" />
-      <workItem from="1584428839398" duration="306000" />
-      <workItem from="1584429232518" duration="6101000" />
-      <workItem from="1584602645259" duration="7217000" />
-      <workItem from="1584666792818" duration="345000" />
-      <workItem from="1584668142040" duration="31148000" />
-      <workItem from="1584953393890" duration="416000" />
-      <workItem from="1584953866191" duration="5666000" />
+      <workItem from="1586250619733" duration="266000" />
+      <workItem from="1586250901354" duration="212000" />
+      <workItem from="1586251128836" duration="2838000" />
+      <workItem from="1586306052936" duration="28836000" />
+      <workItem from="1586391975266" duration="33673000" />
+      <workItem from="1586478897113" duration="2828000" />
+      <workItem from="1586482204348" duration="26113000" />
+      <workItem from="1586564404282" duration="15761000" />
     </task>
-    <task id="LOCAL-00001" summary="feat : 完善框架&#10;&#10;- 调整登录日志&#10;- 增加操作日志&#10;- 增加403、404、405统一异常处理&#10;- 移除无效功能">
-      <created>1582021669626</created>
+    <task id="LOCAL-00001" summary="fix: 修改决定">
+      <created>1586253938201</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1582021669626</updated>
+      <updated>1586253938201</updated>
     </task>
-    <task id="LOCAL-00002" summary="feat : 完善框架&#10;&#10;- 完善403异常处理&#10;- 完善字典类型功能&#10;- 完善字典功能">
-      <created>1582091987070</created>
+    <task id="LOCAL-00002" summary="feat: 文书bug修改&#10;- 文书资料整理">
+      <created>1586343100443</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1582091987070</updated>
+      <updated>1586343100443</updated>
     </task>
-    <task id="LOCAL-00003" summary="feat : 完善框架样式&#10;&#10;- 按钮布局&#10;- table样式&#10;- 表单布局样式&#10;- 移除无效功能&#10;- 提示框样式修改&#10;- 弹出框样式调整&#10;- 增加字典类型功能&#10;- 增加字典功能&#10;- 统一按钮名称">
-      <created>1582205997838</created>
+    <task id="LOCAL-00003" summary="fix: 修改bug&#10;- 证据页面删除文件bug&#10;- 修改文书 处罚决定审批表 模板">
+      <created>1586400841161</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1582205997838</updated>
+      <updated>1586400841161</updated>
     </task>
-    <task id="LOCAL-00004" summary="feat : 完善框架样式&#10;&#10;- 修改工具栏样式">
-      <created>1582207293522</created>
+    <task id="LOCAL-00004" summary="feat: 修改文书字段">
+      <created>1586427799505</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1582207293522</updated>
+      <updated>1586427799505</updated>
     </task>
-    <task id="LOCAL-00005" summary="fix : 修改按钮名称及居右">
-      <created>1582209526141</created>
+    <task id="LOCAL-00005" summary="fix: 恢复配置类">
+      <created>1586479441108</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1582209526141</updated>
+      <updated>1586479441108</updated>
     </task>
-    <task id="LOCAL-00006" summary="fix : 调整table高度及table展现形式">
-      <created>1582255249480</created>
+    <task id="LOCAL-00006" summary="fix: 修改jar引入方式&#10;- 修改xml路径">
+      <created>1586487046958</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1582255249480</updated>
+      <updated>1586487046958</updated>
     </task>
-    <task id="LOCAL-00007" summary="工作计划信息管理">
-      <created>1584079642543</created>
+    <task id="LOCAL-00007" summary="fix: 根据文书规则修改逻辑">
+      <created>1586509407450</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1584079642543</updated>
+      <updated>1586509407450</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix: 修改文书">
+      <created>1586513148201</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1586513148201</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,301 +315,191 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="基本类型-物料类型测试" />
-    <MESSAGE value="feat : 完善框架" />
-    <MESSAGE value="feat : 完善框架&#10;&#10;- 调整登录日志" />
-    <MESSAGE value="feat : 完善框架&#10;&#10;- 调整登录日志&#10;- 增加操作日志&#10;- 增加403、404、405统一异常处理&#10;- 移除无效功能" />
-    <MESSAGE value="feat : 完善框架&#10;&#10;- 完善403异常处理&#10;- 完善字典类型功能&#10;- 完善字典功能" />
-    <MESSAGE value="feat : 完善框架样式&#10;&#10;- 按钮布局&#10;- table样式&#10;- 表单布局样式&#10;- 移除无效功能&#10;- 提示框样式修改&#10;- 弹出框样式调整&#10;- 增加字典类型功能&#10;- 增加字典功能&#10;- 统一按钮名称" />
-    <MESSAGE value="feat : 完善框架样式&#10;&#10;- 修改工具栏样式" />
-    <MESSAGE value="fix : 修改按钮名称及居右" />
-    <MESSAGE value="fix : 调整table高度及table展现形式" />
-    <MESSAGE value="fix : 完善框架&#10;&#10;- 根据现有业务更改代码生成&#10;- 提升java编写规范&#10;- 各种demo规范整理" />
-    <MESSAGE value="工作计划信息管理" />
-    <MESSAGE value="历史报警信息" />
-    <option name="LAST_COMMIT_MESSAGE" value="历史报警信息" />
+    <MESSAGE value="fix: 修改决定" />
+    <MESSAGE value="feat: 文书bug修改&#10;- 文书资料整理" />
+    <MESSAGE value="fix: 修改bug&#10;- 证据页面删除文件bug&#10;- 修改文书 处罚决定审批表 模板" />
+    <MESSAGE value="feat: 修改文书字段" />
+    <MESSAGE value="fix: 恢复配置类" />
+    <MESSAGE value="fix: 修改jar引入方式&#10;- 修改xml路径" />
+    <MESSAGE value="fix: 根据文书规则修改逻辑" />
+    <MESSAGE value="fix: 修改文书" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修改文书" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="74" key="#Inspections" timestamp="1584068026833">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="74" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1584068026833" />
-    <state x="361" y="74" key="#SQL_Dialects" timestamp="1583994927862">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="74" key="#SQL_Dialects/0.0.1536.824@0.0.1536.824" timestamp="1583994927862" />
-    <state x="361" y="74" key="#Servers" timestamp="1583379054235">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="74" key="#Servers/0.0.1536.824@0.0.1536.824" timestamp="1583379054235" />
-    <state x="587" y="16" key="#Tomcat_Server" timestamp="1583390699279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="587" y="16" key="#Tomcat_Server/0.0.1536.824@0.0.1536.824" timestamp="1583390699279" />
-    <state x="599" y="271" key="#com.intellij.debugger.actions.ViewTextAction" timestamp="1583316616917">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="599" y="271" key="#com.intellij.debugger.actions.ViewTextAction/0.0.1536.824@0.0.1536.824" timestamp="1583316616917" />
-    <state x="526" y="107" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583995728408">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="526" y="107" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1583995728408" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1583982192638">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583982192638" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1583143098726" />
-    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="358" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584958577078">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="358" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1584958577078" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583143098726" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="650" y="166" key="#xdebugger.XInspectDialog" timestamp="1583316785924">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="650" y="166" key="#xdebugger.XInspectDialog/0.0.1536.824@0.0.1536.824" timestamp="1583316785924" />
-    <state x="524" y="119" key="#xdebugger.evaluate" timestamp="1583997601705">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="524" y="119" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1583997601705" />
-    <state x="487" y="286" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1583386645646">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="487" y="286" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1583386645646" />
-    <state x="455" y="14" key="CommitChangelistDialog2" timestamp="1584668695203">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="455" y="14" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1584668695203" />
-    <state x="455" y="116" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="490" height="466" key="DebuggerActiveHint" timestamp="1584951028159">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="490" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1584951028159" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1584435865742">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1584435865742" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1584439363940">
+    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586420731763">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583995888510" />
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584439363940" />
-    <state width="1493" height="251" key="GridCell.Tab.0.bottom" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586420731763" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1578042077144">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.0.center" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1578042077144" />
+    <state x="806" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586250941022">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.0.left" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="806" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250941022" />
+    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1577930188408">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.0.right" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577930188408" />
+    <state x="739" y="378" width="584" height="293" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586512343276">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.1.bottom" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="739" y="378" width="584" height="293" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1586512343276" />
+    <state x="704" y="331" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1586421909266">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.1.center" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="704" y="331" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586421909266" />
+    <state x="505" y="35" key="CommitChangelistDialog2" timestamp="1586513231760">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.1.left" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="505" y="35" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586513231760" />
+    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1586342135653">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.1.right" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="445" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1586342135653" />
+    <state x="159" y="15" key="DiffContextDialog" timestamp="1586513222845">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="157" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.2.bottom" timestamp="1584959620383">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="159" y="15" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586513222845" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1586251097062">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584959620383" />
-    <state width="1877" height="225" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.2.center" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586251097062" />
+    <state x="781" y="416" width="382" height="208" key="Github.CreateGistDialog" timestamp="1586496671547">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="225" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.2.left" timestamp="1584959620382">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="781" y="416" width="382" height="208" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586496671547" />
+    <state width="1877" height="352" key="GridCell.Tab.0.bottom" timestamp="1586586170080">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1584959620382" />
-    <state width="1877" height="225" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="1493" height="251" key="GridCell.Tab.2.right" timestamp="1584959620383">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170080" />
+    <state width="1877" height="352" key="GridCell.Tab.0.center" timestamp="1586586170079">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1493" height="251" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1584959620383" />
-    <state width="1877" height="225" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1583995658655">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
+    <state width="1877" height="352" key="GridCell.Tab.0.left" timestamp="1586586170079">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1583995658655" />
-    <state x="349" y="159" key="IDE.errors.dialog" timestamp="1583386692801">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
+    <state width="1877" height="352" key="GridCell.Tab.0.right" timestamp="1586586170079">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="349" y="159" key="IDE.errors.dialog/0.0.1536.824@0.0.1536.824" timestamp="1583386692801" />
-    <state x="299" y="71" key="Maven.ArtifactSearchDialog" timestamp="1583994054623">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
+    <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1586586299245">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="299" y="71" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1583994054623" />
-    <state x="531" y="185" key="Registry" timestamp="1583143098726" />
-    <state x="531" y="185" key="Registry/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="540" y="137" key="RollbackChangesDialog" timestamp="1584954672988">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
+    <state width="1877" height="284" key="GridCell.Tab.1.center" timestamp="1586586299245">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="137" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584954672988" />
-    <state x="498" y="0" key="SettingsEditor" timestamp="1584001311433">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
+    <state width="1877" height="284" key="GridCell.Tab.1.left" timestamp="1586586299245">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="498" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584001311433" />
-    <state x="739" y="296" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="285" y="133" key="Vcs.Push.Dialog.v2" timestamp="1584435847589">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
+    <state width="1877" height="284" key="GridCell.Tab.1.right" timestamp="1586586299245">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="285" y="133" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584435847589" />
-    <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="523" y="170" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1583995552433">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
+    <state width="1877" height="352" key="GridCell.Tab.2.bottom" timestamp="1586586169950">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="523" y="170" key="com.intellij.database.run.ParametersPanel.Standalone/0.0.1536.824@0.0.1536.824" timestamp="1583995552433" />
-    <state x="485" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1583995790310">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
+    <state width="1877" height="352" key="GridCell.Tab.2.center" timestamp="1586586169950">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="485" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1583995790310" />
-    <state x="194" y="121" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1584001454586">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
+    <state width="1877" height="352" key="GridCell.Tab.2.left" timestamp="1586586169950">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="194" y="121" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.0.1536.824@0.0.1536.824" timestamp="1584001454586" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1583143098726" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1583143098726" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="246" y="5" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1583732783754">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
+    <state width="1877" height="352" key="GridCell.Tab.2.right" timestamp="1586586169950">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="246" y="5" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1583732783754" />
-    <state x="564" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584079659880">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="352" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1586479313399">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="564" y="331" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1584079659880" />
-    <state x="214" y="222" width="909" height="565" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1583997671420">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586479313399" />
+    <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1586250774875">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="214" y="222" width="909" height="565" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1583997671420" />
-    <state x="257" y="14" width="1080" height="801" key="find.popup" timestamp="1584956631756">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250774875" />
+    <state x="531" y="185" key="Registry" timestamp="1578552587609">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="257" y="14" width="1080" height="801" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1584956631756" />
-    <state x="668" y="120" width="1080" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="471" y="215" key="git4idea.merge.GitPullDialog" timestamp="1584668652771">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="531" y="185" key="Registry/0.0.1920.1040@0.0.1920.1040" timestamp="1578552587609" />
+    <state x="739" y="189" key="SettingsEditor" timestamp="1586481974331">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="471" y="215" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1584668652771" />
-    <state x="528" y="253" key="git4idea.ui.GitUnstashDialog" timestamp="1583391277442">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="739" y="189" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586481974331" />
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2" timestamp="1586513187417">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="528" y="253" key="git4idea.ui.GitUnstashDialog/0.0.1536.824@0.0.1536.824" timestamp="1583391277442" />
-    <state x="334" y="222" key="new project wizard" timestamp="1583143098726" />
-    <state x="334" y="222" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1583143098726" />
-    <state x="511" y="45" key="refactoring.ChangeSignatureDialog" timestamp="1584952892660">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586513187417" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1586564405267">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="511" y="45" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1584952892660" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1583379331595">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586564405267" />
+    <state x="523" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586576057699">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1583379331595" />
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1584957156500">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="523" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586576057699" />
+    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586564994682">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584957156500" />
-    <state x="531" y="83" width="840" height="854" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584439361824" />
+    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586564994682" />
+    <state x="668" y="120" width="1080" height="801" key="find.popup" timestamp="1586313139257">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="120" width="1080" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586313139257" />
+    <state x="722" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1586250765646">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="722" y="232" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250765646" />
+    <state x="659" y="311" key="git4idea.merge.GitPullDialog" timestamp="1586251205328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="659" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586251205328" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1586583393849">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586583393849" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="javascript">
-          <url>file://$PROJECT_DIR$/src/main/webapp/static/common/plugins/layui/lay/modules/layer.js</url>
-          <line>20</line>
-          <option name="timeStamp" value="149" />
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/webapp/static/modular/system/position/position_add.js</url>
+          <line>32</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/service/impl/ShipWorkLogServiceImpl.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="172" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/basic_info/controller/MunitonTypeController.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/PositionServiceImpl.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="190" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/service/impl/PositionServiceImpl.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="191" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/controller/SailLogController.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="195" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/impl/SailLogServiceImpl.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="196" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/impl/SailLogServiceImpl.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="197" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog>
-          <selected-grouping-rules>
-            <grouping-rule id="XBreakpointGroupingByClassRule" />
-            <grouping-rule id="by-file" />
-          </selected-grouping-rules>
-        </breakpoints-dialog>
-      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gwc$GwcApplication.ic" NAME="GwcApplication Coverage Results" MODIFIED="1577779395410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/GWC_WEB$GwcApplication.ic" NAME="GwcApplication Coverage Results" MODIFIED="1583377360283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

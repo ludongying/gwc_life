@@ -182,61 +182,85 @@
                         <div class="layui-card-body">
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">案件编号</label>
-                                <div class="layui-input-inline" style="width: 80px">
-                                    <input name="shortName" value="${value.shortName}" placeholder="" autocomplete="off" class="layui-input" disabled>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">案件编号</label>
+                                    <div class="layui-input-inline" style="width: 80px">
+                                        <input name="shortName" value="${value.shortName}" placeholder="" autocomplete="off" class="layui-input" disabled>
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">罚&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="layui-input-inline" style="width: 80px">
+                                        <input name="lawCode" value="${value.lawCaseFineCode}${value.lawCaseCode}" placeholder="" autocomplete="off" class="layui-input" disabled>
+                                        <input name="lawCaseFineCode" value="${value.lawCaseFineCode}" type="hidden" placeholder="" autocomplete="off" class="layui-input" disabled>
+                                        <input name="lawCaseCode" value="${value.lawCaseCode}" type="hidden" placeholder="" autocomplete="off" class="layui-input" disabled>
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">号&nbsp;&nbsp;&nbsp;</div>
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">罚&nbsp;&nbsp;&nbsp;</div>
-                                <div class="layui-input-inline" style="width: 80px">
-                                    <input name="lawCode" value="${value.lawCaseFineCode}${value.lawCaseCode}" placeholder="" autocomplete="off" class="layui-input" disabled>
-                                    <input name="lawCaseFineCode" value="${value.lawCaseFineCode}" type="hidden" placeholder="" autocomplete="off" class="layui-input" disabled>
-                                    <input name="lawCaseCode" value="${value.lawCaseCode}" type="hidden" placeholder="" autocomplete="off" class="layui-input" disabled>
-                                </div>
-                                <div class="layui-form-mid layui-word-aux">号&nbsp;&nbsp;&nbsp;</div>
 
-                                <div class="layui-inline" style="margin-left: 5px">
+                                <div class="layui-inline">
                                     <label class="layui-form-label">案件来源</label>
                                     <div class="layui-input-inline">
-                                        <select name="lawCaseSource">
+                                        <select name="lawCaseSource" >
                                             @for(item in lawCaseSource){
                                                <option value="${item.code}">${item.message}</option>
                                             @}
                                         </select>
                                     </div>
                                 </div>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">案发时间</label>
-                                    <div class="layui-input-inline bg_input">
-                                        <input type="text" id="lawCaseDate" name="lawCaseDate" autocomplete="off" class="layui-input">
+
+                                <div class="layui-inline" id="lon_lat">
+                                    <label class="layui-form-label">案发经纬度</label>
+                                    <div class="layui-form-mid layui-word-aux">N</div>
+                                    <div class="layui-input-inline" style="width: 55px;margin-left: -9px">
+                                        <input placeholder="" name="lawCaseLon1" lay-verify="positiveNumber" autocomplete="off" class="layui-input lonlat">
                                     </div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">°</div>
+                                    <div class="layui-input-inline" style="width: 55px">
+                                        <input placeholder="" name="lawCaseLon2" lay-verify="positiveNumber" autocomplete="off" class="layui-input lonlat">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">′</div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">，</div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">E</div>
+                                    <div class="layui-input-inline" style="width: 55px;margin-left: -9px">
+                                        <input placeholder="" name="lawCaseLat1" lay-verify="positiveNumber"  autocomplete="off" class="layui-input lonlat">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">°</div>
+                                    <div class="layui-input-inline" style="width: 55px">
+                                        <input placeholder="" name="lawCaseLat2" lay-verify="positiveNumber"  autocomplete="off" class="layui-input lonlat">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux" style=" margin-left:-10px;padding:0;">′</div>
                                 </div>
+
                             </div>
 
 
                             <div class="layui-form-item">
-                                <label class="layui-form-label">案发经纬度</label>
-                                <div class="layui-input-inline" style="width: 80px">
-                                    <input placeholder="" name="lawCaseLon" lay-verify="floatNumber" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-form-mid layui-word-aux">经度</div>
-                                <div class="layui-input-inline" style="width: 80px">
-                                    <input placeholder="" name="lawCaseLat" lay-verify="floatNumber"  autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-form-mid layui-word-aux">纬度</div>
 
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">案发地点</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" name="lawCaseAddr"  autocomplete="off" class="layui-input">
-                                    </div>
-                                </div>
+
                                 <div class="layui-inline">
                                     <label class="layui-form-label">询问时间</label>
                                     <div class="layui-input-inline  bg_input">
                                         <input type="text" id="inquireDate"  name="inquireDateStr" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
+
+                                <div class="layui-inline" style="margin-left: 50px">
+                                    <label class="layui-form-label">案发时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lawCaseDate" name="lawCaseDate" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">案发地点</label>
+                                    <div class="layui-input-inline" style="width: 295px">
+                                        <input type="text" id="lawCaseAddr" name="lawCaseAddr" placeholder="请核对坐标渔区" autocomplete="off" disabled class="layui-input">
+                                    </div>
+                                </div>
+
                             </div>
+
+
                         </div>
                     </div>
                 </div>

@@ -83,6 +83,21 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         input.val(data.elem[data.elem.selectedIndex].dataset.certificate);
     });
 
+    $("#lon_lat .lonlat").blur(function () {
+        let inputs=$("#lon_lat .lonlat");
+        let latlon="N";
+        latlon+=inputs.eq(0).val()+"°";
+        latlon+=inputs.eq(1).val()+"′,E";
+        latlon+=inputs.eq(2).val()+"°";
+        latlon+=inputs.eq(3).val()+"′";
+        $("#lawCaseAddr").val(latlon);
+    });
+
+    function setLonLat(data){
+        let inputs=$("#lon_lat .lonlat");
+        data.field.lawCaseLon=inputs.eq(0).val()+","+inputs.eq(1).val();
+        data.field.lawCaseLat=inputs.eq(2).val()+","+inputs.eq(3).val();
+    }
 
     //开启表单内容监听
     startListen($,lay.key);
@@ -92,6 +107,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         setProspectInquire($,data);
         //设置办案人员
         getOperators(data);
+        //设置经纬度
+        setLonLat(data);
         //开启监听后，下一步操作验证
         nextStep({
             "lay":lay,

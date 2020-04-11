@@ -82,8 +82,10 @@
                 )
             </if>
             <if test="investigateTel!=null and investigateTel!=''">
-                AND (law_record_inquire_.investigate_tel=#{investigateTel} or
-                law_record_inquire_safe.investigate_tel=#{investigateTel})
+                AND (law_record_inquire_.investigate_tel like CONCAT("%",#{investigateTel},"%")
+                    or
+                    law_record_inquire_safe.investigate_tel like CONCAT("%",#{investigateTel},"%")
+                )
             </if>
             <if test="investigateName!=null and investigateName!=''">
                 AND (

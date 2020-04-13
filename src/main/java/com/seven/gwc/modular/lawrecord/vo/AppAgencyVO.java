@@ -89,10 +89,14 @@ public class AppAgencyVO {
 
     /** 询问开始时间  */
     @ApiModelProperty(value = "询问开始时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date inquireStartDate;
 
     /** 询问结束时间  */
     @ApiModelProperty(value = "询问结束时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
     private Date inquireEndDate;
 
     /** 电话请示时间  */

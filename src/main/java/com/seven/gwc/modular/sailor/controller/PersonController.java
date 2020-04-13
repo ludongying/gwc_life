@@ -7,9 +7,11 @@ import com.github.pagehelper.PageInfo;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
+import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
 import com.seven.gwc.modular.sailor.vo.PersonVO;
@@ -137,7 +139,13 @@ public class PersonController extends BaseController {
     @RequestMapping("/detail/{id}")
     @ResponseBody
     public PersonEntity detail(@PathVariable String id) {
-        return personService.getOneById(id);
+        PersonEntity personEntity = personService.getOneById(id);
+        if (ToolUtil.isNotEmpty(personEntity.getDeptId())) {
+            personEntity.setDeptName(CacheFactory.me().getDeptName(personEntity.getDeptId()));
+        } else {
+            personEntity.setDeptName("顶级");
+        }
+        return personEntity;
     }
 
     /**

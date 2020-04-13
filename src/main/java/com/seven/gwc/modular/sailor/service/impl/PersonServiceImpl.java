@@ -97,7 +97,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         } else {
             //判断user表是否存在，存在则更新，不存在则插入
             LambdaQueryWrapper<UserEntity> lambdaQueryUser = Wrappers.<UserEntity>lambdaQuery();
-            lambdaQueryUser.eq(UserEntity::getId, person.getPersonId());
+            lambdaQueryUser.eq(UserEntity::getId, person.getPersonId()).ne(UserEntity::getStatus, "DELETED");
             UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
             UserEntity userEntityInput = new UserEntity();
             if (userEntity != null) {
@@ -165,7 +165,7 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
         } else {
             //判断user表是否存在，存在则更新，不存在则插入
             LambdaQueryWrapper<UserEntity> lambdaQueryUser = Wrappers.<UserEntity>lambdaQuery();
-            lambdaQueryUser.eq(UserEntity::getId, person.getPersonId());
+            lambdaQueryUser.eq(UserEntity::getId, person.getPersonId()).ne(UserEntity::getStatus, "DELETED");
             UserEntity userEntity = userMapper.selectOne(lambdaQueryUser);
             UserEntity userEntityInput = new UserEntity();
             if (userEntity != null) {
@@ -258,6 +258,14 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
     @Override
     public List<PersonEntity> listPersonsByDept(String deptId) {
         return personMapper.PersonsByDeptList(deptId);
+    }
+
+    @Override
+    public PersonEntity getOneByPersonId(String personId) {
+        LambdaQueryWrapper<PersonEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(PersonEntity::getPersonId, personId);
+        PersonEntity personEntity = personMapper.selectOne(lambdaQuery);
+        return personEntity;
     }
 
 }

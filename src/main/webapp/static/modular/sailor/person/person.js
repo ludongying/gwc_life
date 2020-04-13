@@ -48,7 +48,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 }
             },
             {title: '民族', field: 'nation', sort: false, align: "center"},
-            {title: '身份证号', field: 'idNumber', sort: false, align: "center"},
+            {title: '身份证号', field: 'idNumber', sort: false, align: "center", minWidth: 200},
             {title: '籍贯', field: 'birthPlace', sort: false, align: "center", hide: true},
             {title: '职务', field: 'duty', sort: false, align: "center"},
             {title: '岗位', field: 'positionName', sort: false, align: "center"},

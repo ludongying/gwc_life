@@ -1,26 +1,24 @@
 package com.seven.gwc.modular.munition.controller;
 
-import com.seven.gwc.core.state.ErrorEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.munition.entity.MunitionInfoEntity;
 import com.seven.gwc.modular.munition.service.MunitionInfoService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -133,6 +131,24 @@ public class MunitionInfoController extends BaseController {
     @ResponseBody
     public MunitionInfoEntity detail(@PathVariable String munitionInfoId) {
         return munitionInfoService.getById(munitionInfoId);
+    }
+
+    /**
+     * 通过物资类型获取物资信息列表
+     */
+    @RequestMapping("/listByType")
+    @ResponseBody
+    public List<MunitionInfoEntity> getMunitionListByType(String type) {
+        return munitionInfoService.getMunitionListByType(type);
+    }
+
+    /**
+     * 通过物资名称获取物资信息列表
+     */
+    @RequestMapping("/listByName")
+    @ResponseBody
+    public List<MunitionInfoEntity> getMunitionListByName(String name) {
+        return munitionInfoService.getMunitionListByName(name);
     }
 
 }

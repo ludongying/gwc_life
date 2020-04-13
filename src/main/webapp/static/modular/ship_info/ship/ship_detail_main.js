@@ -68,7 +68,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'carousel', 'func'], function () {
         var count = 0;
         $.each(images, function (index, item) {
             if(item !=null && item !="" ){
-                $('#image').append('<div style="text-align :center"><img class="img-thumbnail" src=' + item + '></div>');
+                $('#image').append('<div style="text-align :center;margin-top: 10px;"><img class="img-thumbnail" src=' + item + '></div>');
             }
         })
         ins.reload({

@@ -49,4 +49,19 @@ public interface MunitionInfoService extends IService<MunitionInfoEntity> {
      */
     boolean editMunitionInfo(MunitionInfoEntity munitionInfo, ShiroUser user);
 
+    /**
+     * 通过类型获取物资信息列表
+     *
+     * @param type 物资类型
+     * @return List<物资信息服务对象>
+     */
+    List<MunitionInfoEntity> getMunitionListByType(String type);
+
+    /**
+     * 通过名称获取物资信息列表
+     *
+     * @param name 物资名称
+     * @return List<物资信息服务对象>
+     */
+    List<MunitionInfoEntity> getMunitionListByName(String name);
 }

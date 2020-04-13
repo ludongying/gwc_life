@@ -17,10 +17,21 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     loadVerify(form);
 
     laydate.render({
+        elem: '#applyTime',
+        type: 'date',
+        trigger: 'click'
+    });
+
+    laydate.render({
         elem: '#inOutTime',
         type: 'date',
         trigger: 'click'
     });
+
+    //初始化表单数据
+    var ajax = new $ax(Feng.ctxPath + "/munitionIn/getInitInfo/");
+    var result = ajax.start();
+    form.val('munitionInForm', result);
 
     //初始化物资类型下拉框
     $.ajax({
@@ -44,6 +55,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             $.each(data, function (index, item) {
                 $('#applyPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
             })
+            $('#applyPerson').val(result.applyPerson);
             form.render('select');//表单渲染
         }
     });
@@ -78,4 +90,23 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         ajax.start();
         return false;
     });
+
+    // 表单提交跳转事件
+    // form.on('submit(btnSubmitLocate)', function (data) {
+    //     var ajax = new $ax(Feng.ctxPath + "/munitionIn/add", function (data) {
+    //         if (data.success) {
+    //             Feng.success("增加成功!");
+    //             admin.putTempData('formOk', true);//传给上个页面，刷新table用
+    //             admin.closeThisDialog();//关掉对话框
+    //             // var url = Feng.ctxPath + '/certificate?personId=' + d.id;
+    //         } else {
+    //             Feng.error(data.message);
+    //         }
+    //     }, function (data) {
+    //         Feng.error("增加失败!" + data.message)
+    //     });
+    //     ajax.set(data.field);
+    //     ajax.start();
+    //     return false;
+    // });
 });

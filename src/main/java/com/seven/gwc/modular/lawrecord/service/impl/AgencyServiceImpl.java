@@ -84,6 +84,7 @@ public class AgencyServiceImpl extends ServiceImpl<AgencyMapper, AgencyEntity> i
             detail.setOperators(operatorService.getByRecord(id));
             detail.setPersons();
             detail.setLawCodeStr();
+            detail.setLonLat();
         }
         return detail;
     }

@@ -17,6 +17,7 @@
     let ForbiddenFishLine = null;//禁渔区
     let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
+    let FishLine_NoName = null;//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
     var hide = document.getElementById('hide');
@@ -296,6 +297,10 @@
             if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0&&map.hasLayer(ForbiddenFishLine)&&ForbiddenFishLine_NoName!=null)
             {
                 magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
+            }
+            if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0&&map.hasLayer(FishLine)&&FishLine_NoName!=null)
+            {
+                magnifyingGlassLayer.push(FishLine_NoName);
             }
             map.addLayer(magnifyingGlass);
         }
@@ -604,6 +609,7 @@
             let result=data.content;
             //清空之前绘制的点
             FishLine.clearLayers();
+            FishLine_NoName = null;
             var FishArea = [];
             var FishAreaName = [];
             for (var i = 0; i < result.length; i++) {
@@ -675,6 +681,14 @@
                     Opacity: 0.3,
                 }
             }).addTo(FishLine);
+            FishLine_NoName = L.geoJson(FishAreaPolygon, {
+                style: {
+                    fillOpacity: 0,
+                    weight: 1,
+                    color: '#D74D56',
+                    Opacity: 0.3,
+                }
+            });
             let lineGeo = L.geoJson(FishAreaPolygonN, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
@@ -697,6 +711,13 @@
                 getFishPoint();
             else
                 map.addLayer(FishLine);
+            if(map.hasLayer(magnifyingGlass)){
+                if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0){
+                    map.removeLayer(magnifyingGlass);
+                    magnifyingGlassLayer.push(FishLine_NoName);
+                    map.addLayer(magnifyingGlass);
+                }
+            }
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
@@ -704,6 +725,13 @@
             //清空之前绘制的点
             // FishLine.clearLayers();
             map.removeLayer(FishLine);
+            let index = magnifyingGlassLayer.indexOf(FishLine_NoName);
+            if(index>=0&&map.hasLayer(magnifyingGlass))
+            {
+                map.removeLayer(magnifyingGlass);
+                magnifyingGlassLayer.splice(index,1);
+                map.addLayer(magnifyingGlass);
+            }
         }
     });
 });

@@ -93,4 +93,19 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
         return true;
     }
 
+    @Override
+    public List<MunitionInfoEntity> getMunitionListByType(String type) {
+        LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.<MunitionInfoEntity>lambdaQuery();
+        lambdaQuery.eq(ToolUtil.isNotEmpty(type),MunitionInfoEntity::getTypeId,type);
+        List<MunitionInfoEntity> list = munitionInfoMapper.selectList(lambdaQuery);
+        return munitionInfoMapper.selectList(lambdaQuery);
+    }
+
+    @Override
+    public List<MunitionInfoEntity> getMunitionListByName(String name) {
+        LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.<MunitionInfoEntity>lambdaQuery();
+        lambdaQuery.eq(ToolUtil.isNotEmpty(name),MunitionInfoEntity::getName,name);
+        return munitionInfoMapper.selectList(lambdaQuery);
+    }
+
 }

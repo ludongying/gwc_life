@@ -16,5 +16,35 @@
         id, action_type, detail_id, content, remark, status, apply_person, in_out_person, in_out_time
     </sql>
 
+    <select id="maxCode" resultType="java.lang.Integer">
+        SELECT count(*) FROM ship_munition_inandout WHERE code like CONCAT('%',#{dateCode},'%')
+    </select>
+
+    <select id="selectMunitionInList" resultType="com.seven.gwc.modular.munition.entity.MunitionInEntity">
+        SELECT i.* FROM ship_munition_inandout i
+        LEFT JOIN sys_user u ON i.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where i.delete_flag = 1
+        <if test="munitionIn.code != null and munitionIn.code != ''">
+            and i.code like CONCAT('%',#{munitionIn.code},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munitionIn.params.dataScope}
+        order by i.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.munition.entity.MunitionInEntity">
+        SELECT i.* FROM ship_munition_inandout i
+        LEFT JOIN sys_user u ON i.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where i.delete_flag = 1
+        <if test="munitionIn.code != null and munitionIn.code != ''">
+            and i.code like CONCAT('%',#{munitionIn.code},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munitionIn.params.dataScope}
+    </select>
+
 
 </mapper>

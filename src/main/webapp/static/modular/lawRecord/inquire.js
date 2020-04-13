@@ -92,9 +92,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
     });
     function submitData(des,data){
         //验证办案人员
-        if(!verifyOperators()){
+        if(!verifyOperators() || !verifyInvestigateName()){
             return;
         }
+
         //获取地址
         // data.field.investigateAddr= JSON.stringify(getLocAddr($,"investigate_addr"));
         //获取补录内容
@@ -143,7 +144,26 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func','
         }
         return true;
     }
-    
+    //验证询问人重名
+    function verifyInvestigateName(){
+        let arr =$("#inquireForm .investigateName");
+        let hash = {};
+
+        for (let i=0; i<arr.length;i++) {
+            let val=arr.eq(i).val();
+            if (hash[val]){
+                arr.eq(i).addClass("msg-error");
+                arr.eq(i).blur(function () {
+                    arr.eq(i).removeClass("msg-error");
+                });
+                msg_error($,"被询问人名称不能重复")
+                return false;
+            }
+            hash[val] = true;
+        }
+        return true;
+    }
+
     //初始化内容
     function initContent(content){
         let index=($('#inquire_box .inquire_index')).length+1;

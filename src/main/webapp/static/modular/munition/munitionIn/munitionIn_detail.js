@@ -14,9 +14,9 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     // admin.iframeAuto();
 
     //初始化物资入库的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/munitionIn/detail/" + Feng.getUrlParam("munitionInandoutId"));
+    var ajax = new $ax(Feng.ctxPath + "/munitionIn/detail/" + Feng.getUrlParam("munitionInId"));
     var result = ajax.start();
-    form.val('munitionInandoutForm',result);
+    form.val('munitionInForm',result);
 
 
 });

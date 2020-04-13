@@ -138,7 +138,13 @@ public class FileUtils {
     public static boolean getLicense() {
         boolean result = false;
         try {
-            InputStream is = FileUtils.class.getClassLoader().getResourceAsStream(license_path);
+            InputStream is;
+            if(System.getProperty("os.name").toLowerCase().startsWith("w")){
+                System.out.println("文件存在 相对路径");
+                is= FileUtils.class.getClassLoader().getResourceAsStream("\\license.xml");
+            }else{
+                is= FileUtils.class.getClassLoader().getResourceAsStream(license_path);
+            }
             License aposeLic = new License();
             aposeLic.setLicense(is);
             result = true;

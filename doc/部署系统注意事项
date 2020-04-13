@@ -1,0 +1,30 @@
+1文书字体
+    1. From Windows
+    Windows下字体库的位置为C:\Windows\fonts，这里面包含所有windows下可用的字体。
+
+    2. To Linux
+    linux的字体库是 /usr/share/Fonts 。
+
+    在该目录下新建一个目录，比如目录名叫 windows（根据个人的喜好，自己理解就行，当然这里是有权限要求的，你可以用sudo来执行）。
+
+    然后将 windows 字体库中你要的字体文件复制到新建的目录下(只需要复制*.ttc，和*.ttf的文件).
+
+    复制所有字体：
+       sudo cp *.ttc /usr/share/fonts/windows/
+       sudo cp *.ttf /usr/share/fonts/windows/
+
+    更改这些字体库的权限：
+        sudo chmod 755 /usr/share/fonts/windows/*
+
+    然后进入linux字体库：
+        cd /usr/share/fonts/windows/
+    接着根据当前目录下的字体建立scale文件
+        sudo mkfontscale
+
+    接着建立dir文件
+       sudo mkfontdir
+
+    然后运行
+       sudo fc-cache
+
+    重启 Linux 操作系统就可以使用这些字体了。

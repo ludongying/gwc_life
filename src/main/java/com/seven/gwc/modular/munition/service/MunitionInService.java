@@ -1,8 +1,8 @@
 package com.seven.gwc.modular.munition.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -18,33 +18,41 @@ public interface MunitionInService extends IService<MunitionInEntity> {
     /**
      * 物资入库查询列表
      *
-     * @param munitionInandoutName 名称
+     * @param munitionIn 名称
      * @return List<物资入库服务对象>
      */
-    List<MunitionInEntity> selectMunitionInandout(String munitionInandoutName);
+    List<MunitionInEntity> selectMunitionIn(MunitionInEntity munitionIn, Integer total, Integer size);
+
+    Integer getListSize(MunitionInEntity munitionIn);
 
     /**
      * 物资入库新建
      *
-     * @param munitionInandout 实体对象
+     * @param munitionIn 实体对象
      * @param user 当前用户
      */
-    void addMunitionInandout(MunitionInEntity munitionInandout, ShiroUser user);
+    boolean addMunitionIn(MunitionInEntity munitionIn, ShiroUser user);
 
     /**
      * 物资入库删除
      *
-     * @param munitionInandoutId 唯一标识
+     * @param munitionInId 唯一标识
      * @param user 当前用户
      */
-    void deleteMunitionInandout(String munitionInandoutId, ShiroUser user);
+    void deleteMunitionIn(String munitionInId, ShiroUser user);
 
     /**
      * 物资入库编辑
      *
-     * @param munitionInandout 实体对象
+     * @param munitionIn 实体对象
      * @param user 当前用户
      */
-    void editMunitionInandout(MunitionInEntity munitionInandout, ShiroUser user);
+    void editMunitionIn(MunitionInEntity munitionIn, ShiroUser user);
+
+    /**
+     * 获取入库表单最新标号
+     * @return
+     */
+    String getAutoCode();
 
 }

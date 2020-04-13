@@ -89,6 +89,11 @@ public class InquireDO extends BaseDO {
      */
     protected String Holder2;
 
+    /**
+     *当事人姓名
+     */
+    protected String Name_1;
+
     public InquireDO(InquireBase inquireBase){
 
         SexEnum sexEnum = SexEnum.findByCode(inquireBase.getInvestigateSex());
@@ -117,6 +122,8 @@ public class InquireDO extends BaseDO {
         if(InvestigatePositionEnum.CAPTAIN.getCode().equals(inquireBase.getInvestigatePosition())){
             this.setCaptain(this.getAsk_Name());
         }
+
+        this.setName_1(inquireBase.getInvestigateName());
     }
 
 

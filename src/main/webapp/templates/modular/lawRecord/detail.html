@@ -1443,34 +1443,7 @@
                         @}
                     </div>
                 </div>
-
-                <div class="layui-col-md12" id="document">
-                    <div class="layui-card">
-                        <div class="layui-card-header card_header_title">&nbsp;&nbsp;&nbsp;文书列表</div>
-                        <div class="layui-card-body">
-                            <div class="layui-card">
-                                <div class="layui-card-body">
-                                    @if(isNotEmpty(reason.document)){
-                                    @for(item in reason.document){
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label" style="width: 0"></label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="shipCaseFish" value="${item.content!''}"
-                                                       style="width: 500px" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @}
-                                    @}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </form>
-
         </div>
     </div>
 </div>

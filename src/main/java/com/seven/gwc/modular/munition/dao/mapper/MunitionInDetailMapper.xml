@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.munition.dao.MunitionInDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.munition.entity.MunitionInDetailEntity">
+        <id column="id" property="id" />
+        <result column="munition_id" property="munitionId" />
+        <result column="munition_name" property="munitionName" />
+        <result column="depot_id" property="depotId" />
+        <result column="depot_name" property="depotName" />
+        <result column="spec_quantity" property="specQuantity" />
+        <result column="total_num" property="totalNum" />
+        <result column="unit" property="unit" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="syn_flag" property="synFlag" />
+        <result column="create_person" property="createPerson" />
+        <result column="create_date" property="createDate" />
+        <result column="update_person" property="updatePerson" />
+        <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, munition_id, munition_name, depot_id, depot_name, spec_quantity, total_num, unit, delete_flag, syn_flag, create_person, create_date, update_person, update_date
+    </sql>
+
+    <select id="selectMunitionList" resultType="com.seven.gwc.modular.munition.entity.MunitionInDetailEntity">
+        SELECT i.* FROM ship_munition_inandout_detail i
+        LEFT JOIN sys_user u ON i.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where i.delete_flag = 1
+        <if test="munitionInDetail.code != null and munitionInDetail.code != ''">
+            and i.code like CONCAT('%',#{munitionInDetail.code},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munitionInDetail.params.dataScope}
+        order by i.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.munition.entity.MunitionInDetailEntity">
+        SELECT i.* FROM ship_munition_inandout_detail i
+        LEFT JOIN sys_user u ON i.create_person = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where i.delete_flag = 1
+        <if test="munitionInDetail.code != null and munitionInDetail.code != ''">
+            and i.code like CONCAT('%',#{munitionInDetail.code},'%')
+        </if>
+        <!-- 数据范围过滤 -->
+        ${munitionInDetail.params.dataScope}
+    </select>
+
+
+</mapper>

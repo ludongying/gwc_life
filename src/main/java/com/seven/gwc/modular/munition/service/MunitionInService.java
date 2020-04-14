@@ -47,7 +47,7 @@ public interface MunitionInService extends IService<MunitionInEntity> {
      * @param munitionIn 实体对象
      * @param user 当前用户
      */
-    void editMunitionIn(MunitionInEntity munitionIn, ShiroUser user);
+    boolean editMunitionIn(MunitionInEntity munitionIn, ShiroUser user);
 
     /**
      * 获取入库表单最新标号

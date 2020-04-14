@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.seven.gwc.modular.munition.dao.MunitionInfoMapper;
 import com.seven.gwc.modular.munition.entity.MunitionInfoEntity;
 import com.seven.gwc.modular.munition.service.MunitionInfoService;
@@ -76,7 +77,14 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
 
     @Override
     public void deleteMunitionInfo(String munitionInfoId, ShiroUser user) {
-        munitionInfoMapper.deleteById(munitionInfoId);
+        MunitionInfoEntity munitionInfoEntity = munitionInfoMapper.selectById(munitionInfoId);
+        if (munitionInfoEntity != null) {
+            munitionInfoEntity.setDeleteFlag(false);
+            munitionInfoEntity.setSynFlag(false);
+            munitionInfoEntity.setUpdateDate(new Date());
+            munitionInfoEntity.setUpdatePerson(user.getId());
+        }
+        munitionInfoMapper.updateById(munitionInfoEntity);
     }
 
     @Override

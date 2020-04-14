@@ -1,5 +1,6 @@
 package com.seven.gwc.modular.munition.controller;
 
+import com.seven.gwc.core.state.ErrorEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageInfo;
@@ -80,11 +81,14 @@ public class MunitionInDetailController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<MunitionInDetailEntity> list(String munitionInDetailName) {
+    public BaseResultPage<MunitionInDetailEntity> list(MunitionInDetailEntity detailEntity, String munitionMainId) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<MunitionInDetailEntity> munitionInDetails = munitionInDetailService.selectMunitionInDetail(munitionInDetailName);
+        List<MunitionInDetailEntity> munitionInDetails = munitionInDetailService.selectMunitionInDetail(detailEntity,munitionMainId,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
         PageInfo pageInfo = new PageInfo<>(munitionInDetails);
+        Integer size = munitionInDetailService.getListSize(detailEntity,munitionMainId);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
@@ -104,9 +108,9 @@ public class MunitionInDetailController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam String munitionInDetailId) {
+    public BaseResult delete(@RequestParam String munitionInDetailId, String munitionInId ) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInDetailService.deleteMunitionInDetail(munitionInDetailId, user);
+        munitionInDetailService.deleteMunitionInDetail(munitionInDetailId,munitionInId, user);
         return SUCCESS;
     }
 
@@ -117,7 +121,9 @@ public class MunitionInDetailController extends BaseController {
     @ResponseBody
     public BaseResult update(MunitionInDetailEntity munitionInDetail) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInDetailService.editMunitionInDetail(munitionInDetail, user);
+        if(!munitionInDetailService.editMunitionInDetail(munitionInDetail, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_IN_MUNITION_CODE);
+        }
         return SUCCESS;
     }
 

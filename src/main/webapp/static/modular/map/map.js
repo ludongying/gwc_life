@@ -348,6 +348,13 @@
     //绘制执法船的轨迹点以及两点间连线
     function PointJSON(jsonArr) {
         let points = [];
+        let features=[];
+        let circleStyle = {radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1};
+        let style = {
+            weight: 1.5,
+            color:"#2B79E6",
+            opacity:0.6
+        };
         //遍历json数组
         for(let i=0;i<jsonArr.length;i++)
         {
@@ -357,37 +364,40 @@
             points.push(point);
             if(i!=(jsonArr.length-1))//最后一个点
             {
-                let circle = L.circle([jsonObj.lat,jsonObj.lon],{radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1});
-                circle.addTo(pointsGroup);
-                // bind event on marker
-                circle.on('click', function(e) {
-                    console.log(e);
-                    alert(jsonObj.lat);
-                })
-            }
-
-        }
-        let Line = {
-            "type": "FeatureCollection",
-            "features": [
-                {
+                // Define geojson features
+                let circleFeature = {
                     "type": "Feature",
+                    "properties": {
+                        "style": style
+                    },
                     "geometry": {
-                        "type": "LineString",
-                        "coordinates": points
+                        "type": "Point",
+                        "coordinates": [jsonObj.lon,jsonObj.lat]
                     }
-                }
-            ]
-        };
-
-        let lineGeo = L.geoJson(Line, {
-            style: {
-                weight: 1.5,
-                color:"#2B79E6",
-                opacity:0.6
+                };
+                features.push(circleFeature);
+                // let circle = L.circle([jsonObj.lat,jsonObj.lon],{radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1});
+                // circle.addTo(pointsGroup);
+                // // bind event on marker
+                // circle.on('click', function(e) {
+                //     console.log(e);
+                //     alert(jsonObj.lat);
+                // })
             }
-        });
-        lineGeo.addTo(pointsGroup);
+        }
+
+        let Line_points = {
+            "type": "Feature",
+            "properties": {
+                "style": style
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": points
+            }
+        };
+        features.push(Line_points);
+        return features.reverse();
     }
     //绘制执法船最新位置点
     //obj 点的位置信息
@@ -414,13 +424,6 @@
     //大圆计算公式
     function speeddisplay(obj) {
 
-        //设置线的属性
-        var lineStyle = {
-            "color": "#000000",
-            "weight": 1.5,
-            "opacity": 0.65
-        };
-
         //如果当前航速为0时，不绘制
         if (obj.speed == 0) {
             return null;
@@ -435,13 +438,23 @@
 
         var lon1 = obj1[1];//经度
         var lat1 = obj1[0];//纬度
+        //设置线的属性
+        let style = {
+            "color": "#000000",
+            "weight": 1.5,
+            "opacity": 0.65
+        };
+        let line = {
+            "type": "Feature",
+            "properties": {
+                "style": style
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [[obj.lon, obj.lat], [lon1, lat1]]
+            }
+        };
 
-        //添加线
-        var myLines = [{
-            "type": "LineString",
-            "coordinates": [[obj.lon, obj.lat], [lon1, lat1]]
-        }];
-        let line = L.geoJSON(myLines, { style: lineStyle });
         let HeadingIcon = new L.icon({
             iconUrl: 'common/plugins/map/images/shipheading.png',
             iconSize: [39, 57],
@@ -474,10 +487,27 @@
             // linesGroup.clearLayers();
             // 将String转为JSON
             let jsonArr = JSON.parse(data.content);
-            PointJSON(jsonArr);
+            let features = PointJSON(jsonArr);
             let heading = speeddisplay(jsonArr[jsonArr.length-1]);
-            heading[0].addTo(pointsGroup);
+            let headingline = heading[0];
+            features.push(headingline);
             heading[1].addTo(pointsGroup);
+            let Line = {
+                "type": "FeatureCollection",
+                "features": features
+            };
+
+            let lineGeo = L.geoJson(Line, {
+                pointToLayer: function (feature, latlng){
+                    // return L.circleMarker(latlng, geojsonMarkerOptions);
+                    return L.circle(latlng,{radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1});
+                },
+                style: function (feature) {
+                    return feature.properties.style;
+                }
+            });
+            lineGeo.addTo(pointsGroup);
+
             LastPointJSON(jsonArr[jsonArr.length-1]).addTo(pointsGroup);
             map.addLayer(pointsGroup);
         }

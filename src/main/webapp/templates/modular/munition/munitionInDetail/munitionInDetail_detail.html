@@ -1,0 +1,110 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/munition/munitionInDetail/munitionInDetail_detail.js"]}){
+<div class="layui-tab-content">
+    <form id="munitionInDetailForm" lay-filter="munitionInDetailForm" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">出入库物资列表编码</label>
+                <div class="layui-input-block">
+                    <input id="id" name="id" placeholder="请输入出入库物资列表编码" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">物资编码</label>
+                <div class="layui-input-block">
+                    <input id="munitionId" name="munitionId" placeholder="请输入物资编码" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">物资名称</label>
+                <div class="layui-input-block">
+                    <input id="munitionName" name="munitionName" placeholder="请输入物资名称" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">仓库编码</label>
+                <div class="layui-input-block">
+                    <input id="depotId" name="depotId" placeholder="请输入仓库编码" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">仓库名称</label>
+                <div class="layui-input-block">
+                    <input id="depotName" name="depotName" placeholder="请输入仓库名称" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">每件数量</label>
+                <div class="layui-input-block">
+                    <input id="specQuantity" name="specQuantity" placeholder="请输入每件数量" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">总数量</label>
+                <div class="layui-input-block">
+                    <input id="totalNum" name="totalNum" placeholder="请输入总数量" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">单位</label>
+                <div class="layui-input-block">
+                    <input id="unit" name="unit" placeholder="请输入单位" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">删除标记</label>
+                <div class="layui-input-block">
+                    <input id="deleteFlag" name="deleteFlag" placeholder="请输入删除标记" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">同步标记</label>
+                <div class="layui-input-block">
+                    <input id="synFlag" name="synFlag" placeholder="请输入同步标记" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">创建人</label>
+                <div class="layui-input-block">
+                    <input id="createPerson" name="createPerson" placeholder="请输入创建人" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">创建时间</label>
+                <div class="layui-input-block">
+                    <input id="createDate" name="createDate" placeholder="请输入创建时间" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">修改人</label>
+                <div class="layui-input-block">
+                    <input id="updatePerson" name="updatePerson" placeholder="请输入修改人" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <label class="layui-form-label">修改时间</label>
+                <div class="layui-input-block">
+                    <input id="updateDate" name="updateDate" placeholder="请输入修改时间" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+@}
+

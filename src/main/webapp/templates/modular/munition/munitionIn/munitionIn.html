@@ -7,7 +7,7 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="munitionInandoutName" class="layui-input" type="text" placeholder="物资入库名称"/>
+                                <input id="munitionInName" class="layui-input" type="text" placeholder="表单编号"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn">搜索</button>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="layui-table" id="munitionInandoutTable" lay-filter="munitionInandoutTable"></table>
+                    <table class="layui-table" id="munitionInTable" lay-filter="munitionInTable"></table>
                 </div>
             </div>
         </div>
@@ -29,7 +29,13 @@
 
 <script type="text/html" id="tableBar">
     @if(shiro.hasPermission("/munitionIn/detail")){
-    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
+    @}
+    @if(shiro.hasPermission("/munitionIn/approve")){
+    <a id="approve" class="layui-btn layui-btn-xs" lay-event="approve">审核</a>
+    @}
+    @if(shiro.hasPermission("/munitionIn/submit")){
+    <a id="submit" class="layui-btn layui-btn-xs" lay-event="submit">提交</a>
     @}
     @if(shiro.hasPermission("/munitionIn/update")){
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>

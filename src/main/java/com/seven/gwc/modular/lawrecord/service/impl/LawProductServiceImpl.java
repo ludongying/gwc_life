@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.seven.gwc.core.base.BaseResult;
-import com.seven.gwc.core.util.FileUtil;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.dao.*;
 import com.seven.gwc.modular.lawrecord.dto.*;
@@ -13,6 +12,10 @@ import com.seven.gwc.modular.lawrecord.entity.*;
 import com.seven.gwc.modular.lawrecord.enums.*;
 import com.seven.gwc.modular.lawrecord.service.*;
 import com.seven.gwc.modular.lawrecord.vo.*;
+import com.seven.gwc.modular.sailor.dao.CertificateMapper;
+import com.seven.gwc.modular.sailor.dao.PersonMapper;
+import com.seven.gwc.modular.sailor.service.PersonService;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -46,6 +49,10 @@ public class LawProductServiceImpl implements LawProductService {
     private DecisionSafeMapper decisionSafeMapper;
     @Autowired
     private EvidenceMapper evidenceMapper;
+    @Autowired
+    private PersonMapper personMapper;
+    @Autowired
+    private CertificateMapper certificateMapper;
 
     @Autowired
     private AgencyService agencyService;
@@ -61,29 +68,31 @@ public class LawProductServiceImpl implements LawProductService {
     private InquireSafeService inquireSafeService;
     @Autowired
     private DecisionSafeService decisionSafeService;
+    @Autowired
+    private PersonService personService;
     @Value("${FILE_UPLOAD_PATH_FILE}")
     private String uploadPathFile;
 
 
     @Override
-    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
+    public BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquisitionEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList) throws ParseException {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.PRODUCE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
-        List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
+        // List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
-        List<InquireEntity> inquireEntityList = this.inquireEntityList(personalId, lawRecordEntity.getId(), null);
+        List<InquireEntity> inquireEntityList = this.inquireEntityList(personalId, lawRecordEntity.getId(), caseInquiryList);
         InquisitionEntity inquisitionEntity = this.inquisitionVOToInquisition(personalId, lawRecordEntity.getId(), appInquisitionEntityVO);
         DecisionEntity decisionEntity = this.decisionVOToDecisionEntity(personalId, lawRecordEntity.getId(), appDecisionVO);
         LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
 
-        for (EvidenceEntity evidenceEntity : evidenceEntityList) {
+        /*for (EvidenceEntity evidenceEntity : evidenceEntityList) {
             evidenceMapper.insert(evidenceEntity);
-        }
+        }*/
         for (InquireEntity inquireEntity : inquireEntityList) {
             inquireMapper.insert(inquireEntity);
         }
-        agencyMapper.insert(agencyEntity);
+        agencyMapper.updateById(agencyEntity);
         operatorMapper.insert(operatorEntity1);
         operatorMapper.insert(operatorEntity2);
         inquisitionMapper.insert(inquisitionEntity);
@@ -96,15 +105,15 @@ public class LawProductServiceImpl implements LawProductService {
     public BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
         LawRecordEntity lawRecordEntity = lawRecordService.createLawRecord(personalId, LawTypeEnum.SAFE.getCode());
         AgencyEntity agencyEntity = this.agencyVOToAgency(personalId, lawRecordEntity.getId(), appAgencyVO);
-        List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
+        //List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, lawRecordEntity.getId(), evidenceList);
         OperatorEntity operatorEntity1 = this.operatorVOToOperator1(personalId, lawRecordEntity.getId(), appOperatorVO);
         OperatorEntity operatorEntity2 = this.operatorVOToOperator2(personalId, lawRecordEntity.getId(), appOperatorVO);
         InquireSafeEntity inquireSafeEntity = this.inquireSafeVOToInquireSafe(personalId, lawRecordEntity.getId(), appInquireSafeVO);
         DecisionSafeEntity decisionSafeEntity = this.decisionSafeVOToDecisionSafe(personalId, lawRecordEntity.getId(), appDecisionSafeVO);
         LawRecordEntity lawRecord = this.lawRecordVOToLawRecord(lawRecordEntity, appReasonVO);
-        for (EvidenceEntity evidenceEntity : evidenceEntityList) {
+        /*for (EvidenceEntity evidenceEntity : evidenceEntityList) {
             evidenceMapper.insert(evidenceEntity);
-        }
+        }*/
         lawRecordMapper.updateById(lawRecord);
         agencyMapper.insert(agencyEntity);
         operatorMapper.insert(operatorEntity1);
@@ -125,10 +134,17 @@ public class LawProductServiceImpl implements LawProductService {
             AgencyEntity agencyEntity = agencyMapper.selectById(lawRecordEntity.getId());
             if (ToolUtil.isNotEmpty(agencyEntity)) {
                 lawRecordVO.setId(lawRecordEntity.getId());
-                lawRecordVO.setLawCaseCode(agencyEntity.getLawCaseFineCode()+"" + agencyEntity.getLawCaseCode());
-                lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
+                lawRecordVO.setLawCaseCode(agencyEntity.getShortName() + "罚" + agencyEntity.getLawCaseFineCode() + agencyEntity.getLawCaseCode() + "号");
+                if (ToolUtil.isNotEmpty(agencyEntity.getLawCaseSource())) {
+                    lawRecordVO.setLawCaseSource(LawCaseSourceEnum.findByCode(agencyEntity.getLawCaseSource()).getMessage());
+                } else {
+                    lawRecordVO.setLawCaseSource("");
+                }
+                lawRecordVO.setLawType(LawTypeEnum.findByCode(lawRecordEntity.getLawType()).getMessage());
+                lawRecordVO.setLawCaseAddr(agencyEntity.getLawCaseAddr());
                 lawRecordVO.setLawCaseLon(agencyEntity.getLawCaseLon());
                 lawRecordVO.setLawCaseLat(agencyEntity.getLawCaseLat());
+                lawRecordVO.setStatus(RecordStatusEnum.findByCode(lawRecordEntity.getStatus()).getMessage());
                 lawRecordVO.setLawCaseDate(agencyEntity.getLawCaseDate());
             }
             list.add(lawRecordVO);
@@ -367,6 +383,12 @@ public class LawProductServiceImpl implements LawProductService {
     }
 
     @Override
+    public List<PersonVO> getOperatorInfoList() {
+        return personService.listLawPersons();
+
+    }
+
+    @Override
     public List<EnumVO> getInvestigatePositionList() {
         List<EnumVO> list = new ArrayList<>();
         for (InvestigatePositionEnum vo : InvestigatePositionEnum.values()) {
@@ -506,12 +528,13 @@ public class LawProductServiceImpl implements LawProductService {
             evidenceEntity.setRecordId(id);
             evidenceEntity.setEvidenceContent(jsonObject.getString("evidenceContent"));
             evidenceEntity.setEvidenceDate(formatter.parse(jsonObject.getString("evidenceDate")));
-
+            JSONObject object = new JSONObject();
             for(int j=0; j<fileArray.size(); j++){
                 JSONObject fileObject = fileArray.getJSONObject(j);
-                fileName = FileUtil.base64ToFile(uploadPathFile, fileObject.getString("fileName"));
+                object.put("fileName", fileObject.getString("fileName"));
+                //fileName = FileUtil.base64ToFile(uploadPathFile, fileObject.getString("fileName"));
             }
-            evidenceEntity.setEvidenceFilePath(fileName);
+            evidenceEntity.setEvidenceFilePath(object.toJSONString());
             list.add(evidenceEntity);
         }
         return list;
@@ -520,37 +543,68 @@ public class LawProductServiceImpl implements LawProductService {
     private List<InquireEntity> inquireEntityList(String personalId, String id, String data) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<InquireEntity> list = new ArrayList<>();
-        JSONArray jsonArray = JSONArray.parseArray("data");
+        JSONArray jsonArray = JSONArray.parseArray(data);
         for(int i=0; i<jsonArray.size(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             InquireEntity inquireEntity = new InquireEntity();
+            if(i==0){
+                inquireEntity.setId(id);
+            }else{
+                inquireEntity.setId(cn.hutool.core.lang.UUID.fastUUID().toString(true));
+            }
             inquireEntity.setRecordId(id);
             inquireEntity.setInvestigateName(jsonObject.getString("investigateName"));
-            inquireEntity.setInvestigateSex(Integer.parseInt(jsonObject.getString("investigateSex")));
-            inquireEntity.setInvestigateAge(Integer.parseInt(jsonObject.getString("investigateAge")));
-            inquireEntity.setInvestigatePosition(Integer.parseInt(jsonObject.getString("investigatePosition")));
+            if (ToolUtil.isNotEmpty(jsonObject.getString("investigateSex"))) {
+                inquireEntity.setInvestigateSex(Integer.parseInt(jsonObject.getString("investigateSex")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("investigateAge"))) {
+                inquireEntity.setInvestigateAge(Integer.parseInt(jsonObject.getString("investigateAge")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("investigatePosition"))) {
+                inquireEntity.setInvestigatePosition(Integer.parseInt(jsonObject.getString("investigatePosition")));
+            }
             inquireEntity.setInvestigateTel(jsonObject.getString("investigateTel"));
             inquireEntity.setInvestigateAddr(jsonObject.getString("investigateAddr"));
-            inquireEntity.setIdentityCase(Integer.parseInt(jsonObject.getString("identityCase")));
+            if (ToolUtil.isNotEmpty(jsonObject.getString("identityCase"))) {
+                inquireEntity.setIdentityCase(Integer.parseInt(jsonObject.getString("identityCase")));
+            }
             inquireEntity.setIdentityCard(jsonObject.getString("identityCard"));
             inquireEntity.setShipName(jsonObject.getString("shipName"));
             inquireEntity.setShipOwner(jsonObject.getString("shipOwner"));
-            inquireEntity.setShipMember(Integer.parseInt(jsonObject.getString("shipMember")));
-            inquireEntity.setShipRealType(Integer.parseInt(jsonObject.getString("shipRealType")));
-            inquireEntity.setShipRatedType(Integer.parseInt(jsonObject.getString("shipRatedType")));
-            inquireEntity.setShipRealPower(Double.parseDouble(jsonObject.getString("shipRealPower")));
-            inquireEntity.setShipRatedPower(Double.parseDouble(jsonObject.getString("shipRatedPower")));
-            inquireEntity.setShipRealPowerUnit(Integer.parseInt(jsonObject.getString("shipRealPowerUnit")));
-            inquireEntity.setShipRatedPowerUnit(Integer.parseInt(jsonObject.getString("shipRatedPowerUnit")));
-            inquireEntity.setShipInfo(jsonObject.getString("shipInfo"));
-            inquireEntity.setShipStatus(Integer.parseInt(jsonObject.getString("shipStatus")));
-            inquireEntity.setShipOutDate(formatter.parse(jsonObject.getString("shipOutDate")));
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipMember"))) {
+                inquireEntity.setShipMember(Integer.parseInt(jsonObject.getString("shipMember")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipRealType"))) {
+                inquireEntity.setShipRealType(Integer.parseInt(jsonObject.getString("shipRealType")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipRatedType"))) {
+                inquireEntity.setShipRatedType(Integer.parseInt(jsonObject.getString("shipRatedType")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipRealPower"))) {
+                inquireEntity.setShipRealPower(Double.parseDouble(jsonObject.getString("shipRealPower")));  //""
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipRatedPower"))) {
+                inquireEntity.setShipRatedPower(Double.parseDouble(jsonObject.getString("shipRatedPower")));  //""
+            }
+            inquireEntity.setShipRealPowerUnit(2);  //null
+            inquireEntity.setShipRatedPowerUnit(2);  //null
+            inquireEntity.setShipInfo(jsonObject.getString("shipInfo"));  //""
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipStatus"))) {
+                inquireEntity.setShipStatus(Integer.parseInt(jsonObject.getString("shipStatus")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipOutDate"))) {
+                inquireEntity.setShipOutDate(formatter.parse(jsonObject.getString("shipOutDate")));
+            }
+
             inquireEntity.setShipOutPort(jsonObject.getString("shipOutPort"));
             inquireEntity.setShipGoodsCount(jsonObject.getString("shipGoodsCount"));
             inquireEntity.setShipGoodsValue(jsonObject.getString("shipGoodsValue"));
-            inquireEntity.setShipGenerateCount(Integer.parseInt(jsonObject.getString("shipGenerateCount")));
-            inquireEntity.setShipFishAreaDate(formatter.parse(jsonObject.getString("shipFishAreaDate")));
-
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipGenerateCount"))) {
+                inquireEntity.setShipGenerateCount(Integer.parseInt(jsonObject.getString("shipGenerateCount")));
+            }
+            if (ToolUtil.isNotEmpty(jsonObject.getString("shipFishAreaDate"))) {
+                inquireEntity.setShipFishAreaDate(formatter.parse(jsonObject.getString("shipFishAreaDate")));
+            }
             inquireEntity.setCreateDate(new Date());
             inquireEntity.setCreatePerson(personalId);
             inquireEntity.setDeleteFlag(true);
@@ -563,6 +617,7 @@ public class LawProductServiceImpl implements LawProductService {
     private OperatorEntity operatorVOToOperator1(String personalId, String id, AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
         operatorEntity.setRecordId(id);
+        operatorEntity.setLawPersonId(appOperatorVO.getLawPersonId1());
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName1());
         operatorEntity.setLawCredentialCode(appOperatorVO.getLawCredentialCode1());
         operatorEntity.setCreateDate(new Date());
@@ -575,6 +630,7 @@ public class LawProductServiceImpl implements LawProductService {
     private OperatorEntity operatorVOToOperator2(String personalId, String id, AppOperatorVO appOperatorVO) {
         OperatorEntity operatorEntity = new OperatorEntity();
         operatorEntity.setRecordId(id);
+        operatorEntity.setLawPersonId(appOperatorVO.getLawPersonId2());
         operatorEntity.setLawPersonName(appOperatorVO.getLawPersonName2());
         operatorEntity.setLawCredentialCode(appOperatorVO.getLawCredentialCode2());
         operatorEntity.setCreateDate(new Date());

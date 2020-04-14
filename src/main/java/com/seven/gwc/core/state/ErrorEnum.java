@@ -62,6 +62,8 @@ public enum ErrorEnum {
     ERROR_ONLY_EQUIP_CODE(5003,"设备出厂编码已存在"),
     ERROR_ONLY_MAINTAIN_CODE(5004,"设备维保编号已存在"),
     ERROR_ONLY_MUNITION_CODE(5005,"物资编码已存在"),
+    ERROR_ONLY_IN_CODE(5006,"入库表单编号已存在"),
+    ERROR_ONLY_OUT_CODE(5007,"出库表单编号已存在"),
     /********************************✨    部门(6000 * 6999)   ✨*************************************/
     NO_FISH_AREA_DATA(6000, "获取渔区数据失败"),
     NO_FISH_FORBIDDEN_AREA_DATA(6001, "获取禁渔区数据失败"),

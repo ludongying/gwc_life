@@ -1,45 +1,97 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/modular/munition/munitionIn/munitionIn_edit.js"]}){
 <div class="layui-tab-content">
-    <form id="munitionInandoutForm" lay-filter="munitionInandoutForm" class="layui-form">
+    <form id="munitionInForm" lay-filter="munitionInForm" class="layui-form">
         <div class="layui-row layui-col-space10">
 
             <input name="id" type="hidden"/>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">出入库表单编码<span style="color: red;">*</span></label>
+                <label class="layui-form-label">表单编码<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入出入库表单编码" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="code" name="code" placeholder="保存后自动生成" type="text" class="layui-input" lay-verify="required" required readonly/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">仓库操作类型：入库为0，出库为1（枚举）<span style="color: red;">*</span></label>
+                <label class="layui-form-label">申请人</label>
                 <div class="layui-input-block">
-                    <input id="actionType" name="actionType" placeholder="请输入仓库操作类型：入库为0，出库为1（枚举）" type="text" class="layui-input" lay-verify="required" required/>
+                    <!--                    <input id="maintainPerson" name="maintainPerson" placeholder="请输入负责人员" type="text"-->
+                    <!--                           class="layui-input"/>-->
+                    <select id="applyPerson" name="applyPerson" disabled>
+                        <option value="">请选择申请人</option>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">出入库物资列表详情id<span style="color: red;">*</span></label>
+                <label class="layui-form-label">申请日期</label>
                 <div class="layui-input-block">
-                    <input id="detailId" name="detailId" placeholder="请输入出入库物资列表详情id" type="text" class="layui-input" lay-verify="required" required/>
+                    <input id="applyTime" name="applyTime" placeholder="请输入申请日期" readonly type="text"
+                           class="layui-input date-icon"/>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                <label class="layui-form-label">物资类型<span style="color: red;">*</span></label>
                 <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                    <select id="munitionType" name="munitionType" required></select>
+                </div>
+            </div>
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">申请缘由<span style="color: red;">*</span></label>
+                <div class="layui-input-block">
+                    <input id="content" name="content" placeholder="请输入申请缘由" class="layui-input"
+                           lay-verify="required" required></input>
                 </div>
             </div>
 
             <div class="layui-col-md6">
-                <label class="layui-form-label">审核状态<span style="color: red;">*</span></label>
+                <label class="layui-form-label">入库人</label>
                 <div class="layui-input-block">
-                    <input id="status" name="status" placeholder="请输入审核状态" type="text" class="layui-input" lay-verify="required" required/>
+                    <!--                    <input id="maintainPerson" name="maintainPerson" placeholder="请输入负责人员" type="text"-->
+                    <!--                           class="layui-input"/>-->
+                    <select id="inOutPerson" name="InPerson">
+                        <option value="">请选择入库人</option>
+                    </select>
                 </div>
             </div>
 
+            <div class="layui-col-md6">
+                <label class="layui-form-label">入库日期</label>
+                <div class="layui-input-block">
+                    <input id="inOutTime" name="inOutTime" placeholder="请输入入库日期" readonly type="text"
+                           class="layui-input date-icon"/>
+                </div>
+            </div>
+
+            <!--            <div class="layui-col-md6">-->
+            <!--                <label class="layui-form-label">仓库操作类型：入库为0，出库为1（枚举）<span style="color: red;">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input id="actionType" name="actionType" placeholder="请输入仓库操作类型：入库为0，出库为1（枚举）" type="text" class="layui-input" lay-verify="required" required/>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <!--            <div class="layui-col-md6">-->
+            <!--                <label class="layui-form-label">出入库物资列表详情id<span style="color: red;">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input id="detailId" name="detailId" placeholder="请输入出入库物资列表详情id" type="text" class="layui-input" lay-verify="required" required/>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <div class="layui-col-md12">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" autocomplete="off"/>
+                </div>
+            </div>
+
+            <!--            <div class="layui-col-md6">-->
+            <!--                <label class="layui-form-label">审核状态<span style="color: red;">*</span></label>-->
+            <!--                <div class="layui-input-block">-->
+            <!--                    <input id="status" name="status" placeholder="请输入审核状态" type="text" class="layui-input" lay-verify="required" required/>-->
+            <!--                </div>-->
+            <!--            </div>-->
 
             <div class="layui-col-md12 text-right">
                 <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">&emsp;取消&emsp;</button>

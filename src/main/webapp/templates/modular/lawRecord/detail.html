@@ -173,6 +173,29 @@
                                         </div>
 
                                         <div class="layui-inline">
+                                            <label class="layui-form-label">案发经纬度</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" value="${agency.lawCaseLonLatStr!''}"
+                                                       autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="layui-form-item">
+
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">询问时间</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" id="inquireDate" name="inquireDateStr"
+                                                       value="${agency.inquireDateStr!''}" autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-inline">
                                             <label class="layui-form-label">案发时间</label>
                                             <div class="layui-input-inline bg_input">
                                                 @if(isNotEmpty(agency.lawCaseDate)){
@@ -186,32 +209,11 @@
                                             </div>
                                         </div>
 
-                                    </div>
-
-                                    <div class="layui-form-item">
-
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">案发经纬度</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" value="${agency.lawCaseLonLatStr!''}"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-
                                         <div class="layui-inline">
                                             <label class="layui-form-label">案发地点</label>
                                             <div class="layui-input-inline">
                                                 <input type="text" name="lawCaseAddr" value="${agency.lawCaseAddr!''}"
                                                        autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">询问时间</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" id="inquireDate" name="inquireDateStr"
-                                                       value="${agency.inquireDateStr!''}" autocomplete="off"
-                                                       class="layui-input">
                                             </div>
                                         </div>
                                     </div>
@@ -472,13 +474,16 @@
                                                        class="layui-input">
                                             </div>
                                         </div>
+
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">手机号</label>
+                                            <label class="layui-form-label">身份证</label>
                                             <div class="layui-input-inline">
-                                                <input name="investigateTel" value="${item.investigateTel!''}"
-                                                       autocomplete="off" class="layui-input">
+                                                <input type="text" name="identityCard"
+                                                       value="${item.identityCard!''}" autocomplete="off"
+                                                       class="layui-input">
                                             </div>
                                         </div>
+
                                         <div class="layui-inline">
                                             <label class="layui-form-label">身份证号码</label>
                                             <div class="layui-input-inline">
@@ -489,6 +494,14 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">手机号</label>
+                                            <div class="layui-input-inline">
+                                                <input name="investigateTel" value="${item.investigateTel!''}"
+                                                       autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
                                         <div class="layui-inline" id="investigate_addr">
                                             <label class="layui-form-label">住址</label>
                                             <div class="layui-input-inline">
@@ -662,7 +675,7 @@
                         <div class="layui-card-header card_header_title">&nbsp;&nbsp;&nbsp;勘验笔录</div>
                         <div class="layui-card-body">
                             <div class="layui-card">
-                                <!--                                <div class="layui-card-header"></div>-->
+                                <div class="layui-card-header">渔船情况</div>
                                 <div class="layui-card-body">
                                     <div class="layui-form-item">
 
@@ -704,7 +717,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">师傅携带证件</label>
+                                            <label class="layui-form-label">是否携带证件</label>
                                             <div class="layui-input-inline">
                                                 <input type="text" name="shipCaseCredentials"
                                                        value="${inquisition.shipCaseCredentialsStr!''}"
@@ -723,17 +736,9 @@
                                 </div>
                             </div>
                             <div class="layui-card">
-                                <div class="layui-card-header">当事人在现场检查时</div>
+                                <div class="layui-card-header">现场检查</div>
                                 <div class="layui-card-body">
                                     <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">捕捞许可编号</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="shipCredentialsCode"
-                                                       value="${inquisition.shipCredentialsCode!''}" autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-                                        </div>
                                         <div class="layui-inline">
                                             <label class="layui-form-label">船号</label>
                                             <div class="layui-input-inline">
@@ -741,6 +746,16 @@
                                                        autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
+
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">实际主机功率</label>
+                                            <div class="layui-input-inline">
+                                                <input placeholder="" name="shipPower"
+                                                       value="${inquisition.shipPower!''}" autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
+
                                         <div class="layui-inline">
                                             <label class="layui-form-label">作业方式(人)</label>
                                             <div class="layui-input-inline">
@@ -751,8 +766,15 @@
                                         </div>
                                     </div>
 
-
                                     <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">捕捞许可编号</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="shipCredentialsCode"
+                                                       value="${inquisition.shipCredentialsCode!''}" autocomplete="off"
+                                                       class="layui-input">
+                                            </div>
+                                        </div>
 
                                         <div class="layui-inline">
                                             <label class="layui-form-label">持证人姓名</label>
@@ -761,16 +783,6 @@
                                                        value="${inquisition.shipCredentialsOwner!''}" autocomplete="off"
                                                        class="layui-input">
                                             </div>
-                                        </div>
-
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">主机功率(马力)</label>
-                                            <div class="layui-input-inline">
-                                                <input placeholder="" name="shipPower"
-                                                       value="${inquisition.shipPower!''}" autocomplete="off"
-                                                       class="layui-input">
-                                            </div>
-
                                         </div>
 
                                         <div class="layui-inline">
@@ -1219,16 +1231,17 @@
                                     </div>
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">情节严重性</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="severity" value="${decision.severityStr!''}"
-                                                       autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-inline">
                                             <label class="layui-form-label">是否暴力抗法</label>
                                             <div class="layui-input-inline">
                                                 <input name="caseViolenceLaw" value="${decision.caseViolenceLawStr!''}"
+                                                       autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">情节严重性</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="severity" value="${decision.severityStr!''}"
                                                        autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
@@ -1378,17 +1391,17 @@
 
                                     <div class="layui-form-item">
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">情节严重性</label>
+                                            <label class="layui-form-label">是否暴力抗法</label>
                                             <div class="layui-input-inline">
-                                                <input type="text" name="severity" value="${decision.severityStr!''}"
+                                                <input name="caseViolenceLaw" value="${decision.caseViolenceLawStr!''}"
                                                        autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
 
                                         <div class="layui-inline">
-                                            <label class="layui-form-label">是否暴力抗法</label>
+                                            <label class="layui-form-label">情节严重性</label>
                                             <div class="layui-input-inline">
-                                                <input name="caseViolenceLaw" value="${decision.caseViolenceLawStr!''}"
+                                                <input type="text" name="severity" value="${decision.severityStr!''}"
                                                        autocomplete="off" class="layui-input">
                                             </div>
                                         </div>
@@ -1430,9 +1443,7 @@
                         @}
                     </div>
                 </div>
-
             </form>
-
         </div>
     </div>
 </div>

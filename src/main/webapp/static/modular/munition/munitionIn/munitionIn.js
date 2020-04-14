@@ -12,35 +12,50 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 物资入库管理
      */
-    var MunitionInandout = {
-        tableId: "munitionInandoutTable",
+    var MunitionIn = {
+        tableId: "munitionInTable",
         condition: {
-            munitionInandoutName: ""
+            code: ""
         }
     };
 
     /**
      * 初始化表格的列
      */
-    MunitionInandout.initColumn = function () {
+    MunitionIn.initColumn = function () {
         return [[
-            {title: '出入库表单编码', field: 'id', align: "center"},
-            {title: '仓库操作类型：入库为0，出库为1（枚举）', field: 'actionType', align: "center"},
-            {title: '出入库物资列表详情id', field: 'detailId', align: "center"},
-            {title: '备注', field: 'remark', align: "center"},
-            {title: '审核状态', field: 'status', align: "center"},
+            {title: '入库编号', field: 'code', align: "center", templet: function (d) {
+                var url = Feng.ctxPath + "/munitionInDetail?code=" + d.code + "&type=" + d.munitionType;
+                return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
+            }},
+            {title: '物资类型', field: 'munitionTypeDesp', align: "center"},
+            {title: '申请缘由', field: 'content', align: "center"},
+            {title: '申请人', field: 'applyPersonDesp', align: "center"},
+            {title: '入库人', field: 'inOutPersonDesp', align: "center"},
+            {title: '入库日期', field: 'inOutTime', align: "center"},
+            {title: '审核状态', field: 'status', align: "center", templet: function (d) {
+                if(d.status === 0){
+                    return "<div> 已保存 </div>";
+                }else if(d.status === 1){
+                    return "<div> 已提交 </div>";
+                }else if(d.status === 2){
+                    return "<div> 已归档 </div>";;
+                }else{
+                    return "<div></div>";
+                }
+            }},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
 
     // 渲染表格
     var tableResult = table.render({
-        elem: '#' + MunitionInandout.tableId,
+        elem: '#' + MunitionIn.tableId,
         url: Feng.ctxPath + '/munitionIn/list',
         page: true,
         height: "full-97",
         cellMinWidth: 100,
-        cols: MunitionInandout.initColumn()
+        cols: MunitionIn.initColumn()
     });
 
     /**
@@ -48,11 +63,11 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     // 搜索按钮点击事件
     $('#btnSearch').click(function () {
-        MunitionInandout.search();
+        MunitionIn.search();
     });
     // 重置按钮点击事件
     $('#btnReset').click(function () {
-        MunitionInandout.btnReset();
+        MunitionIn.btnReset();
     });
 
 
@@ -61,77 +76,76 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
-        MunitionInandout.openAddMunitionInandout();
+        MunitionIn.openAddMunitionIn();
     });
 
 
     /**
      * 工具条点击事件
      */
-    table.on('tool(' + MunitionInandout.tableId + ')', function (obj) {
+    table.on('tool(' + MunitionIn.tableId + ')', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
 
         if (layEvent === 'edit') {
-            MunitionInandout.onEditMunitionInandout(data);
+            MunitionIn.onEditMunitionIn(data);
         } else if (layEvent === 'delete') {
-            MunitionInandout.onDeleteMunitionInandout(data);
-        } else if (layEvent === 'detail') {
-            MunitionInandout.onDetailMunitionInandout(data);
+            MunitionIn.onDeleteMunitionIn(data);
+        } else if (layEvent === 'inMunition') {
+            MunitionIn.onMunitionIn(data);
         }
     });
-
 
     /**
      * 点击搜索按钮
      */
-    MunitionInandout.search = function () {
+    MunitionIn.search = function () {
         var queryData = {};
-        queryData['munitionInandoutName'] = $("#munitionInandoutName").val().trim();
-        table.reload(MunitionInandout.tableId, {where: queryData});
+        queryData['code'] = $("#munitionInName").val().trim();
+        table.reload(MunitionIn.tableId, {where: queryData});
     };
 
     /**
      * 重置查询条件
      */
-    MunitionInandout.btnReset = function () {
-        $("#munitionInandoutName").val("");
+    MunitionIn.btnReset = function () {
+        $("#munitionInName").val("");
     };
 
     /**
      * 弹出增加物资入库
      */
-    MunitionInandout.openAddMunitionInandout = function () {
+    MunitionIn.openAddMunitionIn = function () {
         func.open({
             title: '增加物资入库',
             area: ['1000px', '500px'],
             content: Feng.ctxPath + '/munitionIn/munitionIn_add',
-            tableId: MunitionInandout.tableId
+            tableId: MunitionIn.tableId
         });
     };
 
     /**
      * 点击编辑物资入库
      */
-    MunitionInandout.onEditMunitionInandout = function (data) {
+    MunitionIn.onEditMunitionIn = function (data) {
         func.open({
             title: '编辑物资入库',
             area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/munitionIn/munitionIn_edit?munitionInandoutId=' + data.id,
-            tableId: MunitionInandout.tableId
+            content: Feng.ctxPath + '/munitionIn/munitionIn_edit?munitionInId=' + data.id,
+            tableId: MunitionIn.tableId
         });
     };
 
     /**
-     * 点击查看物资入库
+     * 点击入库
      */
-    MunitionInandout.onDetailMunitionInandout = function (data) {
-        func.open({
-            title: '查看物资入库',
-            area: ['1000px', '500px'],
-            content: Feng.ctxPath + '/munitionIn/munitionIn_detail?munitionInandoutId=' + data.id,
-            tableId: MunitionInandout.tableId
-        });
+    MunitionIn.onMunitionIn = function (data) {
+        // func.open({
+        //     title: '查看物资入库',
+        //     area: ['1000px', '500px'],
+        //     content: Feng.ctxPath + '/munitionIn/munitionIn_detail?munitionInId=' + data.id,
+        //     tableId: MunitionIn.tableId
+        // });
     };
 
 
@@ -140,19 +154,19 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      *
      * @param data 点击按钮时候的行数据
      */
-    MunitionInandout.onDeleteMunitionInandout = function (data) {
+    MunitionIn.onDeleteMunitionIn = function (data) {
         Feng.confirm("您确定要删除所选数据吗？", function () {
-            var ajax = new $ax(Feng.ctxPath + "/munitionInandout/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/munitionIn/delete", function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
-                    table.reload(MunitionInandout.tableId);
+                    table.reload(MunitionIn.tableId);
                 } else {
                     Feng.error(data.message);
                 }
             }, function (data) {
                 Feng.error("删除失败!" + data.message + "!");
             });
-            ajax.set("munitionInandoutId", data.id);
+            ajax.set("munitionInId", data.id);
             ajax.start();
         });
     };

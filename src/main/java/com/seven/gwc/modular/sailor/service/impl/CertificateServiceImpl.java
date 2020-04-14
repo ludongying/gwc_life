@@ -136,16 +136,18 @@ public class CertificateServiceImpl extends ServiceImpl<CertificateMapper, Certi
         LambdaQueryWrapper<PersonEntity> lamdaQueryPerson = Wrappers.lambdaQuery();
         lamdaQueryPerson.eq(PersonEntity::getId, personId);
         PersonEntity personEntity = personMapper.selectOne(lamdaQueryPerson);
-        String certificateids = personEntity.getCertificateId();
-        if (certificateids == null || certificateids.isEmpty()) {
-            certificateids = certificate.getId();
-        } else {
-            certificateids += FileUtils.file_2_file_sep + certificate.getId();
+        if(personEntity!=null){
+            String certificateids = personEntity.getCertificateId();
+            if (certificateids == null || certificateids.isEmpty()) {
+                certificateids = certificate.getId();
+            } else {
+                certificateids += FileUtils.file_2_file_sep + certificate.getId();
+            }
+            personEntity.setCertificateId(certificateids);
+            personEntity.setUpdateDate(new Date());
+            personEntity.setUpdatePerson(user.getId());
+            personMapper.updateById(personEntity);
         }
-        personEntity.setCertificateId(certificateids);
-        personEntity.setUpdateDate(new Date());
-        personEntity.setUpdatePerson(user.getId());
-        personMapper.updateById(personEntity);
         return true;
     }
 

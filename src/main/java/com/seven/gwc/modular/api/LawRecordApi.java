@@ -4,14 +4,12 @@ import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.modular.lawrecord.enums.SafeReasonEnum;
 import com.seven.gwc.modular.lawrecord.service.LawProductService;
 import com.seven.gwc.modular.lawrecord.vo.*;
+import com.seven.gwc.modular.sailor.vo.PersonVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -27,9 +25,9 @@ public class LawRecordApi {
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
     public BaseResult addLawProduct(HttpServletRequest request,AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
-                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException {
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList) throws ParseException {
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, evidenceList);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, caseInquiryList);
     }
 
     @PostMapping(value = "/addLawSafe")
@@ -141,6 +139,12 @@ public class LawRecordApi {
     @ApiOperation(value = "获取渔船状态列表")
     public BaseResult<List<EnumVO>> getShipStatusList() {
         return new BaseResult().content(lawProductService.getShipStatusList());
+    }
+
+    @GetMapping(value = "/getOperatorInfoList")
+    @ApiOperation(value = "获取执法人员列表")
+    public BaseResult<List<PersonVO>> getOperatorInfoList() {
+        return new BaseResult().content(lawProductService.getOperatorInfoList());
     }
 
 }

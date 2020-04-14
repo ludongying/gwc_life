@@ -78,4 +78,11 @@ public interface PersonService extends IService<PersonEntity> {
      */
     List<PersonEntity> listPersonsByDept(String deptId);
 
+    /**
+     * 通过personId获取船员信息
+     * @param personId
+     * @return
+     */
+    PersonEntity getOneByPersonId(String personId);
+
 }

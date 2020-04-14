@@ -1,26 +1,28 @@
 package com.seven.gwc.modular.munition.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
 import com.seven.gwc.modular.munition.service.MunitionInService;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.seven.gwc.modular.sailor.entity.PersonEntity;
+import com.seven.gwc.modular.sailor.service.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.seven.gwc.core.base.BaseController;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,7 +40,9 @@ public class MunitionInController extends BaseController {
     private static String PREFIX = "/modular/munition/munitionIn/";
 
     @Autowired
-    private MunitionInService munitionInandoutService;
+    private MunitionInService munitionInService;
+    @Autowired
+    private PersonService personService;
 
     /**
      * 跳转到物资入库首页
@@ -52,7 +56,7 @@ public class MunitionInController extends BaseController {
      * 跳转到添加物资入库
      */
     @RequestMapping("/munitionIn_add")
-    public String munitionInandoutAdd() {
+    public String munitionInAdd() {
         return PREFIX + "munitionIn_add";
     }
 
@@ -60,7 +64,7 @@ public class MunitionInController extends BaseController {
      * 跳转到修改物资入库
      */
     @RequestMapping("/munitionIn_edit")
-    public String munitionInandoutUpdate(String munitionInandoutId) {
+    public String munitionInUpdate(String munitionInId) {
         return PREFIX + "munitionIn_edit";
     }
 
@@ -68,7 +72,7 @@ public class MunitionInController extends BaseController {
      * 跳转到查看物资入库
      */
     @RequestMapping("/munitionIn_detail")
-    public String munitionInandoutDetail(String munitionInandoutId) {
+    public String munitionInDetail(String munitionInId) {
         return PREFIX + "munitionIn_detail";
     }
 
@@ -77,11 +81,14 @@ public class MunitionInController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<MunitionInEntity> list(String munitionInandoutName) {
+    public BaseResultPage<MunitionInEntity> list(MunitionInEntity munitionIn) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<MunitionInEntity> munitionInandouts = munitionInandoutService.selectMunitionInandout(munitionInandoutName);
-        PageInfo pageInfo = new PageInfo<>(munitionInandouts);
+        List<MunitionInEntity> munitionIns = munitionInService.selectMunitionIn(munitionIn,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
+        PageInfo pageInfo = new PageInfo<>(munitionIns);
+        Integer size = munitionInService.getListSize(munitionIn);
+        pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
+        pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
@@ -90,9 +97,11 @@ public class MunitionInController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(MunitionInEntity munitionInandout) {
+    public BaseResult add(MunitionInEntity munitionIn) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInandoutService.addMunitionInandout(munitionInandout, user);
+        if(!munitionInService.addMunitionIn(munitionIn, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_IN_CODE);
+        }
         return SUCCESS;
     }
 
@@ -101,9 +110,9 @@ public class MunitionInController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam String munitionInandoutId) {
+    public BaseResult delete(@RequestParam String munitionInId) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInandoutService.deleteMunitionInandout(munitionInandoutId, user);
+        munitionInService.deleteMunitionIn(munitionInId, user);
         return SUCCESS;
     }
 
@@ -112,19 +121,34 @@ public class MunitionInController extends BaseController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResult update(MunitionInEntity munitionInandout) {
+    public BaseResult update(MunitionInEntity munitionIn) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInandoutService.editMunitionInandout(munitionInandout, user);
+        munitionInService.editMunitionIn(munitionIn, user);
         return SUCCESS;
     }
 
     /**
      * 物资入库详情
      */
-    @RequestMapping("/detail/{munitionInandoutId}")
+    @RequestMapping("/detail/{munitionInId}")
     @ResponseBody
-    public MunitionInEntity detail(@PathVariable String munitionInandoutId) {
-        return munitionInandoutService.getById(munitionInandoutId);
+    public MunitionInEntity detail(@PathVariable String munitionInId) {
+        return munitionInService.getById(munitionInId);
+    }
+
+    /**
+     * 物资入库表单自动生成
+     */
+    @RequestMapping("/getInitInfo")
+    @ResponseBody
+    public MunitionInEntity getInitInfo() {
+        MunitionInEntity munitionIn = new MunitionInEntity();
+        munitionIn.setCode(munitionInService.getAutoCode());
+        ShiroUser user = ShiroKit.getUser();
+        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
+        munitionIn.setApplyPerson(personEntity.getId());
+        munitionIn.setApplyTime(new Date());
+        return munitionIn;
     }
 
 }

@@ -30,10 +30,10 @@
     float: left;
     display: block;
     padding: 5px 0px;
-    width: 90px;
+    width: 100%;
     font-weight: 400;
     line-height: 20px;
-    text-align: left;
+    text-align: center;
     font-size: 14px;
     color: #999999;
 }
@@ -43,10 +43,10 @@
     float: left;
     display: block;
     padding: 5px 0px;
-    width: 90px;
+    width: 100%;
     font-weight: bolder;
     line-height: 20px;
-    text-align: left;
+    text-align: center;
     font-size: 16px;
     color: #666666;
 }

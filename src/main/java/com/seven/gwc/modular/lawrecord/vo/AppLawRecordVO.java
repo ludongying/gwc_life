@@ -13,6 +13,9 @@ public class AppLawRecordVO {
     @ApiModelProperty(value = "记录id")
     private String id;
 
+    @ApiModelProperty(value = "案件类型")
+    private String lawType;
+
     /** 案件编号 */
     @ApiModelProperty(value = "案件编号")
     private String lawCaseCode;
@@ -29,7 +32,15 @@ public class AppLawRecordVO {
     @ApiModelProperty(value = "案发纬度")
     private String lawCaseLat;
 
+    /** 案发地点 */
+    @ApiModelProperty(value = "案发地点")
+    private String lawCaseAddr;
+
     /** 案发时间 */
     @ApiModelProperty(value = "案发时间")
     private Date lawCaseDate;
+
+    /** 案件状态 */
+    @ApiModelProperty(value = "案件状态")
+    private String status;
 }

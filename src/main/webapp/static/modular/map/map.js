@@ -90,6 +90,14 @@
             $(this).attr("src","/common/plugins/map/images/open.png");
             $(this).attr("alt","open");
             map.addLayer(drawnItems);
+            // if(map.hasLayer(magnifyingGlass)){
+            //     map.removeLayer(magnifyingGlass);
+            //     drawnItems.eachLayer(function (layer) {
+            //         magnifyingGlassLayer.push(layer);
+            //     });
+            //     map.addLayer(magnifyingGlass);
+            // }
+
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
@@ -245,23 +253,19 @@
         {
             map.removeLayer(magnifyingGlass);
             magnifyingGlassLayer.splice(index,1);
-        }
-        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
-            layers: 'ENC', //必须是ENC
-            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
-        });
-        c2_glass.setParams({
-            'LAYERS': 'ENC',
-            'CSBOOL': GetCSBOOL(),
-            'CSVALUE': GetCSVALUE(),
-            'CRS': 'EPSG:3395',
-            'TRANSPARENT': 'false'
-        });
-        if(!map.hasLayer(magnifyingGlass)){
-            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
-                magnifyingGlassLayer.push(c2_glass);
-                map.addLayer(magnifyingGlass);
-            }
+            c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+                layers: 'ENC', //必须是ENC
+                format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+            });
+            c2_glass.setParams({
+                'LAYERS': 'ENC',
+                'CSBOOL': GetCSBOOL(),
+                'CSVALUE': GetCSVALUE(),
+                'CRS': 'EPSG:3395',
+                'TRANSPARENT': 'false'
+            });
+            magnifyingGlassLayer.push(c2_glass);
+            map.addLayer(magnifyingGlass);
         }
     });
     //深度信息
@@ -281,41 +285,37 @@
         {
             map.removeLayer(magnifyingGlass);
             magnifyingGlassLayer.splice(index,1);
-        }
-        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
-            layers: 'ENC', //必须是ENC
-            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
-        });
-        c2_glass.setParams({
-            'LAYERS': 'ENC',
-            'CSBOOL': GetCSBOOL(),
-            'CSVALUE': GetCSVALUE(),
-            'CRS': 'EPSG:3395',
-            'TRANSPARENT': 'false'
-        });
-        if(!map.hasLayer(magnifyingGlass)){
-            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
-                magnifyingGlassLayer.push(c2_glass);
-                map.addLayer(magnifyingGlass);
-            }
+            c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+                layers: 'ENC', //必须是ENC
+                format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+            });
+            c2_glass.setParams({
+                'LAYERS': 'ENC',
+                'CSBOOL': GetCSBOOL(),
+                'CSVALUE': GetCSVALUE(),
+                'CRS': 'EPSG:3395',
+                'TRANSPARENT': 'false'
+            });
+            magnifyingGlassLayer.push(c2_glass);
+            map.addLayer(magnifyingGlass);
         }
     });
     //显示模式
     $('#DisplayCategory').change(function () {
         refreshChart();
         //小地图
-        var mini_map1 = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+        mini_map = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
             format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
         });
-        mini_map1.setParams({
+        mini_map.setParams({
             'LAYERS': 'ENC',
             'CSBOOL': GetCSBOOL(),
             'CSVALUE': GetCSVALUE(),
             'CRS': 'EPSG:3395',
             'TRANSPARENT': 'false'
         });
-        miniMap.changeLayer(mini_map1);
+        miniMap.changeLayer(mini_map);
         // miniMap.addLayer(ForbiddenFishLine);
         //鹰眼图
         let index = magnifyingGlassLayer.indexOf(c2_glass);

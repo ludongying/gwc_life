@@ -42,8 +42,10 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
         $(this).addClass("bold_font");
     });
 
+    $(document).on("click","#document .doc",function () {
+           let path=$(this).data("path");
 
-
+    });
 
     $('#evidence img').on('click', function () {
         layer.photos({

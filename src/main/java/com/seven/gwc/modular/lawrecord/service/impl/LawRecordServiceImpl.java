@@ -9,6 +9,8 @@ import com.seven.gwc.config.constant.GwcConsts;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.modular.lawrecord.dao.LawRecordMapper;
+import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import com.seven.gwc.modular.lawrecord.data.local.LocData;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.*;
@@ -151,10 +153,6 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         model.addAttribute("agency",agencyDTO);
         model.addAttribute("evidence",evidenceService.detail(id));
         if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
-            /*InquireDTO inquireDTO = inquireService.detail(id);
-            if(Objects.nonNull(inquireDTO)){
-                inquireDTO.setDetailContent();
-            }*/
             model.addAttribute("inquire",inquireService.detailList(id));
             InquisitionDTO inquisitionDTO = inquisitionService.detail(id);
             if(Objects.nonNull(inquisitionDTO)){inquisitionDTO.setDetailContent();}
@@ -171,6 +169,12 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
             DecisionSafeDTO decisionSafeDTO = decisionSafeService.detail(id);
             if(Objects.nonNull(decisionSafeDTO)){decisionSafeDTO.setDetailContent();}
             model.addAttribute("decision",decisionSafeDTO);
+        }
+        if(lawRecordEntity.isWritFlag()){
+            List<FilePathDO> files = FilePathDO.getFiles(lawRecordEntity.getAutoWritFilePath());
+            files.addAll(FilePathDO.getFiles(lawRecordEntity.getWritFilePath()));
+            List<FilePathDTO> dtos = files.stream().map(FilePathDTO::getInstance).collect(Collectors.toList());
+            model.addAttribute("document",dtos);
         }
     }
 

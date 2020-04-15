@@ -323,23 +323,19 @@
         {
             map.removeLayer(magnifyingGlass);
             magnifyingGlassLayer.splice(index,1);
-        }
-        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
-            layers: 'ENC', //必须是ENC
-            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
-        });
-        c2_glass.setParams({
-            'LAYERS': 'ENC',
-            'CSBOOL': GetCSBOOL(),
-            'CSVALUE': GetCSVALUE(),
-            'CRS': 'EPSG:3395',
-            'TRANSPARENT': 'false'
-        });
-        if(!map.hasLayer(magnifyingGlass)){
-            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
-                magnifyingGlassLayer.push(c2_glass);
-                map.addLayer(magnifyingGlass);
-            }
+            c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+                layers: 'ENC', //必须是ENC
+                format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+            });
+            c2_glass.setParams({
+                'LAYERS': 'ENC',
+                'CSBOOL': GetCSBOOL(),
+                'CSVALUE': GetCSVALUE(),
+                'CRS': 'EPSG:3395',
+                'TRANSPARENT': 'false'
+            });
+            magnifyingGlassLayer.push(c2_glass);
+            map.addLayer(magnifyingGlass);
         }
     });
     //鹰眼图
@@ -791,10 +787,10 @@
             var FishArea = [];
             var FishAreaName = [];
             let linestyle= {
-                    fillOpacity: 0,
-                    weight: 1,
-                    color: '#D74D56',
-                    Opacity: 0.3,
+                fillOpacity: 0,
+                weight: 1,
+                color: '#D74D56',
+                Opacity: 0.3,
             };
             let namestyle= {
                 weight: 1,

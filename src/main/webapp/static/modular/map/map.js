@@ -305,6 +305,10 @@
                 magnifyingGlassLayer.push(FishLine_NoName);
                 magnifyingGlassLayer.push(FishLine_Name);
             }
+            if(magnifyingGlassLayer.indexOf(shippath)<0&&map.hasLayer(pointsGroup)&&shippath!=null)
+            {
+                magnifyingGlassLayer.push(shippath);
+            }
             map.addLayer(magnifyingGlass);
         }
         else {
@@ -541,9 +545,30 @@
                 }
             });
             lineGeo.addTo(pointsGroup);
+            shippath = L.geoJson(Line, {
+                pointToLayer: function (feature, latlng){
+                    if(feature.properties.style.icon)
+                    {
+                        return L.marker(latlng, feature.properties.style);
+                    }
+                    else
+                    {
+                        return L.circle(latlng,feature.properties.style);
+                    }
 
-
+                },
+                style: function (feature) {
+                    return feature.properties.style;
+                }
+            });
             map.addLayer(pointsGroup);
+            if(map.hasLayer(magnifyingGlass)){
+                if(magnifyingGlassLayer.indexOf(shippath)<0){
+                    map.removeLayer(magnifyingGlass);
+                    magnifyingGlassLayer.push(shippath);
+                    map.addLayer(magnifyingGlass);
+                }
+            }
         }
     }
     //定时刷新执法船位置信息
@@ -567,6 +592,13 @@
                         //清空之前绘制的点
                         pointsGroup.clearLayers();
                         clearInterval(i);//取消定时刷新
+                        let index = magnifyingGlassLayer.indexOf(shippath);
+                        if(index>=0&&map.hasLayer(magnifyingGlass))
+                        {
+                            map.removeLayer(magnifyingGlass);
+                            magnifyingGlassLayer.splice(index,1);
+                            map.addLayer(magnifyingGlass);
+                        }
                     }
                     state = !state;
                 }

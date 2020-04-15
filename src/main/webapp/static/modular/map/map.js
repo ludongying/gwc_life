@@ -17,6 +17,7 @@
     let shippath = null;//渔船轨迹
     let ForbiddenFishLine = null;//禁渔区
     let ForbiddenFishLine_NoName = null;//禁渔区
+    let ForbiddenFishLine_miniMap = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
     let FishLine_Name = null;//渔区
     //菜单栏
@@ -189,9 +190,10 @@
         'CRS': 'EPSG:3395',
         'TRANSPARENT': 'false'
     });
-    var miniMap = new L.Control.MiniMap(mini_map, { toggleDisplay: true });
-    miniMap.addTo(map);
-    // miniMap.addLayer(ForbiddenFishLine);
+    var miniMaplayers = new L.LayerGroup([mini_map]);
+    var miniMap = new L.Control.MiniMap(miniMaplayers, { toggleDisplay: true });
+    // miniMap.addTo(map);
+    map.addControl(miniMap);
     function refreshChart() {
         c2= L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
@@ -247,6 +249,20 @@
             $(this).attr("alt","close")
         }
         refreshChart();
+        //小地图
+        miniMaplayers.removeLayer(mini_map);
+        mini_map = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        mini_map.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        miniMaplayers.addLayer(mini_map);
         //鹰眼图
         let index = magnifyingGlassLayer.indexOf(c2_glass);
         if(index>=0&&map.hasLayer(magnifyingGlass))
@@ -279,6 +295,20 @@
             $(this).attr("alt","close")
         }
         refreshChart();
+        //小地图
+        miniMaplayers.removeLayer(mini_map);
+        mini_map = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        mini_map.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        miniMaplayers.addLayer(mini_map);
         //鹰眼图
         let index = magnifyingGlassLayer.indexOf(c2_glass);
         if(index>=0&&map.hasLayer(magnifyingGlass))
@@ -304,6 +334,7 @@
     $('#DisplayCategory').change(function () {
         refreshChart();
         //小地图
+        miniMaplayers.removeLayer(mini_map);
         mini_map = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
             layers: 'ENC', //必须是ENC
             format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
@@ -315,8 +346,8 @@
             'CRS': 'EPSG:3395',
             'TRANSPARENT': 'false'
         });
-        miniMap.changeLayer(mini_map);
-        // miniMap.addLayer(ForbiddenFishLine);
+        miniMaplayers.addLayer(mini_map);
+
         //鹰眼图
         let index = magnifyingGlassLayer.indexOf(c2_glass);
         if(index>=0&&map.hasLayer(magnifyingGlass))
@@ -685,6 +716,7 @@
             //清空之前绘制的点
             ForbiddenFishLine=null;
             ForbiddenFishLine_NoName=null;
+            ForbiddenFishLine_miniMap=null;
             var ForbiddenFishPoint = [];
             for (var i = 0; i < result.length; i++) {
                 var point = [result[i].lon,result[i].lat];
@@ -715,13 +747,16 @@
                     color:"#666666",
                 }
             });
-            // ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
-            //     style: {
-            //         weight: 2,
-            //         color:"#666666",
-            //     }
-            // });
             ForbiddenFishLine_NoName = L.geoJson(flightsEW, {
+                onEachFeature: function (feature, layer) {
+                    layer.setText(feature.properties.name, {center: true,offset: -5});
+                },
+                style: {
+                    weight: 2,
+                    color:"#666666",
+                }
+            });
+            ForbiddenFishLine_miniMap = L.geoJson(flightsEW, {
                 onEachFeature: function (feature, layer) {
                     layer.setText(feature.properties.name, {center: true,offset: -5});
                 },
@@ -752,6 +787,11 @@
                     map.addLayer(magnifyingGlass);
                 }
             }
+
+            if(!miniMaplayers.hasLayer(ForbiddenFishLine_miniMap)){
+                miniMaplayers.addLayer(ForbiddenFishLine_miniMap);
+            }
+
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
@@ -766,6 +806,10 @@
                 map.removeLayer(magnifyingGlass);
                 magnifyingGlassLayer.splice(index,1);
                 map.addLayer(magnifyingGlass);
+            }
+            if(miniMaplayers.hasLayer(ForbiddenFishLine_miniMap))
+            {
+                miniMaplayers.removeLayer(ForbiddenFishLine_miniMap);
             }
         }
     });

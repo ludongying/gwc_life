@@ -29,6 +29,9 @@ public class InquireBase extends GwcBaseEntity {
     /** 性别(枚举) */
     protected Integer investigateSex;
 
+    @TableField(exist=false)
+    protected String investigateSexName;
+
     /** 年龄 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     protected Integer investigateAge;
@@ -36,6 +39,9 @@ public class InquireBase extends GwcBaseEntity {
     /** 职务 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     protected Integer investigatePosition;
+
+    @TableField(exist=false)
+    protected String investigatePositionName;
 
     /** 地址 */
     @TableField(updateStrategy = FieldStrategy.IGNORED)
@@ -56,5 +62,10 @@ public class InquireBase extends GwcBaseEntity {
     private Integer shipMember;
     /** 查获时候捕鱼状态 */
     private Integer shipStatus;
+
+    @TableField(exist=false)
+    private String shipStatusName;
+    @TableField(exist=false)
+    private String identityCaseName;
 
 }

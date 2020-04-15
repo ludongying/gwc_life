@@ -38,6 +38,7 @@ public interface InquireService extends IService<InquireEntity> {
 
     List<InquireDTO> inquireDTODetail(String id);
 
+
     /**
      * 获取询问笔录补录
      * @param id

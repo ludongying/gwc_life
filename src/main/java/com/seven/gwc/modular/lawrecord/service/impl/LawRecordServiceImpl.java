@@ -151,10 +151,6 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
         model.addAttribute("agency",agencyDTO);
         model.addAttribute("evidence",evidenceService.detail(id));
         if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
-            /*InquireDTO inquireDTO = inquireService.detail(id);
-            if(Objects.nonNull(inquireDTO)){
-                inquireDTO.setDetailContent();
-            }*/
             model.addAttribute("inquire",inquireService.detailList(id));
             InquisitionDTO inquisitionDTO = inquisitionService.detail(id);
             if(Objects.nonNull(inquisitionDTO)){inquisitionDTO.setDetailContent();}

@@ -82,7 +82,13 @@ public class InquireEntity extends InquireBase {
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Date inquireEndDate;
 
-
-
+    @TableField(exist = false)
+    private String shipRealTypeName;
+    @TableField(exist = false)
+    private String shipRatedTypeName;
+    @TableField(exist = false)
+    private String shipRealPowerUnitName;
+    @TableField(exist = false)
+    private String shipRatedPowerUnitName;
 
 }

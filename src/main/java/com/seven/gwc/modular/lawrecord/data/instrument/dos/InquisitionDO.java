@@ -125,7 +125,7 @@ public class InquisitionDO extends BaseDO {
                this.setLicense1("出示了").setLicense2("出示了").setLicense3("从事")
                        .setLicense4("有")
                        .setLicense5("出示了捕捞许可证,编号是"+
-                               (Objects.nonNull(entity.getShipCredentialsOwnerIdentity())?entity.getShipCredentialsOwnerIdentity():"")+
+                               (Objects.nonNull(entity.getShipCredentialsCode())?entity.getShipCredentialsCode():"")+
                                "，船号是"+
                                (Objects.nonNull(entity.getShipCode())?entity.getShipCode():"")+
                                "，主机功率是"+

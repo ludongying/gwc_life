@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.munition.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.seven.gwc.core.base.GwcBaseEntity;
@@ -28,20 +29,26 @@ public class MunitionInDetailEntity extends GwcBaseEntity implements Serializabl
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
-    /** 物资编码 */
+    /** 物资编码主表 */
     private String munitionMainId;
 
     /** 物资编码 */
     private String munitionId;
 
-//    /** 物资名称 */
-//    private String munitionName;
+    /** 物资编码 */
+    @TableField(exist = false)
+    private String code;
+
+    /** 物资名称 */
+    @TableField(exist = false)
+    private String munitionName;
 
     /** 仓库编码 */
     private String depotId;
 
-//    /** 仓库名称 */
-//    private String depotName;
+    /** 仓库名称 */
+    @TableField(exist = false)
+    private String depotName;
 
 //    /** 每件数量 */
 //    private Integer specQuantity;
@@ -50,6 +57,7 @@ public class MunitionInDetailEntity extends GwcBaseEntity implements Serializabl
     private Integer totalNum;
 
     /** 单位 */
+    @TableField(exist = false)
     private String unit;
 
 

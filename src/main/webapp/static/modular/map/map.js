@@ -20,6 +20,7 @@
     let ForbiddenFishLine_miniMap = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
     let FishLine_Name = null;//渔区
+    let FishLine_miniMap = null;//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
     var hide = document.getElementById('hide');
@@ -826,7 +827,7 @@
             let result=data.content;
             //清空之前绘制的点
             FishLine.clearLayers();
-            FishLine_NoName = null;
+            FishLine_miniMap = null;
             FishLine_Name = null;
             var FishArea = [];
             var FishAreaName = [];
@@ -910,6 +911,15 @@
                     return feature.properties.style;
                 }
             });
+            FishLine_miniMap = L.geoJson(FishAreaPolygon, {
+                onEachFeature: function (feature, layer) {
+                    if(feature.properties.name)
+                        layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                },
+                style: function (feature) {
+                    return feature.properties.style;
+                }
+            });
             let lineGeo =  L.geoJson(FishAreaPolygon, {
                 onEachFeature: function (feature, layer) {
                     if(feature.properties.name)
@@ -939,6 +949,9 @@
                     map.addLayer(magnifyingGlass);
                 }
             }
+            if(!miniMaplayers.hasLayer(FishLine_miniMap)){
+                miniMaplayers.addLayer(FishLine_miniMap);
+            }
         }
         else {
             $(this).attr("src","/common/plugins/map/images/close.png");
@@ -952,6 +965,10 @@
                 map.removeLayer(magnifyingGlass);
                 magnifyingGlassLayer.splice(index,1);
                 map.addLayer(magnifyingGlass);
+            }
+            if(miniMaplayers.hasLayer(FishLine_miniMap))
+            {
+                miniMaplayers.removeLayer(FishLine_miniMap);
             }
         }
     });

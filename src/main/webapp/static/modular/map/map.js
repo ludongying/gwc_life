@@ -18,7 +18,6 @@
     let ForbiddenFishLine = null;//禁渔区
     let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
-    let FishLine_NoName = null;//渔区
     let FishLine_Name = null;//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
@@ -300,9 +299,8 @@
             {
                 magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
             }
-            if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0&&map.hasLayer(FishLine)&&FishLine_NoName!=null)
+            if(magnifyingGlassLayer.indexOf(FishLine_Name)<0&&map.hasLayer(FishLine)&&FishLine_Name!=null)
             {
-                magnifyingGlassLayer.push(FishLine_NoName);
                 magnifyingGlassLayer.push(FishLine_Name);
             }
             if(magnifyingGlassLayer.indexOf(shippath)<0&&map.hasLayer(pointsGroup)&&shippath!=null)
@@ -720,9 +718,22 @@
             FishLine_Name = null;
             var FishArea = [];
             var FishAreaName = [];
+            let linestyle= {
+                    fillOpacity: 0,
+                    weight: 1,
+                    color: '#D74D56',
+                    Opacity: 0.3,
+            };
+            let namestyle= {
+                weight: 1,
+                color: 'transport'
+            };
             for (var i = 0; i < result.length; i++) {
                 var FishPolygon = {
                     "type": "Feature",
+                    "properties": {
+                        "style": linestyle
+                    },
                     "geometry": {
                         "type": "Polygon",
                         "coordinates": [[
@@ -754,7 +765,8 @@
                 var FishPolygonN = {
                     "type": "Feature",
                     "properties": {
-                        "name": result[i].name
+                        "name": result[i].name,
+                        "style":namestyle
                     },
                     "geometry": {
                         "type": "LineString",
@@ -771,48 +783,28 @@
                     }
                 };
                 FishArea.push(FishPolygon);
-                FishAreaName.push(FishPolygonN);
+                FishArea.push(FishPolygonN);
             }
             var FishAreaPolygon = {
                 "type": "FeatureCollection",
                 "features": FishArea
             };
-            var FishAreaPolygonN = {
-                "type": "FeatureCollection",
-                "features": FishAreaName
-            };
-            L.geoJson(FishAreaPolygon, {
-                style: {
-                    fillOpacity: 0,
-                    weight: 1,
-                    color: '#D74D56',
-                    Opacity: 0.3,
-                }
-            }).addTo(FishLine);
-            FishLine_NoName = L.geoJson(FishAreaPolygon, {
-                style: {
-                    fillOpacity: 0,
-                    weight: 1,
-                    color: '#D74D56',
-                    Opacity: 0.3,
+            FishLine_Name = L.geoJson(FishAreaPolygon, {
+                onEachFeature: function (feature, layer) {
+                    if(feature.properties.name)
+                        layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                },
+                style: function (feature) {
+                    return feature.properties.style;
                 }
             });
-            FishLine_Name = L.geoJson(FishAreaPolygonN, {
+            let lineGeo =  L.geoJson(FishAreaPolygon, {
                 onEachFeature: function (feature, layer) {
-                    layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                    if(feature.properties.name)
+                        layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
                 },
-                style: {
-                    weight: 1,
-                    color: 'transport'
-                }
-            });
-            let lineGeo = L.geoJson(FishAreaPolygonN, {
-                onEachFeature: function (feature, layer) {
-                    layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
-                },
-                style: {
-                    weight: 1,
-                    color: 'transport'
+                style: function (feature) {
+                    return feature.properties.style;
                 }
             }).addTo(FishLine);
             map.addLayer(FishLine);
@@ -829,9 +821,8 @@
             else
                 map.addLayer(FishLine);
             if(map.hasLayer(magnifyingGlass)){
-                if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0){
+                if(magnifyingGlassLayer.indexOf(FishLine_Name)<0){
                     map.removeLayer(magnifyingGlass);
-                    magnifyingGlassLayer.push(FishLine_NoName);
                     magnifyingGlassLayer.push(FishLine_Name);
                     map.addLayer(magnifyingGlass);
                 }
@@ -843,13 +834,11 @@
             //清空之前绘制的点
             // FishLine.clearLayers();
             map.removeLayer(FishLine);
-            let index = magnifyingGlassLayer.indexOf(FishLine_NoName);
-            let index1 = magnifyingGlassLayer.indexOf(FishLine_Name);
+            let index = magnifyingGlassLayer.indexOf(FishLine_Name);
             if(index>=0&&map.hasLayer(magnifyingGlass))
             {
                 map.removeLayer(magnifyingGlass);
                 magnifyingGlassLayer.splice(index,1);
-                magnifyingGlassLayer.splice(index1,1);
                 map.addLayer(magnifyingGlass);
             }
         }

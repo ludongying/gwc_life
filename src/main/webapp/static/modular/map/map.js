@@ -269,6 +269,30 @@
         });
         miniMap.changeLayer(mini_map1);
         // miniMap.addLayer(ForbiddenFishLine);
+        //鹰眼图
+        let index = magnifyingGlassLayer.indexOf(c2_glass);
+        if(index>=0&&map.hasLayer(magnifyingGlass))
+        {
+            map.removeLayer(magnifyingGlass);
+            magnifyingGlassLayer.splice(index,1);
+        }
+        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        c2_glass.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        if(!map.hasLayer(magnifyingGlass)){
+            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
+                magnifyingGlassLayer.push(c2_glass);
+                map.addLayer(magnifyingGlass);
+            }
+        }
     });
     //鹰眼图
     var c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {

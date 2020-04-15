@@ -292,7 +292,57 @@ public class FileUtil {
      * baseStr = baseStr.replace("data:image/jpeg;base64,", "");
      * base64解密部分乱码问题（“+” 号，在urlecode编码中会被解码成空格）
      */
-    private static void base64ToFile(String destPath, String base64, String fileName) {
+    public static String base64ToFileName(String destPath, String base64, String fileName) {
+        //创建文件目录
+        File dir = new File(destPath);
+        if (!dir.exists() && !dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        try {
+            String suf = "";
+            String str = base64;
+            if (str.indexOf("jpeg;base64") > 0) {
+                suf = ".jpeg";
+                str = str.replace("data:image/jpeg;base64,", "");
+            } else if (str.indexOf("png;base64") > 0) {
+                suf = ".png";
+                str = str.replace("data:image/png;base64,", "");
+            } else if (str.indexOf("jpg;base64") > 0) {
+                suf = ".jpg";
+                str = str.replace("data:image/jpg;base64,", "");
+            }
+            String path = fileName + suf;
+            base64ToFile(destPath, str, path);
+            return path;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * BASE64解码成File文件
+     * baseStr = baseStr.replace("data:image/jpeg;base64,", "");
+     * base64解密部分乱码问题（“+” 号，在urlecode编码中会被解码成空格）
+     */
+    public static void base64ToFile(String destPath, String base64, String fileName) {
         File file = null;
         //创建文件目录
         String filePath = destPath;

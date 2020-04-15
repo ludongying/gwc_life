@@ -52,7 +52,7 @@ public interface LawProductService {
     List<PersonVO> getOperatorInfoList();
 
     //案件生产新增
-    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList) throws ParseException;
+    BaseResult addLawProduct(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList, String caseEvidenceList);
 
     //案件安全新增
     BaseResult addLawSafe(String personalId, AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquireSafeVO appInquireSafeVO, AppDecisionSafeVO appDecisionSafeVO, AppReasonVO appReasonVO, String evidenceList) throws ParseException;

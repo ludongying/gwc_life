@@ -24,7 +24,7 @@ public class AppRecordDetailVO {
 
     /** 询问笔录-生产 */
     @ApiModelProperty(value = "询问笔录-生产")
-    private List<InquireDTO> inquireDTOList;
+    private List<InquireSupplementDTO> inquireSupplementDTOList;
 
     /** 勘验笔录 */
     @ApiModelProperty(value = "勘验笔录")

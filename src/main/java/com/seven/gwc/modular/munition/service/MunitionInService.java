@@ -55,4 +55,10 @@ public interface MunitionInService extends IService<MunitionInEntity> {
      */
     String getAutoCode();
 
+    /**
+     * 设置保单状态
+     * @return
+     */
+    int setStatus(String munitionInId, String state);
+
 }

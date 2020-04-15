@@ -10,6 +10,7 @@ import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
+import com.seven.gwc.modular.munition.munitionEnum.MunitionInStatesEnum;
 import com.seven.gwc.modular.munition.service.MunitionInService;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.sailor.service.PersonService;
@@ -152,6 +153,37 @@ public class MunitionInController extends BaseController {
         munitionIn.setApplyTime(new Date());
         return munitionIn;
     }
+
+    /**
+     * 入库表单提交
+     */
+    @RequestMapping("/submit")
+    @ResponseBody
+    public BaseResult submit(@RequestParam String id) {
+       munitionInService.setStatus(id, MunitionInStatesEnum.SUBMIT.getCode());
+       return SUCCESS;
+    }
+
+    /**
+     * 入库表单审核通过
+     */
+    @RequestMapping("/approve")
+    @ResponseBody
+    public BaseResult approve(@RequestParam String id) {
+        munitionInService.setStatus(id, MunitionInStatesEnum.APPROVE.getCode());
+        return SUCCESS;
+    }
+
+    /**
+     * 入库表单审核驳回
+     */
+    @RequestMapping("/refused")
+    @ResponseBody
+    public BaseResult refused(@RequestParam String id) {
+        munitionInService.setStatus(id, MunitionInStatesEnum.REFUSED.getCode());
+        return SUCCESS;
+    }
+
 
 }
 

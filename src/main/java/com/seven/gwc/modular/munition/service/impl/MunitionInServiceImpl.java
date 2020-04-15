@@ -1,6 +1,7 @@
 package com.seven.gwc.modular.munition.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
@@ -132,6 +133,13 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
             codestr += code.toString();
         }
         return codestr;
+    }
+
+    @Override
+    public int setStatus(String munitionInId, String state) {
+        LambdaUpdateWrapper<MunitionInEntity> lambdaUpdate = Wrappers.<MunitionInEntity>lambdaUpdate();
+        lambdaUpdate.set(MunitionInEntity::getStatus, state).eq(MunitionInEntity::getId, munitionInId);
+        return this.munitionInMapper.update(null, lambdaUpdate);
     }
 
 }

@@ -1443,6 +1443,34 @@
                         @}
                     </div>
                 </div>
+
+                 <div class="layui-col-md12" id="document">
+                    <div class="layui-card">
+                        <div class="layui-card-header card_header_title">&nbsp;&nbsp;&nbsp;文书列表</div>
+                        <div class="layui-card-body">
+                            <div class="layui-card">
+                                <div class="layui-card-body">
+                                    @if(isNotEmpty(document)){
+                                    @for(item in document){
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label" style="width: 0"></label>
+                                            <div class="layui-input-inline">
+                                                <div data-path="${item.path}"  class="doc">
+                                                  <input type="text"  value="${item.name!''}" style="width: 500px" autocomplete="off" class="layui-input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @}
+                                    @}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </form>
         </div>
     </div>

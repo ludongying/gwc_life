@@ -138,22 +138,16 @@ public class AgencyDTO extends AgencyEntity {
         this.lawCaseSourceStr=Objects.isNull(lawCaseSourceEnum)?"":lawCaseSourceEnum.getMessage();
         Integer lawCaseCode = this.getLawCaseCode();
         Integer lawCaseFineCode = this.getLawCaseFineCode();
-        this.lawCaseCodeStr="";
+        this.lawCaseCodeStr=this.getShortName();
         if(Objects.nonNull(lawCaseFineCode)){
             lawCaseCodeStr+=lawCaseFineCode+"罚 ";
         }
         if(Objects.nonNull(lawCaseCode)){
             lawCaseCodeStr+=lawCaseCode+"号";
         }
-        this.lawCaseLonLatStr="";
-        String lawCaseLon = this.getLawCaseLon();
-        String lawCaseLat = this.getLawCaseLat();
-        if(Objects.nonNull(lawCaseLon)){
-            lawCaseLonLatStr+=lawCaseLon+"经度";
-        }
-        if(Objects.nonNull(lawCaseLat)){
-            lawCaseLonLatStr+=lawCaseLat+"纬度";
-        }
+        this.lawCaseLonLatStr=this.getLawCaseAddr();
+/*        this.lawCaseLonLatStr+=this.getLawCaseLon1()+"°"+this.getLawCaseLon1()+"′，"
+                +this.getLawCaseLon2()+"°"+this.getLawCaseLat2()+"′";*/
     }
 
     public void setPersons(){

@@ -1,9 +1,12 @@
 package com.seven.gwc.modular.lawrecord.data.instrument.dto;
 
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
 import com.seven.gwc.modular.lawrecord.data.instrument.dos.FilePathDO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.apache.tomcat.jni.File;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,15 @@ public class FilePathDTO extends FilePathDO {
     public FilePathDTO(Integer code, String path) {
         super(code, path);
         this.filePath="";
+    }
+
+    public static FilePathDTO getInstance(FilePathDO filePathDO){
+        FilePathDTO dto=new FilePathDTO();
+        BeanUtils.copyProperties(filePathDO,dto);
+        String filePath = dto.getPath();
+        String name = filePath.substring(filePath.lastIndexOf(FileUtils.file_sep) + 1);
+        dto.setName(name);
+        return dto;
     }
 
     public static void mergeFilePath(List<FilePathDTO> list,List<FilePathDO> dos){

@@ -70,7 +70,67 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         var layEvent = obj.event;
         if (layEvent === 'detail') {
             window.location.href=Feng.ctxPath+"lawRecord/detail?id="+data.id;
+        } else if(layEvent === 'instrument') {
+            ElectronicFile.onInstrument(data);
+        } else if(layEvent === 'export'){
+            ElectronicFile.export(data);
+        } else if(layEvent === 'print'){
+            ElectronicFile.preview(data);
         }
     });
 
+    ElectronicFile.onInstrument = function (data) {
+        return  func.open({
+            title: '文书',
+            area: ['1000px', '500px'],
+            content: Feng.ctxPath + '/lawRecord/instrument?id=' + data.id
+        });
+
+    };
+
+    ElectronicFile.export = function (data) {
+        let ajax = new $ax(Feng.ctxPath + "/lawRecord/instrument/generate?id=" +data.id);
+        let result = ajax.start();
+        if(result.success){
+            Feng.success("案件文书已生成，正在导出文件...")
+            downFile($,result.content);
+        }else{
+            Feng.error("案件文书生成失败")
+        }
+    };
+
+
+    /**
+     * 预览文件
+     */
+    ElectronicFile.preview = function (data) {
+        let ajax = new $ax(Feng.ctxPath + "/lawRecord/instrument/generate?id=" +data.id);
+        let result = ajax.start();
+        if(result.success){
+            Feng.success("案件文书已生成，正在生成预览文件...");
+            $.ajax({
+                url:Feng.ctxPath + "/lawRecord/instrument/generatePdf",
+                dataType: 'json',
+                type: 'post',
+                data:{path:result.content},
+                success: function (result_pdf) {
+                    Feng.success("案件文书已生成，正在跳转打印预览...");
+                    preview($,Feng.ctxPath + "/lawRecord/instrument/preview",result_pdf.content);
+                },
+                error:function(data){
+                    Feng.error("预览文件生成失败...")
+                }
+            });
+        }else{
+            Feng.error("案件文书生成失败")
+        }
+    };
+
+    function preview($,url,path){
+        let exportForm = $("<form action='"+url+"' method='post' target='_blank'></form>")
+        exportForm.append("<input type='hidden' name='path' value='"+path+"'/>")
+        $(document.body).append(exportForm);
+        exportForm.submit();
+        exportForm.remove();
+    }
 });

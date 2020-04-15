@@ -14,10 +14,10 @@
     let measureControl;//测距和面积
     let drawnItems;//标绘
     let pointsGroup = L.layerGroup();//执法船
+    let shippath = null;//渔船轨迹
     let ForbiddenFishLine = null;//禁渔区
     let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
-    let FishLine_NoName = null;//渔区
     let FishLine_Name = null;//渔区
     //菜单栏
     var menuid = document.getElementById('menuid');
@@ -239,6 +239,30 @@
             $(this).attr("alt","close")
         }
         refreshChart();
+        //鹰眼图
+        let index = magnifyingGlassLayer.indexOf(c2_glass);
+        if(index>=0&&map.hasLayer(magnifyingGlass))
+        {
+            map.removeLayer(magnifyingGlass);
+            magnifyingGlassLayer.splice(index,1);
+        }
+        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        c2_glass.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        if(!map.hasLayer(magnifyingGlass)){
+            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
+                magnifyingGlassLayer.push(c2_glass);
+                map.addLayer(magnifyingGlass);
+            }
+        }
     });
     //深度信息
     $('#deep').click(function () {
@@ -251,6 +275,30 @@
             $(this).attr("alt","close")
         }
         refreshChart();
+        //鹰眼图
+        let index = magnifyingGlassLayer.indexOf(c2_glass);
+        if(index>=0&&map.hasLayer(magnifyingGlass))
+        {
+            map.removeLayer(magnifyingGlass);
+            magnifyingGlassLayer.splice(index,1);
+        }
+        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        c2_glass.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        if(!map.hasLayer(magnifyingGlass)){
+            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
+                magnifyingGlassLayer.push(c2_glass);
+                map.addLayer(magnifyingGlass);
+            }
+        }
     });
     //显示模式
     $('#DisplayCategory').change(function () {
@@ -269,6 +317,30 @@
         });
         miniMap.changeLayer(mini_map1);
         // miniMap.addLayer(ForbiddenFishLine);
+        //鹰眼图
+        let index = magnifyingGlassLayer.indexOf(c2_glass);
+        if(index>=0&&map.hasLayer(magnifyingGlass))
+        {
+            map.removeLayer(magnifyingGlass);
+            magnifyingGlassLayer.splice(index,1);
+        }
+        c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
+            layers: 'ENC', //必须是ENC
+            format: 'image/png'  //只能是png图片，猜测为服务器端为png类型
+        });
+        c2_glass.setParams({
+            'LAYERS': 'ENC',
+            'CSBOOL': GetCSBOOL(),
+            'CSVALUE': GetCSVALUE(),
+            'CRS': 'EPSG:3395',
+            'TRANSPARENT': 'false'
+        });
+        if(!map.hasLayer(magnifyingGlass)){
+            if(magnifyingGlassLayer.indexOf(c2_glass)<0){
+                magnifyingGlassLayer.push(c2_glass);
+                map.addLayer(magnifyingGlass);
+            }
+        }
     });
     //鹰眼图
     var c2_glass = L.tileLayer.wms("http://192.168.18.212:8080/wms?", {
@@ -299,10 +371,13 @@
             {
                 magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
             }
-            if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0&&map.hasLayer(FishLine)&&FishLine_NoName!=null)
+            if(magnifyingGlassLayer.indexOf(FishLine_Name)<0&&map.hasLayer(FishLine)&&FishLine_Name!=null)
             {
-                magnifyingGlassLayer.push(FishLine_NoName);
                 magnifyingGlassLayer.push(FishLine_Name);
+            }
+            if(magnifyingGlassLayer.indexOf(shippath)<0&&map.hasLayer(pointsGroup)&&shippath!=null)
+            {
+                magnifyingGlassLayer.push(shippath);
             }
             map.addLayer(magnifyingGlass);
         }
@@ -368,7 +443,7 @@
                 let circleFeature = {
                     "type": "Feature",
                     "properties": {
-                        "style": style
+                        "style": circleStyle
                     },
                     "geometry": {
                         "type": "Point",
@@ -409,16 +484,30 @@
             iconAnchor: [19, 19],
             popupAnchor: [0, -10]
         });
-        //绘制执法船的轨迹点
-        var point = L.marker([obj.lat, obj.lon], {
+        let style = {
             icon: LastPointIcon,
             // rotationAngle: obj.heading,
-        });
-        var date = getDate(obj.timeStamp,0);
-        //标牌信息
-        // point.bindPopup("执法船编号：" + "0" + "<br />" + "经度： " + obj.lon + "<br />" + "纬度： " + obj.lat + "<br />" + "航向： " + obj.heading + "<br />" + "航速：" + obj.speed + "<br />" + "时间：" + date);
-        return point;
-
+        };
+        // //绘制执法船的轨迹点
+        // var point = L.marker([obj.lat, obj.lon], {
+        //     icon: LastPointIcon,
+        //     // rotationAngle: obj.heading,
+        // });
+        // var date = getDate(obj.timeStamp,0);
+        // //标牌信息
+        // // point.bindPopup("执法船编号：" + "0" + "<br />" + "经度： " + obj.lon + "<br />" + "纬度： " + obj.lat + "<br />" + "航向： " + obj.heading + "<br />" + "航速：" + obj.speed + "<br />" + "时间：" + date);
+        // return point;
+        let circleFeature = {
+            "type": "Feature",
+            "properties": {
+                "style": style
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [obj.lon, obj.lat]
+            }
+        };
+        return circleFeature;
     }
     //绘制指向线
     //大圆计算公式
@@ -461,11 +550,22 @@
             iconAnchor: [19.5, 28.5],
             popupAnchor: [0, 0]
         });
-        //绘制执法船的轨迹点
-        let Headingpoint = L.marker([obj.lat, obj.lon], {
+        let HeadingStyle = {
             icon: HeadingIcon,
             rotationAngle: obj.heading,
-        });
+        };
+        let Headingpoint = {
+            "type": "Feature",
+            "properties": {
+                "style": HeadingStyle
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [obj.lon, obj.lat]
+            }
+        };
+
+
         let result = new Array(2);
         result[0] = line;
         result[1] = Headingpoint;
@@ -484,14 +584,15 @@
         {
             //清空之前绘制的点
             pointsGroup.clearLayers();
-            // linesGroup.clearLayers();
+            shippath = null;
             // 将String转为JSON
             let jsonArr = JSON.parse(data.content);
             let features = PointJSON(jsonArr);
             let heading = speeddisplay(jsonArr[jsonArr.length-1]);
             let headingline = heading[0];
             features.push(headingline);
-            heading[1].addTo(pointsGroup);
+            features.push(heading[1]);
+            features.push(LastPointJSON(jsonArr[jsonArr.length-1]));
             let Line = {
                 "type": "FeatureCollection",
                 "features": features
@@ -499,17 +600,45 @@
 
             let lineGeo = L.geoJson(Line, {
                 pointToLayer: function (feature, latlng){
-                    // return L.circleMarker(latlng, geojsonMarkerOptions);
-                    return L.circle(latlng,{radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1});
+                    if(feature.properties.style.icon)
+                    {
+                        return L.marker(latlng, feature.properties.style);
+                    }
+                    else
+                    {
+                        return L.circle(latlng,feature.properties.style);
+                    }
+
                 },
                 style: function (feature) {
                     return feature.properties.style;
                 }
             });
             lineGeo.addTo(pointsGroup);
+            shippath = L.geoJson(Line, {
+                pointToLayer: function (feature, latlng){
+                    if(feature.properties.style.icon)
+                    {
+                        return L.marker(latlng, feature.properties.style);
+                    }
+                    else
+                    {
+                        return L.circle(latlng,feature.properties.style);
+                    }
 
-            LastPointJSON(jsonArr[jsonArr.length-1]).addTo(pointsGroup);
+                },
+                style: function (feature) {
+                    return feature.properties.style;
+                }
+            });
             map.addLayer(pointsGroup);
+            if(map.hasLayer(magnifyingGlass)){
+                if(magnifyingGlassLayer.indexOf(shippath)<0){
+                    map.removeLayer(magnifyingGlass);
+                    magnifyingGlassLayer.push(shippath);
+                    map.addLayer(magnifyingGlass);
+                }
+            }
         }
     }
     //定时刷新执法船位置信息
@@ -533,6 +662,13 @@
                         //清空之前绘制的点
                         pointsGroup.clearLayers();
                         clearInterval(i);//取消定时刷新
+                        let index = magnifyingGlassLayer.indexOf(shippath);
+                        if(index>=0&&map.hasLayer(magnifyingGlass))
+                        {
+                            map.removeLayer(magnifyingGlass);
+                            magnifyingGlassLayer.splice(index,1);
+                            map.addLayer(magnifyingGlass);
+                        }
                     }
                     state = !state;
                 }
@@ -654,9 +790,22 @@
             FishLine_Name = null;
             var FishArea = [];
             var FishAreaName = [];
+            let linestyle= {
+                    fillOpacity: 0,
+                    weight: 1,
+                    color: '#D74D56',
+                    Opacity: 0.3,
+            };
+            let namestyle= {
+                weight: 1,
+                color: 'transport'
+            };
             for (var i = 0; i < result.length; i++) {
                 var FishPolygon = {
                     "type": "Feature",
+                    "properties": {
+                        "style": linestyle
+                    },
                     "geometry": {
                         "type": "Polygon",
                         "coordinates": [[
@@ -688,7 +837,8 @@
                 var FishPolygonN = {
                     "type": "Feature",
                     "properties": {
-                        "name": result[i].name
+                        "name": result[i].name,
+                        "style":namestyle
                     },
                     "geometry": {
                         "type": "LineString",
@@ -705,48 +855,28 @@
                     }
                 };
                 FishArea.push(FishPolygon);
-                FishAreaName.push(FishPolygonN);
+                FishArea.push(FishPolygonN);
             }
             var FishAreaPolygon = {
                 "type": "FeatureCollection",
                 "features": FishArea
             };
-            var FishAreaPolygonN = {
-                "type": "FeatureCollection",
-                "features": FishAreaName
-            };
-            L.geoJson(FishAreaPolygon, {
-                style: {
-                    fillOpacity: 0,
-                    weight: 1,
-                    color: '#D74D56',
-                    Opacity: 0.3,
-                }
-            }).addTo(FishLine);
-            FishLine_NoName = L.geoJson(FishAreaPolygon, {
-                style: {
-                    fillOpacity: 0,
-                    weight: 1,
-                    color: '#D74D56',
-                    Opacity: 0.3,
+            FishLine_Name = L.geoJson(FishAreaPolygon, {
+                onEachFeature: function (feature, layer) {
+                    if(feature.properties.name)
+                        layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                },
+                style: function (feature) {
+                    return feature.properties.style;
                 }
             });
-            FishLine_Name = L.geoJson(FishAreaPolygonN, {
+            let lineGeo =  L.geoJson(FishAreaPolygon, {
                 onEachFeature: function (feature, layer) {
-                    layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
+                    if(feature.properties.name)
+                        layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
                 },
-                style: {
-                    weight: 1,
-                    color: 'transport'
-                }
-            });
-            let lineGeo = L.geoJson(FishAreaPolygonN, {
-                onEachFeature: function (feature, layer) {
-                    layer.setText(feature.properties.name, {center: true,offset: 5,orientation:232});
-                },
-                style: {
-                    weight: 1,
-                    color: 'transport'
+                style: function (feature) {
+                    return feature.properties.style;
                 }
             }).addTo(FishLine);
             map.addLayer(FishLine);
@@ -763,9 +893,8 @@
             else
                 map.addLayer(FishLine);
             if(map.hasLayer(magnifyingGlass)){
-                if(magnifyingGlassLayer.indexOf(FishLine_NoName)<0){
+                if(magnifyingGlassLayer.indexOf(FishLine_Name)<0){
                     map.removeLayer(magnifyingGlass);
-                    magnifyingGlassLayer.push(FishLine_NoName);
                     magnifyingGlassLayer.push(FishLine_Name);
                     map.addLayer(magnifyingGlass);
                 }
@@ -777,13 +906,11 @@
             //清空之前绘制的点
             // FishLine.clearLayers();
             map.removeLayer(FishLine);
-            let index = magnifyingGlassLayer.indexOf(FishLine_NoName);
-            let index1 = magnifyingGlassLayer.indexOf(FishLine_Name);
+            let index = magnifyingGlassLayer.indexOf(FishLine_Name);
             if(index>=0&&map.hasLayer(magnifyingGlass))
             {
                 map.removeLayer(magnifyingGlass);
                 magnifyingGlassLayer.splice(index,1);
-                magnifyingGlassLayer.splice(index1,1);
                 map.addLayer(magnifyingGlass);
             }
         }

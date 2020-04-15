@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -110,7 +111,7 @@ public class UserController extends BaseController {
     @BussinessLog(value = "增加用户", key = "account", dict = UserDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
-    public BaseResult add(@Valid UserEntity user) {
+    public BaseResult add(@Valid UserEntity user) throws IOException {
         ShiroUser currentUser = ShiroKit.getUser();
         user.setStatus(TypeStatesEnum.FREEZED.getCode());
         user.setCreateUser(currentUser.getId());
@@ -141,7 +142,7 @@ public class UserController extends BaseController {
     @BussinessLog(value = "编辑用户", key = "account", dict = UserDict.class)
     @RequestMapping(value = "/update")
     @ResponseBody
-    public BaseResult update(UserEntity user) {
+    public BaseResult update(UserEntity user) throws IOException {
         ShiroUser currentUser = ShiroKit.getUser();
         if (user.getId().equals(ConfigConsts.ADMIN_ID)) {
             return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
@@ -149,7 +150,7 @@ public class UserController extends BaseController {
 
         user.setUpdateUser(currentUser.getId());
         user.setUpdateTime(new Date());
-
+        //userService.add("http://192.168.18.199", "2002", "2002", "1", "1", "2002","0");
         userService.updateById(user);
         return SUCCESS;
     }

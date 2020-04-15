@@ -25,9 +25,9 @@ public class LawRecordApi {
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
     public BaseResult addLawProduct(HttpServletRequest request,AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
-                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList) throws ParseException {
+                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList, String caseEvidenceList) {
         String userId = request.getAttribute("userId").toString();
-        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, caseInquiryList);
+        return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, caseInquiryList, caseEvidenceList);
     }
 
     @PostMapping(value = "/addLawSafe")

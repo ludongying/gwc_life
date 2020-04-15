@@ -13,7 +13,7 @@ import java.util.List;
  * @date : 2020-04-09
  */
 public interface MunitionInDetailMapper extends BaseMapper<MunitionInDetailEntity> {
-    List<MunitionInDetailEntity> selectMunitionList(@Param("munitionInDetail") MunitionInDetailEntity munitionInDetail, @Param("total") Integer total, @Param("size") Integer size);
+    List<MunitionInDetailEntity> selectMunitionList(@Param("munitionInDetail") MunitionInDetailEntity munitionInDetail, @Param("munitionMainId") String munitionMainId, @Param("total") Integer total, @Param("size") Integer size);
 
-    List<MunitionInDetailEntity> getListSize(@Param("munitionInDetail") MunitionInDetailEntity munitionInDetail);
+    List<MunitionInDetailEntity> getListSize(@Param("munitionInDetail") MunitionInDetailEntity munitionInDetail, @Param("munitionMainId") String munitionMainId);
 }

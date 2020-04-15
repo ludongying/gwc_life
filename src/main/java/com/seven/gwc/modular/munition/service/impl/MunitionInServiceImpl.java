@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.seven.gwc.modular.munition.dao.MunitionInMapper;
+import com.seven.gwc.modular.munition.entity.MunitionInDetailEntity;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
 import com.seven.gwc.modular.munition.service.MunitionInService;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
@@ -93,12 +95,28 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
 
     @Override
     public void deleteMunitionIn(String munitionInId, ShiroUser user) {
-        munitionInMapper.deleteById(munitionInId);
+        MunitionInEntity munitionInEntity = munitionInMapper.selectById(munitionInId);
+        if (munitionInEntity != null) {
+            munitionInEntity.setDeleteFlag(false);
+            munitionInEntity.setSynFlag(false);
+            munitionInEntity.setUpdateDate(new Date());
+            munitionInEntity.setUpdatePerson(user.getId());
+        }
+        munitionInMapper.updateById(munitionInEntity);
     }
 
     @Override
-    public void editMunitionIn(MunitionInEntity munitionIn, ShiroUser user) {
+    public boolean editMunitionIn(MunitionInEntity munitionIn, ShiroUser user) {
+        LambdaQueryWrapper<MunitionInEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(MunitionInEntity::getCode,munitionIn.getCode()).eq(MunitionInEntity::getDeleteFlag, 1).ne(MunitionInEntity::getId,munitionIn.getId());
+        MunitionInEntity munitionInEntity = munitionInMapper.selectOne(lambdaQuery);
+        if(munitionInEntity != null){
+            return false;
+        }
+        munitionIn.setUpdateDate(new Date());
+        munitionIn.setUpdatePerson(user.getId());
         munitionInMapper.updateById(munitionIn);
+        return true;
     }
 
     @Override

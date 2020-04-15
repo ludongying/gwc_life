@@ -3,6 +3,7 @@ package com.seven.gwc.modular.munition.service;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.modular.munition.entity.MunitionInDetailEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.seven.gwc.modular.munition.entity.MunitionInEntity;
 
 import java.util.List;
 
@@ -18,10 +19,12 @@ public interface MunitionInDetailService extends IService<MunitionInDetailEntity
     /**
      * 物资入库详情查询列表
      *
-     * @param munitionInDetailName 名称
+     * @param munitionInDetail 入库物资详情实体
      * @return List<物资入库详情服务对象>
      */
-    List<MunitionInDetailEntity> selectMunitionInDetail(String munitionInDetailName);
+    List<MunitionInDetailEntity> selectMunitionInDetail(MunitionInDetailEntity munitionInDetail, String munitionMainId, Integer total, Integer size);
+
+    Integer getListSize(MunitionInDetailEntity munitionInDetail, String munitionMainId);
 
     /**
      * 物资入库详情新建
@@ -37,7 +40,7 @@ public interface MunitionInDetailService extends IService<MunitionInDetailEntity
      * @param munitionInDetailId 唯一标识
      * @param user 当前用户
      */
-    void deleteMunitionInDetail(String munitionInDetailId, ShiroUser user);
+    void deleteMunitionInDetail(String munitionInDetailId, String munitionInId,  ShiroUser user);
 
     /**
      * 物资入库详情编辑
@@ -45,6 +48,6 @@ public interface MunitionInDetailService extends IService<MunitionInDetailEntity
      * @param munitionInDetail 实体对象
      * @param user 当前用户
      */
-    void editMunitionInDetail(MunitionInDetailEntity munitionInDetail, ShiroUser user);
+    boolean editMunitionInDetail(MunitionInDetailEntity munitionInDetail, ShiroUser user);
 
 }

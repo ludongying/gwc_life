@@ -123,7 +123,9 @@ public class MunitionInController extends BaseController {
     @ResponseBody
     public BaseResult update(MunitionInEntity munitionIn) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.editMunitionIn(munitionIn, user);
+        if(!munitionInService.editMunitionIn(munitionIn, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_ONLY_IN_CODE);
+        }
         return SUCCESS;
     }
 

@@ -1,19 +1,23 @@
 @layout("/common/_container.html",{js:["/modular/munition/munitionInDetail/munitionInDetail.js"]}){
 <div class="layui-fluid">
     <div class="layui-card">
-        <div class="layui-card-header">入库清单</div>
+        <div class="layui-card-header">
+            <label id="mainId" name="mainId">${munitionInCode}</label>
+            <label>入库清单</label>
+        </div>
         <div class="layui-card-body">
 
             <form id="munitionInDetailForm" lay-filter="munitionInDetailForm" class="layui-form">
                 <div class="layui-row layui-col-space10">
-
-                    <input id="munitionMainId" value="${munitionInCode}" type="hidden" class="layui-input"/>
+                    <input id="munitionMainId" name="munitionMainId" value="${munitionInCode}" type="hidden" class="layui-input"/>
                     <input id="type" value="${type}" type="hidden" class="layui-input"/>
+                    <input id="id" name="id" type="hidden" class="layui-input"/>
 
                     <div class="layui-col-md3">
                         <label class="layui-form-label">物资名称<span style="color: red;">*</span></label>
                         <div class="layui-input-block">
-                            <select id="munitionName" name="munitionName" lay-filter="nameFilter"  lay-verify="required" required>
+                            <select id="munitionName" name="munitionName" lay-filter="nameFilter" lay-verify="required"
+                                    required>
                                 <option value="">请选择物资</option>
                             </select>
                         </div>
@@ -22,7 +26,8 @@
                     <div class="layui-col-md3">
                         <label class="layui-form-label">物资编码<span style="color: red;">*</span></label>
                         <div class="layui-input-block">
-                            <select id="munitionId" name="munitionId" lay-filter="specFilter" lay-verify="required" required>
+                            <select id="munitionId" name="munitionId" lay-filter="specFilter" lay-verify="required"
+                                    required>
                                 <option value="">请选择物资编码</option>
                             </select>
                         </div>
@@ -39,7 +44,7 @@
 
                     <div class="layui-col-md3">
                         <label class="layui-form-label">数量<span style="color: red;">*</span></label>
-                        <div class="layui-input-inline" >
+                        <div class="layui-input-inline">
                             <input id="totalNum" name="totalNum" placeholder="请输入数量" type="text" class="layui-input"
                                    lay-verify="required|positiveNumber" required/>
                         </div>
@@ -80,15 +85,15 @@
                        lay-filter="munitionInDetailTable"></table>
             </div>
 
-<!--            <div class="layui-row layui-col-space10" style="margin-top: 15px;">-->
-<!--                <div class="layui-col-md12 text-center">-->
-<!--                    <button class="layui-btn layui-btn-primary" id="btnBack" lay-filter="btnBack">-->
-<!--                        &emsp;返回&emsp;-->
-<!--                    </button>-->
-<!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>-->
-<!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;提交&emsp;</button>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="layui-row layui-col-space10" style="margin-top: 15px;">-->
+            <!--                <div class="layui-col-md12 text-center">-->
+            <!--                    <button class="layui-btn layui-btn-primary" id="btnBack" lay-filter="btnBack">-->
+            <!--                        &emsp;返回&emsp;-->
+            <!--                    </button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;提交&emsp;</button>-->
+            <!--                </div>-->
+            <!--            </div>-->
 
         </div>
     </div>

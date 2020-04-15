@@ -14,6 +14,7 @@
     let measureControl;//测距和面积
     let drawnItems;//标绘
     let pointsGroup = L.layerGroup();//执法船
+    let shippath = null;//渔船轨迹
     let ForbiddenFishLine = null;//禁渔区
     let ForbiddenFishLine_NoName = null;//禁渔区
     let FishLine = L.layerGroup();//渔区
@@ -368,7 +369,7 @@
                 let circleFeature = {
                     "type": "Feature",
                     "properties": {
-                        "style": style
+                        "style": circleStyle
                     },
                     "geometry": {
                         "type": "Point",
@@ -409,16 +410,30 @@
             iconAnchor: [19, 19],
             popupAnchor: [0, -10]
         });
-        //绘制执法船的轨迹点
-        var point = L.marker([obj.lat, obj.lon], {
+        let style = {
             icon: LastPointIcon,
             // rotationAngle: obj.heading,
-        });
-        var date = getDate(obj.timeStamp,0);
-        //标牌信息
-        // point.bindPopup("执法船编号：" + "0" + "<br />" + "经度： " + obj.lon + "<br />" + "纬度： " + obj.lat + "<br />" + "航向： " + obj.heading + "<br />" + "航速：" + obj.speed + "<br />" + "时间：" + date);
-        return point;
-
+        };
+        // //绘制执法船的轨迹点
+        // var point = L.marker([obj.lat, obj.lon], {
+        //     icon: LastPointIcon,
+        //     // rotationAngle: obj.heading,
+        // });
+        // var date = getDate(obj.timeStamp,0);
+        // //标牌信息
+        // // point.bindPopup("执法船编号：" + "0" + "<br />" + "经度： " + obj.lon + "<br />" + "纬度： " + obj.lat + "<br />" + "航向： " + obj.heading + "<br />" + "航速：" + obj.speed + "<br />" + "时间：" + date);
+        // return point;
+        let circleFeature = {
+            "type": "Feature",
+            "properties": {
+                "style": style
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [obj.lon, obj.lat]
+            }
+        };
+        return circleFeature;
     }
     //绘制指向线
     //大圆计算公式
@@ -461,11 +476,22 @@
             iconAnchor: [19.5, 28.5],
             popupAnchor: [0, 0]
         });
-        //绘制执法船的轨迹点
-        let Headingpoint = L.marker([obj.lat, obj.lon], {
+        let HeadingStyle = {
             icon: HeadingIcon,
             rotationAngle: obj.heading,
-        });
+        };
+        let Headingpoint = {
+            "type": "Feature",
+            "properties": {
+                "style": HeadingStyle
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [obj.lon, obj.lat]
+            }
+        };
+
+
         let result = new Array(2);
         result[0] = line;
         result[1] = Headingpoint;
@@ -484,14 +510,15 @@
         {
             //清空之前绘制的点
             pointsGroup.clearLayers();
-            // linesGroup.clearLayers();
+            shippath = null;
             // 将String转为JSON
             let jsonArr = JSON.parse(data.content);
             let features = PointJSON(jsonArr);
             let heading = speeddisplay(jsonArr[jsonArr.length-1]);
             let headingline = heading[0];
             features.push(headingline);
-            heading[1].addTo(pointsGroup);
+            features.push(heading[1]);
+            features.push(LastPointJSON(jsonArr[jsonArr.length-1]));
             let Line = {
                 "type": "FeatureCollection",
                 "features": features
@@ -499,8 +526,15 @@
 
             let lineGeo = L.geoJson(Line, {
                 pointToLayer: function (feature, latlng){
-                    // return L.circleMarker(latlng, geojsonMarkerOptions);
-                    return L.circle(latlng,{radius:3,color: "#2B79E6",fillColor:"#FFFFFF", fillOpacity: 1});
+                    if(feature.properties.style.icon)
+                    {
+                        return L.marker(latlng, feature.properties.style);
+                    }
+                    else
+                    {
+                        return L.circle(latlng,feature.properties.style);
+                    }
+
                 },
                 style: function (feature) {
                     return feature.properties.style;
@@ -508,7 +542,7 @@
             });
             lineGeo.addTo(pointsGroup);
 
-            LastPointJSON(jsonArr[jsonArr.length-1]).addTo(pointsGroup);
+
             map.addLayer(pointsGroup);
         }
     }

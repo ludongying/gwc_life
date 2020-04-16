@@ -25,7 +25,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     MunitionIn.initColumn = function () {
         return [[
             {title: '入库编号', field: 'code', align: "center", templet: function (d) {
-                var url = Feng.ctxPath + "/munitionInDetail?code=" + d.code + "&type=" + d.munitionType;
+                var url = Feng.ctxPath + "/munitionInDetail?code=" + d.code + "&type=" + d.munitionType + "&status=" + d.status;
                 return '<a style="color: #01AAED;" href="' + url + '">' + d.code + '</a>';
             }},
             {title: '物资类型', field: 'munitionTypeDesp', align: "center"},
@@ -35,16 +35,19 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             {title: '入库日期', field: 'inOutTime', align: "center"},
             {title: '审核状态', field: 'status', align: "center", templet: function (d) {
                 if(d.status === 0){
-                    return "<div> 已保存 </div>";
+                    return "<span class='layui-badge layui-bg-gray'>已保存</span></b>";
                 }else if(d.status === 1){
-                    return "<div> 已提交 </div>";
+                    return "<span class='layui-badge layui-bg-blue'>已提交</span></b>";
                 }else if(d.status === 2){
-                    return "<div> 已归档 </div>";;
-                }else{
-                    return "<div></div>";
+                    return "<span class='layui-badge layui-bg-green'>审批通过</span></b>";
+                }else if(d.status === 3) {
+                    return "<span class='layui-badge layui-bg-red'>已驳回</span></b>";
+                }
+                else{
+                    return "</b>";
                 }
             }},
-            {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
+            {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'left'}
         ]];
     };
 
@@ -91,8 +94,12 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             MunitionIn.onEditMunitionIn(data);
         } else if (layEvent === 'delete') {
             MunitionIn.onDeleteMunitionIn(data);
-        } else if (layEvent === 'inMunition') {
-            MunitionIn.onMunitionIn(data);
+        } else if (layEvent === 'approve') {
+            MunitionIn.onApprove(data);
+        } else if (layEvent === 'submit') {
+            MunitionIn.onSubmit(data);
+        }else if (layEvent === 'detail') {
+            //MunitionIn.onMunitionIn(data);
         }
     });
 
@@ -167,6 +174,69 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 Feng.error("删除失败!" + data.message + "!");
             });
             ajax.set("munitionInId", data.id);
+            ajax.start();
+        });
+    };
+
+    /**
+     * 点击提交物资入库表单
+     *
+     * @param data 点击按钮时候的行数据
+     */
+    MunitionIn.onSubmit = function (data) {
+        Feng.confirm("您确定要提交入库表单吗？", function () {
+            var ajax = new $ax(Feng.ctxPath + "/munitionIn/submit", function (data) {
+                if (data.success) {
+                    Feng.success("提交成功!");
+                    table.reload(MunitionIn.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("提交失败!" + data.message + "!");
+            });
+            ajax.set("id", data.id);
+            ajax.start();
+        });
+    };
+
+    /**
+     * 点击审核物资入库表单
+     *
+     * @param data 点击按钮时候的行数据
+     */
+    MunitionIn.onApprove = function (data) {
+       layer.confirm('请选择审批结果？', {
+            btn: ['通过','驳回'], //按钮
+        }, function(index){//通过
+            // var index = layer.load(0, {shade: false});
+            var ajax = new $ax(Feng.ctxPath + "/munitionIn/approve", function (data) {
+                if (data.success) {
+                    Feng.success("审核成功!");
+                    layer.close(index);
+                    table.reload(MunitionIn.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("审核失败!" + data.message + "!");
+            });
+            ajax.set("id", data.id);
+            ajax.start();
+        },function(index){//驳回
+            // var index = layer.load(0, {shade: false});
+            var ajax = new $ax(Feng.ctxPath + "/munitionIn/refused", function (data) {
+                if (data.success) {
+                    Feng.success("驳回成功!");
+                    layer.close(index);
+                    table.reload(MunitionIn.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("驳回失败!" + data.message + "!");
+            });
+            ajax.set("id", data.id);
             ajax.start();
         });
     };

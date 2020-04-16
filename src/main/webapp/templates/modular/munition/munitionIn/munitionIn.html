@@ -15,7 +15,8 @@
                             </div>
                             <div style="float: right">
                                 @if(shiro.hasPermission("/munitionIn/add")){
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加
+                                </button>
                                 @}
                             </div>
                         </div>
@@ -32,16 +33,24 @@
     <a id="detail" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详情</a>
     @}
     @if(shiro.hasPermission("/munitionIn/approve")){
+    {{#  if(d.status ==1 ){ }}
     <a id="approve" class="layui-btn layui-btn-xs" lay-event="approve">审核</a>
+    {{#  }  }}
     @}
     @if(shiro.hasPermission("/munitionIn/submit")){
+    {{#  if(d.status ==0 ){ }}
     <a id="submit" class="layui-btn layui-btn-xs" lay-event="submit">提交</a>
+    {{#  }  }}
     @}
     @if(shiro.hasPermission("/munitionIn/update")){
+    {{#  if(d.status ==0 || d.status ==3){ }}
     <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    {{#  }  }}
     @}
     @if(shiro.hasPermission("/munitionIn/delete")){
+    {{#  if(d.status ==0 || d.status ==3){ }}
     <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    {{#  }  }}
     @}
 </script>
 @}

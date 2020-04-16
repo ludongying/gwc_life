@@ -46,9 +46,10 @@ public class MunitionInDetailController extends BaseController {
      * 跳转到物资入库详情首页
      */
     @RequestMapping("")
-    public String index(@RequestParam("code") String code, @RequestParam("type") String type, Model model) {
+    public String index(@RequestParam("code") String code, @RequestParam("type") String type, @RequestParam("status") String status, Model model) {
         model.addAttribute("munitionInCode", code);
         model.addAttribute("type", type);
+        model.addAttribute("status", status);
         return PREFIX + "munitionInDetail";
     }
 
@@ -108,7 +109,8 @@ public class MunitionInDetailController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam String munitionInDetailId, String munitionInId ) {
+//    public BaseResult delete(@RequestParam String munitionInDetailId, @RequestParam String munitionInId ) {
+    public BaseResult delete(String munitionInDetailId, String munitionInId ) {
         ShiroUser user = ShiroKit.getUser();
         munitionInDetailService.deleteMunitionInDetail(munitionInDetailId,munitionInId, user);
         return SUCCESS;

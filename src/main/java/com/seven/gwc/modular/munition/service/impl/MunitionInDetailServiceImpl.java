@@ -86,11 +86,11 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
             munitionInDetailMapper.insert(munitionInDetail);
             //更新入库主表detailIds
             LambdaQueryWrapper<MunitionInEntity> lambdaQueryMunitionIn = Wrappers.lambdaQuery();
-            lambdaQueryMunitionIn.eq(MunitionInEntity::getId,munitionInDetail.getMunitionMainId()).eq(MunitionInEntity::getDeleteFlag,1);
+            lambdaQueryMunitionIn.eq(MunitionInEntity::getCode,munitionInDetail.getMunitionMainId()).eq(MunitionInEntity::getDeleteFlag,1);
             MunitionInEntity munitionInEntity = munitionInMapper.selectOne(lambdaQueryMunitionIn);
             if(munitionInEntity!=null){
                 String details = munitionInEntity.getDetailId();
-                if (ToolUtil.isNotEmpty(details)) {
+                if (!ToolUtil.isNotEmpty(details)) {
                     details = munitionInDetail.getId();
                 } else {
                     details += FileUtils.file_2_file_sep + munitionInDetail.getId();
@@ -107,26 +107,28 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
     public void deleteMunitionInDetail(String munitionInDetailId, String munitionInId, ShiroUser user) {
         //更新入库物资表
         LambdaQueryWrapper<MunitionInEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInEntity::getId,munitionInId);
+        lambdaQuery.eq(MunitionInEntity::getCode,munitionInId);
         MunitionInEntity munitionInEntity = munitionInMapper.selectOne(lambdaQuery);
-        ArrayList<String> detailIds =
-                Stream.of(munitionInEntity.getDetailId().split(FileUtils.file_2_file_sep))
-                        .collect(Collectors.toCollection(ArrayList<String>::new));
-        detailIds.removeAll(Collections.singleton(munitionInDetailId));
-        String result = detailIds.stream().collect(Collectors.joining(","));
-        munitionInEntity.setDetailId(result);
-        munitionInEntity.setUpdateDate(new Date());
-        munitionInEntity.setUpdatePerson(user.getId());
-        munitionInMapper.updateById(munitionInEntity);
-        //删除入库物资
-        MunitionInDetailEntity detail = munitionInDetailMapper.selectById(munitionInDetailId);
-        if (detail != null) {
-            detail.setDeleteFlag(false);
-            detail.setSynFlag(false);
-            detail.setUpdateDate(new Date());
-            detail.setUpdatePerson(user.getId());
+        if(munitionInEntity != null){
+            ArrayList<String> detailIds =
+                    Stream.of(munitionInEntity.getDetailId().split(FileUtils.file_2_file_sep))
+                            .collect(Collectors.toCollection(ArrayList<String>::new));
+            detailIds.removeAll(Collections.singleton(munitionInDetailId));
+            String result = detailIds.stream().collect(Collectors.joining(","));
+            munitionInEntity.setDetailId(result);
+            munitionInEntity.setUpdateDate(new Date());
+            munitionInEntity.setUpdatePerson(user.getId());
+            munitionInMapper.updateById(munitionInEntity);
+            //删除入库物资
+            MunitionInDetailEntity detail = munitionInDetailMapper.selectById(munitionInDetailId);
+            if (detail != null) {
+                detail.setDeleteFlag(false);
+                detail.setSynFlag(false);
+                detail.setUpdateDate(new Date());
+                detail.setUpdatePerson(user.getId());
+            }
+            munitionInDetailMapper.updateById(detail);
         }
-        munitionInDetailMapper.updateById(detail);
     }
 
     @Override

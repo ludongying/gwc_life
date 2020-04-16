@@ -36,15 +36,31 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         ]];
     };
 
-    // 渲染表格
-    var tableResult = table.render({
-        elem: '#' + MunitionInDetail.tableId,
-        url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId='+ $('#mainId').text(),
-        page: true,
-        height: "full-180",
-        cellMinWidth: 100,
-        cols: MunitionInDetail.initColumn()
-    });
+    /**
+     * 初始化按钮
+     */
+    if($('#status').val() === '1' || $('#status').val() === '2'){
+        $("#munitionDiv").attr("style","display:none;");
+        // 渲染表格
+        var tableResult = table.render({
+            elem: '#' + MunitionInDetail.tableId,
+            url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId=' + $('#mainId').text(),
+            page: true,
+            height: "full-97",
+            cellMinWidth: 100,
+            cols: MunitionInDetail.initColumn()
+        });
+    }else{
+        var tableResult = table.render({
+            elem: '#' + MunitionInDetail.tableId,
+            url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId=' + $('#mainId').text(),
+            page: true,
+            height: "full-180",
+            cellMinWidth: 100,
+            cols: MunitionInDetail.initColumn()
+        });
+    }
+
 
     //监听表格行单击事件
     table.on('row(munitionInDetailTable)', function (obj) {
@@ -179,9 +195,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     // 删除入库物资提交事件
     form.on('submit(btnDelete)', function (data) {
-        alert($('#munitionMainId').val().trim());
         Feng.confirm("您确定要删除所选数据吗？", function () {
-            var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/delete?munitionInId=" + $('#munitionMainId').val().trim(), function (data) {
+            // var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/delete?munitionInId=" + $('#munitionMainId').val().trim()
+                + "&munitionInDetailId=" + $('#id').val().trim(), function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
                     table.reload(MunitionInDetail.tableId);
@@ -191,9 +208,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             }, function (data) {
                 Feng.error("删除失败!" + data.message + "!");
             });
-            ajax.set("munitionInDetailId", data.id);
+            // ajax.set("munitionInDetailId", data.id);
             ajax.start();
         });
+        return false;
     });
 
 });

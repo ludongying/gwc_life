@@ -521,7 +521,7 @@
         // return point;
         //执法船最新位置图标
         var LastPointIcon = new L.icon({
-            iconUrl: 'common/plugins/map/images/lawship.png',
+            iconUrl: '/common/plugins/map/images/lawship.png',
             iconSize: [38, 38],
             iconAnchor: [19, 19],
             popupAnchor: [0, -10]
@@ -541,7 +541,7 @@
             }
         };
         var LastPointIcon_miniMap = new L.icon({
-            iconUrl: 'common/plugins/map/images/lawship.png',
+            iconUrl: '/common/plugins/map/images/lawship.png',
             iconSize: [19, 19],
             iconAnchor: [10, 10],
             popupAnchor: [0, -10]
@@ -602,7 +602,7 @@
         };
 
         let HeadingIcon = new L.icon({
-            iconUrl: 'common/plugins/map/images/shipheading.png',
+            iconUrl: '/common/plugins/map/images/shipheading.png',
             iconSize: [39, 57],
             iconAnchor: [19.5, 28.5],
             popupAnchor: [0, 0]
@@ -623,7 +623,7 @@
         };
 
         let HeadingIcon_miniMap = new L.icon({
-            iconUrl: 'common/plugins/map/images/shipheading.png',
+            iconUrl: '/common/plugins/map/images/shipheading.png',
             iconSize: [20, 29],
             iconAnchor: [10, 14.5],
             popupAnchor: [0, 0]

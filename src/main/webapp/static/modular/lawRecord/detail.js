@@ -3,8 +3,10 @@
  */
 
 
-layui.use(['layer', 'form', 'admin', 'ax'], function () {
+layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     var $ = layui.jquery;
+    var table = layui.table;
+
     $(".layui-form input").attr("disabled","disabled");
 
     // var fileManager=new initFiles($);
@@ -15,6 +17,37 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
     // $("#evidence .demo-preview-1").click(function () {
     //     fileManager.preview_img($(this).data("filePath"));
     // });
+
+    /**
+     * 渔船信息管理
+     */
+    var Document = {
+        tableId: "documentTable",
+        condition: {
+            fishShipName: ""
+        }
+    };
+
+    /**
+     * 初始化表格的列
+     */
+    Document.initColumn = function () {
+        return [[
+            {title: '序号', width: 120, type: 'numbers', align: "center"},
+            {title: '文书名称', field: 'code', align: "center"},
+            {title: '下载', toolbar: '#tableBar', minWidth: 280, align: 'center'}
+        ]];
+    };
+
+    // 渲染表格
+    var tableResult = table.render({
+        elem: '#' + Document.tableId,
+        url: Feng.ctxPath + '/fishShip/list',
+        page: false,
+        height: "600",
+        cellMinWidth: 100,
+        cols: Document.initColumn()
+    });
 
     $('#uploader-list img').on('click', function () {
         layer.photos({
@@ -58,6 +91,8 @@ layui.use(['layer', 'form', 'admin', 'ax'], function () {
             shadeClose:true
         });
     })
+
+
 
     $(document).on("mouseenter mouseleave", ".file-iteme", function(event){
         if(event.type === "mouseenter"){

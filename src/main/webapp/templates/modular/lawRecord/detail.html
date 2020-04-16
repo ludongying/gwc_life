@@ -1450,31 +1450,18 @@
                         <div class="layui-card-body">
                             <div class="layui-card">
                                 <div class="layui-card-body">
-                                    @if(isNotEmpty(document)){
-                                    @for(item in document){
-                                    <div class="layui-form-item">
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label" style="width: 0"></label>
-                                            <div class="layui-input-inline">
-                                                <div data-path="${item.path}"  class="doc">
-                                                  <input type="text"  value="${item.name!''}" style="width: 500px" autocomplete="off" class="layui-input">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @}
-                                    @}
+                                    <table class="layui-table" id="documentTable" lay-filter="documentTable"></table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>
 </div>
 
-
+<script type="text/html" id="tableBar">
+    <a id="test" style="color: #1890FF; cursor:pointer" lay-event="downDocument">下载</a>
+</script>
 @}

@@ -8,9 +8,10 @@
         <div class="layui-card-body">
 
             <form id="munitionInDetailForm" lay-filter="munitionInDetailForm" class="layui-form">
-                <div class="layui-row layui-col-space10">
+                <div class="layui-row layui-col-space10" id="munitionDiv">
                     <input id="munitionMainId" name="munitionMainId" value="${munitionInCode}" type="hidden" class="layui-input"/>
                     <input id="type" value="${type}" type="hidden" class="layui-input"/>
+                    <input id="status" value="${status}" type="hidden" class="layui-input"/>
                     <input id="id" name="id" type="hidden" class="layui-input"/>
 
                     <div class="layui-col-md3">
@@ -52,12 +53,12 @@
                     </div>
 
                     <div class="layui-col-md12 text-right">
-                        <button class="layui-btn layui-btn-sm" lay-filter="btnAdd" lay-submit="">
+                        <button id="add" class="layui-btn layui-btn-sm" lay-filter="btnAdd" lay-submit="">
                             &emsp;添加&emsp;
                         </button>
-                        <button class="layui-btn layui-btn-sm" lay-filter="btnEdit" lay-submit="">&emsp;修改&emsp;
+                        <button id="edit" class="layui-btn layui-btn-sm" lay-filter="btnEdit" lay-submit="">&emsp;修改&emsp;
                         </button>
-                        <button class="layui-btn layui-btn-sm layui-btn-danger" lay-filter="btnDelete" lay-submit="">
+                        <button id="delete" class="layui-btn layui-btn-sm layui-btn-danger" lay-filter="btnDelete" lay-submit="">
                             &emsp;删除&emsp;
                         </button>
                     </div>

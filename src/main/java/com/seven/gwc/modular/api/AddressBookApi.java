@@ -11,10 +11,13 @@ import com.seven.gwc.modular.address_book.vo.InitialsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -102,5 +105,13 @@ public class AddressBookApi extends BaseController {
     public BaseResult deletePersonalByGroupId(String groupId, String personalIds) {
         return groupPersonService.deletePersonalByGroupId(groupId, personalIds);
     }
+
+    @GetMapping(value = "/getPttList")
+    @ApiOperation(value = "获取组")
+    public void getPttList(String keyWord) throws IOException {
+        String body = groupPersonService.getPttList(keyWord);
+        System.out.println("body:    "+body);
+    }
+
 
 }

@@ -150,7 +150,6 @@ public class UserController extends BaseController {
 
         user.setUpdateUser(currentUser.getId());
         user.setUpdateTime(new Date());
-        //userService.add("http://192.168.18.199", "2002", "2002", "1", "1", "2002","0");
         userService.updateById(user);
         return SUCCESS;
     }

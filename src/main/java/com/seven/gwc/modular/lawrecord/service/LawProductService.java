@@ -66,5 +66,7 @@ public interface LawProductService {
     //案件详情
     AppRecordDetailVO getRecordDetail(String id);
 
-    BaseResult addEvidence(String personalId, String id, String evidenceList) throws ParseException;
+    BaseResult addEvidence(String personalId, String id, String evidenceList);
+
+    BaseResult addEvidenceVideo(String personalId, String id, String evidenceList);
 }

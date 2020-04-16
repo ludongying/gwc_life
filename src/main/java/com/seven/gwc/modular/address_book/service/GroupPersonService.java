@@ -8,6 +8,7 @@ import com.seven.gwc.modular.address_book.vo.FriendListVO;
 import com.seven.gwc.modular.address_book.vo.GroupPersonalVO;
 import com.seven.gwc.modular.address_book.vo.GroupVO;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,4 +43,10 @@ public interface GroupPersonService extends IService<GroupPersonEntity> {
      * @return
      */
     BaseResult deletePersonalByGroupId(String groupId, String ids);
+
+    /**
+     * 查询对讲组列表信息
+     */
+    String getPttList(String keyWord) throws IOException;
+
 }

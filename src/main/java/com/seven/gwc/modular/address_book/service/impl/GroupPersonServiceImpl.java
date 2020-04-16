@@ -9,6 +9,17 @@ import com.seven.gwc.modular.address_book.entity.GroupEntity;
 import com.seven.gwc.modular.address_book.vo.FriendListVO;
 import com.seven.gwc.modular.address_book.vo.GroupPersonalVO;
 import com.seven.gwc.modular.address_book.vo.GroupVO;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -19,6 +30,7 @@ import com.seven.gwc.modular.address_book.dao.GroupPersonMapper;
 import com.seven.gwc.modular.address_book.service.GroupPersonService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
@@ -31,8 +43,11 @@ import java.util.WeakHashMap;
  */
 @Service
 public class GroupPersonServiceImpl extends ServiceImpl<GroupPersonMapper, GroupPersonEntity> implements GroupPersonService {
-
+    String host = "http://192.168.18.199";
     private Logger log = LoggerFactory.getLogger(this.getClass());
+    BasicCookieStore cookieStore = new BasicCookieStore();
+    CloseableHttpClient httpclient = HttpClients.custom()
+            .setDefaultCookieStore(cookieStore).build();
 
     @Autowired
     private GroupPersonMapper groupPersonMapper;
@@ -99,5 +114,23 @@ public class GroupPersonServiceImpl extends ServiceImpl<GroupPersonMapper, Group
             groupPersonMapper.deleteById(groupPersonEntity);
         }
         return new BaseResult(200, "操作成功");
+    }
+
+    @Override
+    public String getPttList(String keyWord) throws IOException {
+        HttpPost post=new HttpPost(host+"/cmt/ptt/query?type=view");
+
+        List <NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("dpttAdmin", keyWord));
+        post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+
+        CloseableHttpResponse response = httpclient.execute(post);
+        try {
+            HttpEntity entity = response.getEntity();
+            String body = EntityUtils.toString(entity);
+            return body;
+        } finally {
+            response.close();
+        }
     }
 }

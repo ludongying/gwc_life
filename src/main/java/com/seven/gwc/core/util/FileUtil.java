@@ -73,9 +73,9 @@ public class FileUtil {
 
     /**
      * 截取视频帧数
-     * @param videoFile 视频路径
-     * @param frameFile 文件路径
-     * @param fileName 文件名
+     * @param videoFile 视频物理路径  (D:\myfile\file//1586939529095短视频.mp4)
+     * @param frameFile 保存图片文件路径  (D:\myfile\file\)
+     * @param fileName 保存之后的文件名  (1586939529095短视频.jpg)
      * @throws Exception
      */
     public static void fetchFrame(String videoFile, String frameFile, String fileName) throws Exception {

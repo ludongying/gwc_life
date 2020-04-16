@@ -24,8 +24,8 @@ public class LawRecordApi {
 
     @PostMapping(value = "/addLawProduct")
     @ApiOperation(value = "新增新案件-生产")
-    public BaseResult addLawProduct(HttpServletRequest request,AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO,
-                                    AppInquisitionEntityVO appInquireSafeEntityVO, AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList, String caseEvidenceList) {
+    public BaseResult addLawProduct(HttpServletRequest request,AppAgencyVO appAgencyVO, AppOperatorVO appOperatorVO, AppInquisitionEntityVO appInquireSafeEntityVO,
+                                    AppDecisionVO appDecisionVO, AppReasonVO appReasonVO, String caseInquiryList, String caseEvidenceList) {
         String userId = request.getAttribute("userId").toString();
         return lawProductService.addLawProduct(userId, appAgencyVO, appOperatorVO, appInquireSafeEntityVO, appDecisionVO, appReasonVO, caseInquiryList, caseEvidenceList);
     }
@@ -45,10 +45,17 @@ public class LawRecordApi {
     }
 
     @PostMapping(value = "/addEvidence")
-    @ApiOperation(value = "证据补充")
+    @ApiOperation(value = "证据补充-图片")
     public BaseResult addEvidence(HttpServletRequest request, String id, String evidenceList) throws ParseException {
         String userId = request.getAttribute("userId").toString();
         return lawProductService.addEvidence(userId, id, evidenceList);
+    }
+
+    @PostMapping(value = "/addEvidenceVideo")
+    @ApiOperation(value = "证据补充-视频")
+    public BaseResult addEvidenceVideo(HttpServletRequest request, String id, String evidenceList) {
+        String userId = request.getAttribute("userId").toString();
+        return lawProductService.addEvidenceVideo(userId, id, evidenceList);
     }
 
     @GetMapping(value = "/getLawRecordList")

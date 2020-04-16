@@ -205,8 +205,13 @@ public class LawProductServiceImpl implements LawProductService {
         appRecordDetailVO.setEvidenceDTOList(evidenceDTOList);
         if(LawTypeEnum.PRODUCE.getCode().equals(lawType)){
             InquireDTO inquireDTO = inquireService.detail(id);
-            AppSupplementVO appSupplementVO = new AppSupplementVO(inquireDTO, agencyDTO);
-            appRecordDetailVO.setInquireSupplementDTOList(appSupplementVO.getList());
+            if (ToolUtil.isNotEmpty(inquireDTO)) {
+                AppSupplementVO appSupplementVO = new AppSupplementVO(inquireDTO, agencyDTO);
+                appRecordDetailVO.setInquireSupplementDTOList(appSupplementVO.getList());
+            } else {
+                appRecordDetailVO.setInquireSupplementDTOList(null);
+            }
+
             InquisitionDTO inquisitionDTO = inquisitionService.detail(id);
             if(Objects.nonNull(inquisitionDTO)){
                 inquisitionDTO.setDetailContent();
@@ -237,10 +242,48 @@ public class LawProductServiceImpl implements LawProductService {
     }
 
     @Override
-    public BaseResult addEvidence(String personalId, String id, String evidenceList) throws ParseException {
+    public BaseResult addEvidence(String personalId, String id, String evidenceList) {
         List<EvidenceEntity> evidenceEntityList = this.getEvidenceEntityList(personalId, id, evidenceList);
         for (EvidenceEntity evidenceEntity : evidenceEntityList) {
             evidenceMapper.insert(evidenceEntity);
+        }
+        return new BaseResult(true, 200, "操作成功");
+    }
+
+    @Override
+    public BaseResult addEvidenceVideo(String personalId, String id, String evidenceList) {
+        List<EvidenceEntity> list = new ArrayList<>();
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            JSONArray jsonArray = JSONArray.parseArray(evidenceList);
+            for(int i=0; i<jsonArray.size(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String files = jsonObject.getString("photoArray");
+                JSONArray fileArray = JSONArray.parseArray(files);
+
+                EvidenceEntity evidenceEntity = new EvidenceEntity();
+                evidenceEntity.setCreateDate(new Date());
+                evidenceEntity.setCreatePerson(personalId);
+                evidenceEntity.setRecordId(id);
+                evidenceEntity.setDeleteFlag(true);
+                evidenceEntity.setEvidenceContent(jsonObject.getString("photoContent"));
+                evidenceEntity.setEvidenceDate(formatter.parse(jsonObject.getString("photoTime")));
+                StringBuilder fileName = new StringBuilder();
+                for(int j=0; j<fileArray.size(); j++){
+                    JSONObject fileObject = fileArray.getJSONObject(i);
+                    String name = fileObject.getString("fileName").substring(0, fileName.lastIndexOf(".")) + ".jpg";
+                    fileName.append(name).append(",");
+                    FileUtil.fetchFrame("", uploadPathFile, name);
+                }
+                evidenceEntity.setEvidenceFilePath(fileName.toString());
+                list.add(evidenceEntity);
+            }
+            for (EvidenceEntity evidenceEntity : list) {
+                evidenceMapper.insert(evidenceEntity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new BaseResult(false, 500, "操作失败");
         }
         return new BaseResult(true, 200, "操作成功");
     }
@@ -519,35 +562,40 @@ public class LawProductServiceImpl implements LawProductService {
         return inquisitionEntity;
     }
 
-    private List<EvidenceEntity> getEvidenceEntityList(String personalId, String id, String data) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private List<EvidenceEntity> getEvidenceEntityList(String personalId, String id, String data) {
         List<EvidenceEntity> list = new ArrayList<>();
-        JSONArray jsonArray = JSONArray.parseArray(data);
-        for(int i=0; i<jsonArray.size(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            String files = jsonObject.getString("photoArray");
-            JSONArray fileArray = JSONArray.parseArray(files);
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            JSONArray jsonArray = JSONArray.parseArray(data);
+            for(int i=0; i<jsonArray.size(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String files = jsonObject.getString("photoArray");
+                JSONArray fileArray = JSONArray.parseArray(files);
 
-            EvidenceEntity evidenceEntity = new EvidenceEntity();
-            evidenceEntity.setCreateDate(new Date());
-            evidenceEntity.setCreatePerson(personalId);
-            evidenceEntity.setRecordId(id);
-            evidenceEntity.setDeleteFlag(true);
-            evidenceEntity.setEvidenceContent(jsonObject.getString("photoContent"));
-            evidenceEntity.setEvidenceDate(formatter.parse(jsonObject.getString("photoTime")));
-            StringBuilder fileName = new StringBuilder();
-            for(int j=0; j<fileArray.size(); j++){
-                String name = formatter.format(new Date());
-                name = name.replaceAll("-", "");
-                name = name.replaceAll(":", "");
-                name = name.replaceAll(" ", "_");
-                String file = FileUtil.base64ToFileName(uploadPathFile, fileArray.get(j).toString(), name + "_" + j);
-                fileName.append(uploadPathFile).append(file).append(",");
+                EvidenceEntity evidenceEntity = new EvidenceEntity();
+                evidenceEntity.setCreateDate(new Date());
+                evidenceEntity.setCreatePerson(personalId);
+                evidenceEntity.setRecordId(id);
+                evidenceEntity.setDeleteFlag(true);
+                evidenceEntity.setEvidenceContent(jsonObject.getString("photoContent"));
+                evidenceEntity.setEvidenceDate(formatter.parse(jsonObject.getString("photoTime")));
+                StringBuilder fileName = new StringBuilder();
+                for(int j=0; j<fileArray.size(); j++){
+                    String name = formatter.format(new Date());
+                    name = name.replaceAll("-", "");
+                    name = name.replaceAll(":", "");
+                    name = name.replaceAll(" ", "_");
+                    String file = FileUtil.base64ToFileName(uploadPathFile, fileArray.get(j).toString(), name + "_" + j);
+                    fileName.append(uploadPathFile).append(file).append(",");
+                }
+                evidenceEntity.setEvidenceFilePath(fileName.toString());
+                list.add(evidenceEntity);
             }
-            evidenceEntity.setEvidenceFilePath(fileName.toString());
-            list.add(evidenceEntity);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return list;
+
     }
 
     private List<InquireEntity> inquireEntityList(String personalId, String id, String data) throws ParseException {

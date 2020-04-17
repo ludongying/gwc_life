@@ -59,15 +59,15 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
                 }
             }
             if(ToolUtil.isNotEmpty(munitionInEntity.getApplyPerson())){
-                UserEntity user = userMapper.selectById(munitionInEntity.getApplyPerson());
-                if(user != null){
-                    munitionInEntity.setApplyPersonDesp(user.getName());
+                UserEntity userEntity = userMapper.selectById(munitionInEntity.getApplyPerson());
+                if(userEntity != null){
+                    munitionInEntity.setApplyPersonDesp(userEntity.getName());
                 }
             }
             if(ToolUtil.isNotEmpty(munitionInEntity.getInOutPerson())){
-                UserEntity user = userMapper.selectById(munitionInEntity.getInOutPerson());
-                if(user != null){
-                    munitionInEntity.setInOutPersonDesp(user.getName());
+                UserEntity userEntity = userMapper.selectById(munitionInEntity.getInOutPerson());
+                if(userEntity != null){
+                    munitionInEntity.setInOutPersonDesp(userEntity.getName());
                 }
             }
         }
@@ -156,6 +156,24 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
             lambdaUpdate.set(MunitionInEntity::getStatus, state).eq(MunitionInEntity::getId, munitionInId);
         }
         return this.munitionInMapper.update(null, lambdaUpdate);
+    }
+
+    @Override
+    public MunitionInEntity getMunitionInDetail(String id) {
+        MunitionInEntity munitionInEntity = munitionInMapper.selectById(id);
+        if(ToolUtil.isNotEmpty(munitionInEntity.getInOutPerson())){
+            UserEntity userEntity = userMapper.selectById(munitionInEntity.getInOutPerson());
+            if(userEntity != null){
+                munitionInEntity.setInOutPersonDesp(userEntity.getName());
+            }
+        }
+        if(ToolUtil.isNotEmpty(munitionInEntity.getApprovePerson())){
+            UserEntity userEntity = userMapper.selectById(munitionInEntity.getApprovePerson());
+            if(userEntity != null){
+                munitionInEntity.setApprovePersonDesp(userEntity.getName());
+            }
+        }
+        return munitionInEntity;
     }
 
 }

@@ -136,7 +136,7 @@ public class MunitionInController extends BaseController {
     @RequestMapping("/detail/{munitionInId}")
     @ResponseBody
     public MunitionInEntity detail(@PathVariable String munitionInId) {
-        return munitionInService.getById(munitionInId);
+        return munitionInService.getMunitionInDetail(munitionInId);
     }
 
     /**
@@ -148,8 +148,8 @@ public class MunitionInController extends BaseController {
         MunitionInEntity munitionIn = new MunitionInEntity();
         munitionIn.setCode(munitionInService.getAutoCode());
         ShiroUser user = ShiroKit.getUser();
-        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
-        munitionIn.setApplyPerson(personEntity.getId());
+//        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
+        munitionIn.setApplyPerson(user.getId());
         munitionIn.setApplyTime(new Date());
         return munitionIn;
     }

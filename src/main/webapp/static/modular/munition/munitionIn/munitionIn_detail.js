@@ -2,7 +2,6 @@
  * 物资入库详情对话框
  */
 
-
 layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
@@ -28,29 +27,20 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     var ajax = new $ax(Feng.ctxPath + "/munitionIn/detail/" + Feng.getUrlParam("munitionInId"));
     var result = ajax.start();
     form.val('munitionInForm', result);
-    //申请/出库/审批人员下拉框
-    $('#applyPerson').val(result.applyPerson);
-    $('#inOutPerson').val(result.inOutPerson);
-    $('#approvePerson').val(result.approvePerson);
 
-    // //申请/出库/审批人员下拉框
-    // $.ajax({
-    //     url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
-    //     dataType: 'json',
-    //     type: 'get',
-    //     success: function (data) {
-    //         $.each(data, function (index, item) {
-    //             alert(item.personName + ":" + item.id);
-    //             $('#applyPerson').append(new Option(item.personName, item.id));
-    //             $('#inOutPerson').append(new Option(item.personName, item.id));
-    //             $('#approvePerson').append(new Option(item.personName, item.id));
-    //         })
-    //         $('#applyPerson').val(result.applyPerson);
-    //         $('#inOutPerson').val(result.inOutPerson);
-    //         $('#approvePerson').val(result.approvePerson);
-    //         form.render('select');//表单渲染
-    //     }
-    // });
+    //申请人员下拉框
+    $.ajax({
+        url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#applyPerson').append(new Option(item.personName, item.personId));
+            })
+            $('#applyPerson').val(result.applyPerson);
+            form.render('select');//表单渲染
+        }
+    });
 
     //初始化物资类型下拉框
     $.ajax({

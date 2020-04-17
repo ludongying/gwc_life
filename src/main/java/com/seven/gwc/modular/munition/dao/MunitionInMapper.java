@@ -24,4 +24,5 @@ public interface MunitionInMapper extends BaseMapper<MunitionInEntity> {
      * @return
      */
     Integer maxCode( @Param("dateCode") String dateCode);
+
 }

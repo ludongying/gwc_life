@@ -38,7 +38,7 @@ public class FishShipController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private static String PREFIX = "/modular/fish_info/fishShip/";
+    private static final String PREFIX = "/modular/fish_info/fishShip/";
 
     @Autowired
     private FishShipService fishShipService;
@@ -98,8 +98,7 @@ public class FishShipController extends BaseController {
     @ResponseBody
     public BaseResult add(FishShipEntity fishShip) {
         ShiroUser user = ShiroKit.getUser();
-        fishShipService.addFishShip(fishShip, user);
-        return SUCCESS;
+        return fishShipService.addFishShip(fishShip, user);
     }
 
     /**
@@ -120,8 +119,7 @@ public class FishShipController extends BaseController {
     @ResponseBody
     public BaseResult update(FishShipEntity fishShip) {
         ShiroUser user = ShiroKit.getUser();
-        fishShipService.editFishShip(fishShip, user);
-        return SUCCESS;
+        return fishShipService.editFishShip(fishShip, user);
     }
 
     /**

@@ -36,7 +36,7 @@ public interface FishShipService extends IService<FishShipEntity> {
      * @param fishShip 实体对象
      * @param user 当前用户
      */
-    void addFishShip(FishShipEntity fishShip, ShiroUser user);
+    BaseResult addFishShip(FishShipEntity fishShip, ShiroUser user);
 
     /**
      * 渔船信息删除
@@ -52,7 +52,7 @@ public interface FishShipService extends IService<FishShipEntity> {
      * @param fishShip 实体对象
      * @param user 当前用户
      */
-    void editFishShip(FishShipEntity fishShip, ShiroUser user);
+    BaseResult editFishShip(FishShipEntity fishShip, ShiroUser user);
 
     /**
      * 获取渔船信息

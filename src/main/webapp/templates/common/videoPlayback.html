@@ -9,7 +9,6 @@
 
         var name = $("#videoName").val();
 
-        console.log(name);
         var script = document.createElement('script');
         script.src = 'http://172.38.75.169:88/' + name;
         document.body.insertBefore(script, document.body.firstChild);

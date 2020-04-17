@@ -159,4 +159,21 @@ layui.use(['layer', 'form','upload', 'table', 'ztree', 'laydate', 'admin', 'ax',
         }
     });
 
+    var name = $("#videoName").val();
+
+    var script = document.createElement('script');
+    script.src = 'http://172.38.75.169:88/1586939529095短视频.mp4';
+    document.body.insertBefore(script, document.body.firstChild);
+
+    let player = new Player({
+        id: 'mse',
+        autoplay: false,
+        loop: true,
+        volume: 0.3,
+        width: 300,
+        height: 200,
+        url: script.src,
+        //whitelist: ['']
+    });
+
 });

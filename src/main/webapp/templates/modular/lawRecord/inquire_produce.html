@@ -375,7 +375,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">市场价值</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="shipGoodsValue" autocomplete="off" class="layui-input">
+                                        <input type="text"  name="shipGoodsValue" onkeyup="value=value.replace(/[^\d.]+/g,'')" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-inline">
@@ -707,7 +707,6 @@
                 出海信息(补录)&nbsp;&nbsp;
             </div>
             <div class="layui-card-body">
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">出海时间</label>
@@ -733,7 +732,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">市场价值</label>
                         <div class="layui-input-inline">
-                            <input type="text" data-name="shipGoodsValue{{d.index}}" value="{{d.content.shipGoodsValue?d.content.shipGoodsValue:''}}" autocomplete="off" class="layui-input">
+                            <input type="text" data-name="shipGoodsValue{{d.index}}" onkeyup="value=value.replace(/[^\d.]+/g,'')" value="{{d.content.shipGoodsValue?d.content.shipGoodsValue:''}}" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -746,7 +745,7 @@
                         <label class="layui-form-label">到作业渔区时间</label>
                         <div class="layui-input-inline">
                             <input type="text" id="shipFishAreaDate{{d.index}}" data-name="shipFishAreaDate{{d.index}}" value="{{d.content.shipFishAreaDate?d.content.shipFishAreaDate:''}}" autocomplete="off" class="layui-input shipFishAreaDate">
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>

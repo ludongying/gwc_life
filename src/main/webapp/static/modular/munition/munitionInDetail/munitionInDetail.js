@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 初始化按钮
      */
-    if($('#status').val() === '1' || $('#status').val() === '2'){
+    if($('#status').val() === '1' || $('#status').val() === '2'|| $('#status').val() === '4'){
         $("#munitionDiv").attr("style","display:none;");
         // 渲染表格
         var tableResult = table.render({

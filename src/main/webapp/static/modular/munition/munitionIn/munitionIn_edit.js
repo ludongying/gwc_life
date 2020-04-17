@@ -54,26 +54,26 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         type: 'get',
         success: function (data) {
             $.each(data, function (index, item) {
-                $('#applyPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
+                $('#applyPerson').append(new Option(item.personName, item.personId));//往下拉菜单里添加元素
             })
             $('#applyPerson').val(result.applyPerson);
             form.render('select');//表单渲染
         }
     });
 
-    //出库人员下拉框
-    $.ajax({
-        url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
-        dataType: 'json',
-        type: 'get',
-        success: function (data) {
-            $.each(data, function (index, item) {
-                $('#inOutPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
-            })
-            $('#inOutPerson').val(result.inOutPerson);
-            form.render('select');//表单渲染
-        }
-    });
+    // //出库人员下拉框
+    // $.ajax({
+    //     url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
+    //     dataType: 'json',
+    //     type: 'get',
+    //     success: function (data) {
+    //         $.each(data, function (index, item) {
+    //             $('#inOutPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
+    //         })
+    //         $('#inOutPerson').val(result.inOutPerson);
+    //         form.render('select');//表单渲染
+    //     }
+    // });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {

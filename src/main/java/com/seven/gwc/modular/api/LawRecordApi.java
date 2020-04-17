@@ -46,7 +46,7 @@ public class LawRecordApi {
 
     @PostMapping(value = "/addEvidence")
     @ApiOperation(value = "证据补充-图片")
-    public BaseResult addEvidence(HttpServletRequest request, String id, String evidenceList) throws ParseException {
+    public BaseResult addEvidence(HttpServletRequest request, String id, String evidenceList) {
         String userId = request.getAttribute("userId").toString();
         return lawProductService.addEvidence(userId, id, evidenceList);
     }

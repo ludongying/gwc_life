@@ -111,14 +111,13 @@ public class UserController extends BaseController {
     @BussinessLog(value = "增加用户", key = "account", dict = UserDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
-    public BaseResult add(@Valid UserEntity user) throws IOException {
+    public BaseResult add(@Valid UserEntity user) {
         ShiroUser currentUser = ShiroKit.getUser();
         user.setStatus(TypeStatesEnum.FREEZED.getCode());
         user.setCreateUser(currentUser.getId());
         user.setCreateTime(new Date());
 
-        userService.addUser(user);
-        return SUCCESS;
+        return userService.addUser(user);
     }
 
     /**
@@ -130,7 +129,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public BaseResult delete(@RequestParam String id) {
         if (id.equals(ConfigConsts.ADMIN_ID)) {
-            return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
+            return new BaseResult(false, 500, ErrorEnum.CANT_OPERATION_ADMIN.getMessage());
         }
         userService.removeById(id);
         return SUCCESS;
@@ -145,7 +144,8 @@ public class UserController extends BaseController {
     public BaseResult update(UserEntity user) throws IOException {
         ShiroUser currentUser = ShiroKit.getUser();
         if (user.getId().equals(ConfigConsts.ADMIN_ID)) {
-            return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
+            return new BaseResult(false, 500, ErrorEnum.ERROR_USER_EXIST.getMessage());
+            //return new BaseResult().failure(ErrorEnum.CANT_OPERATION_ADMIN);
         }
 
         user.setUpdateUser(currentUser.getId());
@@ -286,6 +286,7 @@ public class UserController extends BaseController {
 //        tree.add(ZTreeNode.createParent());
         return tree;
     }
+
 
 }
 

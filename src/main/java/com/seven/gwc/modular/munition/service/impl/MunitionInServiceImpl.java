@@ -11,11 +11,15 @@ import com.seven.gwc.modular.equipment_info.entity.EquipEntity;
 import com.seven.gwc.modular.munition.dao.MunitionInMapper;
 import com.seven.gwc.modular.munition.entity.MunitionInDetailEntity;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
+import com.seven.gwc.modular.munition.munitionEnum.MunitionInStatesEnum;
 import com.seven.gwc.modular.munition.service.MunitionInService;
 import com.seven.gwc.modular.sailor.dao.PersonMapper;
 import com.seven.gwc.modular.sailor.entity.PersonEntity;
 import com.seven.gwc.modular.system.dao.DictMapper;
+import com.seven.gwc.modular.system.dao.UserMapper;
+import com.seven.gwc.modular.system.dto.UserDTO;
 import com.seven.gwc.modular.system.entity.DictEntity;
+import com.seven.gwc.modular.system.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +45,7 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
     @Autowired
     private DictMapper dictMapper;
     @Autowired
-    private PersonMapper personMapper;
+    private UserMapper userMapper;
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
@@ -55,15 +59,15 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
                 }
             }
             if(ToolUtil.isNotEmpty(munitionInEntity.getApplyPerson())){
-                PersonEntity personEntity = personMapper.getPerson(munitionInEntity.getApplyPerson());
-                if(personEntity != null){
-                    munitionInEntity.setApplyPersonDesp(personEntity.getPersonName());
+                UserEntity userEntity = userMapper.selectById(munitionInEntity.getApplyPerson());
+                if(userEntity != null){
+                    munitionInEntity.setApplyPersonDesp(userEntity.getName());
                 }
             }
             if(ToolUtil.isNotEmpty(munitionInEntity.getInOutPerson())){
-                PersonEntity personEntity = personMapper.getPerson(munitionInEntity.getInOutPerson());
-                if(personEntity != null){
-                    munitionInEntity.setInOutPersonDesp(personEntity.getPersonName());
+                UserEntity userEntity = userMapper.selectById(munitionInEntity.getInOutPerson());
+                if(userEntity != null){
+                    munitionInEntity.setInOutPersonDesp(userEntity.getName());
                 }
             }
         }
@@ -85,7 +89,8 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
             return false;
         }
         munitionIn.setActionType(0);//入库为0，出库为1
-        munitionIn.setStatus(0);//保存为0，提交为1，归档（入库完成）为2
+        //表单状态：0保存，1提交，2出入库通过，3出入库驳回，4审核通过，5审核未通过
+        munitionIn.setStatus(MunitionInStatesEnum.SAVE.getCode());
         munitionIn.setCreateDate(new Date());
         munitionIn.setCreatePerson(user.getId());
         munitionIn.setSynFlag(false);
@@ -136,10 +141,39 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
     }
 
     @Override
-    public int setStatus(String munitionInId, String state) {
+    public int setStatus(String munitionInId, String state , ShiroUser user) {
         LambdaUpdateWrapper<MunitionInEntity> lambdaUpdate = Wrappers.<MunitionInEntity>lambdaUpdate();
-        lambdaUpdate.set(MunitionInEntity::getStatus, state).eq(MunitionInEntity::getId, munitionInId);
+        if(state == MunitionInStatesEnum.SUBMIT.getCode()){
+            lambdaUpdate.set(MunitionInEntity::getStatus, state).set(MunitionInEntity::getApplyPerson,user.getId()).set(MunitionInEntity::getApplyTime,new Date()).eq(MunitionInEntity::getId, munitionInId);
+        }
+        else if(state == MunitionInStatesEnum.MUNITION_IN_OK.getCode() || state == MunitionInStatesEnum.MUNITION_IN_REFUSED.getCode()){
+            lambdaUpdate.set(MunitionInEntity::getStatus, state).set(MunitionInEntity::getInOutPerson,user.getId()).set(MunitionInEntity::getInOutTime,new Date()).eq(MunitionInEntity::getId, munitionInId);
+        }
+        else if(state == MunitionInStatesEnum.APPROVE.getCode() || state == MunitionInStatesEnum.REFUSED.getCode()){
+            lambdaUpdate.set(MunitionInEntity::getStatus, state).set(MunitionInEntity::getApprovePerson,user.getId()).set(MunitionInEntity::getApproveTime,new Date()).eq(MunitionInEntity::getId, munitionInId);
+        }
+        else{
+            lambdaUpdate.set(MunitionInEntity::getStatus, state).eq(MunitionInEntity::getId, munitionInId);
+        }
         return this.munitionInMapper.update(null, lambdaUpdate);
+    }
+
+    @Override
+    public MunitionInEntity getMunitionInDetail(String id) {
+        MunitionInEntity munitionInEntity = munitionInMapper.selectById(id);
+        if(ToolUtil.isNotEmpty(munitionInEntity.getInOutPerson())){
+            UserEntity userEntity = userMapper.selectById(munitionInEntity.getInOutPerson());
+            if(userEntity != null){
+                munitionInEntity.setInOutPersonDesp(userEntity.getName());
+            }
+        }
+        if(ToolUtil.isNotEmpty(munitionInEntity.getApprovePerson())){
+            UserEntity userEntity = userMapper.selectById(munitionInEntity.getApprovePerson());
+            if(userEntity != null){
+                munitionInEntity.setApprovePersonDesp(userEntity.getName());
+            }
+        }
+        return munitionInEntity;
     }
 
 }

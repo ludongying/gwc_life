@@ -1,47 +1,107 @@
-@layout("/common/_container.html",{bg:"bg-white",js:["/modular/munition/munitionIn/munitionIn_detail.js"]}){
+@layout("/common/_container.html",{js:["/modular/munition/munitionIn/munitionIn_detail.js"]}){
 <div class="layui-tab-content">
-    <form id="munitionInForm" lay-filter="munitionInForm" class="layui-form">
-        <div class="layui-row layui-col-space10">
 
-            <input name="id" type="hidden"/>
+    <div class="layui-card">
+        <div class="layui-card-header">基本信息</div>
+        <div class="layui-card-body">
+            <form id="munitionInForm" lay-filter="munitionInForm" class="layui-form">
+                <div class="layui-row layui-col-space10">
 
-            <div class="layui-col-md6">
-                <label class="layui-form-label">出入库表单编码</label>
-                <div class="layui-input-block">
-                    <input id="id" name="id" placeholder="请输入出入库表单编码" type="text" class="layui-input" disabled="disabled"/>
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">表单编码<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="code" name="code" type="text" class="layui-input" readonly/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">申请人</label>
+                        <div class="layui-input-block">
+                            <select id="applyPerson" name="applyPerson" disabled>
+                                <!--                        <option value="">请选择申请人</option>-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">申请日期</label>
+                        <div class="layui-input-block">
+                            <input id="applyTime" name="applyTime" readonly type="text"
+                                   class="layui-input date-icon" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">物资类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select id="munitionType" name="munitionType" disabled></select>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">申请缘由<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="content" name="content" class="layui-input"
+                                   lay-verify="required" readonly></input>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <input id="remark" name="remark" type="text" class="layui-input"
+                                   autocomplete="off"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">入库人</label>
+                        <div class="layui-input-block">
+                            <input id="inOutPersonDesp" name="inOutPersonDesp" type="text" class="layui-input" readonly></input>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">入库日期</label>
+                        <div class="layui-input-block">
+                            <input id="inOutTime" name="inOutTime" readonly type="text"
+                                   class="layui-input date-icon" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">审核人</label>
+                        <div class="layui-input-block">
+                            <input id="approvePersonDesp" name="approvePersonDesp" type="text" class="layui-input" readonly></input>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">审核日期</label>
+                        <div class="layui-input-block">
+                            <input id="approveTime" name="approveTime" readonly type="text"
+                                   class="layui-input date-icon" disabled/>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">仓库操作类型：入库为0，出库为1（枚举）</label>
-                <div class="layui-input-block">
-                    <input id="actionType" name="actionType" placeholder="请输入仓库操作类型：入库为0，出库为1（枚举）" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">出入库物资列表详情id</label>
-                <div class="layui-input-block">
-                    <input id="detailId" name="detailId" placeholder="请输入出入库物资列表详情id" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
-            <div class="layui-col-md6">
-                <label class="layui-form-label">审核状态</label>
-                <div class="layui-input-block">
-                    <input id="status" name="status" placeholder="请输入审核状态" type="text" class="layui-input" disabled="disabled"/>
-                </div>
-            </div>
-
+            </form>
         </div>
-    </form>
+    </div>
+
+    <div class="layui-card">
+        <div class="layui-card-header">物资清单</div>
+        <div class="layui-card-body">
+            <div class="layui-row layui-col-space10">
+                <table class="layui-table" id="munitionInDetailTable"
+                       lay-filter="munitionInDetailTable"></table>
+            </div>
+        </div>
+    </div>
+
 </div>
 @}
 

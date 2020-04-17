@@ -154,13 +154,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     }
 
     @Override
-    public void addUser(UserEntity user) {
+    public BaseResult addUser(UserEntity user) {
         ShiroUser user1 = ShiroKit.getUser();
 
         // 判断账号是否重复
         UserEntity theUser = this.getByAccount(user.getAccount());
         if (theUser != null){
-            throw new BusinessException(ErrorEnum.ERROR_USER_EXIST);
+            return new BaseResult(false, 500, ErrorEnum.ERROR_USER_EXIST.getMessage());
         }
         // 完善账号信息
         String salt = ShiroKit.getRandomSalt(5);
@@ -174,6 +174,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         user.setSalt(salt);
 
         this.save(user);
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override

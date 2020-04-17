@@ -13,7 +13,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, action_type, detail_id, content, remark, status, apply_person, in_out_person, in_out_time
+        id, action_type, detail_id, content, remark, status, apply_person, apply_time, in_out_person, in_out_time, approve_person, approve_time
     </sql>
 
     <select id="maxCode" resultType="java.lang.Integer">
@@ -45,6 +45,5 @@
         <!-- 数据范围过滤 -->
         ${munitionIn.params.dataScope}
     </select>
-
 
 </mapper>

@@ -136,7 +136,7 @@ public class MunitionInController extends BaseController {
     @RequestMapping("/detail/{munitionInId}")
     @ResponseBody
     public MunitionInEntity detail(@PathVariable String munitionInId) {
-        return munitionInService.getById(munitionInId);
+        return munitionInService.getMunitionInDetail(munitionInId);
     }
 
     /**
@@ -148,8 +148,8 @@ public class MunitionInController extends BaseController {
         MunitionInEntity munitionIn = new MunitionInEntity();
         munitionIn.setCode(munitionInService.getAutoCode());
         ShiroUser user = ShiroKit.getUser();
-        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
-        munitionIn.setApplyPerson(personEntity.getId());
+//        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
+        munitionIn.setApplyPerson(user.getId());
         munitionIn.setApplyTime(new Date());
         return munitionIn;
     }
@@ -160,8 +160,31 @@ public class MunitionInController extends BaseController {
     @RequestMapping("/submit")
     @ResponseBody
     public BaseResult submit(@RequestParam String id) {
-       munitionInService.setStatus(id, MunitionInStatesEnum.SUBMIT.getCode());
+        ShiroUser user = ShiroKit.getUser();
+       munitionInService.setStatus(id, MunitionInStatesEnum.SUBMIT.getCode(),user);
        return SUCCESS;
+    }
+
+    /**
+     * 入库通过
+     */
+    @RequestMapping("/inApprove")
+    @ResponseBody
+    public BaseResult inApprove(@RequestParam String id) {
+        ShiroUser user = ShiroKit.getUser();
+        munitionInService.setStatus(id, MunitionInStatesEnum.MUNITION_IN_OK.getCode(),user);
+        return SUCCESS;
+    }
+
+    /**
+     * 入库驳回
+     */
+    @RequestMapping("/inRefused")
+    @ResponseBody
+    public BaseResult inRefused(@RequestParam String id) {
+        ShiroUser user = ShiroKit.getUser();
+        munitionInService.setStatus(id, MunitionInStatesEnum.MUNITION_IN_REFUSED.getCode(),user);
+        return SUCCESS;
     }
 
     /**
@@ -170,7 +193,8 @@ public class MunitionInController extends BaseController {
     @RequestMapping("/approve")
     @ResponseBody
     public BaseResult approve(@RequestParam String id) {
-        munitionInService.setStatus(id, MunitionInStatesEnum.APPROVE.getCode());
+        ShiroUser user = ShiroKit.getUser();
+        munitionInService.setStatus(id, MunitionInStatesEnum.APPROVE.getCode(),user);
         return SUCCESS;
     }
 
@@ -180,7 +204,8 @@ public class MunitionInController extends BaseController {
     @RequestMapping("/refused")
     @ResponseBody
     public BaseResult refused(@RequestParam String id) {
-        munitionInService.setStatus(id, MunitionInStatesEnum.REFUSED.getCode());
+        ShiroUser user = ShiroKit.getUser();
+        munitionInService.setStatus(id, MunitionInStatesEnum.REFUSED.getCode(),user);
         return SUCCESS;
     }
 

@@ -84,5 +84,23 @@ layui.use(['form', 'table', 'element', 'ax', 'laydate'], function () {
         cols: GongzuoTable.initColumn()
     });
 
-    //$("#map").load('../system/map');
+    //获取天气信息
+    $.ajax({
+        type: 'GET',
+        url: 'https://www.tianqiapi.com/api/',
+        data: 'version=v1&city=天津&appid=23035354&appsecret=8YvlPNrz',
+        dataType: 'JSON',
+        error: function () {
+            alert('网络错误');
+        },
+        success: function (res) {
+            $('#box').append('<li>City: ' + res.city + '</li>');
+            $('#box').append('<li>Weather: ' + res.data[0].wea + '</li>');
+            $('#box').append('<li>Tips: ' + res.data[0].air_tips + '</li>');
+            // 遍历数组
+            for (var i = 0; i < res.data[0].hours.length; i++) {
+                $('#hours').append('<li>' + (i + 1) + ': 时间: ' + res.data[0].hours[i].day + ' 气温: ' + res.data[0].hours[i].tem + ' </li >');
+            }
+        }
+    });
 });

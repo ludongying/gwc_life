@@ -107,7 +107,7 @@ public interface UserService extends IService<UserEntity> {
      *
      * @param user 用户实体
      */
-    void addUser(UserEntity user);
+    BaseResult addUser(UserEntity user);
 
     /**
      * 刷新当前登录用户的信息

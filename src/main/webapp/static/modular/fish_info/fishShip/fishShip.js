@@ -188,13 +188,13 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
     /**
      * 预览
      */
-    FishShip.onPreviewFishShip = function (data) {
+    /*FishShip.onPreviewFishShip = function (data) {
         func.open({
             title: '预览',
             maxmin: true,
             content: Feng.ctxPath + '/system/previewPdf?fileName=' + data.fullName
         });
-    };
+    };*/
 
     /**
      * 点击删除渔船信息
@@ -224,7 +224,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
         , accept: 'file' //普通文件
         , exts: 'xls|xlsx'
         , done: function (res) {
-            if (res.message.substring(13, 15) == "插入") {
+            if (res.message.substring(13, 15) === "插入") {
                 layer.confirm(res.message.substring(13), {
                     btn: ['确定'],
                     btn1:function (index) {
@@ -232,7 +232,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func', 
                         table.reload(FishShip.tableId);
                     }
                 });
-                if (res.message.substring(res.message.length - 5) != "失败0条。") {
+                if (res.message.substring(res.message.length - 5) !== "失败0条。") {
                     var exportForm = $("<form action='/system/downloadFile' method='post'></form>")
                     exportForm.append("<input type='hidden' name='fileName' value='" + res.message.substring(0, 13) + ".xlsx" + "'/>")
                     $(document.body).append(exportForm);

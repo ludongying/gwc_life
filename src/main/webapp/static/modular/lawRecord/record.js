@@ -87,7 +87,9 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     $('#btnSearch').click(function () {
         let queryData=getParam(LawRecord.searchType);
-        table.reload(LawRecord.tableId, {where: queryData});
+        if (queryData != null){
+            table.reload(LawRecord.tableId, {where: queryData});
+        }
     });
 
     function getParam(id){

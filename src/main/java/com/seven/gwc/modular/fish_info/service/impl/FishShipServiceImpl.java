@@ -1,9 +1,12 @@
 package com.seven.gwc.modular.fish_info.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.core.util.CalculationDateUtil;
 import com.seven.gwc.core.util.ExcelUtil;
 import com.seven.gwc.core.util.ToolUtil;
@@ -91,10 +94,17 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     }
 
     @Override
-    public void addFishShip(FishShipEntity fishShip, ShiroUser user) {
+    public BaseResult addFishShip(FishShipEntity fishShip, ShiroUser user) {
+        LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(FishShipEntity::getCode, fishShip.getCode());
+        FishShipEntity fishShipEntity = fishShipMapper.selectOne(lambdaQuery);
+        if (ToolUtil.isEmpty(fishShipEntity)) {
+            return new BaseResult(false, 500, ErrorEnum.ERROR_ONLY_NAME.getMessage());
+        }
         fishShip.setCreateTime(new Date());
         fishShip.setCreateUser(user.getId());
         fishShipMapper.insert(fishShip);
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override
@@ -103,10 +113,18 @@ public class FishShipServiceImpl extends ServiceImpl<FishShipMapper, FishShipEnt
     }
 
     @Override
-    public void editFishShip(FishShipEntity fishShip, ShiroUser user) {
+    public BaseResult editFishShip(FishShipEntity fishShip, ShiroUser user) {
+        LambdaQueryWrapper<FishShipEntity> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(FishShipEntity::getCode, fishShip.getCode())
+                .ne(FishShipEntity::getId, fishShip.getId());
+        FishShipEntity fishShipEntity = fishShipMapper.selectOne(lambdaQuery);
+        if (ToolUtil.isEmpty(fishShipEntity)) {
+            return new BaseResult(false, 500, ErrorEnum.ERROR_ONLY_NAME.getMessage());
+        }
         fishShip.setUpdateTime(new Date());
         fishShip.setUpdateUser(user.getId());
         fishShipMapper.updateById(fishShip);
+        return new BaseResult(true, 200, "操作成功");
     }
 
     @Override

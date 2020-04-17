@@ -31,6 +31,9 @@ import com.seven.gwc.modular.address_book.service.GroupPersonService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
@@ -118,19 +121,23 @@ public class GroupPersonServiceImpl extends ServiceImpl<GroupPersonMapper, Group
 
     @Override
     public String getPttList(String keyWord) throws IOException {
-        HttpPost post=new HttpPost(host+"/cmt/ptt/query?type=view");
+        HttpPost post=new HttpPost(host+"/cmt/user/daq/view/video");
 
-        List <NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("dpttAdmin", keyWord));
-        post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+        List <NameValuePair> params = new ArrayList();
+        params.add(new BasicNameValuePair("fileId", "117"));
+        post.setEntity(new UrlEncodedFormEntity(params, StandardCharsets.UTF_8));
 
         CloseableHttpResponse response = httpclient.execute(post);
         try {
             HttpEntity entity = response.getEntity();
             String body = EntityUtils.toString(entity);
+            System.out.println(">>>>>>>" + body);
+            byte[] byteArray = body.getBytes();
+            Files.write(Paths.get("D:\\myfile\\file\\测试视频"), byteArray);
             return body;
         } finally {
             response.close();
         }
     }
+
 }

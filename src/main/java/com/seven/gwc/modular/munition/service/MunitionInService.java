@@ -59,6 +59,6 @@ public interface MunitionInService extends IService<MunitionInEntity> {
      * 设置保单状态
      * @return
      */
-    int setStatus(String munitionInId, String state);
+    int setStatus(String munitionInId, String state, ShiroUser user);
 
 }

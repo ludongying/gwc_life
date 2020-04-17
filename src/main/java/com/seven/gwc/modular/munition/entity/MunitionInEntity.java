@@ -55,7 +55,7 @@ public class MunitionInEntity extends GwcBaseEntity implements Serializable {
     private String remark;
 
     /** 审核状态 */
-    private Integer status;
+    private String status;
 
     /** 申请人 */
     private String applyPerson;
@@ -80,5 +80,17 @@ public class MunitionInEntity extends GwcBaseEntity implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date inOutTime;
+
+    /** 审核人 */
+    private String approvePerson;
+
+    /** 审核人描述 */
+    @TableField(exist = false)
+    private String approvePersonDesp;
+
+    /** 审核日期 */
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date approveTime;
 
 }

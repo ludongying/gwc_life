@@ -14,8 +14,10 @@ public enum MunitionInStatesEnum {
      */
     SAVE("0", "保存"),
     SUBMIT("1", "提交"),
-    APPROVE("2", "审批通过"),
-    REFUSED("3", "不通过");
+    MUNITION_IN_OK("2", "入库通过"),
+    MUNITION_IN_REFUSED("3", "入库不通过"),
+    APPROVE("4", "审批通过"),
+    REFUSED("5", "不通过");
 
     String code;
     String message;

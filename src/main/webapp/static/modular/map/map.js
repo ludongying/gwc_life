@@ -23,6 +23,7 @@
     let FishLine_Name = null;//渔区
     let FishLine_miniMap = null;//渔区
     //菜单栏
+    var navId = document.getElementById('navId');
     var menuid = document.getElementById('menuid');
     var hide = document.getElementById('hide');
     var CloseHide = document.getElementById('Closehide');
@@ -389,33 +390,42 @@
         zoomOffset: 1,
         layers: magnifyingGlassLayer
     });
-    $('#eyeid').click(function () {
-        if ($(this).attr("alt")=="close"){
-            $(this).attr("src","/common/plugins/map/images/open.png");
-            $(this).attr("alt","open");
-            if(map.hasLayer(magnifyingGlass)) {
-                return;
-            }
-            if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0&&map.hasLayer(ForbiddenFishLine)&&ForbiddenFishLine_NoName!=null)
-            {
-                magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
-            }
-            if(magnifyingGlassLayer.indexOf(FishLine_Name)<0&&map.hasLayer(FishLine)&&FishLine_Name!=null)
-            {
-                magnifyingGlassLayer.push(FishLine_Name);
-            }
-            if(magnifyingGlassLayer.indexOf(shippath)<0&&map.hasLayer(pointsGroup)&&shippath!=null)
-            {
-                magnifyingGlassLayer.push(shippath);
-            }
-            map.addLayer(magnifyingGlass);
+    function magnifyingGlass_open()
+    {
+        if(map.hasLayer(magnifyingGlass)) {
+            return;
         }
-        else {
-            $(this).attr("src","/common/plugins/map/images/close.png");
-            $(this).attr("alt","close");
+        if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0&&map.hasLayer(ForbiddenFishLine)&&ForbiddenFishLine_NoName!=null)
+        {
+            magnifyingGlassLayer.push(ForbiddenFishLine_NoName);
+        }
+        if(magnifyingGlassLayer.indexOf(FishLine_Name)<0&&map.hasLayer(FishLine)&&FishLine_Name!=null)
+        {
+            magnifyingGlassLayer.push(FishLine_Name);
+        }
+        if(magnifyingGlassLayer.indexOf(shippath)<0&&map.hasLayer(pointsGroup)&&shippath!=null)
+        {
+            magnifyingGlassLayer.push(shippath);
+        }
+        map.addLayer(magnifyingGlass);
+    }
+    function magnifyingGlass_close()
+    {
+        if(map.hasLayer(magnifyingGlass))
             map.removeLayer(magnifyingGlass);
+    }
+    $('#eyeid').click(function () {
+        if ($('#eyeid').attr("alt")=="close") {
+            $('#eyeid').attr("src", "/common/plugins/map/images/open.png");
+            $('#eyeid').attr("alt", "open");
+            magnifyingGlass_open();
         }
-
+        else
+        {
+            $('#eyeid').attr("src","/common/plugins/map/images/close.png");
+            $('#eyeid').attr("alt","close");
+            magnifyingGlass_close();
+        }
     });
     ////////////////////////////////绘制轨迹开始////////////////////////////////////////////////////////////////////
     //执法船
@@ -688,7 +698,18 @@
                 pointToLayer: function (feature, latlng){
                     if(feature.properties.style.icon)
                     {
-                        return L.marker(latlng, feature.properties.style);
+                        let marker = L.marker(latlng, feature.properties.style);
+                        marker.on("click", function (e) {
+                            // alert(latlng);
+                            let id = '8b24dac0908f3fcbfdf0d358285f6cea';
+                            func.open({
+                                title: '渔船',
+                                area: ['539px', '364px'],
+                                content: Feng.ctxPath + '/map/ship_detail?id=' + id,
+                                // tableId: Person.tableId
+                            });
+                        });
+                        return marker;
                     }
                     else
                     {
@@ -746,7 +767,6 @@
         }
     }
     //定时刷新执法船位置信息
-
     var i = window.setInterval(getPoint, 5000);//5秒刷新一次
     var state = true;
     L.easyButton({
@@ -1052,5 +1072,35 @@
             }
         }
     });
+    var state1 = false;
+    L.easyButton({
+        states:[
+            {
+                icon: '<span class="star">全屏切换</span>',
+                onClick: function(){
+                    if(state1 == false)//非全屏
+                    {
+                        //显示信息
+                        //禁渔区
+                        //渔区
+                        //菜单栏隐藏
+                        navId.style.display = "none";
+                        //鹰眼图隐藏
+                        magnifyingGlass_close();
+
+                    }
+                    else//全屏
+                    {
+                        navId.style.display = "block";
+                        //鹰眼图显示
+                        if ($('#eyeid').attr("alt")=="open") {
+                            magnifyingGlass_open();
+                        }
+                    }
+                    state1 = !state1;
+                }
+            }
+        ]
+    }).addTo(map);
 });
 

@@ -10,10 +10,10 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var func = layui.func;
 
     /**
-     * 物资入库详情管理
+     * 物资出库详情管理
      */
-    var MunitionInDetail = {
-        tableId: "munitionInDetailTable",
+    var MunitionOutDetail = {
+        tableId: "munitionOutDetailTable",
         condition: {
             munitionName: ""
         }
@@ -22,7 +22,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 初始化表格的列
      */
-    MunitionInDetail.initColumn = function () {
+    MunitionOutDetail.initColumn = function () {
         return [[
             {title: '出入库物资列表编码', field: 'id', align: "center", hide: true},
             {title: '物资表id', field: 'munitionId', align: "center", hide: true},
@@ -43,27 +43,27 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         $("#munitionDiv").attr("style","display:none;");
         // 渲染表格
         var tableResult = table.render({
-            elem: '#' + MunitionInDetail.tableId,
-            url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId=' + $('#mainId').text(),
+            elem: '#' + MunitionOutDetail.tableId,
+            url: Feng.ctxPath + '/munitionOutDetail/list?munitionMainId=' + $('#mainId').text(),
             page: true,
             height: "full-97",
             cellMinWidth: 100,
-            cols: MunitionInDetail.initColumn()
+            cols: MunitionOutDetail.initColumn()
         });
     }else{
         var tableResult = table.render({
-            elem: '#' + MunitionInDetail.tableId,
-            url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId=' + $('#mainId').text(),
+            elem: '#' + MunitionOutDetail.tableId,
+            url: Feng.ctxPath + '/munitionOutDetail/list?munitionMainId=' + $('#mainId').text(),
             page: true,
             height: "full-180",
             cellMinWidth: 100,
-            cols: MunitionInDetail.initColumn()
+            cols: MunitionOutDetail.initColumn()
         });
     }
 
 
     //监听表格行单击事件
-    table.on('row(munitionInDetailTable)', function (obj) {
+    table.on('row(munitionOutDetailTable)', function (obj) {
         var dataChecked = obj.data;
         $('#id').val(dataChecked.id);
         $('#munitionName').val(dataChecked.munitionName);
@@ -93,7 +93,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     //物资名称下拉框联动
     layui.use('form', function () {
         form.on('select(nameFilter)', function (data) {
-            $('#munitionId').empty();
+             $('#munitionId').empty();
             //物资规格下拉框初始化
             $.ajax({
                 url: Feng.ctxPath + '/munitionInfo/listByName?name=' + $('#munitionName').val(),
@@ -103,8 +103,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     $.each(data, function (index, item) {
                         $('#munitionId').append(new Option(item.code, item.id));//往下拉菜单里添加元素
                     })
-                    alert(data.unit);
-                    $('#unit').text(data.unit);
+                    //物资规格改变，物资名称重新加载
+                    munitionSpecFilter();
                     form.render('select');//表单渲染
                 }
             });
@@ -112,7 +112,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     });
 
     //当物资名称赋值时，未启动select事件，则物资联动事件
-    function munitionNameFilter(munitionId) {
+    function munitionNameFilter() {
         //物资规格下拉框初始化
         $('#munitionId').empty();
         $.ajax({
@@ -121,30 +121,40 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             type: 'get',
             success: function (data) {
                 $.each(data, function (index, item) {
-                    $('#munitionId').append(new Option(item.code, item.id));//往下拉菜单里添加元素
+                    $('#munitionId').append(new Option(item.code, item.id));
                 })
                 //$('#munitionId').val(munitionId);
-                alert(data.unit);
-                $('#unit').text(data.unit);
                 form.render('select');//表单渲染
             }
         });
     }
 
-    //物资编码下拉框联动
-    // layui.use('form', function () {
-    //     form.on('select(nameFilter)', function (data) {
-    //         //单位初始化
-    //         $.ajax({
-    //             url: Feng.ctxPath + '/munitionInfo/detail/' + $('#munitionId').val(),
-    //             dataType: 'json',
-    //             type: 'get',
-    //             success: function (data) {
-    //                 $('#unit').text(data.unit);
-    //             }
-    //         });
-    //     });
-    // });
+    //物资编码下拉框联动(物资单位初始化）
+    layui.use('form', function () {
+        form.on('select(specFilter)', function (data) {
+            //单位初始化
+            $.ajax({
+                url: Feng.ctxPath + '/munitionInfo/detail/' + $('#munitionId').val(),
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $('#unit').text(data.unit);
+                }
+            });
+        });
+    });
+
+    //当物资规格赋值时，未启动select事件，则单位联动事件
+    function munitionSpecFilter() {
+        $.ajax({
+            url: Feng.ctxPath + '/munitionInfo/detail/' + $('#munitionId').val(),
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $('#unit').text(data.unit);
+            }
+        });
+    }
 
     //初始化仓库下拉框
     $.ajax({
@@ -159,14 +169,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         }
     });
 
-    // 增加入库物资提交事件
+    // 增加出库物资提交事件
     form.on('submit(btnAdd)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/add", function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
                 //admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框
-                table.reload(MunitionInDetail.tableId);
+                table.reload(MunitionOutDetail.tableId);
             } else {
                 Feng.error(data.message);
             }
@@ -178,14 +188,14 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         return false;
     });
 
-    // 修改入库物资提交事件
+    // 修改出库物资提交事件
     form.on('submit(btnEdit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/update", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/update", function (data) {
             if (data.success) {
                 Feng.success("编辑成功!");
                 //admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框
-                table.reload(MunitionInDetail.tableId);
+                table.reload(MunitionOutDetail.tableId);
             } else {
                 Feng.error(data.message);
             }
@@ -197,22 +207,22 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
         return false;
     });
 
-    // 删除入库物资提交事件
+    // 删除出库物资提交事件
     form.on('submit(btnDelete)', function (data) {
         Feng.confirm("您确定要删除所选数据吗？", function () {
-            // var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/delete", function (data) {
-            var ajax = new $ax(Feng.ctxPath + "/munitionInDetail/delete?munitionInId=" + $('#munitionMainId').val().trim()
-                + "&munitionInDetailId=" + $('#id').val().trim(), function (data) {
+            // var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/delete?munitionOutId=" + $('#munitionMainId').val().trim()
+                + "&munitionOutDetailId=" + $('#id').val().trim(), function (data) {
                 if (data.success) {
                     Feng.success("删除成功!");
-                    table.reload(MunitionInDetail.tableId);
+                    table.reload(MunitionOutDetail.tableId);
                 } else {
                     Feng.error(data.message);
                 }
             }, function (data) {
                 Feng.error("删除失败!" + data.message + "!");
             });
-            // ajax.set("munitionInDetailId", data.id);
+            // ajax.set("munitionOutDetailId", data.id);
             ajax.start();
         });
         return false;

@@ -1,0 +1,102 @@
+@layout("/common/_container.html",{js:["/modular/munition/munitionOutDetail/munitionOutDetail.js"]}){
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <label id="mainId" name="mainId">${munitionOutCode}</label>
+            <label>出库清单</label>
+        </div>
+        <div class="layui-card-body">
+
+            <form id="munitionOutDetailForm" lay-filter="munitionOutDetailForm" class="layui-form">
+                <div class="layui-row layui-col-space10" id="munitionDiv">
+                    <input id="munitionMainId" name="munitionMainId" value="${munitionOutCode}" type="hidden" class="layui-input"/>
+                    <input id="type" value="${type}" type="hidden" class="layui-input"/>
+                    <input id="status" value="${status}" type="hidden" class="layui-input"/>
+                    <input id="id" name="id" type="hidden" class="layui-input"/>
+
+                    <div class="layui-col-md3">
+                        <label class="layui-form-label">物资名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select id="munitionName" name="munitionName" lay-filter="nameFilter" lay-verify="required"
+                                    required>
+                                <option value="">请选择物资</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md3">
+                        <label class="layui-form-label">物资编码<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select id="munitionId" name="munitionId" lay-filter="specFilter" lay-verify="required"
+                                    required>
+                                <option value="">请选择物资编码</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md3">
+                        <label class="layui-form-label">仓库名称</label>
+                        <div class="layui-input-block">
+                            <select id="depotId" name="depotId">
+                                <option value="">请选择仓库名称</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md3">
+                        <label class="layui-form-label">数量<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="totalNum" name="totalNum" placeholder="请输入数量" type="text" class="layui-input"
+                                   lay-verify="required|positiveNumber" required/>
+                        </div>
+                        <div class="layui-input-inline layui-input-company"><label id="unit"></label></div>
+                    </div>
+
+                    <div class="layui-col-md12 text-right">
+                        <button id="add" class="layui-btn layui-btn-sm" lay-filter="btnAdd" lay-submit="">
+                            &emsp;添加&emsp;
+                        </button>
+                        <button id="edit" class="layui-btn layui-btn-sm" lay-filter="btnEdit" lay-submit="">&emsp;修改&emsp;
+                        </button>
+                        <button id="delete" class="layui-btn layui-btn-sm layui-btn-danger" lay-filter="btnDelete" lay-submit="">
+                            &emsp;删除&emsp;
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="layui-row layui-col-space10">
+                <!--                                <div class="layui-form toolbar">-->
+                <!--                                    <div class="layui-form-item">-->
+                <!--                                        <div class="layui-inline">-->
+                <!--                                            <input id="munitionOutDetailName" class="layui-input" type="text"-->
+                <!--                                                   placeholder="物资出库详情名称"/>-->
+                <!--                                        </div>-->
+                <!--                                        <div class="layui-inline">-->
+                <!--                                            <button id="btnSearch" class="layui-btn">搜索</button>-->
+                <!--                                            <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>-->
+                <!--                                        </div>-->
+                <!--                                        <div style="float: right">-->
+                <!--                                            <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加-->
+                <!--                                            </button>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <table class="layui-table" id="munitionOutDetailTable"
+                       lay-filter="munitionOutDetailTable"></table>
+            </div>
+
+            <!--            <div class="layui-row layui-col-space10" style="margin-top: 15px;">-->
+            <!--                <div class="layui-col-md12 text-center">-->
+            <!--                    <button class="layui-btn layui-btn-primary" id="btnBack" lay-filter="btnBack">-->
+            <!--                        &emsp;返回&emsp;-->
+            <!--                    </button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;提交&emsp;</button>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+        </div>
+    </div>
+</div>
+@}

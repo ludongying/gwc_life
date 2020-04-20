@@ -9,9 +9,9 @@ import com.seven.gwc.core.base.BaseResultPage;
 import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
-import com.seven.gwc.modular.munition.entity.MunitionInEntity;
+import com.seven.gwc.modular.munition.entity.MunitionOutEntity;
 import com.seven.gwc.modular.munition.munitionEnum.MunitionInOutStatesEnum;
-import com.seven.gwc.modular.munition.service.MunitionInService;
+import com.seven.gwc.modular.munition.service.MunitionOutService;
 import com.seven.gwc.modular.sailor.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,185 +26,185 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * description : 物资入库控制器
+ * description : 物资出库控制器
  *
  * @author : LDY
  * @date : 2020-04-07
  */
 @Controller
-@RequestMapping("munitionIn")
-public class MunitionInController extends BaseController {
+@RequestMapping("munitionOut")
+public class MunitionOutController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private static String PREFIX = "/modular/munition/munitionIn/";
+    private static String PREFIX = "/modular/munition/munitionOut/";
 
     @Autowired
-    private MunitionInService munitionInService;
+    private MunitionOutService munitionOutService;
     @Autowired
     private PersonService personService;
 
     /**
-     * 跳转到物资入库首页
+     * 跳转到物资出库首页
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "munitionIn";
+        return PREFIX + "munitionOut";
     }
 
     /**
-     * 跳转到添加物资入库
+     * 跳转到添加物资出库
      */
-    @RequestMapping("/munitionIn_add")
-    public String munitionInAdd() {
-        return PREFIX + "munitionIn_add";
+    @RequestMapping("/munitionOut_add")
+    public String munitionOutAdd() {
+        return PREFIX + "munitionOut_add";
     }
 
     /**
-     * 跳转到修改物资入库
+     * 跳转到修改物资出库
      */
-    @RequestMapping("/munitionIn_edit")
-    public String munitionInUpdate(String munitionInId) {
-        return PREFIX + "munitionIn_edit";
+    @RequestMapping("/munitionOut_edit")
+    public String munitionOutUpdate(String munitionOutId) {
+        return PREFIX + "munitionOut_edit";
     }
 
     /**
-     * 跳转到查看物资入库
+     * 跳转到查看物资出库
      */
-    @RequestMapping("/munitionIn_detail")
-    public String munitionInDetail(String munitionInId) {
-        return PREFIX + "munitionIn_detail";
+    @RequestMapping("/munitionOut_detail")
+    public String munitionOutDetail(String munitionOutId) {
+        return PREFIX + "munitionOut_detail";
     }
 
     /**
-     * 获取物资入库列表
+     * 获取物资出库列表
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResultPage<MunitionInEntity> list(MunitionInEntity munitionIn) {
+    public BaseResultPage<MunitionOutEntity> list(MunitionOutEntity munitionOut) {
         Page page = BaseResultPage.defaultPage();
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<MunitionInEntity> munitionIns = munitionInService.selectMunitionIn(munitionIn,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
-        PageInfo pageInfo = new PageInfo<>(munitionIns);
-        Integer size = munitionInService.getListSize(munitionIn);
+        List<MunitionOutEntity> munitionOuts = munitionOutService.selectMunitionOut(munitionOut,(int)(page.getCurrent() - 1) * (int)page.getSize(), (int)page.getSize());
+        PageInfo pageInfo = new PageInfo<>(munitionOuts);
+        Integer size = munitionOutService.getListSize(munitionOut);
         pageInfo.setPages((int)Math.ceil((float)size / (float) page.getSize()));
         pageInfo.setTotal(size);
         return new BaseResultPage().createPage(pageInfo);
     }
 
     /**
-     * 增加物资入库
+     * 增加物资出库
      */
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(MunitionInEntity munitionIn) {
+    public BaseResult add(MunitionOutEntity munitionOut) {
         ShiroUser user = ShiroKit.getUser();
-        if(!munitionInService.addMunitionIn(munitionIn, user)){
+        if(!munitionOutService.addMunitionOut(munitionOut, user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_IN_CODE);
         }
         return SUCCESS;
     }
 
     /**
-     * 删除物资入库
+     * 删除物资出库
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public BaseResult delete(@RequestParam String munitionInId) {
+    public BaseResult delete(@RequestParam String munitionOutId) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.deleteMunitionIn(munitionInId, user);
+        munitionOutService.deleteMunitionOut(munitionOutId, user);
         return SUCCESS;
     }
 
     /**
-     * 编辑物资入库
+     * 编辑物资出库
      */
     @RequestMapping("/update")
     @ResponseBody
-    public BaseResult update(MunitionInEntity munitionIn) {
+    public BaseResult update(MunitionOutEntity munitionOut) {
         ShiroUser user = ShiroKit.getUser();
-        if(!munitionInService.editMunitionIn(munitionIn, user)){
+        if(!munitionOutService.editMunitionOut(munitionOut, user)){
             return new BaseResult().failure(ErrorEnum.ERROR_ONLY_IN_CODE);
         }
         return SUCCESS;
     }
 
     /**
-     * 物资入库详情
+     * 物资出库详情
      */
-    @RequestMapping("/detail/{munitionInId}")
+    @RequestMapping("/detail/{munitionOutId}")
     @ResponseBody
-    public MunitionInEntity detail(@PathVariable String munitionInId) {
-        return munitionInService.getMunitionInDetail(munitionInId);
+    public MunitionOutEntity detail(@PathVariable String munitionOutId) {
+        return munitionOutService.getMunitionOutDetail(munitionOutId);
     }
 
     /**
-     * 物资入库表单自动生成
+     * 物资出库表单自动生成
      */
     @RequestMapping("/getInitInfo")
     @ResponseBody
-    public MunitionInEntity getInitInfo() {
-        MunitionInEntity munitionIn = new MunitionInEntity();
-        munitionIn.setCode(munitionInService.getAutoCode());
+    public MunitionOutEntity getInitInfo() {
+        MunitionOutEntity munitionOut = new MunitionOutEntity();
+        munitionOut.setCode(munitionOutService.getAutoCode());
         ShiroUser user = ShiroKit.getUser();
 //        PersonEntity personEntity = personService.getOneByPersonId(user.getId());
-        munitionIn.setApplyPerson(user.getId());
-        munitionIn.setApplyTime(new Date());
-        return munitionIn;
+        munitionOut.setApplyPerson(user.getId());
+        munitionOut.setApplyTime(new Date());
+        return munitionOut;
     }
 
     /**
-     * 入库表单提交
+     * 出库表单提交
      */
     @RequestMapping("/submit")
     @ResponseBody
     public BaseResult submit(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-       munitionInService.setStatus(id, MunitionInOutStatesEnum.SUBMIT.getCode(),user);
+       munitionOutService.setStatus(id, MunitionInOutStatesEnum.SUBMIT.getCode(),user);
        return SUCCESS;
     }
 
     /**
-     * 入库通过
+     * 出库通过
      */
-    @RequestMapping("/inApprove")
+    @RequestMapping("/outApprove")
     @ResponseBody
-    public BaseResult inApprove(@RequestParam String id) {
+    public BaseResult outApprove(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.setStatus(id, MunitionInOutStatesEnum.MUNITION_IN_OUT_OK.getCode(),user);
+        munitionOutService.setStatus(id, MunitionInOutStatesEnum.MUNITION_IN_OUT_OK.getCode(),user);
         return SUCCESS;
     }
 
     /**
-     * 入库驳回
+     * 出库驳回
      */
-    @RequestMapping("/inRefused")
+    @RequestMapping("/outRefused")
     @ResponseBody
-    public BaseResult inRefused(@RequestParam String id) {
+    public BaseResult outRefused(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.setStatus(id, MunitionInOutStatesEnum.MUNITION_IN_OUT_REFUSED.getCode(),user);
+        munitionOutService.setStatus(id, MunitionInOutStatesEnum.MUNITION_IN_OUT_REFUSED.getCode(),user);
         return SUCCESS;
     }
 
     /**
-     * 入库表单审核通过
+     * 出库表单审核通过
      */
     @RequestMapping("/approve")
     @ResponseBody
     public BaseResult approve(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.setStatus(id, MunitionInOutStatesEnum.APPROVE.getCode(),user);
+        munitionOutService.setStatus(id, MunitionInOutStatesEnum.APPROVE.getCode(),user);
         return SUCCESS;
     }
 
     /**
-     * 入库表单审核驳回
+     * 出库表单审核驳回
      */
     @RequestMapping("/refused")
     @ResponseBody
     public BaseResult refused(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
-        munitionInService.setStatus(id, MunitionInOutStatesEnum.REFUSED.getCode(),user);
+        munitionOutService.setStatus(id, MunitionInOutStatesEnum.REFUSED.getCode(),user);
         return SUCCESS;
     }
 

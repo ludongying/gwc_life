@@ -39,7 +39,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 {title: '被询问人', field: 'investigateName', align: "center"},
                 {title: '被询问人电话', field: 'investigateTel', align: "center"},
                 {title: '案件来源', field: 'lawCaseSourceName', align: "center"},
-                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'center'}
+                {title: '操作', toolbar: '#tableBar', minWidth: 360, align: 'left'}
             ]];
         };
         table.render({

@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * description : 船员信息服务实现类
@@ -248,6 +249,10 @@ public class PersonServiceImpl extends ServiceImpl<PersonMapper, PersonEntity> i
                 if(listCertificate.size()>0){
                     CertificateEntity certificateEntity = listCertificate.get(0);
                     personVO.setLawCode(certificateEntity.getCertificateId());
+                }
+                //过滤没有执法证人员
+                if(Objects.isNull(personVO.getLawCode())||personVO.getLawCode().trim().isEmpty()){
+                    continue;
                 }
                 listVo.add(personVO);
             }

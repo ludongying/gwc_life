@@ -390,8 +390,7 @@
         zoomOffset: 1,
         layers: magnifyingGlassLayer
     });
-    function magnifyingGlass_open()
-    {
+    function magnifyingGlass_open() {
         if(map.hasLayer(magnifyingGlass)) {
             return;
         }
@@ -409,8 +408,7 @@
         }
         map.addLayer(magnifyingGlass);
     }
-    function magnifyingGlass_close()
-    {
+    function magnifyingGlass_close() {
         if(map.hasLayer(magnifyingGlass))
             map.removeLayer(magnifyingGlass);
     }
@@ -870,17 +868,28 @@
             // miniMap.addLayer(ForbiddenFishLine);
         }
     }
-
-    $('#forbiddenfishId').click(function () {
-        if ($(this).attr("alt")=="close"){
-            $(this).attr("src","/common/plugins/map/images/open.png");
-            $(this).attr("alt","open");
+    function addForbiddenFishLine(){
+        if(!map.hasLayer(ForbiddenFishLine))
+        {
             if(ForbiddenFishLine==null)
             {
                 getForbiddenFishPoint();
             }
             else
                 map.addLayer(ForbiddenFishLine);
+        }
+    }
+    function removeForbiddenFishLine(){
+        if(map.hasLayer(ForbiddenFishLine))
+        {
+            map.removeLayer(ForbiddenFishLine);
+        }
+    }
+    $('#forbiddenfishId').click(function () {
+        if ($(this).attr("alt")=="close"){
+            $(this).attr("src","/common/plugins/map/images/open.png");
+            $(this).attr("alt","open");
+            addForbiddenFishLine();
             if(map.hasLayer(magnifyingGlass)){
                 if(magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName)<0){
                     map.removeLayer(magnifyingGlass);
@@ -898,9 +907,7 @@
             $(this).attr("src","/common/plugins/map/images/close.png");
             $(this).attr("alt","close");
             //清空之前绘制的点
-            // miniMap.removeLayer(ForbiddenFishLine);
-            // ForbiddenFishLine.clearLayers();
-            map.removeLayer(ForbiddenFishLine);
+            removeForbiddenFishLine();
             let index = magnifyingGlassLayer.indexOf(ForbiddenFishLine_NoName);
             if(index>=0&&map.hasLayer(magnifyingGlass))
             {
@@ -1032,16 +1039,22 @@
             map.addLayer(FishLine);
         }
     }
-
+    function addFishLine(){
+        let flag = FishLine.getLayers();
+        if(flag.length==0)
+            getFishPoint();
+        else
+            map.addLayer(FishLine);
+    }
+    function removeFishLine(){
+        if(map.hasLayer(FishLine))
+            map.removeLayer(FishLine);
+    }
     $('#fishId').click(function () {
         if ($(this).attr("alt")=="close"){
             $(this).attr("src","/common/plugins/map/images/open.png");
             $(this).attr("alt","open");
-            let flag = FishLine.getLayers();
-            if(flag.length==0)
-                getFishPoint();
-            else
-                map.addLayer(FishLine);
+            addFishLine();
             if(map.hasLayer(magnifyingGlass)){
                 if(magnifyingGlassLayer.indexOf(FishLine_Name)<0){
                     map.removeLayer(magnifyingGlass);
@@ -1058,7 +1071,7 @@
             $(this).attr("alt","close");
             //清空之前绘制的点
             // FishLine.clearLayers();
-            map.removeLayer(FishLine);
+            removeFishLine();
             let index = magnifyingGlassLayer.indexOf(FishLine_Name);
             if(index>=0&&map.hasLayer(magnifyingGlass))
             {
@@ -1072,6 +1085,7 @@
             }
         }
     });
+    //全屏显示  非全屏显示
     var state1 = false;
     L.easyButton({
         states:[
@@ -1081,13 +1095,15 @@
                     if(state1 == false)//非全屏
                     {
                         //显示信息
-                        //禁渔区
-                        //渔区
+
                         //菜单栏隐藏
                         navId.style.display = "none";
                         //鹰眼图隐藏
                         magnifyingGlass_close();
-
+                        //禁渔区显示
+                        addForbiddenFishLine();
+                        //渔区显示
+                        addFishLine();
                     }
                     else//全屏
                     {
@@ -1095,6 +1111,14 @@
                         //鹰眼图显示
                         if ($('#eyeid').attr("alt")=="open") {
                             magnifyingGlass_open();
+                        }
+                        //禁渔区隐藏
+                        if($('#forbiddenfishId').attr("alt")=="close"){
+                            removeForbiddenFishLine();
+                        }
+                        //渔区隐藏
+                        if($('#fishId').attr("alt")=="close"){
+                            removeFishLine();
                         }
                     }
                     state1 = !state1;

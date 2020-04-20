@@ -1,8 +1,11 @@
 package com.seven.gwc.modular.map.controller;
 
 import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.factory.CacheFactory;
 import com.seven.gwc.core.state.ErrorEnum;
 
+import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.equipment_info.service.EquipMaintainService;
 import com.seven.gwc.modular.map.entity.FishForbiddenAreaEntity;
 import com.seven.gwc.modular.map.service.FishForbiddenAreaService;
 
@@ -11,6 +14,8 @@ import com.seven.gwc.modular.map.service.FishAreaService;
 
 import com.seven.gwc.modular.map.service.FishShipTrackService;
 
+import com.seven.gwc.modular.sailor.entity.PersonEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,6 +153,29 @@ public class mapController extends BaseController{
 //        fishShipTrackService.save(FishShipTrackEntity);
 //        return SUCCESS;
 //    }
+    /**
+     * 跳转到查看船员信息
+     */
+    @RequestMapping("/ship_detail")
+    public String personDetail(String id) {
+        return PREFIX + "ship_detail";
+    }
+//    /**
+//     * 船员信息详情
+//     */
+//    @RequestMapping("/shipdetail/{id}")
+//    @ResponseBody
+//    public PersonEntity detail(@PathVariable String id) {
+//        EquipMaintainService personService;
+//        PersonEntity personEntity = personService.getOneById(id);
+//        if (ToolUtil.isNotEmpty(personEntity.getDeptId())) {
+//            personEntity.setDeptName(CacheFactory.me().getDeptName(personEntity.getDeptId()));
+//        } else {
+//            personEntity.setDeptName("顶级");
+//        }
+//        return personEntity;
+//    }
+
 }
 
 

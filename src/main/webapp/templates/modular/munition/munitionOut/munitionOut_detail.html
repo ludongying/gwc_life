@@ -1,10 +1,10 @@
-@layout("/common/_container.html",{js:["/modular/munition/munitionIn/munitionIn_detail.js"]}){
+@layout("/common/_container.html",{js:["/modular/munition/munitionOut/munitionOut_detail.js"]}){
 <div class="layui-tab-content">
 
     <div class="layui-card">
         <div class="layui-card-header">基本信息</div>
         <div class="layui-card-body">
-            <form id="munitionInForm" lay-filter="munitionInForm" class="layui-form">
+            <form id="munitionOutForm" lay-filter="munitionOutForm" class="layui-form">
                 <div class="layui-row layui-col-space10">
 
                     <input name="id" type="hidden"/>
@@ -58,14 +58,14 @@
                     </div>
 
                     <div class="layui-col-md6">
-                        <label class="layui-form-label">入库人</label>
+                        <label class="layui-form-label">出库人</label>
                         <div class="layui-input-block">
                             <input id="inOutPersonDesp" name="inOutPersonDesp" type="text" class="layui-input" readonly></input>
                         </div>
                     </div>
 
                     <div class="layui-col-md6">
-                        <label class="layui-form-label">入库日期</label>
+                        <label class="layui-form-label">出库日期</label>
                         <div class="layui-input-block">
                             <input id="inOutTime" name="inOutTime" readonly type="text"
                                    class="layui-input date-icon" disabled/>
@@ -96,8 +96,8 @@
         <div class="layui-card-header">物资清单</div>
         <div class="layui-card-body">
             <div class="layui-row layui-col-space10">
-                <table class="layui-table" id="munitionInDetailTable"
-                       lay-filter="munitionInDetailTable"></table>
+                <table class="layui-table" id="munitionOutDetailTable"
+                       lay-filter="munitionOutDetailTable"></table>
             </div>
         </div>
     </div>

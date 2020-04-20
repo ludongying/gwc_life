@@ -1,5 +1,5 @@
 /**
- * 物资入库增加对话框
+ * 物资出库增加对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
@@ -29,9 +29,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     });
 
     //初始化表单数据
-    var ajax = new $ax(Feng.ctxPath + "/munitionIn/getInitInfo/");
+    var ajax = new $ax(Feng.ctxPath + "/munitionOut/getInitInfo/");
     var result = ajax.start();
-    form.val('munitionInForm', result);
+    form.val('munitionOutForm', result);
 
     //初始化物资类型下拉框
     $.ajax({
@@ -75,7 +75,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/munitionIn/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/munitionOut/add", function (data) {
             if (data.success) {
                 Feng.success("增加成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用
@@ -93,7 +93,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
 
     // 表单提交跳转事件
     // form.on('submit(btnSubmitLocate)', function (data) {
-    //     var ajax = new $ax(Feng.ctxPath + "/munitionIn/add", function (data) {
+    //     var ajax = new $ax(Feng.ctxPath + "/munitionOut/add", function (data) {
     //         if (data.success) {
     //             Feng.success("增加成功!");
     //             admin.putTempData('formOk', true);//传给上个页面，刷新table用

@@ -46,12 +46,12 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
-    public List<MunitionInDetailEntity> selectMunitionInDetail(MunitionInDetailEntity munitionInDetail, String munitionMainId,Integer total, Integer size){
-        List<MunitionInDetailEntity> lists = munitionInDetailMapper.selectMunitionList(munitionInDetail,munitionMainId,total,size);
-        for(MunitionInDetailEntity detail: lists){
-            if(ToolUtil.isNotEmpty(detail.getDepotId())){
+    public List<MunitionInDetailEntity> selectMunitionInDetail(MunitionInDetailEntity munitionInDetail, String munitionMainId, Integer total, Integer size) {
+        List<MunitionInDetailEntity> lists = munitionInDetailMapper.selectMunitionList(munitionInDetail, munitionMainId, total, size);
+        for (MunitionInDetailEntity detail : lists) {
+            if (ToolUtil.isNotEmpty(detail.getDepotId())) {
                 DictEntity dictEntity = dictMapper.selectById(detail.getDepotId());
-                if(dictEntity != null){
+                if (dictEntity != null) {
                     detail.setDepotName(dictEntity.getName());
                 }
             }
@@ -61,15 +61,14 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
 
     @Override
     public Integer getListSize(MunitionInDetailEntity munitionInDetail, String munitionMainId) {
-        List<MunitionInDetailEntity> list = munitionInDetailMapper.getListSize(munitionInDetail,munitionMainId);
+        List<MunitionInDetailEntity> list = munitionInDetailMapper.getListSize(munitionInDetail, munitionMainId);
         return list.size();
     }
-
 
     @Override
     public void addMunitionInDetail(MunitionInDetailEntity munitionInDetail, ShiroUser user) {
         LambdaQueryWrapper<MunitionInDetailEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInDetailEntity::getMunitionMainId,munitionInDetail.getMunitionMainId()).eq(MunitionInDetailEntity::getMunitionId,munitionInDetail.getMunitionId()).eq(MunitionInDetailEntity::getDeleteFlag,1);
+        lambdaQuery.eq(MunitionInDetailEntity::getMunitionMainId, munitionInDetail.getMunitionMainId()).eq(MunitionInDetailEntity::getMunitionId, munitionInDetail.getMunitionId()).eq(MunitionInDetailEntity::getDepotId, munitionInDetail.getDepotId()).eq(MunitionInDetailEntity::getDeleteFlag, 1);
         MunitionInDetailEntity detail = munitionInDetailMapper.selectOne(lambdaQuery);
         if (detail != null) {//该物资已存在，累加更新
             int num = detail.getTotalNum() + munitionInDetail.getTotalNum();
@@ -77,8 +76,8 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
             detail.setUpdateDate(new Date());
             detail.setUpdatePerson(user.getId());
             munitionInDetailMapper.updateById(detail);
-        }
-        else{//该物资不存在，直接插入
+        } else {//该物资不存在，直接插入
+            munitionInDetail.setId(null);
             munitionInDetail.setSynFlag(false);
             munitionInDetail.setDeleteFlag(true);
             munitionInDetail.setCreateDate(new Date());
@@ -86,9 +85,9 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
             munitionInDetailMapper.insert(munitionInDetail);
             //更新入库主表detailIds
             LambdaQueryWrapper<MunitionInEntity> lambdaQueryMunitionIn = Wrappers.lambdaQuery();
-            lambdaQueryMunitionIn.eq(MunitionInEntity::getCode,munitionInDetail.getMunitionMainId()).eq(MunitionInEntity::getDeleteFlag,1);
+            lambdaQueryMunitionIn.eq(MunitionInEntity::getCode, munitionInDetail.getMunitionMainId()).eq(MunitionInEntity::getDeleteFlag, 1);
             MunitionInEntity munitionInEntity = munitionInMapper.selectOne(lambdaQueryMunitionIn);
-            if(munitionInEntity!=null){
+            if (munitionInEntity != null) {
                 String details = munitionInEntity.getDetailId();
                 if (!ToolUtil.isNotEmpty(details)) {
                     details = munitionInDetail.getId();
@@ -107,9 +106,9 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
     public void deleteMunitionInDetail(String munitionInDetailId, String munitionInId, ShiroUser user) {
         //更新入库物资表
         LambdaQueryWrapper<MunitionInEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInEntity::getCode,munitionInId);
+        lambdaQuery.eq(MunitionInEntity::getCode, munitionInId);
         MunitionInEntity munitionInEntity = munitionInMapper.selectOne(lambdaQuery);
-        if(munitionInEntity != null){
+        if (munitionInEntity != null) {
             ArrayList<String> detailIds =
                     Stream.of(munitionInEntity.getDetailId().split(FileUtils.file_2_file_sep))
                             .collect(Collectors.toCollection(ArrayList<String>::new));
@@ -134,9 +133,9 @@ public class MunitionInDetailServiceImpl extends ServiceImpl<MunitionInDetailMap
     @Override
     public boolean editMunitionInDetail(MunitionInDetailEntity munitionInDetail, ShiroUser user) {
         LambdaQueryWrapper<MunitionInDetailEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInDetailEntity::getMunitionId,munitionInDetail.getMunitionId()).eq(MunitionInDetailEntity::getDeleteFlag, 1).ne(MunitionInDetailEntity::getId,munitionInDetail.getId());
+        lambdaQuery.eq(MunitionInDetailEntity::getMunitionId, munitionInDetail.getMunitionId()).eq(MunitionInDetailEntity::getDeleteFlag, 1).ne(MunitionInDetailEntity::getId, munitionInDetail.getId());
         MunitionInDetailEntity detail = munitionInDetailMapper.selectOne(lambdaQuery);
-        if(detail != null){
+        if (detail != null) {
             return false;
         }
         munitionInDetail.setUpdateDate(new Date());

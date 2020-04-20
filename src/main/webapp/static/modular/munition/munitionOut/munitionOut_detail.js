@@ -1,5 +1,5 @@
 /**
- * 物资入库详情对话框
+ * 物资出库详情对话框
  */
 
 layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
@@ -11,10 +11,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     var table = layui.table;
 
     /**
-     * 物资入库详情管理
+     * 物资出库详情管理
      */
-    var MunitionInDetail = {
-        tableId: "munitionInDetailTable",
+    var MunitionOutDetail = {
+        tableId: "munitionOutDetailTable",
         condition: {
             munitionName: ""
         }
@@ -24,9 +24,9 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     // admin.iframeAuto();
 
     //初始化物资入库的详情数据
-    var ajax = new $ax(Feng.ctxPath + "/munitionIn/detail/" + Feng.getUrlParam("munitionInId"));
+    var ajax = new $ax(Feng.ctxPath + "/munitionOut/detail/" + Feng.getUrlParam("munitionOutId"));
     var result = ajax.start();
-    form.val('munitionInForm', result);
+    form.val('munitionOutForm', result);
 
     //申请人员下拉框
     $.ajax({
@@ -56,13 +56,12 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
         }
     });
 
-
     /**
      * 初始化表格的列
      */
-    MunitionInDetail.initColumn = function () {
+    MunitionOutDetail.initColumn = function () {
         return [[
-            {title: '出入库物资列表编码', field: 'id', align: "center", hide: true},
+            {title: '出库物资列表编码', field: 'id', align: "center", hide: true},
             {title: '物资表id', field: 'munitionId', align: "center", hide: true},
             {title: '物资名称', field: 'munitionName', align: "center"},
             {title: '物资编码', field: 'code', align: "center"},
@@ -75,40 +74,11 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     };
 
     var tableResult = table.render({
-        elem: '#' + MunitionInDetail.tableId,
-        url: Feng.ctxPath + '/munitionInDetail/list?munitionMainId=' + $('#code').val(),
+        elem: '#' + MunitionOutDetail.tableId,
+        url: Feng.ctxPath + '/munitionOutDetail/list?munitionMainId=' + $('#code').val(),
         page: true,
         height: "full-180",
         cellMinWidth: 100,
-        cols: MunitionInDetail.initColumn()
+        cols: MunitionOutDetail.initColumn()
     });
-
-
-    // //出库人员下拉框
-    // $.ajax({
-    //     url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
-    //     dataType: 'json',
-    //     type: 'get',
-    //     success: function (data) {
-    //         $.each(data, function (index, item) {
-    //             $('#inOutPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
-    //         })
-    //         form.render('select');//表单渲染
-    //     }
-    // });
-    //
-    // //审批人员下拉框
-    // $.ajax({
-    //     url: Feng.ctxPath + '/person/listPersonsByDept?deptId=',
-    //     dataType: 'json',
-    //     type: 'get',
-    //     success: function (data) {
-    //         $.each(data, function (index, item) {
-    //             $('#approvePerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
-    //         })
-    //         form.render('select');//表单渲染
-    //     }
-    // });
-
-
 });

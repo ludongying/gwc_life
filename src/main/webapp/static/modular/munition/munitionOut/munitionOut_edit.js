@@ -1,6 +1,7 @@
 /**
- * 物资入库增加对话框
+ * 物资出库编辑对话框
  */
+
 
 layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var $ = layui.jquery;
@@ -9,7 +10,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     var admin = layui.admin;
     var layer = layui.layer;
     var laydate = layui.laydate;
-
 
     // 让当前iframe弹层高度适应
     // admin.iframeAuto();
@@ -28,10 +28,10 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
         trigger: 'click'
     });
 
-    //初始化表单数据
-    var ajax = new $ax(Feng.ctxPath + "/munitionIn/getInitInfo/");
+    //初始化物资入库的详情数据
+    var ajax = new $ax(Feng.ctxPath + "/munitionOut/detail/" + Feng.getUrlParam("munitionOutId"));
     var result = ajax.start();
-    form.val('munitionInForm', result);
+    form.val('munitionOutForm',result);
 
     //初始化物资类型下拉框
     $.ajax({
@@ -42,6 +42,7 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
             $.each(data, function (index, item) {
                 $('#munitionType').append(new Option(item.name, item.id));//往下拉菜单里添加元素
             })
+            $('#munitionType').val(result.munitionType);
             form.render('select');//表单渲染 把内容加载进去
         }
     });
@@ -67,46 +68,28 @@ layui.use(['layer', 'form', 'admin', 'ax', 'laydate'], function () {
     //     type: 'get',
     //     success: function (data) {
     //         $.each(data, function (index, item) {
-    //             $('#inOutPerson').append(new Option(item.personName, item.personId));//往下拉菜单里添加元素
+    //             $('#inOutPerson').append(new Option(item.personName, item.id));//往下拉菜单里添加元素
     //         })
+    //         $('#inOutPerson').val(result.inOutPerson);
     //         form.render('select');//表单渲染
     //     }
     // });
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/munitionIn/add", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/munitionOut/update", function (data) {
             if (data.success) {
-                Feng.success("增加成功!");
+                Feng.success("编辑成功!");
                 admin.putTempData('formOk', true);//传给上个页面，刷新table用
                 admin.closeThisDialog();//关掉对话框
             } else {
                 Feng.error(data.message);
             }
         }, function (data) {
-            Feng.error("增加失败!" + data.message)
+            Feng.error("编辑失败!" + data.message + "!");
         });
         ajax.set(data.field);
         ajax.start();
         return false;
     });
-
-    // 表单提交跳转事件
-    // form.on('submit(btnSubmitLocate)', function (data) {
-    //     var ajax = new $ax(Feng.ctxPath + "/munitionIn/add", function (data) {
-    //         if (data.success) {
-    //             Feng.success("增加成功!");
-    //             admin.putTempData('formOk', true);//传给上个页面，刷新table用
-    //             admin.closeThisDialog();//关掉对话框
-    //             // var url = Feng.ctxPath + '/certificate?personId=' + d.id;
-    //         } else {
-    //             Feng.error(data.message);
-    //         }
-    //     }, function (data) {
-    //         Feng.error("增加失败!" + data.message)
-    //     });
-    //     ajax.set(data.field);
-    //     ajax.start();
-    //     return false;
-    // });
 });

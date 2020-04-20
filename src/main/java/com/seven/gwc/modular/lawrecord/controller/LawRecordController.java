@@ -3,6 +3,7 @@ package com.seven.gwc.modular.lawrecord.controller;
 import com.seven.gwc.core.base.BaseController;
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.enums.LawTypeEnum;
@@ -85,7 +86,18 @@ public class LawRecordController extends BaseController {
         return PREFIX + "detail";
     }
 
-
+    /**
+     * 详情页
+     */
+    @RequestMapping("/document")
+    @ResponseBody
+    public BaseResultPage detail(String id) {
+        BaseResultPage baseResultPage=new BaseResultPage();
+        List<FilePathDTO> instrument = lawRecordService.instrument(id);
+        baseResultPage.setData(instrument);
+        baseResultPage.setCode(0);
+        return baseResultPage;
+    }
 
 
 }

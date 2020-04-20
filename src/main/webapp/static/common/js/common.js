@@ -353,7 +353,7 @@ var initFiles=function ($,upload,fileParam,index){
  * @param path 物理路径
  */
 function downFile($,path){
-    let exportForm = $("<form action='/file/downFile' method='post'></form>")
+    let exportForm = $("<form action='/tpl/downFile' method='post'></form>")
     exportForm.append("<input type='hidden' name='path' value='"+path+"'/>")
     $(document.body).append(exportForm);
     exportForm.submit();

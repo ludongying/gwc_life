@@ -33,6 +33,8 @@ public class FileUtils {
 
     private static String license_path            =  ResourceUtils.CLASSPATH_URL_PREFIX+"license.xml";
 
+    public static final String template_path     =  "tpl";
+
     private static double mathLog(int basement, Long n){
         return Math.log(n) / Math.log(basement);
     }

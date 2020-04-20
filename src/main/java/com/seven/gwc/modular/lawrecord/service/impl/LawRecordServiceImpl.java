@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -170,12 +171,20 @@ public class LawRecordServiceImpl extends ServiceImpl<LawRecordMapper, LawRecord
             if(Objects.nonNull(decisionSafeDTO)){decisionSafeDTO.setDetailContent();}
             model.addAttribute("decision",decisionSafeDTO);
         }
+
+    }
+
+
+    @Override
+    public List<FilePathDTO> instrument(String id){
+        LawRecordEntity lawRecordEntity = this.getById(id);
         if(lawRecordEntity.isWritFlag()){
             List<FilePathDO> files = FilePathDO.getFiles(lawRecordEntity.getAutoWritFilePath());
             files.addAll(FilePathDO.getFiles(lawRecordEntity.getWritFilePath()));
             List<FilePathDTO> dtos = files.stream().map(FilePathDTO::getInstance).collect(Collectors.toList());
-            model.addAttribute("document",dtos);
+             return  dtos;
         }
+        return new ArrayList<>();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.seven.gwc.modular.lawrecord.service;
 
 import com.seven.gwc.core.base.BaseResult;
 import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.modular.lawrecord.data.instrument.dto.FilePathDTO;
 import com.seven.gwc.modular.lawrecord.data.local.StateData;
 import com.seven.gwc.modular.lawrecord.dto.LawRecordDTO;
 import com.seven.gwc.modular.lawrecord.dto.LawTypeDTO;
@@ -81,7 +82,12 @@ public interface LawRecordService extends IService<LawRecordEntity> {
     LawTypeDTO findLawType(String id);
 
 
-
+    /**
+     * 获取文书列表
+     * @param id
+     * @return
+     */
+    List<FilePathDTO> instrument(String id);
 
 
 

@@ -9,14 +9,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
 
     $(".layui-form input").attr("disabled","disabled");
 
-    // var fileManager=new initFiles($);
-    // $("#evidence .demo-down-1").click(function () {
-    //        fileManager.downLoad($(this).data("filePath"));
-    // });
-    //
-    // $("#evidence .demo-preview-1").click(function () {
-    //     fileManager.preview_img($(this).data("filePath"));
-    // });
 
     /**
      * 渔船信息管理
@@ -34,20 +26,33 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
     Document.initColumn = function () {
         return [[
             {title: '序号', width: 120, type: 'numbers', align: "center"},
-            {title: '文书名称', field: 'code', align: "center"},
-            {title: '下载', toolbar: '#tableBar', minWidth: 280, align: 'center'}
+            {title: '文书名称', field: 'name', align: "center"},
+            {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
 
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + Document.tableId,
-        url: Feng.ctxPath + '/fishShip/list',
+        url: Feng.ctxPath + '/lawRecord/document',
+        where:{
+          id:Feng.getUrlParam("id")
+        },
         page: false,
         height: "600",
         cellMinWidth: 100,
         cols: Document.initColumn()
     });
+
+    // 工具条点击事件
+    table.on('tool(' + Document.tableId + ')', function (obj) {
+        let data = obj.data;
+        let layEvent = obj.event;
+        if (layEvent === 'downDocument') {
+          downFile($,data.path);
+        }
+    });
+
 
     $('#uploader-list img').on('click', function () {
         layer.photos({
@@ -75,10 +80,6 @@ layui.use(['layer', 'form', 'admin', 'ax', 'table'], function () {
         $(this).addClass("bold_font");
     });
 
-    $(document).on("click","#document .doc",function () {
-           let path=$(this).data("path");
-
-    });
 
     $('#evidence img').on('click', function () {
         layer.photos({

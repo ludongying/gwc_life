@@ -36,6 +36,7 @@ public class FileManager {
     private String ip;
 
 
+
     /**
      * 上传单个文件
      * @param file
@@ -108,8 +109,10 @@ public class FileManager {
         Metadata metadata = ImageMetadataReader.readMetadata(file);
         for (Directory directory : metadata.getDirectories()) {
             for (Tag tag : directory.getTags()) {
-                String tagName = tag.getTagName();  //标签名
-                String desc = tag.getDescription(); //标签信息
+                //标签名
+                String tagName = tag.getTagName();
+                //标签信息
+                String desc = tag.getDescription();
                 if (tagName.equals("Image Height")) {
                     System.out.println("图片高度: " + desc);
                 } else if (tagName.equals("Image Width")) {
@@ -193,7 +196,7 @@ public class FileManager {
      * @param name 文件路径
      */
     public void downloadTemplate(String name,HttpServletResponse resp) {
-           download(FileUtils.getStaticPath()+name,resp);
+           download(FileUtils.getStaticPath()+FileUtils.file_sep+FileUtils.template_path+FileUtils.file_sep+name,resp);
 }
 
     /**

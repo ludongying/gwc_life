@@ -7,10 +7,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.munition.dao.MunitionOutDetailMapper;
 import com.seven.gwc.modular.munition.dao.MunitionOutMapper;
-import com.seven.gwc.modular.munition.entity.MunitionOutEntity;
+import com.seven.gwc.modular.munition.entity.*;
 import com.seven.gwc.modular.munition.munitionEnum.MunitionInOutStatesEnum;
 import com.seven.gwc.modular.munition.service.MunitionOutService;
+import com.seven.gwc.modular.munition.service.MunitionStoreService;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
@@ -21,8 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * description : 物资出库服务实现类
@@ -41,6 +47,10 @@ public class MunitionOutServiceImpl extends ServiceImpl<MunitionOutMapper, Munit
     private DictMapper dictMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private MunitionOutDetailMapper munitionOutDetailMapper;
+    @Autowired
+    private MunitionStoreService munitionStoreService;
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
@@ -169,6 +179,33 @@ public class MunitionOutServiceImpl extends ServiceImpl<MunitionOutMapper, Munit
             }
         }
         return munitionOutEntity;
+    }
+
+    @Override
+    public void updateStoreList(String id, ShiroUser user) {
+        MunitionOutEntity munitionOutEntity = munitionOutMapper.selectById(id);
+        if(munitionOutEntity != null){
+            ArrayList<String> detailIds =
+                    Stream.of(munitionOutEntity.getDetailId().split(FileUtils.file_2_file_sep))
+                            .collect(Collectors.toCollection(ArrayList<String>::new));
+            for(int i=0;i<detailIds.size();i++){
+                MunitionOutDetailEntity detailEntity = munitionOutDetailMapper.selectById(detailIds.get(i));
+                if(detailEntity != null){
+                    //查找对应库存记录
+                    MunitionStoreEntity store = munitionStoreService.getMunitionStore(detailEntity.getMunitionId());
+                    if(store!=null){ //库存表存在，库存数量减去出库数量
+                        MunitionStoreEntity storeEntity = new MunitionStoreEntity();
+                        int num = store.getTotalNum() - detailEntity.getTotalNum();//数量累加
+                        storeEntity.setTotalNum(num);
+                        munitionStoreService.editMunitionStore(storeEntity,user);
+                    }
+                    else//库存表不存在
+                    {
+
+                    }
+                }
+            }
+        }
     }
 
 }

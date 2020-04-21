@@ -56,6 +56,6 @@ public class MunitionInfoEntity extends GwcBaseEntity implements Serializable {
 
     /** 库存数量 */
     @TableField(exist = false)
-    private Integer inventory;
+    private Integer store;
 
 }

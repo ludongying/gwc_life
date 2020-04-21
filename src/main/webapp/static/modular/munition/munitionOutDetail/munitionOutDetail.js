@@ -39,8 +39,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     /**
      * 初始化按钮
      */
-    if($('#status').val() === '1' || $('#status').val() === '2'|| $('#status').val() === '4'){
-        $("#munitionDiv").attr("style","display:none;");
+    if ($('#status').val() === '1' || $('#status').val() === '2' || $('#status').val() === '4') {
+        $("#munitionDiv").attr("style", "display:none;");
         // 渲染表格
         var tableResult = table.render({
             elem: '#' + MunitionOutDetail.tableId,
@@ -50,7 +50,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             cellMinWidth: 100,
             cols: MunitionOutDetail.initColumn()
         });
-    }else{
+    } else {
         var tableResult = table.render({
             elem: '#' + MunitionOutDetail.tableId,
             url: Feng.ctxPath + '/munitionOutDetail/list?munitionMainId=' + $('#mainId').text(),
@@ -93,7 +93,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     //物资名称下拉框联动
     layui.use('form', function () {
         form.on('select(nameFilter)', function (data) {
-             $('#munitionId').empty();
+            $('#munitionId').empty();
             //物资规格下拉框初始化
             $.ajax({
                 url: Feng.ctxPath + '/munitionInfo/listByName?name=' + $('#munitionName').val(),
@@ -139,6 +139,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                 type: 'get',
                 success: function (data) {
                     $('#unit').text(data.unit);
+                    $('#store').text(data.store);
+                    $('#unit_store').text(data.unit);
                 }
             });
         });
@@ -152,6 +154,8 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
             type: 'get',
             success: function (data) {
                 $('#unit').text(data.unit);
+                $('#store').text(data.store);
+                $('#unit_store').text(data.unit);
             }
         });
     }
@@ -190,20 +194,24 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
 
     // 修改出库物资提交事件
     form.on('submit(btnEdit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/update", function (data) {
-            if (data.success) {
-                Feng.success("编辑成功!");
-                //admin.putTempData('formOk', true);//传给上个页面，刷新table用
-                admin.closeThisDialog();//关掉对话框
-                table.reload(MunitionOutDetail.tableId);
-            } else {
-                Feng.error(data.message);
-            }
-        }, function (data) {
-            Feng.error("编辑失败!" + data.message + "!");
-        });
-        ajax.set(data.field);
-        ajax.start();
+        if ($('#totalNum').val() <= $('#store').text()) {
+            var ajax = new $ax(Feng.ctxPath + "/munitionOutDetail/update", function (data) {
+                if (data.success) {
+                    Feng.success("编辑成功!");
+                    //admin.putTempData('formOk', true);//传给上个页面，刷新table用
+                    admin.closeThisDialog();//关掉对话框
+                    table.reload(MunitionOutDetail.tableId);
+                } else {
+                    Feng.error(data.message);
+                }
+            }, function (data) {
+                Feng.error("编辑失败!" + data.message + "!");
+            });
+            ajax.set(data.field);
+            ajax.start();
+        } else {
+            Feng.error("库存数量小于出库数量，请重新输入出库数量！");
+        }
         return false;
     });
 

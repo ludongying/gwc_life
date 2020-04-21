@@ -98,7 +98,9 @@ public class MunitionOutDetailController extends BaseController {
     @ResponseBody
     public BaseResult add(MunitionOutDetailEntity munitionOutDetail) {
         ShiroUser user = ShiroKit.getUser();
-        munitionOutDetailService.addMunitionOutDetail(munitionOutDetail, user);
+        if(!munitionOutDetailService.addMunitionOutDetail(munitionOutDetail, user)){
+            return new BaseResult().failure(ErrorEnum.ERROR_OUT_MUNITION_STORE);
+        }
         return SUCCESS;
     }
 

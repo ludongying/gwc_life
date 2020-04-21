@@ -31,7 +31,7 @@ public interface MunitionOutDetailService extends IService<MunitionOutDetailEnti
      * @param munitionOutDetail 实体对象
      * @param user 当前用户
      */
-    void addMunitionOutDetail(MunitionOutDetailEntity munitionOutDetail, ShiroUser user);
+    boolean addMunitionOutDetail(MunitionOutDetailEntity munitionOutDetail, ShiroUser user);
 
     /**
      * 物资出库详情删除

@@ -15,7 +15,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
     var MunitionInfo = {
         tableId: "munitionInfoTable",
         condition: {
-           name: ""
+            name: ""
         }
     };
 
@@ -24,21 +24,31 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
      */
     MunitionInfo.initColumn = function () {
         return [[
-            {title: '编码', field: 'id', align: "center", hide:true},
+            {title: '编码', field: 'id', align: "center", hide: true},
             {title: '物资名称', field: 'name', align: "center"},
             {title: '物资编码', field: 'code', align: "center"},
             {title: '物资类型', field: 'typeDesp', align: "center"},
             {title: '物资规格', field: 'description', align: "center"},
-            {title: '单位', field: 'unit', align: "center", hide:true},
-            {title: '库存数量', field: 'inventory', align: "center"},
-            {title: '最低库存数量', field: 'warnMinCount', align: "center", templet: function(d){
-                    if(d.warnMinCount != null && d.warnMinCount != ''){
-                        return "<div>" + d.warnMinCount + d.unit + "</div>";
-                    }else{
+            {title: '单位', field: 'unit', align: "center", hide: true},
+            {
+                title: '库存数量', field: 'store', align: "center", templet: function (d) {
+                    if (d.store != null) {
+                        return "<div>" + d.store + d.unit + "</div>";
+                    } else {
                         return "<div></div>";
                     }
-                }},
-            {title: '备注', field: 'remark', align: "center", hide:true},
+                }
+            },
+            {
+                title: '最低库存数量', field: 'warnMinCount', align: "center", templet: function (d) {
+                    if (d.warnMinCount != null && d.warnMinCount != '') {
+                        return "<div>" + d.warnMinCount + d.unit + "</div>";
+                    } else {
+                        return "<div></div>";
+                    }
+                }
+            },
+            {title: '备注', field: 'remark', align: "center", hide: true},
             {title: '操作', toolbar: '#tableBar', minWidth: 280, align: 'center'}
         ]];
     };
@@ -157,7 +167,7 @@ layui.use(['layer', 'form', 'table', 'ztree', 'laydate', 'admin', 'ax', 'func'],
                     Feng.success("删除成功!");
                     table.reload(MunitionInfo.tableId);
                 } else {
-                    Feng.error(data.message);
+                    Feng.error("删除失败!" + data.message);
                 }
             }, function (data) {
                 Feng.error("删除失败!" + data.message + "!");

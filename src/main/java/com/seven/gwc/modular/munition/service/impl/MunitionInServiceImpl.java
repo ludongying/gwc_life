@@ -7,10 +7,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
+import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.munition.dao.MunitionInDetailMapper;
 import com.seven.gwc.modular.munition.dao.MunitionInMapper;
+import com.seven.gwc.modular.munition.dao.MunitionStoreMapper;
+import com.seven.gwc.modular.munition.entity.MunitionInDetailEntity;
 import com.seven.gwc.modular.munition.entity.MunitionInEntity;
+import com.seven.gwc.modular.munition.entity.MunitionStoreEntity;
 import com.seven.gwc.modular.munition.munitionEnum.MunitionInOutStatesEnum;
 import com.seven.gwc.modular.munition.service.MunitionInService;
+import com.seven.gwc.modular.munition.service.MunitionStoreService;
 import com.seven.gwc.modular.system.dao.DictMapper;
 import com.seven.gwc.modular.system.dao.UserMapper;
 import com.seven.gwc.modular.system.entity.DictEntity;
@@ -21,8 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * description : 物资入库服务实现类
@@ -41,6 +50,10 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
     private DictMapper dictMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private MunitionInDetailMapper munitionInDetailMapper;
+    @Autowired
+    private MunitionStoreService munitionStoreService;
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
@@ -169,6 +182,36 @@ public class MunitionInServiceImpl extends ServiceImpl<MunitionInMapper, Munitio
             }
         }
         return munitionInEntity;
+    }
+
+    @Override
+    public void updateStoreList(String id, ShiroUser user) {
+        MunitionInEntity munitionInEntity = munitionInMapper.selectById(id);
+        if(munitionInEntity != null){
+            ArrayList<String> detailIds =
+                    Stream.of(munitionInEntity.getDetailId().split(FileUtils.file_2_file_sep))
+                            .collect(Collectors.toCollection(ArrayList<String>::new));
+            for(int i=0;i<detailIds.size();i++){
+                MunitionInDetailEntity detailEntity = munitionInDetailMapper.selectById(detailIds.get(i));
+                if(detailEntity != null){
+                    //查找对应库存记录
+                    MunitionStoreEntity store = munitionStoreService.getMunitionStore(detailEntity.getMunitionId());
+                    if(store!=null){ //库存表存在，累加库存数量
+                        MunitionStoreEntity storeEntity = new MunitionStoreEntity();
+                        int num = detailEntity.getTotalNum() + store.getTotalNum();//数量累加
+                        storeEntity.setTotalNum(num);
+                        munitionStoreService.editMunitionStore(storeEntity,user);
+                    }
+                    else//库存表不存在，新增库存记录
+                    {
+                        MunitionStoreEntity storeEntity = new MunitionStoreEntity();
+                        storeEntity.setTotalNum(detailEntity.getTotalNum());
+                        storeEntity.setMunitionId(detailEntity.getMunitionId());
+                        munitionStoreService.addMunitionStore(storeEntity,user);
+                    }
+                }
+            }
+        }
     }
 
 }

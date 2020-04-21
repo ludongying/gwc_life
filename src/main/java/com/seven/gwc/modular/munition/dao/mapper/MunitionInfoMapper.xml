@@ -19,7 +19,8 @@
         id, type_id, code, name, description, unit, remark, warn_min_count
     </sql>
     <select id="selectMunitionList" resultType="com.seven.gwc.modular.munition.entity.MunitionInfoEntity">
-        SELECT m.* FROM ship_munition_info m
+        SELECT m.*, s.total_num as store FROM ship_munition_info m
+        LEFT JOIN ship_munition_store s ON s.munition_id = m.id
         LEFT JOIN sys_user u ON m.create_person = u.id
         LEFT JOIN sys_dept d ON u.dept_id = d.id
         where m.delete_flag = 1
@@ -32,7 +33,8 @@
         LIMIT #{total} , #{size}
     </select>
     <select id="getListSize" resultType="com.seven.gwc.modular.munition.entity.MunitionInfoEntity">
-        SELECT m.* FROM ship_munition_info m
+        SELECT m.*, s.total_num as store FROM ship_munition_info m
+        LEFT JOIN ship_munition_store s ON s.munition_id = m.id
         LEFT JOIN sys_user u ON m.create_person = u.id
         LEFT JOIN sys_dept d ON u.dept_id = d.id
         where m.delete_flag = 1

@@ -194,6 +194,8 @@ public class MunitionInController extends BaseController {
     public BaseResult approve(@RequestParam String id) {
         ShiroUser user = ShiroKit.getUser();
         munitionInService.setStatus(id, MunitionInOutStatesEnum.APPROVE.getCode(),user);
+        //更新库存表
+        munitionInService.updateStoreList(id,user);
         return SUCCESS;
     }
 

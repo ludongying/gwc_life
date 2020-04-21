@@ -10,7 +10,9 @@ import com.seven.gwc.core.shiro.ShiroKit;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.state.ErrorEnum;
 import com.seven.gwc.modular.munition.entity.MunitionInfoEntity;
+import com.seven.gwc.modular.munition.entity.MunitionStoreEntity;
 import com.seven.gwc.modular.munition.service.MunitionInfoService;
+import com.seven.gwc.modular.munition.service.MunitionStoreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,8 @@ public class MunitionInfoController extends BaseController {
 
     @Autowired
     private MunitionInfoService munitionInfoService;
+    @Autowired
+    private MunitionStoreService munitionStoreService;
 
     /**
      * 跳转到物资信息首页
@@ -97,6 +101,11 @@ public class MunitionInfoController extends BaseController {
         if(!munitionInfoService.addMunitionInfo(munitionInfo, user)){
             return new BaseResultPage().failure(ErrorEnum.ERROR_ONLY_MUNITION_CODE);
         }
+        //添加库存表记录
+        MunitionStoreEntity store = new MunitionStoreEntity();
+        store.setMunitionId(munitionInfo.getId());
+        store.setTotalNum(0);
+        munitionStoreService.addMunitionStore(store,user);
         return SUCCESS;
     }
 
@@ -107,6 +116,9 @@ public class MunitionInfoController extends BaseController {
     @ResponseBody
     public BaseResult delete(@RequestParam String munitionInfoId) {
         ShiroUser user = ShiroKit.getUser();
+        if( munitionStoreService.getMunitionStore(munitionInfoId).getTotalNum()!=0){
+            return new BaseResultPage().failure(ErrorEnum.ERROR_ONLY_MUNITION_STORE);
+        }
         munitionInfoService.deleteMunitionInfo(munitionInfoId, user);
         return SUCCESS;
     }

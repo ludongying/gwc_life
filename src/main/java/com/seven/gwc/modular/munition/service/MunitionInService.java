@@ -68,4 +68,11 @@ public interface MunitionInService extends IService<MunitionInEntity> {
      */
     MunitionInEntity getMunitionInDetail(String id);
 
+    /**
+     * 物资入库，更新库存表
+     * @param id
+     * @return
+     */
+    void updateStoreList(String id, ShiroUser user);
+
 }

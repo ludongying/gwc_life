@@ -61,8 +61,9 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
 
     @Override
     public boolean addMunitionInfo(MunitionInfoEntity munitionInfo, ShiroUser user) {
+        //物资表添加
         LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInfoEntity::getCode, munitionInfo.getCode());
+        lambdaQuery.eq(MunitionInfoEntity::getCode, munitionInfo.getCode()).eq(MunitionInfoEntity::getDeleteFlag,1);
         MunitionInfoEntity munition = munitionInfoMapper.selectOne(lambdaQuery);
         if (munition != null) {
             return false;
@@ -90,7 +91,7 @@ public class MunitionInfoServiceImpl extends ServiceImpl<MunitionInfoMapper, Mun
     @Override
     public boolean editMunitionInfo(MunitionInfoEntity munitionInfo, ShiroUser user) {
         LambdaQueryWrapper<MunitionInfoEntity> lambdaQuery = Wrappers.lambdaQuery();
-        lambdaQuery.eq(MunitionInfoEntity::getCode, munitionInfo.getCode()).ne(MunitionInfoEntity::getId, munitionInfo.getId());
+        lambdaQuery.eq(MunitionInfoEntity::getCode, munitionInfo.getCode()).eq(MunitionInfoEntity::getDeleteFlag,1).ne(MunitionInfoEntity::getId, munitionInfo.getId());
         MunitionInfoEntity munitionInfoEntity = munitionInfoMapper.selectOne(lambdaQuery);
         if (munitionInfoEntity != null) {
             return false;

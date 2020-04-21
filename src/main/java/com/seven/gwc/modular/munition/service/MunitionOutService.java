@@ -68,4 +68,12 @@ public interface MunitionOutService extends IService<MunitionOutEntity> {
      */
     MunitionOutEntity getMunitionOutDetail(String id);
 
+    /**
+     * 物资出库，更新库存表
+     * @param id
+     * @return
+     */
+    void updateStoreList(String id, ShiroUser user);
+
+
 }

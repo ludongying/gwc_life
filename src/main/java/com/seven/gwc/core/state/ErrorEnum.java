@@ -64,8 +64,11 @@ public enum ErrorEnum {
     ERROR_ONLY_MUNITION_CODE(5005,"物资编码已存在"),
     ERROR_ONLY_IN_CODE(5006,"入库表单编号已存在"),
     ERROR_ONLY_OUT_CODE(5007,"出库表单编号已存在"),
+    ERROR_ONLY_MUNITION_STORE(5008,"库存表中该物资数量未清零!"),
     //入库表单物资
-    ERROR_ONLY_IN_MUNITION_CODE(5007,"该物资编号已存在"),
+    ERROR_ONLY_IN_MUNITION_CODE(5009,"该物资编号已存在"),
+    //出库表单物资
+    ERROR_OUT_MUNITION_STORE(5010,"该物资库存数量小于出库数量，请根据库存输入出库数量！"),
     /********************************✨    部门(6000 * 6999)   ✨*************************************/
     NO_FISH_AREA_DATA(6000, "获取渔区数据失败"),
     NO_FISH_FORBIDDEN_AREA_DATA(6001, "获取禁渔区数据失败"),

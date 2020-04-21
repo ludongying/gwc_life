@@ -7,8 +7,10 @@ import com.seven.gwc.core.annotation.DataScope;
 import com.seven.gwc.core.shiro.ShiroUser;
 import com.seven.gwc.core.util.ToolUtil;
 import com.seven.gwc.modular.lawrecord.data.file.FileUtils;
+import com.seven.gwc.modular.munition.dao.MunitionInfoMapper;
 import com.seven.gwc.modular.munition.dao.MunitionOutDetailMapper;
 import com.seven.gwc.modular.munition.dao.MunitionOutMapper;
+import com.seven.gwc.modular.munition.entity.MunitionInfoEntity;
 import com.seven.gwc.modular.munition.entity.MunitionOutDetailEntity;
 import com.seven.gwc.modular.munition.entity.MunitionOutEntity;
 import com.seven.gwc.modular.munition.service.MunitionOutDetailService;
@@ -43,6 +45,8 @@ public class MunitionOutDetailServiceImpl extends ServiceImpl<MunitionOutDetailM
     private MunitionOutMapper munitionOutMapper;
     @Autowired
     private DictMapper dictMapper;
+    @Autowired
+    private MunitionInfoMapper munitionInfoMapper;
 
     @Override
     @DataScope(deptAlias = "d", userAlias = "u")
@@ -67,23 +71,35 @@ public class MunitionOutDetailServiceImpl extends ServiceImpl<MunitionOutDetailM
 
 
     @Override
-    public void addMunitionOutDetail(MunitionOutDetailEntity munitionOutDetail, ShiroUser user) {
+    public boolean addMunitionOutDetail(MunitionOutDetailEntity munitionOutDetail, ShiroUser user) {
         LambdaQueryWrapper<MunitionOutDetailEntity> lambdaQuery = Wrappers.lambdaQuery();
         lambdaQuery.eq(MunitionOutDetailEntity::getMunitionMainId, munitionOutDetail.getMunitionMainId()).eq(MunitionOutDetailEntity::getMunitionId, munitionOutDetail.getMunitionId()).eq(MunitionOutDetailEntity::getDepotId, munitionOutDetail.getDepotId()).eq(MunitionOutDetailEntity::getDeleteFlag, 1);
         MunitionOutDetailEntity detail = munitionOutDetailMapper.selectOne(lambdaQuery);
         if (detail != null) {//该物资已存在，累加更新
             int num = detail.getTotalNum() + munitionOutDetail.getTotalNum();
-            detail.setTotalNum(num);
-            detail.setUpdateDate(new Date());
-            detail.setUpdatePerson(user.getId());
-            munitionOutDetailMapper.updateById(detail);
+            MunitionInfoEntity munitionInfoEntity = munitionInfoMapper.selectById(detail.getMunitionId());
+            if (munitionInfoEntity!=null && munitionInfoEntity.getStore()>=num){
+                detail.setTotalNum(num);
+                detail.setUpdateDate(new Date());
+                detail.setUpdatePerson(user.getId());
+                munitionOutDetailMapper.updateById(detail);
+            }
+            else{
+                return false;
+            }
         } else {//该物资不存在，直接插出
-            munitionOutDetail.setId(null);
-            munitionOutDetail.setSynFlag(false);
-            munitionOutDetail.setDeleteFlag(true);
-            munitionOutDetail.setCreateDate(new Date());
-            munitionOutDetail.setCreatePerson(user.getId());
-            munitionOutDetailMapper.insert(munitionOutDetail);
+            MunitionInfoEntity munitionInfoEntity = munitionInfoMapper.selectById(detail.getMunitionId());
+            if (munitionInfoEntity!=null && munitionInfoEntity.getStore()>=munitionOutDetail.getTotalNum()) {
+                munitionOutDetail.setId(null);
+                munitionOutDetail.setSynFlag(false);
+                munitionOutDetail.setDeleteFlag(true);
+                munitionOutDetail.setCreateDate(new Date());
+                munitionOutDetail.setCreatePerson(user.getId());
+                munitionOutDetailMapper.insert(munitionOutDetail);
+            }
+            else{
+                return false;
+            }
             //更新出库主表detailIds
             LambdaQueryWrapper<MunitionOutEntity> lambdaQueryMunitionOut = Wrappers.lambdaQuery();
             lambdaQueryMunitionOut.eq(MunitionOutEntity::getCode, munitionOutDetail.getMunitionMainId()).eq(MunitionOutEntity::getDeleteFlag, 1);
@@ -101,6 +117,7 @@ public class MunitionOutDetailServiceImpl extends ServiceImpl<MunitionOutDetailM
                 munitionOutMapper.updateById(munitionOutEntity);
             }
         }
+        return true;
     }
 
     @Override

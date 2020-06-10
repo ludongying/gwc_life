@@ -1,0 +1,28 @@
+@layout("/common/_container.html",{js:["/modular/lawRecord/instrument.js"]}){
+
+<form class="layui-form">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table class="layui-table" id="instrumentTable" lay-filter="instrumentTable"></table>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/html" id="tableBar">
+
+    <a class="layui-btn layui-btn-xs" lay-event="downTemplate">下载模板</a>
+    <button style="margin:auto 10px" type="button" data-code="{{d.code}}" data-generate-name="{{d.generateName}}"  class="layui-btn layui-btn-xs" id="upload{{d.LAY_TABLE_INDEX}}">
+        {{# if(d.filePath){ }}
+            更换
+        {{# }else{ }}
+            上传
+        {{# } }}
+    </button>
+    <a  class="layui-btn layui-btn-xs layui-hide" data-file-path="{{d.filePath}}" id="down{{d.LAY_TABLE_INDEX}}" lay-event="down">下载</a>
+
+
+</script>
+@}
+

@@ -1,0 +1,288 @@
+@layout("/common/_container.html",{js:["/modular/lawRecord/inquisition.js","/common/plugins/md5/md5.js","/modular/lawRecord/law_record_util.js","/modular/lawRecord/law_form_verify.js"]}){
+<style>
+    .container {
+        padding-top: 40px;
+        height: 40px;
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 20px;
+        margin: auto auto -7px;
+    }
+
+    .dot_blue {
+        border: 1px solid #1890FF;
+        background-color: #1890FF;
+    }
+
+    .dot_gray {
+        border: 1px solid #C1C1C1;
+        background-color: #C1C1C1;
+    }
+
+    .dot_content {
+        margin: auto auto -27px;
+    }
+
+    .item {
+        flex: 1;
+        border-bottom: 2px solid #F1F1F1
+    }
+
+    .item_blue{
+        flex: 1;
+        border-bottom: 2px solid #4E89E9
+    }
+
+    .item_content {
+        flex: 1;
+    }
+
+    .layui-card-header {
+        font-size: 16px;
+    }
+
+    .label_bg label{
+        width: 120px;
+    }
+    .layui-col-md12{
+        padding: 8px 20px;
+        background-color: #F2F2F2;
+        margin-bottom: 0;
+    }
+
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <form class="layui-form" lay-filter="inquisitionForm">
+                <input type="hidden" id="id" name="id" value="${id}">
+                <input type="hidden" id="lawType" name="lawType" value="${lawType}">
+                <div class="layui-col-md12">
+<!--                    <p style="float:right;margin-top:5px; font-size:16px" >-->
+<!--                        <i style="color:#1890FF;" class="layui-icon layui-icon-refresh"></i>切换执法目标&nbsp;&nbsp;&nbsp;</p>-->
+                    <div class="layui-card" style="height: 110px">
+                        <div class="container">
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item_blue"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_blue"></div>
+                                    <div class="dot dot_blue"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div class="item"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item"></div>
+                                    <div class="dot dot_gray"></div>
+                                    <div style="flex:1;"></div>
+                                </div>
+                            </div>
+                            <div style="display:flex;">
+                                <div style="flex:1;display:flex">
+                                    <div style="flex:1"></div>
+                                    <div class="dot_content">办案机关</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">询问笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">勘验笔录</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">证据</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">案由</div>
+                                    <div class="item_content"></div>
+                                </div>
+                                <div style="flex:1;display:flex">
+                                    <div class="item_content"></div>
+                                    <div class="dot_content">处罚决定</div>
+                                    <div class="item_content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md12 label_bg">
+                    <div class="layui-card">
+                        <div class="layui-card-header">渔船情况</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">船名号涂写情况</label>
+                                    <div class="layui-input-inline">
+                                        <select name="shipCaseName">
+                                            @for(sc in shipCase){
+                                            <option value="${sc.code}">${sc.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">船籍港涂写情况</label>
+                                    <div class="layui-input-inline">
+                                        <select name="shipCaseRegistry">
+                                            @for(sc in shipCase){
+                                            <option value="${sc.code}">${sc.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">船籍港</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="shipRegistry" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">船名名牌悬挂情况</label>
+                                    <div class="layui-input-inline">
+                                        <select name="shipCaseCard">
+                                            @for(sc in shipCaseCard){
+                                            <option value="${sc.code}">${sc.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否携带证件</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="shipCaseCredentials" value="1" title="是">
+                                        <input type="radio" name="shipCaseCredentials" value="0" title="否" checked="">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">是否有残留渔获物</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="shipCaseFish" value="1" title="是">
+                                        <input type="radio" name="shipCaseFish" value="0" title="否" checked="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-col-md12 label_bg">
+                    <div class="layui-card">
+                        <div class="layui-card-header">现场检查</div>
+                        <div class="layui-card-body">
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">船号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="shipCode" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">实际主机功率</label>
+                                    <div class="layui-input-inline" style="width: 73px">
+                                        <input placeholder="" lay-verify="positiveFloatNumber" name="shipPower" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-input-inline" style="width:85px">
+                                        <select name="shipPowerUnit" data-name="shipPowerUnit" id="shipPowerUnit" lay-filter="powerUnit">
+                                            @for(item in powerUnit){
+                                            <option value="${item.code}">${item.message}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">作业方式</label>
+                                    <div class="layui-input-inline" style="width: 152px">
+                                        <input placeholder="" name="shipOperatePerson" lay-verify="positiveNumber" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">人</div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">捕捞许可编号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="shipCredentialsCode" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">持证人姓名</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="shipCredentialsOwner" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">身份证号码</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="shipCredentialsOwnerIdentity" lay-verify="identityNumber" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-col-md12 ">
+                    <div class="layui-card" style="padding: 20px">
+                        <div style="text-align: center;">
+                            <button type="button" lay-filter="preStep" lay-submit=""  class="layui-btn layui-btn-primary">上一步</button>
+                            <button type="button"  lay-filter="nextStep" lay-submit=""  class="layui-btn layui-btn-normal">下一步</button>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+@}

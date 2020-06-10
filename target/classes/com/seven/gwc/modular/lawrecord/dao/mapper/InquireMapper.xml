@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.lawrecord.dao.InquireMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.entity.InquireEntity">
+        <id column="id" property="id" />
+        <result column="investigate_name" property="investigateName" />
+        <result column="investigate_sex" property="investigateSex" />
+        <result column="investigate_age" property="investigateAge" />
+        <result column="investigate_position" property="investigatePosition" />
+        <result column="investigate_tel" property="investigateTel" />
+        <result column="investigate_addr" property="investigateAddr" />
+        <result column="identity_case" property="identityCase" />
+        <result column="identity_card" property="identityCard" />
+        <result column="ship_name" property="shipName" />
+        <result column="ship_owner" property="shipOwner" />
+        <result column="ship_member" property="shipMember" />
+        <result column="ship_real_type" property="shipRealType" />
+        <result column="ship_rated_type" property="shipRatedType" />
+        <result column="ship_real_power" property="shipRealPower" />
+        <result column="ship_rated_power" property="shipRatedPower" />
+        <result column="ship_info" property="shipInfo" />
+        <result column="ship_status" property="shipStatus" />
+        <result column="ship_out_date" property="shipOutDate" />
+        <result column="ship_out_port" property="shipOutPort" />
+        <result column="ship_goods_count" property="shipGoodsCount" />
+        <result column="ship_goods_value" property="shipGoodsValue" />
+        <result column="ship_generate_count" property="shipGenerateCount" />
+        <result column="ship_fish_area_date" property="shipFishAreaDate" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_person" property="updatePerson" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="syn_flag" property="synFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, investigate_name, investigate_sex, investigate_age, investigate_position, investigate_tel, investigate_addr, identity_case, identity_card, ship_name, ship_owner, ship_member, ship_real_type, ship_rated_type, ship_real_power, ship_rated_power, ship_info, ship_status, ship_out_date, ship_out_port, ship_goods_count, ship_goods_value, ship_generate_count, ship_fish_area_date, create_date, update_date, create_person, update_person, delete_flag, syn_flag
+    </sql>
+
+
+</mapper>

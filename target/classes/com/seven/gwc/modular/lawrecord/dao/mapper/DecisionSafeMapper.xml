@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.lawrecord.dao.DecisionSafeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.lawrecord.entity.DecisionSafeEntity">
+        <id column="id" property="id" />
+        <result column="punish_person_type" property="punishPersonType" />
+        <result column="punish_company_name" property="punishCompanyName" />
+        <result column="punish_person_name" property="punishPersonName" />
+        <result column="punish_age" property="punishAge" />
+        <result column="punish_sex" property="punishSex" />
+        <result column="punish_identity_card" property="punishIdentityCard" />
+        <result column="punish_tel" property="punishTel" />
+        <result column="punish_addr" property="punishAddr" />
+        <result column="severity" property="severity" />
+        <result column="fine" property="fine" />
+        <result column="resource_compensation" property="resourceCompensation" />
+        <result column="description" property="description" />
+        <result column="case_violence_law" property="caseViolenceLaw" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_person" property="updatePerson" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="syn_flag" property="synFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, punish_person_type, punish_company_name, punish_person_name, punish_age, punish_sex, punish_identity_card, punish_tel, punish_addr, severity, fine, resource_compensation, description, case_violence_law, create_date, update_date, create_person, update_person, delete_flag, syn_flag
+    </sql>
+
+
+</mapper>

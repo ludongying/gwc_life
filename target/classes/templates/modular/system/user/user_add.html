@@ -1,0 +1,111 @@
+@layout("/common/_container.html",{js:["/modular/system/user/user_add.js"]}){
+<div class="layui-tab-content">
+    <form id="userForm" lay-filter="userForm" class="layui-form">
+
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-row layui-col-space10">
+
+                    <input  style="display:none" type="text" name="username" autocomplete="off"/>
+                    <input  style="display:none" type="password"  autocomplete="off"/>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">姓名<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="name" name="name" placeholder="请输入姓名" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">出生日期</label>
+                        <div class="layui-input-block">
+                            <input id="birthday" name="birthday" placeholder="请输入生日" type="text" readonly class="layui-input date-icon" autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">账号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="account" name="account" placeholder="请输入账号" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-block">
+                            <input id="male" type="radio" name="sex" value="M" title="男" checked/>
+                            <input id="female" type="radio" name="sex" value="F" title="女"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">密码<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="password" type="text" name="password"  placeholder="请输入密码" autocomplete="off" class="layui-input" onfocus="this.type='password'" lay-verify="required|psw" required>
+                            <input type="password" style="display: none;"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">确认密码<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="rePassword" name="rePassword" placeholder="请输入确认密码"  onfocus="this.type='password'" class="layui-input" lay-verify="required|repsw" required/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input id="phone" name="phone" placeholder="请输入电话" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md6">
+                        <label class="layui-form-label">邮箱<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" style="display: none;"/>
+                            <input id="email" name="email" placeholder="请输入邮箱" type="text" value="" class="layui-input" lay-verify="required|email" required autocomplete="off" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-card">
+            <div class="layui-card-header">部门信息</div>
+            <div class="layui-card-body">
+
+                <div class="layui-row layui-col-space10">
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">部门<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="deptId" name="deptId" type="hidden">
+                            <input id="deptName" name="deptName" placeholder="请输入部门" type="text" class="layui-input" readonly lay-verify="required" required autocomplete="off"/>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">岗位</label>
+                        <div class="layui-input-block">
+                            <select id="positionId" name="positionId" xm-select="selPosition" xm-select-skin="normal" lay-ignore="" xm-select-height="5px" xm-select-direction="up"_name="position">
+                                <option value="">请选择岗位</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-right" style="clear: both;">
+            <button id="cancelUser" class="layui-btn layui-btn-primary" type="reset"  ew-event="closeDialog">&emsp;取消&emsp;</button>
+            <button id="saveUser" class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>
+        </div>
+
+    </form>
+</div>
+@}

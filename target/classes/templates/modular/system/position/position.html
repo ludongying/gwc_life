@@ -1,0 +1,45 @@
+@layout("/common/_container.html",{js:["/modular/system/position/position.js"]}){
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="positionName" class="layui-input" type="text" placeholder="岗位名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn">搜索</button>
+                                <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                            <div style="float: right">
+                                @if(shiro.hasPermission("/position/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加</button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="positionTable" lay-filter="positionTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/position/update")){
+    <a id="edit" class="layui-btn layui-btn-xs" lay-event="edit" title="编辑">编辑</a>
+    @}
+    @if(shiro.hasPermission("/position/delete")){
+    <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" title="删除">删除</a>
+    @}
+    @if(shiro.hasPermission("/position/dataAuthority")){
+    <a id="dataAuthority" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="dataAuthority">数据权限</a>
+    @}
+</script>
+
+<script type="text/html" id="statusTpl">
+    <input type="checkbox" lay-filter="state" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" {{d.state=='ENABLE'?'checked':''}} />
+</script>
+@}

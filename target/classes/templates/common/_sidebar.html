@@ -1,0 +1,26 @@
+@/* 侧边栏 */
+<div class="layui-side">
+    <div class="layui-side-scroll">
+        <ul class="layui-nav layui-nav-tree" lay-filter="admin-side-nav" style="margin-right: 10px;">
+
+            <li class="layui-nav-item"><a lay-href="/tv"><i class="layui-icon layui-icon-video"></i>&emsp;<cite>电视剧</cite></a></li>
+            <li class="layui-nav-item"><a lay-href="/film"><i class="layui-icon layui-icon-video"></i>&emsp;<cite>电影</cite></a></a></li>
+            <li class="layui-nav-item"><a lay-href="/book"><i class="layui-icon layui-icon-read"></i>&emsp;<cite>书籍</cite></a></a></li>
+            <li class="layui-nav-item"><a lay-href="/music"><i class="layui-icon layui-icon-speaker"></i>&emsp;<cite>音乐</cite></a></a></li>
+            <li class="layui-nav-item"><a lay-href="/game"><i class="layui-icon layui-icon-senior"></i>&emsp;<cite>游戏</cite></a></a></li>
+
+
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon layui-icon-release"></i>&emsp;<cite>资源维护</cite></a>
+                <dl class="layui-nav-child">
+                    <dd><a lay-href="/tvManage">电视剧维护</a></dd>
+                    <dd><a lay-href="/filmManage">电影维护</a></dd>
+                    <dd><a lay-href="/bookManage">书籍维护</a></dd>
+                    <dd><a lay-href="/musicManage">音乐维护</a></dd>
+                    <dd><a lay-href="/gameManage">游戏维护</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+

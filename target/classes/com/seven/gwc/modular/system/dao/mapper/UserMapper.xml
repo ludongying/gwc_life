@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.system.dao.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.system.entity.UserEntity">
+        <id column="id" property="id" />
+        <result column="avatar" property="avatar" />
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="name" property="name" />
+        <result column="birthday" property="birthday" />
+        <result column="sex" property="sex" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="role_id" property="roleId" />
+        <result column="dept_id" property="deptId" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="create_user" property="createUser" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_user" property="updateUser" />
+        <result column="version" property="version" />
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, avatar, account, password, salt, name, birthday, sex, email, phone, role_id, dept_id, status, create_time, create_user, update_time, update_user, version
+    </sql>
+    <select id="listBasicsEntity" resultType="com.seven.gwc.modular.system.vo.ListBasicsEntityVO">
+        SELECT b.id AS id,b.`name` AS `name`,b.basics_type_id AS basicsTypeId,
+            (CASE WHEN (b.id in (SELECT r.basics_id FROM user_basics_relation r WHERE r.user_id = #{userId}) ) THEN true ELSE false END) as state
+        FROM basics b where state = 'ENABLE'
+    </select>
+
+    <select id="userEntityList" resultType="com.seven.gwc.modular.system.entity.UserEntity">
+        SELECT u.*,d.full_name AS deptName,GROUP_CONCAT(r.`name`) AS roleName
+        FROM sys_user u
+        LEFT JOIN sys_role r ON FIND_IN_SET(r.id,u.role_id)
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where u.status != 'DELETED'
+        <if test="user.name != null and user.name != ''">
+            and (u.account like CONCAT('%',#{user.name},'%') or u.name like CONCAT('%',#{user.name},'%'))
+        </if>
+        <if test="user.deptId != null and user.deptId != ''">
+            and (u.dept_id = #{user.deptId} or u.dept_id in ( select id from sys_dept where pids like CONCAT('%$[', #{user.deptId}, '$]%') escape '$' ))
+        </if>
+        <!-- 数据范围过滤 -->
+        ${user.params.dataScope}
+        GROUP BY u.id
+        order by u.create_time desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="tree" resultType="com.seven.gwc.core.node.ZTreeNode">
+		SELECT id AS id, birthday, sex, email, phone, position_id, '' AS "pId", name AS name,'true' AS "open"
+        FROM sys_user
+        WHERE id not in (SELECT p.person_id from ship_person p where p.delete_flag=1)
+        ORDER BY id asc
+	</select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.system.entity.UserEntity">
+        SELECT u.*
+        FROM sys_user u
+        LEFT JOIN sys_role r ON FIND_IN_SET(r.id,u.role_id)
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        where u.status != 'DELETED'
+        <if test="user.name != null and user.name != ''">
+            and (u.account like CONCAT('%',#{user.name},'%') or u.name like CONCAT('%',#{user.name},'%'))
+        </if>
+        <if test="user.deptId != null">
+            and (u.dept_id = #{user.deptId} or u.dept_id in ( select id from sys_dept where pids like CONCAT('%$[', #{user.deptId}, '$]%') escape '$' ))
+        </if>
+        <!-- 数据范围过滤 -->
+        ${user.params.dataScope}
+        GROUP BY u.id
+    </select>
+
+
+</mapper>

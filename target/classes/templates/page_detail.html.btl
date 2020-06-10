@@ -1,0 +1,25 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/modular/${genQo.moduleName}/${genQo.bizEnName}/${genQo.bizEnName}_detail.js"]}){
+<div class="layui-tab-content">
+    <form id="${genQo.bizEnName}Form" lay-filter="${genQo.bizEnName}Form" class="layui-form">
+        <div class="layui-row layui-col-space10">
+
+            <input name="id" type="hidden"/>
+
+            <% for(var i=0;i<table.fields.~size;i++){ %>
+            <% if(table.fields[i].keyIdentityFlag){%>
+
+            <% }else{ %>
+            <div class="layui-col-md6">
+                <label class="layui-form-label">${table.fields[i].comment}</label>
+                <div class="layui-input-block">
+                    <input id="${table.fields[i].propertyName}" name="${table.fields[i].propertyName}" placeholder="请输入${table.fields[i].comment}" type="text" class="layui-input" disabled="disabled"/>
+                </div>
+            </div>
+
+            <% } %>
+            <% } %>
+        </div>
+    </form>
+</div>
+@}
+

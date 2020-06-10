@@ -1,0 +1,111 @@
+server:
+  port: 88                                                  #默认端口号
+  ip: http://192.168.18.73:88/                             #服务器IP地址
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${FILE_UPLOAD_PATH_FILE},file:${FILE_UPLOAD_PATH_IMAGE} #外挂文件地址
+  servlet:
+    multipart:
+      max-file-size: 50MB                                   #单个文件的大小
+      max-request-size: 100MB                               #单次请求的文件的总大小
+  profiles:
+    active: dev                          #默认开发环境
+  mvc:
+    view:
+      prefix: /templates                                    #指定视图的前缀路径
+  devtools:
+    restart:
+      enabled: false                                        #设置开启热部署
+      additional-paths: src/main/java,src/main/webapp       #配置监视路径的更改
+      exclude: static/**,templates/**                       #仅排除static/与templates/
+
+beetl:
+  resource-auto-check: true                                 #热加载beetcontext-pathl模板，开发时候用
+  delimiter-statement-start: \@                             #开始标签(yaml不允许@开头)
+  delimiter-statement-end: null                             #结束标签
+
+# MyBatis
+mybatis-plus:
+  typeAliasesPackage: com.seven.gwc.modular.*.entity        # 搜索指定包别名
+  typeEnumsPackage: com.seven.gwc.core.state,com.seven.gwc.modular.*.enums
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+  mapper-locations:                                         # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    - classpath*:/com/seven/gwc/modular/*/dao/mapper/*Mapper.xml
+  global-config:
+    banner: false
+
+logging:                                                    #日志配置
+  level:
+    #root: warn
+    com.seven.gwc.modular.system.dao: debug
+    com.seven.gwc.modular.sailor.dao: debug
+    com.seven.gwc.modular.ship_info.dao: debug
+    com.seven.gwc.modular.lawrecord.dao: debug
+    com.seven.gwc.modular.work.dao: debug
+    com.seven.gwc.modular.munition.dao: debug
+  pattern:
+    console: '%d %clr(%p) : %m%n'
+
+
+############################### start框架配置start ###############################
+
+tonfun:
+  swagger-open: true                #是否开启swagger (true/false)
+  spring-session-open: false        #是否开启spring session,如果是多机环境需要开启(true/false)
+  session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
+  session-validation-interval: 900  #多久检测一次失效的session(只在单机环境下生效) 单位：秒
+
+############################### end框架配置end ###############################
+
+############################### start上传地址配置start ###############################
+
+#FILE_UPLOAD_PATH_FILE: D:\myfile\file\                       #文件上传物理路径
+#FILE_UPLOAD_PATH_IMAGE: D:\myfile\file\images\portrait\      #文件上传物理路径
+FILE_UPLOAD_PATH_FILE: /opt/files/file/             #文件上传物理路径
+FILE_UPLOAD_PATH_IMAGE: /opt/files/images/portrait/ #文件上传物理路径
+
+############################### end上传地址配置end ###############################
+
+############################### start代码生成配置字段start ###############################
+
+#genQo:
+#  Driver: com.mysql.cj.jdbc.Driver
+#  Url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+#  UserName: gwc
+#  Password: ^5ADg#^5v2ZGF%rT
+genQo:
+  Driver: com.mysql.cj.jdbc.Driver
+  Url: jdbc:mysql://115.238.244.113:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+  UserName: gwc
+  Password: ^5ADg#^5v2ZGF%rT
+
+
+################################# end代码生成配置字段end #################################
+
+---
+spring:
+  profiles: dev                                             #开发环境
+  datasource:                                               #数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver             #数据库驱动
+    url: jdbc:mysql://192.168.18.37:3306/gwc?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT  #数据库连接
+    username: root                                           #数据库账号
+    password: 123456                              #数据库密码
+
+---
+spring:
+  profiles: test                                            #测试环境
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.220.155:3306/gwc_work?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: 123456
+
+---
+spring:
+  profiles: pro                                             #正式环境
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.18.37:3306/gwctest?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT&testOnBorrow=true&validationQuery=select 1
+    username: gwcTest
+    password: 123456

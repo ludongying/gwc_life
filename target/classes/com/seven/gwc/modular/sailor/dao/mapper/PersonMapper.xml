@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.sailor.dao.PersonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        <id column="id" property="id"/>
+        <result column="ship_id" property="shipId"/>
+        <result column="person_id" property="personId"/>
+        <result column="phone_ip" property="phoneIp"/>
+        <result column="nation" property="nation"/>
+        <result column="id_number" property="idNumber"/>
+        <result column="birth_place" property="birthPlace"/>
+        <result column="duty" property="duty"/>
+        <result column="certificate_id" property="certificateId"/>
+        <result column="political" property="political"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ship_id, person_id, phone_ip, nation, id_number, birth_place, duty, certificate_id, political
+    </sql>
+    <select id="PersonEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.*,r.name as personName,r.birthday,r.sex,r.email,r.phone,r.position_id as positionId,s.name as
+        lawShipName
+        from ship_person p
+        LEFT JOIN sys_user u ON p.person_id = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        LEFT JOIN sys_user r ON p.person_id = r.id
+        LEFT JOIN ship_info_ship s ON p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="person.personName != null and person.personName != ''">
+            and r.name like CONCAT('%',#{person.personName},'%')
+        </if>
+        <if test="person.id != null and person.id != ''">
+            and p.id=#{person.id}
+        </if>
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${person.params.dataScope}-->
+        order by p.create_date desc
+        LIMIT #{total} , #{size}
+    </select>
+
+    <select id="PersonNamesEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.id,u.name as personName, p.person_id from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="id != null and id!= ''">
+            and p.id = #{id}
+        </if>
+    </select>
+
+    <select id="PersonLawEntityList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+--         select  p.*,u.*,u.name as personName,d.simple_name
+        select  p.id,p.certificate_id,u.name as personName
+        from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN sys_dept d on u.dept_id = d.id
+        --         LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1 and d.simple_name like '%执法部%'
+    </select>
+
+    <select id="PersonsByDeptList" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.id,p.certificate_id,u.name as personName,p.person_id as personId
+        from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN sys_dept d on u.dept_id = d.id
+        -- LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="deptId != null and deptId!= ''">
+            and d.simple_name like CONCAT('%',#{deptId},'%')
+        </if>
+    </select>
+
+    <select id="getListSize" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.*
+        from ship_person p
+        LEFT JOIN sys_user u ON p.person_id = u.id
+        LEFT JOIN sys_dept d ON u.dept_id = d.id
+        LEFT JOIN sys_user r ON p.person_id = r.id
+        LEFT JOIN ship_info_ship s ON p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="person.personName != null and person.personName != ''">
+            and r.name like CONCAT('%',#{person.personName},'%')
+        </if>
+        <if test="person.id != null and person.id != ''">
+            and p.id=#{person.id}
+        </if>
+<!--        &lt;!&ndash; 数据范围过滤 &ndash;&gt;-->
+<!--        ${person.params.dataScope}-->
+    </select>
+
+    <select id="getPerson" resultType="com.seven.gwc.modular.sailor.entity.PersonEntity">
+        select p.*,u.name as personName,u.birthday,u.sex,u.email,u.phone,u.position_id as positionId,u.dept_id as deptId,s.name as
+        lawShipName, d.full_name as deptName
+        from ship_person p
+        LEFT JOIN sys_user u on p.person_id = u.id
+        LEFT JOIN sys_dept d on d.id = u.dept_id
+        LEFT JOIN ship_info_ship s on p.ship_id = s.id
+        where p.delete_flag = 1
+        <if test="id != null and id != ''">
+            and p.id=#{id}
+        </if>
+    </select>
+</mapper>

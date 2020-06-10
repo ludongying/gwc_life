@@ -1,0 +1,77 @@
+@layout("/common/_container.html",{js:["/modular/system/loginLog/loginLog.js"]}){
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+
+                    <div class="layui-tab" lay-filter="logTab">
+                        <div class="layui-tab">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">登录日志</li>
+                                <li>操作日志</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <div class="layui-tab-item layui-show">
+                                    <div class="layui-form toolbar">
+                                        <div class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <input id="loginLogName" name="loginLogName" class="layui-input" type="text" placeholder="登录日志名称"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="message" name="message" class="layui-input" type="text" placeholder="具体消息"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="beginTime" class="layui-input" type="text" placeholder="开始时间"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="endTime" class="layui-input" type="text" placeholder="结束时间"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <button id="btnSearch" class="layui-btn">搜索</button>
+                                                <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
+                                            </div>
+                                            <!-- 按钮居右 -->
+                                            <div style="float: right;">
+                                                @if(shiro.hasPermission("/loginLog/delete")){
+                                                <button id="delete" name="delete" class="layui-btn layui-btn-danger icon-btn"><i class="layui-icon">&#xe640;</i>清空所有</button>
+                                                @}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="layui-table" id="loginLogTable" lay-filter="loginLogTable"></table>
+                                </div>
+                                <div class="layui-tab-item">
+                                    <div class="layui-form toolbar">
+                                        <div class="layui-form-item">
+                                            <div class="layui-inline">
+                                                <input id="operationLogName" class="layui-input" type="text" placeholder="操作日志名称"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="messageO" name="messageO" class="layui-input" type="text" placeholder="具体消息"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="beginTimeO" class="layui-input" type="text" placeholder="开始时间"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <input id="endTimeO" class="layui-input" type="text" placeholder="结束时间"/>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <button id="btnSearchO" class="layui-btn layui-btn-normal">搜索</button>
+                                                <button id="btnResetO" class="layui-btn layui-btn-primary">重置</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="layui-table" id="operationLogTable" lay-filter="operationLogTable"></table>
+                                </div>
+                            </div>
+                        </div>
+                    <div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@}

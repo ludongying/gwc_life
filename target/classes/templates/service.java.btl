@@ -1,0 +1,50 @@
+package ${package.Service};
+
+import com.seven.gwc.core.shiro.ShiroUser;
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+import java.util.List;
+
+/**
+ * description : ${cfg.genQo.bizChName}服务类
+ *
+ * @author : ${author}
+ * @date : ${date}
+ */
+
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+    /**
+     * ${cfg.genQo.bizChName}查询列表
+     *
+     * @param ${cfg.genQo.bizEnName}Name 名称
+     * @return List<${cfg.genQo.bizChName}服务对象>
+     */
+    List<${entity}> select${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Name);
+
+    /**
+     * ${cfg.genQo.bizChName}新建
+     *
+     * @param ${cfg.genQo.bizEnName} 实体对象
+     * @param user 当前用户
+     */
+    void add${cfg.genQo.bizEnBigName}(${entity} ${cfg.genQo.bizEnName}, ShiroUser user);
+
+    /**
+     * ${cfg.genQo.bizChName}删除
+     *
+     * @param ${cfg.genQo.bizEnName}Id 唯一标识
+     * @param user 当前用户
+     */
+    void delete${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Id, ShiroUser user);
+
+    /**
+     * ${cfg.genQo.bizChName}编辑
+     *
+     * @param ${cfg.genQo.bizEnName} 实体对象
+     * @param user 当前用户
+     */
+    void edit${cfg.genQo.bizEnBigName}(${entity} ${cfg.genQo.bizEnName}, ShiroUser user);
+
+}

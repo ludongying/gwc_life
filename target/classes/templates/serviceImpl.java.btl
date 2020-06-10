@@ -1,0 +1,55 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import org.springframework.stereotype.Service;
+import com.seven.gwc.core.shiro.ShiroUser;
+import com.seven.gwc.core.util.ToolUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${superServiceImplClassPackage};
+
+import java.util.List;
+
+/**
+ * description : ${cfg.genQo.bizChName}服务实现类
+ *
+ * @author : ${author}
+ * @date : ${date}
+ */
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+
+    private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private ${table.mapperName} ${cfg.genQo.bizEnName}Mapper;
+
+    @Override
+    public List<${entity}> select${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Name){
+        LambdaQueryWrapper<${entity}> lambdaQuery = Wrappers.<${entity}>lambdaQuery();
+        lambdaQuery.like(ToolUtil.isNotEmpty(${cfg.genQo.bizEnName}Name),${entity}::getName,${cfg.genQo.bizEnName}Name);
+        return ${cfg.genQo.bizEnName}Mapper.selectList(lambdaQuery);
+    }
+
+    @Override
+    public void add${cfg.genQo.bizEnBigName}(${entity} ${cfg.genQo.bizEnName}, ShiroUser user) {
+        ${cfg.genQo.bizEnName}Mapper.insert(${cfg.genQo.bizEnName});
+    }
+
+    @Override
+    public void delete${cfg.genQo.bizEnBigName}(String ${cfg.genQo.bizEnName}Id, ShiroUser user) {
+        ${cfg.genQo.bizEnName}Mapper.deleteById(${cfg.genQo.bizEnName}Id);
+    }
+
+    @Override
+    public void edit${cfg.genQo.bizEnBigName}(${entity} ${cfg.genQo.bizEnName}, ShiroUser user) {
+        ${cfg.genQo.bizEnName}Mapper.updateById(${cfg.genQo.bizEnName});
+    }
+
+}

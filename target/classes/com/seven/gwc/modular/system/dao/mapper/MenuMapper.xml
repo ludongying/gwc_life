@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seven.gwc.modular.system.dao.MenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.seven.gwc.modular.system.entity.MenuEntity">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="pcode" property="pcode"/>
+        <result column="pcodes" property="pcodes"/>
+        <result column="name" property="name"/>
+        <result column="icon" property="icon"/>
+        <result column="url" property="url"/>
+        <result column="sort" property="sort"/>
+        <result column="levels" property="levels"/>
+        <result column="menu_flag" property="menuFlag"/>
+        <result column="description" property="description"/>
+        <result column="status" property="status"/>
+        <result column="new_page_flag" property="newPageFlag"/>
+        <result column="open_flag" property="openFlag"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", code AS "code", pcode AS "pcode", pcodes AS "pcodes", name AS "name", icon AS "icon", url AS "url", sort AS "sort", levels AS "levels", menu_flag AS "menuFlag", description AS "description", status AS "status", new_page_flag AS "newPageFlag", open_flag AS "openFlag", create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser"
+    </sql>
+
+    <sql id="Base_Column_Tree_List">
+        id AS "id", code AS "code", pcodes AS "pcodes", name AS "name", icon AS "icon", url AS "url", sort AS "sort", levels AS "levels", menu_flag AS "menuFlag", description AS "description", status AS "status", new_page_flag AS "newPageFlag", open_flag AS "openFlag", create_time AS "createTime", update_time AS "updateTime", create_user AS "createUser", update_user AS "updateUser"
+    </sql>
+
+    <select id="selectMenuTree" resultType="java.util.Map">
+        select
+        <choose>
+            <when test="(level != null and level != '') or (menuName != null and menuName != '')">
+                0 AS "pcode",
+            </when>
+            <otherwise>
+                pcode AS "pcode",
+            </otherwise>
+        </choose>
+        <include refid="Base_Column_Tree_List"/>
+        from sys_menu
+        <where>
+            <if test="menuName != null and menuName != ''">
+                and (name like CONCAT('%',#{menuName},'%') or code like CONCAT('%',#{menuName},'%'))
+            </if>
+            <if test="level != null and level != ''">
+                and levels = #{level}
+            </if>
+        </where>
+        order by sort asc
+    </select>
+
+    <select id="getFirstMenusByRoleIds" resultType="com.seven.gwc.core.node.FirstMenuNode">
+        SELECT m1.code AS code,  m1.name AS name
+        FROM sys_menu m1
+        INNER JOIN (SELECT id FROM sys_menu WHERE id IN (
+        SELECT menu_id FROM sys_relation rela WHERE rela.role_id IN (
+        <foreach collection="list" index="index" item="i" separator="," >
+            #{i}
+        </foreach>
+        )
+        )) m3 ON m1.id = m3.id
+        where m1.menu_flag = 'Y'
+        AND m1.`status` = 'ENABLE'
+        AND m1.levels=1
+        order by m1.sort asc
+    </select>
+
+    <select id="getMenusByRoleIds" resultType="com.seven.gwc.core.node.MenuNode">
+        SELECT m1.id AS id,m1.icon AS icon,
+        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0 ELSE m2.id END) AS "parentId",
+        m1.name as name,
+        (CASE WHEN m1.url = '#' THEN '' ELSE m1.url END) as url,
+        m1.levels as levels,
+        m1.menu_flag as ismenu,
+        m1.sort as num
+        FROM sys_menu m1
+        LEFT join sys_menu m2 ON m1.pcode = m2.code
+        INNER JOIN (SELECT id FROM sys_menu WHERE id IN (
+        SELECT menu_id FROM sys_relation rela WHERE rela.role_id IN (
+        <foreach collection="list" index="index" item="i" separator="," >
+            #{i}
+        </foreach>
+        )
+        )) m3 ON m1.id = m3.id
+        where m1.menu_flag = 'Y'
+        AND m1.`status` = 'ENABLE'
+        order by levels,m1.sort asc
+    </select>
+
+    <select id="getMenusByRoleIdsAndPcode" resultType="com.seven.gwc.core.node.MenuNode">
+        SELECT m1.id AS id,m1.icon AS icon,
+        (CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0 ELSE m2.id END) AS "parentId",
+        m1.name as name,
+        (CASE WHEN m1.url = '#' THEN '' ELSE m1.url END) as url,
+        m1.levels as levels,
+        m1.menu_flag as ismenu,
+        m1.sort as num
+        FROM sys_menu m1
+        LEFT join sys_menu m2 ON m1.pcode = m2.code
+        INNER JOIN (SELECT id FROM sys_menu WHERE id IN (
+        SELECT menu_id FROM sys_relation rela WHERE rela.role_id IN (
+        <foreach collection="roleIds" index="index" item="i" separator="," >
+            #{i}
+        </foreach>
+        )
+        )) m3 ON m1.id = m3.id
+        where m1.menu_flag = 'Y'
+        AND m1.`status` = 'ENABLE'
+        <if test="pcode != null and pcode != ''">
+            AND m1.levels > 1
+            AND m1.pcodes LIKE CONCAT('%[',#{pcode},']%')
+        </if>
+        order by levels,m1.sort asc
+    </select>
+
+    <select id="menuTreeList" resultType="com.seven.gwc.core.node.ZTreeNode">
+        SELECT m1.id AS id,
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 0 ELSE m2.id END ) AS pId,
+        m1.name AS name,
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 'true' ELSE 'false' END ) as "open"
+        FROM sys_menu m1
+        LEFT join sys_menu m2 ON m1.pcode = m2.code
+        WHERE m1.`status`='ENABLE'
+        ORDER BY m1.id ASC
+    </select>
+    <select id="menuTreeListByMenuIds" resultType="com.seven.gwc.core.node.ZTreeNode">
+        SELECT m1.id AS id,
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN "0" ELSE m2.id END) AS "pId",
+        m1.name AS name,
+        (CASE WHEN (m2.id = "0" OR m2.id IS NULL) THEN 'true' ELSE 'false' END) as "open",
+        (CASE WHEN (m3.id = "0" OR m3.id IS NULL) THEN 'false' ELSE 'true' END) as "checked"
+        FROM sys_menu m1
+        LEFT JOIN sys_menu m2 ON m1.pcode = m2.code
+        LEFT JOIN (SELECT id FROM sys_menu WHERE id IN
+        <foreach collection="list" index="index" item="i" open="(" separator="," close=")">
+            #{i}
+        </foreach>
+        ) m3 on m1.id = m3.id
+        WHERE m1.`status` = 'ENABLE'
+        ORDER BY m1.id ASC
+    </select>
+    <select id="getResUrlsByRoleId" resultType="java.lang.String">
+        SELECT URL FROM
+        sys_relation rel
+        INNER JOIN sys_menu m ON rel.menu_id = m.id
+        WHERE rel.role_id = #{roleId}
+    </select>
+    <select id="getMenusLikePcodes" resultType="com.seven.gwc.modular.system.entity.MenuEntity">
+        select
+        <include refid="Base_Column_List"></include>
+        from sys_menu where 1 = 1
+        <if test="code != null and code != ''">
+            and pcodes LIKE CONCAT('%$[',#{code},'$]%') escape '$'
+        </if>
+    </select>
+
+</mapper>

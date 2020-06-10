@@ -1,0 +1,3 @@
+<% for(menu in sqls.menus!){ %>
+INSERT INTO `gwc`.`sys_menu` (`code`, `pcode`, `pcodes`, `name`, `icon`, `url`, `sort`, `levels`, `menu_flag`, `description`, `status`, `open_flag`) VALUES ('${menu.code}', '${menu.pcode}', '${menu.pcodes}', '${menu.name}', '${menu.icon}', '${menu.url}', '${menu.sort}', '${menu.levels}', '${menu.menuFlag}', NULL, '${menu.status}', '${menu.openFlag}');
+<% } %>

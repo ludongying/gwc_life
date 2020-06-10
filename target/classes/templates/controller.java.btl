@@ -1,0 +1,145 @@
+package ${package.Controller};
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageHelper;
+import com.seven.gwc.core.base.BaseResult;
+import com.seven.gwc.core.base.BaseResultPage;
+import com.seven.gwc.core.shiro.ShiroKit;
+import com.seven.gwc.core.shiro.ShiroUser;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+<% if(restControllerStyle){ %>
+import org.springframework.web.bind.annotation.RestController;
+<% }else{ %>
+import org.springframework.stereotype.Controller;
+<% } %>
+<% if(isNotEmpty(superControllerClassPackage)){ %>
+import ${superControllerClassPackage};
+<% } %>
+
+import java.util.List;
+
+/**
+ * description : ${cfg.genQo.bizChName}控制器
+ *
+ * @author : ${author}
+ * @date : ${date}
+ */
+<% if(restControllerStyle){ %>
+@RestController
+<% }else{ %>
+@Controller
+<% } %>
+@RequestMapping("${cfg.genQo.bizEnName}")
+<% if(isNotEmpty(superControllerClass)){ %>
+public class ${table.controllerName} extends ${superControllerClass} {
+<% }else{ %>
+public class ${table.controllerName} {
+<% } %>
+
+    private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    private static String PREFIX = "/modular/${cfg.genQo.moduleName}/${cfg.genQo.bizEnName}/";
+
+    @Autowired
+    private ${table.serviceName} ${cfg.genQo.bizEnName}Service;
+
+    /**
+     * 跳转到${cfg.genQo.bizChName}首页
+     */
+    @RequestMapping("")
+    public String index() {
+        return PREFIX + "${cfg.genQo.bizEnName}";
+    }
+
+    /**
+     * 跳转到添加${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/${cfg.genQo.bizEnName}_add")
+    public String ${cfg.genQo.bizEnName}Add() {
+        return PREFIX + "${cfg.genQo.bizEnName}_add";
+    }
+
+    /**
+     * 跳转到修改${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/${cfg.genQo.bizEnName}_edit")
+    public String ${cfg.genQo.bizEnName}Update(String ${cfg.genQo.bizEnName}Id) {
+        return PREFIX + "${cfg.genQo.bizEnName}_edit";
+    }
+
+    /**
+     * 跳转到查看${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/${cfg.genQo.bizEnName}_detail")
+    public String ${cfg.genQo.bizEnName}Detail(String ${cfg.genQo.bizEnName}Id) {
+        return PREFIX + "${cfg.genQo.bizEnName}_detail";
+    }
+
+    /**
+     * 获取${cfg.genQo.bizChName}列表
+     */
+    @RequestMapping("/list")
+    @ResponseBody
+    public BaseResultPage<${entity}> list(String ${cfg.genQo.bizEnName}Name) {
+        Page page = BaseResultPage.defaultPage();
+        PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
+        List<${entity}> ${cfg.genQo.bizEnName}s = ${cfg.genQo.bizEnName}Service.select${cfg.genQo.bizEnBigName}(${cfg.genQo.bizEnName}Name);
+        PageInfo pageInfo = new PageInfo<>(${cfg.genQo.bizEnName}s);
+        return new BaseResultPage().createPage(pageInfo);
+    }
+
+    /**
+     * 增加${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/add")
+    @ResponseBody
+    public BaseResult add(${entity} ${cfg.genQo.bizEnName}) {
+        ShiroUser user = ShiroKit.getUser();
+        ${cfg.genQo.bizEnName}Service.add${cfg.genQo.bizEnBigName}(${cfg.genQo.bizEnName}, user);
+        return SUCCESS;
+    }
+
+    /**
+     * 删除${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public BaseResult delete(@RequestParam String ${cfg.genQo.bizEnName}Id) {
+        ShiroUser user = ShiroKit.getUser();
+        ${cfg.genQo.bizEnName}Service.delete${cfg.genQo.bizEnBigName}(${cfg.genQo.bizEnName}Id, user);
+        return SUCCESS;
+    }
+
+    /**
+     * 编辑${cfg.genQo.bizChName}
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public BaseResult update(${entity} ${cfg.genQo.bizEnName}) {
+        ShiroUser user = ShiroKit.getUser();
+        ${cfg.genQo.bizEnName}Service.edit${cfg.genQo.bizEnBigName}(${cfg.genQo.bizEnName}, user);
+        return SUCCESS;
+    }
+
+    /**
+     * ${cfg.genQo.bizChName}详情
+     */
+    @RequestMapping("/detail/{${cfg.genQo.bizEnName}Id}")
+    @ResponseBody
+    public ${entity} detail(@PathVariable String ${cfg.genQo.bizEnName}Id) {
+        return ${cfg.genQo.bizEnName}Service.getById(${cfg.genQo.bizEnName}Id);
+    }
+
+}
+

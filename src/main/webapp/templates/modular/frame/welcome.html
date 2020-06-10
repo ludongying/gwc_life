@@ -1,147 +1,169 @@
-@layout("/common/_container.html",{js:["/modular/frame/welcome.js"]}){
-<style>
-    .layui-table-view{
-        border-style: none;
-    }
-    .layui-tab-title .layui-this{
-        border-style: none;
-        color: #1890FF;
-    }
-    .layui-tab-title .layui-this:after{
-        border-style: none;
-        color: #1890FF;
-    }
+@layout("/common/_container.html",{js:["/modular/resource/tv.js"],css:["/modular/resource/film.css"]}){
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space25">
 
-</style>
-
-<div class="layui-fluid" >
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-sm6 layui-col-md9">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    电子巡航
+        <div class="layui-form toolbar">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <input id="personName" class="layui-input" type="text" placeholder="请输入电视剧名称"/>
                 </div>
-                <div class="layui-card-body" style="padding: 0;">
-                    <div class="layui-tab" style="height: 485px">
-                        <div class="layui-tab-content" style="padding: 0;">
-                            <div class="layui-tab-item layui-show" id="map">
-                                <iframe src="../system/map" frameborder="0" width=100% scrolling="No" height=445px; leftmargin="0" topmargin="0"></iframe>
-                            </div>
-                            <div class="layui-tab-item"><img src="${ctxPath}/common/images/haitu1.jpg" style="width: 100%; height: 445px;"></div>
-                            <div class="layui-tab-item"><img src="${ctxPath}/common/images/haitu2.jpg" style="width: 100%; height: 445px;"></div>
-                        </div>
-                        <ul class="layui-tab-title" lay-filter="demo" style="border-bottom-width: 0;">
-                            <li class="layui-col-sm4 layui-this" style="border-right: 1px solid #E8E8E8;">电子巡航</li>
-                            <li class="layui-col-sm4" style="border-right: 1px solid #E8E8E8;">视频监控</li>
-                            <li class="layui-col-sm4">设备监控</li>
-                        </ul>
-                    </div>
+                <div class="layui-inline">
+                    <button id="btnSearch" class="layui-btn">搜索</button>
+                    <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </div>
 
-        <div class="layui-col-sm6 layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    基础数据
-                </div>
-                <div class="layui-card-body ">
-                    <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none">
-                        <ul class="layui-row layui-col-space10 layui-this">
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body" style="border-right: 1px solid #EEEEEE;">
-                                    <p><cite>${lawType}</cite></p>
-                                    <h3>未完成任务</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body">
-                                    <p><cite>20</cite></p>
-                                    <h3>全部任务</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body" style="border-right: 1px solid #EEEEEE;">
-                                    <p><cite>220</cite></p>
-                                    <h3>报警信息</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body">
-                                    <p><cite>150</cite></p>
-                                    <h3>库存紧张</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body" style="border-right: 1px solid #EEEEEE;">
-                                    <p><cite>220</cite></p>
-                                    <h3>异常设备</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body">
-                                    <p><cite>150</cite></p>
-                                    <h3>昨日视频</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body" style="border-right: 1px solid #EEEEEE;">
-                                    <p><cite>220</cite></p>
-                                    <h3>昨日维修</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body">
-                                    <p><cite>150</cite></p>
-                                    <h3>锁定目标</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body" style="border-right: 1px solid #EEEEEE;">
-                                    <p><cite>220</cite></p>
-                                    <h3>资料数量</h3>
-                                </a>
-                            </li>
-                            <li class="layui-col-xs6">
-                                <a href="#" class="layadmin-backlog-body">
-                                    <p><cite>150</cite></p>
-                                    <h3>应到人数</h3>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="layui-row layui-col-space15">
-            <div class="layui-col-sm6 layui-col-md2">
-                <div class="layui-card">
-                    <div class="layui-inline" id="calendar"></div>
-                </div>
-            </div>
 
-            <div class="layui-col-sm6 layui-col-md5">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        日程信息
-                    </div>
-                    <div class="layui-card-body layuiadmin-card-list">
-                        <table class="layui-table" id="rchengTable" lay-filter="rchengTable"></table>
-                    </div>
+        <ul class="fly-case-list">
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise">共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px" id="tvDetail">详情</button>
                 </div>
-            </div>
+            </li>
 
-            <div class="layui-col-sm6 layui-col-md5">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        工作计划
-                    </div>
-                    <div class="layui-card-body layuiadmin-card-list">
-                        <table class="layui-table" id="gongzuoTable" lay-filter="gongzuoTable"></table>
-                    </div>
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise">共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
                 </div>
-            </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+
+            <li data-id="123">
+                <a class="fly-case-img" href="http://fly.layui.com/" target="_blank" >
+                    <img src="http://localhost:88/common/images/tv.jpg" alt="三叉戟">
+                    <cite class="layui-btn layui-btn-primary layui-btn-small">去观看</cite>
+                </a>
+                <h2><a href="http://fly.layui.com/tv.jpg" target="_blank">三叉戟</a></h2>
+                <div class="fly-case-info">
+                    <p class="layui-elip" style="font-size: 12px;"><span style="color: #666;">更新时间</span> 2017-11-30</p>
+                    <p><a class="fly-case-nums fly-case-active" href="javascript:;" data-type="showPraise" >共30集</a></p>
+                    <button class="layui-btn fly-case-active" data-type="praise" style="margin-top: 5px">详情</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="layui-col-md12 layui-col-sm12" style="text-align: center">
+            <div id="demo0"><div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1"><a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a><span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span><a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a><a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a><a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a></div></div>
         </div>
     </div>
 </div>
 @}
+

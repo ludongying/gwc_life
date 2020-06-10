@@ -2,44 +2,339 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c905755f-134e-4a2b-b2b9-94539250b626" name="Default Changelist" comment="基本类型-物料类型测试">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/gwc_life.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/manage/controller/BookManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/manage/controller/FilmManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/manage/controller/GameManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/manage/controller/MusicManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/manage/controller/TvManageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/resource/controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/resource/controller/FilmController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/resource/controller/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/resource/controller/MusicController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/resource/controller/TVController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/book.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/book.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/film.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/film.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/music.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/song.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/common/images/tv.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_book/book_manage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_book/book_manage_add.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_film/film_manage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_film/film_manage_add.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_game/game_manage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_game/game_manage_add.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_music/music_manage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_music/music_manage_add.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_tv/tv_manage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_tv/tv_series.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/book.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/film.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/film.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/game.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/music.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/tv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/resource/tv_detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_book/book_manage_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_film/film_manage_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_game/game_manage_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_music/music_manage_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_tv/tv_manage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_tv/tv_series.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/book.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/film.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/game.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/music.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/tv.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/resource/tv_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitee/ISSUE_TEMPLATE.zh-CN.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitee/PULL_REQUEST_TEMPLATE.zh-CN.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/data/file/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/data/file/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/dto/AgencyDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/dto/AgencyDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/service/impl/AgencyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/lawrecord/service/impl/AgencyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GWC-WEB.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid18600.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/ConfigConsts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/constant/ConfigConsts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/filter/TonFunUserFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/filter/TonFunUserFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/config/web/ShiroConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/state/ErrorEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/core/state/ErrorEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/controller/FriendController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/controller/GroupController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/controller/GroupPersonController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/FriendMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/GroupMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/GroupPersonMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/mapper/FriendMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/mapper/GroupMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/dao/mapper/GroupPersonMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/entity/FriendEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/entity/GroupEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/entity/GroupPersonEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/FriendService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/GroupPersonService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/GroupService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/impl/FriendServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/impl/GroupPersonServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/service/impl/GroupServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/vo/FriendListVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/vo/GroupPersonalVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/vo/GroupVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/address_book/vo/InitialsVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/AddressBookApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/LawRecordApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/LawsRegulationApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/LoginApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/PreviewFileApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/api/UserApi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/controller/EquipController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/controller/EquipMaintainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/EquipMaintainMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/EquipMaintaindetailMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/EquipMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/mapper/EquipMaintainMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/mapper/EquipMaintaindetailMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/dao/mapper/EquipMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/entity/EquipEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/entity/EquipMaintainEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/entity/EquipMaintaindetailEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/EquipMaintainService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/EquipMaintaindetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/EquipService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/impl/EquipMaintainServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/impl/EquipMaintaindetailServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/equipment_info/service/impl/EquipServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/controller/FishShipController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/dao/FishShipMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/dao/mapper/FishShipMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/entity/FishShipEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/service/FishShipService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/service/impl/FishShipServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/fish_info/vo/ExportFishShipVO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/controller/mapController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/FishAreaMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/FishForbiddenAreaMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/FishShipTrackMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/mapper/FishAreaMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/mapper/FishForbiddenAreaMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/dao/mapper/FishShipTrackMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/entity/FishAreaEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/entity/FishForbiddenAreaEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/entity/FishShipTrackEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/FishAreaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/FishForbiddenAreaService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/FishShipTrackService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/impl/FishAreaServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/impl/FishForbiddenAreaServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/map/service/impl/FishShipTrackServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/controller/MunitionInController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/controller/MunitionInDetailController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/controller/MunitionInfoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/controller/MunitionOutController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/controller/MunitionOutDetailController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionInDetailMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionInMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionInfoMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionOutDetailMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionOutMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/MunitionStoreMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionInDetailMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionInMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionInfoMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionOutDetailMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionOutMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/dao/mapper/MunitionStoreMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionInDetailEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionInEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionInfoEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionOutDetailEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionOutEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/entity/MunitionStoreEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/munitionEnum/MunitionInOutStatesEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionInDetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionInService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionInfoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionOutDetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionOutService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/MunitionStoreService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionInDetailServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionInServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionInfoServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionOutDetailServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionOutServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/munition/service/impl/MunitionStoreServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/controller/ShipWorkPlanController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/ShipWorkPlanMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/dao/mapper/ShipWorkPlanMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/entity/ShipWorkPlanEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/ShipWorkPlanService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship/service/impl/ShipWorkPlanServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/controller/CertificateShipController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/controller/ShipController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/dao/CertificateShipMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/dao/ShipMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/dao/mapper/CertificateShipMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/dao/mapper/ShipMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/entity/CertificateShipEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/entity/ShipEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/CertificateShipService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/ShipService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/impl/CertificateShipServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_info/service/impl/ShipServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/dao/SailLogMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/dao/mapper/SailLogMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/entity/SailLogEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/SailLogService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/ship_log/service/impl/SailLogServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/sync/config/MasterConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/sync/controller/SyncController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/sync/service/CacheService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/sync/service/SyncService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/SystemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/SystemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/timingTask/TimingTaskController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/controller/ShipWorkLogController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/dao/ShipWorkLogMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/dao/mapper/ShipWorkLogMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/entity/ShipWorkLogEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/service/ShipWorkLogService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/work/service/impl/ShipWorkLogServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/controller/ShipEquipmentWarnController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/dao/ShipEquipmentWarnMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/dao/mapper/ShipEquipmentWarnMapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/entity/ShipEquipmentWarnEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/service/ShipEquipmentWarnService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/worn_his/service/impl/ShipEquipmentWarnServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_法人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/05行政处罚立案审批表_自然人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_法人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/13案件处理意见书_自然人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_法人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/14行政处罚事先告知书_自然人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/15陈述和申辩笔录.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/15陈述和申辩笔录.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/16行政处罚听证会通知书.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/16行政处罚听证会通知书.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/18行政处罚听证会报告书.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/18行政处罚听证会报告书.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/24行政处罚结案报告_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/25备考表.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/25备考表.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/26行政处罚决定审批表_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_法人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人_安.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument/27责令返港通知书_自然人_安.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/lawRecord/agency.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/lawRecord/agency.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/lawRecord/agency.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/lawRecord/agency.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/seven/gwc/test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/seven/gwc/test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/electronicFile/electronicFile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/electronicFile/electronicFile_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equip/equip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equip/equip_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equip/equip_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equip/equip_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equipMaintain/equipMaintain.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equipMaintain/equipMaintain_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equipMaintain/equipMaintain_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/equipment_info/equipMaintain/equipMaintain_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/fish_info/fishShip/fishShip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/fish_info/fishShip/fishShip_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/fish_info/fishShip/fishShip_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/fish_info/fishShip/fishShip_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/map/map.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/map/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/map/navi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/map/ship_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionIn/munitionIn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionIn/munitionIn_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionIn/munitionIn_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionIn/munitionIn_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInDetail/munitionInDetail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInfo/munitionInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInfo/munitionInfo_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInfo/munitionInfo_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInfo/munitionInfo_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionInfo/munitionInfo_warnSet.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionOut/munitionOut.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionOut/munitionOut_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionOut/munitionOut_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionOut/munitionOut_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/munition/munitionOutDetail/munitionOutDetail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship/shipWorkPlan/shipWorkPlan_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/certificate/certificate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/certificate/certificate_add.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/modular/manage_tv/tv_manage_add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/certificate/certificate_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/certificate/certificate_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_detail_main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_detail_mainv1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_info/ship/ship_v1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/ship_log/sailLog/sailLog_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/work/shipWorkLog/shipWorkLog_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_add.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_edit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/_header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/common/_header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/common/_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/common/_sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/electronicFile/electronicFile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/electronicFile/electronicFile_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equip/equip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equip/equip_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equip/equip_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equip/equip_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equipMaintain/equipMaintain.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_film/film_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equipMaintain/equipMaintain_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equipMaintain/equipMaintain_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/equipment_info/equipMaintain/equipMaintain_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/fish_info/fishShip/fishShip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/fish_info/fishShip/fishShip_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/fish_info/fishShip/fishShip_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/fish_info/fishShip/fishShip_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/frame/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/frame/welcome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/map/map.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/map/ship_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionIn/munitionIn.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionIn/munitionIn_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionIn/munitionIn_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionIn/munitionIn_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInDetail/munitionInDetail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInfo/munitionInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInfo/munitionInfo_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInfo/munitionInfo_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInfo/munitionInfo_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionInfo/munitionInfo_warnSet.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionOut/munitionOut.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionOut/munitionOut_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionOut/munitionOut_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionOut/munitionOut_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/munition/munitionOutDetail/munitionOutDetail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship/shipWorkPlan/shipWorkPlan_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/certificate/certificate.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/certificate/certificate_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_tv/tv_manage_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/certificate/certificate_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/certificate/certificate_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_game/game_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_detail_main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_detail_main2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_detail_main_v1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_info/ship/ship_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_book/book_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/ship_log/sailLog/sailLog_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/work/shipWorkLog/shipWorkLog_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/modular/manage_music/music_manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_add.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/modular/worn_his/shipEquipmentWarn/shipEquipmentWarn_edit.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,12 +364,41 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Class" />
         <option value="Class" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="ADD_SUFFIX_TO_CHERRY_PICKS_OF_PUBLISHED_COMMITS" value="false" />
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="dev" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -111,6 +435,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -118,25 +443,32 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/static/lawrecord/instrument" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.51724136" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.tonfun" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ideawork\GWC-WEB\src\main\webapp\static\lawrecord\instrument" />
-      <recent name="D:\ideawork\GWC-WEB\target\classes\static\lawrecord\instrument" />
-      <recent name="D:\ideawork\GWC-WEB\src\main\webapp\static\lawrecord\instrument_file" />
-      <recent name="D:\idea\workspace\gwc" />
-      <recent name="D:\idea\workspace\gwc\src\main" />
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\static\modular\manage_music" />
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\static\modular\manage_game" />
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\static\modular\manage_film" />
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\static\modular\manage_book" />
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\templates\modular\manage_book" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.seven.gwc.modular.manage.controller" />
+      <recent name="com.seven.gwc.modular.resource.controller" />
+      <recent name="com.seven.gwc.modular.munition.controller" />
+      <recent name="com.seven.gwc.modular.munition.dao" />
+      <recent name="com.seven.gwc.modular.munition.service.impl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\idea\workspace\gwc_life\src\main\webapp\static\modular\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.GwcApplication">
+  <component name="RunManager" selected="Spring Boot.gwc">
     <configuration name="InstrumentModelData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.seven.gwc.modular.lawrecord.data.instrument.InstrumentModelData" />
       <module name="GWC-WEB" />
@@ -163,22 +495,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GwcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="GWC-WEB" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.seven.gwc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration name="gwc" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="gwc_life" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.seven.gwc.GwcApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.InstrumentModelData" />
+      <item itemvalue="Application.test" />
+      <item itemvalue="Spring Boot.gwc" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.GwcApplication" />
         <item itemvalue="Application.test" />
         <item itemvalue="Application.InstrumentModelData" />
       </list>
@@ -240,6 +571,22 @@
       <workItem from="1586478897113" duration="2828000" />
       <workItem from="1586482204348" duration="26113000" />
       <workItem from="1586564404282" duration="15761000" />
+      <workItem from="1586746186750" duration="104000" />
+      <workItem from="1586746301867" duration="61061000" />
+      <workItem from="1586998568737" duration="20383000" />
+      <workItem from="1587084779700" duration="50715000" />
+      <workItem from="1587368778867" duration="26002000" />
+      <workItem from="1591251059612" duration="494000" />
+      <workItem from="1591251570245" duration="3144000" />
+      <workItem from="1591255057156" duration="15107000" />
+      <workItem from="1591325673308" duration="13059000" />
+      <workItem from="1591348490573" duration="51000" />
+      <workItem from="1591348686457" duration="22684000" />
+      <workItem from="1591578267235" duration="23104000" />
+      <workItem from="1591771686564" duration="71000" />
+      <workItem from="1591774607918" duration="5000" />
+      <workItem from="1591775179540" duration="3000" />
+      <workItem from="1591776782346" duration="520000" />
     </task>
     <task id="LOCAL-00001" summary="fix: 修改决定">
       <created>1586253938201</created>
@@ -297,7 +644,56 @@
       <option name="project" value="LOCAL" />
       <updated>1586513148201</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="备件物料代码恢复">
+      <created>1586759397712</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586759397712</updated>
+    </task>
+    <task id="LOCAL-00010" summary="备件物料入库清单页">
+      <created>1586856679848</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586856679848</updated>
+    </task>
+    <task id="LOCAL-00011" summary="备件物料入库审批流程控制代码">
+      <created>1586943681199</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586943681199</updated>
+    </task>
+    <task id="LOCAL-00012" summary="备件物料入库流程修改">
+      <created>1587029047823</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1587029047823</updated>
+    </task>
+    <task id="LOCAL-00013" summary="备件物料入库-申请/入库/审核人员由person表更为user表">
+      <created>1587090628791</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1587090628791</updated>
+    </task>
+    <task id="LOCAL-00014" summary="物资出库整体（初步）">
+      <created>1587194767752</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1587194767752</updated>
+    </task>
+    <task id="LOCAL-00015" summary="备件物料-库存后台">
+      <created>1587430195163</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1587430195163</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,25 +725,36 @@
     <MESSAGE value="fix: 修改jar引入方式&#10;- 修改xml路径" />
     <MESSAGE value="fix: 根据文书规则修改逻辑" />
     <MESSAGE value="fix: 修改文书" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 修改文书" />
+    <MESSAGE value="备件物料代码恢复" />
+    <MESSAGE value="备件物料入库清单页" />
+    <MESSAGE value="备件物料入库审批流程控制代码" />
+    <MESSAGE value="备件物料入库流程修改" />
+    <MESSAGE value="备件物料入库-申请/入库/审核人员由person表更为user表" />
+    <MESSAGE value="物资出库整体（初步）" />
+    <MESSAGE value="备件物料-库存后台" />
+    <option name="LAST_COMMIT_MESSAGE" value="备件物料-库存后台" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586420731763">
+    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1586747530327">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586420731763" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1578042077144">
+    <state x="414" y="175" width="1174" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586747530327" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1587432507874">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1578042077144" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587432507874" />
+    <state x="689" y="301" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1586931355661">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="689" y="301" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586931355661" />
+    <state x="730" y="309" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1586747522029">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="730" y="309" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586747522029" />
     <state x="806" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586250941022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="806" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250941022" />
-    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1577930188408">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="590" y="448" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577930188408" />
     <state x="739" y="378" width="584" height="293" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586512343276">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -356,74 +763,74 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="704" y="331" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586421909266" />
-    <state x="505" y="35" key="CommitChangelistDialog2" timestamp="1586513231760">
+    <state x="505" y="35" key="CommitChangelistDialog2" timestamp="1587430194153">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="505" y="35" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586513231760" />
+    <state x="505" y="35" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587430194153" />
     <state width="445" height="466" key="DebuggerActiveHint" timestamp="1586342135653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="445" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1586342135653" />
-    <state x="159" y="15" key="DiffContextDialog" timestamp="1586513222845">
+    <state x="159" y="15" width="1536" height="858" key="DiffContextDialog" timestamp="1586758636386">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="159" y="15" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586513222845" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1586251097062">
+    <state x="159" y="15" width="1536" height="858" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586758636386" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1591346657407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586251097062" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591346657407" />
     <state x="781" y="416" width="382" height="208" key="Github.CreateGistDialog" timestamp="1586496671547">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="781" y="416" width="382" height="208" key="Github.CreateGistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586496671547" />
-    <state width="1877" height="352" key="GridCell.Tab.0.bottom" timestamp="1586586170080">
+    <state width="1153" height="338" key="GridCell.Tab.0.bottom" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170080" />
-    <state width="1877" height="352" key="GridCell.Tab.0.center" timestamp="1586586170079">
+    <state width="1153" height="338" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.0.center" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
-    <state width="1877" height="352" key="GridCell.Tab.0.left" timestamp="1586586170079">
+    <state width="1153" height="338" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.0.left" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
-    <state width="1877" height="352" key="GridCell.Tab.0.right" timestamp="1586586170079">
+    <state width="1153" height="338" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.0.right" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586170079" />
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1586586299245">
+    <state width="1153" height="338" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.1.bottom" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
-    <state width="1877" height="284" key="GridCell.Tab.1.center" timestamp="1586586299245">
+    <state width="1153" height="338" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.1.center" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
-    <state width="1877" height="284" key="GridCell.Tab.1.left" timestamp="1586586299245">
+    <state width="1153" height="338" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.1.left" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
-    <state width="1877" height="284" key="GridCell.Tab.1.right" timestamp="1586586299245">
+    <state width="1153" height="338" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.1.right" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586299245" />
-    <state width="1877" height="352" key="GridCell.Tab.2.bottom" timestamp="1586586169950">
+    <state width="1153" height="338" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.2.bottom" timestamp="1591777303008">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
-    <state width="1877" height="352" key="GridCell.Tab.2.center" timestamp="1586586169950">
+    <state width="1153" height="338" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303008" />
+    <state width="1153" height="338" key="GridCell.Tab.2.center" timestamp="1591777303008">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
-    <state width="1877" height="352" key="GridCell.Tab.2.left" timestamp="1586586169950">
+    <state width="1153" height="338" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303008" />
+    <state width="1153" height="338" key="GridCell.Tab.2.left" timestamp="1591777303007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
-    <state width="1877" height="352" key="GridCell.Tab.2.right" timestamp="1586586169950">
+    <state width="1153" height="338" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303007" />
+    <state width="1153" height="338" key="GridCell.Tab.2.right" timestamp="1591777303008">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="352" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586586169950" />
+    <state width="1153" height="338" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591777303008" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1586479313399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -432,18 +839,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250774875" />
-    <state x="531" y="185" key="Registry" timestamp="1578552587609">
+    <state x="806" y="233" key="RollbackChangesDialog" timestamp="1586748300905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="531" y="185" key="Registry/0.0.1920.1040@0.0.1920.1040" timestamp="1578552587609" />
-    <state x="739" y="189" key="SettingsEditor" timestamp="1586481974331">
+    <state x="806" y="233" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586748300905" />
+    <state x="739" y="189" key="SettingsEditor" timestamp="1591428506347">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="739" y="189" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586481974331" />
-    <state x="552" y="256" key="Vcs.Push.Dialog.v2" timestamp="1586513187417">
+    <state x="739" y="189" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591428506347" />
+    <state x="822" y="253" key="VCS.ChangeListViewerDialog" timestamp="1586758640471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586513187417" />
+    <state x="822" y="253" key="VCS.ChangeListViewerDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586758640471" />
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2" timestamp="1587430223096">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587430223096" />
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1586564405267">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -452,26 +863,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="523" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586576057699" />
-    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586564994682">
+    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587455674667">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586564994682" />
-    <state x="668" y="120" width="1080" height="801" key="find.popup" timestamp="1586313139257">
+    <state x="752" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587455674667" />
+    <state x="709" y="26" width="972" height="874" key="dock-window-1" timestamp="1587368343731">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="120" width="1080" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586313139257" />
+    <state x="709" y="26" width="972" height="874" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1587368343731" />
+    <state x="296" y="122" width="1208" height="621" maximized="true" key="dock-window-2" timestamp="1586856495514">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="296" y="122" width="1208" height="621" maximized="true" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1586856495514" />
+    <state x="560" y="226" width="1201" height="766" key="dock-window-3" timestamp="1586916876815">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="560" y="226" width="1201" height="766" key="dock-window-3/0.0.1920.1040@0.0.1920.1040" timestamp="1586916876815" />
+    <state x="591" y="108" width="1080" height="801" key="find.popup" timestamp="1591689504482">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="591" y="108" width="1080" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591689504482" />
     <state x="722" y="232" key="git4idea.branch.GitSmartOperationDialog" timestamp="1586250765646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="722" y="232" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586250765646" />
-    <state x="659" y="311" key="git4idea.merge.GitPullDialog" timestamp="1586251205328">
+    <state x="659" y="311" key="git4idea.merge.GitPullDialog" timestamp="1586912879981">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="659" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586251205328" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1586583393849">
+    <state x="659" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586912879981" />
+    <state x="771" y="426" key="git4idea.ui.GitResetDialog" timestamp="1586748328634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586583393849" />
+    <state x="771" y="426" key="git4idea.ui.GitResetDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586748328634" />
+    <state x="799" y="429" key="git4idea.ui.GitStashDialog" timestamp="1586746330884">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="799" y="429" key="git4idea.ui.GitStashDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586746330884" />
+    <state x="624" y="340" key="git4idea.ui.GitUnstashDialog" timestamp="1586758641386">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="624" y="340" key="git4idea.ui.GitUnstashDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586758641386" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1586748458881">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586748458881" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591688565104">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591688565104" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -487,14 +926,14 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/modular/system/controller/PositionController.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/seven/gwc/core/aop/GlobalExceptionHandler.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

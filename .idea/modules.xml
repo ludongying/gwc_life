@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GWC-WEB.iml" filepath="$PROJECT_DIR$/.idea/GWC-WEB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gwc_life.iml" filepath="$PROJECT_DIR$/gwc_life.iml" />
     </modules>
   </component>
 </project>

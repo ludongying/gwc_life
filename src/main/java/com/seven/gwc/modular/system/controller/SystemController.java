@@ -62,6 +62,11 @@ public class SystemController extends BaseController {
         return "modular/frame/welcome";
     }
 
+//    @RequestMapping("/index")
+//    public String index() {
+//        return "index";
+//    }
+
     @RequestMapping("/map")
     public String map() {
         return "modular/map/map";

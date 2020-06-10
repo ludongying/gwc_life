@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.seven</groupId>
-    <artifactId>gwc</artifactId>
+    <artifactId>gwc_life</artifactId>
     <version>0.0.2-SNAPSHOT</version>
 
     <packaging>jar</packaging>

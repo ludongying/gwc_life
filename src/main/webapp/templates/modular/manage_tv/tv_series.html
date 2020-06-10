@@ -1,0 +1,91 @@
+@layout("/common/_container.html",{js:["/modular/manage_tv/tv_series.js"]}){
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <label>添加剧集</label>
+        </div>
+        <div class="layui-card-body">
+
+            <form id="tvSeriesDetailForm" lay-filter="tvSeriesDetailForm" class="layui-form">
+                <div class="layui-row layui-col-space10" id="tvSeriesDiv">
+                    <input id="id" name="id" type="hidden" class="layui-input"/>
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">集数<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="totalNum" name="totalNum" placeholder="请输入集数" type="text" class="layui-input"
+                                   lay-verify="required|positiveNumber" required/>
+                        </div>
+<!--                        <div class="layui-input-inline layui-input-company"><label id="unit"></label></div>-->
+                    </div>
+
+                    <div class="layui-col-md12">
+                        <label class="layui-form-label">视频<span style="color: red;">*</span></label>
+                        <!--                <div class="layui-input-block">-->
+                        <!--                    <input id="attachment" name="attachment" placeholder="请输入附件" type="text" class="layui-input" lay-verify="required" required/>-->
+                        <!--                </div>-->
+                        <div class="layui-input-block layui-upload">
+                            <button type="button" class="layui-btn" id="PreviewBtn">上传视频</button>
+                            <input id="attachFilePath" name="attachFilePath" type="hidden"/>
+                            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;height: 50px">
+                                <!--                        预览图：-->
+                                <div class="layui-upload-list uploader-list" style="overflow: auto;" id="attachment"></div>
+                            </blockquote>
+                            <label><span style="color: red;">* 支持视频格式为：mp4</span></label>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-col-md12 text-right">
+                        <button id="add" class="layui-btn layui-btn-sm" lay-filter="btnAdd" lay-submit="">
+                            &emsp;添加&emsp;
+                        </button>
+<!--                        <button id="edit" class="layui-btn layui-btn-sm" lay-filter="btnEdit" lay-submit="">&emsp;修改&emsp;-->
+<!--                        </button>-->
+<!--                        <button id="delete" class="layui-btn layui-btn-sm layui-btn-primary" lay-filter="btnDelete" lay-submit="">-->
+<!--                            &emsp;取消&emsp;-->
+<!--                        </button>-->
+                    </div>
+                </div>
+            </form>
+
+            <div class="layui-row layui-col-space10">
+                <!--                                <div class="layui-form toolbar">-->
+                <!--                                    <div class="layui-form-item">-->
+                <!--                                        <div class="layui-inline">-->
+                <!--                                            <input id="tvSeriesDetailName" class="layui-input" type="text"-->
+                <!--                                                   placeholder="物资入库详情名称"/>-->
+                <!--                                        </div>-->
+                <!--                                        <div class="layui-inline">-->
+                <!--                                            <button id="btnSearch" class="layui-btn">搜索</button>-->
+                <!--                                            <button id="btnReset" class="layui-btn layui-btn-primary">重置</button>-->
+                <!--                                        </div>-->
+                <!--                                        <div style="float: right">-->
+                <!--                                            <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>增加-->
+                <!--                                            </button>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <table class="layui-table" id="tvSeriesDetailTable"
+                       lay-filter="tvSeriesDetailTable"></table>
+            </div>
+
+            <!--            <div class="layui-row layui-col-space10" style="margin-top: 15px;">-->
+            <!--                <div class="layui-col-md12 text-center">-->
+            <!--                    <button class="layui-btn layui-btn-primary" id="btnBack" lay-filter="btnBack">-->
+            <!--                        &emsp;返回&emsp;-->
+            <!--                    </button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;保存&emsp;</button>-->
+            <!--                    <button class="layui-btn" lay-filter="btnSubmit" lay-submit="">&emsp;提交&emsp;</button>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    <a id="delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    <a id="preview" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="preview">播放</a>
+</script>
+@}

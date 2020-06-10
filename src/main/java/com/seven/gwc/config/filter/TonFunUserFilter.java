@@ -37,7 +37,6 @@ public class TonFunUserFilter extends AccessControlFilter {
             httpServletResponse.setHeader("sessionstatus", "timeout");
             return false;
         } else {
-
             /**
              * 第一次点击页面
              */
@@ -45,20 +44,23 @@ public class TonFunUserFilter extends AccessControlFilter {
             if (referer == null) {
                 saveRequestAndRedirectToLogin(request, response);
                 return false;
-            } else {
-
-                /**
-                 * 从别的页面跳转过来的
-                 */
-                if (ShiroKit.getSession().getAttribute("sessionFlag") == null) {
-                    httpServletRequest.setAttribute("tips", "session超时");
-                    httpServletRequest.getRequestDispatcher("/login").forward(request, response);
-                    return false;
-                } else {
-                    saveRequestAndRedirectToLogin(request, response);
-                    return false;
-                }
             }
+//            else {
+//
+//                /**
+//                 * 从别的页面跳转过来的
+//                 */
+//                if (ShiroKit.getSession().getAttribute("sessionFlag") == null) {
+//                    httpServletRequest.setAttribute("tips", "session超时");
+//                    httpServletRequest.getRequestDispatcher("/login").forward(request, response);
+//                    return false;
+//                } else {
+//                    saveRequestAndRedirectToLogin(request, response);
+//                    return false;
+//                }
+//            }
+
         }
+        return  false;
     }
 }

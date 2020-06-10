@@ -45,22 +45,22 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model, String pcode) {
-        ShiroUser user = ShiroKit.getUserNotNull();
-        List<String> roleList = user.getRoleList();
-
-        if (roleList == null || roleList.size() == 0) {
-            ShiroKit.getSubject().logout();
-            model.addAttribute("tips", "该用户没有角色，无法登陆");
-            //登录失败，记录登录日志
-            loginLogService.insert(LogTypeEnum.LOGIN_FAIL, user.getId(), "帐号：" + user.getAccount() + "->用户没有角色，无法登陆", getIp(), SysUtil.getmacAddress());
-            return "/login";
-        }
-        //登录成功，记录登录日志
-        loginLogService.insert(LogTypeEnum.LOGIN, user.getId(), "帐号：" + user.getAccount() + "->登录成功", getIp(), SysUtil.getmacAddress());
-
-        List<MenuNode> menus = userService.getUserMenuNodes(roleList);
-        model.addAttribute("menus", menus);
-        model.addAttribute("userInfo", user);
+//        ShiroUser user = ShiroKit.getUserNotNull();
+//        List<String> roleList = user.getRoleList();
+//
+//        if (roleList == null || roleList.size() == 0) {
+//            ShiroKit.getSubject().logout();
+//            model.addAttribute("tips", "该用户没有角色，无法登陆");
+//            //登录失败，记录登录日志
+//            loginLogService.insert(LogTypeEnum.LOGIN_FAIL, user.getId(), "帐号：" + user.getAccount() + "->用户没有角色，无法登陆", getIp(), SysUtil.getmacAddress());
+//            return "/login";
+//        }
+//        //登录成功，记录登录日志
+//        loginLogService.insert(LogTypeEnum.LOGIN, user.getId(), "帐号：" + user.getAccount() + "->登录成功", getIp(), SysUtil.getmacAddress());
+//
+//        List<MenuNode> menus = userService.getUserMenuNodes(roleList);
+//        model.addAttribute("menus", menus);
+//        model.addAttribute("userInfo", user);
         return "index";
     }
 
